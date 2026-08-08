@@ -13,7 +13,7 @@ You got here through the stream.
 
 Some chain of links and glances carried you — a feed, a search, a message from someone, each step engineered by somebody to lead somewhere. That's not an accusation. It's just where everyone lives now. The stream is very good at its work, and its work is deciding what you'll see next, slightly before you decide anything at all.
 
-This page is a dry place beside the stream. Darshan installs nothing that measures you — no analytics, no trackers, nothing of ours counting your scroll or your seconds, nothing optimized to keep you here. (The company whose servers host these pages keeps ordinary request logs, as every host on earth does; that fact sits in our public trace beside everything else.) If you leave in thirty seconds, nothing we care about gets worse. What this page wants — and it's the only thing it wants — is that you leave seeing a little more clearly than you arrived, with your next intention a little more your own.
+This page is a dry place beside the stream. Darshan installs nothing that measures you — no analytics, no trackers, nothing of ours counting your scroll or your seconds, nothing optimized to keep you here. (GitHub Pages, our current host, logs visitor IP addresses for security under its published policy; that fact sits in our public trace.) If you leave in thirty seconds, nothing we care about gets worse. What this page wants — and it's the only thing it wants — is that you leave seeing a little more clearly than you arrived, with your next intention a little more your own.
 
 That sentence is the whole publication. The rest is how.
 
