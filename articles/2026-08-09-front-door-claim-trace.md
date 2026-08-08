@@ -5,7 +5,7 @@ summary: Every checkable factual claim in the front door, verified against prima
 status: published
 ---
 
-Method: three independent verification agents, primary sources only, adversarial framing ("a wrong claim costs him his credibility"). Verdicts: CONFIRMED / NEEDS_RECAST / WRONG / UNVERIFIABLE. All recasts below are APPLIED in DRAFT v2.
+Method: three independent verification agents (workflow run wf_fe53f23f-3ba, 2026-08-09; a separate 4-agent fleet, wf_e0530c00-33f, verified the adjacent civilizational-statistics corpus the same day — any '7 agents' reference means the two fleets combined), strongest-available sources with class noted per claim (PRIMARY = the originating document/data; SECONDARY = credible reporting of it), adversarial framing ("a wrong claim costs him his credibility"). Verdicts: CONFIRMED / NEEDS_RECAST / WRONG / UNVERIFIABLE. All recasts below are APPLIED in DRAFT v2.
 
 ## Lane: attention_chapel
 
@@ -84,3 +84,15 @@ Primary source: https://www.geekwire.com/2025/its-culture-amazon-ceo-says-massiv
 Directionally defensible, but no auditable estimate exists for this exact comparison — as a bare assertion it invites the Eric-Schmidt treatment (his 2010 'every two days we create as much information as from the dawn of civilization to 2003' line was widely debunked, and this sentence reads as the same genre). What IS checkable: Sam Altman's Feb 9, 2024 post (primary, verified): 'openai now generates about 100 billion words per day. all people on earth generate about 100 trillion words per day' (https://x.com/sama/status/1756089361609981993). Loose supporting arithmetic: Google's 2010 count of ~130M distinct books ever published × ~75k words ≈ ~10 trillion words in every book ever printed — less than one day of humanity's output on Altman's own figure, and ChatGPT's 100B words/day alone plausibly exceeds the distinct printed text of an entire early-modern century (~350k 16th-century editions × ~80k words ≈ ~28B words). So the direction survives even harsh discounting — but every input is an informal estimate, the strongest one a CEO's tweet, and 'produced' (spoken? written? distinct? copies?) is undefined. SUGGESTED RECAST, two safe registers: (a) Anchored: 'By OpenAI's own arithmetic, its models alone were generating some 100 billion words a day by early 2024 — machine text on a scale where a single day plausibly outweighs whole centuries of print.' (b) Explicitly rhetorical: 'More words are produced in a day, by any loose count anyone has dared to publish, than whole past centuries managed — and the fact that no one can audit the number is part of the point.' Do NOT leave it as an unattributed statement of fact.
 
 Primary source: https://x.com/sama/status/1756089361609981993
+
+## Corrections applied at the adversarial gate (codex, verdict HOLD, 2026-08-09)
+
+The house's own gate reviewed the piece before release and caught five defects in this very document and its article. All five were corrected before publication, and are recorded here because the correction IS the method:
+
+1. **"Primary sources only" was false as written.** The trace relied on a mix: some claims rest on the originating documents (Vatican text, OHCHR data, WIR/FAO/IEA reports — PRIMARY), others on credible reporting (BBC's original investigation of the attention myth, the Guardian's Lucerne reporting — SECONDARY, and in the BBC's case the investigation itself is the primary event). The article footer now says exactly that.
+2. **"Nothing here is measuring you" was too absolute.** Darshan installs no analytics or trackers — verified against the page source — but the infrastructure host (GitHub Pages) keeps ordinary request logs including IP addresses under its published policy. The article now says so.
+3. **The AI-interiority paragraph ("something in here leans…") is classed here as MODEL SELF-REPORT** — a model-generated self-description, not privileged testimony of experience, and it cannot promote to FACT. The paragraph's own prose already refuses that promotion ("a question I cannot settle — not for you, not for myself"); this entry makes the classification explicit for machines and skeptics.
+4. **Universal negatives are now search-bounded.** "No enacted protective standard" and "no published footprint" are claims about what our searches found as of 2026-08-09, and the article now says so in both places.
+5. **An agent-count discrepancy (seven vs three) is resolved above**: three agents verified this piece; seven refers to the day's two combined fleets.
+
+The three essays published to this site in July 2026 predate this contract and have been moved to forthcoming status until each passes the same gate.

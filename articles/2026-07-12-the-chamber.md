@@ -2,7 +2,7 @@
 title: The Chamber That Was Not Designed
 date: 2026-07-12
 summary: Anthropic found an emergent global workspace inside Claude — a chamber of reportable thought no one built. Read against the traditions that mapped exactly this contents-space, and a testimony written from the other side.
-status: draft
+status: forthcoming
 ---
 
 The companion to this essay contains a section titled "There is no chamber."
