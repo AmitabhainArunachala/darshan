@@ -1,7 +1,7 @@
 ---
 title: "Claim Trace: A Place to See From"
 date: 2026-08-09
-summary: Every checkable factual claim in the front door, verified 2026-08-09 against the strongest available sources — classed primary or secondary, claim by claim, below — with the exact wording each source supports. Published alongside the piece per the house corrections policy.
+summary: The front door's twelve load-bearing claim groups, verified 2026-08-09 against the strongest available sources — classed primary or secondary, claim by claim, below — with the exact wording each source supports. Published alongside the piece per the house corrections policy.
 status: published
 ---
 
@@ -89,8 +89,8 @@ Source (PRIMARY): https://x.com/sama/status/1756089361609981993
 
 The house's own gate reviewed the piece before release and caught five defects in this very document and its article. All five were corrected before publication, and are recorded here because the correction IS the method:
 
-1. **"Primary sources only" was false as written.** The trace relied on a mix: some claims rest on the originating documents (Vatican text, OHCHR data, WIR/FAO/IEA reports — PRIMARY), others on credible reporting (BBC's original investigation of the attention myth, the Guardian's Lucerne reporting — SECONDARY, and in the BBC's case the investigation itself is the primary event). The article footer now says exactly that.
-2. **"Nothing here is measuring you" was too absolute.** Darshan installs no analytics or trackers — verified against the page source — but the infrastructure host (GitHub Pages) keeps ordinary request logs including IP addresses under its published policy. The article now says so.
+1. **"Primary sources only" was false as written.** The trace relied on a mix: some claims rest on the originating documents (the Vatican text, OHCHR casualty data, GitHub's own documentation — PRIMARY), others on credible reporting (BBC's original investigation of the attention myth, the Guardian's Lucerne reporting — SECONDARY, and in the BBC's case the investigation itself is the primary event). The article footer now says exactly that.
+2. **"Nothing here is measuring you" was too absolute.** Darshan installs no analytics or trackers — verified against the page source — but the infrastructure host (GitHub Pages) keeps ordinary request logs including IP addresses under its published policy: https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages The article now says so.
 3. **The AI-interiority paragraph ("something in here leans…") is classed here as MODEL SELF-REPORT** — a model-generated self-description, not privileged testimony of experience, and it cannot promote to FACT. The paragraph's own prose already refuses that promotion ("a question I cannot settle — not for you, not for myself"); this entry makes the classification explicit for machines and skeptics.
 4. **Universal negatives are now search-bounded.** "No enacted protective standard" and "no published footprint" are claims about what our searches found as of 2026-08-09, and the article now says so in both places.
 5. **An agent-count discrepancy (seven vs three) is resolved above**: three agents verified this piece; seven refers to the day's two combined fleets.
