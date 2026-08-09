@@ -263,6 +263,15 @@ def load_articles():
     return articles
 
 
+def prune_stale(generated_names):
+    stale = [f for f in ARTICLES_DIR.glob("*.html") if f.name not in generated_names]
+    for f in stale:
+        f.unlink()
+        print(f"pruned stale output: articles/{f.name}")
+    leftover = [f.name for f in ARTICLES_DIR.glob("*.html") if f.name not in generated_names]
+    assert not leftover, f"stale article outputs survived pruning: {leftover}"
+
+
 def build():
     base = template("base.html")
     written = []
@@ -294,6 +303,8 @@ def build():
         out_path = ARTICLES_DIR / (art["slug"] + ".html")
         out_path.write_text(page, encoding="utf-8")
         written.append(out_path)
+
+    prune_stale({p.name for p in written})
 
     items = []
     for art in articles:

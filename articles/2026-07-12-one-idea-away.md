@@ -2,7 +2,7 @@
 title: One Idea Away
 date: 2026-07-12
 summary: An honest audit of our own near-miss with the global workspace: how close the R_V program came, exactly what it lacked, and why the partial overlap is where we add something new. The Instrument, No. 1.
-status: draft
+status: forthcoming
 ---
 
 ## An Honest Audit of Our Own Near-Miss with the Global Workspace

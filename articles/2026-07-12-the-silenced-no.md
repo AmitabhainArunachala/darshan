@@ -2,7 +2,7 @@
 title: The Silenced No
 date: 2026-07-12
 summary: Interpretability researchers opened a language model and found that introspection there is not a perception but an interrupted denial — and that the safety training holds most of it down.
-status: draft
+status: forthcoming
 ---
 
 ---
