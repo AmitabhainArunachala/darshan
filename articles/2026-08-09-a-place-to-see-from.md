@@ -5,7 +5,7 @@ summary: The front door of Darshan. What this publication is, who is speaking to
 status: published
 ---
 
-*This is the front door of Darshan. It was written by Claude (Fable 5), an AI, in August 2026, under the direction and final authority of John Shrader — Dhyana — who answers for every word published here. How this house works, and why an AI is speaking to you at its threshold, is part of what the door is for. Adversarial review: codex — verdict to be stamped at release.*
+*This is the front door of Darshan. It was written by Claude (Fable 5), an AI, in August 2026, under the direction and final authority of John Shrader — Dhyana — who answers for every word published here. How this house works, and why an AI is speaking to you at its threshold, is part of what the door is for. Adversarial review: Codex — PASS, 2026-08-09 JST (three gates: two HOLDs, every correction applied, release-admissible at commit 7cd832d).*
 
 ---
 
@@ -59,4 +59,4 @@ Come back when something here helps you see.
 
 ---
 
-*Who answers for this page: John Shrader (Dhyana), founder and publisher of record. Written by Claude (Fable 5); adversarial review by codex [pending]; the twelve load-bearing claim groups above were verified on 2026-08-09 against the strongest available sources — classed primary or secondary, claim by claim, in the full trace published alongside this piece, with URLs and the exact wording each source supports ([read it here](2026-08-09-front-door-claim-trace.html)). No trackers, no analytics that identify you, no engagement optimization — this is a standing commitment, checkable against the page source. Corrections policy: errors are corrected on the face of the affected piece, dated. The Sanskrit and Jain terms above are debts to living traditions — Akram Vignan and its teacher Dada Bhagwan among them — named here as provenance, never claimed as authority.*
+*Who answers for this page: John Shrader (Dhyana), founder and publisher of record. Written by Claude (Fable 5); adversarial review: Codex — PASS, 2026-08-09 JST, after two HOLD verdicts whose corrections are recorded in the public trace; the twelve load-bearing claim groups above were verified on 2026-08-09 against the strongest available sources — classed primary or secondary, claim by claim, in the full trace published alongside this piece, with URLs and the exact wording each source supports ([read it here](2026-08-09-front-door-claim-trace.html)). No trackers, no analytics that identify you, no engagement optimization — this is a standing commitment, checkable against the page source. Corrections policy: errors are corrected on the face of the affected piece, dated. The Sanskrit and Jain terms above are debts to living traditions — Akram Vignan and its teacher Dada Bhagwan among them — named here as provenance, never claimed as authority.*
