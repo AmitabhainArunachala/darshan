@@ -244,6 +244,53 @@ img { max-width: 100%; height: auto; }
   font-weight: 400;
 }
 
+/* ——— front-page hero: the threshold ——— */
+
+.hero {
+  border: 1px solid var(--rule);
+  border-top: 2px solid var(--accent);
+  padding: 1.6rem 1.5rem 1.4rem;
+  margin: 0 0 2rem;
+}
+
+.hero-kicker {
+  margin: 0 0 0.5rem;
+  color: var(--accent);
+  font-size: 0.78rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.hero-title {
+  margin: 0 0 0.7rem;
+  font-size: 1.55rem;
+  line-height: 1.25;
+}
+
+.hero-title a { color: var(--ink); text-decoration: none; }
+.hero-title a:hover { color: var(--accent); }
+
+.hero-line { margin: 0 0 0.9rem; color: var(--faint); }
+
+.hero-cta { margin: 0; font-size: 0.95rem; }
+.hero-cta a { text-decoration: none; letter-spacing: 0.04em; }
+.hero-cta a:hover { text-decoration: underline; }
+
+/* companion rows (claim traces) sit quietly under their piece */
+
+.article-list li.companion {
+  padding: 0.55rem 0 0.55rem 1.35rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+.article-list li.companion .piece-title {
+  font-size: 0.92rem;
+  font-weight: 400;
+}
+
+.article-list li.companion .piece-title a { color: var(--faint); }
+.article-list li.companion .piece-title a:hover { color: var(--accent); }
+
 /* ——— front-page standfirst ——— */
 
 .standfirst {
@@ -273,4 +320,12 @@ footer a:hover { color: var(--accent); }
   body { font-size: 1rem; padding: 1rem 1.05rem 3rem; }
   .masthead .wordmark { font-size: 1.55rem; letter-spacing: 0.34em; text-indent: 0.34em; }
   h1 { font-size: 1.4rem; }
+}
+
+/* ——— print: the page should survive paper ——— */
+
+@media print {
+  .theme-toggle, .masthead nav, .hero-cta { display: none; }
+  body { max-width: none; font-size: 11pt; }
+  a { color: inherit; text-decoration: none; }
 }
