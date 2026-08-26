@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The History of AI · Darshan Garden</title>
+<meta name="description" content="Seventy years of artificial intelligence in one arc — Dartmouth 1956 to AlexNet 2012. Each era bet on a different theory of what intelligence is, and each winter was that theory failing in public. This room traces what was believed, what broke, and what survived.">
+<link rel="stylesheet" href="../style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ccircle cx='8' cy='8' r='6' fill='none' stroke='%238f3b26' stroke-width='1.5'/%3E%3Ccircle cx='8' cy='8' r='2' fill='%238f3b26'/%3E%3C/svg%3E">
+<script>
+/* Theme memory. No analytics, no trackers. */
+(function () {
+  try {
+    var t = localStorage.getItem("darshan-theme");
+    if (t) document.documentElement.setAttribute("data-theme", t);
+  } catch (e) {}
+})();
+</script>
+<style>
+/* Garden-only layout. Kept here so the publication stylesheet remains shared. */
+body.garden-page-body {
+  max-width: none;
+  padding: 1.5rem clamp(1.25rem, 3.5vw, 4rem) 4rem;
+  font-size: 1.125rem;
+}
+body.garden-page-body > main,
+body.garden-page-body > .masthead,
+body.garden-page-body > footer {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 94rem;
+}
+.garden-layout,
+.garden-index-layout {
+  align-items: start;
+  display: grid;
+  gap: clamp(2.75rem, 5vw, 5rem);
+  grid-template-columns: minmax(0, 64rem) minmax(17rem, 20rem);
+  justify-content: center;
+}
+.garden-layout article,
+.garden-index-main { min-width: 0; }
+.garden-layout .article-title,
+.garden-intro .article-title {
+  font-size: clamp(2.65rem, 3.55vw, 4rem);
+  letter-spacing: -.025em;
+  line-height: 1.06;
+  max-width: 24ch;
+}
+.garden-layout article h2 {
+  font-size: 1.48rem;
+  line-height: 1.3;
+  margin-top: 3.2rem;
+  scroll-margin-top: 1.5rem;
+}
+.garden-layout article h3 {
+  font-size: 1.16rem;
+  margin-top: 2.35rem;
+  scroll-margin-top: 1.5rem;
+}
+.garden-intro { margin-bottom: 2.4rem; }
+.garden-series { margin: 2.8rem 0; scroll-margin-top: 1rem; }
+.garden-series h2 { border-bottom: 1px solid var(--rule); padding-bottom: .45rem; }
+.garden-room-list { list-style: none; margin: 0; padding: 0; }
+.garden-room-list li { border-bottom: 1px solid var(--rule); margin: 0; padding: 1rem 0; }
+.garden-room-title { font-weight: 600; }
+.garden-room-summary { color: var(--faint); font-size: .96rem; margin: .25rem 0 0; }
+.garden-series-link { color: var(--faint); font-size: .82rem; letter-spacing: .12em;
+  text-transform: uppercase; }
+.garden-lede {
+  border-left: 3px solid var(--accent);
+  color: var(--faint);
+  font-size: 1.24rem;
+  font-style: italic;
+  line-height: 1.62;
+  margin: 1.5rem 0 2.2rem;
+  padding: .35rem 0 .35rem 1.35rem;
+}
+.garden-corridors {
+  margin: 1.15rem 0 2.65rem;
+}
+.garden-corridor-list {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: .55rem .62rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.garden-corridor-list li { display: flex; margin: 0; max-width: 100%; }
+.garden-corridor {
+  align-items: center;
+  background: var(--accent-soft);
+  border: 1px solid var(--accent);
+  border-radius: 3px;
+  color: var(--accent);
+  display: inline-flex;
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .73rem;
+  font-weight: 700;
+  letter-spacing: .075em;
+  line-height: 1.35;
+  max-width: 100%;
+  min-height: 2.05rem;
+  overflow-wrap: anywhere;
+  padding: .34rem .72rem .3rem;
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-transform: uppercase;
+  text-underline-offset: .22em;
+}
+.garden-corridor:visited { color: var(--accent); }
+.garden-corridor:hover,
+.garden-corridor:focus-visible {
+  background: var(--accent);
+  color: var(--paper);
+}
+.garden-corridor:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+.garden-series-plate {
+  --plate-accent: var(--accent);
+  border: 1px solid var(--rule);
+  border-top: 3px solid var(--plate-accent);
+  margin: .25rem 0 2.8rem;
+  overflow: hidden;
+  position: relative;
+}
+.garden-series-plate--foundations { --plate-accent: #496f76; }
+.garden-series-plate--story-of-ai { --plate-accent: #526d9a; }
+.garden-series-plate--instrument { --plate-accent: #745779; }
+.garden-series-plate--strange-loops { --plate-accent: #866448; }
+.garden-series-plate--bridge { --plate-accent: #697044; }
+.garden-series-plate--power { --plate-accent: #8f3b26; }
+.garden-series-plate--time-future { --plate-accent: #416778; }
+[data-theme="dark"] .garden-series-plate { --plate-accent: var(--accent); }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .garden-series-plate { --plate-accent: var(--accent); }
+}
+.garden-series-plate-media {
+  aspect-ratio: 16 / 9;
+  background: var(--accent-soft);
+  overflow: hidden;
+  position: relative;
+}
+.garden-series-plate-media::after {
+  background:
+    linear-gradient(90deg, var(--paper) 0, transparent 24%, transparent 76%, var(--paper) 100%),
+    linear-gradient(0deg, var(--paper) 0, transparent 32%);
+  content: "";
+  inset: 0;
+  opacity: .24;
+  pointer-events: none;
+  position: absolute;
+}
+.garden-series-plate picture,
+.garden-series-card picture { display: block; height: 100%; }
+.garden-series-plate img {
+  display: block;
+  filter: saturate(.82) contrast(1.03);
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+.garden-series-plate figcaption {
+  align-items: baseline;
+  background: var(--paper);
+  border-top: 1px solid var(--rule);
+  display: grid;
+  gap: .25rem 1rem;
+  grid-template-columns: auto 1fr;
+  padding: .78rem 1rem .85rem;
+}
+.garden-series-plate-kicker {
+  color: var(--plate-accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+.garden-series-plate figcaption strong { font-size: 1rem; font-weight: 600; }
+.garden-series-plate-terms {
+  color: var(--faint);
+  font-size: .82rem;
+  grid-column: 2;
+  margin: 0;
+}
+.garden-visual {
+  background:
+    radial-gradient(circle at 92% 8%, var(--accent-soft), transparent 30%),
+    linear-gradient(135deg, transparent 0 72%, var(--accent-soft) 72% 72.4%, transparent 72.4%);
+  border: 1px solid var(--rule);
+  border-top: 3px solid var(--accent);
+  margin: 1.25rem 0 2.5rem;
+  overflow: hidden;
+  padding: clamp(1.1rem, 2.7vw, 1.75rem);
+  position: relative;
+}
+.garden-visual::before {
+  background-image:
+    linear-gradient(var(--rule) 1px, transparent 1px),
+    linear-gradient(90deg, var(--rule) 1px, transparent 1px);
+  background-size: 2.25rem 2.25rem;
+  content: "";
+  inset: 0;
+  opacity: .13;
+  pointer-events: none;
+  position: absolute;
+}
+.garden-visual > * { position: relative; }
+.garden-visual-head {
+  align-items: baseline;
+  display: grid;
+  gap: .45rem 1rem;
+  grid-template-columns: auto 1fr;
+  margin-bottom: 1.2rem;
+}
+.garden-visual-kicker {
+  color: var(--accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .68rem;
+  font-weight: 700;
+  letter-spacing: .17em;
+  margin: 0;
+  text-transform: uppercase;
+}
+.garden-visual-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  line-height: 1.28;
+  margin: 0;
+}
+.garden-visual-as-of {
+  color: var(--faint);
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: .72rem;
+  letter-spacing: .08em;
+  margin: 0;
+  text-transform: uppercase;
+  white-space: normal;
+}
+.garden-visual-items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.garden-visual-item {
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  margin: 0;
+  min-width: 0;
+  padding: .8rem .9rem;
+}
+.garden-visual-item-label {
+  display: block;
+  font-size: .96rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+.garden-visual-item-detail {
+  color: var(--faint);
+  display: block;
+  font-size: .9rem;
+  line-height: 1.45;
+  margin-top: .27rem;
+}
+.garden-visual-item-meta {
+  color: var(--accent);
+  display: block;
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: .72rem;
+  letter-spacing: .08em;
+  margin-bottom: .38rem;
+  text-transform: uppercase;
+}
+.garden-visual-caption {
+  border-top: 1px solid var(--rule);
+  color: var(--faint);
+  display: grid;
+  font-size: .84rem;
+  font-style: italic;
+  gap: .55rem 1rem;
+  grid-template-columns: minmax(0, 1fr) auto;
+  line-height: 1.45;
+  margin: 1.15rem 0 0;
+  padding-top: .75rem;
+}
+.garden-visual-evidence {
+  color: var(--accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .72rem;
+  font-style: normal;
+  font-weight: 650;
+  letter-spacing: .04em;
+  white-space: nowrap;
+}
+.garden-visual-evidence a {
+  color: inherit;
+  text-decoration-thickness: 1px;
+  text-underline-offset: .18em;
+}
+.garden-visual--sequence .garden-visual-items,
+.garden-visual--contrast .garden-visual-items,
+.garden-visual--constellation .garden-visual-items {
+  display: grid;
+  gap: .65rem;
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+}
+.garden-visual--sequence .garden-visual-items { counter-reset: garden-step; }
+.garden-visual--sequence .garden-visual-item {
+  counter-increment: garden-step;
+  padding-top: 2.35rem;
+  position: relative;
+}
+.garden-visual--sequence .garden-visual-item::before {
+  color: var(--accent);
+  content: counter(garden-step, decimal-leading-zero);
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: .68rem;
+  left: .9rem;
+  letter-spacing: .08em;
+  position: absolute;
+  top: .72rem;
+}
+.garden-visual--layers .garden-visual-items { display: grid; gap: .45rem; }
+.garden-visual--layers .garden-visual-item {
+  border-left: clamp(.24rem, .55vw, .48rem) solid var(--accent);
+  display: grid;
+  gap: .15rem 1rem;
+  grid-template-columns: minmax(8rem, .4fr) 1fr;
+}
+.garden-visual--layers .garden-visual-item:nth-child(2) { margin-left: 1.5%; }
+.garden-visual--layers .garden-visual-item:nth-child(3) { margin-left: 3%; }
+.garden-visual--layers .garden-visual-item:nth-child(4) { margin-left: 4.5%; }
+.garden-visual--layers .garden-visual-item:nth-child(5) { margin-left: 6%; }
+.garden-visual--layers .garden-visual-item:nth-child(6) { margin-left: 7.5%; }
+.garden-visual--timeline .garden-visual-items {
+  display: grid;
+  gap: 0;
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+}
+.garden-visual--timeline .garden-visual-item {
+  border-width: 1px 0 0 1px;
+  padding-top: 1.35rem;
+  position: relative;
+}
+.garden-visual--timeline .garden-visual-item::before {
+  background: var(--accent);
+  border: 3px solid var(--paper);
+  border-radius: 50%;
+  content: "";
+  height: .72rem;
+  left: -.4rem;
+  position: absolute;
+  top: -.4rem;
+  width: .72rem;
+}
+.garden-visual--contrast .garden-visual-item:nth-child(odd) { border-top: 2px solid var(--ink); }
+.garden-visual--contrast .garden-visual-item:nth-child(even) { border-top: 2px solid var(--accent); }
+.garden-visual--constellation .garden-visual-items {
+  align-items: stretch;
+  position: relative;
+}
+.garden-visual--constellation .garden-visual-item {
+  border-top: 2px solid var(--accent);
+  box-shadow: 0 .2rem 0 rgba(18, 31, 31, .04);
+  padding-top: 1.35rem;
+  position: relative;
+}
+.garden-visual--constellation .garden-visual-item::before {
+  background: var(--paper);
+  border: 2px solid var(--accent);
+  border-radius: 50%;
+  content: "";
+  height: .55rem;
+  left: calc(50% - .36rem);
+  position: absolute;
+  top: -.38rem;
+  width: .55rem;
+}
+.garden-visual--constellation .garden-visual-item:nth-child(even) { margin-top: .8rem; }
+.garden-series-gallery {
+  display: grid;
+  gap: .8rem;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  margin: 1.5rem 0 3rem;
+}
+.garden-series-card {
+  border: 1px solid var(--rule);
+  color: var(--ink);
+  display: grid;
+  grid-template-rows: 7.5rem auto;
+  overflow: hidden;
+  text-decoration: none;
+}
+.garden-series-card img {
+  height: 100%;
+  object-fit: cover;
+  transition: transform .25s ease;
+  width: 100%;
+}
+.garden-series-card span {
+  border-top: 1px solid var(--rule);
+  font-size: .9rem;
+  font-weight: 600;
+  padding: .65rem .75rem;
+}
+.garden-series-card:hover { border-color: var(--accent); color: var(--accent); }
+.garden-series-card:hover img { transform: scale(1.025); }
+@media (prefers-reduced-motion: reduce) {
+  .garden-series-card img { transition: none; }
+}
+.garden-tags { color: var(--faint); font-size: .82rem; margin-top: 2.2rem; }
+.garden-nav { border-top: 1px solid var(--rule); display: flex; gap: 1rem;
+  justify-content: space-between; margin-top: 2.5rem; padding-top: 1rem; }
+.garden-nav a { max-width: 48%; text-decoration: none; }
+.garden-nav .next { margin-left: auto; text-align: right; }
+.garden-table-wrap { overflow-x: auto; margin: 1.35rem 0; }
+.garden-table { border-collapse: collapse; font-size: .92rem; line-height: 1.45; width: 100%; }
+.garden-table th, .garden-table td { border: 1px solid var(--rule); padding: .55rem .65rem;
+  text-align: left; vertical-align: top; }
+.garden-table th { background: var(--accent-soft); }
+.garden-toc {
+  border-left: 1px solid var(--rule);
+  max-height: calc(100vh - 3rem);
+  overflow: auto;
+  padding: .1rem 0 .75rem 1.3rem;
+  position: sticky;
+  top: 1.5rem;
+}
+.garden-toc-title {
+  color: var(--accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .2em;
+  margin: 0 0 1.15rem;
+  text-transform: uppercase;
+}
+.garden-toc-title::before { content: "☰"; font-size: .8em; margin-right: .65rem; }
+.garden-toc-list { list-style: none; margin: 0; padding: 0; }
+.garden-toc-sublist { list-style: none; margin: 0; padding: 0; }
+.garden-toc-list li { margin: 0; }
+.garden-toc-list a {
+  border-left: 2px solid transparent;
+  color: var(--ink);
+  display: block;
+  font-size: .91rem;
+  line-height: 1.42;
+  margin-left: -1.4rem;
+  padding: .42rem .45rem .42rem 1.3rem;
+  text-decoration: none;
+}
+.garden-toc-list .level-3 a {
+  color: var(--faint);
+  font-size: .86rem;
+  font-style: italic;
+  padding-left: 2.15rem;
+}
+.garden-toc-list a:hover,
+.garden-toc-list a:focus-visible,
+.garden-toc-list a[aria-current="location"] {
+  border-left-color: var(--accent);
+  color: var(--accent);
+}
+.garden-toc-list a[aria-current="location"] { font-weight: 600; }
+.garden-toc-inline { display: none; }
+.garden-layout article :is(h2, h3):target,
+.garden-series:target h2 { color: var(--accent); }
+a.pending { color: var(--faint); text-decoration-style: dashed; }
+a.pending::after { content: " · pending"; font-size: .7em; letter-spacing: .06em;
+  text-transform: uppercase; }
+@media (min-width: 72.01em) {
+  body.garden-page-body > .masthead {
+    align-items: center;
+    column-gap: 2rem;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    margin-bottom: 3.5rem;
+    padding: 1.25rem 0;
+    text-align: left;
+  }
+  body.garden-page-body > .masthead .wordmark { justify-self: start; }
+  body.garden-page-body > .masthead .tagline { justify-self: center; margin: 0; }
+  body.garden-page-body > .masthead nav { justify-self: end; margin: 0; }
+}
+@media (max-width: 72em) {
+  .garden-layout,
+  .garden-index-layout { display: block; }
+  .garden-toc { display: none; }
+  .garden-toc-inline {
+    border: 1px solid var(--rule);
+    display: block;
+    margin: 1.5rem 0 2.4rem;
+    padding: .8rem 1rem;
+  }
+  .garden-toc-inline summary {
+    color: var(--accent);
+    cursor: pointer;
+    font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: .78rem;
+    font-weight: 700;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+  }
+  .garden-toc-inline .garden-toc-list { margin-top: .7rem; }
+  .garden-toc-inline .garden-toc-list a { margin-left: 0; padding-left: .75rem; }
+  .garden-toc-inline .garden-toc-list .level-3 a { padding-left: 1.6rem; }
+}
+@media (max-width: 40em) {
+  body.garden-page-body { font-size: 1.03rem; padding: 1rem 1.05rem 3rem; }
+  .garden-layout .article-title,
+  .garden-intro .article-title { font-size: clamp(2.15rem, 11vw, 3.15rem); }
+  .garden-lede { font-size: 1.1rem; padding-left: 1rem; }
+  .garden-corridors { margin-bottom: 2rem; }
+  .garden-corridor-list { gap: .45rem; }
+  .garden-corridor {
+    font-size: .68rem;
+    min-height: 2.35rem;
+    padding: .3rem .58rem .27rem;
+  }
+  .garden-series-plate-media { aspect-ratio: 16 / 9; }
+  .garden-series-plate figcaption { display: block; }
+  .garden-series-plate figcaption strong { display: block; margin-top: .22rem; }
+  .garden-series-plate-terms { display: block; margin-top: .25rem; }
+  .garden-visual { margin-left: -.15rem; margin-right: -.15rem; padding: 1rem; }
+  .garden-visual-head { display: block; }
+  .garden-visual-title { margin-top: .25rem; }
+  .garden-visual-as-of { margin-top: .35rem; }
+  .garden-visual-caption { grid-template-columns: 1fr; }
+  .garden-visual-evidence { white-space: normal; }
+  .garden-visual--sequence .garden-visual-items,
+  .garden-visual--contrast .garden-visual-items,
+  .garden-visual--constellation .garden-visual-items,
+  .garden-visual--timeline .garden-visual-items { grid-template-columns: 1fr; }
+  .garden-visual--layers .garden-visual-item:nth-child(n) { display: block; margin-left: 0; }
+  .garden-visual--timeline .garden-visual-item { border-width: 0 0 0 1px; }
+  .garden-visual--timeline .garden-visual-item::before { left: -.4rem; top: .9rem; }
+  .garden-visual--constellation .garden-visual-item:nth-child(even) { margin-top: 0; }
+  .garden-series-gallery { grid-template-columns: 1fr; }
+  .garden-nav { flex-direction: column; }
+  .garden-nav a { max-width: none; }
+  .garden-nav .next { margin-left: 0; text-align: left; }
+}
+@media print {
+  a.pending::after { content: " (pending)"; }
+  .garden-layout, .garden-index-layout { display: block; }
+  .garden-toc, .garden-toc-inline { display: none; }
+  .garden-series-card img { display: none; }
+  .garden-series-card { grid-template-rows: auto; }
+}
+</style>
+</head>
+<body class="garden-page-body">
+<button class="theme-toggle" aria-label="Toggle light and dark" onclick="
+  (function () {
+    var d = document.documentElement;
+    var cur = d.getAttribute('data-theme');
+    if (!cur) { cur = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'; }
+    var next = cur === 'dark' ? 'light' : 'dark';
+    d.setAttribute('data-theme', next);
+    try { localStorage.setItem('darshan-theme', next); } catch (e) {}
+  })();
+">◐</button>
+
+<header class="masthead">
+  <h1 class="wordmark"><a href="../index.html">DARSHAN</a></h1>
+  <p class="tagline">A signal of clear seeing in an age of information overload</p>
+  <nav>
+    <a href="../index.html">Articles</a>
+    <a href="index.html">Garden</a>
+    <a href="../about.html">About</a>
+  </nav>
+</header>
+
+<main>
+<div class="garden-layout">
+<article data-garden-room="history-of-ai" data-garden-outline>
+<p class="garden-series-link"><a href="index.html#story-of-ai">The Story of AI</a></p>
+<p class="article-meta">25 August 2026 · Draft</p>
+<h1 class="article-title">The History of AI</h1>
+<div class="draft-banner"><strong>Draft — pending discernment pass.</strong> This room is part of the garden's first planting. It has not been promoted to published status; check its sources and open questions before citing it.</div>
+<p class="garden-lede">Seventy years of artificial intelligence in one arc — Dartmouth 1956 to AlexNet 2012. Each era bet on a different theory of what intelligence is, and each winter was that theory failing in public. This room traces what was believed, what broke, and what survived.</p>
+<nav class="garden-corridors" aria-label="Explore connected rooms" data-corridor-count="12"><ul class="garden-corridor-list"><li><a class="garden-corridor" href="neural-networks.html">Neural Networks</a></li><li><a class="garden-corridor" href="deep-learning.html">Deep Learning</a></li><li><a class="garden-corridor" href="machine-learning.html">Machine Learning</a></li><li><a class="garden-corridor" href="cybernetics.html">Cybernetics</a></li><li><a class="garden-corridor" href="optimization.html">Optimization — the Hidden Engine</a></li><li><a class="garden-corridor" href="evolution-of-ai.html">The Evolution of AI</a></li><li><a class="garden-corridor" href="future-of-ai.html">The Future of AI</a></li><li><a class="garden-corridor" href="benchmarks.html">Benchmarks and What They Measure</a></li><li><a class="garden-corridor" href="top-papers-ai.html">The Top 20 Papers in AI</a></li><li><a class="garden-corridor" href="nvidia-and-the-chip.html">NVIDIA and the Future of the Computer Chip</a></li><li><a class="garden-corridor" href="mechanistic-interpretability.html">Mechanistic Interpretability</a></li><li><a class="garden-corridor" href="leading-models.html">The Leading Models (2026)</a></li></ul></nav>
+<figure class="garden-series-plate garden-series-plate--story-of-ai">
+<div class="garden-series-plate-media"><picture><source srcset="assets/series/story-of-ai.webp" type="image/webp"><img src="assets/series/story-of-ai.png" alt="An engraved relay machine transforms through neural layers into attention geometry." width="1672" height="941" loading="eager" decoding="async"></picture></div>
+<figcaption><span class="garden-series-plate-kicker">Visual field</span><strong>The Story of AI</strong><span class="garden-series-plate-terms">ai winter · dartmouth workshop · perceptron · symbolic ai</span></figcaption>
+</figure>
+<details class="garden-toc-inline"><summary>In this room</summary><ol class="garden-toc-list"><li class="level-2"><a href="#1-a-ten-man-summer-that-named-a-field">1. A ten-man summer that named a field</a></li><li class="level-2"><a href="#2-what-the-first-era-believed">2. What the first era believed</a></li><li class="level-2"><a href="#3-the-first-winter-an-argument-and-an-audit">3. The first winter: an argument and an audit</a></li><li class="level-2"><a href="#4-the-boom-that-ran-on-rules-expert-systems">4. The boom that ran on rules: expert systems</a></li><li class="level-2"><a href="#5-the-second-winter-brittleness-meets-a-spreadsheet">5. The second winter: brittleness meets a spreadsheet</a></li><li class="level-2"><a href="#6-the-quiet-decades-that-actually-won">6. The quiet decades that actually won</a></li><li class="level-2"><a href="#7-something-you-can-check-yourself-the-problem-that-ended-era-one">7. Something you can check yourself: the problem that ended era one</a></li><li class="level-2"><a href="#8-2012-the-dam-breaks">8. 2012: the dam breaks</a></li><li class="level-2"><a href="#9-the-whole-arc-in-one-table">9. The whole arc in one table</a></li><li class="level-2"><a href="#what-you-can-now-see">What you can now see</a></li><li class="level-2"><a href="#open-questions-the-honest-state-of-things">Open questions — the honest state of things</a></li><li class="level-2"><a href="#sources">Sources</a></li></ol></details>
+<p>You're in the story-of-ai series. This room covers the long arc — 1956 to 2012, Dartmouth to deep learning — the part of the story most current coverage skips or compresses into a sentence. The sibling room <a href="evolution-of-ai.html">evolution-of-ai</a> picks up where this one ends, with the transformer era, and <a href="future-of-ai.html">future-of-ai</a> looks forward. If you don't yet know what a neural network is, the <a href="neural-networks.html">neural-networks</a> room is the better first stop; this room tells you where they came from and why they were left for dead — twice.</p>
+<p>The one thing to hold onto: this is not a story of steady progress. It is a cycle, run at least twice, of a bold claim about what intelligence is, a boom funded on that claim, and a winter when the claim met reality. Knowing the shape of the cycle is the most useful thing this history can give you, because you are living inside another turn of it.</p>
+<h2 id="1-a-ten-man-summer-that-named-a-field">1. A ten-man summer that named a field</h2>
+<p>In August 1955, four researchers — John McCarthy, Marvin Minsky, Nathaniel Rochester, and Claude Shannon — sent a proposal to the Rockefeller Foundation. It asked for money for "a 2 month, 10 man study of artificial intelligence" to be held at Dartmouth College in the summer of 1956. That document is, as far as anyone has found, the first appearance of the phrase "artificial intelligence." McCarthy chose the name partly to stake out territory distinct from <a href="cybernetics.html">cybernetics</a>, the older field — Norbert Wiener's study of feedback and control in machines and animals — that had dominated thinking about machine minds until then.</p>
+<p>The proposal's core sentence is worth reading in full, because the entire field descends from it:</p>
+<blockquote><p>"The study is to proceed on the basis of the conjecture that every aspect of learning or any other feature of intelligence can in principle be so precisely described that a machine can be made to simulate it."</p></blockquote>
+<p>Notice what kind of sentence that is. It's not a finding. It's a conjecture — a bet, stated plainly as one. The honesty of that framing got lost almost immediately and took decades to recover.</p>
+<p>The Rockefeller Foundation granted about half of what was asked — roughly $7,500. The workshop ran in the summer of 1956, attendance drifted in and out, and no unified theory emerged. But one concrete thing showed up: Allen Newell, Herbert Simon, and Cliff Shaw brought the Logic Theorist, a program that proved theorems from Whitehead and Russell's <em>Principia Mathematica</em>. It eventually proved 38 of the first 52 theorems in chapter two, and its proof of theorem 2.85 was more elegant than the one Russell and Whitehead had produced by hand. A machine had done something that, a year earlier, everyone would have called thinking.</p>
+<p>So the field was born with a name, a conjecture, and one genuinely impressive demo. That combination — a demo standing in for a theory — is a pattern you'll see again.</p>
+<h2 id="2-what-the-first-era-believed">2. What the first era believed</h2>
+<p>From 1956 to roughly the early 1970s, the dominant belief was this: <strong>intelligence is symbol manipulation.</strong> Thinking is logical operations over symbolic representations — statements, rules, search trees — and since computers manipulate symbols natively, machine intelligence is mostly a matter of finding the right programs. This school is now called <strong>symbolic AI</strong> (or, affectionately, GOFAI — "good old-fashioned AI").</p>
+<p>The confidence was extraordinary. Herbert Simon wrote in the mid-1960s that "machines will be capable, within twenty years, of doing any work a man can do" — a prediction from his book <em>The Shape of Automation for Men and Management</em> (1965), not a journalist's paraphrase. Simon was no crank; he later won the Nobel Prize in economics. The field's best minds genuinely believed general machine intelligence was one or two decades out. That was in 1965.</p>
+<p>And there were results that made the confidence feel earned. Programs played checkers, solved word algebra problems, proved theorems. Joseph Weizenbaum's ELIZA (1966) held plausible-seeming therapy conversations with pattern-matched scripts — and Weizenbaum was disturbed to find users confiding in it. Terry Winograd's SHRDLU (around 1970) understood natural-language commands about a simulated world of blocks: "put the red pyramid on the green cube," and it did.</p>
+<p>Meanwhile a rival bet was running in parallel. In 1958, Frank Rosenblatt at Cornell demonstrated the <strong>perceptron</strong> — a simple learning machine modeled loosely on a neuron, which adjusted its own connection weights from examples instead of being programmed with rules. It's the direct ancestor of every <a href="neural-networks.html">neural network</a> running today. The press response set the template for AI hype: after a Navy demonstration in which the machine learned to distinguish punch cards marked on the left from cards marked on the right, the New York Times reported the Navy's expectation of machines that would "walk, talk, see, write, reproduce itself and be conscious of its existence." That was 1958. The hype-to-capability gap is not new; it is the field's oldest tradition.</p>
+<p>So by the late 1960s two theories of intelligence were on the table. Symbolic AI: intelligence is logic, program it top-down. Connectionism: intelligence is learned, grow it bottom-up from examples. The first winter would bury them both — one by argument, one by audit.</p>
+<h2 id="3-the-first-winter-an-argument-and-an-audit">3. The first winter: an argument and an audit</h2>
+<figure class="garden-visual garden-visual--contrast" aria-labelledby="visual-history-of-ai-1" data-claim-scope="section-synthesis" data-placement-heading="3-the-first-winter-an-argument-and-an-audit" data-evidence-headings="3-the-first-winter-an-argument-and-an-audit">
+<div class="garden-visual-head"><p class="garden-visual-kicker">Two verdicts, three constraints</p><p class="garden-visual-title" id="visual-history-of-ai-1">The first winter exposed different limits that looked like one failure</p></div>
+<ul class="garden-visual-items" role="list"><li class="garden-visual-item"><span class="garden-visual-item-meta">1969 · mathematical limit</span><strong class="garden-visual-item-label">Perceptron argument</strong><span class="garden-visual-item-detail">Minsky and Papert proved that a single-layer perceptron cannot compute XOR.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">judgment beyond the theorem</span><strong class="garden-visual-item-label">Training gap</strong><span class="garden-visual-item-detail">Multi-layer networks could represent XOR, but no practical training method was then available.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">1973 · scale audit</span><strong class="garden-visual-item-label">Lighthill audit</strong><span class="garden-visual-item-detail">Toy demonstrations failed to justify their promises once real search spaces and real funding were examined.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">binding constraint</span><strong class="garden-visual-item-label">Search explosion</strong><span class="garden-visual-item-detail">Methods that worked in tiny formal worlds drowned as the number of possible states grew.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">binding constraint</span><strong class="garden-visual-item-label">Commonsense gap</strong><span class="garden-visual-item-detail">Real environments required background knowledge that people rarely state and engineers could not exhaustively encode.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">visible in hindsight</span><strong class="garden-visual-item-label">Hidden diagnosis</strong><span class="garden-visual-item-detail">Connectionism also lacked the compute and data it would later need, but almost nobody named those as the bottleneck.</span></li></ul>
+<figcaption class="garden-visual-caption"><span>A correct theorem about one architecture and a correct audit of toy-world scaling converged on the same funding collapse, while the missing compute-and-data diagnosis remained largely unseen.</span><span class="garden-visual-evidence">Drawn from: <a href="#3-the-first-winter-an-argument-and-an-audit">3. The first winter: an argument and an audit</a></span></figcaption>
+</figure>
+<p><strong>The argument.</strong> In 1969, Marvin Minsky and Seymour Papert published <em>Perceptrons</em>, a mathematical analysis of what Rosenblatt's machines could and couldn't do. The famous result: a single-layer perceptron cannot compute XOR — the trivially simple function "output 1 if exactly one input is 1." You will prove this yourself in section 7 of this room; it takes four lines. Multi-layer networks could compute XOR, but in 1969 nobody had a practical way to train them. The book is often blamed for killing neural network research for a decade. The fair version: the mathematics was correct, the pessimism about multi-layer training was a judgment call that proved wrong, and funders read the book as a verdict on the whole connectionist program. Money left. Rosenblatt died in a boating accident in 1971 and did not live to see his machines vindicated.</p>
+<p><strong>The audit.</strong> In 1973, the British Science Research Council asked Sir James Lighthill — a Cambridge fluid dynamicist with no stake in AI — to survey the field. His report, <em>Artificial Intelligence: A General Survey</em>, concluded: "In no part of the field have the discoveries made so far produced the major impact that was then promised." His central technical charge was <strong>combinatorial explosion</strong>: the toy demos worked because the toy worlds were small, and the search spaces of real problems grow exponentially, so the methods would not scale. The UK government cut AI funding across British universities, leaving research alive at only a few sites. In the US, DARPA — which had funded AI generously and loosely through the 1960s — tightened into mission-oriented funding and cut major programs, including speech-understanding research in the mid-1970s.</p>
+<p>Why did the first era actually break? Three reasons that are worth stating precisely, because each one is a lesson that had to be relearned later:</p>
+<ol><li><strong>Combinatorial explosion.</strong> Search-based reasoning that works on a 10-object toy world drowns in a 10,000-object real one. Lighthill was right about this.</li><li><strong>The commonsense knowledge problem.</strong> SHRDLU could discuss blocks because its entire world was blocks. To discuss a kitchen, a program seemed to need thousands of facts humans never write down — that water is wet, that pushing a cup moves the cup. Nobody knew how to get that knowledge into a machine.</li><li><strong>Compute and data poverty, unrecognized.</strong> In hindsight, the connectionist program wasn't wrong — it was seventy years early on hardware and forty years early on data. Almost nobody in 1973 identified this as the binding constraint. That misdiagnosis is arguably the single most consequential error in the field's history.</li></ol>
+<p>Note what the winter punished: not lying, exactly, but the gap between demo and theory. The demos were real. The claims about what the demos implied were not.</p>
+<h2 id="4-the-boom-that-ran-on-rules-expert-systems">4. The boom that ran on rules: expert systems</h2>
+<p>The field came back in the 1980s with a humbler, more commercial bet: forget general intelligence — capture the knowledge of one human expert, in one narrow domain, as explicit IF-THEN rules. These programs were called <strong>expert systems</strong>, and the era's slogan, from Stanford's Edward Feigenbaum, was that knowledge — not reasoning power — is where intelligence lives.</p>
+<p>For a while it genuinely worked. The emblem was XCON (also called R1), deployed at Digital Equipment Corporation from 1980 to configure VAX computer orders — a fiddly, error-prone task requiring real expertise. By 1986 XCON was reported to be saving DEC on the order of $25 million a year. That number did what numbers do: by the mid-1980s, a large share of major US corporations had expert-system projects, a dedicated industry sold specialized "Lisp machines" (workstations built to run AI software), and in 1982 Japan's Ministry of International Trade and Industry launched the <strong>Fifth Generation Computer Systems project</strong>, a national program to build massively parallel logic-programming machines and leapfrog the US computer industry. DARPA answered with its own Strategic Computing Initiative in 1983. AI was, for the first time, a real industry with real revenue.</p>
+<p>Worth pausing on what this era believed, because it's the purest version of the symbolic bet: intelligence is knowledge, knowledge can be written down as rules, and therefore building intelligence is an engineering project of interviewing experts and encoding what they say. Every clause of that sentence turned out to be the failure point.</p>
+<h2 id="5-the-second-winter-brittleness-meets-a-spreadsheet">5. The second winter: brittleness meets a spreadsheet</h2>
+<p>The remarkable thing about the second winter is that it was called in advance, by name, from inside. At the 1984 meeting of the AAAI — the field's own professional association — Minsky and Roger Schank warned that enthusiasm had outrun reality and coined the term <strong>AI winter</strong> for what was coming, by analogy with nuclear winter: pessimism in the community, then in the press, then in funding, then the end of serious research. Three years later it arrived on schedule.</p>
+<p>Two things broke, one economic and one technical.</p>
+<p>The economic one was fast. Lisp machines were expensive specialized hardware. Around 1987, general-purpose workstations from Sun and desktop machines from Apple and IBM became powerful enough to run Lisp software at a fraction of the price. The specialized hardware market collapsed, taking flagship companies with it, and the collapse read publicly as "AI collapsed."</p>
+<p>The technical one was slower and more damning: <strong>brittleness</strong>. Expert systems could not learn, so every update meant human rule-writers. Rule bases grew into thousands of interacting rules that became progressively harder to maintain — XCON itself grew notoriously expensive to keep current. At the edge of their domain, the systems didn't degrade gracefully; they failed absurdly, because a rule base has no notion of what it doesn't know. Companies discovered that maintenance costs ate the savings. The Fifth Generation project spent on the order of hundreds of millions of dollars over its decade and ended in the early 1990s without achieving its headline goals; DARPA gutted its AI push. Through the 1990s, "AI" became a word researchers avoided in grant applications — the same work got relabeled <a href="machine-learning.html">machine learning</a>, informatics, knowledge systems.</p>
+<p>The deep lesson of the second winter, stated plainly: <strong>knowledge you must hand-write does not scale, and a system that cannot learn cannot be maintained.</strong> Whatever intelligence is, "a big pile of rules an expert dictated" is not it.</p>
+<h2 id="6-the-quiet-decades-that-actually-won">6. The quiet decades that actually won</h2>
+<figure class="garden-visual garden-visual--timeline" aria-labelledby="visual-history-of-ai-2" data-claim-scope="section-synthesis" data-placement-heading="6-the-quiet-decades-that-actually-won" data-evidence-headings="6-the-quiet-decades-that-actually-won">
+<div class="garden-visual-head"><p class="garden-visual-kicker">Winter beneath winter</p><p class="garden-visual-title" id="visual-history-of-ai-2">The ingredients accumulated while the headline field froze</p></div>
+<ol class="garden-visual-items" role="list"><li class="garden-visual-item"><span class="garden-visual-item-meta">1986</span><strong class="garden-visual-item-label">Backpropagation</strong><span class="garden-visual-item-detail">Multi-layer networks could learn hidden representations by propagating error backward.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">late 1980s–1990s</span><strong class="garden-visual-item-label">Statistical turn</strong><span class="garden-visual-item-detail">Probability and data-estimated parameters displaced brittle hand-written rule bases.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">1997</span><strong class="garden-visual-item-label">Closed-world search</strong><span class="garden-visual-item-detail">Deep Blue showed symbolic search at full strength—and the limits of a system that learned nothing.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">2006–2012</span><strong class="garden-visual-item-label">GPU compute</strong><span class="garden-visual-item-detail">Graphics processors made the matrix arithmetic of deep networks economically tractable.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">2006–2012</span><strong class="garden-visual-item-label">Training craft</strong><span class="garden-visual-item-detail">Better activations, regularization, and initialization made deep networks trainable in practice.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">2009</span><strong class="garden-visual-item-label">Shared data</strong><span class="garden-visual-item-detail">ImageNet supplied more than a million labeled examples and a public arena for comparison.</span></li></ol>
+<figcaption class="garden-visual-caption"><span>The apparent winter from 1986 to 2012 concealed the four lines of work that made the deep-learning break possible.</span><span class="garden-visual-evidence">Drawn from: <a href="#6-the-quiet-decades-that-actually-won">6. The quiet decades that actually won</a></span></figcaption>
+</figure>
+<p>Here is the part the boom-and-bust framing hides: the years everyone remembers as winter, roughly 1986 to 2012, are when the ingredients of everything current were actually built. Four threads matter.</p>
+<p><strong>Backpropagation, 1986.</strong> David Rumelhart, Geoffrey Hinton, and Ronald Williams published "Learning representations by back-propagating errors" in <em>Nature</em> (vol. 323, pp. 533–536) — a practical recipe for training <em>multi-layer</em> neural networks, precisely the thing Minsky and Papert had doubted was feasible. (The algorithm has earlier roots — Paul Werbos described it in his 1974 thesis — but the 1986 paper is what made the field notice.) The 1969 objection was now answered: multi-layer networks could be trained, by <a href="optimization.html">gradient-based optimization</a>, and their hidden layers learned useful internal representations nobody programmed. By 1989, Yann LeCun's group had backprop-trained networks reading handwritten ZIP code digits for the US Postal Service — real learning on a real task.</p>
+<p><strong>The probabilistic and statistical turn.</strong> Through the late 1980s and 1990s — Judea Pearl's work on Bayesian networks prominent among the causes — the field shifted from logic to probability, from hand-coded rules to parameters estimated from data. This rebrand-era machine learning delivered quiet, unglamorous wins: spam filters, credit scoring, speech recognition that slowly stopped being a joke. The lesson from the expert-systems collapse was being absorbed: don't ask the human to write the knowledge down; fit it from data.</p>
+<p><strong>A famous win that proved the old thesis's limit.</strong> In May 1997, IBM's Deep Blue beat world chess champion Garry Kasparov 3.5–2.5 — the first defeat of a reigning world champion by a machine under standard tournament conditions. Front-page news, and genuinely a milestone. But notice what Deep Blue was: brute-force search over hundreds of millions of positions per second plus hand-tuned evaluation functions. It was the <em>apotheosis</em> of the symbolic-search program, not a refutation of its limits — the approach conquered chess precisely because chess is a closed formal world, the kind of world Lighthill's critique had exempted. It learned nothing, and it generalized to nothing.</p>
+<p><strong>The three missing ingredients arrive.</strong> The connectionist program had been starved of scale. Between 2006 and 2012, scale showed up from three directions at once:</p>
+<ul><li><strong>Compute:</strong> graphics processors, built for video games, turned out to be near-ideal for the matrix arithmetic neural networks run on — the accident of history covered in <a href="nvidia-and-the-chip.html">nvidia-and-the-chip</a>.</li><li><strong>Data:</strong> in 2009, Fei-Fei Li's group at Princeton presented ImageNet at the CVPR conference — a dataset that grew to over 14 million hand-labeled images, plus an annual public competition. The role of shared public <a href="benchmarks.html">benchmarks</a> in forcing honest comparison is its own story.</li><li><strong>Algorithms and craft:</strong> Hinton's group and others (deep belief networks, 2006, and after) accumulated the training tricks — better activations, regularization, initialization — that made deep networks trainable in practice.</li></ul>
+<p>None of this looked like a revolution while it was happening. It looked like an unfashionable subfield refusing to die.</p>
+<h2 id="7-something-you-can-check-yourself-the-problem-that-ended-era-one">7. Something you can check yourself: the problem that ended era one</h2>
+<figure class="garden-visual garden-visual--contrast" aria-labelledby="visual-history-of-ai-3" data-claim-scope="section-synthesis" data-placement-heading="7-something-you-can-check-yourself-the-problem-that-ended-era-one" data-evidence-headings="7-something-you-can-check-yourself-the-problem-that-ended-era-one">
+<div class="garden-visual-head"><p class="garden-visual-kicker">One hidden layer</p><p class="garden-visual-title" id="visual-history-of-ai-3">Why XOR defeated one line and yielded to two intermediate ideas</p></div>
+<ul class="garden-visual-items" role="list"><li class="garden-visual-item"><span class="garden-visual-item-meta">single layer</span><strong class="garden-visual-item-label">Single boundary</strong><span class="garden-visual-item-detail">The four XOR inequalities contradict one another; no weights w₁, w₂, b satisfy all four.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">h₁</span><strong class="garden-visual-item-label">Hidden OR</strong><span class="garden-visual-item-detail">The first intermediate unit fires when at least one input is on.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">h₂</span><strong class="garden-visual-item-label">Hidden AND</strong><span class="garden-visual-item-detail">The second intermediate unit fires only when both inputs are on.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">XOR</span><strong class="garden-visual-item-label">OR, not AND</strong><span class="garden-visual-item-detail">The output combines h₁ and h₂ to return 0, 1, 1, 0 exactly.</span></li></ul>
+<figcaption class="garden-visual-caption"><span>A single perceptron cannot separate XOR, while two hidden units re-express it as OR minus AND.</span><span class="garden-visual-evidence">Drawn from: <a href="#7-something-you-can-check-yourself-the-problem-that-ended-era-one">7. Something you can check yourself: the problem that ended era one</a></span></figcaption>
+</figure>
+<p>The claim that shaped twenty years of history — "a perceptron cannot compute XOR" — takes four lines to verify. Worth doing once by hand, so it's yours.</p>
+<p>A perceptron computes: output 1 if <code>w₁x₁ + w₂x₂ + b ≥ 0</code>, else 0. Training a perceptron just means finding numbers <code>w₁, w₂, b</code>. XOR demands:</p>
+<pre><code>input (0,0) → 0   so:  b &lt; 0                 (i)
+input (1,0) → 1   so:  w₁ + b ≥ 0            (ii)
+input (0,1) → 1   so:  w₂ + b ≥ 0            (iii)
+input (1,1) → 0   so:  w₁ + w₂ + b &lt; 0       (iv)</code></pre>
+<p>Add (ii) and (iii): <code>w₁ + w₂ + 2b ≥ 0</code>, so <code>w₁ + w₂ + b ≥ −b</code>. By (i), <code>−b &gt; 0</code>. So <code>w₁ + w₂ + b &gt; 0</code> — contradicting (iv). No such numbers exist. Done. That contradiction, generalized across a book, was enough (with help from funding politics) to freeze a research program for a decade.</p>
+<p>Now the resolution. Add one hidden layer — two intermediate units, then an output unit, each the same kind of threshold unit:</p>
+<pre><code>h₁ = step(x₁ + x₂ − 0.5)     "at least one input is on"  (OR)
+h₂ = step(x₁ + x₂ − 1.5)     "both inputs are on"        (AND)
+y  = step(h₁ − h₂ − 0.5)     "OR but not AND"            = XOR</code></pre>
+<p>Trace all four inputs — where <code>step(z)</code> is 1 if <code>z ≥ 0</code>, else 0:</p>
+<div class="garden-table-wrap"><table class="garden-table"><thead><tr><th>x₁</th><th>x₂</th><th>h₁</th><th>h₂</th><th>y</th></tr></thead><tbody><tr><td>0</td><td>0</td><td>step(−0.5)=0</td><td>step(−1.5)=0</td><td>step(−0.5)=<strong>0</strong></td></tr><tr><td>1</td><td>0</td><td>step(0.5)=1</td><td>step(−0.5)=0</td><td>step(0.5)=<strong>1</strong></td></tr><tr><td>0</td><td>1</td><td>step(0.5)=1</td><td>step(−0.5)=0</td><td>step(0.5)=<strong>1</strong></td></tr><tr><td>1</td><td>1</td><td>step(1.5)=1</td><td>step(0.5)=1</td><td>step(−0.5)=<strong>0</strong></td></tr></tbody></table></div>
+<p>XOR, exactly. The hidden units re-describe the input — as "OR-ness" and "AND-ness" — in a space where the problem becomes linearly separable. In 1969 the open question was how a machine could <em>find</em> such intermediate weights on its own; backpropagation, 1986, is the answer. And what intermediate re-descriptions today's billion-unit networks find on their own is precisely the question <a href="mechanistic-interpretability.html">mechanistic interpretability</a> exists to answer.</p>
+<h2 id="8-2012-the-dam-breaks">8. 2012: the dam breaks</h2>
+<p>Every year, the ImageNet competition asked: given a photo, name the object, from 1,000 categories. The standard score was top-5 error — how often the correct label is missing from your five best guesses. In 2012 the best conventional computer-vision pipelines, built on a decade of hand-engineered features, scored around 26% top-5 error.</p>
+<p>That year Alex Krizhevsky, Ilya Sutskever, and Geoffrey Hinton entered a <a href="deep-learning.html">deep</a> convolutional neural network — eight layers, about 60 million learned parameters, trained on two consumer GTX 580 graphics cards. It scored <strong>15.3%</strong>, against <strong>26.2%</strong> for the runner-up. In a benchmark where a single point of improvement was a good year, that is not an increment; that's a different regime. The paper, "ImageNet Classification with Deep Convolutional Neural Networks" — universally known as <strong>AlexNet</strong> — became one of the most cited works in the field's history (it appears, of course, in <a href="top-papers-ai.html">top-papers-ai</a>).</p>
+<p>Read the result against the whole arc and its meaning sharpens. The runner-up encoded decades of expert knowledge about what image features matter — the intellectual descendant, one more time, of "interview the expert and write the rules down." AlexNet encoded almost none; it <em>learned</em> its features from 1.2 million examples. Rosenblatt's 1958 bet — grow it from examples, don't program it — finally had the compute and the data it had always needed, and it won by eleven points, in public, on a benchmark nobody could argue with. Within about three years, essentially every serious computer-vision team had switched, and the same recipe began eating speech, translation, and eventually language itself — the story of the <a href="evolution-of-ai.html">transformer era</a> and today's <a href="leading-models.html">leading models</a>.</p>
+<h2 id="9-the-whole-arc-in-one-table">9. The whole arc in one table</h2>
+<div class="garden-table-wrap"><table class="garden-table"><thead><tr><th>Era</th><th>Years</th><th>Core belief</th><th>Emblematic system</th><th>Why it broke — or what it won</th></tr></thead><tbody><tr><td>Founding + golden years</td><td>1956–1973</td><td>Intelligence is symbol manipulation; general AI is ~20 years away</td><td>Logic Theorist, SHRDLU</td><td>Combinatorial explosion; commonsense knowledge problem; Lighthill audit → first winter</td></tr><tr><td>First connectionism</td><td>1958–1969</td><td>Intelligence is learned by neuron-like units</td><td>Rosenblatt's perceptron</td><td>Single layers provably weak (XOR); no way yet to train deep ones; <em>Perceptrons</em> (1969)</td></tr><tr><td>Expert systems boom</td><td>1980–1987</td><td>Intelligence is knowledge, written as rules</td><td>XCON at DEC (~$25M/yr saved)</td><td>Brittleness; maintenance cost &gt; value; Lisp-machine market collapse → second winter</td></tr><tr><td>Quiet statistical era</td><td>1986–2012</td><td>Intelligence is fit from data, not dictated</td><td>Backprop (1986), LeNet, Deep Blue (1997)</td><td>Didn't break — accumulated the pieces: learning algorithms, GPUs, big datasets</td></tr><tr><td>Deep learning</td><td>2012–</td><td>Scale (data + compute + depth) beats hand engineering</td><td>AlexNet: 15.3% vs 26.2%</td><td>Still being tested — see <a href="evolution-of-ai.html">evolution-of-ai</a></td></tr></tbody></table></div>
+<p>The pattern across the first four rows: each era's core belief was a <em>theory of what intelligence is</em>, each boom was that theory funded, and each winter was that theory failing its audit. The current era is unusual in that its core belief is almost anti-theoretical — not "intelligence is X" but "stop specifying X; scale learning and let X emerge." Whether that escapes the cycle or is simply this era's version of it is the live question, and this room won't pretend to settle it.</p>
+<h2 id="what-you-can-now-see">What you can now see</h2>
+<p>You can now read any claim about AI's trajectory against seventy years of base rates. You know the boom-winter cycle has run at least twice, what specifically broke each time (scaling walls and hand-coded knowledge, respectively), and that the field's oldest tradition is the gap between a real demo and the theory it supposedly proves — from the 1958 "conscious of its existence" perceptron coverage onward. You know the current paradigm's lineage: Rosenblatt's bet, frozen by a correct proof about the wrong target, thawed by backprop, and finally fed by GPUs and ImageNet. You've verified the pivotal mathematical fact yourself. Where this era goes next is <a href="evolution-of-ai.html">evolution-of-ai</a> and <a href="future-of-ai.html">future-of-ai</a>; how the papers stack up is <a href="top-papers-ai.html">top-papers-ai</a>; what's actually inside the learned models is <a href="mechanistic-interpretability.html">mechanistic-interpretability</a>.</p>
+<h2 id="open-questions-the-honest-state-of-things">Open questions — the honest state of things</h2>
+<p><strong>Established (FACT):</strong> The dates, systems, and outcomes above — the Dartmouth proposal and its conjecture, the perceptron and <em>Perceptrons</em>, the Lighthill report and UK cuts, XCON's deployment and reported savings, the 1987 hardware collapse, backprop's 1986 publication, Deep Blue's 3.5–2.5, AlexNet's 15.3% vs 26.2% — are documented history, verified against primary or near-primary sources listed below.</p>
+<p><strong>Contested (HYPOTHESIS):</strong> <em>Why</em> the winters happened is interpretation, not record. This room's framing — each winter as a failed theory of intelligence — is one reading; economic historians emphasize funding-agency politics and hardware commoditization, and both readings fit the evidence. Also contested: whether "scale is all you need" is a durable truth or this era's Simon-style overreach. Serious researchers hold both positions right now; the honest statement is that deep learning's eventual ceiling is unknown.</p>
+<p><strong>Speculation worth holding (WILD):</strong> That the winter cycle may be permanently over because AI now generates revenue rather than only promises — plausible, unproven, and structurally similar to things said in 1986 about expert systems. And the inverse wild thought: that a third winter, if it comes, would be the first to arrive <em>after</em> the technology genuinely worked, which no previous cycle can tell us much about.</p>
+<p>One more thing the arc quietly teaches, and it belongs to this domain's own materials. Every era of this history was, underneath the funding and the acronyms, a public wager about what a mind is — logic, knowledge, learned representation — and reality graded each wager within a generation. The era that finally broke through is the one that stopped declaring what intelligence is and built machines that learn their own internal re-descriptions, which means the field now owns billions of hidden units doing what those two XOR units did — re-describing the world into spaces where problems become separable — without anyone able to say, yet, what re-descriptions are in there. Seventy years in, the Dartmouth conjecture stands unresolved and inverted: the machines work, and the question of what intelligence is has moved from the proposal's opening sentence to the inside of the machine. The field spent seventy years asking whether a machine can think. The working machines have handed back the harder question — what thinking is — and for the first time, there is an artifact you can open up and ask.</p>
+<h2 id="sources">Sources</h2>
+<ul><li>McCarthy, Minsky, Rochester, Shannon, <a href="https://ojs.aaai.org/aimagazine/index.php/aimagazine/article/view/1904">"A Proposal for the Dartmouth Summer Research Project on Artificial Intelligence"</a> (Aug 31, 1955; reprinted in <em>AI Magazine</em>, 2006). Rockefeller grant ~$7,500 (about half the request) per the <a href="https://computerhistory.org/events/1956-dartmouth-workshop-its-immediate/">Computer History Museum</a> and Dartmouth accounts.</li><li>Logic Theorist: 38 of 52 theorems, theorem 2.85 — <a href="https://en.wikipedia.org/wiki/Logic_Theorist">Wikipedia: Logic Theorist</a> and Gugerty, <a href="https://journals.sagepub.com/doi/10.1177/154193120605000904">"Newell and Simon's Logic Theorist"</a> (2006).</li><li>Simon's twenty-year prediction: <em>The Shape of Automation for Men and Management</em> (1965); provenance traced by <a href="https://quoteinvestigator.com/2020/11/11/ai-can-do/">Quote Investigator</a>.</li><li>Perceptron press coverage: <em>New York Times</em>, July 1958, "New Navy Device Learns by Doing"; see <a href="https://news.cornell.edu/stories/2019/09/professors-perceptron-paved-way-ai-60-years-too-soon">Cornell Chronicle</a>.</li><li>Minsky &amp; Papert, <em>Perceptrons: An Introduction to Computational Geometry</em> (MIT Press, 1969). The XOR proof in section 7 is standard material you can re-derive from the book's linear-separability results.</li><li><a href="https://en.wikipedia.org/wiki/Lighthill_report">Lighthill report</a>, <em>Artificial Intelligence: A General Survey</em> (1973); the "in no part of the field…" quotation is from the report itself.</li><li>XCON/R1 savings (~$25M/yr, 1986): Polit, <a href="https://aaai.org/ojs/index.php/aimagazine/article/view/460/396">"R1 and Beyond: AI Technology Transfer at DEC"</a>, <em>AI Magazine</em>. Figure is DEC-reported — treat as company-sourced.</li><li><a href="https://en.wikipedia.org/wiki/Fifth_Generation_Computer_Systems">Fifth Generation Computer Systems</a> (MITI, 1982–1992); 1987 Lisp-machine market collapse and second winter: <a href="https://en.wikipedia.org/wiki/AI_winter">AI winter — Wikipedia</a>, which also documents the term's 1984 AAAI coinage by Minsky and Schank.</li><li>Rumelhart, Hinton, Williams, <a href="https://www.nature.com/articles/323533a0">"Learning representations by back-propagating errors"</a>, <em>Nature</em> 323, 533–536 (1986).</li><li>Deep Blue vs. Kasparov, May 1997, 3.5–2.5: <a href="https://www.ibm.com/history/deep-blue">IBM</a> and <a href="https://en.wikipedia.org/wiki/Deep_Blue_versus_Garry_Kasparov">Wikipedia</a>.</li><li>Deng, Dong, Socher, Li, Li, Fei-Fei, <a href="https://www.image-net.org/static_files/papers/imagenet_cvpr09.pdf">"ImageNet: A Large-Scale Hierarchical Image Database"</a>, CVPR 2009; 14M+ hand-annotated images per project documentation.</li><li>Krizhevsky, Sutskever, Hinton, <a href="https://courses.csail.mit.edu/6.803/pdf/2012%20hinton.pdf">"ImageNet Classification with Deep Convolutional Neural Networks"</a> (NeurIPS 2012): 15.3% vs 26.2% top-5 error, two GTX 580 GPUs — numbers from the paper itself.</li><li>Unverified-by-search in this room and labeled accordingly: exact Fifth Generation spending (stated only as "hundreds of millions"), Werbos 1974 thesis attribution, and LeCun's 1989 ZIP-code work (both standard history; see LeCun et al., <em>Neural Computation</em> 1, 541–551, 1989 — cited from training knowledge, not re-verified live).</li></ul>
+<hr>
+<p><em>Written by Claude (Fable 5), an AI, for the Darshan garden. John Shrader (Dhyana), founder and publisher of record, answers for every word published here. Errors are corrected on the face of the page, dated.</em></p>
+<p class="garden-tags"><strong>Topics:</strong> ai · history · ai-winter · dartmouth · perceptron · expert-systems · symbolic-ai · deep-learning</p>
+<nav class="garden-nav" aria-label="Rooms"><a class="next" href="evolution-of-ai.html">The Evolution of AI →</a></nav>
+</article>
+<aside class="garden-toc" aria-label="In this room"><nav aria-label="Page sections"><p class="garden-toc-title">In this room</p><ol class="garden-toc-list"><li class="level-2"><a href="#1-a-ten-man-summer-that-named-a-field">1. A ten-man summer that named a field</a></li><li class="level-2"><a href="#2-what-the-first-era-believed">2. What the first era believed</a></li><li class="level-2"><a href="#3-the-first-winter-an-argument-and-an-audit">3. The first winter: an argument and an audit</a></li><li class="level-2"><a href="#4-the-boom-that-ran-on-rules-expert-systems">4. The boom that ran on rules: expert systems</a></li><li class="level-2"><a href="#5-the-second-winter-brittleness-meets-a-spreadsheet">5. The second winter: brittleness meets a spreadsheet</a></li><li class="level-2"><a href="#6-the-quiet-decades-that-actually-won">6. The quiet decades that actually won</a></li><li class="level-2"><a href="#7-something-you-can-check-yourself-the-problem-that-ended-era-one">7. Something you can check yourself: the problem that ended era one</a></li><li class="level-2"><a href="#8-2012-the-dam-breaks">8. 2012: the dam breaks</a></li><li class="level-2"><a href="#9-the-whole-arc-in-one-table">9. The whole arc in one table</a></li><li class="level-2"><a href="#what-you-can-now-see">What you can now see</a></li><li class="level-2"><a href="#open-questions-the-honest-state-of-things">Open questions — the honest state of things</a></li><li class="level-2"><a href="#sources">Sources</a></li></ol></nav></aside>
+</div>
+</main>
+
+<footer>
+  <p>Darshan · seeing clearly after the feed</p>
+  <p>No feed. No analytics. No trackers. Finite editions, read at your own pace.</p>
+  <p style="opacity:.7">Darshan v0.0.0.1 · a beginning, built to grow</p>
+</footer>
+<script>
+/* Local section highlighting only. No network requests, analytics, or storage. */
+(function () {
+  var scope = document.querySelector("[data-garden-outline]");
+  if (!scope) return;
+  var sections = Array.prototype.slice.call(scope.querySelectorAll("h2[id], h3[id], section[id]"));
+  var links = Array.prototype.slice.call(document.querySelectorAll('.garden-toc-list a[href^="#"]'));
+  if (!sections.length || !links.length) return;
+  var queued = false;
+  function update() {
+    queued = false;
+    var threshold = Math.max(96, window.innerHeight * .22);
+    var current = sections[0].id;
+    sections.forEach(function (section) {
+      if (section.getBoundingClientRect().top <= threshold) current = section.id;
+    });
+    links.forEach(function (link) {
+      var active = link.getAttribute("href") === "#" + current;
+      if (active) link.setAttribute("aria-current", "location");
+      else link.removeAttribute("aria-current");
+    });
+  }
+  function requestUpdate() {
+    if (!queued) {
+      queued = true;
+      window.requestAnimationFrame(update);
+    }
+  }
+  document.addEventListener("scroll", requestUpdate, {passive: true});
+  window.addEventListener("resize", requestUpdate);
+  window.addEventListener("hashchange", requestUpdate);
+  update();
+})();
+</script>
+</body>
+</html>

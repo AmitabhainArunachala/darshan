@@ -1,0 +1,9 @@
+{
+  "slug": "forecasting",
+  "verdict": "PASS",
+  "contract": "All nine frontmatter keys are present. The current 4,364-word room now opens in four sentences and includes numbered descriptive sections, a substantive four-tool comparison table, a transparent live-forecast walkthrough, conclusion, typed FACT/HYPOTHESIS/WILD questions, sources, disclosure, declared slug.html corridors, and a socket earned from the discipline of noticing forecast error. A fresh full reread on 2026-08-25 found the repaired opening and scoring convention coherent in context.",
+  "facts": "The Brier paragraph now explicitly defines the binary squared-error convention used throughout the room as (p-o)^2 with range 0 to 1, and states that the later 0.081 and 0.101 values use that normalized convention. It no longer conflates this with Brier's original two-component 0-to-2 formulation. The previously spot-checked primary evidence still supports the XPT 0.38% versus 3.9% medians, the resolved near-term MATH comparison, and ForecastBench's carefully caveated 2026 parity claim. The room keeps benchmark staleness, statistical indistinguishability, and durable outperformance distinct.",
+  "voice": "The XPT limitation, ForecastBench parity discussion, and final identity/update movement were reread aloud. The four-sentence opener now moves cleanly, and the scoring explanation can be spoken without a convention switch. The room remains direct without turning calibrated evidence into certainty.",
+  "must_fix": "none. The orientation and Brier-convention defects are repaired; no remaining publication-blocking contract, factual, voice, disclosure, link, or socket issue was found.",
+  "source_sha256": "0790a05988d899c0805f10a12df6c488c06d86b9c0a5fa60bc0c4981331b1aaa"
+}

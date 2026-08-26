@@ -1,0 +1,9 @@
+{
+  "slug": "intro-to-computer-science",
+  "verdict": "PASS",
+  "contract": "All exact frontmatter keys, the short orientation, nine numbered sections, layer comparison table, reproducible Python/disassembly walkthrough, conclusion, typed FACT/HYPOTHESIS/WILD ledger, live-linked Sources, disclosure, and domain-earned socket-exit are present. Body prose remains within 2,500–4,500 words, all declared term links appear, and terms of art are on-ramped. The complete repaired source was reread.",
+  "facts": "Fresh checks on 2026-08-25 confirm three load-bearing claims: Shannon's original thesis records submission in August 1937; Turing's original paper records receipt on May 28, 1936 and constructs a universal computing machine; Apple's official M3 Ultra release states 184 billion transistors. The repaired byte example now correctly distinguishes 0x41 as INC ECX in legacy 32-bit x86 mode from its REX.B-prefix meaning in x86-64 long mode. The timing paragraph now separates sub-millisecond hardware addition from the milliseconds-to-tens-of-milliseconds Python process and terminal path, consistent with three local 20–30 ms runs.",
+  "voice": "The three densest passages—the abstraction-layer failure paragraph, three-question mental model, and closing layers/meaning movement—pass the read-aloud test. They are concrete, second-person, and sayable. The 1936 opening now accurately says core formal model and central limits rather than claiming the whole theory was finished.",
+  "must_fix": "none; execution-mode, timing-scope, and 1936-theory wording were corrected",
+  "source_sha256": "84b41c558eb150d9839444ebd7e8e7bed92ef6af4cfd5b1d5b6e96c61cee2f83"
+}

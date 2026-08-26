@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Futurism Without Prophecy · Darshan Garden</title>
+<meta name="description" content="Futurism is not one prediction about tomorrow. It is a contest among programs for building it. This room maps Kurzweil&#x27;s singularity, transhumanism, e/acc, post-growth and degrowth, cosmism, longtermism, and risk-first foresight while keeping facts, hypotheses, scenarios, and wild possibilities in separate boxes.">
+<link rel="stylesheet" href="../style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ccircle cx='8' cy='8' r='6' fill='none' stroke='%238f3b26' stroke-width='1.5'/%3E%3Ccircle cx='8' cy='8' r='2' fill='%238f3b26'/%3E%3C/svg%3E">
+<script>
+/* Theme memory. No analytics, no trackers. */
+(function () {
+  try {
+    var t = localStorage.getItem("darshan-theme");
+    if (t) document.documentElement.setAttribute("data-theme", t);
+  } catch (e) {}
+})();
+</script>
+<style>
+/* Garden-only layout. Kept here so the publication stylesheet remains shared. */
+body.garden-page-body {
+  max-width: none;
+  padding: 1.5rem clamp(1.25rem, 3.5vw, 4rem) 4rem;
+  font-size: 1.125rem;
+}
+body.garden-page-body > main,
+body.garden-page-body > .masthead,
+body.garden-page-body > footer {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 94rem;
+}
+.garden-layout,
+.garden-index-layout {
+  align-items: start;
+  display: grid;
+  gap: clamp(2.75rem, 5vw, 5rem);
+  grid-template-columns: minmax(0, 64rem) minmax(17rem, 20rem);
+  justify-content: center;
+}
+.garden-layout article,
+.garden-index-main { min-width: 0; }
+.garden-layout .article-title,
+.garden-intro .article-title {
+  font-size: clamp(2.65rem, 3.55vw, 4rem);
+  letter-spacing: -.025em;
+  line-height: 1.06;
+  max-width: 24ch;
+}
+.garden-layout article h2 {
+  font-size: 1.48rem;
+  line-height: 1.3;
+  margin-top: 3.2rem;
+  scroll-margin-top: 1.5rem;
+}
+.garden-layout article h3 {
+  font-size: 1.16rem;
+  margin-top: 2.35rem;
+  scroll-margin-top: 1.5rem;
+}
+.garden-intro { margin-bottom: 2.4rem; }
+.garden-series { margin: 2.8rem 0; scroll-margin-top: 1rem; }
+.garden-series h2 { border-bottom: 1px solid var(--rule); padding-bottom: .45rem; }
+.garden-room-list { list-style: none; margin: 0; padding: 0; }
+.garden-room-list li { border-bottom: 1px solid var(--rule); margin: 0; padding: 1rem 0; }
+.garden-room-title { font-weight: 600; }
+.garden-room-summary { color: var(--faint); font-size: .96rem; margin: .25rem 0 0; }
+.garden-series-link { color: var(--faint); font-size: .82rem; letter-spacing: .12em;
+  text-transform: uppercase; }
+.garden-lede {
+  border-left: 3px solid var(--accent);
+  color: var(--faint);
+  font-size: 1.24rem;
+  font-style: italic;
+  line-height: 1.62;
+  margin: 1.5rem 0 2.2rem;
+  padding: .35rem 0 .35rem 1.35rem;
+}
+.garden-corridors {
+  margin: 1.15rem 0 2.65rem;
+}
+.garden-corridor-list {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: .55rem .62rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.garden-corridor-list li { display: flex; margin: 0; max-width: 100%; }
+.garden-corridor {
+  align-items: center;
+  background: var(--accent-soft);
+  border: 1px solid var(--accent);
+  border-radius: 3px;
+  color: var(--accent);
+  display: inline-flex;
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .73rem;
+  font-weight: 700;
+  letter-spacing: .075em;
+  line-height: 1.35;
+  max-width: 100%;
+  min-height: 2.05rem;
+  overflow-wrap: anywhere;
+  padding: .34rem .72rem .3rem;
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-transform: uppercase;
+  text-underline-offset: .22em;
+}
+.garden-corridor:visited { color: var(--accent); }
+.garden-corridor:hover,
+.garden-corridor:focus-visible {
+  background: var(--accent);
+  color: var(--paper);
+}
+.garden-corridor:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+.garden-series-plate {
+  --plate-accent: var(--accent);
+  border: 1px solid var(--rule);
+  border-top: 3px solid var(--plate-accent);
+  margin: .25rem 0 2.8rem;
+  overflow: hidden;
+  position: relative;
+}
+.garden-series-plate--foundations { --plate-accent: #496f76; }
+.garden-series-plate--story-of-ai { --plate-accent: #526d9a; }
+.garden-series-plate--instrument { --plate-accent: #745779; }
+.garden-series-plate--strange-loops { --plate-accent: #866448; }
+.garden-series-plate--bridge { --plate-accent: #697044; }
+.garden-series-plate--power { --plate-accent: #8f3b26; }
+.garden-series-plate--time-future { --plate-accent: #416778; }
+[data-theme="dark"] .garden-series-plate { --plate-accent: var(--accent); }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .garden-series-plate { --plate-accent: var(--accent); }
+}
+.garden-series-plate-media {
+  aspect-ratio: 16 / 9;
+  background: var(--accent-soft);
+  overflow: hidden;
+  position: relative;
+}
+.garden-series-plate-media::after {
+  background:
+    linear-gradient(90deg, var(--paper) 0, transparent 24%, transparent 76%, var(--paper) 100%),
+    linear-gradient(0deg, var(--paper) 0, transparent 32%);
+  content: "";
+  inset: 0;
+  opacity: .24;
+  pointer-events: none;
+  position: absolute;
+}
+.garden-series-plate picture,
+.garden-series-card picture { display: block; height: 100%; }
+.garden-series-plate img {
+  display: block;
+  filter: saturate(.82) contrast(1.03);
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+.garden-series-plate figcaption {
+  align-items: baseline;
+  background: var(--paper);
+  border-top: 1px solid var(--rule);
+  display: grid;
+  gap: .25rem 1rem;
+  grid-template-columns: auto 1fr;
+  padding: .78rem 1rem .85rem;
+}
+.garden-series-plate-kicker {
+  color: var(--plate-accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+.garden-series-plate figcaption strong { font-size: 1rem; font-weight: 600; }
+.garden-series-plate-terms {
+  color: var(--faint);
+  font-size: .82rem;
+  grid-column: 2;
+  margin: 0;
+}
+.garden-visual {
+  background:
+    radial-gradient(circle at 92% 8%, var(--accent-soft), transparent 30%),
+    linear-gradient(135deg, transparent 0 72%, var(--accent-soft) 72% 72.4%, transparent 72.4%);
+  border: 1px solid var(--rule);
+  border-top: 3px solid var(--accent);
+  margin: 1.25rem 0 2.5rem;
+  overflow: hidden;
+  padding: clamp(1.1rem, 2.7vw, 1.75rem);
+  position: relative;
+}
+.garden-visual::before {
+  background-image:
+    linear-gradient(var(--rule) 1px, transparent 1px),
+    linear-gradient(90deg, var(--rule) 1px, transparent 1px);
+  background-size: 2.25rem 2.25rem;
+  content: "";
+  inset: 0;
+  opacity: .13;
+  pointer-events: none;
+  position: absolute;
+}
+.garden-visual > * { position: relative; }
+.garden-visual-head {
+  align-items: baseline;
+  display: grid;
+  gap: .45rem 1rem;
+  grid-template-columns: auto 1fr;
+  margin-bottom: 1.2rem;
+}
+.garden-visual-kicker {
+  color: var(--accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .68rem;
+  font-weight: 700;
+  letter-spacing: .17em;
+  margin: 0;
+  text-transform: uppercase;
+}
+.garden-visual-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  line-height: 1.28;
+  margin: 0;
+}
+.garden-visual-as-of {
+  color: var(--faint);
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: .72rem;
+  letter-spacing: .08em;
+  margin: 0;
+  text-transform: uppercase;
+  white-space: normal;
+}
+.garden-visual-items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.garden-visual-item {
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  margin: 0;
+  min-width: 0;
+  padding: .8rem .9rem;
+}
+.garden-visual-item-label {
+  display: block;
+  font-size: .96rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+.garden-visual-item-detail {
+  color: var(--faint);
+  display: block;
+  font-size: .9rem;
+  line-height: 1.45;
+  margin-top: .27rem;
+}
+.garden-visual-item-meta {
+  color: var(--accent);
+  display: block;
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: .72rem;
+  letter-spacing: .08em;
+  margin-bottom: .38rem;
+  text-transform: uppercase;
+}
+.garden-visual-caption {
+  border-top: 1px solid var(--rule);
+  color: var(--faint);
+  display: grid;
+  font-size: .84rem;
+  font-style: italic;
+  gap: .55rem 1rem;
+  grid-template-columns: minmax(0, 1fr) auto;
+  line-height: 1.45;
+  margin: 1.15rem 0 0;
+  padding-top: .75rem;
+}
+.garden-visual-evidence {
+  color: var(--accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .72rem;
+  font-style: normal;
+  font-weight: 650;
+  letter-spacing: .04em;
+  white-space: nowrap;
+}
+.garden-visual-evidence a {
+  color: inherit;
+  text-decoration-thickness: 1px;
+  text-underline-offset: .18em;
+}
+.garden-visual--sequence .garden-visual-items,
+.garden-visual--contrast .garden-visual-items,
+.garden-visual--constellation .garden-visual-items {
+  display: grid;
+  gap: .65rem;
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+}
+.garden-visual--sequence .garden-visual-items { counter-reset: garden-step; }
+.garden-visual--sequence .garden-visual-item {
+  counter-increment: garden-step;
+  padding-top: 2.35rem;
+  position: relative;
+}
+.garden-visual--sequence .garden-visual-item::before {
+  color: var(--accent);
+  content: counter(garden-step, decimal-leading-zero);
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: .68rem;
+  left: .9rem;
+  letter-spacing: .08em;
+  position: absolute;
+  top: .72rem;
+}
+.garden-visual--layers .garden-visual-items { display: grid; gap: .45rem; }
+.garden-visual--layers .garden-visual-item {
+  border-left: clamp(.24rem, .55vw, .48rem) solid var(--accent);
+  display: grid;
+  gap: .15rem 1rem;
+  grid-template-columns: minmax(8rem, .4fr) 1fr;
+}
+.garden-visual--layers .garden-visual-item:nth-child(2) { margin-left: 1.5%; }
+.garden-visual--layers .garden-visual-item:nth-child(3) { margin-left: 3%; }
+.garden-visual--layers .garden-visual-item:nth-child(4) { margin-left: 4.5%; }
+.garden-visual--layers .garden-visual-item:nth-child(5) { margin-left: 6%; }
+.garden-visual--layers .garden-visual-item:nth-child(6) { margin-left: 7.5%; }
+.garden-visual--timeline .garden-visual-items {
+  display: grid;
+  gap: 0;
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+}
+.garden-visual--timeline .garden-visual-item {
+  border-width: 1px 0 0 1px;
+  padding-top: 1.35rem;
+  position: relative;
+}
+.garden-visual--timeline .garden-visual-item::before {
+  background: var(--accent);
+  border: 3px solid var(--paper);
+  border-radius: 50%;
+  content: "";
+  height: .72rem;
+  left: -.4rem;
+  position: absolute;
+  top: -.4rem;
+  width: .72rem;
+}
+.garden-visual--contrast .garden-visual-item:nth-child(odd) { border-top: 2px solid var(--ink); }
+.garden-visual--contrast .garden-visual-item:nth-child(even) { border-top: 2px solid var(--accent); }
+.garden-visual--constellation .garden-visual-items {
+  align-items: stretch;
+  position: relative;
+}
+.garden-visual--constellation .garden-visual-item {
+  border-top: 2px solid var(--accent);
+  box-shadow: 0 .2rem 0 rgba(18, 31, 31, .04);
+  padding-top: 1.35rem;
+  position: relative;
+}
+.garden-visual--constellation .garden-visual-item::before {
+  background: var(--paper);
+  border: 2px solid var(--accent);
+  border-radius: 50%;
+  content: "";
+  height: .55rem;
+  left: calc(50% - .36rem);
+  position: absolute;
+  top: -.38rem;
+  width: .55rem;
+}
+.garden-visual--constellation .garden-visual-item:nth-child(even) { margin-top: .8rem; }
+.garden-series-gallery {
+  display: grid;
+  gap: .8rem;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  margin: 1.5rem 0 3rem;
+}
+.garden-series-card {
+  border: 1px solid var(--rule);
+  color: var(--ink);
+  display: grid;
+  grid-template-rows: 7.5rem auto;
+  overflow: hidden;
+  text-decoration: none;
+}
+.garden-series-card img {
+  height: 100%;
+  object-fit: cover;
+  transition: transform .25s ease;
+  width: 100%;
+}
+.garden-series-card span {
+  border-top: 1px solid var(--rule);
+  font-size: .9rem;
+  font-weight: 600;
+  padding: .65rem .75rem;
+}
+.garden-series-card:hover { border-color: var(--accent); color: var(--accent); }
+.garden-series-card:hover img { transform: scale(1.025); }
+@media (prefers-reduced-motion: reduce) {
+  .garden-series-card img { transition: none; }
+}
+.garden-tags { color: var(--faint); font-size: .82rem; margin-top: 2.2rem; }
+.garden-nav { border-top: 1px solid var(--rule); display: flex; gap: 1rem;
+  justify-content: space-between; margin-top: 2.5rem; padding-top: 1rem; }
+.garden-nav a { max-width: 48%; text-decoration: none; }
+.garden-nav .next { margin-left: auto; text-align: right; }
+.garden-table-wrap { overflow-x: auto; margin: 1.35rem 0; }
+.garden-table { border-collapse: collapse; font-size: .92rem; line-height: 1.45; width: 100%; }
+.garden-table th, .garden-table td { border: 1px solid var(--rule); padding: .55rem .65rem;
+  text-align: left; vertical-align: top; }
+.garden-table th { background: var(--accent-soft); }
+.garden-toc {
+  border-left: 1px solid var(--rule);
+  max-height: calc(100vh - 3rem);
+  overflow: auto;
+  padding: .1rem 0 .75rem 1.3rem;
+  position: sticky;
+  top: 1.5rem;
+}
+.garden-toc-title {
+  color: var(--accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .2em;
+  margin: 0 0 1.15rem;
+  text-transform: uppercase;
+}
+.garden-toc-title::before { content: "☰"; font-size: .8em; margin-right: .65rem; }
+.garden-toc-list { list-style: none; margin: 0; padding: 0; }
+.garden-toc-sublist { list-style: none; margin: 0; padding: 0; }
+.garden-toc-list li { margin: 0; }
+.garden-toc-list a {
+  border-left: 2px solid transparent;
+  color: var(--ink);
+  display: block;
+  font-size: .91rem;
+  line-height: 1.42;
+  margin-left: -1.4rem;
+  padding: .42rem .45rem .42rem 1.3rem;
+  text-decoration: none;
+}
+.garden-toc-list .level-3 a {
+  color: var(--faint);
+  font-size: .86rem;
+  font-style: italic;
+  padding-left: 2.15rem;
+}
+.garden-toc-list a:hover,
+.garden-toc-list a:focus-visible,
+.garden-toc-list a[aria-current="location"] {
+  border-left-color: var(--accent);
+  color: var(--accent);
+}
+.garden-toc-list a[aria-current="location"] { font-weight: 600; }
+.garden-toc-inline { display: none; }
+.garden-layout article :is(h2, h3):target,
+.garden-series:target h2 { color: var(--accent); }
+a.pending { color: var(--faint); text-decoration-style: dashed; }
+a.pending::after { content: " · pending"; font-size: .7em; letter-spacing: .06em;
+  text-transform: uppercase; }
+@media (min-width: 72.01em) {
+  body.garden-page-body > .masthead {
+    align-items: center;
+    column-gap: 2rem;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    margin-bottom: 3.5rem;
+    padding: 1.25rem 0;
+    text-align: left;
+  }
+  body.garden-page-body > .masthead .wordmark { justify-self: start; }
+  body.garden-page-body > .masthead .tagline { justify-self: center; margin: 0; }
+  body.garden-page-body > .masthead nav { justify-self: end; margin: 0; }
+}
+@media (max-width: 72em) {
+  .garden-layout,
+  .garden-index-layout { display: block; }
+  .garden-toc { display: none; }
+  .garden-toc-inline {
+    border: 1px solid var(--rule);
+    display: block;
+    margin: 1.5rem 0 2.4rem;
+    padding: .8rem 1rem;
+  }
+  .garden-toc-inline summary {
+    color: var(--accent);
+    cursor: pointer;
+    font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: .78rem;
+    font-weight: 700;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+  }
+  .garden-toc-inline .garden-toc-list { margin-top: .7rem; }
+  .garden-toc-inline .garden-toc-list a { margin-left: 0; padding-left: .75rem; }
+  .garden-toc-inline .garden-toc-list .level-3 a { padding-left: 1.6rem; }
+}
+@media (max-width: 40em) {
+  body.garden-page-body { font-size: 1.03rem; padding: 1rem 1.05rem 3rem; }
+  .garden-layout .article-title,
+  .garden-intro .article-title { font-size: clamp(2.15rem, 11vw, 3.15rem); }
+  .garden-lede { font-size: 1.1rem; padding-left: 1rem; }
+  .garden-corridors { margin-bottom: 2rem; }
+  .garden-corridor-list { gap: .45rem; }
+  .garden-corridor {
+    font-size: .68rem;
+    min-height: 2.35rem;
+    padding: .3rem .58rem .27rem;
+  }
+  .garden-series-plate-media { aspect-ratio: 16 / 9; }
+  .garden-series-plate figcaption { display: block; }
+  .garden-series-plate figcaption strong { display: block; margin-top: .22rem; }
+  .garden-series-plate-terms { display: block; margin-top: .25rem; }
+  .garden-visual { margin-left: -.15rem; margin-right: -.15rem; padding: 1rem; }
+  .garden-visual-head { display: block; }
+  .garden-visual-title { margin-top: .25rem; }
+  .garden-visual-as-of { margin-top: .35rem; }
+  .garden-visual-caption { grid-template-columns: 1fr; }
+  .garden-visual-evidence { white-space: normal; }
+  .garden-visual--sequence .garden-visual-items,
+  .garden-visual--contrast .garden-visual-items,
+  .garden-visual--constellation .garden-visual-items,
+  .garden-visual--timeline .garden-visual-items { grid-template-columns: 1fr; }
+  .garden-visual--layers .garden-visual-item:nth-child(n) { display: block; margin-left: 0; }
+  .garden-visual--timeline .garden-visual-item { border-width: 0 0 0 1px; }
+  .garden-visual--timeline .garden-visual-item::before { left: -.4rem; top: .9rem; }
+  .garden-visual--constellation .garden-visual-item:nth-child(even) { margin-top: 0; }
+  .garden-series-gallery { grid-template-columns: 1fr; }
+  .garden-nav { flex-direction: column; }
+  .garden-nav a { max-width: none; }
+  .garden-nav .next { margin-left: 0; text-align: left; }
+}
+@media print {
+  a.pending::after { content: " (pending)"; }
+  .garden-layout, .garden-index-layout { display: block; }
+  .garden-toc, .garden-toc-inline { display: none; }
+  .garden-series-card img { display: none; }
+  .garden-series-card { grid-template-rows: auto; }
+}
+</style>
+</head>
+<body class="garden-page-body">
+<button class="theme-toggle" aria-label="Toggle light and dark" onclick="
+  (function () {
+    var d = document.documentElement;
+    var cur = d.getAttribute('data-theme');
+    if (!cur) { cur = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'; }
+    var next = cur === 'dark' ? 'light' : 'dark';
+    d.setAttribute('data-theme', next);
+    try { localStorage.setItem('darshan-theme', next); } catch (e) {}
+  })();
+">◐</button>
+
+<header class="masthead">
+  <h1 class="wordmark"><a href="../index.html">DARSHAN</a></h1>
+  <p class="tagline">A signal of clear seeing in an age of information overload</p>
+  <nav>
+    <a href="../index.html">Articles</a>
+    <a href="index.html">Garden</a>
+    <a href="../about.html">About</a>
+  </nav>
+</header>
+
+<main>
+<div class="garden-layout">
+<article data-garden-room="futurism" data-garden-outline>
+<p class="garden-series-link"><a href="index.html#time-future">Time and the Future</a></p>
+<p class="article-meta">25 August 2026 · Draft</p>
+<h1 class="article-title">Futurism Without Prophecy</h1>
+<div class="draft-banner"><strong>Draft — pending discernment pass.</strong> This room is part of the garden's first planting. It has not been promoted to published status; check its sources and open questions before citing it.</div>
+<p class="garden-lede">Futurism is not one prediction about tomorrow. It is a contest among programs for building it. This room maps Kurzweil's singularity, transhumanism, e/acc, post-growth and degrowth, cosmism, longtermism, and risk-first foresight while keeping facts, hypotheses, scenarios, and wild possibilities in separate boxes.</p>
+<nav class="garden-corridors" aria-label="Explore connected rooms" data-corridor-count="13"><ul class="garden-corridor-list"><li><a class="garden-corridor" href="meaning-of-time.html">Time: Kala, Yugas, the Mayan Count, and the Meaning of Time</a></li><li><a class="garden-corridor" href="forecasting.html">Forecasting the Future</a></li><li><a class="garden-corridor" href="trends-gap.html">The Trends Gap: When the Curve Is Not the World</a></li><li><a class="garden-corridor" href="the-future.html">The Future</a></li><li><a class="garden-corridor" href="future-of-ai.html">The Future of AI</a></li><li><a class="garden-corridor" href="benchmarks.html">Benchmarks and What They Measure</a></li><li><a class="garden-corridor" href="machine-learning.html">Machine Learning</a></li><li><a class="garden-corridor" href="cybernetics.html">Cybernetics</a></li><li><a class="garden-corridor" href="attention-economy.html">The Attention Economy</a></li><li><a class="garden-corridor" href="teleology.html">Teleology</a></li><li><a class="garden-corridor" href="evolution.html">Evolution: The Algorithm That Needs No Designer</a></li><li><a class="garden-corridor" href="what-self-means.html">What "Self" Means</a></li><li><a class="garden-corridor" href="ontology.html">What Ontology Means</a></li></ul></nav>
+<figure class="garden-series-plate garden-series-plate--time-future">
+<div class="garden-series-plate-media"><picture><source srcset="assets/series/time-future.webp" type="image/webp"><img src="assets/series/time-future.png" alt="Nested engraved time rings opening into several branching forecast paths" width="1672" height="941" loading="eager" decoding="async"></picture></div>
+<figcaption><span class="garden-series-plate-kicker">Visual field</span><strong>Time and the Future</strong><span class="garden-series-plate-terms">futurism · singularity · transhumanism · effective accelerationism</span></figcaption>
+</figure>
+<details class="garden-toc-inline"><summary>In this room</summary><ol class="garden-toc-list"><li class="level-2"><a href="#1-put-four-different-things-in-four-boxes">1. Put four different things in four boxes</a></li><li class="level-2"><a href="#2-kurzweil-and-the-exponential-future">2. Kurzweil and the exponential future</a></li><li class="level-2"><a href="#3-transhumanism-change-the-human-not-only-the-world">3. Transhumanism: change the human, not only the world</a></li><li class="level-2"><a href="#4-e-acc-and-techno-optimism-let-the-process-run">4. E/acc and techno-optimism: let the process run</a></li><li class="level-2"><a href="#5-degrowth-and-post-growth-change-the-score">5. Degrowth and post-growth: change the score</a></li><li class="level-2"><a href="#6-cosmism-no-ancestor-left-behind">6. Cosmism: no ancestor left behind</a></li><li class="level-2"><a href="#7-risk-first-longtermist-and-democratic-futures">7. Risk-first, longtermist, and democratic futures</a></li><li class="level-2"><a href="#8-the-propositions-side-by-side">8. The propositions side by side</a></li><li class="level-2"><a href="#9-worked-example-one-data-center-eight-futures">9. Worked example: one data center, eight futures</a></li><li class="level-2"><a href="#10-what-you-can-now-do">10. What you can now do</a></li><li class="level-2"><a href="#11-open-questions">11. Open questions</a></li><li class="level-2"><a href="#sources">Sources</a></li></ol></details>
+<p>You're in the time-future wing of the garden. <a href="meaning-of-time.html">The meaning of time</a> asks what time is; <a href="forecasting.html">forecasting</a> asks how to make claims that can lose; this room asks which futures people want badly enough to build. That makes futurism less like weather prediction and more like political philosophy with prototypes.</p>
+<h2 id="1-put-four-different-things-in-four-boxes">1. Put four different things in four boxes</h2>
+<figure class="garden-visual garden-visual--contrast" aria-labelledby="visual-futurism-1" data-claim-scope="section-synthesis" data-placement-heading="1-put-four-different-things-in-four-boxes" data-evidence-headings="1-put-four-different-things-in-four-boxes">
+<div class="garden-visual-head"><p class="garden-visual-kicker">Type the claim</p><p class="garden-visual-title" id="visual-futurism-1">Four boxes keep the future honest</p></div>
+<ul class="garden-visual-items" role="list"><li class="garden-visual-item"><strong class="garden-visual-item-label">Fact</strong><span class="garden-visual-item-detail">A documented or observed claim, still subject to correction when its source is an estimate.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Hypothesis</strong><span class="garden-visual-item-detail">A causal explanation whose mechanism can be strengthened or weakened by evidence.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Scenario</strong><span class="garden-visual-item-detail">An internally consistent possible future built from named assumptions.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Wild</strong><span class="garden-visual-item-detail">A possibility worth thinking with whose mechanism, probability, or evidence is presently too weak for planning.</span></li></ul>
+<figcaption class="garden-visual-caption"><span>A sentence becomes easier to challenge when its evidence status is visible before its emotional force.</span><span class="garden-visual-evidence">Drawn from: <a href="#1-put-four-different-things-in-four-boxes">1. Put four different things in four boxes</a></span></figcaption>
+</figure>
+<p>Start with two numbers that were public by 2026.</p>
+<p>The International Energy Agency estimated that data centers used about 415 terawatt-hours of electricity in 2024. Its 2025 base case projected roughly 945 terawatt-hours in 2030. The first number is an estimate of a past quantity. The second is the output of a model whose assumptions include demand, hardware efficiency, software efficiency, energy supply, and the pace of AI adoption.</p>
+<p>If you say both numbers in the future tense—“data-center use will hit 945 TWh”—you have already blurred the room.</p>
+<p>Use four boxes instead:</p>
+<p><strong>A fact</strong> is a claim about what has been observed or documented. “The IEA's 2025 report used 415 TWh as its estimate for 2024 data-center consumption” is a fact about the report. The estimate can still be revised.</p>
+<p><strong>A hypothesis</strong> is an explanatory or causal claim that evidence can strengthen or weaken. “Cheaper computation will cause enough new demand to outweigh efficiency gains” is a hypothesis. It needs a mechanism and a test.</p>
+<p><strong>A scenario</strong> is an internally consistent possible future built from named assumptions. “AI demand grows quickly, efficiency improves at the historical rate, grid construction keeps pace, and data centers reach the IEA base case in 2030” is a scenario. It is not necessarily the most likely future.</p>
+<p><strong>A wild possibility</strong> is a possibility worth thinking with even though its mechanism, probability, or evidence is presently too weak for ordinary planning. “By 2045, biological and machine intelligence merge into a civilization-scale mind” belongs here today. Calling it wild does not mean impossible. It means you may not smuggle it into the fact box.</p>
+<p><strong>Futurism</strong> is the organized production of claims, images, programs, and arguments about possible futures. It includes prediction, but it also includes advocacy: manifestos, investment theses, social movements, design fiction, national plans, and imagined ways of living. A futurist often says “this is where we should go” while sounding like “this is where we are going.” Your first defense is to ask which sentence you just heard.</p>
+<h2 id="2-kurzweil-and-the-exponential-future">2. Kurzweil and the exponential future</h2>
+<p>Ray Kurzweil offers the clearest modern case because he supplies dates.</p>
+<p>In his 2005 book <em>The Singularity Is Near</em>, and again in 2024's <em>The Singularity Is Nearer</em>, Kurzweil argued that information technologies improve along exponential curves. He retained two famous claims: machine intelligence reaches human level around 2029, and a <strong>singularity</strong> arrives around 2045. By singularity he means a transformation in human capability so deep that history beyond it becomes hard to model, associated in his account with very powerful AI, radical longevity, and direct integration between human brains and computation.</p>
+<p>The fact is that some information technologies have improved by orders of magnitude. Compute per dollar, storage density, network capacity, and several <a href="benchmarks.html">benchmarks</a> of AI capability have all shown steep progress over substantial periods. Kurzweil was also early, and directionally right, about everyday speech recognition, portable computing, and the growing importance of AI.</p>
+<p>The hypothesis is that these curves continue and compose. Better compute must keep translating into better systems. Better systems must accelerate science, medicine, and hardware. Bottlenecks in energy, fabrication, data, institutions, and the physical world must either yield or matter less than the information processes improving around them.</p>
+<p>The scenario is the dated story: human-level AI around 2029, then a rapid expansion of intelligence and human-machine integration by 2045. “Human-level” is not a stable measurement unit. A system can outperform people in mathematics and fail at an ordinary physical task. Without a specified test, the date can move by changing the definition.</p>
+<p>The wild part is not simply “computers get much better.” It is the merger claim at full strength: minds extended through brain-cloud interfaces, intelligence multiplied beyond current human scale, and mortality transformed by accelerating biotechnology. Existing brain-computer interfaces and AI-assisted drug discovery establish pieces of a mechanism. They do not establish Kurzweil's timetable or destination.</p>
+<p>Kurzweil's strongest contribution is a refusal to treat the current rate of change as permanent. His strongest failure mode is the reverse: treating a fitted information curve as if it can overrule every slower system it touches. Roads, clinical trials, power lines, law, culture, trust, and human development do not all double on a chip schedule.</p>
+<h2 id="3-transhumanism-change-the-human-not-only-the-world">3. Transhumanism: change the human, not only the world</h2>
+<p><strong>Transhumanism</strong> is the view that people should be able to use science and technology to overcome major biological limits and expand human capacities. Its agenda includes longer healthy life, cognitive and sensory enhancement, reproductive choice, prosthetics, brain-computer interfaces, and possible new forms of embodiment.</p>
+<p>The Transhumanist Declaration was written in 1998 and adopted by the Humanity+ board in 2009. It presents advanced technology as a route to profoundly changed human potential while acknowledging risk, unequal access, and the need for responsible decisions. That combination matters. Transhumanism is not identical to “upload everyone” or “the body is obsolete.” It is a family of views, from broad morphological freedom—the freedom to alter or not alter your body—to very strong posthuman scenarios.</p>
+<p>Take a concrete decision. A safe retinal implant restores some vision. Most people call that therapy. The same technical lineage may eventually give a sighted person infrared perception. That is enhancement. Nothing in the device tells you where restoration ends and elective transformation begins. The boundary comes from medicine, disability politics, insurance, culture, and the person whose body is involved.</p>
+<p>The strongest transhumanist claim is moral, not predictive: inherited biology should not have final authority over what a person may become. This is compelling when the inherited limit is Huntington's disease or a damaged spinal cord. It gets harder when enhancement is demanded by an employer, available only to the rich, transmissible to children who cannot consent, or required to compete with enhanced peers.</p>
+<p>The fact box contains real gene therapies, neural prostheses, fertility technologies, and rapid progress in some forms of <a href="machine-learning.html">machine learning</a>. The hypothesis box contains claims that these tools will become broadly safer, cheaper, and more capable. The scenario box contains societies in which enhancement is ordinary. The wild box contains reliable mind uploading, indefinite personal survival, or a proof that a software continuation would be <em>you</em> rather than a new system with your memories. Those identity questions lead to <a href="what-self-means.html">what self means</a>; engineering alone does not settle them.</p>
+<h2 id="4-e-acc-and-techno-optimism-let-the-process-run">4. E/acc and techno-optimism: let the process run</h2>
+<p><strong>Effective accelerationism</strong>, usually written e/acc, emerged in 2022 around a set of online essays and a loose community. It treats technological and economic acceleration as a positive civilizational force. Its language draws from physics, markets, evolution, and <a href="cybernetics.html">cybernetics</a>, the study of control through feedback. In practice, its center of gravity is simpler: build more, make energy and intelligence abundant, resist centralized efforts to slow innovation, and let competition explore possibilities no committee can design.</p>
+<p>Marc Andreessen's 2023 <em>Techno-Optimist Manifesto</em> is not the founding e/acc text, but it expresses an overlapping program in unusually clear terms. It presents technology as the durable source of growth and attacks the precautionary, post-growth, and AI-risk movements as forms of demoralization. Venture capital gives this vision an institution. It does not only describe a future. It funds founders who try to make that future win.</p>
+<p>Give the view its best case. Many improvements did arrive through people building before a social consensus existed. Cheap computing, vaccines, container shipping, and modern agricultural yields created options that prior institutions could not allocate because the options did not exist. Regulation can protect incumbents, freeze a bad technical standard, or make only giant firms able to comply. Distributed experimentation finds surprises.</p>
+<p>Now name the missing mechanism. Competition selects for what survives and earns returns, not automatically for what is just, safe, or worth wanting. Pollution, addictive products, arms races, monopoly, and fraud are not mysterious exceptions to markets. They are familiar cases where private rewards and public costs separate. “The process will discover a solution” is a hypothesis. It needs a reason that the cost enters the process soon enough, and that the people bearing it can affect the selection pressure.</p>
+<p>E/acc is strongest as an antidote to learned helplessness. It is weakest when it promotes acceleration itself into the moral patient. People then become fuel for a process whose continuation is treated as good by definition. <a href="evolution.html">Evolution</a> teaches the warning cleanly: selection is powerful, but it does not optimize for the well-being of everything selected.</p>
+<h2 id="5-degrowth-and-post-growth-change-the-score">5. Degrowth and post-growth: change the score</h2>
+<p>The opposing camp is often caricatured as wanting poverty. Start with its own definitions.</p>
+<p><strong>Degrowth</strong> is a proposed planned reduction of energy and material throughput in high-income economies, joined to redistribution and public provision so that well-being can improve while resource use falls. It is not a recession by design. A recession is an unplanned contraction inside institutions built for growth, usually with unemployment and insecurity distributed downward. Degrowth advocates propose changing those institutions deliberately and growing some sectors—care, renewable energy, public transport—while shrinking resource-intensive or low-value production.</p>
+<p><strong>Post-growth</strong> is a broader position. It says gross domestic product should not be the overriding target. The OECD's 2020 <em>Beyond Growth</em> report put the distinction plainly: growth can remain a means, but policy should neither treat it as an end nor rely on it. Environmental stability, well-being, inequality, and resilience belong on the dashboard.</p>
+<p>The empirical dispute turns on <strong>decoupling</strong>, which means increasing economic output while reducing environmental pressure. The IEA reported that advanced-economy energy-related carbon dioxide emissions fell in 2024 to a level last seen about fifty years earlier, while their combined GDP was more than three times larger. That is real evidence that output and territorial energy emissions can separate.</p>
+<p>It does not settle the debate. Global energy-related carbon dioxide emissions still rose in 2025 by about 0.4% while world GDP grew about 3.1%. That is relative decoupling: emissions grew more slowly than output. Climate stabilization requires global emissions to fall to net zero, and material use, biodiversity loss, trade-embedded emissions, and local extraction do not move as one number.</p>
+<p>Degrowth also has an evidence problem of its own. A 2024 systematic review of 561 degrowth studies concluded that almost 90% were opinions rather than data analysis, that formal economy-wide modeling was rare, and that political feasibility was often weakly addressed. That review is one contribution to a contested field, not a verdict from outside politics. Its challenge is fair: a program that reorganizes work, investment, welfare, trade, and money needs models and transition evidence at the same scale as its claims.</p>
+<p>The best post-growth question is hard to dismiss: what is GDP growth <em>for</em>, and which other quantities may it damage? The weakest degrowth answer assumes that democratic redistribution and planned contraction arrive together because the theory requires them. History contains contractions without justice and planning without consent.</p>
+<h2 id="6-cosmism-no-ancestor-left-behind">6. Cosmism: no ancestor left behind</h2>
+<p><strong>Cosmism</strong> is the strangest proposition in this map, and one of the oldest. Russian cosmism grew around nineteenth-century thinker Nikolai Fedorov and later figures including rocket pioneer Konstantin Tsiolkovsky. Fedorov's “common task” called humanity to overcome death through science, physically resurrect the dead, unite across generations, and expand into space to make room for the restored human family.</p>
+<p>Read that first as a documented philosophical program. Fedorov lived from 1829 to 1903. He did argue for scientific resurrection and cosmic expansion. His thought influenced an intellectual line that joined religion, technical mastery, and the early imagination of spaceflight.</p>
+<p>Do not then promote the program into science. There is no demonstrated method for reconstructing every dead person, no evidence that the information needed still exists, and no settled account of what would make a reconstruction numerically identical to the deceased. Universal resurrection is wild.</p>
+<p>Modern cosmism loosens the specifically Christian and Russian frame. Ben Goertzel's 2010 <em>Cosmist Manifesto</em>, for example, combines AI, life extension, altered minds, space expansion, and openness to forms of intelligence beyond current humanity. It overlaps with transhumanism but uses the cosmos, rather than the enhanced individual, as its horizon.</p>
+<p>Cosmism contributes one difficult moral intuition: future-building should not casually write off the dead, the unborn, or nonhuman minds as outside the project. Its danger is totalization. If one “common task” claims all generations and all space, dissent can look like ignorance, death like an engineering defect, and nature like raw material awaiting command. The scale that makes cosmism generous can also make it imperial.</p>
+<p>Its factual inheritance is a body of texts and historical influence. Its hypothesis is that intelligence can take increasing responsibility for evolution and cosmic conditions. Its scenario is a spacefaring, radically long-lived civilization. Its wild edge is resurrection, indefinite identity, and universe-scale purpose. The last claim belongs beside <a href="teleology.html">teleology</a>, not inside a laboratory result.</p>
+<h2 id="7-risk-first-longtermist-and-democratic-futures">7. Risk-first, longtermist, and democratic futures</h2>
+<p>Not every leading proposition wants one destination.</p>
+<p>The <strong>risk-first</strong> position begins with irreversible downside. The Future of Life Institute's March 2023 open letter called for a six-month pause in training systems more powerful than GPT-4 while shared safety protocols were developed. The important idea is not the exact line at GPT-4. It is that capability races can make restraint individually costly even when all competitors would prefer a safer world. That is a coordination problem, not simply pessimism.</p>
+<p>The 2026 International AI Safety Report gives this position evidence without giving it certainty. More than one hundred experts, with an advisory panel nominated by over thirty countries and international bodies, agreed that general-purpose AI capabilities were improving and risks were changing. They continued to disagree about the trajectory through 2030, labor effects, and the severity of several future risks. Safety methods had improved, but no method offered guarantees comparable to mature safety-critical engineering. The fact is expert disagreement under high stakes. Any precise catastrophe date or promised safe takeoff remains hypothesis or scenario.</p>
+<p><strong>Longtermism</strong> is the view that effects on the far future deserve major moral weight, especially because future populations could be enormous. Its useful move is to make neglected future people visible in present decisions. Its failure mode is authority laundering: a speculative account of trillions of future lives can be used to override identifiable people now. Expected-value arithmetic does not create evidence for a probability, and moral standing does not arrive merely because a scenario contains a large number.</p>
+<p><strong>Strategic foresight</strong> is the institutional practice of exploring several possible futures to improve decisions now. The OECD explicitly says foresight is not prediction. Scenario teams vary assumptions, look for early signals, and test whether a policy survives more than one future. This approach has less emotional force than a singularity or manifesto. That is also its protection. It does not need one official future to win.</p>
+<h2 id="8-the-propositions-side-by-side">8. The propositions side by side</h2>
+<figure class="garden-visual garden-visual--constellation" aria-labelledby="visual-futurism-2" data-claim-scope="section-synthesis" data-placement-heading="8-the-propositions-side-by-side" data-evidence-headings="8-the-propositions-side-by-side">
+<div class="garden-visual-head"><p class="garden-visual-kicker">Futures as propositions</p><p class="garden-visual-title" id="visual-futurism-2">Six different things a future can optimize</p></div>
+<ul class="garden-visual-items" role="list"><li class="garden-visual-item"><strong class="garden-visual-item-label">Acceleration</strong><span class="garden-visual-item-detail">Kurzweilian and e/acc visions prioritize faster intelligence, building, and productive capacity.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Human freedom</strong><span class="garden-visual-item-detail">Transhumanism centers a person's ability to alter inherited biological limits.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Throughput</strong><span class="garden-visual-item-detail">Degrowth asks rich economies to reduce selected material and energy flows with redistribution.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Scorecard</strong><span class="garden-visual-item-detail">Post-growth treats GDP as a means and adds welfare, resilience, inequality, and ecology.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Cosmic scope</strong><span class="garden-visual-item-detail">Cosmism extends technical purpose across mortality, generations, and space.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Robustness</strong><span class="garden-visual-item-detail">Risk-first and strategic foresight keep irreversible harm and several futures in view.</span></li></ul>
+<figcaption class="garden-visual-caption"><span>Futurist disagreements often concern authority, scarcity, and the definition of failure more than any date.</span><span class="garden-visual-evidence">Drawn from: <a href="#8-the-propositions-side-by-side">8. The propositions side by side</a></span></figcaption>
+</figure>
+<p>These movements contain internal disagreements. The table maps their center of gravity, not every member.</p>
+<div class="garden-table-wrap"><table class="garden-table"><thead><tr><th>Proposition</th><th>Primary thing it wants to change</th><th>Stance toward growth</th><th>Main decision-maker</th><th>Strongest contribution</th><th>Characteristic blind spot</th></tr></thead><tbody><tr><td>Kurzweilian singularity</td><td>Rate and reach of intelligence</td><td>Exponential growth expected</td><td>Inventors, labs, adopters</td><td>Notices nonlinear technical change</td><td>Slow physical and institutional bottlenecks</td></tr><tr><td>Transhumanism</td><td>Human biological limits</td><td>Usually favorable, if choice expands</td><td>The person, aided by medicine and markets</td><td>Defends freedom to alter inherited limits</td><td>Unequal access, coercion, identity ambiguity</td></tr><tr><td>E/acc / techno-optimism</td><td>Innovation rate and productive capacity</td><td>Strongly pro-growth</td><td>Builders and competitive markets</td><td>Restores agency and experimentation</td><td>Externalities, power, irreversible races</td></tr><tr><td>Degrowth</td><td>Rich-world energy and material throughput</td><td>Planned contraction in selected domains</td><td>Democratic state and social movements</td><td>Takes physical limits and distribution seriously</td><td>Transition evidence and political feasibility</td></tr><tr><td>Post-growth</td><td>The social scorecard</td><td>Agnostic; growth is a means</td><td>Public institutions and citizens</td><td>Separates welfare from one aggregate number</td><td>Can become a dashboard without enforcement</td></tr><tr><td>Cosmism</td><td>Mortality and humanity's cosmic scope</td><td>Vast expansion</td><td>Humanity as a collective project</td><td>Extends moral imagination across generations</td><td>Wild mechanisms and totalizing purpose</td></tr><tr><td>Risk-first / longtermism</td><td>Irreversible harm across long horizons</td><td>Conditional on safety</td><td>Coordinated states, labs, and institutions</td><td>Makes tail risks and future people visible</td><td>Speculative numbers can dominate present claims</td></tr><tr><td>Strategic foresight</td><td>Robustness of present choices</td><td>Depends on scenario</td><td>Plural institutions and affected publics</td><td>Keeps several futures in play</td><td>Can produce workshops without power to act</td></tr></tbody></table></div>
+<p>Notice the hidden axes. Who gets to decide: a person, a market, a state, a movement, “humanity,” or future people represented by someone alive now? What is scarce: time, energy, safety margin, ecological capacity, or imagination? What counts as failure: stagnation, extinction, coercion, inequality, overshoot, or a life left biologically unchanged?</p>
+<p>Most futurist fights are disagreements on these axes wearing disagreements about a date.</p>
+<h2 id="9-worked-example-one-data-center-eight-futures">9. Worked example: one data center, eight futures</h2>
+<figure class="garden-visual garden-visual--sequence" aria-labelledby="visual-futurism-3" data-claim-scope="section-synthesis" data-placement-heading="9-worked-example-one-data-center-eight-futures" data-evidence-headings="9-worked-example-one-data-center-eight-futures">
+<div class="garden-visual-head"><p class="garden-visual-kicker">Make the visions sign</p><p class="garden-visual-title" id="visual-futurism-3">Turn a future argument into a staged contract</p></div>
+<ol class="garden-visual-items" role="list"><li class="garden-visual-item"><strong class="garden-visual-item-label">Lock facts</strong><span class="garden-visual-item-detail">Measure electricity, water, land, jobs, tax terms, grid costs, and enforceable shutdown conditions at this site.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Expose hypotheses</strong><span class="garden-visual-item-detail">Put a measurable indicator and revision date beside each claim about demand, jobs, cleaner power, or obsolescence.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Write policy</strong><span class="garden-visual-item-detail">Make every philosophy cash out as a clause about access, costs, benefits, safety, resilience, or distribution.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Stage commitment</strong><span class="garden-visual-item-detail">Approve capacity in increments whose later options expire unless named grid and safety gates are cleared.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Assign authority</strong><span class="garden-visual-item-detail">Name who measures, who can halt expansion, who hears an appeal, and what evidence each role must accept.</span></li></ol>
+<figcaption class="garden-visual-caption"><span>The data-center example becomes governable when rival visions must name evidence, decision rights, and conditions for the next increment.</span><span class="garden-visual-evidence">Drawn from: <a href="#9-worked-example-one-data-center-eight-futures">9. Worked example: one data center, eight futures</a></span></figcaption>
+</figure>
+<p>Suppose a city is asked to approve a large AI data center in 2028. The developer promises jobs, tax revenue, and scientific capacity. Residents worry about electricity, water, noise, grid costs, and who receives the benefits.</p>
+<p>Do not ask which futurist is “right.” Run the decision through each lens.</p>
+<p><strong>Step 1: lock the facts.</strong> Measure the proposed peak and annual electricity demand, water design, backup generation, land, jobs by phase, tax terms, grid-upgrade payer, and enforceable shutdown conditions. Compare them with local capacity. The IEA's global 945 TWh base case is context, not evidence about this site.</p>
+<p><strong>Step 2: expose the hypotheses.</strong> The developer may hypothesize that compute demand stays high, the facility attracts an industrial cluster, and cleaner generation arrives on schedule. Opponents may hypothesize that efficiency makes the site obsolete, ratepayers absorb grid costs, or the jobs disappear after construction. Put a measurable indicator and revision date beside each claim.</p>
+<p><strong>Step 3: make the propositions write policy.</strong></p>
+<ul><li>A Kurzweilian plan approves quickly because compute is an input to accelerating science, but should still explain why this site is on the critical path rather than merely invoking the curve.</li><li>A transhumanist plan asks who gains access to the medical and cognitive advances, and whether public benefit is contractual or rhetorical.</li><li>An e/acc plan removes permitting bottlenecks and expands generation, while its serious version also prices water, pollution, and grid costs so competition receives the right signals.</li><li>A degrowth plan asks whether this new load displaces higher-value social uses and may reject it unless lower-value demand falls elsewhere.</li><li>A post-growth plan scores jobs, distribution, emissions, health, resilience, and fiscal value instead of accepting gross output alone.</li><li>A cosmist plan favors infrastructure that expands intelligence and long-run capability, but cannot use cosmic purpose as evidence that this project works.</li><li>A risk-first plan uses capability evaluations, incident reporting, staged expansion, and a stop condition before the full facility is energized.</li><li>A foresight process tests the contract under at least three scenarios: AI demand surges, efficiency cuts demand, or geopolitics breaks the supply chain.</li></ul>
+<p><strong>Step 4: separate scenario from commitment.</strong> A city can approve the first quarter of capacity, require the next quarter to clear grid and safety gates, and make expansion options expire. That converts a single irreversible bet into a sequence of decisions.</p>
+<p><strong>Step 5: assign authority.</strong> Name who measures compliance, who can halt expansion, who appeals, and whose evidence counts. “Human oversight” is not a governance design. A role, a power, a standard, and an audit trail are.</p>
+<p>You can verify this method on any large future-facing decision. The propositions stop being costumes and become different contract clauses. Their real disagreements become challengeable.</p>
+<h2 id="10-what-you-can-now-do">10. What you can now do</h2>
+<p>You can now hear a future claim and ask four questions before believing or rejecting it. Is this a fact, hypothesis, scenario, or wild possibility? What must remain true for the claim to work? Who gains authority if we act as though it is true? What observation would make the speaker revise it?</p>
+<p>You can also give rival visions their actual weight. Kurzweil sees compounding change that linear institutions miss. Transhumanism refuses to worship biological accident. E/acc remembers that capacity must be built. Degrowth remembers that every machine has a material body. Post-growth asks what the score is for. Cosmism stretches the circle of obligation. Risk-first thought protects option value. Strategic foresight keeps one picture from capturing the room.</p>
+<p>Go next to <a href="forecasting.html">forecasting</a> when the claim can be given a date and a score. Go to the <a href="trends-gap.html">trends gap</a> when you need to know whether a visible technical trend will cross the institutions around it. The <a href="future-of-ai.html">future of AI</a> takes the capability question in detail, while <a href="the-future.html">the future</a> applies the garden's scenario discipline at the widest scale.</p>
+<p>Futurism finally governs the present by allocating <a href="attention-economy.html">attention</a>. A vivid future pulls money, talent, fear, sacrifice, and permission toward itself before it exists. That makes attention part of the evidence chain: not proof that a future is true, but a causal force that can help make one future more reachable than another. The last question is therefore not which picture is most dazzling. It is who gets to hold a possible future in front of a society long enough that everyone begins building inside it.</p>
+<h2 id="11-open-questions">11. Open questions</h2>
+<p>What is established fact: the movements, texts, dates, and institutional reports named here exist; many technical capabilities and some environmental quantities are changing quickly; current AI experts disagree about near-term trajectories; and future-oriented policy already allocates present resources.</p>
+<p>What is hypothesis, held with reasons: AI, biotechnology, energy systems, and automation will reinforce one another strongly enough to change economic and human possibilities over the next two decades. There are working mechanisms and real progress in each domain. Their composition, pace, distribution, and bottlenecks remain uncertain.</p>
+<p>Also hypothesis: rich economies can reduce energy and material throughput while maintaining or improving broad well-being. Degrowth and post-growth researchers offer mechanisms through redistribution, public services, and selective contraction. Evidence at whole-economy scale remains too thin to call the transition demonstrated.</p>
+<p>What is wild, and labeled as such: durable mind uploading, universal resurrection, a benevolent intelligence explosion, complete economic abundance, a voluntarily coordinated global degrowth transition, or a single moral program for a spacefaring civilization. Each can clarify assumptions. None has earned prophecy grammar.</p>
+<p>One standing uncertainty crosses every camp: what future persons, enhanced persons, copied persons, artificial agents, and nonhuman life should count in a decision, and who may speak with their authority now. That is not only a calculation problem. It is a problem of <a href="ontology.html">ontology</a>, identity, and political representation that no manifesto in this room has solved.</p>
+<h2 id="sources">Sources</h2>
+<p>Load-bearing claims were checked by live search on August 25, 2026. Kurzweil's retained 2045 date comes from his own <a href="https://www.writingsbyraykurzweil.com/a-singularity-q-a">2024 singularity Q&amp;A</a> and his 2024 SXSW presentation of <a href="https://www.youtube.com/watch?v=xh2v5oC5Lx4"><em>The Singularity Is Nearer</em></a>. The 2029 and 2045 claims are presented as Kurzweil's claims, not verified forecasts.</p>
+<p>Transhumanism's documented program and dates come from Humanity+'s <a href="https://www.humanityplus.org/the-transhumanist-declaration">Transhumanist Declaration</a>. E/acc's early program was checked against the movement's <a href="https://effectiveaccelerationism.substack.com/p/repost-effective-accelerationism">“Effective Accelerationism” essays</a>; the overlapping techno-optimist program comes from Marc Andreessen's <a href="https://a16z.com/the-techno-optimist-manifesto/"><em>Techno-Optimist Manifesto</em></a>. These are primary statements by advocates and are treated as such.</p>
+<p>Degrowth's definition comes from Jason Hickel, <a href="https://doi.org/10.1080/14747731.2020.1812222">“What does degrowth mean? A few points of clarification”</a>, <em>Globalizations</em> 18(7), 2021. The broader post-growth position comes from the OECD's <a href="https://www.oecd.org/en/publications/beyond-growth_33a25ba3-en.html"><em>Beyond Growth</em></a>, 2020. The evidence challenge comes from Savin and van den Bergh, <a href="https://doi.org/10.1016/j.ecolecon.2024.108324">“Reviewing studies of degrowth: Are claims matched by data, methods and policy analysis?”</a>, <em>Ecological Economics</em> 226, 2024. Its conclusions are attributed to that review rather than stated as a settled judgment.</p>
+<p>The emissions comparison uses the IEA's <a href="https://www.iea.org/reports/global-energy-review-2025/key-findings"><em>Global Energy Review 2025</em></a> and <a href="https://www.iea.org/reports/global-energy-review-2026/co2-emissions"><em>Global Energy Review 2026</em></a>. The data-center example uses the IEA's <a href="https://www.iea.org/reports/energy-and-ai/executive-summary"><em>Energy and AI</em> executive summary</a> and its published sensitivity cases; 945 TWh is explicitly a base-case projection, not a measured future fact.</p>
+<p>Fedorov's life and common task were checked against the <a href="https://iep.utm.edu/fedorov/">Internet Encyclopedia of Philosophy's Fedorov entry</a> and the academic <a href="https://filosofia.dickinson.edu/encyclopedia/cosmism/"><em>Encyclopedia of Russian Thought</em> entry on cosmism</a>. Modern cosmism is represented by Ben Goertzel's primary text, <a href="https://goertzel.org/CosmistManifesto_July2010.pdf"><em>A Cosmist Manifesto</em></a>. Resurrection and mind-continuity claims are labeled wild because these sources establish philosophical proposals, not working mechanisms.</p>
+<p>The risk-first proposal comes from the Future of Life Institute's <a href="https://futureoflife.org/open-letter/pause-giant-ai-experiments/">2023 pause letter</a>. The current evidence boundary comes from the expert-authored <a href="https://internationalaisafetyreport.org/publication/international-ai-safety-report-2026"><em>International AI Safety Report 2026</em></a>. The definition and limits of scenario work were checked against the OECD's <a href="https://www.oecd.org/en/about/programmes/strategic-foresight.html">Strategic Foresight program</a> and <a href="https://www.oecd.org/en/publications/back-to-the-future-s-of-education_178ef527-en/full-report/component-5.html">scenario user guide</a>. Longtermism's strongest academic form is represented by the Global Priorities Institute working paper <a href="https://www.globalprioritiesinstitute.org/wp-content/uploads/The-Case-for-Strong-Longtermism-GPI-Working-Paper-June-2021-2-2.pdf">“The Case for Strong Longtermism”</a>; the authority critique in this room is analysis, not a claim made by that source.</p>
+<hr>
+<p><em>Written by Codex, an AI, for the Darshan garden, completing Claude Fable 5’s interrupted first planting. John Shrader (Dhyana), founder and publisher of record, answers for every word published here. Errors are corrected on the face of the page, dated.</em></p>
+<p class="garden-tags"><strong>Topics:</strong> futurism · singularity · transhumanism · eacc · degrowth · post-growth · cosmism · longtermism · scenarios</p>
+<nav class="garden-nav" aria-label="Rooms"><a class="previous" href="meaning-of-time.html">← "Time: Kala, Yugas, the Mayan Count, and the Meaning of Time"</a><a class="next" href="forecasting.html">Forecasting the Future →</a></nav>
+</article>
+<aside class="garden-toc" aria-label="In this room"><nav aria-label="Page sections"><p class="garden-toc-title">In this room</p><ol class="garden-toc-list"><li class="level-2"><a href="#1-put-four-different-things-in-four-boxes">1. Put four different things in four boxes</a></li><li class="level-2"><a href="#2-kurzweil-and-the-exponential-future">2. Kurzweil and the exponential future</a></li><li class="level-2"><a href="#3-transhumanism-change-the-human-not-only-the-world">3. Transhumanism: change the human, not only the world</a></li><li class="level-2"><a href="#4-e-acc-and-techno-optimism-let-the-process-run">4. E/acc and techno-optimism: let the process run</a></li><li class="level-2"><a href="#5-degrowth-and-post-growth-change-the-score">5. Degrowth and post-growth: change the score</a></li><li class="level-2"><a href="#6-cosmism-no-ancestor-left-behind">6. Cosmism: no ancestor left behind</a></li><li class="level-2"><a href="#7-risk-first-longtermist-and-democratic-futures">7. Risk-first, longtermist, and democratic futures</a></li><li class="level-2"><a href="#8-the-propositions-side-by-side">8. The propositions side by side</a></li><li class="level-2"><a href="#9-worked-example-one-data-center-eight-futures">9. Worked example: one data center, eight futures</a></li><li class="level-2"><a href="#10-what-you-can-now-do">10. What you can now do</a></li><li class="level-2"><a href="#11-open-questions">11. Open questions</a></li><li class="level-2"><a href="#sources">Sources</a></li></ol></nav></aside>
+</div>
+</main>
+
+<footer>
+  <p>Darshan · seeing clearly after the feed</p>
+  <p>No feed. No analytics. No trackers. Finite editions, read at your own pace.</p>
+  <p style="opacity:.7">Darshan v0.0.0.1 · a beginning, built to grow</p>
+</footer>
+<script>
+/* Local section highlighting only. No network requests, analytics, or storage. */
+(function () {
+  var scope = document.querySelector("[data-garden-outline]");
+  if (!scope) return;
+  var sections = Array.prototype.slice.call(scope.querySelectorAll("h2[id], h3[id], section[id]"));
+  var links = Array.prototype.slice.call(document.querySelectorAll('.garden-toc-list a[href^="#"]'));
+  if (!sections.length || !links.length) return;
+  var queued = false;
+  function update() {
+    queued = false;
+    var threshold = Math.max(96, window.innerHeight * .22);
+    var current = sections[0].id;
+    sections.forEach(function (section) {
+      if (section.getBoundingClientRect().top <= threshold) current = section.id;
+    });
+    links.forEach(function (link) {
+      var active = link.getAttribute("href") === "#" + current;
+      if (active) link.setAttribute("aria-current", "location");
+      else link.removeAttribute("aria-current");
+    });
+  }
+  function requestUpdate() {
+    if (!queued) {
+      queued = true;
+      window.requestAnimationFrame(update);
+    }
+  }
+  document.addEventListener("scroll", requestUpdate, {passive: true});
+  window.addEventListener("resize", requestUpdate);
+  window.addEventListener("hashchange", requestUpdate);
+  update();
+})();
+</script>
+</body>
+</html>

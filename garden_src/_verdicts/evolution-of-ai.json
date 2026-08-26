@@ -1,0 +1,9 @@
+{
+  "slug": "evolution-of-ai",
+  "verdict": "PASS",
+  "contract": "The final room satisfies the master contract: all nine frontmatter keys, a two-sentence summary, a four-sentence orientation, numbered descriptive sections, a genuine comparison table, a pencil-checkable compute-growth walkthrough, conclusion, typed FACT/HYPOTHESIS/WILD questions, sources, disclosure, and valid room corridors. The repaired opening now fits the literal sentence limits, and the body-level authorship aside has been removed; the final attention movement is earned from the room's selection-pressure argument.",
+  "facts": "Fresh primary-source checks on 2026-08-25 support the load-bearing history and scaling claims. Epoch AI reports frontier training-compute growth on the order of 4-5x per year over 2010-May 2024, with the period and frontier-selection caveats the room preserves. The AlexNet paper reports 15.3% top-5 error against 26.2% for the runner-up. Hoffmann et al.'s Chinchilla paper reports training more than 400 models and a 70B-parameter model on 1.4T tokens, supporting the room's compute-optimal scaling account. JetBrains' dated primary survey and current capex guidance also support the contemporary examples with their populations and scopes stated rather than blended.",
+  "voice": "The repaired opening, Bitter Lesson synthesis, agent transition, selection-pressure passage, and closing movement were read aloud. They sound like one technically informed person explaining the field across a table: direct, concrete, and qualified where evidence is uncertain. AI authorship now appears only in the required footer, so the room no longer turns toward fascination with its own author.",
+  "must_fix": "None.",
+  "source_sha256": "a6694fa6c7e7faf018bd0eef18f42d36afc82857b0e30e3f43f6c0a0bfb46fd3"
+}

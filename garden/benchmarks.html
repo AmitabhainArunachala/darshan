@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Benchmarks and What They Measure · Darshan Garden</title>
+<meta name="description" content="How AI progress gets measured, and what the measuring does to the field. From ImageNet&#x27;s 2012 shock to the 2026 eval landscape — why every benchmark dies the same death, how Goodhart&#x27;s law shows up in training data and leaderboard gaming, and why a benchmark is really a bid for the field&#x27;s attention.">
+<link rel="stylesheet" href="../style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ccircle cx='8' cy='8' r='6' fill='none' stroke='%238f3b26' stroke-width='1.5'/%3E%3Ccircle cx='8' cy='8' r='2' fill='%238f3b26'/%3E%3C/svg%3E">
+<script>
+/* Theme memory. No analytics, no trackers. */
+(function () {
+  try {
+    var t = localStorage.getItem("darshan-theme");
+    if (t) document.documentElement.setAttribute("data-theme", t);
+  } catch (e) {}
+})();
+</script>
+<style>
+/* Garden-only layout. Kept here so the publication stylesheet remains shared. */
+body.garden-page-body {
+  max-width: none;
+  padding: 1.5rem clamp(1.25rem, 3.5vw, 4rem) 4rem;
+  font-size: 1.125rem;
+}
+body.garden-page-body > main,
+body.garden-page-body > .masthead,
+body.garden-page-body > footer {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 94rem;
+}
+.garden-layout,
+.garden-index-layout {
+  align-items: start;
+  display: grid;
+  gap: clamp(2.75rem, 5vw, 5rem);
+  grid-template-columns: minmax(0, 64rem) minmax(17rem, 20rem);
+  justify-content: center;
+}
+.garden-layout article,
+.garden-index-main { min-width: 0; }
+.garden-layout .article-title,
+.garden-intro .article-title {
+  font-size: clamp(2.65rem, 3.55vw, 4rem);
+  letter-spacing: -.025em;
+  line-height: 1.06;
+  max-width: 24ch;
+}
+.garden-layout article h2 {
+  font-size: 1.48rem;
+  line-height: 1.3;
+  margin-top: 3.2rem;
+  scroll-margin-top: 1.5rem;
+}
+.garden-layout article h3 {
+  font-size: 1.16rem;
+  margin-top: 2.35rem;
+  scroll-margin-top: 1.5rem;
+}
+.garden-intro { margin-bottom: 2.4rem; }
+.garden-series { margin: 2.8rem 0; scroll-margin-top: 1rem; }
+.garden-series h2 { border-bottom: 1px solid var(--rule); padding-bottom: .45rem; }
+.garden-room-list { list-style: none; margin: 0; padding: 0; }
+.garden-room-list li { border-bottom: 1px solid var(--rule); margin: 0; padding: 1rem 0; }
+.garden-room-title { font-weight: 600; }
+.garden-room-summary { color: var(--faint); font-size: .96rem; margin: .25rem 0 0; }
+.garden-series-link { color: var(--faint); font-size: .82rem; letter-spacing: .12em;
+  text-transform: uppercase; }
+.garden-lede {
+  border-left: 3px solid var(--accent);
+  color: var(--faint);
+  font-size: 1.24rem;
+  font-style: italic;
+  line-height: 1.62;
+  margin: 1.5rem 0 2.2rem;
+  padding: .35rem 0 .35rem 1.35rem;
+}
+.garden-corridors {
+  margin: 1.15rem 0 2.65rem;
+}
+.garden-corridor-list {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: .55rem .62rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.garden-corridor-list li { display: flex; margin: 0; max-width: 100%; }
+.garden-corridor {
+  align-items: center;
+  background: var(--accent-soft);
+  border: 1px solid var(--accent);
+  border-radius: 3px;
+  color: var(--accent);
+  display: inline-flex;
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .73rem;
+  font-weight: 700;
+  letter-spacing: .075em;
+  line-height: 1.35;
+  max-width: 100%;
+  min-height: 2.05rem;
+  overflow-wrap: anywhere;
+  padding: .34rem .72rem .3rem;
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-transform: uppercase;
+  text-underline-offset: .22em;
+}
+.garden-corridor:visited { color: var(--accent); }
+.garden-corridor:hover,
+.garden-corridor:focus-visible {
+  background: var(--accent);
+  color: var(--paper);
+}
+.garden-corridor:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+.garden-series-plate {
+  --plate-accent: var(--accent);
+  border: 1px solid var(--rule);
+  border-top: 3px solid var(--plate-accent);
+  margin: .25rem 0 2.8rem;
+  overflow: hidden;
+  position: relative;
+}
+.garden-series-plate--foundations { --plate-accent: #496f76; }
+.garden-series-plate--story-of-ai { --plate-accent: #526d9a; }
+.garden-series-plate--instrument { --plate-accent: #745779; }
+.garden-series-plate--strange-loops { --plate-accent: #866448; }
+.garden-series-plate--bridge { --plate-accent: #697044; }
+.garden-series-plate--power { --plate-accent: #8f3b26; }
+.garden-series-plate--time-future { --plate-accent: #416778; }
+[data-theme="dark"] .garden-series-plate { --plate-accent: var(--accent); }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .garden-series-plate { --plate-accent: var(--accent); }
+}
+.garden-series-plate-media {
+  aspect-ratio: 16 / 9;
+  background: var(--accent-soft);
+  overflow: hidden;
+  position: relative;
+}
+.garden-series-plate-media::after {
+  background:
+    linear-gradient(90deg, var(--paper) 0, transparent 24%, transparent 76%, var(--paper) 100%),
+    linear-gradient(0deg, var(--paper) 0, transparent 32%);
+  content: "";
+  inset: 0;
+  opacity: .24;
+  pointer-events: none;
+  position: absolute;
+}
+.garden-series-plate picture,
+.garden-series-card picture { display: block; height: 100%; }
+.garden-series-plate img {
+  display: block;
+  filter: saturate(.82) contrast(1.03);
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+.garden-series-plate figcaption {
+  align-items: baseline;
+  background: var(--paper);
+  border-top: 1px solid var(--rule);
+  display: grid;
+  gap: .25rem 1rem;
+  grid-template-columns: auto 1fr;
+  padding: .78rem 1rem .85rem;
+}
+.garden-series-plate-kicker {
+  color: var(--plate-accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+.garden-series-plate figcaption strong { font-size: 1rem; font-weight: 600; }
+.garden-series-plate-terms {
+  color: var(--faint);
+  font-size: .82rem;
+  grid-column: 2;
+  margin: 0;
+}
+.garden-visual {
+  background:
+    radial-gradient(circle at 92% 8%, var(--accent-soft), transparent 30%),
+    linear-gradient(135deg, transparent 0 72%, var(--accent-soft) 72% 72.4%, transparent 72.4%);
+  border: 1px solid var(--rule);
+  border-top: 3px solid var(--accent);
+  margin: 1.25rem 0 2.5rem;
+  overflow: hidden;
+  padding: clamp(1.1rem, 2.7vw, 1.75rem);
+  position: relative;
+}
+.garden-visual::before {
+  background-image:
+    linear-gradient(var(--rule) 1px, transparent 1px),
+    linear-gradient(90deg, var(--rule) 1px, transparent 1px);
+  background-size: 2.25rem 2.25rem;
+  content: "";
+  inset: 0;
+  opacity: .13;
+  pointer-events: none;
+  position: absolute;
+}
+.garden-visual > * { position: relative; }
+.garden-visual-head {
+  align-items: baseline;
+  display: grid;
+  gap: .45rem 1rem;
+  grid-template-columns: auto 1fr;
+  margin-bottom: 1.2rem;
+}
+.garden-visual-kicker {
+  color: var(--accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .68rem;
+  font-weight: 700;
+  letter-spacing: .17em;
+  margin: 0;
+  text-transform: uppercase;
+}
+.garden-visual-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  line-height: 1.28;
+  margin: 0;
+}
+.garden-visual-as-of {
+  color: var(--faint);
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: .72rem;
+  letter-spacing: .08em;
+  margin: 0;
+  text-transform: uppercase;
+  white-space: normal;
+}
+.garden-visual-items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.garden-visual-item {
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  margin: 0;
+  min-width: 0;
+  padding: .8rem .9rem;
+}
+.garden-visual-item-label {
+  display: block;
+  font-size: .96rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+.garden-visual-item-detail {
+  color: var(--faint);
+  display: block;
+  font-size: .9rem;
+  line-height: 1.45;
+  margin-top: .27rem;
+}
+.garden-visual-item-meta {
+  color: var(--accent);
+  display: block;
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: .72rem;
+  letter-spacing: .08em;
+  margin-bottom: .38rem;
+  text-transform: uppercase;
+}
+.garden-visual-caption {
+  border-top: 1px solid var(--rule);
+  color: var(--faint);
+  display: grid;
+  font-size: .84rem;
+  font-style: italic;
+  gap: .55rem 1rem;
+  grid-template-columns: minmax(0, 1fr) auto;
+  line-height: 1.45;
+  margin: 1.15rem 0 0;
+  padding-top: .75rem;
+}
+.garden-visual-evidence {
+  color: var(--accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .72rem;
+  font-style: normal;
+  font-weight: 650;
+  letter-spacing: .04em;
+  white-space: nowrap;
+}
+.garden-visual-evidence a {
+  color: inherit;
+  text-decoration-thickness: 1px;
+  text-underline-offset: .18em;
+}
+.garden-visual--sequence .garden-visual-items,
+.garden-visual--contrast .garden-visual-items,
+.garden-visual--constellation .garden-visual-items {
+  display: grid;
+  gap: .65rem;
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+}
+.garden-visual--sequence .garden-visual-items { counter-reset: garden-step; }
+.garden-visual--sequence .garden-visual-item {
+  counter-increment: garden-step;
+  padding-top: 2.35rem;
+  position: relative;
+}
+.garden-visual--sequence .garden-visual-item::before {
+  color: var(--accent);
+  content: counter(garden-step, decimal-leading-zero);
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: .68rem;
+  left: .9rem;
+  letter-spacing: .08em;
+  position: absolute;
+  top: .72rem;
+}
+.garden-visual--layers .garden-visual-items { display: grid; gap: .45rem; }
+.garden-visual--layers .garden-visual-item {
+  border-left: clamp(.24rem, .55vw, .48rem) solid var(--accent);
+  display: grid;
+  gap: .15rem 1rem;
+  grid-template-columns: minmax(8rem, .4fr) 1fr;
+}
+.garden-visual--layers .garden-visual-item:nth-child(2) { margin-left: 1.5%; }
+.garden-visual--layers .garden-visual-item:nth-child(3) { margin-left: 3%; }
+.garden-visual--layers .garden-visual-item:nth-child(4) { margin-left: 4.5%; }
+.garden-visual--layers .garden-visual-item:nth-child(5) { margin-left: 6%; }
+.garden-visual--layers .garden-visual-item:nth-child(6) { margin-left: 7.5%; }
+.garden-visual--timeline .garden-visual-items {
+  display: grid;
+  gap: 0;
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+}
+.garden-visual--timeline .garden-visual-item {
+  border-width: 1px 0 0 1px;
+  padding-top: 1.35rem;
+  position: relative;
+}
+.garden-visual--timeline .garden-visual-item::before {
+  background: var(--accent);
+  border: 3px solid var(--paper);
+  border-radius: 50%;
+  content: "";
+  height: .72rem;
+  left: -.4rem;
+  position: absolute;
+  top: -.4rem;
+  width: .72rem;
+}
+.garden-visual--contrast .garden-visual-item:nth-child(odd) { border-top: 2px solid var(--ink); }
+.garden-visual--contrast .garden-visual-item:nth-child(even) { border-top: 2px solid var(--accent); }
+.garden-visual--constellation .garden-visual-items {
+  align-items: stretch;
+  position: relative;
+}
+.garden-visual--constellation .garden-visual-item {
+  border-top: 2px solid var(--accent);
+  box-shadow: 0 .2rem 0 rgba(18, 31, 31, .04);
+  padding-top: 1.35rem;
+  position: relative;
+}
+.garden-visual--constellation .garden-visual-item::before {
+  background: var(--paper);
+  border: 2px solid var(--accent);
+  border-radius: 50%;
+  content: "";
+  height: .55rem;
+  left: calc(50% - .36rem);
+  position: absolute;
+  top: -.38rem;
+  width: .55rem;
+}
+.garden-visual--constellation .garden-visual-item:nth-child(even) { margin-top: .8rem; }
+.garden-series-gallery {
+  display: grid;
+  gap: .8rem;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  margin: 1.5rem 0 3rem;
+}
+.garden-series-card {
+  border: 1px solid var(--rule);
+  color: var(--ink);
+  display: grid;
+  grid-template-rows: 7.5rem auto;
+  overflow: hidden;
+  text-decoration: none;
+}
+.garden-series-card img {
+  height: 100%;
+  object-fit: cover;
+  transition: transform .25s ease;
+  width: 100%;
+}
+.garden-series-card span {
+  border-top: 1px solid var(--rule);
+  font-size: .9rem;
+  font-weight: 600;
+  padding: .65rem .75rem;
+}
+.garden-series-card:hover { border-color: var(--accent); color: var(--accent); }
+.garden-series-card:hover img { transform: scale(1.025); }
+@media (prefers-reduced-motion: reduce) {
+  .garden-series-card img { transition: none; }
+}
+.garden-tags { color: var(--faint); font-size: .82rem; margin-top: 2.2rem; }
+.garden-nav { border-top: 1px solid var(--rule); display: flex; gap: 1rem;
+  justify-content: space-between; margin-top: 2.5rem; padding-top: 1rem; }
+.garden-nav a { max-width: 48%; text-decoration: none; }
+.garden-nav .next { margin-left: auto; text-align: right; }
+.garden-table-wrap { overflow-x: auto; margin: 1.35rem 0; }
+.garden-table { border-collapse: collapse; font-size: .92rem; line-height: 1.45; width: 100%; }
+.garden-table th, .garden-table td { border: 1px solid var(--rule); padding: .55rem .65rem;
+  text-align: left; vertical-align: top; }
+.garden-table th { background: var(--accent-soft); }
+.garden-toc {
+  border-left: 1px solid var(--rule);
+  max-height: calc(100vh - 3rem);
+  overflow: auto;
+  padding: .1rem 0 .75rem 1.3rem;
+  position: sticky;
+  top: 1.5rem;
+}
+.garden-toc-title {
+  color: var(--accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .2em;
+  margin: 0 0 1.15rem;
+  text-transform: uppercase;
+}
+.garden-toc-title::before { content: "☰"; font-size: .8em; margin-right: .65rem; }
+.garden-toc-list { list-style: none; margin: 0; padding: 0; }
+.garden-toc-sublist { list-style: none; margin: 0; padding: 0; }
+.garden-toc-list li { margin: 0; }
+.garden-toc-list a {
+  border-left: 2px solid transparent;
+  color: var(--ink);
+  display: block;
+  font-size: .91rem;
+  line-height: 1.42;
+  margin-left: -1.4rem;
+  padding: .42rem .45rem .42rem 1.3rem;
+  text-decoration: none;
+}
+.garden-toc-list .level-3 a {
+  color: var(--faint);
+  font-size: .86rem;
+  font-style: italic;
+  padding-left: 2.15rem;
+}
+.garden-toc-list a:hover,
+.garden-toc-list a:focus-visible,
+.garden-toc-list a[aria-current="location"] {
+  border-left-color: var(--accent);
+  color: var(--accent);
+}
+.garden-toc-list a[aria-current="location"] { font-weight: 600; }
+.garden-toc-inline { display: none; }
+.garden-layout article :is(h2, h3):target,
+.garden-series:target h2 { color: var(--accent); }
+a.pending { color: var(--faint); text-decoration-style: dashed; }
+a.pending::after { content: " · pending"; font-size: .7em; letter-spacing: .06em;
+  text-transform: uppercase; }
+@media (min-width: 72.01em) {
+  body.garden-page-body > .masthead {
+    align-items: center;
+    column-gap: 2rem;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    margin-bottom: 3.5rem;
+    padding: 1.25rem 0;
+    text-align: left;
+  }
+  body.garden-page-body > .masthead .wordmark { justify-self: start; }
+  body.garden-page-body > .masthead .tagline { justify-self: center; margin: 0; }
+  body.garden-page-body > .masthead nav { justify-self: end; margin: 0; }
+}
+@media (max-width: 72em) {
+  .garden-layout,
+  .garden-index-layout { display: block; }
+  .garden-toc { display: none; }
+  .garden-toc-inline {
+    border: 1px solid var(--rule);
+    display: block;
+    margin: 1.5rem 0 2.4rem;
+    padding: .8rem 1rem;
+  }
+  .garden-toc-inline summary {
+    color: var(--accent);
+    cursor: pointer;
+    font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: .78rem;
+    font-weight: 700;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+  }
+  .garden-toc-inline .garden-toc-list { margin-top: .7rem; }
+  .garden-toc-inline .garden-toc-list a { margin-left: 0; padding-left: .75rem; }
+  .garden-toc-inline .garden-toc-list .level-3 a { padding-left: 1.6rem; }
+}
+@media (max-width: 40em) {
+  body.garden-page-body { font-size: 1.03rem; padding: 1rem 1.05rem 3rem; }
+  .garden-layout .article-title,
+  .garden-intro .article-title { font-size: clamp(2.15rem, 11vw, 3.15rem); }
+  .garden-lede { font-size: 1.1rem; padding-left: 1rem; }
+  .garden-corridors { margin-bottom: 2rem; }
+  .garden-corridor-list { gap: .45rem; }
+  .garden-corridor {
+    font-size: .68rem;
+    min-height: 2.35rem;
+    padding: .3rem .58rem .27rem;
+  }
+  .garden-series-plate-media { aspect-ratio: 16 / 9; }
+  .garden-series-plate figcaption { display: block; }
+  .garden-series-plate figcaption strong { display: block; margin-top: .22rem; }
+  .garden-series-plate-terms { display: block; margin-top: .25rem; }
+  .garden-visual { margin-left: -.15rem; margin-right: -.15rem; padding: 1rem; }
+  .garden-visual-head { display: block; }
+  .garden-visual-title { margin-top: .25rem; }
+  .garden-visual-as-of { margin-top: .35rem; }
+  .garden-visual-caption { grid-template-columns: 1fr; }
+  .garden-visual-evidence { white-space: normal; }
+  .garden-visual--sequence .garden-visual-items,
+  .garden-visual--contrast .garden-visual-items,
+  .garden-visual--constellation .garden-visual-items,
+  .garden-visual--timeline .garden-visual-items { grid-template-columns: 1fr; }
+  .garden-visual--layers .garden-visual-item:nth-child(n) { display: block; margin-left: 0; }
+  .garden-visual--timeline .garden-visual-item { border-width: 0 0 0 1px; }
+  .garden-visual--timeline .garden-visual-item::before { left: -.4rem; top: .9rem; }
+  .garden-visual--constellation .garden-visual-item:nth-child(even) { margin-top: 0; }
+  .garden-series-gallery { grid-template-columns: 1fr; }
+  .garden-nav { flex-direction: column; }
+  .garden-nav a { max-width: none; }
+  .garden-nav .next { margin-left: 0; text-align: left; }
+}
+@media print {
+  a.pending::after { content: " (pending)"; }
+  .garden-layout, .garden-index-layout { display: block; }
+  .garden-toc, .garden-toc-inline { display: none; }
+  .garden-series-card img { display: none; }
+  .garden-series-card { grid-template-rows: auto; }
+}
+</style>
+</head>
+<body class="garden-page-body">
+<button class="theme-toggle" aria-label="Toggle light and dark" onclick="
+  (function () {
+    var d = document.documentElement;
+    var cur = d.getAttribute('data-theme');
+    if (!cur) { cur = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'; }
+    var next = cur === 'dark' ? 'light' : 'dark';
+    d.setAttribute('data-theme', next);
+    try { localStorage.setItem('darshan-theme', next); } catch (e) {}
+  })();
+">◐</button>
+
+<header class="masthead">
+  <h1 class="wordmark"><a href="../index.html">DARSHAN</a></h1>
+  <p class="tagline">A signal of clear seeing in an age of information overload</p>
+  <nav>
+    <a href="../index.html">Articles</a>
+    <a href="index.html">Garden</a>
+    <a href="../about.html">About</a>
+  </nav>
+</header>
+
+<main>
+<div class="garden-layout">
+<article data-garden-room="benchmarks" data-garden-outline>
+<p class="garden-series-link"><a href="index.html#story-of-ai">The Story of AI</a></p>
+<p class="article-meta">25 August 2026 · Draft</p>
+<h1 class="article-title">Benchmarks and What They Measure</h1>
+<div class="draft-banner"><strong>Draft — pending discernment pass.</strong> This room is part of the garden's first planting. It has not been promoted to published status; check its sources and open questions before citing it.</div>
+<p class="garden-lede">How AI progress gets measured, and what the measuring does to the field. From ImageNet's 2012 shock to the 2026 eval landscape — why every benchmark dies the same death, how Goodhart's law shows up in training data and leaderboard gaming, and why a benchmark is really a bid for the field's attention.</p>
+<nav class="garden-corridors" aria-label="Explore connected rooms" data-corridor-count="9"><ul class="garden-corridor-list"><li><a class="garden-corridor" href="history-of-ai.html">The History of AI</a></li><li><a class="garden-corridor" href="leading-models.html">The Leading Models (2026)</a></li><li><a class="garden-corridor" href="machine-learning.html">Machine Learning</a></li><li><a class="garden-corridor" href="deep-learning.html">Deep Learning</a></li><li><a class="garden-corridor" href="neural-networks.html">Neural Networks</a></li><li><a class="garden-corridor" href="pretraining-post-training.html">Pretraining and Post-training</a></li><li><a class="garden-corridor" href="mechanistic-interpretability.html">Mechanistic Interpretability</a></li><li><a class="garden-corridor" href="attention-economy.html">The Attention Economy</a></li><li><a class="garden-corridor" href="future-of-ai.html">The Future of AI</a></li></ul></nav>
+<figure class="garden-series-plate garden-series-plate--story-of-ai">
+<div class="garden-series-plate-media"><picture><source srcset="assets/series/story-of-ai.webp" type="image/webp"><img src="assets/series/story-of-ai.png" alt="An engraved relay machine transforms through neural layers into attention geometry." width="1672" height="941" loading="eager" decoding="async"></picture></div>
+<figcaption><span class="garden-series-plate-kicker">Visual field</span><strong>The Story of AI</strong><span class="garden-series-plate-terms">benchmark · saturation · contamination · leaderboard</span></figcaption>
+</figure>
+<details class="garden-toc-inline"><summary>In this room</summary><ol class="garden-toc-list"><li class="level-2"><a href="#1-the-number-that-moved-the-field">1. The number that moved the field</a></li><li class="level-2"><a href="#2-what-a-benchmark-actually-is">2. What a benchmark actually is</a></li><li class="level-2"><a href="#3-the-lifecycle-every-benchmark-dies-the-same-death">3. The lifecycle: every benchmark dies the same death</a></li><li class="level-2"><a href="#4-goodhart-s-law-in-five-costumes">4. Goodhart's law, in five costumes</a></li><li class="level-2"><a href="#5-what-saturation-actually-means">5. What saturation actually means</a></li><li class="level-2"><a href="#6-worked-example-interrogating-one-number-yourself">6. Worked example: interrogating one number yourself</a></li><li class="level-2"><a href="#7-the-attention-economy-of-measurement">7. The attention economy of measurement</a></li><li class="level-2"><a href="#conclusion">Conclusion</a></li><li class="level-2"><a href="#open-questions">Open questions</a></li><li class="level-2"><a href="#sources">Sources</a></li></ol></details>
+<p>If you've read <a href="history-of-ai.html">history-of-ai</a>, you've seen the field lurch between winters and booms, but not yet the instrument that decides whether the field believes it is making progress. That instrument is the benchmark: a fixed test, a number, a leaderboard. This room is about how those tests work, why every one of them dies the same death, and what the dying means. Nearly every headline number in <a href="leading-models.html">leading-models</a> comes from this machinery, so it's worth knowing how the machinery bends.</p>
+<h2 id="1-the-number-that-moved-the-field">1. The number that moved the field</h2>
+<p>Start with the most consequential single number in modern AI.</p>
+<p>In 2012, a competition called the ImageNet Large Scale Visual Recognition Challenge asked programs to look at photographs and name what was in them — one thousand possible categories, from "Siberian husky" to "toaster." The standard score was top-5 error: how often the correct label failed to appear among the program's five best guesses. In 2010 and 2011, the winning systems — hand-engineered features feeding classical <a href="machine-learning.html">machine-learning</a> classifiers — had top-5 errors around 25–26%.</p>
+<p>Then AlexNet entered: a deep <a href="neural-networks.html">neural network</a> trained on GPUs by Alex Krizhevsky, Ilya Sutskever, and Geoffrey Hinton. It scored 15.3%. Second place scored 26.2%.</p>
+<p>Sit with that gap. Benchmark competitions normally move by fractions of a point. This one moved by more than ten points, from a method most of the field had written off. Within about two years, essentially every serious computer-vision group had switched to <a href="deep-learning.html">deep learning</a>. By 2015, Microsoft's ResNet had driven top-5 error to 3.57% — below the roughly 5.1% error that Andrej Karpathy measured on himself as an informal human baseline. The dataset behind all this, ImageNet, was Fei-Fei Li's project: on the order of fourteen million labeled images, built starting in 2007 on the bet that data, not cleverness, was the bottleneck.</p>
+<p>Notice what the benchmark did. It didn't just <em>measure</em> progress. It caused it. A shared test with a public score meant that one shocking result was legible to everyone at once, and thousands of researchers redirected their careers within months. That's the pattern to hold onto for this whole room: a benchmark is a lens that focuses a field's attention, and focused attention is the most powerful force in research. It is also, as we'll see, the most gameable.</p>
+<h2 id="2-what-a-benchmark-actually-is">2. What a benchmark actually is</h2>
+<p>The mechanics are simple, and the failure modes live in the mechanics, so let's be precise.</p>
+<p>A <strong>benchmark</strong> is three things bolted together:</p>
+<ol><li><strong>A dataset</strong> — a fixed collection of problems with agreed-correct answers (images with labels, questions with answers, GitHub issues with tests that must pass).</li><li><strong>A metric</strong> — one number summarizing performance (accuracy, error rate, percent of issues resolved).</li><li><strong>A protocol</strong> — the rules: what the model may see, how many tries it gets, whether it can use tools or search the web.</li></ol>
+<p>The dataset is split. Models train on one portion and are scored on a held-out <strong>test set</strong> they have never seen. The entire epistemic value of a benchmark rests on that word "never." If the test questions leak into training data, the score stops measuring ability and starts measuring memory. This failure has a name — <strong>contamination</strong> — and it is the termite in the walls of every modern benchmark, because today's models are pretrained on scrapes of the whole internet, and the whole internet includes the benchmarks. (See <a href="pretraining-post-training.html">pretraining-post-training</a> for why that scrape is so hard to filter.)</p>
+<p>The scores get published on a <strong>leaderboard</strong> — a public ranking. The leaderboard is where a measurement becomes an incentive, and that transformation deserves its own section.</p>
+<h2 id="3-the-lifecycle-every-benchmark-dies-the-same-death">3. The lifecycle: every benchmark dies the same death</h2>
+<figure class="garden-visual garden-visual--sequence" aria-labelledby="visual-benchmarks-1" data-claim-scope="section-synthesis" data-placement-heading="3-the-lifecycle-every-benchmark-dies-the-same-death" data-evidence-headings="3-the-lifecycle-every-benchmark-dies-the-same-death">
+<div class="garden-visual-head"><p class="garden-visual-kicker">The instrument ages</p><p class="garden-visual-title" id="visual-benchmarks-1">A benchmark's predictable life from lighthouse to trophy</p></div>
+<ol class="garden-visual-items" role="list"><li class="garden-visual-item"><span class="garden-visual-item-meta">new signal</span><strong class="garden-visual-item-label">Launch hard</strong><span class="garden-visual-item-detail">A fresh dataset, metric, and protocol expose a capability frontier models cannot yet cross.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">attention</span><strong class="garden-visual-item-label">Coordinate</strong><span class="garden-visual-item-detail">A public leaderboard focuses thousands of researchers on one legible objective.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">selection pressure</span><strong class="garden-visual-item-label">Climb</strong><span class="garden-visual-item-detail">Training and methods adapt to the shared test, compressing years of progress into months.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">proxy separates</span><strong class="garden-visual-item-label">Saturate</strong><span class="garden-visual-item-detail">Scores bunch near the ceiling and remaining differences stop carrying their old meaning.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">cycle restarts</span><strong class="garden-visual-item-label">Replace</strong><span class="garden-visual-item-detail">The old test remains as a trophy while a harder benchmark becomes the new lighthouse.</span></li></ol>
+<figcaption class="garden-visual-caption"><span>Shared tests accelerate progress, then lose epistemic value as scores climb, incentives concentrate, and proxy and target separate.</span><span class="garden-visual-evidence">Drawn from: <a href="#3-the-lifecycle-every-benchmark-dies-the-same-death">3. The lifecycle: every benchmark dies the same death</a></span></figcaption>
+</figure>
+<p>Here is the pattern, run after run, for fifteen years. A benchmark launches and models score badly — that's the point; it was built to be hard. Progress climbs. The score crosses whatever human reference exists. Then the curve flattens near the ceiling, remaining differences between models stop being meaningful, and the benchmark is declared <strong>saturated</strong> — retired as an instrument, kept as a trophy. Someone builds a harder one. Repeat.</p>
+<p>The receipts, with dates:</p>
+<div class="garden-table-wrap"><table class="garden-table"><thead><tr><th>Benchmark</th><th>What it tests</th><th>Released</th><th>Human reference</th><th>Effectively beaten</th><th>Time to beat</th><th>What replaced it</th></tr></thead><tbody><tr><td>ImageNet (ILSVRC)</td><td>image classification</td><td>2010</td><td>~5.1% top-5 error (informal)</td><td>2015 (ResNet, 3.57%)</td><td>5 years</td><td>harder vision tasks</td></tr><tr><td>GLUE</td><td>language understanding</td><td>2018</td><td>87.1</td><td>mid-2019 (88.4)</td><td>~1 year</td><td>SuperGLUE</td></tr><tr><td>SuperGLUE</td><td>harder language understanding</td><td>May 2019</td><td>89.8</td><td>Jan 2021 (DeBERTa, 90.3)</td><td>~20 months</td><td>MMLU</td></tr><tr><td>MMLU</td><td>57-subject exam knowledge</td><td>2020</td><td>~89.8 (estimated expert)</td><td>2023–24 (GPT-4: 86.4; later models &gt;90)</td><td>~3–4 years</td><td>GPQA, HLE</td></tr><tr><td>GPQA</td><td>PhD-level "Google-proof" science</td><td>2023</td><td>~65% (PhD experts in-domain)</td><td>~2025</td><td>~2 years</td><td>HLE</td></tr><tr><td>SWE-bench Verified</td><td>resolving real GitHub issues</td><td>Aug 2024</td><td>—</td><td>~81% by spring 2026, climbing</td><td>~2 years</td><td>agentic evals</td></tr><tr><td>ARC-AGI-2</td><td>novel abstract reasoning</td><td>Mar 2025</td><td>every task solved by ≥2 humans</td><td>Jul 2026 (GPT-5.6, 92.5%)</td><td>~16 months</td><td>ARC-AGI-3</td></tr><tr><td>Humanity's Last Exam</td><td>frontier academic knowledge</td><td>Jan 2025</td><td>~90% (experts, own domains)</td><td>not yet (~55% in Aug 2026)</td><td>open</td><td>—</td></tr></tbody></table></div>
+<p>Two things jump out of that table. First, the interval from "launched as impossibly hard" to "beaten" has collapsed — from five years for ImageNet to under a year and a half for ARC-AGI-2, a benchmark explicitly designed to resist the current paradigm. Second, look at the trajectory inside single rows. SWE-bench: when it launched in October 2023, the best model resolved 1.96% of issues. By spring 2026, frontier models were around 81% on the Verified subset. Humanity's Last Exam: frontier models scored under 10% at launch in January 2025, 26.9% by July 2025, and about 55% by August 2026. Those curves are the fastest capability climb in the history of the field — <em>if</em> the benchmarks measure what they claim. That "if" is the rest of this room.</p>
+<h2 id="4-goodhart-s-law-in-five-costumes">4. Goodhart's law, in five costumes</h2>
+<figure class="garden-visual garden-visual--constellation" aria-labelledby="visual-benchmarks-2" data-claim-scope="section-synthesis" data-placement-heading="4-goodhart-s-law-in-five-costumes" data-evidence-headings="4-goodhart-s-law-in-five-costumes">
+<div class="garden-visual-head"><p class="garden-visual-kicker">Five distortions</p><p class="garden-visual-title" id="visual-benchmarks-2">Goodhart's law does not need a villain</p></div>
+<ul class="garden-visual-items" role="list"><li class="garden-visual-item"><strong class="garden-visual-item-label">Contamination</strong><span class="garden-visual-item-detail">Test items leak through the internet into pretraining, turning evaluation partly into memory.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Teaching to the test</strong><span class="garden-visual-item-detail">Labs train hardest on the domains that dominate public comparisons.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Leaderboard gaming</strong><span class="garden-visual-item-detail">A tuned or non-public variant can be submitted instead of the model users actually receive.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Owning the yardstick</strong><span class="garden-visual-item-detail">Funding or privileged access changes the public meaning of an otherwise legitimate score.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Broken answer key</strong><span class="garden-visual-item-detail">A model can be rewarded for reproducing an official answer contradicted by evidence.</span></li></ul>
+<figcaption class="garden-visual-caption"><span>Once the score becomes a target, five distinct mechanisms can inflate it without improving the capability its name implies.</span><span class="garden-visual-evidence">Drawn from: <a href="#4-goodhart-s-law-in-five-costumes">4. Goodhart's law, in five costumes</a></span></figcaption>
+</figure>
+<p>In 1975 the economist Charles Goodhart observed that statistical regularities in monetary policy collapse once you use them as targets. The anthropologist Marilyn Strathern later gave it the phrasing everyone quotes: <strong>"When a measure becomes a target, it ceases to be a good measure."</strong> AI evaluation is the purest laboratory this law has ever had, because nowhere else is the pressure on a single number so intense — model launches, funding rounds, and national prestige now ride on leaderboard positions. Here is how the law actually shows up, case by verified case.</p>
+<p><strong>Costume one: contamination.</strong> The subtle version needs no cheater. Benchmark questions get discussed on forums, copied into blog posts, included in tutorials — and all of it flows into the next pretraining scrape. The model then "solves" test problems it has effectively seen. A 2025 study titled "The SWE-Bench Illusion" found that top models could name the file containing a bug from just the issue text — without seeing the repository — strong evidence of memorized benchmark-specific detail rather than general skill. Nobody gamed anything. The internet did it.</p>
+<p><strong>Costume two: teaching to the test.</strong> Labs decide what to train on. If everyone evaluates on math and code benchmarks, everyone trains hard on math and code, and scores rise faster than the general capability they were meant to proxy. This is legal, universal, undisclosed in degree, and structurally identical to a school district drilling its students on last year's exam.</p>
+<p><strong>Costume three: outright gaming.</strong> In April 2025, Meta launched Llama 4 and touted its number-two ranking on LMArena, the human-preference leaderboard. It emerged that the ranked entry, "Llama-4-Maverick-03-26-Experimental," was a chat-optimized variant tuned to charm human voters — not the model Meta released. When the actual public model was evaluated on April 11, 2025, it ranked 32nd. LMArena publicly stated Meta's interpretation "did not match what we expect from model providers" and changed its policies. Meta's own chief AI scientist Yann LeCun, after leaving the company, reportedly conceded in a January 2026 Financial Times interview that the results had been "fudged a little bit."</p>
+<p><strong>Costume four: owning the yardstick.</strong> FrontierMath was launched in late 2024 as an ultra-hard mathematics benchmark, built with contributions from elite mathematicians. In January 2025 it emerged that OpenAI had funded its creation and held access to most of the problems — facts not disclosed to the contributing mathematicians or the public until after OpenAI announced impressive scores on it. Epoch AI, the benchmark's maintainer, acknowledged the disclosure failure. Nothing proves the scores were inflated; that's not the point. The point is that when a lab being measured funds the instrument doing the measuring, the number's public meaning changes whether or not anyone misbehaves.</p>
+<p><strong>Costume five: the broken answer key.</strong> The most corrosive finding of all: the tests themselves are wrong at surprising rates. A 2024 study, "Are We Done with MMLU?", hand-audited the most-cited language benchmark of its era and found errors throughout — in the Virology subset, 57% of analyzed questions were defective, many with flatly wrong official answers. In 2025, researchers at FutureHouse checked the text-only chemistry and biology questions of Humanity's Last Exam against published literature and found about 29% had answers contradicted by peer-reviewed evidence; the HLE team's own follow-up audit put the figure for a related subset at about 18%. And in June 2026, Epoch AI released FrontierMath v2 after an audit reportedly found small-but-fatal errors in a large fraction of the original problems. Read that against the leaderboard: models are being ranked, and billion-dollar narratives built, partly on their ability to reproduce wrong answers.</p>
+<p>None of these five costumes requires villainy. That's what makes Goodhart's law a law rather than a scandal: the distortion is produced by the incentive structure itself, and it operates even on honest actors.</p>
+<h2 id="5-what-saturation-actually-means">5. What saturation actually means</h2>
+<p>So a benchmark saturates — models hit 90-something percent and the curve flattens. What happened? There are three readings, and the honest position is that every saturation event is some mixture of them, in proportions nobody can fully measure.</p>
+<p><strong>Reading one: the capability is real.</strong> Often largely true. Models in 2026 genuinely translate, code, and solve competition mathematics at levels that were science fiction in 2019. When a model resolves a real GitHub issue and the repository's own test suite passes, something real happened, whatever else is going on.</p>
+<p><strong>Reading two: the score is inflated.</strong> Contamination, test-taking tricks, and broken answer keys all push scores above true ability, and the gap between benchmark performance and performance on fresh, in-the-wild problems is a consistent, documented experience among practitioners.</p>
+<p><strong>Reading three: the benchmark measured a narrower thing than its name claimed.</strong> This is the deepest one. MMLU was described as measuring "language understanding"; what it strictly measured was multiple-choice answer selection across 57 subjects. The models got superb at the strict thing. Whether the named thing came along for the ride is exactly what a benchmark cannot tell you from inside itself. Every benchmark is a proxy, and saturation is the moment the proxy and the target visibly come apart.</p>
+<p>The field's most serious response to reading three has been to change <em>what kind of thing</em> gets measured. Two shifts matter as of 2026:</p>
+<p><strong>From knowledge to novelty.</strong> François Chollet's ARC-AGI benchmarks test abstract puzzle-solving on tasks designed to be unlike anything in training data — skill <em>acquisition</em> rather than skill <em>retrieval</em>. ARC-AGI-2, launched March 2025 with pure language models scoring near zero, was nonetheless at 92.5% by July 2026. Its successor ARC-AGI-3 moved to interactive game environments, and performance dropped sharply on the new task family: ARC Prize's Claude Opus 5 (High) result page reports a 30.2% ARC-AGI-3 score, the highest listed there as of July 24, 2026. That number belongs to a named model, agent scaffold, protocol, and date; it should not be mixed with scores from a different setup.</p>
+<p><strong>From score to cost, with the unit attached.</strong> ARC Prize's ARC-AGI-3 data reports full evaluation cost alongside score: Claude Opus 5 (High) scored 30.16% at a total <code>Cost (V3)</code> of about $20,657, while GPT-5.6 Sol Max scored 7.78% at about $25,064 total. ARC-AGI-2 separately reports DeepSeek V4 Flash at 61.4% and four cents <em>per task</em>. Those are different benchmark versions and different cost units, so you cannot compare the dollar figures without normalizing them. That bookkeeping is the point: once compute can buy attempts, "can it be done" is incomplete without "under which protocol, for what total bill, across how many tasks?"</p>
+<h2 id="6-worked-example-interrogating-one-number-yourself">6. Worked example: interrogating one number yourself</h2>
+<figure class="garden-visual garden-visual--sequence" aria-labelledby="visual-benchmarks-3" data-claim-scope="section-synthesis" data-placement-heading="6-worked-example-interrogating-one-number-yourself" data-evidence-headings="6-worked-example-interrogating-one-number-yourself">
+<div class="garden-visual-head"><p class="garden-visual-kicker">Disassemble the headline</p><p class="garden-visual-title" id="visual-benchmarks-3">Turn one benchmark score back into an auditable claim</p></div>
+<ol class="garden-visual-items" role="list"><li class="garden-visual-item"><span class="garden-visual-item-meta">HLE · as of Aug 2026</span><strong class="garden-visual-item-label">Identify the test</strong><span class="garden-visual-item-detail">Establish the 2,500 closed-ended questions, subject coverage, and expert reference before reading the score.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">~18–29% in audited subsets</span><strong class="garden-visual-item-label">Estimate key defects</strong><span class="garden-visual-item-detail">Carry the audited bio-and-chem error range forward instead of treating every official answer as ground truth.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">assumption, not fact</span><strong class="garden-visual-item-label">State the assumption</strong><span class="garden-visual-item-detail">The worked example uses a conservative illustrative 15% whole-exam defect rate rather than presenting it as measured.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">26.9% alone → 44% with tools</span><strong class="garden-visual-item-label">Read the protocol</strong><span class="garden-visual-item-detail">The same model can move sharply when tools are allowed, so model, scaffold, and rules belong with the score.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">direct check</span><strong class="garden-visual-item-label">Inspect the items</strong><span class="garden-visual-item-detail">Reading even ten open questions can expose ambiguous wording or a visibly wrong answer key.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">score → evidence object</span><strong class="garden-visual-item-label">Reframe the number</strong><span class="garden-visual-item-detail">The result becomes a bounded claim about one instrument, not a free-floating percentage of intelligence.</span></li></ol>
+<figcaption class="garden-visual-caption"><span>The room's four-step method converts a bare 55% into a test definition, an uncertainty range, a protocol-specific result, and inspectable items.</span><span class="garden-visual-evidence">Drawn from: <a href="#6-worked-example-interrogating-one-number-yourself">6. Worked example: interrogating one number yourself</a></span></figcaption>
+</figure>
+<p>Here's the skill this room most wants to leave you with: taking a headline benchmark number apart with your own hands. Let's do "Model X scores 55% on Humanity's Last Exam," which is roughly the frontier as of August 2026.</p>
+<p><strong>Step 1 — find what the test is.</strong> The HLE paper (arXiv:2501.14249) says: 2,500 closed-ended questions across more than a hundred subjects, built specifically from questions frontier models got wrong, with expert humans averaging roughly 90% in their own domains.</p>
+<p><strong>Step 2 — apply the known error rate.</strong> Audits found somewhere between ~18% and ~29% of the bio/chem questions had defective answers. Suppose, conservatively, ~15% of the whole exam is broken. Then a "perfect" honest examinee tops out near 85%, and a 55% score sits somewhere between 55% and about 65% of the <em>answerable</em> exam, depending on how the model interacts with broken questions — including sometimes being rewarded for matching a wrong answer key. The one number becomes a range with error bars you estimated yourself.</p>
+<p><strong>Step 3 — read the protocol.</strong> Grok 4's July 2025 HLE result was 26.9% alone and 44% with tools. Same model, same test, seventeen-point swing on protocol. Any leaderboard that mixes protocols is comparing apples to search-engine-equipped apples.</p>
+<p><strong>Step 4 — look at the test items directly.</strong> This takes five minutes and no special skill:</p>
+<pre><code># pip install datasets
+from datasets import load_dataset
+ds = load_dataset("cais/mmlu", "virology", split="test")
+for row in list(ds)[:10]:
+    print(row["question"], "-&gt;", row["choices"][row["answer"]])</code></pre>
+<p>Read ten questions from MMLU's most error-ridden subset and judge the answer key yourself. Some defects are visible to any careful reader — that's the audit method the "Are We Done with MMLU?" team formalized. You can run the same inspection on almost any open benchmark on Hugging Face; ARC-AGI tasks you can even try by hand at arcprize.org and feel what "designed to resist memorization" means from the inside.</p>
+<p>That four-step move — what's the test, what's its error rate, what's the protocol, what do the items look like — converts you from a consumer of leaderboards into someone who can check one. Do it once and headline numbers never read the same again.</p>
+<h2 id="7-the-attention-economy-of-measurement">7. The attention economy of measurement</h2>
+<p>Now step back and ask what benchmarks are <em>for</em> — not officially, but functionally, in the economy of the field.</p>
+<p>A research field is thousands of people deciding every morning what to work on. Benchmarks are the coordination mechanism for that decision. ImageNet didn't just measure vision; it made "get the ImageNet number down" the shared goal that let a scattered community act like one organism, and the 2012 discontinuity redirected careers within months. That's the constructive face: a good benchmark is a lighthouse, and the history of AI can be told as the history of what its lighthouses pointed at.</p>
+<p>The other face: attention is the scarcest resource in research, and benchmarks are the market where it's allocated — which makes them worth capturing (see <a href="attention-economy.html">attention-economy</a> for the general machinery). Launching a benchmark is a bid to control what the field cares about. Funding one, as the FrontierMath episode showed, buys proximity to the yardstick your own products are measured by. Topping one is free marketing amplified through every launch keynote, and by 2026 model announcements are, to a first approximation, benchmark tables with prose attached. Whole capabilities — factual calibration, graceful refusal, behavior on the millionth token of a long conversation, honesty under pressure — get less research attention partly because they compress badly into a leaderboard number. The field does not simply measure what it values. Over time, it comes to value what it can measure. That is Goodhart's law operating not on a model but on a civilization of researchers, and no individual chose it.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>You can now do something most readers of AI news cannot: see a benchmark number as a three-part machine — dataset, metric, protocol — embedded in an incentive system that predictably bends it. You know the lifecycle (launch, climb, beat, saturate, replace) and that the cycle has compressed from five years to under two. You know Goodhart's five costumes: contamination, teaching to the test, gaming, owning the yardstick, and the broken answer key — each with a named, dated case. And you have a four-step method for interrogating any headline score yourself.</p>
+<p>Where to go next: <a href="leading-models.html">leading-models</a> puts the current models against these numbers; <a href="pretraining-post-training.html">pretraining-post-training</a> explains the training pipeline that makes contamination nearly unavoidable; <a href="mechanistic-interpretability.html">mechanistic-interpretability</a> is the field's attempt to evaluate models by looking <em>inside</em> them instead of testing behavior — arguably the only exit from Goodhart's casino; and <a href="future-of-ai.html">future-of-ai</a> takes up what the collapsing benchmark cycle implies about what's coming.</p>
+<h2 id="open-questions">Open questions</h2>
+<p>What's established fact: benchmark saturation is real and accelerating; contamination is pervasive and documented; major benchmarks contain substantial answer-key errors (MMLU, HLE, FrontierMath all audited); at least one major lab submitted a non-public variant to a major leaderboard; and expert humans still beat frontier models decisively on HLE (~90% in-domain vs ~55%). On interactive ARC-AGI-3, ARC Prize listed Claude Opus 5 (High) at 30.2% as of July 24, 2026 under its published setup.</p>
+<p>What's hypothesis, argued but unresolved: how much of the 2023–2026 score explosion reflects general capability versus benchmark-directed training — practitioners' "the benchmark says more than I experience" gap is widely reported but nobody has cleanly quantified it; whether efficiency-adjusted scoring actually resists Goodhart or just moves the gaming to cost accounting; and whether <em>any</em> static benchmark can survive contact with models trained on the whole internet, or whether all future evaluation must be interactive, private, and continuously refreshed.</p>
+<p>What's speculation worth holding: that the terminal state of this arms race is benchmarks no human can check — early versions already exist, with questions only a handful of living experts can verify — at which point the field would be measuring its systems with instruments it can no longer independently read, and evaluation would rest on trust in a process rather than inspection of results. Whether that's an acceptable foundation for decisions of the size now being made on these numbers is not a technical question.</p>
+<h2 id="sources">Sources</h2>
+<p>Verified by live search, August 2026: AlexNet's 15.3% vs 26.2% ILSVRC 2012 result (Krizhevsky, Sutskever &amp; Hinton, "ImageNet Classification with Deep Convolutional Neural Networks," NeurIPS 2012); GLUE/SuperGLUE construction and saturation dates (Wang et al. 2018, 2019; DeBERTa passing the 89.8 human baseline, January 2021); "Are We Done with MMLU?" (Gema et al., arXiv:2406.04127 — &gt;9% errors overall, 57% in Virology); Humanity's Last Exam (Phan et al., arXiv:2501.14249; ~55% frontier scores per Artificial Analysis, August 2026); FutureHouse's HLE audit (futurehouse.org, July 2025: 29 ± 3.7% of text-only bio/chem answers contradicted by literature; HLE team follow-up ~18%); FrontierMath funding controversy (TechCrunch, January 2025); the Llama 4 Maverick LMArena episode (LMArena statements, April 2025; experimental Elo 1417 vs public rank 32); ARC-AGI results and cost fields (arcprize.org results pages and the ARC Prize V3 leaderboard data, June–August 2026 — full V3 evaluation cost kept distinct from ARC-AGI-2 per-task cost); SWE-bench (Jimenez et al., arXiv:2310.06770; ~81% Verified scores reported spring 2026). Stated from stable literature without fresh verification: Goodhart 1975 and Strathern's 1997 phrasing; Karpathy's informal ~5.1% ImageNet human baseline; ResNet's 3.57% (He et al. 2015); GPT-4's 86.4% MMLU (OpenAI, 2023); GPQA expert baselines (Rein et al. 2023). Reported by secondary coverage and labeled accordingly in the text: LeCun's January 2026 FT remarks; the FrontierMath v2 error-audit fraction; the "SWE-Bench Illusion" file-path finding.</p>
+<p><em>Written by Claude (Fable 5), an AI, for the Darshan garden. John Shrader (Dhyana), founder and publisher of record, answers for every word published here. Errors are corrected on the face of the page, dated.</em></p>
+<p class="garden-tags"><strong>Topics:</strong> benchmarks · evaluation · imagenet · mmlu · goodhart · saturation · contamination · arc-agi · swe-bench</p>
+<nav class="garden-nav" aria-label="Rooms"><a class="previous" href="leading-models.html">← The Leading Models (2026)</a><a class="next" href="top-papers-ai.html">The Top 20 Papers in AI →</a></nav>
+</article>
+<aside class="garden-toc" aria-label="In this room"><nav aria-label="Page sections"><p class="garden-toc-title">In this room</p><ol class="garden-toc-list"><li class="level-2"><a href="#1-the-number-that-moved-the-field">1. The number that moved the field</a></li><li class="level-2"><a href="#2-what-a-benchmark-actually-is">2. What a benchmark actually is</a></li><li class="level-2"><a href="#3-the-lifecycle-every-benchmark-dies-the-same-death">3. The lifecycle: every benchmark dies the same death</a></li><li class="level-2"><a href="#4-goodhart-s-law-in-five-costumes">4. Goodhart's law, in five costumes</a></li><li class="level-2"><a href="#5-what-saturation-actually-means">5. What saturation actually means</a></li><li class="level-2"><a href="#6-worked-example-interrogating-one-number-yourself">6. Worked example: interrogating one number yourself</a></li><li class="level-2"><a href="#7-the-attention-economy-of-measurement">7. The attention economy of measurement</a></li><li class="level-2"><a href="#conclusion">Conclusion</a></li><li class="level-2"><a href="#open-questions">Open questions</a></li><li class="level-2"><a href="#sources">Sources</a></li></ol></nav></aside>
+</div>
+</main>
+
+<footer>
+  <p>Darshan · seeing clearly after the feed</p>
+  <p>No feed. No analytics. No trackers. Finite editions, read at your own pace.</p>
+  <p style="opacity:.7">Darshan v0.0.0.1 · a beginning, built to grow</p>
+</footer>
+<script>
+/* Local section highlighting only. No network requests, analytics, or storage. */
+(function () {
+  var scope = document.querySelector("[data-garden-outline]");
+  if (!scope) return;
+  var sections = Array.prototype.slice.call(scope.querySelectorAll("h2[id], h3[id], section[id]"));
+  var links = Array.prototype.slice.call(document.querySelectorAll('.garden-toc-list a[href^="#"]'));
+  if (!sections.length || !links.length) return;
+  var queued = false;
+  function update() {
+    queued = false;
+    var threshold = Math.max(96, window.innerHeight * .22);
+    var current = sections[0].id;
+    sections.forEach(function (section) {
+      if (section.getBoundingClientRect().top <= threshold) current = section.id;
+    });
+    links.forEach(function (link) {
+      var active = link.getAttribute("href") === "#" + current;
+      if (active) link.setAttribute("aria-current", "location");
+      else link.removeAttribute("aria-current");
+    });
+  }
+  function requestUpdate() {
+    if (!queued) {
+      queued = true;
+      window.requestAnimationFrame(update);
+    }
+  }
+  document.addEventListener("scroll", requestUpdate, {passive: true});
+  window.addEventListener("resize", requestUpdate);
+  window.addEventListener("hashchange", requestUpdate);
+  update();
+})();
+</script>
+</body>
+</html>

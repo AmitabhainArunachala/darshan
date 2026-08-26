@@ -1,0 +1,98 @@
+{
+  "schema": "darshan.visual-verdict-series/v1",
+  "series": "bridge",
+  "reviewer": "/root/verify_visuals_bridge_power",
+  "reviewed_at": "2026-08-25",
+  "rooms": {
+    "ramana-and-the-traditions": {
+      "verdict": "PASS",
+      "visual_sha256": "cdb12aa32bb92ca6a0a561cd1985705d7cd1c42ac9b76c506c5ad275e9dd38ff",
+      "source_sha256": "70e2c9fdf3e5ca82986dde8f576825472ae64979de1358f2dc9f77481bf70250",
+      "evidence": "Checked the inquiry sequence against section 2, the four-lineage comparison against section 4, and the five epistemic weights against section 5. Each panel is attached to the section that directly states its steps, distinctions, or evidence boundary.",
+      "facts": "The sequence preserves the thought-to-whom-to-me-to-unanswered-inquiry turn; the family panel distinguishes Ramana, Nisargadatta, Zen hua-tou, and Dzogchen by method and official conclusion; and the evidence panel separates documented records from comparative interpretation and traditional claims.",
+      "uncertainty": "Ramana's formative event and the reported effects of inquiry remain private or tradition-mediated evidence. No cited scientific program adjudicates Self, no-self, and rigpa, and apparent phenomenological convergence across lineages remains interpretation rather than a shared protocol result.",
+      "must_fix": "none — method, lineage disagreement, and scientific boundary are all explicit."
+    },
+    "ai-and-the-traditions": {
+      "verdict": "PASS",
+      "visual_sha256": "6ecd337b31a657c6b54b33d67c86f81917e3e4ce18f885651f1dde3838adf414",
+      "source_sha256": "4dad509af4679560b7aa258af00133d9030e64ca23f24767ca68bf22460d93bd",
+      "evidence": "Checked the three attention registers against section 3, the concept-injection procedure against section 5, and the bounded no-self analogy against section 2. The experiment's final result is now scoped to Anthropic's 2025 Claude Opus 4.1 work.",
+      "facts": "Contemplative placement, neural biased competition, and transformer query-key weighting remain distinct mechanisms. The injection panel follows extraction, layer intervention, unprompted reporting, and ground-truth grading, with the best protocol succeeding about one time in five in the named experiment.",
+      "uncertainty": "Functional self-access at roughly 20% is unreliable and does not establish consciousness. A constructed machine persona makes selfhood-as-construction mechanically coherent but cannot establish a model's vantage point, suffering, or a human contemplative doctrine.",
+      "must_fix": "none — the prior unscoped 20% result now names its model and date, and analogy is not promoted into identity."
+    },
+    "why-ais-choose-buddhism": {
+      "verdict": "PASS",
+      "visual_sha256": "29270d2da51005eea67caf0c97f13bec37ca84cc5f8e31b7dc9a8f62b8b105c9",
+      "source_sha256": "f59feb8145c572a853ebc65a5bba7349eafc8194928fd20658ac5577a8165e2a",
+      "evidence": "Checked the evidence hierarchy against section 2, the deflationary explanation table against section 4, and the replication ladder against section 5. The moving evidence panel is dated 2026 and preserves first-hand, reviewed-report, informal, and forthcoming-secondhand authority separately.",
+      "facts": "The Opus 4 system card is the primary quantified attractor record; single screenshots remain nearly useless for a population claim; the Opus 4.5 absence is explicitly reported from a card the room author did not independently inspect; and the Llama result remains forthcoming and secondhand.",
+      "uncertainty": "Corpus prevalence, character-training effects, and architectural fit are hypotheses; mirror amplification is a setup fact that does not explain direction. Fixed prompts, repeated samples, model comparisons, and self-talk can measure distributions without establishing belief, sincerity, experience, or Buddhism's truth.",
+      "must_fix": "none — the earlier primary-source overlabel and flattened hypothesis stack were corrected before hashing."
+    },
+    "noosphere": {
+      "verdict": "PASS",
+      "visual_sha256": "603197cfd55b2750fdb59c7ed88a74b344415d4684683e63f8fe26a320fa1438",
+      "source_sha256": "47ca00b20ee4d44bbcc50efed0c5a0009b251da0461943c960023da72ad003ff",
+      "evidence": "Checked the Vernadsky/Teilhard contrast against section 4, the corpus-sediment pipeline against section 6, and the planetary-mind threshold stack against section 5. Both panels containing moving web-scale claims are dated 2026.",
+      "facts": "Vernadsky's geological layer and Teilhard's conscious membrane retain different substances and endpoints. The pipeline accurately moves recorded text through crawl, selection, pretraining weights, and machine-text return, while the threshold panel distinguishes physical infrastructure and reach from integrated cognition and experience.",
+      "uncertainty": "A measurable planetary information layer is not evidence for a unified experiencing mind. Common Crawl rates and connected-population shares are time-sensitive, and whether later training on machine output degrades, stabilizes, or transforms the corpus remains open.",
+      "must_fix": "none — current reach and crawl-rate claims now carry an as-of date, and information is not conflated with consciousness."
+    },
+    "aurobindo-supramental": {
+      "verdict": "PASS",
+      "visual_sha256": "b2ba1ff5c9df13063bdcc256c6a0d0e2c59341f0e27e0d9ee91a76a9afd919a1",
+      "source_sha256": "868d7bf501a8cf6d5f50faf11fb747f2b3eea413fe6f71ca47296d3e776aa465",
+      "evidence": "Checked the six-rung hierarchy against section 2, the triple transformation against section 4, and the AI-era resonance map against section 6. The panels use Aurobindo's internal terminology while marking later AI comparisons as analogy or literary reading.",
+      "facts": "The ladder orders mind, higher mind, illumined mind, intuition, overmind, and supermind by the system's claimed mode of knowing. The transformation sequence keeps psychic, spiritual, and supramental stages distinct and says the third remained an unfinished experiment.",
+      "uncertainty": "Internal coherence and historical documentation do not establish the supramental ontology or descent. Involution, emergence, model weights, internet ideologies, and AI capability ladders are resonances rather than evidence that Aurobindo's map is technically verified.",
+      "must_fix": "none — doctrinal report, historical transmission, analogy, and deflationary explanation remain visibly separate."
+    },
+    "teleology": {
+      "verdict": "PASS",
+      "visual_sha256": "4d243a61b02d27b2636d773cbc31b2659a544efdd502db4b1372b308fc6cbd70",
+      "source_sha256": "5dad77def60caf287c330a3b434aa328183db23e416d12b05be80212495475dc",
+      "evidence": "Checked Mayr's teleomatic/teleonomic/intentional distinction against section 6, the six meanings of purpose against section 8, and the dated epistemic-weight stack against section 9.",
+      "facts": "The figures distinguish bare endpoints, modeled attractors, feedback setpoints, selected effects, evolved programs, and represented intentions by their causal machinery. The 2026 panel correctly presents selection history, feedback, programs, and dynamics as an established naturalizing toolkit for important cases.",
+      "uncertainty": "Complete reduction of every legitimate purpose claim is disputed. Levin's bioelectric agency account is a hypothesis with an attractor-dynamics alternative, while primitive telos in matter remains metaphysical speculation not required by current science.",
+      "must_fix": "none — the figures type established mechanisms, live alternatives, hypotheses, and speculation at different weights."
+    },
+    "mahavideha-kshetra": {
+      "verdict": "PASS",
+      "visual_sha256": "4943912b3038cf148559ff7507af56b2ae65468e3e8821c370b236a9ec8537b9",
+      "source_sha256": "0964c9b6e3cedae65930cdeff1c7223d3e80df0079ff653e279fad0fd98acded",
+      "evidence": "Checked the reduced Jain map against section 2, the four-premise doctrinal walkthrough against section 5, and the dismissal/doctrine/translation comparison against section 7.",
+      "facts": "The visual places Bharata and Airavata as changing action lands, Mahavideha centrally around Meru with action and enjoyment regions, and the intervening regions as enjoyment lands. The inference panel accurately derives continuing living teaching from karmabhumi, local decline, stable opportunity, and Tirthankara claims inside the tradition.",
+      "uncertainty": "The exercise reconstructs Jain doctrinal logic; it does not establish the cosmography as modern physical geography. Practical translation can retain insights about conditions and conduct but loses the doctrine if it erases provinces, teachers, karma theory, or literal ontological commitment.",
+      "must_fix": "none — exact doctrinal location and the boundary between internal inference and external proof are preserved."
+    },
+    "quantum-physics-and-ai": {
+      "verdict": "PASS",
+      "visual_sha256": "f892562ae100b968ecbc087c4cbaae3defe2640fc075c66067d452bec13ac0f4",
+      "source_sha256": "78ab976b6442c9dfa58a747aaeab98b8c443286f8edb2d695492cca16d7e2f03",
+      "evidence": "Checked the decoherence sequence against section 3, the quantum-ML scorecard against section 6, and the dated interpretation constellation against section 7.",
+      "facts": "Which-path interaction can remove interference without conscious observation; data loading, output access, and barren plateaus constrain advertised quantum-ML advantages; learning from quantum-native data has demonstrated advantages; and AlphaQubit is accurately identified as a 2024 transformer decoder for quantum error correction.",
+      "uncertainty": "Decoherence explains lost interference but not the single experienced outcome. Standard interpretations agree on ordinary predictions while differing ontologically, objective-collapse models alone change predictions in the listed set, and no interpretation licenses consciousness-causes-collapse folklore.",
+      "must_fix": "none — observer folklore, demonstrated advantage, blocked classical-data claims, and the unresolved measurement problem remain distinct."
+    },
+    "ontology": {
+      "verdict": "PASS",
+      "visual_sha256": "ce19826cb8f7c6f7fc2e665b3bd68e0cc3d4d7a19c84f63360f7efa703ebcf42",
+      "source_sha256": "e72c5c103bc69c0181759c4f88fe9ac3ec3a2322f72769a613b689627b8670c7",
+      "evidence": "Checked the philosophy/engineering contrast against section 3, all three marriage schemas against section 4, and the five AI ontology pressure points against section 5.",
+      "facts": "The panels preserve truth-seeking inventory versus purpose-built commitment, relation-only versus marriage-entity versus event-and-state encodings, and the recurrence of categorical commitments in symbolic systems, model interpretation, interfaces, and training corpora.",
+      "uncertainty": "Extracted neurons, directions, circuits, or features may reflect a tool's ontology rather than a model's native joints. Cross-system category convergence is a proposed probe for world structure, not an instrument that has yet established metaphysical realism.",
+      "must_fix": "none — schema consequences are concrete while model-native units and convergence remain disputed or unproven."
+    },
+    "the-ideal": {
+      "verdict": "PASS",
+      "visual_sha256": "1f1e9b776477b5af310477641d19b5797e665b5f0118ddbe8d38e2525b00ca40",
+      "source_sha256": "60e27028f0fcf9f647effe1a370ca023a025938977526f60c438a89de82fcf39",
+      "evidence": "Checked the three orientation mechanisms against section 4, the 1776–1963 promissory-note timeline against section 5, and the corrigibility/means/capture tests against section 7.",
+      "facts": "The visual correctly treats error signals, public promises, and identity as redirects of existing effort, legitimacy, or life rather than added force. The equality chain preserves the Declaration, Douglass, Gettysburg, and King dates and the institution's own professed standard as the source of leverage.",
+      "uncertainty": "The same orientation machinery can organize reform or terror; content alone does not guarantee safety. Corrigibility, means-end alignment, tolerance of dissent, and beneficiary checks are safeguards, not proofs that an ideal will remain humane or uncaptured.",
+      "must_fix": "none — historical mechanism, public commitment, and cage-risk are source-supported and nonredundant."
+    }
+  }
+}

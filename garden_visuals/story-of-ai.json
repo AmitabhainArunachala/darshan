@@ -1,0 +1,383 @@
+{
+  "schema": "darshan.visual-series/v1",
+  "series": "story-of-ai",
+  "art": {
+    "src": "assets/series/story-of-ai.png",
+    "alt": "An engraved relay machine transforms through neural layers into attention geometry.",
+    "png_sha256": "deedf6e8cc88ef688f7b9ebe61aa61dbeebf304c914ebfaef8aee666ac8f32ca",
+    "webp_sha256": "d04d0fc40a449a4d537e7ec3895b40251980c4058d45ed2ab775c9ac3c41e0aa",
+    "prompt": "Use case: stylized-concept\nAsset type: wide 16:9 editorial series plate for a serious long-form knowledge garden\nPrimary request: depict the history of artificial intelligence as one continuous archival mechanism transforming across time: on the left, hand-built relay logic, punched cards, early symbolic diagrams and a cybernetic feedback governor; through the middle, layered perceptron meshes, laboratory traces and a restrained neural lattice; on the right, the same mechanism resolves into elegant transformer-like attention geometry and modular machine intelligence. The transformation should feel archaeological and causal, not celebratory or futuristic.\nScene/backdrop: warm cream rag paper, horizontal museum-table composition with faint chronological strata and translucent technical overlays\nSubject: an evolving cybernetic machine/relay lineage, physically continuous from early mechanical and symbolic forms into neural and transformer geometry\nStyle/medium: original tactile printmaking, copperplate engraving and woodcut linework combined with translucent technical drafting layers, serious literary-scientific editorial illustration\nComposition/framing: cinematic wide 16:9, left-to-right transformation, dense but legible, strong central rhythm, generous breathing space at edges; no framed panels\nLighting/mood: quiet archival gravity, intellectual wonder, precise rather than dramatic\nColor palette: cream paper, charcoal black, oxide red, with one restrained ultramarine accent\nMaterials/textures: visible paper grain, dry ink, etched hatching, subtle registration offsets, translucent vellum-like overlays\nConstraints: textless; no letters, numbers, captions, logos, interface UI, or watermark; historically suggestive without portraying identifiable people; coherent single illustration\nAvoid: generic sci-fi, neon, glowing robot heads, humanoid robots, floating dashboards, stock circuit-board imagery, glossy 3D rendering, named-artist imitation"
+  },
+  "rooms": {
+    "history-of-ai": {
+      "visuals": [
+        {
+          "after": "6-the-quiet-decades-that-actually-won",
+          "kind": "timeline",
+          "kicker": "Winter beneath winter",
+          "title": "The ingredients accumulated while the headline field froze",
+          "caption": "The apparent winter from 1986 to 2012 concealed the four lines of work that made the deep-learning break possible.",
+          "items": [
+            {"label": "Backpropagation", "detail": "Multi-layer networks could learn hidden representations by propagating error backward.", "meta": "1986"},
+            {"label": "Statistical turn", "detail": "Probability and data-estimated parameters displaced brittle hand-written rule bases.", "meta": "late 1980s–1990s"},
+            {"label": "Closed-world search", "detail": "Deep Blue showed symbolic search at full strength—and the limits of a system that learned nothing.", "meta": "1997"},
+            {"label": "GPU compute", "detail": "Graphics processors made the matrix arithmetic of deep networks economically tractable.", "meta": "2006–2012"},
+            {"label": "Training craft", "detail": "Better activations, regularization, and initialization made deep networks trainable in practice.", "meta": "2006–2012"},
+            {"label": "Shared data", "detail": "ImageNet supplied more than a million labeled examples and a public arena for comparison.", "meta": "2009"}
+          ]
+        },
+        {
+          "after": "7-something-you-can-check-yourself-the-problem-that-ended-era-one",
+          "kind": "contrast",
+          "kicker": "One hidden layer",
+          "title": "Why XOR defeated one line and yielded to two intermediate ideas",
+          "caption": "A single perceptron cannot separate XOR, while two hidden units re-express it as OR minus AND.",
+          "items": [
+            {"label": "Single boundary", "detail": "The four XOR inequalities contradict one another; no weights w₁, w₂, b satisfy all four.", "meta": "single layer"},
+            {"label": "Hidden OR", "detail": "The first intermediate unit fires when at least one input is on.", "meta": "h₁"},
+            {"label": "Hidden AND", "detail": "The second intermediate unit fires only when both inputs are on.", "meta": "h₂"},
+            {"label": "OR, not AND", "detail": "The output combines h₁ and h₂ to return 0, 1, 1, 0 exactly.", "meta": "XOR"}
+          ]
+        },
+        {
+          "after": "3-the-first-winter-an-argument-and-an-audit",
+          "kind": "contrast",
+          "kicker": "Two verdicts, three constraints",
+          "title": "The first winter exposed different limits that looked like one failure",
+          "caption": "A correct theorem about one architecture and a correct audit of toy-world scaling converged on the same funding collapse, while the missing compute-and-data diagnosis remained largely unseen.",
+          "items": [
+            {"label": "Perceptron argument", "detail": "Minsky and Papert proved that a single-layer perceptron cannot compute XOR.", "meta": "1969 · mathematical limit"},
+            {"label": "Training gap", "detail": "Multi-layer networks could represent XOR, but no practical training method was then available.", "meta": "judgment beyond the theorem"},
+            {"label": "Lighthill audit", "detail": "Toy demonstrations failed to justify their promises once real search spaces and real funding were examined.", "meta": "1973 · scale audit"},
+            {"label": "Search explosion", "detail": "Methods that worked in tiny formal worlds drowned as the number of possible states grew.", "meta": "binding constraint"},
+            {"label": "Commonsense gap", "detail": "Real environments required background knowledge that people rarely state and engineers could not exhaustively encode.", "meta": "binding constraint"},
+            {"label": "Hidden diagnosis", "detail": "Connectionism also lacked the compute and data it would later need, but almost nobody named those as the bottleneck.", "meta": "visible in hindsight"}
+          ]
+        }
+      ]
+    },
+    "evolution-of-ai": {
+      "visuals": [
+        {
+          "after": "7-the-three-selection-pressures-with-numbers",
+          "kind": "layers",
+          "kicker": "Five environments",
+          "title": "Each AI body plan metabolized the resource its era made abundant",
+          "as_of": "25 August 2026",
+          "caption": "The field's succession reads less like a planned ladder than a sequence of organisms selected by changing constraints.",
+          "items": [
+            {"label": "Symbolic", "detail": "Scarce compute and data favored compressing available human expertise into rules.", "meta": "1956–1990"},
+            {"label": "Statistical", "detail": "Digitized corpora favored methods that could learn from counting instead of hand-written grammar.", "meta": "1988–2012"},
+            {"label": "Neural", "detail": "GPU compute and labeled data rewarded architectures that parallelized and learned features.", "meta": "2012–2019"},
+            {"label": "Foundation", "detail": "Capital and web-scale data favored one generalist pretrained according to scaling laws.", "meta": "2017–2023"},
+            {"label": "Agents", "detail": "The scarce resource became reliable verification as systems moved from answers to completed tasks.", "meta": "2024–now"}
+          ]
+        },
+        {
+          "after": "8-worked-example-one-lineage-four-extinctions",
+          "kind": "sequence",
+          "kicker": "One sentence, four eras",
+          "title": "Machine translation as a lineage of changing bottlenecks",
+          "caption": "The same ambiguous sentence exposes what each successive paradigm could metabolize—and what killed it.",
+          "items": [
+            {"label": "Rules", "detail": "A symbolic translator cannot disambiguate “spirit” without unwritable world knowledge.", "meta": "~1970"},
+            {"label": "Phrase counts", "detail": "Parallel text resolves familiar phrases but produces stilted output when counting hits its ceiling.", "meta": "~2005"},
+            {"label": "Neural sequence", "detail": "Whole-sentence fluency jumps, but the model remains a translation specialist.", "meta": "2016"},
+            {"label": "General model", "detail": "One system translates, explains the idiom, and checks its own result with tools.", "meta": "now"}
+          ]
+        },
+        {
+          "after": "2-the-symbolic-era-fitness-by-hand-1956-1990",
+          "kind": "sequence",
+          "kicker": "Fitness before failure",
+          "title": "Symbolic AI first fit its environment, then lost the environment",
+          "caption": "The paradigm's rise and extinction follow a resource chain: spend abundant expert labor to conserve scarce compute, until both its internal ceiling and its hardware niche break.",
+          "items": [
+            {"label": "Resource climate", "detail": "Compute was scarce, digitized data barely existed, and human expertise was comparatively available.", "meta": "1970s"},
+            {"label": "Adaptive strategy", "detail": "Engineers compressed expertise into explicit rules so machines could reason without costly learning.", "meta": "symbolic fit"},
+            {"label": "Commercial bloom", "detail": "Expert systems such as XCON delivered real value and supported a specialized Lisp-machine industry.", "meta": "early 1980s"},
+            {"label": "Internal ceiling", "detail": "Thousands of interacting rules became brittle, while tacit skills resisted being written down at all.", "meta": "rules do not scale"},
+            {"label": "External shock", "detail": "General-purpose workstations erased the economic reason for dedicated Lisp hardware.", "meta": "late 1980s"},
+            {"label": "Selection outcome", "detail": "The lineage lost its budget and funding climate rather than being defeated by elegance alone.", "meta": "second AI winter"}
+          ]
+        }
+      ]
+    },
+    "future-of-ai": {
+      "visuals": [
+        {
+          "after": "5-three-scenarios-assumptions-named",
+          "kind": "contrast",
+          "kicker": "Three conditional futures",
+          "title": "The scenarios differ by observable hinges, not mood",
+          "as_of": "25 August 2026",
+          "caption": "Each future is a chain of assumptions with evidence that could confirm it and evidence that could kill it.",
+          "items": [
+            {"label": "Fast takeoff", "detail": "Requires recent time-horizon doubling to hold, AI to accelerate AI research, and deployment friction to fall.", "meta": "~2027–2030"},
+            {"label": "Steady compounding", "detail": "Requires long-run capability growth, organizational diffusion, and infrastructure financed by real revenue.", "meta": "10–20 years"},
+            {"label": "Plateau and diffusion", "detail": "Requires inference-time scaling to exhaust its overhang with no new capability axis.", "meta": "frontier slows"}
+          ]
+        },
+        {
+          "after": "6-worked-example-run-the-extrapolation-yourself",
+          "kind": "sequence",
+          "kicker": "Five doublings",
+          "title": "One target, three trend windows, three arrival dates",
+          "as_of": "25 August 2026",
+          "caption": "Moving from a 320-minute horizon to 9,600 minutes takes about five doublings, but the chosen window moves the answer by more than a year.",
+          "items": [
+            {"label": "Start", "detail": "The worked example begins from Claude Opus 4.5's roughly 320-minute measured horizon.", "meta": "January 2026"},
+            {"label": "Recent window", "detail": "Five doublings at 89 days each place the month-scale horizon around mid-2027.", "meta": "445 days"},
+            {"label": "Post-2023 window", "detail": "Five doublings at 131 days each place it around late 2027.", "meta": "655 days"},
+            {"label": "All-time window", "detail": "Five doublings at about 196 days each place it around late 2028.", "meta": "983 days"},
+            {"label": "Uncertainty band", "detail": "The stated 170–729 minute interval shifts every date by roughly one doubling.", "meta": "about ±3–6 months"}
+          ]
+        },
+        {
+          "after": "1-the-ground-rules-why-this-room-refuses-prophecy",
+          "kind": "layers",
+          "kicker": "Forecasting without prophecy",
+          "title": "A future claim earns weight by carrying its date, assumptions, and type",
+          "caption": "The room replaces one confident prediction with a protocol that lets you see exactly what changed when evidence moves.",
+          "items": [
+            {"label": "Start with the miss record", "detail": "Famous experts underestimated and overestimated progress, so confidence and access are not evidence.", "meta": "calibration"},
+            {"label": "Date the evidence", "detail": "Every empirical signal is tied to August 2026 because an undated frontier claim hides its decay.", "meta": "measured layer"},
+            {"label": "Name the assumptions", "detail": "A scenario states the hinges that must hold instead of presenting its outcome as a forecasted fact.", "meta": "conditional layer"},
+            {"label": "Type the claim", "detail": "Measurement, contest, and speculation keep different grammar so their authority cannot silently merge.", "meta": "epistemic layer"},
+            {"label": "Watch the hinge", "detail": "When an assumption breaks, update the scenario rather than defending the date attached to it.", "meta": "revision rule"}
+          ]
+        }
+      ]
+    },
+    "leading-models": {
+      "visuals": [
+        {
+          "after": "4-the-dated-table",
+          "kind": "constellation",
+          "kicker": "A perishable frontier",
+          "title": "The 2026 model landscape is an ecosystem, not one leaderboard",
+          "as_of": "25 August 2026",
+          "caption": "The room maps closed labs, open-weight challengers, context, price, and access as separate dimensions that expire at different speeds.",
+          "items": [
+            {"label": "Closed frontier", "detail": "Anthropic, OpenAI, Google, xAI, and Meta compete through hosted models, with Meta straddling the weight boundary.", "meta": "five labs"},
+            {"label": "Open-weight challengers", "detail": "DeepSeek, Moonshot, Zhipu, and Alibaba put downloadable or promised weights near the frontier.", "meta": "four families"},
+            {"label": "Context", "detail": "Published windows range from Grok's 500K to Gemini Pro's 2M in the dated table.", "meta": "model-dependent"},
+            {"label": "Price", "detail": "Headline token rates conceal threshold billing, output premiums, and retries per completed task.", "meta": "verify live"},
+            {"label": "Access", "detail": "A model can be technically available yet restricted by government action, region, license, or nationality controls.", "meta": "policy layer"}
+          ]
+        },
+        {
+          "after": "6-worked-example-verify-this-page-then-price-a-real-task",
+          "kind": "contrast",
+          "kicker": "Same coding task",
+          "title": "Per-token prices become concrete only when attached to a workload",
+          "as_of": "25 August 2026",
+          "caption": "For 400K input and 30K output tokens, the room's dated arithmetic produces three very different bills before retries or quality enter.",
+          "items": [
+            {"label": "Claude Opus 5", "detail": "$2.00 of input plus $0.75 of output under the flat listed rates.", "meta": "$2.75"},
+            {"label": "Grok 4.6", "detail": "Crossing the 200K prompt threshold moves the entire request to the higher price band.", "meta": "$1.96"},
+            {"label": "DeepSeek V4-Pro", "detail": "The dated off-peak rates yield the lowest token bill in the comparison.", "meta": "$0.32"},
+            {"label": "Completed-task cost", "detail": "Three attempts or triple the output can erase a model's nominal per-token advantage.", "meta": "not priced here"}
+          ]
+        },
+        {
+          "after": "5-when-a-model-disappears-the-june-export-control-episode",
+          "kind": "timeline",
+          "kicker": "Nineteen days of access",
+          "title": "A model became a controlled dependency overnight",
+          "caption": "The Fable 5 episode turned policy risk from an abstract footnote into a dated failure mode for anyone building on a frontier API.",
+          "items": [
+            {"label": "Launch", "detail": "Anthropic releases Fable 5 and Mythos 5.", "meta": "June 9, 2026"},
+            {"label": "Global suspension", "detail": "Immediate export controls force both models offline because nationality cannot be verified in real time.", "meta": "June 12"},
+            {"label": "Public challenge", "detail": "Security researchers ask Commerce to reverse the restriction.", "meta": "June 14"},
+            {"label": "Narrow restoration", "detail": "Mythos 5 returns for a vetted set of U.S. organizations while broader controls remain.", "meta": "June 26"},
+            {"label": "Controls lifted", "detail": "Commerce reviews new mitigations and removes the restriction.", "meta": "June 30"},
+            {"label": "Global return", "detail": "Access resumes worldwide, leaving the dependency lesson intact.", "meta": "July 1"}
+          ]
+        }
+      ]
+    },
+    "benchmarks": {
+      "visuals": [
+        {
+          "after": "3-the-lifecycle-every-benchmark-dies-the-same-death",
+          "kind": "sequence",
+          "kicker": "The instrument ages",
+          "title": "A benchmark's predictable life from lighthouse to trophy",
+          "caption": "Shared tests accelerate progress, then lose epistemic value as scores climb, incentives concentrate, and proxy and target separate.",
+          "items": [
+            {"label": "Launch hard", "detail": "A fresh dataset, metric, and protocol expose a capability frontier models cannot yet cross.", "meta": "new signal"},
+            {"label": "Coordinate", "detail": "A public leaderboard focuses thousands of researchers on one legible objective.", "meta": "attention"},
+            {"label": "Climb", "detail": "Training and methods adapt to the shared test, compressing years of progress into months.", "meta": "selection pressure"},
+            {"label": "Saturate", "detail": "Scores bunch near the ceiling and remaining differences stop carrying their old meaning.", "meta": "proxy separates"},
+            {"label": "Replace", "detail": "The old test remains as a trophy while a harder benchmark becomes the new lighthouse.", "meta": "cycle restarts"}
+          ]
+        },
+        {
+          "after": "4-goodhart-s-law-in-five-costumes",
+          "kind": "constellation",
+          "kicker": "Five distortions",
+          "title": "Goodhart's law does not need a villain",
+          "caption": "Once the score becomes a target, five distinct mechanisms can inflate it without improving the capability its name implies.",
+          "items": [
+            {"label": "Contamination", "detail": "Test items leak through the internet into pretraining, turning evaluation partly into memory."},
+            {"label": "Teaching to the test", "detail": "Labs train hardest on the domains that dominate public comparisons."},
+            {"label": "Leaderboard gaming", "detail": "A tuned or non-public variant can be submitted instead of the model users actually receive."},
+            {"label": "Owning the yardstick", "detail": "Funding or privileged access changes the public meaning of an otherwise legitimate score."},
+            {"label": "Broken answer key", "detail": "A model can be rewarded for reproducing an official answer contradicted by evidence."}
+          ]
+        },
+        {
+          "after": "6-worked-example-interrogating-one-number-yourself",
+          "kind": "sequence",
+          "kicker": "Disassemble the headline",
+          "title": "Turn one benchmark score back into an auditable claim",
+          "caption": "The room's four-step method converts a bare 55% into a test definition, an uncertainty range, a protocol-specific result, and inspectable items.",
+          "items": [
+            {"label": "Identify the test", "detail": "Establish the 2,500 closed-ended questions, subject coverage, and expert reference before reading the score.", "meta": "HLE · as of Aug 2026"},
+            {"label": "Estimate key defects", "detail": "Carry the audited bio-and-chem error range forward instead of treating every official answer as ground truth.", "meta": "~18–29% in audited subsets"},
+            {"label": "State the assumption", "detail": "The worked example uses a conservative illustrative 15% whole-exam defect rate rather than presenting it as measured.", "meta": "assumption, not fact"},
+            {"label": "Read the protocol", "detail": "The same model can move sharply when tools are allowed, so model, scaffold, and rules belong with the score.", "meta": "26.9% alone → 44% with tools"},
+            {"label": "Inspect the items", "detail": "Reading even ten open questions can expose ambiguous wording or a visibly wrong answer key.", "meta": "direct check"},
+            {"label": "Reframe the number", "detail": "The result becomes a bounded claim about one instrument, not a free-floating percentage of intelligence.", "meta": "score → evidence object"}
+          ]
+        }
+      ]
+    },
+    "cybernetics": {
+      "visuals": [
+        {
+          "after": "2-feedback-the-oldest-new-idea",
+          "kind": "timeline",
+          "kicker": "The returning signal",
+          "title": "Feedback became a science by turning correction into an object of study",
+          "caption": "A mechanical governor became a stability problem, then a general language for control and communication.",
+          "items": [
+            {"label": "Centrifugal governor", "detail": "A spinning mechanism throttles a steam engine as its speed departs from the target.", "meta": "Watt era"},
+            {"label": "Stability mathematics", "detail": "Maxwell turns governor behavior into a formal problem of oscillation and control.", "meta": "1868"},
+            {"label": "Cybernetics", "detail": "Control and communication in animals and machines become one named research program.", "meta": "1948"}
+          ]
+        },
+        {
+          "after": "6-walkthrough-prove-the-law-of-requisite-variety-at-your-kitchen-table",
+          "kind": "contrast",
+          "kicker": "Only variety absorbs variety",
+          "title": "Ashby's law as a three-move game",
+          "caption": "A regulator can collapse three disturbances to one outcome only when it can distinguish and answer all three.",
+          "items": [
+            {"label": "World variety", "detail": "The disturbance can choose among three distinct moves.", "meta": "D = 3"},
+            {"label": "Matched regulator", "detail": "With three countermoves, the regulator maps every disturbance to outcome a.", "meta": "R = 3 → 1 outcome"},
+            {"label": "Amputated regulator", "detail": "With only two countermoves, the third disturbance has no answer that yields a.", "meta": "R = 2"},
+            {"label": "Residual variety", "detail": "The outcome set must contain at least two values; wiring cleverness cannot evade the count.", "meta": "at least 2 outcomes"}
+          ]
+        },
+        {
+          "after": "7-the-split-why-artificial-intelligence-is-not-called-cybernetics",
+          "kind": "contrast",
+          "kicker": "Three nouns for intelligence",
+          "title": "The 1956 secession changed the object of study, but feedback returned",
+          "caption": "Cybernetics, symbolic AI, and modern machine learning each center a different object, mathematics, and test of success; today's missing guarantees reveal what the split left behind.",
+          "items": [
+            {"label": "Cybernetics", "detail": "Feedback loops regulate continuous systems through stability, information, and error correction.", "meta": "intelligence = viable regulation"},
+            {"label": "Symbolic AI", "detail": "Discrete representations support logic, search, planning, and theorem proving.", "meta": "intelligence = correct reasoning"},
+            {"label": "Modern ML", "detail": "Differentiable functions learn from data through statistics, linear algebra, and optimization.", "meta": "intelligence = generalization"},
+            {"label": "The returning inheritance", "detail": "Training and deployed agents are feedback loops even when they no longer use the cybernetic name.", "meta": "error → correction → repeat"},
+            {"label": "The unresolved debt", "detail": "Modern learning is powerful but weak on closed-loop stability and safe-operating guarantees.", "meta": "control theory's home ground"}
+          ]
+        }
+      ]
+    },
+    "top-papers-ai": {
+      "visuals": [
+        {
+          "after": "6-the-whole-story-in-one-table",
+          "kind": "timeline",
+          "kicker": "Twenty papers, four batons",
+          "title": "Modern AI grew by passing a small set of ideas forward",
+          "caption": "The list is less a cabinet of isolated breakthroughs than a relay of computation, error, scale, and feedback.",
+          "items": [
+            {"label": "Neurons compute", "detail": "Threshold units, behavioral tests, and trainable perceptrons establish the substrate and the learning bet.", "meta": "1943–1958 · papers 1–3"},
+            {"label": "Error teaches", "detail": "Backpropagation, gated memory, and convolution make hidden representations trainable and useful.", "meta": "1986–1998 · papers 4–6"},
+            {"label": "Scale breaks through", "detail": "GPUs, learned features, attention, residuals, reward, and search trigger the deep-learning explosion.", "meta": "2012–2016 · papers 7–14"},
+            {"label": "Attention scales", "detail": "Transformers, pretraining, scaling laws, in-context learning, science, and human feedback define the new regime.", "meta": "2017–2022 · papers 15–20"}
+          ]
+        },
+        {
+          "after": "7-worked-example-attention-by-hand",
+          "kind": "sequence",
+          "kicker": "Attention in four moves",
+          "title": "A token asks, scores, normalizes, and mixes",
+          "caption": "The room's two-dimensional example reduces the transformer's core operation to a calculation you can verify on paper.",
+          "items": [
+            {"label": "Query and keys", "detail": "Token A asks with q=[1,0] against keys [2,0] and [0,2].", "meta": "2 dimensions"},
+            {"label": "Scaled scores", "detail": "Dot products divided by √2 produce approximately 1.41 and 0.", "meta": "match strength"},
+            {"label": "Softmax weights", "detail": "The scores become a normalized allocation of roughly 0.80 and 0.20.", "meta": "four-to-one"},
+            {"label": "Value mixture", "detail": "Applying those weights to [10,0] and [0,10] yields [8,2].", "meta": "new representation"}
+          ]
+        },
+        {
+          "after": "4-the-explosion-2012-2016",
+          "kind": "sequence",
+          "kicker": "Six bottlenecks break",
+          "title": "The deep-learning explosion was a relay of removed constraints",
+          "caption": "From vision through control, each landmark inherited the previous machinery and removed one practical obstruction to scale, context, depth, or action.",
+          "items": [
+            {"label": "Learn the features", "detail": "AlexNet scales convolution on GPUs and replaces hand-designed vision features with learned ones.", "meta": "2012"},
+            {"label": "Geometrize meaning", "detail": "Word2vec makes semantic relationships visible as structure in learned vectors.", "meta": "2013"},
+            {"label": "Learn whole sequences", "detail": "Encoder-decoder LSTMs turn translation into one end-to-end model but squeeze the input through one vector.", "meta": "2014"},
+            {"label": "Open the bottleneck", "detail": "Attention lets each output step look back across all input positions instead of trusting one compressed summary.", "meta": "2014–15"},
+            {"label": "Make depth trainable", "detail": "Residual shortcuts ask layers for corrections to identity, allowing 152-layer networks to optimize cleanly.", "meta": "2015"},
+            {"label": "Close perception into action", "detail": "DQN closes perception into reward-guided action; AlphaGo adds tree search to learned policy and value networks.", "meta": "2015–16"}
+          ]
+        }
+      ]
+    },
+    "top-papers-ml": {
+      "visuals": [
+        {
+          "after": "7-the-twenty-at-a-glance",
+          "kind": "timeline",
+          "kicker": "Theory meets practice",
+          "title": "The machine-learning canon advances by exposing its predecessor's limit",
+          "caption": "Across the twenty papers, formal guarantees, practical architectures, and empirical counterexamples repeatedly trade the lead.",
+          "items": [
+            {"label": "Learning formalized", "detail": "SGD, perceptrons, VC dimension, and PAC learning turn adaptation into a mathematical object.", "meta": "1951–1984"},
+            {"label": "Connectionist toolkit", "detail": "Backpropagation, convolution, margin methods, LSTMs, boosting, and forests become reusable workhorses.", "meta": "1986–2001"},
+            {"label": "Deep eruption", "detail": "Pretraining, GPUs, generative models, dropout, Adam, and residual paths make depth practical.", "meta": "2006–2015"},
+            {"label": "Architectural border", "detail": "The transformer removes recurrence and unlocks parallel sequence learning.", "meta": "2017"},
+            {"label": "Theory reckons", "detail": "Random-label memorization and double descent show why classical capacity stories are incomplete.", "meta": "2017–2019"}
+          ]
+        },
+        {
+          "after": "8-worked-example-train-paper-2-by-hand",
+          "kind": "sequence",
+          "kicker": "Thirteen presentations",
+          "title": "The perceptron learns OR by keeping only corrections",
+          "caption": "Four mistakes move the weight vector from zero to a boundary that classifies all four OR inputs correctly.",
+          "items": [
+            {"label": "Begin", "detail": "Weights start at (0,0,0); a zero dot product predicts −1.", "meta": "step 1"},
+            {"label": "First positive", "detail": "The mistaken (0,1) example adds its vector, producing weights (1,0,1).", "meta": "step 2"},
+            {"label": "Repair the zero", "detail": "The false positive on (0,0) subtracts the bias input and later corrections add x₁.", "meta": "steps 5–9"},
+            {"label": "Converge", "detail": "Final weights (0,1,1) give dot products 0,1,1,2 and the labels −1,+1,+1,+1.", "meta": "steps 10–13"},
+            {"label": "XOR test", "detail": "Changing only the labels to XOR prevents convergence because no single line separates the cases.", "meta": "50 epochs still correcting"}
+          ]
+        },
+        {
+          "after": "6-the-border-paper-and-the-theoretical-reckoning-2017-2019",
+          "kind": "contrast",
+          "kicker": "Past the classical curve",
+          "title": "Memorization broke the old capacity story without explaining the new one",
+          "caption": "The 2017 and 2019 papers show that models able to fit pure noise can still generalize, and that test error can fall again after the interpolation threshold.",
+          "items": [
+            {"label": "Classical expectation", "detail": "As model capacity grows past the useful fit, test error should eventually rise in a familiar U-shaped tradeoff.", "meta": "bias–variance account"},
+            {"label": "Random-label test", "detail": "Standard deep networks fit completely random training labels with the same architecture and optimizer.", "meta": "Zhang et al. · 2017"},
+            {"label": "Capacity bound fails", "detail": "A class expressive enough to memorize noise cannot be explained by simple worst-case capacity alone.", "meta": "demolition result"},
+            {"label": "Interpolation spike", "detail": "Test error peaks near the point where the model just fits every training example.", "meta": "threshold"},
+            {"label": "Second descent", "detail": "Increase capacity further and test error can fall again, making overparameterization part of the working regime.", "meta": "Belkin et al. · 2019"},
+            {"label": "Open mechanism", "detail": "Data structure, architecture, and optimizer bias must matter together, but no accepted general theory closes the account.", "meta": "still unresolved"}
+          ]
+        }
+      ]
+    }
+  }
+}

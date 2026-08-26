@@ -1,0 +1,9 @@
+{
+  "slug": "sdk-api",
+  "verdict": "PASS",
+  "contract": "Passes the room contract: exact frontmatter, 3,398 body words, a three-sentence Where you are, numbered sections, a real versioning comparison table, a reproducible curl worked example, conclusion and sibling hooks, typed open questions, sources and disclosure, valid internal .html links, and a socket-exit earned from the interface/interior distinction.",
+  "facts": "Three consequential claims were checked against primary or official records. The official MCP contributing page lists ten maintained SDK languages; Anthropic's December 2025 AAIF announcement says the Python and TypeScript SDKs together exceeded 97 million monthly downloads, exactly the repaired scope. OpenAI's official migration material says the Assistants API was deprecated after Responses reached feature parity and is scheduled to shut down August 26, 2026; the room correctly distinguishes that migration from MCP. The Supreme Court's Google v. Oracle opinion supports the case-specific statement that copying the Java API declaring code at issue was fair use while leaving copyrightability undecided. The corrected MCP sentence does not imply that two languages are the whole protocol.",
+  "voice": "Read aloud the semver/Hyrum sequence, the Google v. Oracle paragraph, and the MCP governance paragraph. They remain concrete and sayable, with legal and technical qualifications expressed in ordinary sentences. The final promise-shape line is aphoristic but grows directly from the interface argument and does not preach.",
+  "must_fix": "none — the MCP language-count/download-scope repair is accurate, and the Assistants/Responses/MCP distinctions remain correct.",
+  "source_sha256": "7b214325a96130f3a32d3bb3695c2811fcccf8b36511d837fecffd66c1370a00"
+}

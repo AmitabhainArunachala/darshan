@@ -1,0 +1,285 @@
+{
+  "schema": "darshan.visual-series/v1",
+  "series": "time-future",
+  "art": {
+    "src": "assets/series/time-future.png",
+    "alt": "Nested engraved time rings opening into several branching forecast paths",
+    "png_sha256": "9d1a35248423b5f7b3d3458665f333fc6d21a43b6c4e4d28957f6ef61d7b1dbf",
+    "webp_sha256": "563c27ad84648e634a4ba2522bd2bf58a183f6469787c7ff6cc15cd6e9de330a",
+    "prompt": "Use case: stylized-concept\nAsset type: wide 16:9 editorial series plate for a serious long-form knowledge garden\nPrimary request: depict time and the future as nested cyclical time rings meeting a branching forecast horizon: concentric engraved rings and measured orbital arcs gather on the left and center, then open into several disciplined branching paths toward a distant horizon on the right\nScene/backdrop: warm cream archival paper with a low, spacious horizon; no literal landscape realism\nStyle/medium: tactile copperplate engraving and restrained linocut marks, overlaid with translucent technical-vellum layers, probability-like branching lines, and subtle calendar/astronomical geometry without text; intellectually serious editorial illustration\nComposition/framing: panoramic 16:9; nested cycles occupy the left two-thirds, a clear hinge at center, branching futures spread toward the right edge with open negative space; layered depth without visual congestion\nLighting/mood: lucid, patient, uncertain but not ominous; contemplative rather than prophetic\nColor palette: cream paper, charcoal ink, oxide red, with one restrained mineral-teal accent\nMaterials/textures: subtle paper grain, etched linework, translucent vellum, faint registration imperfections\nConstraints: textless; no letters, numbers, labels, logos, signatures, or watermark; cycles and branches must read clearly at banner size\nAvoid: clocks with readable numerals, crystal balls, generic sci-fi glow, neon, cyberpunk, apocalypse imagery, glossy 3D, humanoid robots, decorative clutter"
+  },
+  "rooms": {
+    "meaning-of-time": {
+      "visuals": [
+        {
+          "after": "1-three-clocks-that-disagree",
+          "kind": "contrast",
+          "kicker": "Three clocks",
+          "title": "Time does not tell one story",
+          "caption": "Physical rate, macroscopic direction, and lived duration are distinct clocks that do not reduce cleanly to one another.",
+          "items": [
+            {"label": "Relativistic", "detail": "Clock rate depends on gravity and motion, and simultaneity has no universal frame."},
+            {"label": "Entropic", "detail": "Macroscopic systems overwhelmingly move toward more probable, disordered configurations."},
+            {"label": "Attentional", "detail": "Felt duration thickens or collapses with what attention and memory register."}
+          ]
+        },
+        {
+          "after": "5-worked-example-check-the-2012-date-yourself",
+          "kind": "sequence",
+          "kicker": "Calendar audit",
+          "title": "Two routes to December 21, 2012",
+          "caption": "The Long Count conversion closes through ordinary arithmetic and an independent Julian-day check.",
+          "items": [
+            {"label": "Count", "detail": "Thirteen baktuns at 144,000 days each equal 1,872,000 days."},
+            {"label": "Approximate", "detail": "Dividing by 365.2425 gives about 5,125.26 mean Gregorian years."},
+            {"label": "Walk", "detail": "Adding that span to August 11, 3114 BCE, with no year zero, reaches December 21, 2012."},
+            {"label": "Cross-check", "detail": "JDN 584,283 plus 1,872,000 equals JDN 2,456,283, the same date."}
+          ]
+        },
+        {
+          "after": "4-three-geometries-of-time-side-by-side",
+          "kind": "constellation",
+          "kicker": "Three geometries, three jobs",
+          "title": "A clock can measure duration or locate meaning",
+          "caption": "These systems disagree because they were built to answer different questions, not because they are rival versions of one calendar.",
+          "items": [
+            {"label": "Physical time", "detail": "Relativity supplies no global now, while entropy supplies a statistical arrow; the purpose is measurement and prediction."},
+            {"label": "Yuga cycles", "detail": "Nested ages locate the present inside a moral and spiritual gradient, with the quality of an age doing the interpretive work."},
+            {"label": "Long Count", "detail": "An odometer-like day count anchors history and ritual to a fixed era, and its rollovers do not end the count."},
+            {"label": "Audit question", "detail": "Ask whether a dated-looking statement is chronometric evidence or a meaning claim wearing the grammar of a measurement."}
+          ]
+        }
+      ]
+    },
+    "futurism": {
+      "visuals": [
+        {
+          "after": "1-put-four-different-things-in-four-boxes",
+          "kind": "contrast",
+          "kicker": "Type the claim",
+          "title": "Four boxes keep the future honest",
+          "caption": "A sentence becomes easier to challenge when its evidence status is visible before its emotional force.",
+          "items": [
+            {"label": "Fact", "detail": "A documented or observed claim, still subject to correction when its source is an estimate."},
+            {"label": "Hypothesis", "detail": "A causal explanation whose mechanism can be strengthened or weakened by evidence."},
+            {"label": "Scenario", "detail": "An internally consistent possible future built from named assumptions."},
+            {"label": "Wild", "detail": "A possibility worth thinking with whose mechanism, probability, or evidence is presently too weak for planning."}
+          ]
+        },
+        {
+          "after": "8-the-propositions-side-by-side",
+          "kind": "constellation",
+          "kicker": "Futures as propositions",
+          "title": "Six different things a future can optimize",
+          "caption": "Futurist disagreements often concern authority, scarcity, and the definition of failure more than any date.",
+          "items": [
+            {"label": "Acceleration", "detail": "Kurzweilian and e/acc visions prioritize faster intelligence, building, and productive capacity."},
+            {"label": "Human freedom", "detail": "Transhumanism centers a person's ability to alter inherited biological limits."},
+            {"label": "Throughput", "detail": "Degrowth asks rich economies to reduce selected material and energy flows with redistribution."},
+            {"label": "Scorecard", "detail": "Post-growth treats GDP as a means and adds welfare, resilience, inequality, and ecology."},
+            {"label": "Cosmic scope", "detail": "Cosmism extends technical purpose across mortality, generations, and space."},
+            {"label": "Robustness", "detail": "Risk-first and strategic foresight keep irreversible harm and several futures in view."}
+          ]
+        },
+        {
+          "after": "9-worked-example-one-data-center-eight-futures",
+          "kind": "sequence",
+          "kicker": "Make the visions sign",
+          "title": "Turn a future argument into a staged contract",
+          "caption": "The data-center example becomes governable when rival visions must name evidence, decision rights, and conditions for the next increment.",
+          "items": [
+            {"label": "Lock facts", "detail": "Measure electricity, water, land, jobs, tax terms, grid costs, and enforceable shutdown conditions at this site."},
+            {"label": "Expose hypotheses", "detail": "Put a measurable indicator and revision date beside each claim about demand, jobs, cleaner power, or obsolescence."},
+            {"label": "Write policy", "detail": "Make every philosophy cash out as a clause about access, costs, benefits, safety, resilience, or distribution."},
+            {"label": "Stage commitment", "detail": "Approve capacity in increments whose later options expire unless named grid and safety gates are cleared."},
+            {"label": "Assign authority", "detail": "Name who measures, who can halt expansion, who hears an appeal, and what evidence each role must accept."}
+          ]
+        }
+      ]
+    },
+    "forecasting": {
+      "visuals": [
+        {
+          "after": "3-superforecasters-what-works-when-you-keep-score",
+          "kind": "sequence",
+          "kicker": "Forecasting as practice",
+          "title": "Five habits that become measurable skill",
+          "caption": "The Good Judgment Project found that disciplined process, not a prophetic gift, improves scored forecasts.",
+          "items": [
+            {"label": "Train", "detail": "A short module on probability, base rates, bias, and aggregation improves accuracy."},
+            {"label": "Collaborate", "detail": "Teams share evidence and challenge reasoning better than isolated forecasters."},
+            {"label": "Update", "detail": "Many small revisions keep the number responsive to arriving evidence."},
+            {"label": "Use granularity", "detail": "Distinctions such as 63% versus 67% survive scoring better than vague likelihood words."},
+            {"label": "Start outside", "detail": "The reference class supplies an opening rate before the vivid details of this case."}
+          ]
+        },
+        {
+          "after": "7-the-four-tools-side-by-side",
+          "kind": "contrast",
+          "kicker": "Choose the instrument",
+          "title": "Four tools for four shapes of uncertainty",
+          "caption": "The right forecasting method depends on whether the question repeats, resolves, stays liquid, or remains structurally open.",
+          "items": [
+            {"label": "Superforecasting", "detail": "Score and repeatedly update probabilities on well-posed questions."},
+            {"label": "Base rates", "detail": "Correct the inside story with outcomes from a defensible reference class."},
+            {"label": "Scenarios", "detail": "Rehearse several coherent long-horizon worlds without pretending they are predictions."},
+            {"label": "Markets", "detail": "Use priced, resolvable contracts to aggregate a crowd with money at stake."}
+          ]
+        },
+        {
+          "after": "9-where-forecasting-breaks",
+          "kind": "layers",
+          "kicker": "The calibration boundary",
+          "title": "Forecasting skill needs a world that answers back",
+          "caption": "Remove repeated questions, timely resolution, or honest scoring and confidence can no longer be calibrated by a track record.",
+          "items": [
+            {"label": "Volume", "detail": "Elections, prices, and ceasefires offer many comparable questions; a one-shot civilizational event does not."},
+            {"label": "Feedback", "detail": "Near-term outcomes arrive soon enough to correct a forecaster's process; century-scale claims may not."},
+            {"label": "Scoring", "detail": "A precise resolution rule can reward calibrated probability, while an ambiguous outcome lets every story survive."},
+            {"label": "Novelty", "detail": "When a regime changes, the outside view can become the error because its reference class describes the world that just ended."},
+            {"label": "Boundary", "detail": "A number on an unprecedented question may still aid a decision, but it has not inherited demonstrated calibration for free."}
+          ]
+        }
+      ]
+    },
+    "trends-gap": {
+      "visuals": [
+        {
+          "after": "3-six-ways-a-curve-stops-telling-the-whole-story",
+          "kind": "constellation",
+          "kicker": "Break the curve",
+          "title": "Six mechanisms that change what a trend means",
+          "caption": "Most apparent trend failures can be classified before they are dismissed as an unknowable black swan.",
+          "items": [
+            {"label": "Shock", "detail": "A new external variable overwhelms the drivers the old line summarized."},
+            {"label": "Ceiling", "detail": "Heat, energy, cost, or saturation breaks the previous conversion mechanism."},
+            {"label": "Substitution", "detail": "A successor system redirects demand or performance into a neighboring curve."},
+            {"label": "Diffusion lag", "detail": "Capability arrives before skills, workflow, trust, and complementary investment."},
+            {"label": "Measurement", "detail": "A new question, denominator, or metric produces an apparent jump in the data."},
+            {"label": "Threshold", "detail": "A smooth input crosses a binary scoring or decision boundary."}
+          ]
+        },
+        {
+          "after": "6-the-deeper-gap-capability-is-not-deployment",
+          "kind": "layers",
+          "kicker": "Four clocks of adoption",
+          "title": "A capability is not yet an outcome",
+          "caption": "Technology reaches society through four curves whose lags are caused by different systems.",
+          "items": [
+            {"label": "Capability", "detail": "Evaluations and controlled trials show what a system can do under specified conditions."},
+            {"label": "Diffusion", "detail": "Access, cost, trust, skills, reliability, and regulation determine who actually uses it."},
+            {"label": "Reorganization", "detail": "Workflows, roles, incentives, and complementary investments must change around the tool."},
+            {"label": "Outcome", "detail": "Productivity, welfare, risk, power, and distribution move only after effects reach scale."}
+          ]
+        },
+        {
+          "after": "8-agency-a-control-surface-not-a-mood",
+          "kind": "sequence",
+          "kicker": "Make agency testable",
+          "title": "Turn “we can choose” into a bounded experiment",
+          "caption": "Agency becomes operational when a named actor controls a specific intervention and agrees in advance on the evidence that changes the next move.",
+          "items": [
+            {"label": "Actor + authority", "detail": "Name who decides and the exact queue, workflow, or rule they are permitted to change."},
+            {"label": "Resource + window", "detail": "State the people, money, compute, and deadline available rather than assuming unlimited capacity."},
+            {"label": "Intervention", "detail": "Describe the concrete change, such as a six-week randomized assistant trial on half of selected shifts."},
+            {"label": "Observable", "detail": "Measure throughput, quality, escalation, and other outcomes that can reveal both benefit and harm."},
+            {"label": "Stop + trigger", "detail": "Pre-commit to stopping on a critical-error threshold and expanding only after a named gain with no quality decline."}
+          ]
+        }
+      ]
+    },
+    "what-ai-can-bring": {
+      "visuals": [
+        {
+          "after": "5-education-the-two-trials-that-define-the-whole-question",
+          "kind": "contrast",
+          "kicker": "Same model, different school",
+          "title": "Deployment design flips the educational result",
+          "as_of": "25 August 2026",
+          "caption": "The trials show that access alone can weaken learning while structured tutoring can strengthen it.",
+          "items": [
+            {"label": "Structured pairs", "detail": "In Nigeria, teacher-guided pair work with reasoning prompts produced substantial learning gains.", "meta": "6 weeks"},
+            {"label": "Unrestricted answers", "detail": "In Turkey, GPT Base improved practice answers but students scored 17% worse after access was removed."},
+            {"label": "Tutor guardrails", "detail": "The prompted GPT Tutor improved practice performance without the same later-test harm."}
+          ]
+        },
+        {
+          "after": "7-the-conditions-under-which-the-gifts-arrive",
+          "kind": "layers",
+          "kicker": "The verified-gift test",
+          "title": "Three gates between capability and public benefit",
+          "caption": "Across the room's cases, benefits land when reality can grade them, distribution is chosen, and an institution absorbs them.",
+          "items": [
+            {"label": "Verify", "detail": "Trials, forecast outcomes, proofs, or laboratory checks provide cheap objective correction."},
+            {"label": "Distribute", "detail": "Open databases, code, or weights make near-zero marginal copying socially available."},
+            {"label": "Absorb", "detail": "Radiologists, teachers, scientists, or public agencies redesign practice around the tool."}
+          ]
+        },
+        {
+          "after": "8-worked-example-walk-the-chain-yourself",
+          "kind": "sequence",
+          "kicker": "Trust, handed back",
+          "title": "Cross-check two AI-medicine claims in public",
+          "as_of": "25 August 2026",
+          "caption": "The rentosertib and MASAI examples become credible only to the degree that a reader can reach the public artifacts, results, and uncertainty.",
+          "items": [
+            {"label": "Open the map", "detail": "Find the human TNIK entry in the public AlphaFold database and inspect the predicted protein structure."},
+            {"label": "Read uncertainty", "detail": "Use the residue-level pLDDT colors to distinguish high-confidence regions from low-confidence ones."},
+            {"label": "Open the trial", "detail": "Read the open Phase 2a paper and check n = 71, the lung-capacity results, discontinuations, and liver-toxicity signal."},
+            {"label": "Cross-check a second trial", "detail": "For the separate MASAI mammography claim, compare the registered endpoints with the final paper's screening outcome."},
+            {"label": "Keep the scope", "detail": "A verified intermediate result is evidence at that stage, not proof that the drug will clear Phase 3 or generalize everywhere."}
+          ]
+        }
+      ]
+    },
+    "the-future": {
+      "visuals": [
+        {
+          "after": "2-what-can-actually-be-forecast-the-measured-record",
+          "kind": "contrast",
+          "kicker": "Forecastability is plural",
+          "title": "Horizon depends on the target, not the calendar alone",
+          "as_of": "2026",
+          "caption": "Measured horizons and argued limits change radically with the variable, scale, feedback, and scoring instrument.",
+          "items": [
+            {"label": "Detailed weather", "detail": "A 2019 midlatitude study found about ten practical days, while later ML hindcasts challenge a universal ceiling."},
+            {"label": "Weather risk", "detail": "Some probabilistic patterns retain useful information over roughly two to six weeks."},
+            {"label": "Climate averages", "detail": "Forced global trends can retain skill across decades even when daily trajectories cannot."},
+            {"label": "Geopolitics", "detail": "Scored expert judgment is useful over months and decays toward chance around three to five years."},
+            {"label": "Commodity prices", "detail": "At ten-year windows, volatility makes direction roughly coin-flip difficult."},
+            {"label": "Future discoveries", "detail": "Popper's argument limits prediction of knowledge whose content would otherwise already be known.", "meta": "argued · contested"}
+          ]
+        },
+        {
+          "after": "5-the-stance-assembled",
+          "kind": "sequence",
+          "kicker": "The third stance",
+          "title": "Act without prophecy, learn without paralysis",
+          "caption": "The capstone replaces certainty with a repeatable discipline for steering under uncertainty.",
+          "items": [
+            {"label": "Type", "detail": "Mark claims as measured, argued, or speculative before reasoning from them."},
+            {"label": "Quantify", "detail": "Use probabilities instead of verdicts, then keep score with proper rules."},
+            {"label": "Shape", "detail": "Ask the kind of question the domain's demonstrated instrument can answer."},
+            {"label": "Ledger", "detail": "Use many small models, named bets, and piecemeal updates like a fox."},
+            {"label": "Rehearse", "detail": "Where discovery defeats prediction, work through coherent scenarios instead of prophecy."},
+            {"label": "Act", "detail": "Commit fully to the controllable action without pretending to control its fruit."}
+          ]
+        },
+        {
+          "after": "3-worked-example-one-bet-re-run-a-hundred-times",
+          "kind": "timeline",
+          "kicker": "One wager, many worlds",
+          "title": "A settled bet is still one draw from a distribution",
+          "caption": "The Simon–Ehrlich wager gained rigor by naming its terms, then lost its aura of finality when later researchers changed the time window and reran it.",
+          "items": [
+            {"label": "Contract", "detail": "Five metals, a $1,000 basket, inflation adjustment, and an exact ten-year settlement date replace opposing manifestos with one test.", "meta": "1980"},
+            {"label": "Observed verdict", "detail": "All five real prices fall and Ehrlich pays Simon $576.07 under the wager's specified terms.", "meta": "1990"},
+            {"label": "All windows", "detail": "A later study of possible windows from 1900 to 2008 finds Simon wins only about 38% of them.", "meta": "2010 reanalysis"},
+            {"label": "Ten-year reruns", "detail": "A different back-test gives Ehrlich 69 wins in 102 windows and about 63 wins per 100 simulations of the chosen decade.", "meta": "2022 note"},
+            {"label": "What survives", "detail": "The bet made one sentence falsifiable; it did not settle a century-scale theory of scarcity or ingenuity."}
+          ]
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "slug": "top-papers-ml",
+  "verdict": "PASS",
+  "contract": "Passes the top-papers contract: exact frontmatter, 4,033 body words, a situated opener, twenty numbered entries with contribution/importance/limitation, a useful era table, a runnable double-descent worked example, conclusion and sibling hooks, typed open questions, sources and disclosure, valid internal .html links, and an earned socket-exit. The room is now below the 4,500-word ceiling.",
+  "facts": "Three bold claims were checked fresh against primary papers. Schapire's 1990 paper proves the equivalence of weak and strong learnability by constructing a procedure that raises a weak learner to arbitrarily high accuracy; the room now correctly distinguishes that theoretical result from Freund and Schapire's later practical AdaBoost algorithm and cites the primary paper. Zhang et al., arXiv:1611.03530, show standard deep networks fitting random labels and random pixels. Belkin et al., arXiv:1812.11118, introduce the modern double-descent framing and support the worked example's interpolation-threshold target. The historical repair is accurate and no downstream sentence reintroduces the old attribution.",
+  "voice": "Read aloud the PAC-learning, boosting, and modern-generalization entries. The math is translated into direct speech, concrete stakes arrive before formal vocabulary, and limitations land in short sentences. The final turn from held-out data to the learner's own blind spot grows out of validation language and remains a question rather than a lesson.",
+  "must_fix": "none — the word-count and Schapire/AdaBoost history defects are fully repaired.",
+  "source_sha256": "80bb619e81363cf87bcc3ad90b833b81019d10ade6a886b036152ef6d46bb898"
+}

@@ -1,0 +1,9 @@
+{
+  "slug": "leading-models",
+  "verdict": "PASS",
+  "contract": "Passes the room contract: exact frontmatter, 3,549 body words, a short Where you are, numbered sections, a dated comparison table, a reproducible four-source verification worked example, conclusion and sibling hooks, typed open questions, sources that label uncertainty and unverified items, disclosure, valid internal .html links, and a model-market-native socket-exit through token meters and effort dials.",
+  "facts": "Three central clusters were checked against current primary pages. Moonshot's Kimi K3 model card gives 2.8T total parameters, 104B activated, 93 layers, 16 of 896 experts, and a 1M context window; the repaired paragraph now uses 104B active. Moonshot's license separately requires a model-as-a-service agreement above $20M aggregate revenue in any consecutive twelve months and Kimi-name display for a commercial product above 100M monthly users or $20M monthly revenue; the article preserves those distinct thresholds. Anthropic's June 2026 redeployment record supports the June 12 suspension, June 26 limited restoration, June 30 lifting of controls, July 1 global restoration, and the reported Amazon incident. The new Kimi number and adjacent technical/license details are accurate.",
+  "voice": "Read aloud Google's cadence/stall assessment, the Kimi K3 parameter/license paragraph, and the export-control chronology. Dates, facts, and judgments remain visibly separated; uncertainty is spoken directly; and the market comparison sounds like an explanation rather than a database dump. The final move from token meters and effort dials to attention is earned and non-sermonic.",
+  "must_fix": "none — the Kimi K3 activated-parameter correction is present, the two license thresholds remain distinct and accurate, and no downstream stale number remains.",
+  "source_sha256": "d9fe970d365de2740271e304ad03c9dbe49ccbf599835fdc199a19b1b3aa2443"
+}

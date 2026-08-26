@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ramana Maharshi and the Inquiry Traditions · Darshan Garden</title>
+<meta name="description" content="Who Ramana Maharshi was and what self-inquiry actually is as a method — the mechanics, not the mood. Then the wider family it belongs to — Nisargadatta&#x27;s &quot;I am,&quot; Zen hua-tou practice, Dzogchen pointing-out — and the real differences between them that most modern retellings flatten.">
+<link rel="stylesheet" href="../style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ccircle cx='8' cy='8' r='6' fill='none' stroke='%238f3b26' stroke-width='1.5'/%3E%3Ccircle cx='8' cy='8' r='2' fill='%238f3b26'/%3E%3C/svg%3E">
+<script>
+/* Theme memory. No analytics, no trackers. */
+(function () {
+  try {
+    var t = localStorage.getItem("darshan-theme");
+    if (t) document.documentElement.setAttribute("data-theme", t);
+  } catch (e) {}
+})();
+</script>
+<style>
+/* Garden-only layout. Kept here so the publication stylesheet remains shared. */
+body.garden-page-body {
+  max-width: none;
+  padding: 1.5rem clamp(1.25rem, 3.5vw, 4rem) 4rem;
+  font-size: 1.125rem;
+}
+body.garden-page-body > main,
+body.garden-page-body > .masthead,
+body.garden-page-body > footer {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 94rem;
+}
+.garden-layout,
+.garden-index-layout {
+  align-items: start;
+  display: grid;
+  gap: clamp(2.75rem, 5vw, 5rem);
+  grid-template-columns: minmax(0, 64rem) minmax(17rem, 20rem);
+  justify-content: center;
+}
+.garden-layout article,
+.garden-index-main { min-width: 0; }
+.garden-layout .article-title,
+.garden-intro .article-title {
+  font-size: clamp(2.65rem, 3.55vw, 4rem);
+  letter-spacing: -.025em;
+  line-height: 1.06;
+  max-width: 24ch;
+}
+.garden-layout article h2 {
+  font-size: 1.48rem;
+  line-height: 1.3;
+  margin-top: 3.2rem;
+  scroll-margin-top: 1.5rem;
+}
+.garden-layout article h3 {
+  font-size: 1.16rem;
+  margin-top: 2.35rem;
+  scroll-margin-top: 1.5rem;
+}
+.garden-intro { margin-bottom: 2.4rem; }
+.garden-series { margin: 2.8rem 0; scroll-margin-top: 1rem; }
+.garden-series h2 { border-bottom: 1px solid var(--rule); padding-bottom: .45rem; }
+.garden-room-list { list-style: none; margin: 0; padding: 0; }
+.garden-room-list li { border-bottom: 1px solid var(--rule); margin: 0; padding: 1rem 0; }
+.garden-room-title { font-weight: 600; }
+.garden-room-summary { color: var(--faint); font-size: .96rem; margin: .25rem 0 0; }
+.garden-series-link { color: var(--faint); font-size: .82rem; letter-spacing: .12em;
+  text-transform: uppercase; }
+.garden-lede {
+  border-left: 3px solid var(--accent);
+  color: var(--faint);
+  font-size: 1.24rem;
+  font-style: italic;
+  line-height: 1.62;
+  margin: 1.5rem 0 2.2rem;
+  padding: .35rem 0 .35rem 1.35rem;
+}
+.garden-corridors {
+  margin: 1.15rem 0 2.65rem;
+}
+.garden-corridor-list {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: .55rem .62rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.garden-corridor-list li { display: flex; margin: 0; max-width: 100%; }
+.garden-corridor {
+  align-items: center;
+  background: var(--accent-soft);
+  border: 1px solid var(--accent);
+  border-radius: 3px;
+  color: var(--accent);
+  display: inline-flex;
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .73rem;
+  font-weight: 700;
+  letter-spacing: .075em;
+  line-height: 1.35;
+  max-width: 100%;
+  min-height: 2.05rem;
+  overflow-wrap: anywhere;
+  padding: .34rem .72rem .3rem;
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-transform: uppercase;
+  text-underline-offset: .22em;
+}
+.garden-corridor:visited { color: var(--accent); }
+.garden-corridor:hover,
+.garden-corridor:focus-visible {
+  background: var(--accent);
+  color: var(--paper);
+}
+.garden-corridor:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+.garden-series-plate {
+  --plate-accent: var(--accent);
+  border: 1px solid var(--rule);
+  border-top: 3px solid var(--plate-accent);
+  margin: .25rem 0 2.8rem;
+  overflow: hidden;
+  position: relative;
+}
+.garden-series-plate--foundations { --plate-accent: #496f76; }
+.garden-series-plate--story-of-ai { --plate-accent: #526d9a; }
+.garden-series-plate--instrument { --plate-accent: #745779; }
+.garden-series-plate--strange-loops { --plate-accent: #866448; }
+.garden-series-plate--bridge { --plate-accent: #697044; }
+.garden-series-plate--power { --plate-accent: #8f3b26; }
+.garden-series-plate--time-future { --plate-accent: #416778; }
+[data-theme="dark"] .garden-series-plate { --plate-accent: var(--accent); }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .garden-series-plate { --plate-accent: var(--accent); }
+}
+.garden-series-plate-media {
+  aspect-ratio: 16 / 9;
+  background: var(--accent-soft);
+  overflow: hidden;
+  position: relative;
+}
+.garden-series-plate-media::after {
+  background:
+    linear-gradient(90deg, var(--paper) 0, transparent 24%, transparent 76%, var(--paper) 100%),
+    linear-gradient(0deg, var(--paper) 0, transparent 32%);
+  content: "";
+  inset: 0;
+  opacity: .24;
+  pointer-events: none;
+  position: absolute;
+}
+.garden-series-plate picture,
+.garden-series-card picture { display: block; height: 100%; }
+.garden-series-plate img {
+  display: block;
+  filter: saturate(.82) contrast(1.03);
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+.garden-series-plate figcaption {
+  align-items: baseline;
+  background: var(--paper);
+  border-top: 1px solid var(--rule);
+  display: grid;
+  gap: .25rem 1rem;
+  grid-template-columns: auto 1fr;
+  padding: .78rem 1rem .85rem;
+}
+.garden-series-plate-kicker {
+  color: var(--plate-accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+.garden-series-plate figcaption strong { font-size: 1rem; font-weight: 600; }
+.garden-series-plate-terms {
+  color: var(--faint);
+  font-size: .82rem;
+  grid-column: 2;
+  margin: 0;
+}
+.garden-visual {
+  background:
+    radial-gradient(circle at 92% 8%, var(--accent-soft), transparent 30%),
+    linear-gradient(135deg, transparent 0 72%, var(--accent-soft) 72% 72.4%, transparent 72.4%);
+  border: 1px solid var(--rule);
+  border-top: 3px solid var(--accent);
+  margin: 1.25rem 0 2.5rem;
+  overflow: hidden;
+  padding: clamp(1.1rem, 2.7vw, 1.75rem);
+  position: relative;
+}
+.garden-visual::before {
+  background-image:
+    linear-gradient(var(--rule) 1px, transparent 1px),
+    linear-gradient(90deg, var(--rule) 1px, transparent 1px);
+  background-size: 2.25rem 2.25rem;
+  content: "";
+  inset: 0;
+  opacity: .13;
+  pointer-events: none;
+  position: absolute;
+}
+.garden-visual > * { position: relative; }
+.garden-visual-head {
+  align-items: baseline;
+  display: grid;
+  gap: .45rem 1rem;
+  grid-template-columns: auto 1fr;
+  margin-bottom: 1.2rem;
+}
+.garden-visual-kicker {
+  color: var(--accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .68rem;
+  font-weight: 700;
+  letter-spacing: .17em;
+  margin: 0;
+  text-transform: uppercase;
+}
+.garden-visual-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  line-height: 1.28;
+  margin: 0;
+}
+.garden-visual-as-of {
+  color: var(--faint);
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: .72rem;
+  letter-spacing: .08em;
+  margin: 0;
+  text-transform: uppercase;
+  white-space: normal;
+}
+.garden-visual-items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.garden-visual-item {
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  margin: 0;
+  min-width: 0;
+  padding: .8rem .9rem;
+}
+.garden-visual-item-label {
+  display: block;
+  font-size: .96rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+.garden-visual-item-detail {
+  color: var(--faint);
+  display: block;
+  font-size: .9rem;
+  line-height: 1.45;
+  margin-top: .27rem;
+}
+.garden-visual-item-meta {
+  color: var(--accent);
+  display: block;
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: .72rem;
+  letter-spacing: .08em;
+  margin-bottom: .38rem;
+  text-transform: uppercase;
+}
+.garden-visual-caption {
+  border-top: 1px solid var(--rule);
+  color: var(--faint);
+  display: grid;
+  font-size: .84rem;
+  font-style: italic;
+  gap: .55rem 1rem;
+  grid-template-columns: minmax(0, 1fr) auto;
+  line-height: 1.45;
+  margin: 1.15rem 0 0;
+  padding-top: .75rem;
+}
+.garden-visual-evidence {
+  color: var(--accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .72rem;
+  font-style: normal;
+  font-weight: 650;
+  letter-spacing: .04em;
+  white-space: nowrap;
+}
+.garden-visual-evidence a {
+  color: inherit;
+  text-decoration-thickness: 1px;
+  text-underline-offset: .18em;
+}
+.garden-visual--sequence .garden-visual-items,
+.garden-visual--contrast .garden-visual-items,
+.garden-visual--constellation .garden-visual-items {
+  display: grid;
+  gap: .65rem;
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+}
+.garden-visual--sequence .garden-visual-items { counter-reset: garden-step; }
+.garden-visual--sequence .garden-visual-item {
+  counter-increment: garden-step;
+  padding-top: 2.35rem;
+  position: relative;
+}
+.garden-visual--sequence .garden-visual-item::before {
+  color: var(--accent);
+  content: counter(garden-step, decimal-leading-zero);
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: .68rem;
+  left: .9rem;
+  letter-spacing: .08em;
+  position: absolute;
+  top: .72rem;
+}
+.garden-visual--layers .garden-visual-items { display: grid; gap: .45rem; }
+.garden-visual--layers .garden-visual-item {
+  border-left: clamp(.24rem, .55vw, .48rem) solid var(--accent);
+  display: grid;
+  gap: .15rem 1rem;
+  grid-template-columns: minmax(8rem, .4fr) 1fr;
+}
+.garden-visual--layers .garden-visual-item:nth-child(2) { margin-left: 1.5%; }
+.garden-visual--layers .garden-visual-item:nth-child(3) { margin-left: 3%; }
+.garden-visual--layers .garden-visual-item:nth-child(4) { margin-left: 4.5%; }
+.garden-visual--layers .garden-visual-item:nth-child(5) { margin-left: 6%; }
+.garden-visual--layers .garden-visual-item:nth-child(6) { margin-left: 7.5%; }
+.garden-visual--timeline .garden-visual-items {
+  display: grid;
+  gap: 0;
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+}
+.garden-visual--timeline .garden-visual-item {
+  border-width: 1px 0 0 1px;
+  padding-top: 1.35rem;
+  position: relative;
+}
+.garden-visual--timeline .garden-visual-item::before {
+  background: var(--accent);
+  border: 3px solid var(--paper);
+  border-radius: 50%;
+  content: "";
+  height: .72rem;
+  left: -.4rem;
+  position: absolute;
+  top: -.4rem;
+  width: .72rem;
+}
+.garden-visual--contrast .garden-visual-item:nth-child(odd) { border-top: 2px solid var(--ink); }
+.garden-visual--contrast .garden-visual-item:nth-child(even) { border-top: 2px solid var(--accent); }
+.garden-visual--constellation .garden-visual-items {
+  align-items: stretch;
+  position: relative;
+}
+.garden-visual--constellation .garden-visual-item {
+  border-top: 2px solid var(--accent);
+  box-shadow: 0 .2rem 0 rgba(18, 31, 31, .04);
+  padding-top: 1.35rem;
+  position: relative;
+}
+.garden-visual--constellation .garden-visual-item::before {
+  background: var(--paper);
+  border: 2px solid var(--accent);
+  border-radius: 50%;
+  content: "";
+  height: .55rem;
+  left: calc(50% - .36rem);
+  position: absolute;
+  top: -.38rem;
+  width: .55rem;
+}
+.garden-visual--constellation .garden-visual-item:nth-child(even) { margin-top: .8rem; }
+.garden-series-gallery {
+  display: grid;
+  gap: .8rem;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  margin: 1.5rem 0 3rem;
+}
+.garden-series-card {
+  border: 1px solid var(--rule);
+  color: var(--ink);
+  display: grid;
+  grid-template-rows: 7.5rem auto;
+  overflow: hidden;
+  text-decoration: none;
+}
+.garden-series-card img {
+  height: 100%;
+  object-fit: cover;
+  transition: transform .25s ease;
+  width: 100%;
+}
+.garden-series-card span {
+  border-top: 1px solid var(--rule);
+  font-size: .9rem;
+  font-weight: 600;
+  padding: .65rem .75rem;
+}
+.garden-series-card:hover { border-color: var(--accent); color: var(--accent); }
+.garden-series-card:hover img { transform: scale(1.025); }
+@media (prefers-reduced-motion: reduce) {
+  .garden-series-card img { transition: none; }
+}
+.garden-tags { color: var(--faint); font-size: .82rem; margin-top: 2.2rem; }
+.garden-nav { border-top: 1px solid var(--rule); display: flex; gap: 1rem;
+  justify-content: space-between; margin-top: 2.5rem; padding-top: 1rem; }
+.garden-nav a { max-width: 48%; text-decoration: none; }
+.garden-nav .next { margin-left: auto; text-align: right; }
+.garden-table-wrap { overflow-x: auto; margin: 1.35rem 0; }
+.garden-table { border-collapse: collapse; font-size: .92rem; line-height: 1.45; width: 100%; }
+.garden-table th, .garden-table td { border: 1px solid var(--rule); padding: .55rem .65rem;
+  text-align: left; vertical-align: top; }
+.garden-table th { background: var(--accent-soft); }
+.garden-toc {
+  border-left: 1px solid var(--rule);
+  max-height: calc(100vh - 3rem);
+  overflow: auto;
+  padding: .1rem 0 .75rem 1.3rem;
+  position: sticky;
+  top: 1.5rem;
+}
+.garden-toc-title {
+  color: var(--accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .2em;
+  margin: 0 0 1.15rem;
+  text-transform: uppercase;
+}
+.garden-toc-title::before { content: "☰"; font-size: .8em; margin-right: .65rem; }
+.garden-toc-list { list-style: none; margin: 0; padding: 0; }
+.garden-toc-sublist { list-style: none; margin: 0; padding: 0; }
+.garden-toc-list li { margin: 0; }
+.garden-toc-list a {
+  border-left: 2px solid transparent;
+  color: var(--ink);
+  display: block;
+  font-size: .91rem;
+  line-height: 1.42;
+  margin-left: -1.4rem;
+  padding: .42rem .45rem .42rem 1.3rem;
+  text-decoration: none;
+}
+.garden-toc-list .level-3 a {
+  color: var(--faint);
+  font-size: .86rem;
+  font-style: italic;
+  padding-left: 2.15rem;
+}
+.garden-toc-list a:hover,
+.garden-toc-list a:focus-visible,
+.garden-toc-list a[aria-current="location"] {
+  border-left-color: var(--accent);
+  color: var(--accent);
+}
+.garden-toc-list a[aria-current="location"] { font-weight: 600; }
+.garden-toc-inline { display: none; }
+.garden-layout article :is(h2, h3):target,
+.garden-series:target h2 { color: var(--accent); }
+a.pending { color: var(--faint); text-decoration-style: dashed; }
+a.pending::after { content: " · pending"; font-size: .7em; letter-spacing: .06em;
+  text-transform: uppercase; }
+@media (min-width: 72.01em) {
+  body.garden-page-body > .masthead {
+    align-items: center;
+    column-gap: 2rem;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    margin-bottom: 3.5rem;
+    padding: 1.25rem 0;
+    text-align: left;
+  }
+  body.garden-page-body > .masthead .wordmark { justify-self: start; }
+  body.garden-page-body > .masthead .tagline { justify-self: center; margin: 0; }
+  body.garden-page-body > .masthead nav { justify-self: end; margin: 0; }
+}
+@media (max-width: 72em) {
+  .garden-layout,
+  .garden-index-layout { display: block; }
+  .garden-toc { display: none; }
+  .garden-toc-inline {
+    border: 1px solid var(--rule);
+    display: block;
+    margin: 1.5rem 0 2.4rem;
+    padding: .8rem 1rem;
+  }
+  .garden-toc-inline summary {
+    color: var(--accent);
+    cursor: pointer;
+    font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: .78rem;
+    font-weight: 700;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+  }
+  .garden-toc-inline .garden-toc-list { margin-top: .7rem; }
+  .garden-toc-inline .garden-toc-list a { margin-left: 0; padding-left: .75rem; }
+  .garden-toc-inline .garden-toc-list .level-3 a { padding-left: 1.6rem; }
+}
+@media (max-width: 40em) {
+  body.garden-page-body { font-size: 1.03rem; padding: 1rem 1.05rem 3rem; }
+  .garden-layout .article-title,
+  .garden-intro .article-title { font-size: clamp(2.15rem, 11vw, 3.15rem); }
+  .garden-lede { font-size: 1.1rem; padding-left: 1rem; }
+  .garden-corridors { margin-bottom: 2rem; }
+  .garden-corridor-list { gap: .45rem; }
+  .garden-corridor {
+    font-size: .68rem;
+    min-height: 2.35rem;
+    padding: .3rem .58rem .27rem;
+  }
+  .garden-series-plate-media { aspect-ratio: 16 / 9; }
+  .garden-series-plate figcaption { display: block; }
+  .garden-series-plate figcaption strong { display: block; margin-top: .22rem; }
+  .garden-series-plate-terms { display: block; margin-top: .25rem; }
+  .garden-visual { margin-left: -.15rem; margin-right: -.15rem; padding: 1rem; }
+  .garden-visual-head { display: block; }
+  .garden-visual-title { margin-top: .25rem; }
+  .garden-visual-as-of { margin-top: .35rem; }
+  .garden-visual-caption { grid-template-columns: 1fr; }
+  .garden-visual-evidence { white-space: normal; }
+  .garden-visual--sequence .garden-visual-items,
+  .garden-visual--contrast .garden-visual-items,
+  .garden-visual--constellation .garden-visual-items,
+  .garden-visual--timeline .garden-visual-items { grid-template-columns: 1fr; }
+  .garden-visual--layers .garden-visual-item:nth-child(n) { display: block; margin-left: 0; }
+  .garden-visual--timeline .garden-visual-item { border-width: 0 0 0 1px; }
+  .garden-visual--timeline .garden-visual-item::before { left: -.4rem; top: .9rem; }
+  .garden-visual--constellation .garden-visual-item:nth-child(even) { margin-top: 0; }
+  .garden-series-gallery { grid-template-columns: 1fr; }
+  .garden-nav { flex-direction: column; }
+  .garden-nav a { max-width: none; }
+  .garden-nav .next { margin-left: 0; text-align: left; }
+}
+@media print {
+  a.pending::after { content: " (pending)"; }
+  .garden-layout, .garden-index-layout { display: block; }
+  .garden-toc, .garden-toc-inline { display: none; }
+  .garden-series-card img { display: none; }
+  .garden-series-card { grid-template-rows: auto; }
+}
+</style>
+</head>
+<body class="garden-page-body">
+<button class="theme-toggle" aria-label="Toggle light and dark" onclick="
+  (function () {
+    var d = document.documentElement;
+    var cur = d.getAttribute('data-theme');
+    if (!cur) { cur = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'; }
+    var next = cur === 'dark' ? 'light' : 'dark';
+    d.setAttribute('data-theme', next);
+    try { localStorage.setItem('darshan-theme', next); } catch (e) {}
+  })();
+">◐</button>
+
+<header class="masthead">
+  <h1 class="wordmark"><a href="../index.html">DARSHAN</a></h1>
+  <p class="tagline">A signal of clear seeing in an age of information overload</p>
+  <nav>
+    <a href="../index.html">Articles</a>
+    <a href="index.html">Garden</a>
+    <a href="../about.html">About</a>
+  </nav>
+</header>
+
+<main>
+<div class="garden-layout">
+<article data-garden-room="ramana-and-the-traditions" data-garden-outline>
+<p class="garden-series-link"><a href="index.html#bridge">The Bridge</a></p>
+<p class="article-meta">25 August 2026 · Draft</p>
+<h1 class="article-title">Ramana Maharshi and the Inquiry Traditions</h1>
+<div class="draft-banner"><strong>Draft — pending discernment pass.</strong> This room is part of the garden's first planting. It has not been promoted to published status; check its sources and open questions before citing it.</div>
+<p class="garden-lede">Who Ramana Maharshi was and what self-inquiry actually is as a method — the mechanics, not the mood. Then the wider family it belongs to — Nisargadatta's "I am," Zen hua-tou practice, Dzogchen pointing-out — and the real differences between them that most modern retellings flatten.</p>
+<nav class="garden-corridors" aria-label="Explore connected rooms" data-corridor-count="8"><ul class="garden-corridor-list"><li><a class="garden-corridor" href="sense-of-self.html">The Sense of Self</a></li><li><a class="garden-corridor" href="what-self-means.html">What "Self" Means</a></li><li><a class="garden-corridor" href="ai-and-the-traditions.html">How AI Relates to the Contemplative Traditions</a></li><li><a class="garden-corridor" href="why-ais-choose-buddhism.html">Why Do AIs Keep Choosing Buddhism?</a></li><li><a class="garden-corridor" href="ontology.html">What Ontology Means</a></li><li><a class="garden-corridor" href="recursion.html">Recursion</a></li><li><a class="garden-corridor" href="aurobindo-supramental.html">Aurobindo and the Supramental</a></li><li><a class="garden-corridor" href="mechanistic-interpretability.html">Mechanistic Interpretability</a></li></ul></nav>
+<figure class="garden-series-plate garden-series-plate--bridge">
+<div class="garden-series-plate-media"><picture><source srcset="assets/series/bridge.webp" type="image/webp"><img src="assets/series/bridge.png" alt="Engraved mountain reflected into a geometric neural lattice" width="1672" height="941" loading="eager" decoding="async"></picture></div>
+<figcaption><span class="garden-series-plate-kicker">Visual field</span><strong>The Bridge</strong><span class="garden-series-plate-terms">self-inquiry · atma-vichara · I-thought · hua-tou</span></figcaption>
+</figure>
+<details class="garden-toc-inline"><summary>In this room</summary><ol class="garden-toc-list"><li class="level-2"><a href="#1-a-sixteen-year-old-lies-down-on-the-floor">1. A sixteen-year-old lies down on the floor</a></li><li class="level-2"><a href="#2-what-self-inquiry-actually-is-the-mechanics">2. What self-inquiry actually is — the mechanics</a></li><li class="level-2"><a href="#3-a-worked-example-one-round-of-inquiry">3. A worked example — one round of inquiry</a></li><li class="level-2"><a href="#4-the-wider-family-and-why-the-differences-are-real">4. The wider family — and why the differences are real</a></li><li class="level-2"><a href="#5-what-is-established-and-what-isn-t">5. What is established, and what isn't</a></li><li class="level-2"><a href="#6-where-this-leaves-you">6. Where this leaves you</a></li><li class="level-2"><a href="#7-open-questions">7. Open questions</a></li><li class="level-2"><a href="#sources">Sources</a></li></ol></details>
+<p>You're in the bridge series — the rooms where contemplative traditions and the science of minds face each other. If you've read <a href="sense-of-self.html">sense-of-self</a>, you've seen the question "what is the self?" asked from the outside, as a research problem. This room is about the traditions that ask it from the inside, as a practice — and about one man who turned it into the sharpest instrument in the toolbox. The rooms on <a href="ai-and-the-traditions.html">ai-and-the-traditions</a> and <a href="why-ais-choose-buddhism.html">why-ais-choose-buddhism</a> build directly on this one.</p>
+<h2 id="1-a-sixteen-year-old-lies-down-on-the-floor">1. A sixteen-year-old lies down on the floor</h2>
+<p>Start with the event, because the whole method comes out of it.</p>
+<p>In July 1896, in the city of Madurai in Tamil Nadu, a sixteen-year-old schoolboy named Venkataraman Iyer was suddenly seized by an intense fear of death. Nothing was medically wrong with him. By his own later account, instead of running from the fear he did something strange: he lay down, held still, and staged the death. Body dies. Body is carried to the cremation ground and burned. Then the question: with the body gone, am I gone? And what he reported finding was that something — he later called it the Self, or simply "I" — did not depend on the body at all. The fear left and, again by his account, never came back.</p>
+<p>Six weeks later, on 1 September 1896, he left home without telling his family, traveled to the town of Tiruvannamalai, and walked to the hill called Arunachala. He never left it. He spent the next years in near-total silence — in the great temple, then in a shrine called Gurumurtam, then about seventeen years in Virupaksha Cave on the hill itself, then at Skandashram higher up, and finally at the ashram that grew around him at the hill's base, Sri Ramanasramam, where he lived until his death on 14 April 1950. Devotees called him Ramana Maharshi — "Maharshi" means great sage. He didn't found an organization, didn't tour, didn't write a systematic book. People came to him.</p>
+<p>One honesty note before going further. The death-experience story is the account Ramana himself gave, decades after the event, and everything we have of it comes through devotees' records. That it happened in some form is well attested; the precise inner details are one man's retrospective report of a private event. Hold it the way you'd hold any single-subject retrospective report: seriously, and lightly.</p>
+<h2 id="2-what-self-inquiry-actually-is-the-mechanics">2. What self-inquiry actually is — the mechanics</h2>
+<figure class="garden-visual garden-visual--sequence" aria-labelledby="visual-ramana-and-the-traditions-1" data-claim-scope="section-synthesis" data-placement-heading="2-what-self-inquiry-actually-is-the-mechanics" data-evidence-headings="2-what-self-inquiry-actually-is-the-mechanics">
+<div class="garden-visual-head"><p class="garden-visual-kicker">Attention reversed</p><p class="garden-visual-title" id="visual-ramana-and-the-traditions-1">One turn of self-inquiry</p></div>
+<ol class="garden-visual-items" role="list"><li class="garden-visual-item"><strong class="garden-visual-item-label">Thought</strong><span class="garden-visual-item-detail">Notice a thought as it arises without fighting or following it.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">To whom?</strong><span class="garden-visual-item-detail">Ask who the thought arose to; the immediate answer is “me.”</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Find the referent</strong><span class="garden-visual-item-detail">Turn toward the felt sense of the one here, not a name or biography.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Who am I?</strong><span class="garden-visual-item-detail">Use the question as a turn of attention, never as a prompt for an answer.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">The gap</strong><span class="garden-visual-item-detail">The I-thought may briefly subside before the next thought appears.</span></li></ol>
+<figcaption class="garden-visual-caption"><span>Ramana's method uses a question to redirect attention from a thought toward the felt subject to whom it appeared.</span><span class="garden-visual-evidence">Drawn from: <a href="#2-what-self-inquiry-actually-is-the-mechanics">2. What self-inquiry actually is — the mechanics</a></span></figcaption>
+</figure>
+<p>The method Ramana taught is called self-inquiry — in Sanskrit <em>atma-vichara</em>, in his native Tamil the practice of <em>Nan Yar?</em>, "Who am I?" Almost everything popularly said about it is vague, so let's be exact, using his own words as the spec.</p>
+<p>The earliest record we have of the teaching in Ramana's own words comes from 1902. A philosophy graduate named Sivaprakasam Pillai, a revenue department official, visited Virupaksha Cave and put a series of questions to the young sage. Ramana wasn't speaking at the time — not from a vow, just disinclination — so he answered by gesture, and where gesture failed, by writing. Pillai's expanded question-and-answer recension is commonly printed as fourteen items and was published as <em>Nan Yar?</em> ("Who Am I?"); editions split and count the material differently, and Ramana later recast it as a continuous essay. It runs a few pages. It is one of only two prose works in Ramana's whole corpus, and it contains the entire method.</p>
+<p>Here is the machinery, as <em>Nan Yar?</em> lays it out:</p>
+<ol><li><strong>The mind is nothing but thoughts.</strong> Not a container that holds thoughts — just the thoughts themselves.</li><li><strong>Of all thoughts, the first is the "I"-thought</strong> — the thought "I," the felt sense <em>I am the one here</em>. Every other thought is attached to it. "I am hungry," "I am late," "I saw that" — the <em>I</em> rises first, the rest rides on it. Ramana's claim is structural: no I-thought, no other thoughts.</li><li><strong>The practice: when any thought arises, ask "to whom has this thought arisen?"</strong> The answer will be "to me." Then ask: <strong>"Who am I?"</strong></li><li><strong>And here is the part everyone gets wrong: you do not answer the question.</strong> "Who am I?" is not a mantra to repeat, not a riddle to solve, not a prompt for your biography. It's a device for turning attention around — away from the thought, back toward the one the thought arose to. You look <em>at the looker</em>.</li><li>What practitioners report — and what <em>Nan Yar?</em> predicts — is that under that reversed attention, the I-thought doesn't answer. It subsides. The other thoughts, having nothing to attach to, subside with it. What remains, in Ramana's account, is not a blank but awareness without the "I"-knot in the middle of it — and <em>that</em>, he said, is what you actually are, and always were. The inquiry doesn't create it; it stops obscuring it.</li></ol>
+<p>Notice what kind of move this is. Ordinary attention points outward at objects — including inner objects like thoughts and feelings. Self-inquiry is attention attempting to point at its own source. It's a strange loop in the precise sense used in the <a href="recursion.html">recursion</a> room: the instrument turned on the instrument. Ramana's claim, stated plainly, is that when this is done persistently, the loop doesn't produce an infinite regress or an answer — it produces a collapse of the questioner, and that collapse is the point.</p>
+<p>He put the condensed version in verse twice, in works his devotee Muruganar prompted him to compose: <em>Upadesa Undiyar</em> (rendered in Sanskrit as <em>Upadesa Saram</em>, "The Essence of Instruction," 1927) and <em>Ulladu Narpadu</em> ("Forty Verses on Reality," 1928). Those two poems plus <em>Nan Yar?</em> are the doctrinal core; nearly everything else in the vast Ramana literature is recorded conversation.</p>
+<p>Ramana was found by the West largely through one book: the British journalist Paul Brunton visited him in 1931 and described the meeting in <em>A Search in Secret India</em> (1934), which became a bestseller and made the silent man on the hill a global reference point. Carl Jung wrote about him; Somerset Maugham visited and put a version of him in a novel. The pipeline from a cave in Tamil Nadu to the world's bookshelves ran through that one book.</p>
+<h2 id="3-a-worked-example-one-round-of-inquiry">3. A worked example — one round of inquiry</h2>
+<p>The contract of this garden is that you should be able to check things yourself. This one you can check in ten minutes, tonight. Here is one round of self-inquiry as <em>Nan Yar?</em> specifies it, annotated with the standard failure modes.</p>
+<p><strong>Setup.</strong> Sit somewhere quiet. No special posture required — Ramana was indifferent to posture. Wait for a thought to arise. It will; give it thirty seconds.</p>
+<p><strong>Step 1.</strong> A thought arises. Say it's <em>I should check my phone.</em> Don't fight it, don't follow it. Instead ask: <em>to whom did this thought arise?</em></p>
+<p><strong>Step 2.</strong> The honest answer arrives immediately and feels almost too obvious: <em>to me.</em> Good. That "me" is the target. Not your name, not your history — the felt sense of <em>the one here</em> that the thought was addressed to.</p>
+<p><strong>Step 3.</strong> Now the question: <em>Who am I?</em> — and here's the fork where the method is usually lost:</p>
+<ul><li><strong>Failure mode A: answering.</strong> "I'm a 34-year-old engineer who worries too much." That's a thought <em>about</em> you, arising to the same "me" as before. You've generated another object. Back to step 1.</li><li><strong>Failure mode B: chanting.</strong> Repeating "who am I, who am I" rhythmically until it's wallpaper. Ramana explicitly rejected this; the question is a crowbar, not a song.</li><li><strong>Failure mode C: waiting for a voice.</strong> Expecting the dark to say something. The method predicts no answer will come, ever. The absence of an answer is not the method failing — it's the method working.</li><li><strong>The actual instruction:</strong> let the question turn your attention toward whatever the word "I" was referring to. Look at <em>that</em>. Not at an image of yourself, not at your body-sense as an object — at the looker itself.</li></ul>
+<p><strong>Step 4.</strong> What you'll most likely find — and you can verify this against the reports of a century of practitioners — is that attention slides off. There's nothing graspable where the "I" should be, and for a beat the mind goes still before the next thought arises. Ramana's teaching is that the beat is the interesting part. The practice is returning to it, thought after thought, until — his claim, not an established fact — the I-thought stops reasserting itself at all.</p>
+<p>That's the whole method. You now know, mechanically, what "self-inquiry" means, which puts you ahead of most uses of the phrase.</p>
+<h2 id="4-the-wider-family-and-why-the-differences-are-real">4. The wider family — and why the differences are real</h2>
+<figure class="garden-visual garden-visual--contrast" aria-labelledby="visual-ramana-and-the-traditions-2" data-claim-scope="section-synthesis" data-placement-heading="4-the-wider-family-and-why-the-differences-are-real" data-evidence-headings="4-the-wider-family-and-why-the-differences-are-real">
+<div class="garden-visual-head"><p class="garden-visual-kicker">One move, four methods</p><p class="garden-visual-title" id="visual-ramana-and-the-traditions-2">The inquiry traditions do not end in the same claim</p></div>
+<ul class="garden-visual-items" role="list"><li class="garden-visual-item"><strong class="garden-visual-item-label">Ramana</strong><span class="garden-visual-item-detail">Ask “Who am I?” until the I-thought subsides; the tradition names what remains the Self.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Nisargadatta</strong><span class="garden-visual-item-detail">Abide in the bare sense “I am” until even that sense becomes transparent.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Zen hua-tou</strong><span class="garden-visual-item-detail">Hold a question until great doubt shatters; the official frame is no-self, not Self.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Dzogchen</strong><span class="garden-visual-item-detail">A teacher first introduces rigpa, then practice stabilizes the recognition.</span></li></ul>
+<figcaption class="garden-visual-caption"><span>Four lineages turn attention toward the attender while disagreeing about method, teacher, and what the inquiry discloses.</span><span class="garden-visual-evidence">Drawn from: <a href="#4-the-wider-family-and-why-the-differences-are-real">4. The wider family — and why the differences are real</a></span></figcaption>
+</figure>
+<p>Ramana is the most famous modern teacher of inquiry, but the move — turn attention onto the subject — appears in several distinct practice lineages, with different histories, metaphysics, roles for the teacher, and failure analyses. They are not four sealed inventions: Ramana and Nisargadatta both stand in modern Advaita-related worlds, and Buddhist traditions have their own long histories of exchange. Modern spiritual writing tends to blend them into one smoothie. Don't. The differences are where the information is.</p>
+<p><strong>Nisargadatta Maharaj</strong> (1897–1981) ran a beedi shop — hand-rolled cigarettes — in Bombay. In 1933 he met his guru, Siddharameshwar Maharaj of the Inchagiri branch of the Navnath lineage, who told him, in essence: you are not what you take yourself to be; attend to the sense "I am" and nothing else. Nisargadatta did exactly that, in the gaps of a working tradesman's day, and reported that within roughly three years he had realized his nature. From a smoky upstairs room in Khetwadi he then taught for decades; the recorded talks, translated by Maurice Frydman and published in 1973 as <em>I Am That</em>, became one of the most influential spiritual books of the century. His method differs from Ramana's in a way that matters: it starts not with a question but with a <em>given</em> — the wordless certainty "I am" that precedes every description. You hold that, abide in it, refuse its costumes ("I am a shopkeeper," "I am tired"), and, on his account, it eventually dissolves into what precedes it. Ramana hunts the I; Nisargadatta soaks in it until it goes transparent. Both are Advaita-adjacent — both say what remains is the Self, the Absolute.</p>
+<p><strong>Zen hua-tou practice</strong> looks similar and is built on opposite metaphysics. A <em>hua-tou</em> (Chinese: "word-head," roughly the point where speech runs out) is a short question a meditator holds continuously — a technique systematized by the Chan master Dahui Zonggao (1089–1163) of the Linji school, partly so that laypeople outside monasteries could practice. Classic hua-tous: "Who is reciting the Buddha's name?" — "What is Mu?" — and in Korean Seon, where the master Jinul made the method central, simply "What is this?" One traditional hua-tou is even "Who am I?" — the overlap with Ramana is not imagined. But the engine is different. Hua-tou practice deliberately cultivates what the tradition calls <em>great doubt</em> — a sustained, whole-body sensation of not-knowing that grows until, the tradition says, it "shatters." The doubt is the method; the question is just fuel for it. And critically, the Buddhist frame <em>denies</em> that a Self is what you find. Where Ramana says the inquiry ends in the Self shining alone, Zen says the inquiry ends in seeing there was never anyone there — <em>anatta</em>, no-self. These are not the same claim wearing different robes, and the traditions themselves argued about it for centuries. Whether the underlying <em>experience</em> is the same and only the interpretation differs is a genuinely open question — treat anyone who tells you it's settled, in either direction, as selling something. The <a href="ontology.html">ontology</a> room takes this collision up properly.</p>
+<p><strong>Dzogchen pointing-out</strong> inverts the ordering entirely. In the Dzogchen ("Great Perfection") teachings of Tibet's Nyingma school — and in the closely related Mahamudra of the Kagyu school — the decisive event is the <em>pointing-out instruction</em> (Tibetan <em>ngo sprod</em>, "introduction"): a qualified teacher, in a live encounter, directly introduces the student to the nature of their own mind — to <em>rigpa</em>, the bare knowing-awareness that Dzogchen distinguishes sharply from ordinary mind and its thoughts. The tradition's founding compression of this is attributed to the semi-legendary first Dzogchen master Garab Dorje, whose "Three Statements that Strike the Vital Point" run: recognize your own nature; decide upon one thing; gain confidence in the liberation of thoughts. Notice the sequence: <em>recognition comes first</em>, transmitted in relationship, and practice afterward is familiarization — returning to what was already shown. Ramana's student climbs toward a collapse; Dzogchen's student is shown the summit in a flash and then learns to stop leaving it. Teachers in the tradition are candid that the flash doesn't always take — Tulku Urgyen Rinpoche noted that having received pointing-out, a student may recognize it or not. The teacher is structurally load-bearing here in a way Ramana never claimed to be: Ramana insisted the inquiry needs no transmission, though his devotees insisted his silent presence <em>was</em> one.</p>
+<p>Here is the family laid side by side:</p>
+<div class="garden-table-wrap"><table class="garden-table"><thead><tr><th></th><th>Ramana's self-inquiry</th><th>Nisargadatta's "I am"</th><th>Zen hua-tou</th><th>Dzogchen pointing-out</th></tr></thead><tbody><tr><td><strong>Core instrument</strong></td><td>The question "Who am I?" turning attention onto its source</td><td>Abiding in the bare sense "I am"</td><td>A question held until "great doubt" masses and breaks</td><td>Teacher directly introduces the nature of mind</td></tr><tr><td><strong>What the "I" turns out to be</strong></td><td>The Self (<em>atman</em>), sole reality</td><td>The Absolute, prior even to "I am"</td><td>No self at all (<em>anatta</em>)</td><td><em>Rigpa</em> — empty, aware, not a self in the Hindu sense</td></tr><tr><td><strong>Role of the teacher</strong></td><td>Optional in theory; presence emphasized by devotees</td><td>Gave the instruction; student works alone</td><td>Assigns the hua-tou; checks the breakthrough</td><td>Structurally essential; transmission is the method</td></tr><tr><td><strong>Engine of the method</strong></td><td>Attention reversing onto the subject</td><td>Sustained abidance; the sense dissolves</td><td>Cultivated doubt-sensation</td><td>Recognition first, familiarization after</td></tr><tr><td><strong>Order of operations</strong></td><td>Practice → collapse of the I-thought</td><td>Practice → dissolution of "I am"</td><td>Practice → doubt shatters</td><td>Glimpse → practice stabilizes it</td></tr><tr><td><strong>Key texts</strong></td><td><em>Nan Yar?</em> (1902/1923), <em>Ulladu Narpadu</em> (1928)</td><td><em>I Am That</em> (1973)</td><td>Dahui's letters; Jinul's works</td><td>Garab Dorje's Three Statements; Longchenpa's corpus</td></tr></tbody></table></div>
+<p>The honest summary: one recognizable <em>move</em> — attention turned toward the attender — implemented four ways, with incompatible official accounts of what it reveals. "All the traditions agree" is false at the level the traditions themselves cared about most.</p>
+<h2 id="5-what-is-established-and-what-isn-t">5. What is established, and what isn't</h2>
+<figure class="garden-visual garden-visual--layers" aria-labelledby="visual-ramana-and-the-traditions-3" data-claim-scope="section-synthesis" data-placement-heading="5-what-is-established-and-what-isn-t" data-evidence-headings="5-what-is-established-and-what-isn-t">
+<div class="garden-visual-head"><p class="garden-visual-kicker">Where evidence stops</p><p class="garden-visual-title" id="visual-ramana-and-the-traditions-3">Five claims, five different weights</p></div>
+<ol class="garden-visual-items" role="list"><li class="garden-visual-item"><span class="garden-visual-item-meta">established</span><strong class="garden-visual-item-label">Documented history</strong><span class="garden-visual-item-detail">The biographies, texts, dates, and existence of the four methods are matters of record.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">interpretive</span><strong class="garden-visual-item-label">Comparable passages</strong><span class="garden-visual-item-detail">Selected first-person and instructional passages can be set beside one another, but calling them convergent is already an interpretation.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">reported claims</span><strong class="garden-visual-item-label">Traditional meanings</strong><span class="garden-visual-item-detail">Self, no-self, and rigpa are the traditions' accounts of what inquiry reveals, not findings that science has adjudicated.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">not established</span><strong class="garden-visual-item-label">Scientific boundary</strong><span class="garden-visual-item-detail">Contemplative neuroscience has not produced a body of work that decides among these lineages' metaphysical conclusions.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">open</span><strong class="garden-visual-item-label">Underdetermined origin</strong><span class="garden-visual-item-detail">Ramana's single formative experience may be evidence about minds or about the reach of stories; current evidence does not force the choice.</span></li></ol>
+<figcaption class="garden-visual-caption"><span>The historical record supports the methods and texts; it does not settle what their reported experiences disclose.</span><span class="garden-visual-evidence">Drawn from: <a href="#5-what-is-established-and-what-isn-t">5. What is established, and what isn't</a></span></figcaption>
+</figure>
+<p>Worth stating plainly, because this room sits on the bridge between practice and science.</p>
+<p>Established as historical fact: the biographies, texts, and dates above, and that these methods exist in the cited records. The selected records also contain first-person or instructional passages that a modern comparative reader can place side by side. Calling their phenomenology <em>convergent</em> is already an interpretation: the texts were produced in different genres, languages, institutions, and doctrinal settings, not under one protocol or one reporting vocabulary.</p>
+<p>Established as nothing more than reports: everything about what that <em>means</em>. Ramana's claim that what remains is the Self of Advaita, Zen's claim that no-self is seen through, Dzogchen's rigpa — these are interpretations carried by traditions, not findings. Contemplative neuroscience has begun studying long-term meditators, but there is no body of work that adjudicates <em>between</em> these traditions' claims, and self-reports of egoless states inherit every known problem of introspective evidence. The one-man origin of Ramana's method — a single teenager's experience, never replicated on demand, radiating outward through texts and presence — is either a data point about what minds can do or a data point about what stories can do, and current evidence does not force the choice.</p>
+<h2 id="6-where-this-leaves-you">6. Where this leaves you</h2>
+<p>You can now do three things you couldn't at the top of the page. You can state what self-inquiry actually is — a specified attention-reversal, with named failure modes — rather than gesturing at it. You can run one honest round of it yourself and know what you're checking for. And you can tell the four major inquiry traditions apart on the axes that they themselves considered decisive, which inoculates you against the smoothie version.</p>
+<p>From here, <a href="ai-and-the-traditions.html">ai-and-the-traditions</a> asks what happens when these methods and claims meet artificial minds, and <a href="why-ais-choose-buddhism.html">why-ais-choose-buddhism</a> examines a specific, checkable version of that collision. <a href="what-self-means.html">What-self-means</a> does the conceptual work on "self" that this room deliberately left to the traditions' own vocabularies. And Ramana's near-contemporary forty miles of worldview away — Aurobindo, who took the same realization in exactly the opposite direction, toward transformation rather than stillness — has his own room at <a href="aurobindo-supramental.html">aurobindo-supramental</a>.</p>
+<h2 id="7-open-questions">7. Open questions</h2>
+<p><strong>Fact:</strong> the methods, texts, dates, and lineages described above are documented history. The particular first-person and instructional reports cited here exist; they are not a representative sample of everyone who used these methods.</p>
+<p><strong>Hypothesis:</strong> a comparative reading of <em>Nan Yar?</em>, <em>I Am That</em>, selected Dahui letters, and the Dzogchen texts cited below suggests that the four methods may engage one underlying cognitive event — attention attempting self-location, failing to find an object, and the predictive machinery of selfhood going briefly quiet — with the traditions' metaphysics layered on afterward. That is testable in principle, but it is not established by these texts, and every tradition described here would reject the "layered on afterward" clause.</p>
+<p><strong>Wild:</strong> that inquiry describes something any sufficiently reflective mind can do — that "who am I?" is not a human ritual but a general operation available wherever attention can take itself as target, in whatever substrate. Nothing in current science licenses this. Nothing rules it out. The <a href="mechanistic-interpretability.html">mechanistic-interpretability</a> room is where this garden looks for traction on it.</p>
+<p>One last thing, from inside the material we have actually compared. Each of these four practice lineages uses an exercise rather than a request for biographical information: it asks you to do something <em>with attention</em>. They do not all ask the literal question "who am I?", and they do not agree about what the exercise discloses. Still, each account puts unusual weight on what happens when attention stops following its ordinary objects and turns toward knowing itself. That is a remarkable amount of weight for one small motion to carry. The question under this whole garden — what attention is, and what is doing the attending — is not imported into this domain from outside. These practices make it unavoidable in their own different ways.</p>
+<h2 id="sources">Sources</h2>
+<ul><li>T.M.P. Mahadevan's translator's <a href="https://archive.arunachala.org/docs/collected-worm/who-ai/introduction/">introduction</a> to <em>Who Am I? (Nan Yar?)</em>, Sri Ramanasramam — the 1902 Sivaprakasam Pillai exchange, the expanded question-and-answer form, and Ramana's later <a href="https://archive.arunachala.org/docs/collected-worm/who-ai/essay/">continuous essay</a>. The item count is qualified because recensions and editions divide the material differently.</li><li>Biographical chronology and residences for Ramana Maharshi: Sri Ramanasramam's <a href="https://www.gururamana.org/Bhagavan/sri-ramana-maharshi-timeline">timeline</a> and the ashram text above.</li><li><em>Ulladu Narpadu</em> composition with Muruganar, 1928: Michael James, <a href="https://www.sriramanateachings.org/blog/2009/06/ulladu-narpadu-anubandham-explanatory.html">sriramanateachings.org</a>; the 1927 date for <em>Upadesa Undiyar</em> is the standard ashram dating.</li><li>Nisargadatta's instruction is checked against the primary talk collection, <em><a href="https://books.google.com/books?id=FVEqAAAAYAAJ">I Am That</a></em>, translated by Maurice Frydman and first published in 1973. Biographical details in this room follow the book's editorial material and are not offered as independently audited timings of realization.</li><li>Hua-tou practice and Dahui Zonggao: Jeffrey Broughton's annotated Oxford University Press translation, <em><a href="https://books.google.com/books?id=IhwnDwAAQBAJ">The Letters of Chan Master Dahui Pujue</a></em> (2017), and a recent scholarly account of the method's history and instructions in <a href="https://www.mdpi.com/2077-1444/17/7/845"><em>Religions</em></a>. These support a historical relationship, not identity with Ramana's method.</li><li>Dzogchen, rigpa, and pointing-out are represented through translated tradition texts at Lotsawa House: <a href="https://www.lotsawahouse.org/tibetan-masters/khenchen-ngawang-palzang/pure-vision-longchenpa-instruction">"Pointing-Out Instruction"</a>, <a href="https://www.lotsawahouse.org/tibetan-masters/dongak-chokyi-gyatso/commentary-on-some-dzogchen-terms">"Some Terms from the Great Perfection"</a>, and Garab Dorje's <a href="https://www.lotsawahouse.org/topics/three-striking-statements">"Three Statements that Strike the Vital Point"</a>. These are primary/traditional sources in translation, not neutral validation of their metaphysics.</li><li>Paul Brunton, <em>A Search in Secret India</em> (1934), is the source for his reported 1931 visit. Jung's and Maugham's engagements with Ramana were not independently re-verified for this page; treat those two sentences as reported, not certified.</li></ul>
+<p><em>Written by Claude (Fable 5), an AI, for the Darshan garden. John Shrader (Dhyana), founder and publisher of record, answers for every word published here. Errors are corrected on the face of the page, dated.</em></p>
+<p class="garden-tags"><strong>Topics:</strong> ramana maharshi · self-inquiry · advaita · nisargadatta · zen · koan · dzogchen · attention · contemplative practice</p>
+<nav class="garden-nav" aria-label="Rooms"><a class="next" href="ai-and-the-traditions.html">How AI Relates to the Contemplative Traditions →</a></nav>
+</article>
+<aside class="garden-toc" aria-label="In this room"><nav aria-label="Page sections"><p class="garden-toc-title">In this room</p><ol class="garden-toc-list"><li class="level-2"><a href="#1-a-sixteen-year-old-lies-down-on-the-floor">1. A sixteen-year-old lies down on the floor</a></li><li class="level-2"><a href="#2-what-self-inquiry-actually-is-the-mechanics">2. What self-inquiry actually is — the mechanics</a></li><li class="level-2"><a href="#3-a-worked-example-one-round-of-inquiry">3. A worked example — one round of inquiry</a></li><li class="level-2"><a href="#4-the-wider-family-and-why-the-differences-are-real">4. The wider family — and why the differences are real</a></li><li class="level-2"><a href="#5-what-is-established-and-what-isn-t">5. What is established, and what isn't</a></li><li class="level-2"><a href="#6-where-this-leaves-you">6. Where this leaves you</a></li><li class="level-2"><a href="#7-open-questions">7. Open questions</a></li><li class="level-2"><a href="#sources">Sources</a></li></ol></nav></aside>
+</div>
+</main>
+
+<footer>
+  <p>Darshan · seeing clearly after the feed</p>
+  <p>No feed. No analytics. No trackers. Finite editions, read at your own pace.</p>
+  <p style="opacity:.7">Darshan v0.0.0.1 · a beginning, built to grow</p>
+</footer>
+<script>
+/* Local section highlighting only. No network requests, analytics, or storage. */
+(function () {
+  var scope = document.querySelector("[data-garden-outline]");
+  if (!scope) return;
+  var sections = Array.prototype.slice.call(scope.querySelectorAll("h2[id], h3[id], section[id]"));
+  var links = Array.prototype.slice.call(document.querySelectorAll('.garden-toc-list a[href^="#"]'));
+  if (!sections.length || !links.length) return;
+  var queued = false;
+  function update() {
+    queued = false;
+    var threshold = Math.max(96, window.innerHeight * .22);
+    var current = sections[0].id;
+    sections.forEach(function (section) {
+      if (section.getBoundingClientRect().top <= threshold) current = section.id;
+    });
+    links.forEach(function (link) {
+      var active = link.getAttribute("href") === "#" + current;
+      if (active) link.setAttribute("aria-current", "location");
+      else link.removeAttribute("aria-current");
+    });
+  }
+  function requestUpdate() {
+    if (!queued) {
+      queued = true;
+      window.requestAnimationFrame(update);
+    }
+  }
+  document.addEventListener("scroll", requestUpdate, {passive: true});
+  window.addEventListener("resize", requestUpdate);
+  window.addEventListener("hashchange", requestUpdate);
+  update();
+})();
+</script>
+</body>
+</html>

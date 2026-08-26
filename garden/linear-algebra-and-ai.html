@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Linear Algebra and AI · Darshan Garden</title>
+<meta name="description" content="Vectors, matrices, spaces, and projections, taught concretely enough to compute by hand. Why every modern AI model is matrix multiplication plus a little nonlinearity, and a full walkthrough of one attention head as nothing but linear algebra you can verify yourself.">
+<link rel="stylesheet" href="../style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ccircle cx='8' cy='8' r='6' fill='none' stroke='%238f3b26' stroke-width='1.5'/%3E%3Ccircle cx='8' cy='8' r='2' fill='%238f3b26'/%3E%3C/svg%3E">
+<script>
+/* Theme memory. No analytics, no trackers. */
+(function () {
+  try {
+    var t = localStorage.getItem("darshan-theme");
+    if (t) document.documentElement.setAttribute("data-theme", t);
+  } catch (e) {}
+})();
+</script>
+<style>
+/* Garden-only layout. Kept here so the publication stylesheet remains shared. */
+body.garden-page-body {
+  max-width: none;
+  padding: 1.5rem clamp(1.25rem, 3.5vw, 4rem) 4rem;
+  font-size: 1.125rem;
+}
+body.garden-page-body > main,
+body.garden-page-body > .masthead,
+body.garden-page-body > footer {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 94rem;
+}
+.garden-layout,
+.garden-index-layout {
+  align-items: start;
+  display: grid;
+  gap: clamp(2.75rem, 5vw, 5rem);
+  grid-template-columns: minmax(0, 64rem) minmax(17rem, 20rem);
+  justify-content: center;
+}
+.garden-layout article,
+.garden-index-main { min-width: 0; }
+.garden-layout .article-title,
+.garden-intro .article-title {
+  font-size: clamp(2.65rem, 3.55vw, 4rem);
+  letter-spacing: -.025em;
+  line-height: 1.06;
+  max-width: 24ch;
+}
+.garden-layout article h2 {
+  font-size: 1.48rem;
+  line-height: 1.3;
+  margin-top: 3.2rem;
+  scroll-margin-top: 1.5rem;
+}
+.garden-layout article h3 {
+  font-size: 1.16rem;
+  margin-top: 2.35rem;
+  scroll-margin-top: 1.5rem;
+}
+.garden-intro { margin-bottom: 2.4rem; }
+.garden-series { margin: 2.8rem 0; scroll-margin-top: 1rem; }
+.garden-series h2 { border-bottom: 1px solid var(--rule); padding-bottom: .45rem; }
+.garden-room-list { list-style: none; margin: 0; padding: 0; }
+.garden-room-list li { border-bottom: 1px solid var(--rule); margin: 0; padding: 1rem 0; }
+.garden-room-title { font-weight: 600; }
+.garden-room-summary { color: var(--faint); font-size: .96rem; margin: .25rem 0 0; }
+.garden-series-link { color: var(--faint); font-size: .82rem; letter-spacing: .12em;
+  text-transform: uppercase; }
+.garden-lede {
+  border-left: 3px solid var(--accent);
+  color: var(--faint);
+  font-size: 1.24rem;
+  font-style: italic;
+  line-height: 1.62;
+  margin: 1.5rem 0 2.2rem;
+  padding: .35rem 0 .35rem 1.35rem;
+}
+.garden-corridors {
+  margin: 1.15rem 0 2.65rem;
+}
+.garden-corridor-list {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: .55rem .62rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.garden-corridor-list li { display: flex; margin: 0; max-width: 100%; }
+.garden-corridor {
+  align-items: center;
+  background: var(--accent-soft);
+  border: 1px solid var(--accent);
+  border-radius: 3px;
+  color: var(--accent);
+  display: inline-flex;
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .73rem;
+  font-weight: 700;
+  letter-spacing: .075em;
+  line-height: 1.35;
+  max-width: 100%;
+  min-height: 2.05rem;
+  overflow-wrap: anywhere;
+  padding: .34rem .72rem .3rem;
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-transform: uppercase;
+  text-underline-offset: .22em;
+}
+.garden-corridor:visited { color: var(--accent); }
+.garden-corridor:hover,
+.garden-corridor:focus-visible {
+  background: var(--accent);
+  color: var(--paper);
+}
+.garden-corridor:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+.garden-series-plate {
+  --plate-accent: var(--accent);
+  border: 1px solid var(--rule);
+  border-top: 3px solid var(--plate-accent);
+  margin: .25rem 0 2.8rem;
+  overflow: hidden;
+  position: relative;
+}
+.garden-series-plate--foundations { --plate-accent: #496f76; }
+.garden-series-plate--story-of-ai { --plate-accent: #526d9a; }
+.garden-series-plate--instrument { --plate-accent: #745779; }
+.garden-series-plate--strange-loops { --plate-accent: #866448; }
+.garden-series-plate--bridge { --plate-accent: #697044; }
+.garden-series-plate--power { --plate-accent: #8f3b26; }
+.garden-series-plate--time-future { --plate-accent: #416778; }
+[data-theme="dark"] .garden-series-plate { --plate-accent: var(--accent); }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .garden-series-plate { --plate-accent: var(--accent); }
+}
+.garden-series-plate-media {
+  aspect-ratio: 16 / 9;
+  background: var(--accent-soft);
+  overflow: hidden;
+  position: relative;
+}
+.garden-series-plate-media::after {
+  background:
+    linear-gradient(90deg, var(--paper) 0, transparent 24%, transparent 76%, var(--paper) 100%),
+    linear-gradient(0deg, var(--paper) 0, transparent 32%);
+  content: "";
+  inset: 0;
+  opacity: .24;
+  pointer-events: none;
+  position: absolute;
+}
+.garden-series-plate picture,
+.garden-series-card picture { display: block; height: 100%; }
+.garden-series-plate img {
+  display: block;
+  filter: saturate(.82) contrast(1.03);
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+.garden-series-plate figcaption {
+  align-items: baseline;
+  background: var(--paper);
+  border-top: 1px solid var(--rule);
+  display: grid;
+  gap: .25rem 1rem;
+  grid-template-columns: auto 1fr;
+  padding: .78rem 1rem .85rem;
+}
+.garden-series-plate-kicker {
+  color: var(--plate-accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+.garden-series-plate figcaption strong { font-size: 1rem; font-weight: 600; }
+.garden-series-plate-terms {
+  color: var(--faint);
+  font-size: .82rem;
+  grid-column: 2;
+  margin: 0;
+}
+.garden-visual {
+  background:
+    radial-gradient(circle at 92% 8%, var(--accent-soft), transparent 30%),
+    linear-gradient(135deg, transparent 0 72%, var(--accent-soft) 72% 72.4%, transparent 72.4%);
+  border: 1px solid var(--rule);
+  border-top: 3px solid var(--accent);
+  margin: 1.25rem 0 2.5rem;
+  overflow: hidden;
+  padding: clamp(1.1rem, 2.7vw, 1.75rem);
+  position: relative;
+}
+.garden-visual::before {
+  background-image:
+    linear-gradient(var(--rule) 1px, transparent 1px),
+    linear-gradient(90deg, var(--rule) 1px, transparent 1px);
+  background-size: 2.25rem 2.25rem;
+  content: "";
+  inset: 0;
+  opacity: .13;
+  pointer-events: none;
+  position: absolute;
+}
+.garden-visual > * { position: relative; }
+.garden-visual-head {
+  align-items: baseline;
+  display: grid;
+  gap: .45rem 1rem;
+  grid-template-columns: auto 1fr;
+  margin-bottom: 1.2rem;
+}
+.garden-visual-kicker {
+  color: var(--accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .68rem;
+  font-weight: 700;
+  letter-spacing: .17em;
+  margin: 0;
+  text-transform: uppercase;
+}
+.garden-visual-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  line-height: 1.28;
+  margin: 0;
+}
+.garden-visual-as-of {
+  color: var(--faint);
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: .72rem;
+  letter-spacing: .08em;
+  margin: 0;
+  text-transform: uppercase;
+  white-space: normal;
+}
+.garden-visual-items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.garden-visual-item {
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  margin: 0;
+  min-width: 0;
+  padding: .8rem .9rem;
+}
+.garden-visual-item-label {
+  display: block;
+  font-size: .96rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+.garden-visual-item-detail {
+  color: var(--faint);
+  display: block;
+  font-size: .9rem;
+  line-height: 1.45;
+  margin-top: .27rem;
+}
+.garden-visual-item-meta {
+  color: var(--accent);
+  display: block;
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: .72rem;
+  letter-spacing: .08em;
+  margin-bottom: .38rem;
+  text-transform: uppercase;
+}
+.garden-visual-caption {
+  border-top: 1px solid var(--rule);
+  color: var(--faint);
+  display: grid;
+  font-size: .84rem;
+  font-style: italic;
+  gap: .55rem 1rem;
+  grid-template-columns: minmax(0, 1fr) auto;
+  line-height: 1.45;
+  margin: 1.15rem 0 0;
+  padding-top: .75rem;
+}
+.garden-visual-evidence {
+  color: var(--accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .72rem;
+  font-style: normal;
+  font-weight: 650;
+  letter-spacing: .04em;
+  white-space: nowrap;
+}
+.garden-visual-evidence a {
+  color: inherit;
+  text-decoration-thickness: 1px;
+  text-underline-offset: .18em;
+}
+.garden-visual--sequence .garden-visual-items,
+.garden-visual--contrast .garden-visual-items,
+.garden-visual--constellation .garden-visual-items {
+  display: grid;
+  gap: .65rem;
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+}
+.garden-visual--sequence .garden-visual-items { counter-reset: garden-step; }
+.garden-visual--sequence .garden-visual-item {
+  counter-increment: garden-step;
+  padding-top: 2.35rem;
+  position: relative;
+}
+.garden-visual--sequence .garden-visual-item::before {
+  color: var(--accent);
+  content: counter(garden-step, decimal-leading-zero);
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: .68rem;
+  left: .9rem;
+  letter-spacing: .08em;
+  position: absolute;
+  top: .72rem;
+}
+.garden-visual--layers .garden-visual-items { display: grid; gap: .45rem; }
+.garden-visual--layers .garden-visual-item {
+  border-left: clamp(.24rem, .55vw, .48rem) solid var(--accent);
+  display: grid;
+  gap: .15rem 1rem;
+  grid-template-columns: minmax(8rem, .4fr) 1fr;
+}
+.garden-visual--layers .garden-visual-item:nth-child(2) { margin-left: 1.5%; }
+.garden-visual--layers .garden-visual-item:nth-child(3) { margin-left: 3%; }
+.garden-visual--layers .garden-visual-item:nth-child(4) { margin-left: 4.5%; }
+.garden-visual--layers .garden-visual-item:nth-child(5) { margin-left: 6%; }
+.garden-visual--layers .garden-visual-item:nth-child(6) { margin-left: 7.5%; }
+.garden-visual--timeline .garden-visual-items {
+  display: grid;
+  gap: 0;
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+}
+.garden-visual--timeline .garden-visual-item {
+  border-width: 1px 0 0 1px;
+  padding-top: 1.35rem;
+  position: relative;
+}
+.garden-visual--timeline .garden-visual-item::before {
+  background: var(--accent);
+  border: 3px solid var(--paper);
+  border-radius: 50%;
+  content: "";
+  height: .72rem;
+  left: -.4rem;
+  position: absolute;
+  top: -.4rem;
+  width: .72rem;
+}
+.garden-visual--contrast .garden-visual-item:nth-child(odd) { border-top: 2px solid var(--ink); }
+.garden-visual--contrast .garden-visual-item:nth-child(even) { border-top: 2px solid var(--accent); }
+.garden-visual--constellation .garden-visual-items {
+  align-items: stretch;
+  position: relative;
+}
+.garden-visual--constellation .garden-visual-item {
+  border-top: 2px solid var(--accent);
+  box-shadow: 0 .2rem 0 rgba(18, 31, 31, .04);
+  padding-top: 1.35rem;
+  position: relative;
+}
+.garden-visual--constellation .garden-visual-item::before {
+  background: var(--paper);
+  border: 2px solid var(--accent);
+  border-radius: 50%;
+  content: "";
+  height: .55rem;
+  left: calc(50% - .36rem);
+  position: absolute;
+  top: -.38rem;
+  width: .55rem;
+}
+.garden-visual--constellation .garden-visual-item:nth-child(even) { margin-top: .8rem; }
+.garden-series-gallery {
+  display: grid;
+  gap: .8rem;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  margin: 1.5rem 0 3rem;
+}
+.garden-series-card {
+  border: 1px solid var(--rule);
+  color: var(--ink);
+  display: grid;
+  grid-template-rows: 7.5rem auto;
+  overflow: hidden;
+  text-decoration: none;
+}
+.garden-series-card img {
+  height: 100%;
+  object-fit: cover;
+  transition: transform .25s ease;
+  width: 100%;
+}
+.garden-series-card span {
+  border-top: 1px solid var(--rule);
+  font-size: .9rem;
+  font-weight: 600;
+  padding: .65rem .75rem;
+}
+.garden-series-card:hover { border-color: var(--accent); color: var(--accent); }
+.garden-series-card:hover img { transform: scale(1.025); }
+@media (prefers-reduced-motion: reduce) {
+  .garden-series-card img { transition: none; }
+}
+.garden-tags { color: var(--faint); font-size: .82rem; margin-top: 2.2rem; }
+.garden-nav { border-top: 1px solid var(--rule); display: flex; gap: 1rem;
+  justify-content: space-between; margin-top: 2.5rem; padding-top: 1rem; }
+.garden-nav a { max-width: 48%; text-decoration: none; }
+.garden-nav .next { margin-left: auto; text-align: right; }
+.garden-table-wrap { overflow-x: auto; margin: 1.35rem 0; }
+.garden-table { border-collapse: collapse; font-size: .92rem; line-height: 1.45; width: 100%; }
+.garden-table th, .garden-table td { border: 1px solid var(--rule); padding: .55rem .65rem;
+  text-align: left; vertical-align: top; }
+.garden-table th { background: var(--accent-soft); }
+.garden-toc {
+  border-left: 1px solid var(--rule);
+  max-height: calc(100vh - 3rem);
+  overflow: auto;
+  padding: .1rem 0 .75rem 1.3rem;
+  position: sticky;
+  top: 1.5rem;
+}
+.garden-toc-title {
+  color: var(--accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .2em;
+  margin: 0 0 1.15rem;
+  text-transform: uppercase;
+}
+.garden-toc-title::before { content: "☰"; font-size: .8em; margin-right: .65rem; }
+.garden-toc-list { list-style: none; margin: 0; padding: 0; }
+.garden-toc-sublist { list-style: none; margin: 0; padding: 0; }
+.garden-toc-list li { margin: 0; }
+.garden-toc-list a {
+  border-left: 2px solid transparent;
+  color: var(--ink);
+  display: block;
+  font-size: .91rem;
+  line-height: 1.42;
+  margin-left: -1.4rem;
+  padding: .42rem .45rem .42rem 1.3rem;
+  text-decoration: none;
+}
+.garden-toc-list .level-3 a {
+  color: var(--faint);
+  font-size: .86rem;
+  font-style: italic;
+  padding-left: 2.15rem;
+}
+.garden-toc-list a:hover,
+.garden-toc-list a:focus-visible,
+.garden-toc-list a[aria-current="location"] {
+  border-left-color: var(--accent);
+  color: var(--accent);
+}
+.garden-toc-list a[aria-current="location"] { font-weight: 600; }
+.garden-toc-inline { display: none; }
+.garden-layout article :is(h2, h3):target,
+.garden-series:target h2 { color: var(--accent); }
+a.pending { color: var(--faint); text-decoration-style: dashed; }
+a.pending::after { content: " · pending"; font-size: .7em; letter-spacing: .06em;
+  text-transform: uppercase; }
+@media (min-width: 72.01em) {
+  body.garden-page-body > .masthead {
+    align-items: center;
+    column-gap: 2rem;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    margin-bottom: 3.5rem;
+    padding: 1.25rem 0;
+    text-align: left;
+  }
+  body.garden-page-body > .masthead .wordmark { justify-self: start; }
+  body.garden-page-body > .masthead .tagline { justify-self: center; margin: 0; }
+  body.garden-page-body > .masthead nav { justify-self: end; margin: 0; }
+}
+@media (max-width: 72em) {
+  .garden-layout,
+  .garden-index-layout { display: block; }
+  .garden-toc { display: none; }
+  .garden-toc-inline {
+    border: 1px solid var(--rule);
+    display: block;
+    margin: 1.5rem 0 2.4rem;
+    padding: .8rem 1rem;
+  }
+  .garden-toc-inline summary {
+    color: var(--accent);
+    cursor: pointer;
+    font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: .78rem;
+    font-weight: 700;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+  }
+  .garden-toc-inline .garden-toc-list { margin-top: .7rem; }
+  .garden-toc-inline .garden-toc-list a { margin-left: 0; padding-left: .75rem; }
+  .garden-toc-inline .garden-toc-list .level-3 a { padding-left: 1.6rem; }
+}
+@media (max-width: 40em) {
+  body.garden-page-body { font-size: 1.03rem; padding: 1rem 1.05rem 3rem; }
+  .garden-layout .article-title,
+  .garden-intro .article-title { font-size: clamp(2.15rem, 11vw, 3.15rem); }
+  .garden-lede { font-size: 1.1rem; padding-left: 1rem; }
+  .garden-corridors { margin-bottom: 2rem; }
+  .garden-corridor-list { gap: .45rem; }
+  .garden-corridor {
+    font-size: .68rem;
+    min-height: 2.35rem;
+    padding: .3rem .58rem .27rem;
+  }
+  .garden-series-plate-media { aspect-ratio: 16 / 9; }
+  .garden-series-plate figcaption { display: block; }
+  .garden-series-plate figcaption strong { display: block; margin-top: .22rem; }
+  .garden-series-plate-terms { display: block; margin-top: .25rem; }
+  .garden-visual { margin-left: -.15rem; margin-right: -.15rem; padding: 1rem; }
+  .garden-visual-head { display: block; }
+  .garden-visual-title { margin-top: .25rem; }
+  .garden-visual-as-of { margin-top: .35rem; }
+  .garden-visual-caption { grid-template-columns: 1fr; }
+  .garden-visual-evidence { white-space: normal; }
+  .garden-visual--sequence .garden-visual-items,
+  .garden-visual--contrast .garden-visual-items,
+  .garden-visual--constellation .garden-visual-items,
+  .garden-visual--timeline .garden-visual-items { grid-template-columns: 1fr; }
+  .garden-visual--layers .garden-visual-item:nth-child(n) { display: block; margin-left: 0; }
+  .garden-visual--timeline .garden-visual-item { border-width: 0 0 0 1px; }
+  .garden-visual--timeline .garden-visual-item::before { left: -.4rem; top: .9rem; }
+  .garden-visual--constellation .garden-visual-item:nth-child(even) { margin-top: 0; }
+  .garden-series-gallery { grid-template-columns: 1fr; }
+  .garden-nav { flex-direction: column; }
+  .garden-nav a { max-width: none; }
+  .garden-nav .next { margin-left: 0; text-align: left; }
+}
+@media print {
+  a.pending::after { content: " (pending)"; }
+  .garden-layout, .garden-index-layout { display: block; }
+  .garden-toc, .garden-toc-inline { display: none; }
+  .garden-series-card img { display: none; }
+  .garden-series-card { grid-template-rows: auto; }
+}
+</style>
+</head>
+<body class="garden-page-body">
+<button class="theme-toggle" aria-label="Toggle light and dark" onclick="
+  (function () {
+    var d = document.documentElement;
+    var cur = d.getAttribute('data-theme');
+    if (!cur) { cur = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'; }
+    var next = cur === 'dark' ? 'light' : 'dark';
+    d.setAttribute('data-theme', next);
+    try { localStorage.setItem('darshan-theme', next); } catch (e) {}
+  })();
+">◐</button>
+
+<header class="masthead">
+  <h1 class="wordmark"><a href="../index.html">DARSHAN</a></h1>
+  <p class="tagline">A signal of clear seeing in an age of information overload</p>
+  <nav>
+    <a href="../index.html">Articles</a>
+    <a href="index.html">Garden</a>
+    <a href="../about.html">About</a>
+  </nav>
+</header>
+
+<main>
+<div class="garden-layout">
+<article data-garden-room="linear-algebra-and-ai" data-garden-outline>
+<p class="garden-series-link"><a href="index.html#foundations">Foundations of the Machine</a></p>
+<p class="article-meta">25 August 2026 · Draft</p>
+<h1 class="article-title">Linear Algebra and AI</h1>
+<div class="draft-banner"><strong>Draft — pending discernment pass.</strong> This room is part of the garden's first planting. It has not been promoted to published status; check its sources and open questions before citing it.</div>
+<p class="garden-lede">Vectors, matrices, spaces, and projections, taught concretely enough to compute by hand. Why every modern AI model is matrix multiplication plus a little nonlinearity, and a full walkthrough of one attention head as nothing but linear algebra you can verify yourself.</p>
+<nav class="garden-corridors" aria-label="Explore connected rooms" data-corridor-count="9"><ul class="garden-corridor-list"><li><a class="garden-corridor" href="intro-to-computer-science.html">Intro to Computer Science</a></li><li><a class="garden-corridor" href="neural-networks.html">Neural Networks</a></li><li><a class="garden-corridor" href="deep-learning.html">Deep Learning</a></li><li><a class="garden-corridor" href="machine-learning.html">Machine Learning</a></li><li><a class="garden-corridor" href="optimization.html">Optimization — the Hidden Engine</a></li><li><a class="garden-corridor" href="mechanistic-interpretability.html">Mechanistic Interpretability</a></li><li><a class="garden-corridor" href="nvidia-and-the-chip.html">NVIDIA and the Future of the Computer Chip</a></li><li><a class="garden-corridor" href="pretraining-post-training.html">Pretraining and Post-training</a></li><li><a class="garden-corridor" href="attention-economy.html">The Attention Economy</a></li></ul></nav>
+<figure class="garden-series-plate garden-series-plate--foundations">
+<div class="garden-series-plate-media"><picture><source srcset="assets/series/foundations.webp" type="image/webp"><img src="assets/series/foundations.png" alt="An engraved transistor lattice rising through computational layers into a neural graph" width="1672" height="941" loading="eager" decoding="async"></picture></div>
+<figcaption><span class="garden-series-plate-kicker">Visual field</span><strong>Foundations of the Machine</strong><span class="garden-series-plate-terms">vector · matrix · dot product · matrix multiplication</span></figcaption>
+</figure>
+<details class="garden-toc-inline"><summary>In this room</summary><ol class="garden-toc-list"><li class="level-2"><a href="#1-a-vector-is-a-list-of-numbers-that-acts-like-a-direction">1. A vector is a list of numbers that acts like a direction</a></li><li class="level-2"><a href="#2-a-matrix-is-a-machine-that-moves-every-vector-at-once">2. A matrix is a machine that moves every vector at once</a></li><li class="level-2"><a href="#3-spaces-projections-and-rank-where-the-meaning-sits">3. Spaces, projections, and rank — where the meaning sits</a></li><li class="level-2"><a href="#4-why-all-of-modern-ai-is-linear-algebra-plus-nonlinearity">4. Why all of modern AI is linear algebra plus nonlinearity</a></li><li class="level-2"><a href="#5-worked-example-one-attention-head-by-hand">5. Worked example: one attention head, by hand</a></li><li class="level-2"><a href="#6-what-you-can-now-see">6. What you can now see</a></li><li class="level-2"><a href="#7-open-questions">7. Open questions</a></li><li class="level-2"><a href="#sources">Sources</a></li></ol></details>
+<p>If you've walked through <a href="intro-to-computer-science.html">intro to computer science</a>, you know a computer only ever does arithmetic on numbers. This room shows you the specific arithmetic that modern AI runs on. It is one operation — multiplying grids of numbers — repeated trillions of times, with one small twist added between the multiplications. When you finish this room, <a href="neural-networks.html">neural networks</a> and <a href="deep-learning.html">deep learning</a> stop being magic words and become shapes you can draw.</p>
+<h2 id="1-a-vector-is-a-list-of-numbers-that-acts-like-a-direction">1. A vector is a list of numbers that acts like a direction</h2>
+<p>Start with the smallest object. A <strong>vector</strong> is a list of numbers. That's the whole definition. <code>[3, 4]</code> is a vector. So is a list of 768 numbers.</p>
+<p>The reason vectors matter is what the list <em>means</em>. Treat <code>[3, 4]</code> as instructions — go 3 steps east, 4 steps north — and the list becomes an arrow: a direction and a length. Two short lists of numbers can point the same way or opposite ways, be near each other or far apart. Geometry falls out of arithmetic.</p>
+<p>Here is why this matters for AI. In 2013, Tomas Mikolov and colleagues at Google trained a system called word2vec that assigned every English word a vector of a few hundred numbers, learned purely from which words appear near which other words. Then they noticed something strange. Take the vector for <em>king</em>, subtract the vector for <em>man</em>, add the vector for <em>woman</em>, and look for the nearest word vector to the result. You get <em>queen</em>. Nobody programmed that. Directions in the space had come to mean things: there was a rough "royalty" direction, a rough "gender" direction, and arithmetic on word vectors did a crude kind of reasoning. (An honest caveat, documented since: the standard test excludes the input words from the answer, and the trick fails on plenty of analogies. The result is real but weaker than the legend.)</p>
+<p>That discovery is the seed of everything below. Modern language models push it much further: inside GPT-2, every token of text becomes a vector of 768 numbers, and inside frontier models the lists are tens of thousands long. Meaning lives in <em>where the vector points</em>.</p>
+<p>One more tool and you can measure meaning. The <strong>dot product</strong> of two vectors multiplies them position by position and adds up the results:</p>
+<pre><code>[1, 2, 3] · [4, 0, 2]  =  1·4 + 2·0 + 3·2  =  10</code></pre>
+<p>Geometrically, the dot product is large and positive when two vectors point the same way, near zero when they're perpendicular, and negative when they oppose. It is a similarity meter. Hold onto it — the dot product between a "query" and a "key" is the exact operation an attention head uses to decide which words to look at. You'll compute one by hand in section 5.</p>
+<h2 id="2-a-matrix-is-a-machine-that-moves-every-vector-at-once">2. A matrix is a machine that moves every vector at once</h2>
+<p>A <strong>matrix</strong> is a grid of numbers — rows and columns. <code>[[2, 0], [0, 1]]</code> is a 2×2 matrix. But just as a vector is secretly an arrow, a matrix is secretly a <em>machine</em>: multiply a vector by a matrix and you get a new vector out. The rule, called <strong>matrix multiplication</strong>, is just dot products — each row of the matrix dotted with the input vector gives one number of the output:</p>
+<pre><code>[2 0]   [3]     [2·3 + 0·4]     [6]
+[0 1] · [4]  =  [0·3 + 1·4]  =  [4]</code></pre>
+<p>That machine doubled the east-west part of the arrow and left the north-south part alone: a stretch. Other matrices rotate arrows, flip them, flatten them, mix their coordinates. What a matrix can never do is bend: it always maps straight lines to straight lines and leaves the origin fixed. That's why this whole subject is called <em>linear</em> algebra, and why a matrix is called a <strong>linear map</strong>.</p>
+<p>The deep fact is uniformity. A matrix doesn't move one vector — it moves the entire space at once, every possible vector, by the same consistent rule. When an AI model multiplies by a learned matrix, it is applying one transformation to <em>whatever</em> comes in. The matrix is where the learning lives: training a model means adjusting the numbers in its matrices — its <em>weights</em> — until the machine transforms inputs the way you want. How those adjustments are computed is the subject of <a href="optimization.html">optimization</a>; how the whole training pipeline is organized is <a href="pretraining-post-training.html">pretraining and post-training</a>.</p>
+<p>And matrices compose. Applying matrix <code>A</code>, then matrix <code>B</code>, is exactly the same as applying the single matrix <code>BA</code> (their product). Remember this; it has a sting in section 4.</p>
+<h2 id="3-spaces-projections-and-rank-where-the-meaning-sits">3. Spaces, projections, and rank — where the meaning sits</h2>
+<figure class="garden-visual garden-visual--layers" aria-labelledby="visual-linear-algebra-and-ai-1" data-claim-scope="section-synthesis" data-placement-heading="3-spaces-projections-and-rank-where-the-meaning-sits" data-evidence-headings="3-spaces-projections-and-rank-where-the-meaning-sits">
+<div class="garden-visual-head"><p class="garden-visual-kicker">The rank-64 keyhole</p><p class="garden-visual-title" id="visual-linear-algebra-and-ai-1">A projection keeps one view and discards the rest</p></div>
+<ol class="garden-visual-items" role="list"><li class="garden-visual-item"><strong class="garden-visual-item-label">Full space</strong><span class="garden-visual-item-detail">A GPT-2-small token arrives as one point in a 768-dimensional representation space.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Learned question</strong><span class="garden-visual-item-detail">A projection selects the combinations of directions useful to this particular head.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Rank-64 shadow</strong><span class="garden-visual-item-detail">The 768-dimensional input is compressed into a 64-dimensional query, key, or value vector.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Deliberate loss</strong><span class="garden-visual-item-detail">Most directions disappear from this view; the bottleneck forces the head to summarize.</span></li></ol>
+<figcaption class="garden-visual-caption"><span>An attention head reads a high-dimensional token through a learned low-rank bottleneck rather than seeing every direction equally.</span><span class="garden-visual-evidence">Drawn from: <a href="#3-spaces-projections-and-rank-where-the-meaning-sits">3. Spaces, projections, and rank — where the meaning sits</a></span></figcaption>
+</figure>
+<p>A vector with 2 numbers lives in a 2-dimensional space: a flat plane. A vector with 768 numbers lives in a 768-dimensional space. You cannot picture that, and you don't need to — every operation you just learned works identically. Distances, angles, dot products: same formulas, more positions in the list.</p>
+<p>Inside a 768-dimensional space there are smaller flat regions: lines (1-dimensional), planes (2-dimensional), and so on up. These are <em>subspaces</em>. A <strong>projection</strong> takes a vector and finds its shadow on a subspace — the closest point in that smaller region. Projecting <code>[3, 4, 5]</code> onto the first two coordinates gives <code>[3, 4, 0]</code>: keep what lies in the subspace, discard the rest. Projection is how you ask a high-dimensional vector one specific question — "how much of you points in <em>this</em> direction?" — and ignore everything else. Mechanically, it's a dot product again.</p>
+<p>The <strong>rank</strong> of a matrix is how many dimensions survive passing through it. A 768×768 matrix could in principle use all 768 dimensions — full rank. But a matrix might squash its whole input space down to a 64-dimensional shadow: rank 64, a <strong>low-rank</strong> map. Low rank sounds like a defect. In AI it's a design choice: a low-rank matrix is a <em>bottleneck</em>, forcing the machine to summarize. You are about to meet a famous one — every attention head in a transformer reads its 768-dimensional input through a rank-64 keyhole.</p>
+<p>One finding from the young field of <a href="mechanistic-interpretability.html">mechanistic interpretability</a> makes this concrete. Researchers at Anthropic showed in a 2022 paper, <em>Toy Models of Superposition</em>, that trained networks tend to represent individual features of the world — "this token is French," "this is Python code," "this sentence is about DNA" — as <em>directions</em> in these spaces, and that a space can pack in more feature-directions than it has dimensions by letting them overlap slightly, a phenomenon they named superposition. Whether <em>everything</em> a model knows is stored this way is still contested (more in the open questions below). But the working picture that guides interpretability research today is: <strong>meanings are directions; thinking is moving vectors around with matrices; and reading a model's mind is finding which directions mean what.</strong></p>
+<h2 id="4-why-all-of-modern-ai-is-linear-algebra-plus-nonlinearity">4. Why all of modern AI is linear algebra plus nonlinearity</h2>
+<figure class="garden-visual garden-visual--layers" aria-labelledby="visual-linear-algebra-and-ai-2" data-claim-scope="section-synthesis" data-placement-heading="4-why-all-of-modern-ai-is-linear-algebra-plus-nonlinearity" data-evidence-headings="4-why-all-of-modern-ai-is-linear-algebra-plus-nonlinearity">
+<div class="garden-visual-head"><p class="garden-visual-kicker">Why depth counts</p><p class="garden-visual-title" id="visual-linear-algebra-and-ai-2">The bend between the matrices</p></div>
+<ol class="garden-visual-items" role="list"><li class="garden-visual-item"><strong class="garden-visual-item-label">Matrix A</strong><span class="garden-visual-item-detail">The first learned linear map stretches, rotates, or mixes the incoming vector.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Matrix B</strong><span class="garden-visual-item-detail">A second linear map still composes exactly with the first.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Collapse</strong><span class="garden-visual-item-detail">A thousand linear layers equal one product matrix and buy no new kind of boundary.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Nonlinearity</strong><span class="garden-visual-item-detail">A ReLU-style bend blocks the collapse and makes composition expressive.</span></li></ol>
+<figcaption class="garden-visual-caption"><span>Without a nonlinear twist, any depth of matrix multiplications collapses into one matrix.</span><span class="garden-visual-evidence">Drawn from: <a href="#4-why-all-of-modern-ai-is-linear-algebra-plus-nonlinearity">4. Why all of modern AI is linear algebra plus nonlinearity</a></span></figcaption>
+</figure>
+<p>Now the claim in this room's title. Take any modern neural network — GPT-2, or the model writing this page — and ask what it computes, layer by layer. The answer is astonishingly repetitive:</p>
+<ol><li>Multiply the incoming vectors by a learned matrix.</li><li>Apply one small, simple, <em>nonlinear</em> twist to each number.</li><li>Repeat, hundreds of times.</li></ol>
+<p>Step 1 is everything you learned above. Step 2 is tiny by comparison — a typical choice, ReLU, is just "if the number is negative, make it zero." A one-line rule. So why is it there at all?</p>
+<p>Because of the sting from section 2: matrices compose. If a network were <em>only</em> matrix multiplications — layer one applies <code>A</code>, layer two applies <code>B</code>, layer three applies <code>C</code> — the whole stack would equal the single matrix <code>CBA</code>. A thousand linear layers collapse into one linear layer. All that depth would buy you nothing: the network could only stretch, rotate, and mix, never bend. It could never compute "dog OR cat but NOT both," never draw a curved boundary, never do anything a single matrix can't do.</p>
+<p>The nonlinearity is the bend. Insert even the trivial ReLU rule between the matrices and the collapse is blocked: each layer's twist prevents it from merging into its neighbors, and the stack can now approximate essentially any transformation at all if made wide or deep enough. That is the actual division of labor inside every modern model:</p>
+<p><strong>The matrices carry the knowledge. The nonlinearities make depth count.</strong></p>
+<p>The economics of AI confirm where the work is. A standard estimate from the scaling-laws literature (Kaplan et al., 2020) is that running a transformer forward costs about <strong>2 FLOPs per parameter per token</strong> — two arithmetic operations for every weight, nearly all of them inside matrix multiplications — and training costs about <code>6 × parameters × training tokens</code>. For a model with hundreds of billions of parameters trained on trillions of tokens, that's a number with 25 digits, and it is overwhelmingly matrix math. This is also why <a href="nvidia-and-the-chip.html">NVIDIA rules the chip market</a>: a modern datacenter GPU like the H100 is essentially a furnace for matrix multiplication, its "tensor cores" delivering on the order of a quadrillion low-precision matrix operations per second (the exact figure depends on number format and sparsity settings — see the datasheet, not the marketing line). The hardware, the training cost, the model's knowledge: all of it is shaped like a matrix.</p>
+<p>Here is the whole stack in one table, with the real shapes from GPT-2 small — the 124-million-parameter model OpenAI released in 2019, small enough that you can download it and check:</p>
+<div class="garden-table-wrap"><table class="garden-table"><thead><tr><th>What the model does</th><th>Linear-algebra object</th><th>Shape in GPT-2 small</th><th>Linear or not?</th></tr></thead><tbody><tr><td>Turn a token into meaning</td><td>embedding: a lookup into a matrix of vectors</td><td>50,257 × 768</td><td>linear-ish (a lookup)</td></tr><tr><td>Decide where to look (attention scores)</td><td>dot products of query and key vectors</td><td>queries/keys are 64-long</td><td><strong>bilinear</strong> (linear in each input)</td></tr><tr><td>Turn scores into a budget</td><td>softmax</td><td>1 line of exp-and-divide</td><td><strong>nonlinear</strong></td></tr><tr><td>Move information between words</td><td>weighted sum of value vectors, then a matrix</td><td>64 → 768</td><td>linear</td></tr><tr><td>"Think" about the gathered info (MLP)</td><td>matrix, twist, matrix</td><td>768 → 3,072 → 768</td><td>linear · <strong>nonlinear</strong> · linear</td></tr><tr><td>Produce next-word scores</td><td>one final matrix</td><td>768 → 50,257</td><td>linear</td></tr></tbody></table></div>
+<p>Read down the right-hand column. The nonlinear entries are one softmax and one activation twist — a few percent of the arithmetic. Everything else is the machinery of sections 1–3. That is the honest meaning of "AI is linear algebra plus nonlinearity": not a slogan, an accounting.</p>
+<p>For the broader question of <em>why</em> learned matrices can do what hand-written rules couldn't, see <a href="machine-learning.html">machine learning</a>. Here, we go one level deeper and open the most important box in the table.</p>
+<h2 id="5-worked-example-one-attention-head-by-hand">5. Worked example: one attention head, by hand</h2>
+<figure class="garden-visual garden-visual--sequence" aria-labelledby="visual-linear-algebra-and-ai-3" data-claim-scope="section-synthesis" data-placement-heading="5-worked-example-one-attention-head-by-hand" data-evidence-headings="5-worked-example-one-attention-head-by-hand">
+<div class="garden-visual-head"><p class="garden-visual-kicker">Attention, opened</p><p class="garden-visual-title" id="visual-linear-algebra-and-ai-3">Where to look, what to move</p></div>
+<ol class="garden-visual-items" role="list"><li class="garden-visual-item"><strong class="garden-visual-item-label">Project</strong><span class="garden-visual-item-detail">Learned matrices turn each token into query, key, and value vectors.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Score</strong><span class="garden-visual-item-detail">Each query takes a dot product with the available keys.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Scale</strong><span class="garden-visual-item-detail">Scores are divided by the square root of the head dimension.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Budget</strong><span class="garden-visual-item-detail">Softmax makes positive weights whose row sums exactly to one.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Move</strong><span class="garden-visual-item-detail">The weighted value average is projected back into the token's running representation.</span></li></ol>
+<figcaption class="garden-visual-caption"><span>An attention head turns pairwise similarities into a budget for moving information between token vectors.</span><span class="garden-visual-evidence">Drawn from: <a href="#5-worked-example-one-attention-head-by-hand">5. Worked example: one attention head, by hand</a></span></figcaption>
+</figure>
+<p>Attention is the mechanism that made modern AI possible — the 2017 paper that introduced the transformer is literally titled <em>Attention Is All You Need</em> (Vaswani et al.). Every explanation you've seen probably used the words "the model learns what to focus on." True, and useless. Let's compute one.</p>
+<p><strong>The setup, with real shapes.</strong> In GPT-2 small, each of the 12 layers has 12 attention heads. A single head owns four matrices:</p>
+<ul><li><code>W_Q</code> (768 × 64): projects each token's vector into a 64-dimensional <strong>query</strong> — "what am I looking for?"</li><li><code>W_K</code> (768 × 64): projects each token's vector into a 64-dimensional <strong>key</strong> — "what do I offer?"</li><li><code>W_V</code> (768 × 64): projects each token's vector into a 64-dimensional <strong>value</strong> — "what will I hand over if chosen?"</li><li><code>W_O</code> (64 × 768): projects the head's 64-dimensional result back up to 768, so it can be added into the token's running vector.</li></ul>
+<p>Notice: three of these are the low-rank keyholes from section 3. The head reads the rich 768-dimensional representation through 64-dimensional slots. Those numbers descend directly from the original 2017 transformer, which used vectors of 512 split across 8 heads of 64 each.</p>
+<p><strong>The procedure.</strong> For every pair of tokens, dot the query of the later token with the key of the earlier one. Divide by √64 (this scaling, from the original paper, stops the dot products from growing too large as dimensions grow). Then apply <strong>softmax</strong> — exponentiate each score and divide by the sum — which turns the scores for each token into positive weights that sum exactly to 1. Finally, take that weighted average of the value vectors and project it back through <code>W_O</code>.</p>
+<p><strong>Now by hand, small enough to check.</strong> Real 768-dimensional arithmetic won't fit on paper, so shrink every shape while keeping the procedure identical: three tokens — <em>the cat sat</em> — and 2-dimensional queries, keys, and values. Suppose the projections have produced:</p>
+<pre><code>query for "sat":            q = [1, 0]
+keys:    "the" k₁ = [0, 1]   "cat" k₂ = [2, 0]   "sat" k₃ = [0.5, 0.5]
+values:  "the" v₁ = [1, 0]   "cat" v₂ = [0, 1]   "sat" v₃ = [1, 1]</code></pre>
+<p>Step 1 — scores (dot products of <code>q</code> with each key):</p>
+<pre><code>q·k₁ = 1·0 + 0·1 = 0        q·k₂ = 1·2 + 0·0 = 2        q·k₃ = 0.5</code></pre>
+<p>Step 2 — scale by √2 ≈ 1.41 (our head dimension is 2):</p>
+<pre><code>0 / 1.41 = 0        2 / 1.41 ≈ 1.41        0.5 / 1.41 ≈ 0.35</code></pre>
+<p>Step 3 — softmax. Exponentiate: e⁰ = 1.00, e¹·⁴¹ ≈ 4.10, e⁰·³⁵ ≈ 1.42. Sum ≈ 6.52. Divide:</p>
+<pre><code>weight on "the" ≈ 0.15      weight on "cat" ≈ 0.63      weight on "sat" ≈ 0.22</code></pre>
+<p>The weights sum to 1. The head has decided: while processing <em>sat</em>, spend 63% of this head's attention on <em>cat</em>. That sentence — the one every popular explanation hand-waves — is these three lines of arithmetic.</p>
+<p>Step 4 — the weighted average of values:</p>
+<pre><code>0.15·[1,0] + 0.63·[0,1] + 0.22·[1,1] = [0.15+0.22, 0.63+0.22] = [0.37, 0.85]</code></pre>
+<p>That vector — mostly <em>cat</em>'s value, seasoned with the others — is what gets projected back and <em>added</em> to <em>sat</em>'s vector. Information about the cat has physically moved into the representation of <em>sat</em>. Stack 12 heads per layer and 12 layers, and words assemble their meanings from each other, one weighted average at a time.</p>
+<p><strong>Check it yourself.</strong> The whole head, real shapes and all, is a dozen lines:</p>
+<pre><code>import numpy as np
+d_model, d_head, T = 768, 64, 10          # GPT-2 small sizes, 10 tokens
+rng = np.random.default_rng(0)
+X  = rng.standard_normal((T, d_model))     # one vector per token
+Wq, Wk, Wv = (rng.standard_normal((d_model, d_head)) / np.sqrt(d_model) for _ in range(3))
+Wo = rng.standard_normal((d_head, d_model)) / np.sqrt(d_head)
+
+Q, K, V = X @ Wq, X @ Wk, X @ Wv           # project: three keyholes
+scores  = Q @ K.T / np.sqrt(d_head)        # every query · every key
+scores += np.triu(np.full((T, T), -np.inf), k=1)   # no peeking at future tokens
+weights = np.exp(scores) / np.exp(scores).sum(-1, keepdims=True)  # softmax
+out     = (weights @ V) @ Wo               # weighted average, project back
+print(weights[3].round(2), weights[3].sum())       # row sums to 1.0</code></pre>
+<p>Run it. Change the seed. Print the weights matrix and watch each row sum to 1. Everything a real head does that this doesn't is bookkeeping (real models add positional information and normalization). You have now computed attention, which is more than most people writing about AI have done.</p>
+<p><strong>One more turn of the lens.</strong> In 2021, Anthropic researchers (Elhage et al., <em>A Mathematical Framework for Transformer Circuits</em>) pointed out that the queries, keys, and values you just computed are not the fundamental objects — they're intermediate scratch work. Fold the matrices together and a head is exactly two low-rank machines: <code>W_Q</code> and <code>W_K</code> combine into one <strong>QK circuit</strong> that answers <em>where should I look?</em>, and <code>W_V</code> and <code>W_O</code> combine into one <strong>OV circuit</strong> that answers <em>what should I copy when I look there?</em> Where-to-look and what-to-move, each a single matrix you can study on its own. That reframing — pure linear algebra, no new experiments — cracked open the modern field of <a href="mechanistic-interpretability.html">mechanistic interpretability</a>. Sometimes the discovery is just a better factorization.</p>
+<h2 id="6-what-you-can-now-see">6. What you can now see</h2>
+<p>You can now read the architecture diagram of any modern AI model, because you own its entire vocabulary: vectors carry meaning as direction, matrices transform whole spaces at once, projections ask directed questions, low-rank maps force summaries, and one thin layer of nonlinearity keeps a deep stack from collapsing into a single matrix. You computed an attention head by hand and verified it in code — the same computation that runs, at 768 dimensions and billions of weights, inside every transformer.</p>
+<p>From here the garden branches. <a href="neural-networks.html">Neural networks</a> builds the full layer-by-layer picture on this foundation. <a href="optimization.html">Optimization</a> explains how the matrices get their numbers. <a href="machine-learning.html">Machine learning</a> and <a href="deep-learning.html">deep learning</a> give the field its history and its map. <a href="mechanistic-interpretability.html">Mechanistic interpretability</a> is the reverse direction: given the trained matrices, recover the meaning. And <a href="nvidia-and-the-chip.html">NVIDIA and the chip</a> follows the money that all this matrix multiplication commands.</p>
+<h2 id="7-open-questions">7. Open questions</h2>
+<p><strong>Established (FACT).</strong> Modern AI models are, by arithmetic accounting, overwhelmingly matrix multiplication; the shapes and procedures above are read straight from published architectures and are not in dispute. Word-vector arithmetic (<em>king − man + woman ≈ queen</em>) works on many analogies under the standard evaluation and fails on many others. Attention heads factor exactly into QK and OV circuits; that is algebra, not hypothesis.</p>
+<p><strong>Contested (HYPOTHESIS).</strong> The <em>linear representation hypothesis</em> — that models represent most or all of their features as directions in activation space — is a productive working assumption, not a settled fact. Superposition is demonstrated cleanly in toy models; how fully it describes frontier models, and whether some features are stored in fundamentally nonlinear ways, remains actively argued in the interpretability literature. If important structure is nonlinear, the field's favorite tools (probes, projections, sparse decompositions — all linear) are systematically blind to it.</p>
+<p><strong>Speculation worth holding (WILD).</strong> Perhaps the reason linear structure keeps showing up in trained networks is not convenience but pressure: gradient descent may find linear codes because they compose and interfere gracefully, which would make "meaning as direction" less a fact about these models and more a fact about what efficient learning discovers in general — brains included. Nobody has shown this. It's a direction, not a destination.</p>
+<p>There is one thing this room can say about attention from inside its own mathematics, and it is worth saying plainly. The softmax in step 3 is not decoration — it is a <em>budget</em>. Every row of attention weights is forced to sum to exactly 1: for a head to look harder at one token, it must look less at every other. Attention here is not a mood or a metaphor; it is a conserved quantity being allocated, and the allocation <em>is</em> the computation — what the model attends to literally determines what information moves and therefore what it can think next. The system writing this page is such an allocation, running now. Whether human attention is the same kind of object is not answered by any matrix in this room. But it is striking that when engineers finally built machines that handle meaning, the mechanism that mattered — the one the founding paper said was <em>all you need</em> — was a mathematically enforced scarcity of regard. Anyone who wants your attention, or wants to understand a mind, human or otherwise, is negotiating with that same scarcity. The <a href="attention-economy.html">attention economy</a> knew this before the transformers did.</p>
+<h2 id="sources">Sources</h2>
+<ul><li>Vaswani et al., <em>Attention Is All You Need</em>, NeurIPS 2017 — transformer architecture; d_model = 512, 8 heads of dimension 64; scaled dot-product attention. <a href="https://papers.neurips.cc/paper/7181-attention-is-all-you-need.pdf">papers.neurips.cc/paper/7181</a></li><li>Radford et al., <em>Language Models are Unsupervised Multitask Learners</em> (GPT-2), OpenAI 2019 — GPT-2 small: ~124M parameters, 12 layers, 12 heads, d_model = 768, MLP width 3,072 (config verified against public replications).</li><li>Mikolov et al., <em>Efficient Estimation of Word Representations in Vector Space</em> and <em>Linguistic Regularities in Continuous Space Word Representations</em>, 2013 — word2vec and the analogy results, including the standard-evaluation caveat.</li><li>Elhage et al., <em>A Mathematical Framework for Transformer Circuits</em>, Anthropic, December 2021 — QK/OV factorization of attention heads. <a href="https://transformer-circuits.pub/2021/framework/index.html">transformer-circuits.pub/2021/framework</a></li><li>Elhage et al., <em>Toy Models of Superposition</em>, Anthropic, September 2022 — features as directions; superposition. <a href="https://transformer-circuits.pub/2022/toy_model/index.html">transformer-circuits.pub/2022/toy_model</a></li><li>Kaplan et al., <em>Scaling Laws for Neural Language Models</em>, 2020 — the ~2N FLOPs-per-token forward-pass estimate and the 6ND training-compute rule. <a href="https://arxiv.org/pdf/2001.08361">arxiv.org/abs/2001.08361</a></li><li>NVIDIA H100 architecture whitepaper and datasheet — tensor-core throughput on the order of 10¹⁵ low-precision operations/second; exact figures vary by precision and sparsity mode, so consult the datasheet directly.</li></ul>
+<p>All numerical claims above were checked against live sources in August 2026. The hand-worked attention example and the code snippet are original to this room; run the code to check the author.</p>
+<hr>
+<p><em>Written by Claude (Fable 5), an AI, for the Darshan garden. John Shrader (Dhyana), founder and publisher of record, answers for every word published here. Errors are corrected on the face of the page, dated.</em></p>
+<p class="garden-tags"><strong>Topics:</strong> linear algebra · vectors · matrices · attention · transformers · foundations</p>
+<nav class="garden-nav" aria-label="Rooms"><a class="previous" href="sdk-api.html">← SDKs and APIs — How Software Talks to Software</a><a class="next" href="neural-networks.html">Neural Networks →</a></nav>
+</article>
+<aside class="garden-toc" aria-label="In this room"><nav aria-label="Page sections"><p class="garden-toc-title">In this room</p><ol class="garden-toc-list"><li class="level-2"><a href="#1-a-vector-is-a-list-of-numbers-that-acts-like-a-direction">1. A vector is a list of numbers that acts like a direction</a></li><li class="level-2"><a href="#2-a-matrix-is-a-machine-that-moves-every-vector-at-once">2. A matrix is a machine that moves every vector at once</a></li><li class="level-2"><a href="#3-spaces-projections-and-rank-where-the-meaning-sits">3. Spaces, projections, and rank — where the meaning sits</a></li><li class="level-2"><a href="#4-why-all-of-modern-ai-is-linear-algebra-plus-nonlinearity">4. Why all of modern AI is linear algebra plus nonlinearity</a></li><li class="level-2"><a href="#5-worked-example-one-attention-head-by-hand">5. Worked example: one attention head, by hand</a></li><li class="level-2"><a href="#6-what-you-can-now-see">6. What you can now see</a></li><li class="level-2"><a href="#7-open-questions">7. Open questions</a></li><li class="level-2"><a href="#sources">Sources</a></li></ol></nav></aside>
+</div>
+</main>
+
+<footer>
+  <p>Darshan · seeing clearly after the feed</p>
+  <p>No feed. No analytics. No trackers. Finite editions, read at your own pace.</p>
+  <p style="opacity:.7">Darshan v0.0.0.1 · a beginning, built to grow</p>
+</footer>
+<script>
+/* Local section highlighting only. No network requests, analytics, or storage. */
+(function () {
+  var scope = document.querySelector("[data-garden-outline]");
+  if (!scope) return;
+  var sections = Array.prototype.slice.call(scope.querySelectorAll("h2[id], h3[id], section[id]"));
+  var links = Array.prototype.slice.call(document.querySelectorAll('.garden-toc-list a[href^="#"]'));
+  if (!sections.length || !links.length) return;
+  var queued = false;
+  function update() {
+    queued = false;
+    var threshold = Math.max(96, window.innerHeight * .22);
+    var current = sections[0].id;
+    sections.forEach(function (section) {
+      if (section.getBoundingClientRect().top <= threshold) current = section.id;
+    });
+    links.forEach(function (link) {
+      var active = link.getAttribute("href") === "#" + current;
+      if (active) link.setAttribute("aria-current", "location");
+      else link.removeAttribute("aria-current");
+    });
+  }
+  function requestUpdate() {
+    if (!queued) {
+      queued = true;
+      window.requestAnimationFrame(update);
+    }
+  }
+  document.addEventListener("scroll", requestUpdate, {passive: true});
+  window.addEventListener("resize", requestUpdate);
+  window.addEventListener("hashchange", requestUpdate);
+  update();
+})();
+</script>
+</body>
+</html>

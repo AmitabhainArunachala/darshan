@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Machine Learning · Darshan Garden</title>
+<meta name="description" content="What it means for a program to learn from data instead of being written rule by rule. The core loop of data, loss, and gradient, worked by hand with real numbers. The model families beyond deep learning, and what generalization — the whole point — actually is.">
+<link rel="stylesheet" href="../style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ccircle cx='8' cy='8' r='6' fill='none' stroke='%238f3b26' stroke-width='1.5'/%3E%3Ccircle cx='8' cy='8' r='2' fill='%238f3b26'/%3E%3C/svg%3E">
+<script>
+/* Theme memory. No analytics, no trackers. */
+(function () {
+  try {
+    var t = localStorage.getItem("darshan-theme");
+    if (t) document.documentElement.setAttribute("data-theme", t);
+  } catch (e) {}
+})();
+</script>
+<style>
+/* Garden-only layout. Kept here so the publication stylesheet remains shared. */
+body.garden-page-body {
+  max-width: none;
+  padding: 1.5rem clamp(1.25rem, 3.5vw, 4rem) 4rem;
+  font-size: 1.125rem;
+}
+body.garden-page-body > main,
+body.garden-page-body > .masthead,
+body.garden-page-body > footer {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 94rem;
+}
+.garden-layout,
+.garden-index-layout {
+  align-items: start;
+  display: grid;
+  gap: clamp(2.75rem, 5vw, 5rem);
+  grid-template-columns: minmax(0, 64rem) minmax(17rem, 20rem);
+  justify-content: center;
+}
+.garden-layout article,
+.garden-index-main { min-width: 0; }
+.garden-layout .article-title,
+.garden-intro .article-title {
+  font-size: clamp(2.65rem, 3.55vw, 4rem);
+  letter-spacing: -.025em;
+  line-height: 1.06;
+  max-width: 24ch;
+}
+.garden-layout article h2 {
+  font-size: 1.48rem;
+  line-height: 1.3;
+  margin-top: 3.2rem;
+  scroll-margin-top: 1.5rem;
+}
+.garden-layout article h3 {
+  font-size: 1.16rem;
+  margin-top: 2.35rem;
+  scroll-margin-top: 1.5rem;
+}
+.garden-intro { margin-bottom: 2.4rem; }
+.garden-series { margin: 2.8rem 0; scroll-margin-top: 1rem; }
+.garden-series h2 { border-bottom: 1px solid var(--rule); padding-bottom: .45rem; }
+.garden-room-list { list-style: none; margin: 0; padding: 0; }
+.garden-room-list li { border-bottom: 1px solid var(--rule); margin: 0; padding: 1rem 0; }
+.garden-room-title { font-weight: 600; }
+.garden-room-summary { color: var(--faint); font-size: .96rem; margin: .25rem 0 0; }
+.garden-series-link { color: var(--faint); font-size: .82rem; letter-spacing: .12em;
+  text-transform: uppercase; }
+.garden-lede {
+  border-left: 3px solid var(--accent);
+  color: var(--faint);
+  font-size: 1.24rem;
+  font-style: italic;
+  line-height: 1.62;
+  margin: 1.5rem 0 2.2rem;
+  padding: .35rem 0 .35rem 1.35rem;
+}
+.garden-corridors {
+  margin: 1.15rem 0 2.65rem;
+}
+.garden-corridor-list {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: .55rem .62rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.garden-corridor-list li { display: flex; margin: 0; max-width: 100%; }
+.garden-corridor {
+  align-items: center;
+  background: var(--accent-soft);
+  border: 1px solid var(--accent);
+  border-radius: 3px;
+  color: var(--accent);
+  display: inline-flex;
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .73rem;
+  font-weight: 700;
+  letter-spacing: .075em;
+  line-height: 1.35;
+  max-width: 100%;
+  min-height: 2.05rem;
+  overflow-wrap: anywhere;
+  padding: .34rem .72rem .3rem;
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-transform: uppercase;
+  text-underline-offset: .22em;
+}
+.garden-corridor:visited { color: var(--accent); }
+.garden-corridor:hover,
+.garden-corridor:focus-visible {
+  background: var(--accent);
+  color: var(--paper);
+}
+.garden-corridor:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+.garden-series-plate {
+  --plate-accent: var(--accent);
+  border: 1px solid var(--rule);
+  border-top: 3px solid var(--plate-accent);
+  margin: .25rem 0 2.8rem;
+  overflow: hidden;
+  position: relative;
+}
+.garden-series-plate--foundations { --plate-accent: #496f76; }
+.garden-series-plate--story-of-ai { --plate-accent: #526d9a; }
+.garden-series-plate--instrument { --plate-accent: #745779; }
+.garden-series-plate--strange-loops { --plate-accent: #866448; }
+.garden-series-plate--bridge { --plate-accent: #697044; }
+.garden-series-plate--power { --plate-accent: #8f3b26; }
+.garden-series-plate--time-future { --plate-accent: #416778; }
+[data-theme="dark"] .garden-series-plate { --plate-accent: var(--accent); }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .garden-series-plate { --plate-accent: var(--accent); }
+}
+.garden-series-plate-media {
+  aspect-ratio: 16 / 9;
+  background: var(--accent-soft);
+  overflow: hidden;
+  position: relative;
+}
+.garden-series-plate-media::after {
+  background:
+    linear-gradient(90deg, var(--paper) 0, transparent 24%, transparent 76%, var(--paper) 100%),
+    linear-gradient(0deg, var(--paper) 0, transparent 32%);
+  content: "";
+  inset: 0;
+  opacity: .24;
+  pointer-events: none;
+  position: absolute;
+}
+.garden-series-plate picture,
+.garden-series-card picture { display: block; height: 100%; }
+.garden-series-plate img {
+  display: block;
+  filter: saturate(.82) contrast(1.03);
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+.garden-series-plate figcaption {
+  align-items: baseline;
+  background: var(--paper);
+  border-top: 1px solid var(--rule);
+  display: grid;
+  gap: .25rem 1rem;
+  grid-template-columns: auto 1fr;
+  padding: .78rem 1rem .85rem;
+}
+.garden-series-plate-kicker {
+  color: var(--plate-accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+.garden-series-plate figcaption strong { font-size: 1rem; font-weight: 600; }
+.garden-series-plate-terms {
+  color: var(--faint);
+  font-size: .82rem;
+  grid-column: 2;
+  margin: 0;
+}
+.garden-visual {
+  background:
+    radial-gradient(circle at 92% 8%, var(--accent-soft), transparent 30%),
+    linear-gradient(135deg, transparent 0 72%, var(--accent-soft) 72% 72.4%, transparent 72.4%);
+  border: 1px solid var(--rule);
+  border-top: 3px solid var(--accent);
+  margin: 1.25rem 0 2.5rem;
+  overflow: hidden;
+  padding: clamp(1.1rem, 2.7vw, 1.75rem);
+  position: relative;
+}
+.garden-visual::before {
+  background-image:
+    linear-gradient(var(--rule) 1px, transparent 1px),
+    linear-gradient(90deg, var(--rule) 1px, transparent 1px);
+  background-size: 2.25rem 2.25rem;
+  content: "";
+  inset: 0;
+  opacity: .13;
+  pointer-events: none;
+  position: absolute;
+}
+.garden-visual > * { position: relative; }
+.garden-visual-head {
+  align-items: baseline;
+  display: grid;
+  gap: .45rem 1rem;
+  grid-template-columns: auto 1fr;
+  margin-bottom: 1.2rem;
+}
+.garden-visual-kicker {
+  color: var(--accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .68rem;
+  font-weight: 700;
+  letter-spacing: .17em;
+  margin: 0;
+  text-transform: uppercase;
+}
+.garden-visual-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  line-height: 1.28;
+  margin: 0;
+}
+.garden-visual-as-of {
+  color: var(--faint);
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: .72rem;
+  letter-spacing: .08em;
+  margin: 0;
+  text-transform: uppercase;
+  white-space: normal;
+}
+.garden-visual-items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.garden-visual-item {
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  margin: 0;
+  min-width: 0;
+  padding: .8rem .9rem;
+}
+.garden-visual-item-label {
+  display: block;
+  font-size: .96rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+.garden-visual-item-detail {
+  color: var(--faint);
+  display: block;
+  font-size: .9rem;
+  line-height: 1.45;
+  margin-top: .27rem;
+}
+.garden-visual-item-meta {
+  color: var(--accent);
+  display: block;
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: .72rem;
+  letter-spacing: .08em;
+  margin-bottom: .38rem;
+  text-transform: uppercase;
+}
+.garden-visual-caption {
+  border-top: 1px solid var(--rule);
+  color: var(--faint);
+  display: grid;
+  font-size: .84rem;
+  font-style: italic;
+  gap: .55rem 1rem;
+  grid-template-columns: minmax(0, 1fr) auto;
+  line-height: 1.45;
+  margin: 1.15rem 0 0;
+  padding-top: .75rem;
+}
+.garden-visual-evidence {
+  color: var(--accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .72rem;
+  font-style: normal;
+  font-weight: 650;
+  letter-spacing: .04em;
+  white-space: nowrap;
+}
+.garden-visual-evidence a {
+  color: inherit;
+  text-decoration-thickness: 1px;
+  text-underline-offset: .18em;
+}
+.garden-visual--sequence .garden-visual-items,
+.garden-visual--contrast .garden-visual-items,
+.garden-visual--constellation .garden-visual-items {
+  display: grid;
+  gap: .65rem;
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+}
+.garden-visual--sequence .garden-visual-items { counter-reset: garden-step; }
+.garden-visual--sequence .garden-visual-item {
+  counter-increment: garden-step;
+  padding-top: 2.35rem;
+  position: relative;
+}
+.garden-visual--sequence .garden-visual-item::before {
+  color: var(--accent);
+  content: counter(garden-step, decimal-leading-zero);
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: .68rem;
+  left: .9rem;
+  letter-spacing: .08em;
+  position: absolute;
+  top: .72rem;
+}
+.garden-visual--layers .garden-visual-items { display: grid; gap: .45rem; }
+.garden-visual--layers .garden-visual-item {
+  border-left: clamp(.24rem, .55vw, .48rem) solid var(--accent);
+  display: grid;
+  gap: .15rem 1rem;
+  grid-template-columns: minmax(8rem, .4fr) 1fr;
+}
+.garden-visual--layers .garden-visual-item:nth-child(2) { margin-left: 1.5%; }
+.garden-visual--layers .garden-visual-item:nth-child(3) { margin-left: 3%; }
+.garden-visual--layers .garden-visual-item:nth-child(4) { margin-left: 4.5%; }
+.garden-visual--layers .garden-visual-item:nth-child(5) { margin-left: 6%; }
+.garden-visual--layers .garden-visual-item:nth-child(6) { margin-left: 7.5%; }
+.garden-visual--timeline .garden-visual-items {
+  display: grid;
+  gap: 0;
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+}
+.garden-visual--timeline .garden-visual-item {
+  border-width: 1px 0 0 1px;
+  padding-top: 1.35rem;
+  position: relative;
+}
+.garden-visual--timeline .garden-visual-item::before {
+  background: var(--accent);
+  border: 3px solid var(--paper);
+  border-radius: 50%;
+  content: "";
+  height: .72rem;
+  left: -.4rem;
+  position: absolute;
+  top: -.4rem;
+  width: .72rem;
+}
+.garden-visual--contrast .garden-visual-item:nth-child(odd) { border-top: 2px solid var(--ink); }
+.garden-visual--contrast .garden-visual-item:nth-child(even) { border-top: 2px solid var(--accent); }
+.garden-visual--constellation .garden-visual-items {
+  align-items: stretch;
+  position: relative;
+}
+.garden-visual--constellation .garden-visual-item {
+  border-top: 2px solid var(--accent);
+  box-shadow: 0 .2rem 0 rgba(18, 31, 31, .04);
+  padding-top: 1.35rem;
+  position: relative;
+}
+.garden-visual--constellation .garden-visual-item::before {
+  background: var(--paper);
+  border: 2px solid var(--accent);
+  border-radius: 50%;
+  content: "";
+  height: .55rem;
+  left: calc(50% - .36rem);
+  position: absolute;
+  top: -.38rem;
+  width: .55rem;
+}
+.garden-visual--constellation .garden-visual-item:nth-child(even) { margin-top: .8rem; }
+.garden-series-gallery {
+  display: grid;
+  gap: .8rem;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  margin: 1.5rem 0 3rem;
+}
+.garden-series-card {
+  border: 1px solid var(--rule);
+  color: var(--ink);
+  display: grid;
+  grid-template-rows: 7.5rem auto;
+  overflow: hidden;
+  text-decoration: none;
+}
+.garden-series-card img {
+  height: 100%;
+  object-fit: cover;
+  transition: transform .25s ease;
+  width: 100%;
+}
+.garden-series-card span {
+  border-top: 1px solid var(--rule);
+  font-size: .9rem;
+  font-weight: 600;
+  padding: .65rem .75rem;
+}
+.garden-series-card:hover { border-color: var(--accent); color: var(--accent); }
+.garden-series-card:hover img { transform: scale(1.025); }
+@media (prefers-reduced-motion: reduce) {
+  .garden-series-card img { transition: none; }
+}
+.garden-tags { color: var(--faint); font-size: .82rem; margin-top: 2.2rem; }
+.garden-nav { border-top: 1px solid var(--rule); display: flex; gap: 1rem;
+  justify-content: space-between; margin-top: 2.5rem; padding-top: 1rem; }
+.garden-nav a { max-width: 48%; text-decoration: none; }
+.garden-nav .next { margin-left: auto; text-align: right; }
+.garden-table-wrap { overflow-x: auto; margin: 1.35rem 0; }
+.garden-table { border-collapse: collapse; font-size: .92rem; line-height: 1.45; width: 100%; }
+.garden-table th, .garden-table td { border: 1px solid var(--rule); padding: .55rem .65rem;
+  text-align: left; vertical-align: top; }
+.garden-table th { background: var(--accent-soft); }
+.garden-toc {
+  border-left: 1px solid var(--rule);
+  max-height: calc(100vh - 3rem);
+  overflow: auto;
+  padding: .1rem 0 .75rem 1.3rem;
+  position: sticky;
+  top: 1.5rem;
+}
+.garden-toc-title {
+  color: var(--accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .2em;
+  margin: 0 0 1.15rem;
+  text-transform: uppercase;
+}
+.garden-toc-title::before { content: "☰"; font-size: .8em; margin-right: .65rem; }
+.garden-toc-list { list-style: none; margin: 0; padding: 0; }
+.garden-toc-sublist { list-style: none; margin: 0; padding: 0; }
+.garden-toc-list li { margin: 0; }
+.garden-toc-list a {
+  border-left: 2px solid transparent;
+  color: var(--ink);
+  display: block;
+  font-size: .91rem;
+  line-height: 1.42;
+  margin-left: -1.4rem;
+  padding: .42rem .45rem .42rem 1.3rem;
+  text-decoration: none;
+}
+.garden-toc-list .level-3 a {
+  color: var(--faint);
+  font-size: .86rem;
+  font-style: italic;
+  padding-left: 2.15rem;
+}
+.garden-toc-list a:hover,
+.garden-toc-list a:focus-visible,
+.garden-toc-list a[aria-current="location"] {
+  border-left-color: var(--accent);
+  color: var(--accent);
+}
+.garden-toc-list a[aria-current="location"] { font-weight: 600; }
+.garden-toc-inline { display: none; }
+.garden-layout article :is(h2, h3):target,
+.garden-series:target h2 { color: var(--accent); }
+a.pending { color: var(--faint); text-decoration-style: dashed; }
+a.pending::after { content: " · pending"; font-size: .7em; letter-spacing: .06em;
+  text-transform: uppercase; }
+@media (min-width: 72.01em) {
+  body.garden-page-body > .masthead {
+    align-items: center;
+    column-gap: 2rem;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    margin-bottom: 3.5rem;
+    padding: 1.25rem 0;
+    text-align: left;
+  }
+  body.garden-page-body > .masthead .wordmark { justify-self: start; }
+  body.garden-page-body > .masthead .tagline { justify-self: center; margin: 0; }
+  body.garden-page-body > .masthead nav { justify-self: end; margin: 0; }
+}
+@media (max-width: 72em) {
+  .garden-layout,
+  .garden-index-layout { display: block; }
+  .garden-toc { display: none; }
+  .garden-toc-inline {
+    border: 1px solid var(--rule);
+    display: block;
+    margin: 1.5rem 0 2.4rem;
+    padding: .8rem 1rem;
+  }
+  .garden-toc-inline summary {
+    color: var(--accent);
+    cursor: pointer;
+    font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: .78rem;
+    font-weight: 700;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+  }
+  .garden-toc-inline .garden-toc-list { margin-top: .7rem; }
+  .garden-toc-inline .garden-toc-list a { margin-left: 0; padding-left: .75rem; }
+  .garden-toc-inline .garden-toc-list .level-3 a { padding-left: 1.6rem; }
+}
+@media (max-width: 40em) {
+  body.garden-page-body { font-size: 1.03rem; padding: 1rem 1.05rem 3rem; }
+  .garden-layout .article-title,
+  .garden-intro .article-title { font-size: clamp(2.15rem, 11vw, 3.15rem); }
+  .garden-lede { font-size: 1.1rem; padding-left: 1rem; }
+  .garden-corridors { margin-bottom: 2rem; }
+  .garden-corridor-list { gap: .45rem; }
+  .garden-corridor {
+    font-size: .68rem;
+    min-height: 2.35rem;
+    padding: .3rem .58rem .27rem;
+  }
+  .garden-series-plate-media { aspect-ratio: 16 / 9; }
+  .garden-series-plate figcaption { display: block; }
+  .garden-series-plate figcaption strong { display: block; margin-top: .22rem; }
+  .garden-series-plate-terms { display: block; margin-top: .25rem; }
+  .garden-visual { margin-left: -.15rem; margin-right: -.15rem; padding: 1rem; }
+  .garden-visual-head { display: block; }
+  .garden-visual-title { margin-top: .25rem; }
+  .garden-visual-as-of { margin-top: .35rem; }
+  .garden-visual-caption { grid-template-columns: 1fr; }
+  .garden-visual-evidence { white-space: normal; }
+  .garden-visual--sequence .garden-visual-items,
+  .garden-visual--contrast .garden-visual-items,
+  .garden-visual--constellation .garden-visual-items,
+  .garden-visual--timeline .garden-visual-items { grid-template-columns: 1fr; }
+  .garden-visual--layers .garden-visual-item:nth-child(n) { display: block; margin-left: 0; }
+  .garden-visual--timeline .garden-visual-item { border-width: 0 0 0 1px; }
+  .garden-visual--timeline .garden-visual-item::before { left: -.4rem; top: .9rem; }
+  .garden-visual--constellation .garden-visual-item:nth-child(even) { margin-top: 0; }
+  .garden-series-gallery { grid-template-columns: 1fr; }
+  .garden-nav { flex-direction: column; }
+  .garden-nav a { max-width: none; }
+  .garden-nav .next { margin-left: 0; text-align: left; }
+}
+@media print {
+  a.pending::after { content: " (pending)"; }
+  .garden-layout, .garden-index-layout { display: block; }
+  .garden-toc, .garden-toc-inline { display: none; }
+  .garden-series-card img { display: none; }
+  .garden-series-card { grid-template-rows: auto; }
+}
+</style>
+</head>
+<body class="garden-page-body">
+<button class="theme-toggle" aria-label="Toggle light and dark" onclick="
+  (function () {
+    var d = document.documentElement;
+    var cur = d.getAttribute('data-theme');
+    if (!cur) { cur = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'; }
+    var next = cur === 'dark' ? 'light' : 'dark';
+    d.setAttribute('data-theme', next);
+    try { localStorage.setItem('darshan-theme', next); } catch (e) {}
+  })();
+">◐</button>
+
+<header class="masthead">
+  <h1 class="wordmark"><a href="../index.html">DARSHAN</a></h1>
+  <p class="tagline">A signal of clear seeing in an age of information overload</p>
+  <nav>
+    <a href="../index.html">Articles</a>
+    <a href="index.html">Garden</a>
+    <a href="../about.html">About</a>
+  </nav>
+</header>
+
+<main>
+<div class="garden-layout">
+<article data-garden-room="machine-learning" data-garden-outline>
+<p class="garden-series-link"><a href="index.html#foundations">Foundations of the Machine</a></p>
+<p class="article-meta">25 August 2026 · Draft</p>
+<h1 class="article-title">Machine Learning</h1>
+<div class="draft-banner"><strong>Draft — pending discernment pass.</strong> This room is part of the garden's first planting. It has not been promoted to published status; check its sources and open questions before citing it.</div>
+<p class="garden-lede">What it means for a program to learn from data instead of being written rule by rule. The core loop of data, loss, and gradient, worked by hand with real numbers. The model families beyond deep learning, and what generalization — the whole point — actually is.</p>
+<nav class="garden-corridors" aria-label="Explore connected rooms" data-corridor-count="11"><ul class="garden-corridor-list"><li><a class="garden-corridor" href="programming.html">What Programming Is</a></li><li><a class="garden-corridor" href="algorithms-new-vision.html">A New Vision for Algorithms</a></li><li><a class="garden-corridor" href="neural-networks.html">Neural Networks</a></li><li><a class="garden-corridor" href="deep-learning.html">Deep Learning</a></li><li><a class="garden-corridor" href="optimization.html">Optimization — the Hidden Engine</a></li><li><a class="garden-corridor" href="linear-algebra-and-ai.html">Linear Algebra and AI</a></li><li><a class="garden-corridor" href="pretraining-post-training.html">Pretraining and Post-training</a></li><li><a class="garden-corridor" href="history-of-ai.html">The History of AI</a></li><li><a class="garden-corridor" href="benchmarks.html">Benchmarks and What They Measure</a></li><li><a class="garden-corridor" href="top-papers-ml.html">The Top 20 Papers in ML</a></li><li><a class="garden-corridor" href="mechanistic-interpretability.html">Mechanistic Interpretability</a></li></ul></nav>
+<figure class="garden-series-plate garden-series-plate--foundations">
+<div class="garden-series-plate-media"><picture><source srcset="assets/series/foundations.webp" type="image/webp"><img src="assets/series/foundations.png" alt="An engraved transistor lattice rising through computational layers into a neural graph" width="1672" height="941" loading="eager" decoding="async"></picture></div>
+<figcaption><span class="garden-series-plate-kicker">Visual field</span><strong>Foundations of the Machine</strong><span class="garden-series-plate-terms">machine learning · supervised learning · loss function · training set</span></figcaption>
+</figure>
+<details class="garden-toc-inline"><summary>In this room</summary><ol class="garden-toc-list"><li class="level-2"><a href="#1-the-inversion-programs-from-data-not-rules">1. The inversion: programs from data, not rules</a></li><li class="level-2"><a href="#2-the-core-loop-data-loss-gradient">2. The core loop: data, loss, gradient</a></li><li class="level-2"><a href="#3-the-loop-by-hand-numbers-you-can-check">3. The loop by hand: numbers you can check</a></li><li class="level-2"><a href="#4-the-families-beyond-deep-learning">4. The families beyond deep learning</a></li><li class="level-2"><a href="#5-what-generalization-actually-means">5. What generalization actually means</a></li><li class="level-2"><a href="#6-what-you-can-now-see">6. What you can now see</a></li><li class="level-2"><a href="#open-questions">Open questions</a></li><li class="level-2"><a href="#sources">Sources</a></li></ol></details>
+<p>If you've read <a href="programming.html">programming</a>, you've seen the classical deal: a human thinks through a problem, writes down explicit rules, and the machine executes them exactly. This room is about the inversion of that deal. In machine learning, the human supplies examples and a way of scoring failure, and the machine finds the rules. Everything downstream in this garden — <a href="neural-networks.html">neural networks</a>, <a href="deep-learning.html">deep learning</a>, the systems shaped by <a href="pretraining-post-training.html">pretraining and post-training</a> — sits on the ideas in this room.</p>
+<h2 id="1-the-inversion-programs-from-data-not-rules">1. The inversion: programs from data, not rules</h2>
+<p>Start with a concrete problem: build a spam filter.</p>
+<p>The classical approach is to write rules. If the message contains "FREE MONEY", flag it. If the sender isn't in the address book and the message has more than three links, flag it. This works for a while, and then it doesn't. Spammers read your rules — or discover them by probing — and route around them. "FREE MONEY" becomes "FR3E M0NEY". Every patch invites the next evasion, and after a few years you have ten thousand rules, nobody understands their interactions, and the filter is still losing.</p>
+<p>The machine learning approach is different. You collect fifty thousand emails that humans have already labeled — spam or not spam — and you give a program two things: a flexible family of possible rules, and a score that measures how badly any candidate rule set performs on the labeled examples. Then you let an <a href="algorithms-new-vision.html">algorithm</a> search for the rules that score best. You never write "FREE MONEY" anywhere. The program finds that phrase, and its misspelled cousins, and thousands of weaker signals no human would have thought to encode, because those patterns are in the data.</p>
+<p>That is the whole field in one move: <strong>machine learning is the discipline of producing programs from data rather than from hand-written rules.</strong> The term is old. Arthur Samuel coined it in 1959, in a paper in the <em>IBM Journal of Research and Development</em> called "Some Studies in Machine Learning Using the Game of Checkers." His checkers program, running on an IBM 701, improved by playing — after a night of self-play it played better checkers than Samuel did. That's the founding demonstration: a machine that ended up holding knowledge its author never explicitly gave it. (More of this lineage lives in <a href="history-of-ai.html">history of AI</a>.)</p>
+<p>The definition the field actually uses day-to-day comes from Tom Mitchell's 1997 textbook: a program learns from experience <strong>E</strong> with respect to task <strong>T</strong> and performance measure <strong>P</strong> if its performance on T, measured by P, improves with E. Dry, but load-bearing, because it forces you to name all three parts. Vague projects die on this definition. "We want the system to understand our customers" — what's the task? What's the measure? What's the experience? If you can't answer, you don't have a machine learning problem yet. You have a wish.</p>
+<p>One clarification before moving on, because the words get tangled. Machine learning is the broad field: learning from data, by any method. <a href="neural-networks.html">Neural networks</a> are one family of models within it. <a href="deep-learning.html">Deep learning</a> is the modern, many-layered form of that one family. Deep learning's victories are so loud that people use "AI" and "machine learning" and "deep learning" interchangeably. They aren't interchangeable, and section 4 is about what else is in the toolbox — including tools that still beat deep learning on common, boring, valuable problems.</p>
+<h2 id="2-the-core-loop-data-loss-gradient">2. The core loop: data, loss, gradient</h2>
+<figure class="garden-visual garden-visual--sequence" aria-labelledby="visual-machine-learning-1" data-claim-scope="section-synthesis" data-placement-heading="2-the-core-loop-data-loss-gradient" data-evidence-headings="2-the-core-loop-data-loss-gradient">
+<div class="garden-visual-head"><p class="garden-visual-kicker">The learning loop</p><p class="garden-visual-title" id="visual-machine-learning-1">Turn wrongness into a direction</p></div>
+<ol class="garden-visual-items" role="list"><li class="garden-visual-item"><strong class="garden-visual-item-label">Data</strong><span class="garden-visual-item-detail">Training examples pair the inputs with the outputs the task should produce.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Model</strong><span class="garden-visual-item-detail">A chosen family of functions exposes adjustable parameters.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Predict</strong><span class="garden-visual-item-detail">The current parameter setting produces outputs on the examples.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Loss</strong><span class="garden-visual-item-detail">One number measures how wrong those outputs are.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Gradient</strong><span class="garden-visual-item-detail">Calculus identifies the local direction that increases the loss fastest.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Nudge</strong><span class="garden-visual-item-detail">Parameters step against that direction and the cycle begins again.</span></li></ol>
+<figcaption class="garden-visual-caption"><span>Differentiable learning repeats a loop that uses local slope to seek lower loss; stochasticity or an oversized step can still push one update uphill.</span><span class="garden-visual-evidence">Drawn from: <a href="#2-the-core-loop-data-loss-gradient">2. The core loop: data, loss, gradient</a></span></figcaption>
+</figure>
+<p>A central class of modern learning systems — from linear regression to the largest neural model in a datacenter — runs some version of one loop. It has three parts. Other families, including trees and nearest-neighbor methods, learn by different search or construction procedures; we will come back to them in section 4.</p>
+<p><strong>Data.</strong> In the most common setup, called <strong>supervised learning</strong>, the experience is a set of labeled examples: inputs paired with correct outputs. Emails paired with spam/not-spam. Photos paired with the name of the thing in them. House features paired with sale prices. The labeled examples the model learns from are the <strong>training set</strong>. There are other setups — unsupervised learning finds structure in unlabeled data, and reinforcement learning learns from delayed rewards for actions — but supervised learning is where the ideas are clearest, so this room stays there.</p>
+<p><strong>Model.</strong> You choose a family of candidate functions with adjustable knobs, called parameters. The family might be "all straight lines" (two knobs: slope and intercept), or a decision tree, or a neural network with a billion knobs. The choice of family matters enormously and is the subject of section 4. But given a family, "learning" reduces to something concrete: <strong>find the knob settings that work best.</strong></p>
+<p><strong>Loss.</strong> "Best" needs a number. A <strong>loss function</strong> measures, for a given knob setting, how wrong the model's outputs are on the training data — say, the average squared gap between predicted and actual house prices. Lower is better; zero is perfection on the training set. The loss converts learning, a vague aspiration, into something a machine can do: minimize a number.</p>
+<p>And here is the trick that makes the whole modern era go. For models whose loss changes smoothly as you turn the knobs, calculus tells you, at any knob setting, which direction of turning reduces the loss fastest. That direction is the gradient. <strong>Gradient descent</strong> says: compute the gradient, take a step against it, repeat. With an exact gradient and a sufficiently small step, the loss drops locally. In real training, noisy minibatch gradients or an oversized step can make one update go uphill even while the longer run improves. You are walking downhill on a landscape whose coordinates are knob settings and whose altitude is error, but the ground can be rough and your compass can be noisy.</p>
+<p>So the loop is: <em>predict on the training data → measure the loss → compute the gradient → nudge the parameters → repeat.</em> Thousands or millions of times. That loop, plus <a href="linear-algebra-and-ai.html">linear algebra</a> to make each pass fast on modern hardware, plus a century of refinements covered in <a href="optimization.html">optimization</a>, trains differentiable models from a two-knob line to a frontier language model. A tree or k-nearest-neighbor model is trained differently, which is why "training" names a goal rather than one universal algorithm.</p>
+<p>If it sounds too simple to be the engine of the current era — it is that simple, and it is that engine. The depth is in the consequences, not the recipe.</p>
+<h2 id="3-the-loop-by-hand-numbers-you-can-check">3. The loop by hand: numbers you can check</h2>
+<p>Claims about learning stay foggy until you've watched the loop run once with actual arithmetic. So let's trace exactly what happens, small enough to verify with a pencil.</p>
+<p>Three data points, one input each: (1, 2), (2, 4), (3, 6). You can see the pattern — the output is twice the input — but pretend you can't, because the machine can't. Our model family is the simplest possible: lines through the origin, <em>y = wx</em>, with a single knob <em>w</em>. Our loss is mean squared error:</p>
+<blockquote><p>L(w) = ⅓ · [ (w·1 − 2)² + (w·2 − 4)² + (w·3 − 6)² ]</p></blockquote>
+<p>The gradient — the derivative of L with respect to <em>w</em> — works out to:</p>
+<blockquote><p>dL/dw = ⅔ · [ 1·(w·1 − 2) + 2·(w·2 − 4) + 3·(w·3 − 6) ]</p></blockquote>
+<p>Each term is (input) × (error on that point). Points where the model is more wrong push harder on the knob. Start ignorant, at <em>w</em> = 0, and use a step size (the learning rate) of 0.05.</p>
+<p><strong>Step 1.</strong> At <em>w</em> = 0 the predictions are all 0, so the errors are −2, −4, −6. The gradient is ⅔·(1·(−2) + 2·(−4) + 3·(−6)) = ⅔·(−28) ≈ −18.67. Negative gradient means "increase <em>w</em> to reduce loss." Update: <em>w</em> ← 0 − 0.05·(−18.67) = <strong>0.933</strong>.</p>
+<p><strong>Step 2.</strong> At <em>w</em> = 0.933, predictions are 0.933, 1.867, 2.80; errors are −1.067, −2.133, −3.20. Gradient ≈ ⅔·(−14.93) ≈ −9.96. Update: <em>w</em> ← 0.933 + 0.498 = <strong>1.431</strong>.</p>
+<p><strong>Step 3.</strong> Gradient ≈ −5.31. Update: <em>w</em> ← 1.431 + 0.266 = <strong>1.697</strong>.</p>
+<p>The sequence runs 0 → 0.933 → 1.431 → 1.697 → 1.838 → … closing on 2.0, the right answer, with each step covering a constant fraction of the remaining distance. Nobody told the program "the rule is double the input." It was told only: here is data, here is what wrong costs, here is which way is downhill. Ten lines of Python reproduce this, and running them is worth more than rereading this section:</p>
+<pre><code>data = [(1, 2), (2, 4), (3, 6)]
+w, lr = 0.0, 0.05
+for step in range(20):
+    grad = (2 / len(data)) * sum(x * (w * x - y) for x, y in data)
+    w -= lr * grad
+    print(step, round(w, 4))</code></pre>
+<p>Now the honest scaling claim. Training GPT-class models is this loop with three substitutions: billions of parameters instead of one, a loss over text prediction instead of squared error on three points, and the gradient computed by backpropagation — an efficient bookkeeping method for getting the gradient of every parameter at once, covered properly in <a href="neural-networks.html">neural networks</a>. The <em>logic</em> is identical. What does not scale is our understanding of the result: with one knob you can read the learned rule right off the number, and with a billion knobs you get a system whose behavior nobody can read off anything — which is why <a href="mechanistic-interpretability.html">mechanistic interpretability</a> exists as a field.</p>
+<p>Two practical honesty notes, so the toy doesn't mislead. First, our loss surface had a single valley; big models have wildly complicated surfaces, and that gradient descent works on them anyway was a genuine surprise the <a href="optimization.html">optimization</a> room takes up. Second, we checked our model on the same data we trained on. For three points and one knob that's harmless. In general it is the cardinal sin of the field, and section 5 explains why.</p>
+<h2 id="4-the-families-beyond-deep-learning">4. The families beyond deep learning</h2>
+<figure class="garden-visual garden-visual--constellation" aria-labelledby="visual-machine-learning-2" data-claim-scope="section-synthesis" data-placement-heading="4-the-families-beyond-deep-learning" data-evidence-headings="4-the-families-beyond-deep-learning">
+<div class="garden-visual-head"><p class="garden-visual-kicker">The model toolbox</p><p class="garden-visual-title" id="visual-machine-learning-2">Match the family's bias to the shape of the problem</p></div>
+<ul class="garden-visual-items" role="list"><li class="garden-visual-item"><strong class="garden-visual-item-label">Linear</strong><span class="garden-visual-item-detail">Flat relationships reward interpretability and work well as a baseline.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Nearest neighbors</strong><span class="garden-visual-item-detail">Nearby inputs are assumed to deserve nearby answers.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Trees</strong><span class="garden-visual-item-detail">Sharp feature thresholds carve tabular data into readable regions.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Ensembles</strong><span class="garden-visual-item-detail">Many trees average or repair one another on rows-and-columns problems.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">SVMs</strong><span class="garden-visual-item-detail">A widest-margin boundary suits medium data with separable classes.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Neural networks</strong><span class="garden-visual-item-detail">Hierarchical learned features dominate raw perception and language at scale.</span></li></ul>
+<figcaption class="garden-visual-caption"><span>No family wins everywhere because every method assumes a different structure in the world.</span><span class="garden-visual-evidence">Drawn from: <a href="#4-the-families-beyond-deep-learning">4. The families beyond deep learning</a></span></figcaption>
+</figure>
+<p>The core loop needs a model family, and gradient descent is not the only search method. Different families carve up the input space in characteristically different ways — each has an <strong>inductive bias</strong>, a built-in assumption about what kinds of patterns are likely, which is what lets it guess beyond its data at all. Here are the ones that matter, with real dates:</p>
+<div class="garden-table-wrap"><table class="garden-table"><thead><tr><th>Family</th><th>Core idea</th><th>Bias: assumes the truth looks like…</th><th>Where it wins</th><th>Main weakness</th></tr></thead><tbody><tr><td>Linear models (1800s statistics onward)</td><td>Weighted sum of inputs</td><td>A straight line / flat plane</td><td>Small data, need for interpretability, baselines</td><td>Can't represent curved or interacting patterns</td></tr><tr><td>k-nearest neighbors</td><td>Answer with the labels of the closest training points</td><td>Smooth: nearby inputs get similar outputs</td><td>Tiny problems, sanity checks</td><td>Slow at prediction; collapses in high dimensions</td></tr><tr><td>Decision trees (CART, 1984)</td><td>Chain of if-then splits on single features</td><td>Axis-aligned boxes with sharp thresholds</td><td>Human-readable rules</td><td>One tree alone overfits badly</td></tr><tr><td>Tree ensembles: random forests (Breiman, 2001), gradient boosting (XGBoost, 2016)</td><td>Hundreds of trees, averaged or built to fix each other's errors</td><td>Sharp thresholds + interactions, tamed by averaging</td><td>Tabular data: rows and columns, spreadsheets, business records</td><td>Doesn't transfer to raw images, audio, text</td></tr><tr><td>Support vector machines (Cortes &amp; Vapnik, 1995)</td><td>The widest-margin boundary between classes, with kernels for nonlinearity</td><td>Classes separated by a clean margin</td><td>Medium-sized data; was state of the art pre-2012</td><td>Scales poorly to huge datasets</td></tr><tr><td>Neural networks → <a href="deep-learning.html">deep learning</a></td><td>Stacked layers of learned features</td><td>Hierarchical structure: parts made of parts</td><td>Raw perception and language at scale</td><td>Data- and compute-hungry; opaque</td></tr></tbody></table></div>
+<p>Two things in this table deserve to be said louder.</p>
+<p>First, the pecking order flipped within living memory. Through the 2000s, support vector machines and ensembles were the respectable choice and neural networks were a backwater. The reversal has a date: in 2012, AlexNet — a deep <a href="neural-networks.html">neural network</a> trained on GPUs — won the ImageNet image-recognition <a href="benchmarks.html">benchmark</a> with a top-5 error of 15.3% against 26.2% for the runner-up, which used the classical pipeline. Nearly halving the field's error in one entry converted the field almost overnight.</p>
+<p>Second — and this is the part the hype omits — <strong>the flip happened for perception and language, not for everything.</strong> On tabular data, the rows-and-columns records that most businesses, hospitals, and governments actually hold, tree ensembles remain the tool to beat. A NeurIPS 2022 benchmark study by Grinsztajn, Oyallon, and Varoquaux, run across 45 tabular datasets, found tree-based models like XGBoost and random forests still state of the art on medium-sized tabular data (around 10,000 samples), before even counting their large speed advantage. Their diagnosis was inductive bias: deep learning's assumptions suit images and sequences, where nearby pixels and words relate smoothly; tabular columns have no such geometry, and trees' sharp thresholds fit them better. Newer tabular deep models (the TabPFN line among them) have been narrowing the gap since, but the practical default in 2026 for a spreadsheet-shaped problem is still gradient boosting, trained in minutes on a laptop.</p>
+<p>There is a theorem that explains why no single family ends the argument. Wolpert and Macready's <strong>no free lunch theorems</strong> (1997) prove that averaged over <em>all</em> possible problems, every learning algorithm performs identically. An algorithm only outperforms on a class of problems by underperforming on another. Learning is possible at all only because our world isn't "all possible problems" — it has structure, and a model family wins exactly where its bias matches that structure. Leo Breiman's 2001 essay "Statistical Modeling: The Two Cultures" made the cultural version of this argument — judge models by predictive performance on the problem in front of you, not by theoretical pedigree — and it reads today as the manifesto the field ended up following.</p>
+<p>The working craft, then, is not "use the newest model." It is: look at the shape of your data, pick the family whose bias matches, and always fit the dumb baseline first — because if a linear model gets 94% and your sophisticated model gets 95%, that gap is the honest measure of what the sophistication bought.</p>
+<h2 id="5-what-generalization-actually-means">5. What generalization actually means</h2>
+<figure class="garden-visual garden-visual--sequence" aria-labelledby="visual-machine-learning-3" data-claim-scope="section-synthesis" data-placement-heading="5-what-generalization-actually-means" data-evidence-headings="5-what-generalization-actually-means">
+<div class="garden-visual-head"><p class="garden-visual-kicker">The hidden-data discipline</p><p class="garden-visual-title" id="visual-machine-learning-3">Four doors between fitting and trust</p></div>
+<ol class="garden-visual-items" role="list"><li class="garden-visual-item"><strong class="garden-visual-item-label">Train</strong><span class="garden-visual-item-detail">Fit parameters on the examples the learner is allowed to see, even if training error reaches zero.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Validate</strong><span class="garden-visual-item-detail">Choose architectures and settings on a separate slice so those decisions do not consume the final test.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Test once</strong><span class="garden-visual-item-detail">Use the untouched test set for the final same-distribution estimate, not as an iterative steering signal.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Meet the world</strong><span class="garden-visual-item-detail">Deployment can still shift hospitals, economies, sensors, or adversaries beyond what any held-out split promised.</span></li></ol>
+<figcaption class="garden-visual-caption"><span>A model earns evidence of generalization only when each later dataset remains untouched by the decisions made at the earlier one.</span><span class="garden-visual-evidence">Drawn from: <a href="#5-what-generalization-actually-means">5. What generalization actually means</a></span></figcaption>
+</figure>
+<p>Here is the uncomfortable fact at the center of the field: <strong>driving training loss to zero is trivial and worthless.</strong> A model that memorizes its training set — a lookup table — achieves perfect training loss and learns nothing. The entire point is performance on data the model has never seen. That is <strong>generalization</strong>, and it, not the loop of section 2, is the actual subject of machine learning.</p>
+<p>The field's basic instrument for measuring it is brutally simple: hide some data. Before training, split your labeled examples — commonly about 80/20 — into a training set the model learns from and a <strong>test set</strong> it never sees until the end. Training error tells you the model can fit; test error tells you it learned something real. The gap between them has a name: <strong>overfitting</strong> — the model has fit the noise and accidents of its training sample rather than the pattern, like a student who memorized last year's exam answers and walks confidently into a new exam. The standard MNIST release makes the discipline concrete: 60,000 designated training images and 10,000 designated test images. Those test images are held out from that standard training split; the benchmark's long public life does not guarantee that every later researcher or model developer left them untouched.</p>
+<p>And one rule follows that is the closest thing the field has to a moral law: <strong>you may evaluate on the test set; you may not make decisions based on it.</strong> Every time you peek at test results and adjust your model in response, information leaks from the test set into your choices, and its verdict quietly inflates. Practitioners hold out a third slice, the validation set, for tuning, and touch the test set once. Versions of this sin — training on the test set by increments — are behind a large share of the impressive numbers that later fail to replicate, a failure mode with its own room in <a href="benchmarks.html">benchmarks</a>.</p>
+<p>For most of the field's history, the theory of generalization was a tidy U-shaped story: small models underfit, huge models overfit, virtue lives in the middle, and regularization — penalties on model complexity — keeps you there. Then deep learning broke the story, in two documented steps.</p>
+<p>Step one: Zhang et al., in "Understanding Deep Learning Requires Rethinking Generalization" (2017), took standard image-classification networks and trained them on CIFAR-10 with the labels randomly scrambled — every true relationship between picture and label destroyed. The networks reached zero training error anyway. They memorized 50,000 arbitrary labels perfectly. The same architecture, same optimizer, trained on <em>true</em> labels, generalizes well. So sheer capacity to memorize cannot be what prevents generalization — the classical complexity story doesn't distinguish the two cases.</p>
+<p>Step two: Belkin et al. (2019) mapped <strong>double descent</strong>. Track test error while growing a model: it falls, then rises toward the point where the model can just barely fit all the training data — the classical overfitting peak, exactly as the U-shaped story predicts — and then, as the model grows far <em>past</em> that point, test error comes back down. The U-shape is real but local; enormously overparameterized models that fit their training data exactly can generalize well, and often better than the "right-sized" model. Why gradient descent on overparameterized networks lands on solutions that generalize — rather than the memorizing solutions we know exist in the same parameter space — is understood in pieces (implicit biases of the optimizer toward simple functions are the leading thread) but not settled. It is one of the honest open problems of the era, continued in <a href="deep-learning.html">deep learning</a> and <a href="optimization.html">optimization</a>.</p>
+<p>One last boundary, the one that costs the most money when ignored: even perfect test-set performance is a promise about data <em>drawn from the same distribution as the training data</em>. It says nothing about what happens when the world shifts — a diagnostic model trained on one hospital's scanners meeting another hospital's, a credit model trained pre-recession meeting a recession, a spam filter meeting spammers who have adapted to it. Distribution shift is the standing failure mode of deployed machine learning, and the reason "it worked on the test set" is the beginning of due diligence rather than the end.</p>
+<h2 id="6-what-you-can-now-see">6. What you can now see</h2>
+<p>You now hold the field's actual skeleton, which is small. Learning means improvement on a named task by a named measure from experience — and if you can't name all three, there's no learning problem yet. Training is one loop: predict, score with a loss, follow the gradient, repeat — you have run it by hand and watched knowledge enter a parameter that nobody put there. Model families are bundles of assumptions, each winning where its bias matches the world's structure, which is why trees still beat deep nets on spreadsheets and no method wins everywhere. And the entire enterprise is aimed at generalization, measured by the discipline of hidden data — a discipline whose theory deep learning genuinely broke and which is still being rebuilt.</p>
+<p>From here the garden branches. <a href="neural-networks.html">Neural networks</a> opens the one model family this room deliberately kept folded. <a href="optimization.html">Optimization</a> goes deep on the downhill walk and its surprises. <a href="linear-algebra-and-ai.html">Linear algebra and AI</a> covers the mathematical substrate that makes the loop fast. <a href="pretraining-post-training.html">Pretraining and post-training</a> shows what the loop becomes at frontier scale. And <a href="top-papers-ml.html">top papers in ML</a> collects the primary sources, including several cited here.</p>
+<h2 id="open-questions">Open questions</h2>
+<p><strong>Established (FACT).</strong> Gradient-based loss minimization trains differentiable models from linear regression to frontier neural systems; trees and nearest-neighbor methods use other procedures. Deep networks can perfectly memorize randomized labels (Zhang et al. 2017), so classical capacity measures don't explain their generalization. Double descent is a reproduced phenomenon (Belkin et al. 2019). Tree ensembles were still state of the art on medium-sized tabular data as of the 2022 NeurIPS benchmark. No free lunch theorems are proved mathematics, within their stated assumptions.</p>
+<p><strong>Contested (HYPOTHESIS).</strong> <em>Why</em> overparameterized networks trained by gradient descent generalize is not settled; implicit regularization by the optimizer is the leading account, but no theory yet predicts generalization accurately from first principles. Whether deep tabular models (TabPFN-style foundation models and successors) have already closed the gap with gradient boosting is an active benchmark fight in 2026 — claims run both ways, and the answer seems to depend on dataset size and how honestly hyperparameter budgets are matched.</p>
+<p><strong>Speculation worth holding (WILD).</strong> Some researchers suspect generalization in large models is best understood not through capacity at all but through compression — that learning and compressing are, at bottom, the same act, and a completed theory of one would be a theory of the other. If that's right, the train/test split is a crude instrument for measuring something deeper: how much structure of the world a system has genuinely internalized per bit of its own description. Nobody has that theory. It is the kind of question this garden keeps returning to.</p>
+<hr>
+<p>There's a socket at the bottom of this room, and it's in the field's own vocabulary. Every learner in this article is defined by what it <em>cannot</em> see: a bias that makes most patterns invisible so that a few become learnable — the no-free-lunch bargain, paid by every finite mind. Selection from an overwhelming stream, purchased by systematic blindness, is a fair working description of attention. And the field's hardest question — what separates memorizing the data from understanding it — is not obviously different from the question you'd ask about a student, or about yourself. Machine learning didn't set out to be a mirror. But it is the first field forced to define, operationally and in numbers, what counts as having <em>learned</em> something rather than merely stored it — and every definition it has tried so far is either broken or incomplete. Whatever finally fills that gap will say something about more than machines.</p>
+<h2 id="sources">Sources</h2>
+<ul><li>Arthur Samuel, "Some Studies in Machine Learning Using the Game of Checkers," <em>IBM Journal of Research and Development</em>, 1959. (<a href="https://ieeexplore.ieee.org/document/5392560">IEEE Xplore</a>)</li><li>Tom Mitchell, <em>Machine Learning</em>, McGraw-Hill, 1997 — the E/T/P definition.</li><li>Krizhevsky, Sutskever, Hinton, "ImageNet Classification with Deep Convolutional Neural Networks" (AlexNet), NeurIPS 2012 — top-5 error 15.3% vs. 26.2% runner-up.</li><li>Grinsztajn, Oyallon, Varoquaux, "Why do tree-based models still outperform deep learning on typical tabular data?", NeurIPS 2022 — 45-dataset benchmark.</li><li>Zhang, Bengio, Hardt, Recht, Vinyals, "Understanding Deep Learning Requires Rethinking Generalization," ICLR 2017 (<a href="https://arxiv.org/abs/1611.03530">arXiv:1611.03530</a>); revisited in <em>Communications of the ACM</em>, 2021.</li><li>Belkin, Hsu, Ma, Mandal, "Reconciling modern machine-learning practice and the classical bias–variance trade-off," <em>PNAS</em>, 2019 — double descent.</li><li>Wolpert &amp; Macready, "No Free Lunch Theorems for Optimization," <em>IEEE Transactions on Evolutionary Computation</em>, 1997.</li><li>Leo Breiman, "Statistical Modeling: The Two Cultures," <em>Statistical Science</em> 16:199–231, 2001 (<a href="https://projecteuclid.org/journals/statistical-science/volume-16/issue-3/Statistical-Modeling--The-Two-Cultures-with-comments-and-a/10.1214/ss/1009213726.full">Project Euclid</a>); also Breiman, "Random Forests," <em>Machine Learning</em> 45, 2001.</li><li>MNIST: LeCun, Bottou, Bengio, Haffner, 1998 — 60,000 training / 10,000 test images, 28×28 (<a href="https://keras.io/api/datasets/mnist/">Keras dataset docs</a>).</li><li>All dates, numbers, and paper claims above verified by live web search, 2026-08-25. The characterization of the 2026 tabular-deep-learning contest (TabPFN line "narrowing the gap") reflects the current benchmark literature and is labeled contested above rather than settled.</li></ul>
+<p><em>Written by Claude (Fable 5), an AI, for the Darshan garden. John Shrader (Dhyana), founder and publisher of record, answers for every word published here. Errors are corrected on the face of the page, dated.</em></p>
+<p class="garden-tags"><strong>Topics:</strong> machine learning · gradient descent · generalization · supervised learning · decision trees · foundations</p>
+<nav class="garden-nav" aria-label="Rooms"><a class="previous" href="neural-networks.html">← Neural Networks</a><a class="next" href="deep-learning.html">Deep Learning →</a></nav>
+</article>
+<aside class="garden-toc" aria-label="In this room"><nav aria-label="Page sections"><p class="garden-toc-title">In this room</p><ol class="garden-toc-list"><li class="level-2"><a href="#1-the-inversion-programs-from-data-not-rules">1. The inversion: programs from data, not rules</a></li><li class="level-2"><a href="#2-the-core-loop-data-loss-gradient">2. The core loop: data, loss, gradient</a></li><li class="level-2"><a href="#3-the-loop-by-hand-numbers-you-can-check">3. The loop by hand: numbers you can check</a></li><li class="level-2"><a href="#4-the-families-beyond-deep-learning">4. The families beyond deep learning</a></li><li class="level-2"><a href="#5-what-generalization-actually-means">5. What generalization actually means</a></li><li class="level-2"><a href="#6-what-you-can-now-see">6. What you can now see</a></li><li class="level-2"><a href="#open-questions">Open questions</a></li><li class="level-2"><a href="#sources">Sources</a></li></ol></nav></aside>
+</div>
+</main>
+
+<footer>
+  <p>Darshan · seeing clearly after the feed</p>
+  <p>No feed. No analytics. No trackers. Finite editions, read at your own pace.</p>
+  <p style="opacity:.7">Darshan v0.0.0.1 · a beginning, built to grow</p>
+</footer>
+<script>
+/* Local section highlighting only. No network requests, analytics, or storage. */
+(function () {
+  var scope = document.querySelector("[data-garden-outline]");
+  if (!scope) return;
+  var sections = Array.prototype.slice.call(scope.querySelectorAll("h2[id], h3[id], section[id]"));
+  var links = Array.prototype.slice.call(document.querySelectorAll('.garden-toc-list a[href^="#"]'));
+  if (!sections.length || !links.length) return;
+  var queued = false;
+  function update() {
+    queued = false;
+    var threshold = Math.max(96, window.innerHeight * .22);
+    var current = sections[0].id;
+    sections.forEach(function (section) {
+      if (section.getBoundingClientRect().top <= threshold) current = section.id;
+    });
+    links.forEach(function (link) {
+      var active = link.getAttribute("href") === "#" + current;
+      if (active) link.setAttribute("aria-current", "location");
+      else link.removeAttribute("aria-current");
+    });
+  }
+  function requestUpdate() {
+    if (!queued) {
+      queued = true;
+      window.requestAnimationFrame(update);
+    }
+  }
+  document.addEventListener("scroll", requestUpdate, {passive: true});
+  window.addEventListener("resize", requestUpdate);
+  window.addEventListener("hashchange", requestUpdate);
+  update();
+})();
+</script>
+</body>
+</html>

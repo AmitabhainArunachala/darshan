@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>"Taiwan: The Island at the Center of the Machine" · Darshan Garden</title>
+<meta name="description" content="Taiwan is a self-governing democracy, the center of advanced chip manufacturing, and the object of a sovereignty dispute that could reorder the world. This room separates its history and present posture from four distinct conflict scenarios, then asks what the silicon shield can and cannot protect.">
+<link rel="stylesheet" href="../style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ccircle cx='8' cy='8' r='6' fill='none' stroke='%238f3b26' stroke-width='1.5'/%3E%3Ccircle cx='8' cy='8' r='2' fill='%238f3b26'/%3E%3C/svg%3E">
+<script>
+/* Theme memory. No analytics, no trackers. */
+(function () {
+  try {
+    var t = localStorage.getItem("darshan-theme");
+    if (t) document.documentElement.setAttribute("data-theme", t);
+  } catch (e) {}
+})();
+</script>
+<style>
+/* Garden-only layout. Kept here so the publication stylesheet remains shared. */
+body.garden-page-body {
+  max-width: none;
+  padding: 1.5rem clamp(1.25rem, 3.5vw, 4rem) 4rem;
+  font-size: 1.125rem;
+}
+body.garden-page-body > main,
+body.garden-page-body > .masthead,
+body.garden-page-body > footer {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 94rem;
+}
+.garden-layout,
+.garden-index-layout {
+  align-items: start;
+  display: grid;
+  gap: clamp(2.75rem, 5vw, 5rem);
+  grid-template-columns: minmax(0, 64rem) minmax(17rem, 20rem);
+  justify-content: center;
+}
+.garden-layout article,
+.garden-index-main { min-width: 0; }
+.garden-layout .article-title,
+.garden-intro .article-title {
+  font-size: clamp(2.65rem, 3.55vw, 4rem);
+  letter-spacing: -.025em;
+  line-height: 1.06;
+  max-width: 24ch;
+}
+.garden-layout article h2 {
+  font-size: 1.48rem;
+  line-height: 1.3;
+  margin-top: 3.2rem;
+  scroll-margin-top: 1.5rem;
+}
+.garden-layout article h3 {
+  font-size: 1.16rem;
+  margin-top: 2.35rem;
+  scroll-margin-top: 1.5rem;
+}
+.garden-intro { margin-bottom: 2.4rem; }
+.garden-series { margin: 2.8rem 0; scroll-margin-top: 1rem; }
+.garden-series h2 { border-bottom: 1px solid var(--rule); padding-bottom: .45rem; }
+.garden-room-list { list-style: none; margin: 0; padding: 0; }
+.garden-room-list li { border-bottom: 1px solid var(--rule); margin: 0; padding: 1rem 0; }
+.garden-room-title { font-weight: 600; }
+.garden-room-summary { color: var(--faint); font-size: .96rem; margin: .25rem 0 0; }
+.garden-series-link { color: var(--faint); font-size: .82rem; letter-spacing: .12em;
+  text-transform: uppercase; }
+.garden-lede {
+  border-left: 3px solid var(--accent);
+  color: var(--faint);
+  font-size: 1.24rem;
+  font-style: italic;
+  line-height: 1.62;
+  margin: 1.5rem 0 2.2rem;
+  padding: .35rem 0 .35rem 1.35rem;
+}
+.garden-corridors {
+  margin: 1.15rem 0 2.65rem;
+}
+.garden-corridor-list {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: .55rem .62rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.garden-corridor-list li { display: flex; margin: 0; max-width: 100%; }
+.garden-corridor {
+  align-items: center;
+  background: var(--accent-soft);
+  border: 1px solid var(--accent);
+  border-radius: 3px;
+  color: var(--accent);
+  display: inline-flex;
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .73rem;
+  font-weight: 700;
+  letter-spacing: .075em;
+  line-height: 1.35;
+  max-width: 100%;
+  min-height: 2.05rem;
+  overflow-wrap: anywhere;
+  padding: .34rem .72rem .3rem;
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-transform: uppercase;
+  text-underline-offset: .22em;
+}
+.garden-corridor:visited { color: var(--accent); }
+.garden-corridor:hover,
+.garden-corridor:focus-visible {
+  background: var(--accent);
+  color: var(--paper);
+}
+.garden-corridor:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+.garden-series-plate {
+  --plate-accent: var(--accent);
+  border: 1px solid var(--rule);
+  border-top: 3px solid var(--plate-accent);
+  margin: .25rem 0 2.8rem;
+  overflow: hidden;
+  position: relative;
+}
+.garden-series-plate--foundations { --plate-accent: #496f76; }
+.garden-series-plate--story-of-ai { --plate-accent: #526d9a; }
+.garden-series-plate--instrument { --plate-accent: #745779; }
+.garden-series-plate--strange-loops { --plate-accent: #866448; }
+.garden-series-plate--bridge { --plate-accent: #697044; }
+.garden-series-plate--power { --plate-accent: #8f3b26; }
+.garden-series-plate--time-future { --plate-accent: #416778; }
+[data-theme="dark"] .garden-series-plate { --plate-accent: var(--accent); }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .garden-series-plate { --plate-accent: var(--accent); }
+}
+.garden-series-plate-media {
+  aspect-ratio: 16 / 9;
+  background: var(--accent-soft);
+  overflow: hidden;
+  position: relative;
+}
+.garden-series-plate-media::after {
+  background:
+    linear-gradient(90deg, var(--paper) 0, transparent 24%, transparent 76%, var(--paper) 100%),
+    linear-gradient(0deg, var(--paper) 0, transparent 32%);
+  content: "";
+  inset: 0;
+  opacity: .24;
+  pointer-events: none;
+  position: absolute;
+}
+.garden-series-plate picture,
+.garden-series-card picture { display: block; height: 100%; }
+.garden-series-plate img {
+  display: block;
+  filter: saturate(.82) contrast(1.03);
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+.garden-series-plate figcaption {
+  align-items: baseline;
+  background: var(--paper);
+  border-top: 1px solid var(--rule);
+  display: grid;
+  gap: .25rem 1rem;
+  grid-template-columns: auto 1fr;
+  padding: .78rem 1rem .85rem;
+}
+.garden-series-plate-kicker {
+  color: var(--plate-accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+.garden-series-plate figcaption strong { font-size: 1rem; font-weight: 600; }
+.garden-series-plate-terms {
+  color: var(--faint);
+  font-size: .82rem;
+  grid-column: 2;
+  margin: 0;
+}
+.garden-visual {
+  background:
+    radial-gradient(circle at 92% 8%, var(--accent-soft), transparent 30%),
+    linear-gradient(135deg, transparent 0 72%, var(--accent-soft) 72% 72.4%, transparent 72.4%);
+  border: 1px solid var(--rule);
+  border-top: 3px solid var(--accent);
+  margin: 1.25rem 0 2.5rem;
+  overflow: hidden;
+  padding: clamp(1.1rem, 2.7vw, 1.75rem);
+  position: relative;
+}
+.garden-visual::before {
+  background-image:
+    linear-gradient(var(--rule) 1px, transparent 1px),
+    linear-gradient(90deg, var(--rule) 1px, transparent 1px);
+  background-size: 2.25rem 2.25rem;
+  content: "";
+  inset: 0;
+  opacity: .13;
+  pointer-events: none;
+  position: absolute;
+}
+.garden-visual > * { position: relative; }
+.garden-visual-head {
+  align-items: baseline;
+  display: grid;
+  gap: .45rem 1rem;
+  grid-template-columns: auto 1fr;
+  margin-bottom: 1.2rem;
+}
+.garden-visual-kicker {
+  color: var(--accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .68rem;
+  font-weight: 700;
+  letter-spacing: .17em;
+  margin: 0;
+  text-transform: uppercase;
+}
+.garden-visual-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  line-height: 1.28;
+  margin: 0;
+}
+.garden-visual-as-of {
+  color: var(--faint);
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: .72rem;
+  letter-spacing: .08em;
+  margin: 0;
+  text-transform: uppercase;
+  white-space: normal;
+}
+.garden-visual-items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.garden-visual-item {
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  margin: 0;
+  min-width: 0;
+  padding: .8rem .9rem;
+}
+.garden-visual-item-label {
+  display: block;
+  font-size: .96rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+.garden-visual-item-detail {
+  color: var(--faint);
+  display: block;
+  font-size: .9rem;
+  line-height: 1.45;
+  margin-top: .27rem;
+}
+.garden-visual-item-meta {
+  color: var(--accent);
+  display: block;
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: .72rem;
+  letter-spacing: .08em;
+  margin-bottom: .38rem;
+  text-transform: uppercase;
+}
+.garden-visual-caption {
+  border-top: 1px solid var(--rule);
+  color: var(--faint);
+  display: grid;
+  font-size: .84rem;
+  font-style: italic;
+  gap: .55rem 1rem;
+  grid-template-columns: minmax(0, 1fr) auto;
+  line-height: 1.45;
+  margin: 1.15rem 0 0;
+  padding-top: .75rem;
+}
+.garden-visual-evidence {
+  color: var(--accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .72rem;
+  font-style: normal;
+  font-weight: 650;
+  letter-spacing: .04em;
+  white-space: nowrap;
+}
+.garden-visual-evidence a {
+  color: inherit;
+  text-decoration-thickness: 1px;
+  text-underline-offset: .18em;
+}
+.garden-visual--sequence .garden-visual-items,
+.garden-visual--contrast .garden-visual-items,
+.garden-visual--constellation .garden-visual-items {
+  display: grid;
+  gap: .65rem;
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+}
+.garden-visual--sequence .garden-visual-items { counter-reset: garden-step; }
+.garden-visual--sequence .garden-visual-item {
+  counter-increment: garden-step;
+  padding-top: 2.35rem;
+  position: relative;
+}
+.garden-visual--sequence .garden-visual-item::before {
+  color: var(--accent);
+  content: counter(garden-step, decimal-leading-zero);
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: .68rem;
+  left: .9rem;
+  letter-spacing: .08em;
+  position: absolute;
+  top: .72rem;
+}
+.garden-visual--layers .garden-visual-items { display: grid; gap: .45rem; }
+.garden-visual--layers .garden-visual-item {
+  border-left: clamp(.24rem, .55vw, .48rem) solid var(--accent);
+  display: grid;
+  gap: .15rem 1rem;
+  grid-template-columns: minmax(8rem, .4fr) 1fr;
+}
+.garden-visual--layers .garden-visual-item:nth-child(2) { margin-left: 1.5%; }
+.garden-visual--layers .garden-visual-item:nth-child(3) { margin-left: 3%; }
+.garden-visual--layers .garden-visual-item:nth-child(4) { margin-left: 4.5%; }
+.garden-visual--layers .garden-visual-item:nth-child(5) { margin-left: 6%; }
+.garden-visual--layers .garden-visual-item:nth-child(6) { margin-left: 7.5%; }
+.garden-visual--timeline .garden-visual-items {
+  display: grid;
+  gap: 0;
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+}
+.garden-visual--timeline .garden-visual-item {
+  border-width: 1px 0 0 1px;
+  padding-top: 1.35rem;
+  position: relative;
+}
+.garden-visual--timeline .garden-visual-item::before {
+  background: var(--accent);
+  border: 3px solid var(--paper);
+  border-radius: 50%;
+  content: "";
+  height: .72rem;
+  left: -.4rem;
+  position: absolute;
+  top: -.4rem;
+  width: .72rem;
+}
+.garden-visual--contrast .garden-visual-item:nth-child(odd) { border-top: 2px solid var(--ink); }
+.garden-visual--contrast .garden-visual-item:nth-child(even) { border-top: 2px solid var(--accent); }
+.garden-visual--constellation .garden-visual-items {
+  align-items: stretch;
+  position: relative;
+}
+.garden-visual--constellation .garden-visual-item {
+  border-top: 2px solid var(--accent);
+  box-shadow: 0 .2rem 0 rgba(18, 31, 31, .04);
+  padding-top: 1.35rem;
+  position: relative;
+}
+.garden-visual--constellation .garden-visual-item::before {
+  background: var(--paper);
+  border: 2px solid var(--accent);
+  border-radius: 50%;
+  content: "";
+  height: .55rem;
+  left: calc(50% - .36rem);
+  position: absolute;
+  top: -.38rem;
+  width: .55rem;
+}
+.garden-visual--constellation .garden-visual-item:nth-child(even) { margin-top: .8rem; }
+.garden-series-gallery {
+  display: grid;
+  gap: .8rem;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  margin: 1.5rem 0 3rem;
+}
+.garden-series-card {
+  border: 1px solid var(--rule);
+  color: var(--ink);
+  display: grid;
+  grid-template-rows: 7.5rem auto;
+  overflow: hidden;
+  text-decoration: none;
+}
+.garden-series-card img {
+  height: 100%;
+  object-fit: cover;
+  transition: transform .25s ease;
+  width: 100%;
+}
+.garden-series-card span {
+  border-top: 1px solid var(--rule);
+  font-size: .9rem;
+  font-weight: 600;
+  padding: .65rem .75rem;
+}
+.garden-series-card:hover { border-color: var(--accent); color: var(--accent); }
+.garden-series-card:hover img { transform: scale(1.025); }
+@media (prefers-reduced-motion: reduce) {
+  .garden-series-card img { transition: none; }
+}
+.garden-tags { color: var(--faint); font-size: .82rem; margin-top: 2.2rem; }
+.garden-nav { border-top: 1px solid var(--rule); display: flex; gap: 1rem;
+  justify-content: space-between; margin-top: 2.5rem; padding-top: 1rem; }
+.garden-nav a { max-width: 48%; text-decoration: none; }
+.garden-nav .next { margin-left: auto; text-align: right; }
+.garden-table-wrap { overflow-x: auto; margin: 1.35rem 0; }
+.garden-table { border-collapse: collapse; font-size: .92rem; line-height: 1.45; width: 100%; }
+.garden-table th, .garden-table td { border: 1px solid var(--rule); padding: .55rem .65rem;
+  text-align: left; vertical-align: top; }
+.garden-table th { background: var(--accent-soft); }
+.garden-toc {
+  border-left: 1px solid var(--rule);
+  max-height: calc(100vh - 3rem);
+  overflow: auto;
+  padding: .1rem 0 .75rem 1.3rem;
+  position: sticky;
+  top: 1.5rem;
+}
+.garden-toc-title {
+  color: var(--accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .2em;
+  margin: 0 0 1.15rem;
+  text-transform: uppercase;
+}
+.garden-toc-title::before { content: "☰"; font-size: .8em; margin-right: .65rem; }
+.garden-toc-list { list-style: none; margin: 0; padding: 0; }
+.garden-toc-sublist { list-style: none; margin: 0; padding: 0; }
+.garden-toc-list li { margin: 0; }
+.garden-toc-list a {
+  border-left: 2px solid transparent;
+  color: var(--ink);
+  display: block;
+  font-size: .91rem;
+  line-height: 1.42;
+  margin-left: -1.4rem;
+  padding: .42rem .45rem .42rem 1.3rem;
+  text-decoration: none;
+}
+.garden-toc-list .level-3 a {
+  color: var(--faint);
+  font-size: .86rem;
+  font-style: italic;
+  padding-left: 2.15rem;
+}
+.garden-toc-list a:hover,
+.garden-toc-list a:focus-visible,
+.garden-toc-list a[aria-current="location"] {
+  border-left-color: var(--accent);
+  color: var(--accent);
+}
+.garden-toc-list a[aria-current="location"] { font-weight: 600; }
+.garden-toc-inline { display: none; }
+.garden-layout article :is(h2, h3):target,
+.garden-series:target h2 { color: var(--accent); }
+a.pending { color: var(--faint); text-decoration-style: dashed; }
+a.pending::after { content: " · pending"; font-size: .7em; letter-spacing: .06em;
+  text-transform: uppercase; }
+@media (min-width: 72.01em) {
+  body.garden-page-body > .masthead {
+    align-items: center;
+    column-gap: 2rem;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    margin-bottom: 3.5rem;
+    padding: 1.25rem 0;
+    text-align: left;
+  }
+  body.garden-page-body > .masthead .wordmark { justify-self: start; }
+  body.garden-page-body > .masthead .tagline { justify-self: center; margin: 0; }
+  body.garden-page-body > .masthead nav { justify-self: end; margin: 0; }
+}
+@media (max-width: 72em) {
+  .garden-layout,
+  .garden-index-layout { display: block; }
+  .garden-toc { display: none; }
+  .garden-toc-inline {
+    border: 1px solid var(--rule);
+    display: block;
+    margin: 1.5rem 0 2.4rem;
+    padding: .8rem 1rem;
+  }
+  .garden-toc-inline summary {
+    color: var(--accent);
+    cursor: pointer;
+    font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: .78rem;
+    font-weight: 700;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+  }
+  .garden-toc-inline .garden-toc-list { margin-top: .7rem; }
+  .garden-toc-inline .garden-toc-list a { margin-left: 0; padding-left: .75rem; }
+  .garden-toc-inline .garden-toc-list .level-3 a { padding-left: 1.6rem; }
+}
+@media (max-width: 40em) {
+  body.garden-page-body { font-size: 1.03rem; padding: 1rem 1.05rem 3rem; }
+  .garden-layout .article-title,
+  .garden-intro .article-title { font-size: clamp(2.15rem, 11vw, 3.15rem); }
+  .garden-lede { font-size: 1.1rem; padding-left: 1rem; }
+  .garden-corridors { margin-bottom: 2rem; }
+  .garden-corridor-list { gap: .45rem; }
+  .garden-corridor {
+    font-size: .68rem;
+    min-height: 2.35rem;
+    padding: .3rem .58rem .27rem;
+  }
+  .garden-series-plate-media { aspect-ratio: 16 / 9; }
+  .garden-series-plate figcaption { display: block; }
+  .garden-series-plate figcaption strong { display: block; margin-top: .22rem; }
+  .garden-series-plate-terms { display: block; margin-top: .25rem; }
+  .garden-visual { margin-left: -.15rem; margin-right: -.15rem; padding: 1rem; }
+  .garden-visual-head { display: block; }
+  .garden-visual-title { margin-top: .25rem; }
+  .garden-visual-as-of { margin-top: .35rem; }
+  .garden-visual-caption { grid-template-columns: 1fr; }
+  .garden-visual-evidence { white-space: normal; }
+  .garden-visual--sequence .garden-visual-items,
+  .garden-visual--contrast .garden-visual-items,
+  .garden-visual--constellation .garden-visual-items,
+  .garden-visual--timeline .garden-visual-items { grid-template-columns: 1fr; }
+  .garden-visual--layers .garden-visual-item:nth-child(n) { display: block; margin-left: 0; }
+  .garden-visual--timeline .garden-visual-item { border-width: 0 0 0 1px; }
+  .garden-visual--timeline .garden-visual-item::before { left: -.4rem; top: .9rem; }
+  .garden-visual--constellation .garden-visual-item:nth-child(even) { margin-top: 0; }
+  .garden-series-gallery { grid-template-columns: 1fr; }
+  .garden-nav { flex-direction: column; }
+  .garden-nav a { max-width: none; }
+  .garden-nav .next { margin-left: 0; text-align: left; }
+}
+@media print {
+  a.pending::after { content: " (pending)"; }
+  .garden-layout, .garden-index-layout { display: block; }
+  .garden-toc, .garden-toc-inline { display: none; }
+  .garden-series-card img { display: none; }
+  .garden-series-card { grid-template-rows: auto; }
+}
+</style>
+</head>
+<body class="garden-page-body">
+<button class="theme-toggle" aria-label="Toggle light and dark" onclick="
+  (function () {
+    var d = document.documentElement;
+    var cur = d.getAttribute('data-theme');
+    if (!cur) { cur = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'; }
+    var next = cur === 'dark' ? 'light' : 'dark';
+    d.setAttribute('data-theme', next);
+    try { localStorage.setItem('darshan-theme', next); } catch (e) {}
+  })();
+">◐</button>
+
+<header class="masthead">
+  <h1 class="wordmark"><a href="../index.html">DARSHAN</a></h1>
+  <p class="tagline">A signal of clear seeing in an age of information overload</p>
+  <nav>
+    <a href="../index.html">Articles</a>
+    <a href="index.html">Garden</a>
+    <a href="../about.html">About</a>
+  </nav>
+</header>
+
+<main>
+<div class="garden-layout">
+<article data-garden-room="taiwan" data-garden-outline>
+<p class="garden-series-link"><a href="index.html#power">Power and the Board</a></p>
+<p class="article-meta">25 August 2026 · Draft</p>
+<h1 class="article-title">"Taiwan: The Island at the Center of the Machine"</h1>
+<div class="draft-banner"><strong>Draft — pending discernment pass.</strong> This room is part of the garden's first planting. It has not been promoted to published status; check its sources and open questions before citing it.</div>
+<p class="garden-lede">Taiwan is a self-governing democracy, the center of advanced chip manufacturing, and the object of a sovereignty dispute that could reorder the world. This room separates its history and present posture from four distinct conflict scenarios, then asks what the silicon shield can and cannot protect.</p>
+<nav class="garden-corridors" aria-label="Explore connected rooms" data-corridor-count="6"><ul class="garden-corridor-list"><li><a class="garden-corridor" href="chip-wars.html">The Chip Wars: TSMC, ASML, Japan, and the Competing Field</a></li><li><a class="garden-corridor" href="semiconductors.html">Semiconductors</a></li><li><a class="garden-corridor" href="nvidia-and-the-chip.html">NVIDIA and the Future of the Computer Chip</a></li><li><a class="garden-corridor" href="china-usa-race.html">The Race Between China and the USA</a></li><li><a class="garden-corridor" href="forecasting.html">Forecasting the Future</a></li><li><a class="garden-corridor" href="attention-economy.html">The Attention Economy</a></li></ul></nav>
+<figure class="garden-series-plate garden-series-plate--power">
+<div class="garden-series-plate-media"><picture><source srcset="assets/series/power.webp" type="image/webp"><img src="assets/series/power.png" alt="Etched wafer, map contours, network, and civic architecture" width="1672" height="941" loading="eager" decoding="async"></picture></div>
+<figcaption><span class="garden-series-plate-kicker">Visual field</span><strong>Power and the Board</strong><span class="garden-series-plate-terms">taiwan-strait-status-quo · gray-zone-coercion · quarantine · blockade</span></figcaption>
+</figure>
+<details class="garden-toc-inline"><summary>In this room</summary><ol class="garden-toc-list"><li class="level-2"><a href="#1-the-island-before-the-argument">1. The island before the argument</a></li><li class="level-2"><a href="#2-what-the-status-quo-actually-means">2. What “the status quo” actually means</a></li><li class="level-2"><a href="#3-why-one-company-changed-the-stakes">3. Why one company changed the stakes</a></li><li class="level-2"><a href="#4-the-current-posture-dated">4. The current posture, dated</a></li><li class="level-2"><a href="#5-four-futures-people-confuse-with-one-another">5. Four futures people confuse with one another</a><ol class="garden-toc-sublist"><li class="level-3"><a href="#a-worked-example-read-the-frightening-headline">A worked example: read the frightening headline</a></li></ol></li><li class="level-2"><a href="#6-the-united-states-commitment-without-a-blank-check">6. The United States: commitment without a blank check</a></li><li class="level-2"><a href="#7-what-the-silicon-shield-cannot-decide">7. What the silicon shield cannot decide</a></li><li class="level-2"><a href="#what-you-can-now-see">What you can now see</a></li><li class="level-2"><a href="#open-questions">Open questions</a></li><li class="level-2"><a href="#sources">Sources</a></li></ol></details>
+<p>You're in the power wing of the garden. <a href="chip-wars.html">The Chip Wars</a> explains why one island became the manufacturing center of advanced computing; <a href="china-usa-race.html">The Race Between China and the USA</a> explains the larger contest around it. This room is about Taiwan itself: the people and history that disappear when the island is reduced to a chip factory, the actual military pressure around it as of August 2026, and the futures people compress into the single word “war.” A military exercise is not a blockade, a blockade is not an invasion, and a political claim is not the same thing as effective control.</p>
+<h2 id="1-the-island-before-the-argument">1. The island before the argument</h2>
+<p>Taiwan is an island about 130 kilometers from the coast of the People's Republic of China at the narrowest part of the Taiwan Strait. Roughly 23 million people live under the government of the Republic of China, or ROC, which administers Taiwan, Penghu, Kinmen, Matsu, and a few smaller islands. The People's Republic of China, or PRC, has never governed Taiwan. It claims Taiwan as part of China and says unification is an unfinished result of the Chinese civil war.</p>
+<p>Those two sentences describe effective control and a political claim. They do not settle the sovereignty dispute, and this room will not pretend they do.</p>
+<p>Taiwan's history is longer and more crowded than either government's shortest story about it. Austronesian Indigenous peoples lived on the island for millennia before large-scale Han migration. Dutch and Spanish powers established seventeenth-century footholds. The Zheng regime displaced the Dutch in 1662; Qing rule followed in 1683, though the reach of Qing administration varied across the island. Japan acquired Taiwan after the First Sino-Japanese War in 1895 and ruled it as a colony until 1945. Japanese rule brought railways, public-health systems, coercive assimilation, industrial development, and violent repression. “Modernization” and “colonial rule” belong in the same sentence.</p>
+<p>After Japan's defeat in the Second World War, the ROC took control. Misrule and tension between the new authorities and local society erupted in the February 28 Incident of 1947; the state killed and imprisoned large numbers of people in the repression that followed. In 1949, after losing the mainland phase of the civil war to the Chinese Communist Party, Chiang Kai-shek's Kuomintang government relocated to Taiwan. The ROC and PRC have remained separately governed ever since.</p>
+<p>Taiwan then lived under 38 years of martial law. The wider White Terror extended beyond martial law's formal end and included surveillance, imprisonment, and executions under an anti-communist authoritarian system. Civic movements, opposition organizers, victims' families, lawyers, journalists, and reformers forced open political space. Martial law ended in 1987. Taiwan held its first direct presidential election in 1996 and has transferred power between parties through elections.</p>
+<p>That sequence matters. Taiwan did not begin as a finished democracy, and democracy was not a gift bestowed by a great-power patron. People on the island made it through conflict with their own state. When someone describes Taiwan only as a piece on an American or Chinese chessboard, this is the part they have erased.</p>
+<h2 id="2-what-the-status-quo-actually-means">2. What “the status quo” actually means</h2>
+<p>The phrase <strong>Taiwan Strait status quo</strong> sounds precise because officials repeat it so often. It is really a managed ambiguity.</p>
+<p>In practice, the PRC governs the mainland and the ROC government governs Taiwan and its outlying islands. Taiwan elects its president and legislature, maintains armed forces, issues passports and currency, collects taxes, and controls its borders. Most states recognize the PRC diplomatically rather than the ROC, while many maintain substantial unofficial relations with Taiwan. Beijing insists there is one China and Taiwan is part of it. Taiwan's major political camps disagree about national identity, constitutional language, and the safest long-term course, but neither has transferred actual control to Beijing.</p>
+<p>“Maintain the status quo” therefore means, at minimum, no unilateral attempt to settle those unresolved questions by force. It does not mean all sides agree on what Taiwan is.</p>
+<p>Taiwanese opinion makes the ambiguity visible. In a Mainland Affairs Council survey published in April 2025, 36.0% favored maintaining the status quo indefinitely, 25.9% favored maintaining it and deciding later, and 19.9% favored maintaining it while moving toward independence. Immediate independence drew 5.7%; immediate unification drew 1.5%; maintaining the status quo while moving toward unification drew 5.7%. Survey wording and political conditions matter, but the durable center is plain: most people prefer continued self-government without a sudden move that could trigger war.</p>
+<p>President Lai Ching-te's stated position as of August 2026 is that the ROC and PRC are not subordinate to each other, Taiwan is not part of the PRC, and his government will maintain the status quo while strengthening defense and social resilience. Beijing treats language of this kind as separatism. Its 2005 Anti-Secession Law says it prefers peaceful unification but authorizes “non-peaceful means” if it judges that Taiwan has seceded, a major incident toward secession has occurred, or possibilities for peaceful unification have been exhausted.</p>
+<p>These are not matching positions waiting for better translation. One side's continuing self-government is the other side's unresolved division. The danger grows when either side assumes its own definition of “no change” is shared.</p>
+<h2 id="3-why-one-company-changed-the-stakes">3. Why one company changed the stakes</h2>
+<figure class="garden-visual garden-visual--contrast" aria-labelledby="visual-taiwan-1" data-claim-scope="section-synthesis" data-placement-heading="3-why-one-company-changed-the-stakes" data-evidence-headings="3-why-one-company-changed-the-stakes">
+<div class="garden-visual-head"><p class="garden-visual-kicker">Shield and dependency</p><p class="garden-visual-title" id="visual-taiwan-1">Why semiconductor centrality deters and endangers</p></div>
+<ul class="garden-visual-items" role="list"><li class="garden-visual-item"><strong class="garden-visual-item-label">Mutual loss</strong><span class="garden-visual-item-detail">Disrupted production would immediately damage China, the United States, allies, and global customers.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Embedded capability</strong><span class="garden-visual-item-detail">Leading fabrication depends on people, process knowledge, suppliers, and international service access, not movable machines alone.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Stakeholder pressure</strong><span class="garden-visual-item-detail">Customers, supplier states, and financial markets all have reasons to preserve continuity.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Sovereignty outranks cost</strong><span class="garden-visual-item-detail">Political leaders may value legitimacy and territorial claims above economic damage.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Concentration cuts both ways</strong><span class="garden-visual-item-detail">The same centrality that deters coercion can make control of the island appear more valuable.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Production is fragile</strong><span class="garden-visual-item-detail">Shipping, energy, water, chemicals, parts, or staff movement can stop fabs without their destruction.</span></li></ul>
+<figcaption class="garden-visual-caption"><span>TSMC's concentration raises the cost of conflict for every side without functioning as a treaty, force field, or guarantee of rational restraint.</span><span class="garden-visual-evidence">Drawn from: <a href="#3-why-one-company-changed-the-stakes">3. Why one company changed the stakes</a></span></figcaption>
+</figure>
+<p>TSMC did not create the sovereignty dispute. It made the consequences of disruption much larger.</p>
+<p>Taiwan Semiconductor Manufacturing Company is a <strong>foundry</strong>: it manufactures chips designed by customers such as Apple, Nvidia, AMD, Qualcomm, and MediaTek. In the first quarter of 2026, TrendForce estimated that TSMC earned about $35.9 billion in foundry revenue and held roughly 72% of the global contract-chipmaking market. Its own second-quarter report put quarterly company revenue at $40.2 billion. It began volume production of its 2-nanometer-class N2 process in late 2025 and was ramping that process in 2026.</p>
+<p>Market share alone understates the dependency. At the leading edge, you cannot move a design to another factory as though you were changing printers. Each chip is developed with a particular process design kit, libraries, manufacturing rules, packaging system, and months or years of joint engineering. The fab also depends on Dutch lithography tools, Japanese materials, American design software and equipment, Korean memory, ultrapure water, stable electricity, specialized staff, and thousands of suppliers. See <a href="semiconductors.html">Semiconductors</a> for the physical chain and <a href="nvidia-and-the-chip.html">Nvidia and the Chip</a> for the design layer.</p>
+<p>This concentration produced the <strong>silicon shield hypothesis</strong>: because a war would damage every major economy and cut China off from chips it also needs, Taiwan's semiconductor centrality helps deter an attack. That is a hypothesis, not a defense treaty and not a force field.</p>
+<p>There are at least three reasons to take it seriously. First, destroying production would impose immediate costs on China as well as on the United States and its allies. Second, customers, supplier states, and financial markets have strong reasons to preserve continuity. Third, TSMC's capabilities are not a pile of machines an occupying power could simply switch back on; much of the value lives in people, supplier relationships, process knowledge, and international service access.</p>
+<p>There are also three reasons not to lean on it. Leaders may rank sovereignty and regime legitimacy above economic loss. The same concentration that deters an attack may make control of Taiwan seem more strategically valuable. And conflict could halt production without anyone intending to destroy a fab. Taiwan imported 95.4% of its energy supply in 2025. A sustained interruption of shipping, electricity, water, chemicals, spare parts, or staff movement would stop leading-edge production.</p>
+<p>TSMC is reducing single-point risk. In 2025 it announced that its total planned US investment would rise to $165 billion, including fabs, advanced packaging, and research in Arizona. It also operates and plans capacity in Japan and is building in Germany. Yet TSMC's own planning makes clear that fabs take years, overseas production costs more, and the leading ecosystem cannot be copied overnight. Diversification can lower the world's exposure while leaving Taiwan central.</p>
+<p>Do not reduce 23 million people to “the place where the chips come from.” But do not miss what the chips do: they turn local coercion into a global systems problem.</p>
+<h2 id="4-the-current-posture-dated">4. The current posture, dated</h2>
+<figure class="garden-visual garden-visual--sequence" aria-labelledby="visual-taiwan-2" data-claim-scope="section-synthesis" data-placement-heading="4-the-current-posture-dated" data-evidence-headings="4-the-current-posture-dated">
+<div class="garden-visual-head"><p class="garden-visual-kicker">Routine can hide a turn</p><p class="garden-visual-title" id="visual-taiwan-2">How gray-zone pressure compresses warning time</p><p class="garden-visual-as-of">As of 2026-08-25</p></div>
+<ol class="garden-visual-items" role="list"><li class="garden-visual-item"><strong class="garden-visual-item-label">Sustain pressure</strong><span class="garden-visual-item-detail">Aircraft, ships, cyber operations, economic restrictions, legal claims, and information campaigns remain continuously present.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Normalize proximity</strong><span class="garden-visual-item-detail">Frequent patrols and exercises make extraordinary military presence begin to look routine.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Blur the surge</strong><span class="garden-visual-item-detail">A real mobilization becomes harder to distinguish from the recurring pattern that preceded it.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Shorten the decision</strong><span class="garden-visual-item-detail">Taipei and partners receive less time to verify intent, communicate, and choose a proportionate response.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Build coherence</strong><span class="garden-visual-item-detail">Taiwan's answer therefore includes civil defense, communications, energy, and public decision-making as well as weapons.</span></li></ol>
+<figcaption class="garden-visual-caption"><span>Repeated activity below open war can normalize proximity, disguise escalation, and force decisions before institutions know whether an exercise has become an operation.</span><span class="garden-visual-evidence">Drawn from: <a href="#4-the-current-posture-dated">4. The current posture, dated</a></span></figcaption>
+</figure>
+<p>As of August 25, 2026, there is no declared blockade and no invasion of Taiwan. There is sustained coercion.</p>
+<p>Taiwan's Ministry of National Defense says that from January 1 through September 30, 2025, 3,003 PLA aircraft sorties crossed the Taiwan Strait median line or entered Taiwan's southwestern or eastern airspace, while roughly 2,000 PLA naval-vessel sorties operated in Taiwan's air-defense identification and contingency zones. It reported three to four “joint combat readiness patrols” per month, along with named exercises such as Strait Thunder-2025A in April. The ministry's concern is not only the number of aircraft and ships. Repetition makes a surge harder to distinguish from routine activity and shortens the warning time if an exercise becomes an operation.</p>
+<p>The US Department of Defense describes a wider pressure campaign: diplomatic isolation, economic coercion, information operations, daily military activity, near-weekly joint patrols, and exercises that rehearse encirclement and blockade operations. Beijing describes its activity as a response to separatism and outside interference. Taipei describes it as an attempt to intimidate the public and change the status quo without firing the first shot.</p>
+<p>This is <strong>gray-zone coercion</strong>: pressure designed to gain advantage below the threshold that normally triggers a war response. It includes aircraft and ship operations, cyber intrusion, disinformation, economic restrictions, legal claims, diplomatic pressure, and selective enforcement by coast-guard or customs bodies. “Below the threshold” does not mean harmless. Gray-zone activity consumes readiness, normalizes proximity, creates opportunities for collision or misreading, and trains the force that might later be used in war.</p>
+<p>Taiwan's response under Lai is framed around four pillars: stronger defense, whole-of-society resilience, international cooperation that raises the cost of aggression, and preservation of the status quo. That includes military capability, but also civil defense, communication continuity, energy and infrastructure resilience, and a public able to function under pressure. The center of gravity is not merely whether a missile hits a runway. It is whether institutions and people continue to make coherent decisions when frightened and flooded with contradictory information.</p>
+<h2 id="5-four-futures-people-confuse-with-one-another">5. Four futures people confuse with one another</h2>
+<figure class="garden-visual garden-visual--layers" aria-labelledby="visual-taiwan-3" data-claim-scope="section-synthesis" data-placement-heading="5-four-futures-people-confuse-with-one-another" data-evidence-headings="5-four-futures-people-confuse-with-one-another">
+<div class="garden-visual-head"><p class="garden-visual-kicker">Name the rung</p><p class="garden-visual-title" id="visual-taiwan-3">Four coercive futures are not one event</p></div>
+<ol class="garden-visual-items" role="list"><li class="garden-visual-item"><strong class="garden-visual-item-label">Gray-zone pressure</strong><span class="garden-visual-item-detail">Patrols, cyber operations, economic restrictions, and information pressure remain episodic and below open war.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Quarantine</strong><span class="garden-visual-item-detail">Coast guard or customs authorities selectively demand inspections or permits under military backing.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Blockade</strong><span class="garden-visual-item-detail">Military force sustains denial of shipping or aviation until commercial access becomes unsafe or impossible.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Invasion</strong><span class="garden-visual-item-detail">Forces must cross, enter, hold, supply, and govern contested territory.</span></li></ol>
+<figcaption class="garden-visual-caption"><span>Clear classification depends on who leads, whether commerce still moves, how long denial persists, and whether forces enter and hold territory.</span><span class="garden-visual-evidence">Drawn from: <a href="#5-four-futures-people-confuse-with-one-another">5. Four futures people confuse with one another</a></span></figcaption>
+</figure>
+<p>No public source can give you reliable probabilities for these scenarios. Anyone offering a precise invasion percentage is usually converting judgment into false measurement. You can still distinguish the mechanisms.</p>
+<div class="garden-table-wrap"><table class="garden-table"><thead><tr><th>Scenario</th><th>What it would look like</th><th>Likely immediate aim</th><th>What separates it from the next step</th></tr></thead><tbody><tr><td>Continued gray-zone coercion</td><td>Frequent PLA patrols and exercises, cyber operations, economic restrictions, diplomatic and information pressure</td><td>Wear down readiness, normalize PRC presence, shape Taiwanese choices without open war</td><td>Commercial traffic still moves; force remains episodic and deniable</td></tr><tr><td><strong>Quarantine</strong></td><td>Coast guard, customs, or maritime agencies demand inspections or permits for selected ships and routes, backed by military power</td><td>Assert administrative control and force political compliance while presenting the action as law enforcement</td><td>Selective control rather than a declared attempt to seal the island</td></tr><tr><td><strong>Blockade</strong></td><td>PLA forces seek to deny shipping and aviation access, possibly with exclusion zones, mines, missile threats, cyberattack, or strikes</td><td>Compel surrender or negotiation by cutting energy, trade, and reinforcement</td><td>Sustained military denial; commercial access becomes physically unsafe or impossible</td></tr><tr><td>Invasion</td><td>Missile and air attack combined with amphibious, airborne, special-forces, cyber, and information operations</td><td>Seize political and territorial control</td><td>Forces must enter, hold, supply, and govern contested ground</td></tr></tbody></table></div>
+<p>A quarantine deserves its own row because it exploits political hesitation. China could use its coast guard and maritime agencies to announce inspection rules around some ports or cargoes, then keep the PLA nearby as the threat behind the paperwork. Outside states would have to decide whether escorting a commercial ship is enforcement of navigation rights or escalation toward war. CSIS scenario work finds that a quarantine need not completely seal Taiwan to impose costs and claim a new normal.</p>
+<p>A blockade is more openly military and much harder to keep limited. Taiwan is deeply dependent on maritime trade and imported energy, so even partial denial would hurt. But blockade is not a cheap substitute for invasion. It gives defenders and outside powers time to act, requires sustained surveillance and force, exposes blockading units, and creates pressure to strike ports, airfields, missile batteries, satellites, networks, and perhaps mainland bases. In 26 blockade wargames published by CSIS in 2025, Taiwan suffered severe hardship, but the operation repeatedly proved escalatory and costly rather than clean or decisive.</p>
+<p>An invasion is harder again. Moving large forces across the strait, landing under fire, taking ports or beaches, supplying troops, fighting in dense cities and mountains, and then governing a resistant population is one of the most demanding operations a military can attempt. That does not make it impossible. It means “China has more ships and missiles” is not the whole calculation.</p>
+<p>Other paths fit between the rows: seizure of an outlying island, a decapitation attempt against leaders, a cyber campaign against infrastructure, or an incident that escalates faster than anyone planned. Scenario labels help you see the choices. Reality has no obligation to stay inside them.</p>
+<h3 id="a-worked-example-read-the-frightening-headline">A worked example: read the frightening headline</h3>
+<p>Suppose you see this alert: “Thirty-seven Chinese aircraft and eight ships surround Taiwan as invasion fears rise.” Before you repeat it, ask six questions.</p>
+<ol><li><strong>Where did they operate?</strong> Taiwan's air-defense identification zone is not the same as sovereign airspace. Crossing the median line is politically significant, but it is not an aircraft crossing Taiwan's coastline.</li><li><strong>For how long?</strong> A six-hour exercise, a recurring patrol, and sustained twenty-four-hour stationing create different operational problems.</li><li><strong>What happened to commercial traffic?</strong> If ships and aircraft continue normal routes, you are not looking at a functioning blockade. If authorities order inspections, identify prohibited cargo, or physically turn traffic away, the category changes.</li><li><strong>Which agencies lead?</strong> Coast-guard and customs leadership may indicate a quarantine strategy. PLA naval, air, rocket, and support forces conducting sustained denial point toward blockade or attack.</li><li><strong>Was force used?</strong> Electronic interference, cyber disruption, live fire into exclusion areas, mining, strikes on infrastructure, and attacks on vessels sit on different rungs. Record the act; do not let the headline choose the rung for you.</li><li><strong>What is the political demand?</strong> An exercise may signal anger after a speech or foreign visit. A coercive operation usually couples force to a demand and a threatened consequence.</li></ol>
+<p>With only the headline, the honest classification is “military activity near Taiwan; insufficient evidence to call it a blockade or invasion.” That answer is less exciting and more useful. <a href="forecasting.html">Forecasting</a> begins with refusing to smuggle a conclusion into your observation.</p>
+<h2 id="6-the-united-states-commitment-without-a-blank-check">6. The United States: commitment without a blank check</h2>
+<p>The United States switched diplomatic recognition from the ROC to the PRC in 1979 and has maintained unofficial relations with Taiwan since then. The Taiwan Relations Act says the United States expects Taiwan's future to be determined peacefully, will provide Taiwan with defensive arms, and will maintain the capacity to resist force or coercion that jeopardizes the people on Taiwan.</p>
+<p>The law does not contain an automatic promise that US forces will enter every conflict. This is the core of <strong>strategic ambiguity</strong>: enough commitment to make Beijing uncertain that aggression will succeed, enough uncertainty to discourage Taipei from assuming unconditional backing for any move. Presidents and officials sometimes speak more plainly, but the statutory structure is still not a mutual-defense treaty.</p>
+<p>Japan, the Philippines, and other regional states would face their own choices because nearby bases, shipping lanes, airspace, and economies could be involved. European states are less likely to supply frontline forces, but sanctions, technology controls, shipping insurance, and economic response could matter. Every such response depends on how a crisis begins. A sudden missile strike, a nominal law-enforcement quarantine, and an accidental collision create different coalitions.</p>
+<p>That is why deterrence is partly a contest over interpretation. Beijing wants outside powers to see the issue as an internal Chinese matter. Taipei wants them to see coercion as a threat to a democracy and the regional order. Washington wants Beijing to believe intervention is possible without giving every future decision away. All three also speak to domestic audiences. You should hear both conversations.</p>
+<h2 id="7-what-the-silicon-shield-cannot-decide">7. What the silicon shield cannot decide</h2>
+<p>The deepest uncertainty is not technical. It is about what leaders and populations will accept.</p>
+<p>Taiwan's factories matter because the world built an extraordinarily efficient and concentrated manufacturing system. Its democracy matters because the people living inside that system have acquired the habit of choosing their government. China's claim matters because the Chinese Communist Party has made unification part of national rejuvenation and regime legitimacy. American involvement matters because the regional balance and the credibility of US alliances are tied to the outcome. None of these interests reduces neatly to dollars lost in the first quarter after a conflict.</p>
+<p>The silicon shield is strongest as a reason for every side to prevent war. It is weakest when treated as permission to neglect defense, diplomacy, energy security, or public resilience. A fab cannot tell a population what risks to take. A supply chain cannot reconcile incompatible political claims. Economic interdependence raises the cost of violence; history does not show that cost always wins.</p>
+<p>The humane objective is not to predict the most dramatic scenario. It is to keep choices open below it: credible defense without fatalism, contact without coerced settlement, diversification without abandonment, and public information that does not train people to panic at every sortie or sleep through a real change.</p>
+<h2 id="what-you-can-now-see">What you can now see</h2>
+<p>Taiwan is four things at once: an island with Indigenous, colonial, Chinese, Japanese, authoritarian, and democratic histories; a self-governing polity with contested international status; the center of advanced chip manufacturing; and the focus of an intensifying PRC pressure campaign. If you hold only one of those pictures, you will misunderstand the other three.</p>
+<p>You can also see why the word “crisis” is too blunt. Gray-zone coercion is already happening. Quarantine, blockade, and invasion are scenarios with different mechanisms, warning signs, and escalation paths. Treating them as interchangeable makes clear thinking harder at exactly the moment it will be needed.</p>
+<p>And there is one last connection to <a href="attention-economy.html">the attention economy</a>. Taiwan's resilience depends partly on what millions of people can notice together: the difference between a rumor and an order, between a routine patrol and a sustained operation, between fear designed to fragment a society and evidence that should change its behavior. In a crisis, shared attention becomes infrastructure. It can fail before the power grid does.</p>
+<h2 id="open-questions">Open questions</h2>
+<p><strong>FACT</strong></p>
+<ul><li>The ROC government exercises effective control over Taiwan and its administered islands; the PRC claims Taiwan and has never governed it.</li><li>Taiwan ended martial law in 1987 and has elected its president directly since 1996.</li><li>TSMC held roughly 72% of global foundry revenue in Q1 2026, and its leading-edge manufacturing remains concentrated in Taiwan.</li><li>Taiwan imported 95.4% of its energy supply in 2025.</li><li>PRC military and gray-zone pressure around Taiwan is persistent; as of August 25, 2026, there is no declared blockade or invasion.</li></ul>
+<p><strong>HYPOTHESIS</strong></p>
+<ul><li>Semiconductor concentration raises the expected cost of war enough to strengthen deterrence.</li><li>A quarantine led by coast-guard and customs bodies may be politically harder for outside states to counter than an overt PLA blockade.</li><li>Better civil defense, energy reserves, redundant communications, and public media literacy can reduce the chance that coercion succeeds without occupation.</li></ul>
+<p><strong>WILD</strong></p>
+<ul><li>The leading-edge supply chain becomes so geographically distributed that Taiwan's “silicon shield” fades without Taiwan becoming less secure.</li><li>A cross-strait political framework eventually preserves Taiwan's democratic self-government while satisfying enough of Beijing's stated objectives to remove the military deadline. No existing proposal clearly does both.</li><li>The decisive event is neither invasion nor settlement but a long, ambiguous contest over inspections, data, standards, insurance, and attention in which the legal meaning of control changes before territory does.</li></ul>
+<h2 id="sources">Sources</h2>
+<ul><li><a href="https://the.nmth.gov.tw/nmth/en-us/Theme/Detail/6b931de5-f526-4fe8-90f5-501dd6133b8f">National Museum of Taiwan History, “Taiwanese”</a></li><li><a href="https://www.nhrm.gov.tw/w/nhrmEN/White_Terror_Period">Taiwan National Human Rights Museum, “White Terror Period”</a></li><li><a href="https://www.president.gov.tw/qrcode/19e">Office of the President, “Taiwan's Vibrant Democracy, Moving Forward with the World”</a></li><li><a href="https://english.president.gov.tw/NEWS/6726">President Lai's inaugural address, May 20, 2024</a></li><li><a href="https://english.president.gov.tw/News/7194">Office of the President, four pillars for cross-strait peace, August 5, 2026</a></li><li><a href="https://ws.mac.gov.tw/001/Upload/297/relfile/8012/81430/d34eaa9a-ccc9-4b3b-96af-ac35b997e366.pdf">Mainland Affairs Council, April 2025 public-opinion survey attachment</a></li><li><a href="https://english.court.gov.cn/2016-04/13/c_761472.htm">PRC Anti-Secession Law, official English text</a></li><li><a href="https://www.mnd.gov.tw/newupload/ndr/114/114ndreng.pdf">Taiwan Ministry of National Defense, 2025 National Defense Report</a></li><li><a href="https://media.defense.gov/2025/Dec/23/2003849070/-1/-1/1/ANNUAL-REPORT-TO-CONGRESS-MILITARY-AND-SECURITY-DEVELOPMENTS-INVOLVING-THE-PEOPLES-REPUBLIC-OF-CHINA-2025.PDF">US Department of Defense, 2025 China Military Power Report</a></li><li><a href="https://investor.tsmc.com/english/quarterly-results/2026/q2">TSMC, Q2 2026 results</a></li><li><a href="https://investor.tsmc.com/english/encrypt/files/encrypt_file/reports/2026-01/51d09df96cd89ac19d65af39032b038dc2896a24/TSMC%204Q25%20Transcript.pdf">TSMC, Q4 2025 earnings transcript and 2026 outlook</a></li><li><a href="https://www.trendforce.com/presscenter/news/20260612-13095.html">TrendForce, Q1 2026 foundry market</a></li><li><a href="https://pr.tsmc.com/system/files/newspdf/attachment/1f3cfb45dd5b56cf948833fb01a6c5c5c240a63f/TSMC%20Intends%20to%20Expand%20Its%20Investment%20in%20the%20United%20States%20to%20US%24165%20Billion%20to%20Power%20the%20Future%20of%20AI_FINAL_%28E%29_wmn.pdf">TSMC, announced US investment of $165 billion, March 2025</a></li><li><a href="https://www.moeaea.gov.tw/ECW/populace/content/Content.aspx?menu_id=14435">Taiwan Ministry of Economic Affairs, 2025 energy-supply data</a></li><li><a href="https://www.csis.org/analysis/how-china-could-quarantine-taiwan-mapping-out-two-possible-scenarios">CSIS, two possible quarantine scenarios</a></li><li><a href="https://www.csis.org/analysis/lights-out-wargaming-chinese-blockade-taiwan">CSIS, “Lights Out? Wargaming a Chinese Blockade of Taiwan”</a></li><li><a href="https://uscode.house.gov/view.xhtml?req=%28title%3A22+section%3A3301+edition%3Aprelim%29">22 USC §3301, Taiwan Relations Act policy</a></li></ul>
+<p><em>Written by Codex, an AI, for the Darshan garden, completing Claude Fable 5’s interrupted first planting. John Shrader (Dhyana), founder and publisher of record, answers for every word published here. Errors are corrected on the face of the page, dated.</em></p>
+<p class="garden-tags"><strong>Topics:</strong> taiwan · china · tsmc · semiconductors · geopolitics · democracy · cross-strait</p>
+<nav class="garden-nav" aria-label="Rooms"><a class="previous" href="china-usa-race.html">← The Race Between China and the USA</a><a class="next" href="elon-musk.html">"Elon Musk: One Future Thesis, Five Machines" →</a></nav>
+</article>
+<aside class="garden-toc" aria-label="In this room"><nav aria-label="Page sections"><p class="garden-toc-title">In this room</p><ol class="garden-toc-list"><li class="level-2"><a href="#1-the-island-before-the-argument">1. The island before the argument</a></li><li class="level-2"><a href="#2-what-the-status-quo-actually-means">2. What “the status quo” actually means</a></li><li class="level-2"><a href="#3-why-one-company-changed-the-stakes">3. Why one company changed the stakes</a></li><li class="level-2"><a href="#4-the-current-posture-dated">4. The current posture, dated</a></li><li class="level-2"><a href="#5-four-futures-people-confuse-with-one-another">5. Four futures people confuse with one another</a><ol class="garden-toc-sublist"><li class="level-3"><a href="#a-worked-example-read-the-frightening-headline">A worked example: read the frightening headline</a></li></ol></li><li class="level-2"><a href="#6-the-united-states-commitment-without-a-blank-check">6. The United States: commitment without a blank check</a></li><li class="level-2"><a href="#7-what-the-silicon-shield-cannot-decide">7. What the silicon shield cannot decide</a></li><li class="level-2"><a href="#what-you-can-now-see">What you can now see</a></li><li class="level-2"><a href="#open-questions">Open questions</a></li><li class="level-2"><a href="#sources">Sources</a></li></ol></nav></aside>
+</div>
+</main>
+
+<footer>
+  <p>Darshan · seeing clearly after the feed</p>
+  <p>No feed. No analytics. No trackers. Finite editions, read at your own pace.</p>
+  <p style="opacity:.7">Darshan v0.0.0.1 · a beginning, built to grow</p>
+</footer>
+<script>
+/* Local section highlighting only. No network requests, analytics, or storage. */
+(function () {
+  var scope = document.querySelector("[data-garden-outline]");
+  if (!scope) return;
+  var sections = Array.prototype.slice.call(scope.querySelectorAll("h2[id], h3[id], section[id]"));
+  var links = Array.prototype.slice.call(document.querySelectorAll('.garden-toc-list a[href^="#"]'));
+  if (!sections.length || !links.length) return;
+  var queued = false;
+  function update() {
+    queued = false;
+    var threshold = Math.max(96, window.innerHeight * .22);
+    var current = sections[0].id;
+    sections.forEach(function (section) {
+      if (section.getBoundingClientRect().top <= threshold) current = section.id;
+    });
+    links.forEach(function (link) {
+      var active = link.getAttribute("href") === "#" + current;
+      if (active) link.setAttribute("aria-current", "location");
+      else link.removeAttribute("aria-current");
+    });
+  }
+  function requestUpdate() {
+    if (!queued) {
+      queued = true;
+      window.requestAnimationFrame(update);
+    }
+  }
+  document.addEventListener("scroll", requestUpdate, {passive: true});
+  window.addEventListener("resize", requestUpdate);
+  window.addEventListener("hashchange", requestUpdate);
+  update();
+})();
+</script>
+</body>
+</html>

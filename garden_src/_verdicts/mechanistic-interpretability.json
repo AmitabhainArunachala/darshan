@@ -1,0 +1,9 @@
+{
+  "slug": "mechanistic-interpretability",
+  "verdict": "PASS",
+  "contract": "The room satisfies all required frontmatter, length, orientation, numbered-section, toolbox-table, worked-attribution-graph, conclusion, typed-open-question, source, disclosure, corridor, and earned-socket requirements. The repairs scope the architecture claim to the relevant transformer frontier, bind seed instability to its paper, narrow SAE-versus-probe findings to tested tasks, remove prestige claims, and state introspection at the strength the experiment supports.",
+  "facts": "Fresh primary checks support the main empirical claims. DeepMind's March 2025 report found SAE probes worse than dense linear probes on its harmful-intent out-of-distribution task and explains why it deprioritized SAEs there; the room no longer universalizes that result. Paulo and Belrose report about 30% shared features across seeds in their 131K-latent Llama-3-8B setting, now cited and scoped. Anthropic's introspection experiments report roughly 20% detection in the best Opus 4.1 protocol while emphasizing that failure is the norm. Anthropic's circuit-tracing work supports the Dallas-to-Texas-to-Austin mediation example and causal interchange tests, while retaining the replacement-model and faithfulness caveats.",
+  "voice": "The superposition on-ramp, SAE correction, worked graph, and introspection discussion were read aloud. They are technically exact without treating specialist vocabulary as a substitute for explanation. The repaired prose no longer claims the field's best or most-cited work, and it presents limited above-chance state detection without inflating it into dependable self-knowledge.",
+  "must_fix": "None.",
+  "source_sha256": "8c6314623a5aa27befbf1013326a6e79e2877380577e96f6ca93793c674a4dbc"
+}

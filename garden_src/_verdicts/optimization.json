@@ -1,0 +1,9 @@
+{
+  "slug": "optimization",
+  "verdict": "PASS",
+  "contract": "Fresh reread after the source repair confirms complete frontmatter and declared body links, numbered teaching arc, genuine comparison table, runnable worked example, conclusion, FACT/HYPOTHESIS/WILD ledger, live sources, disclosure, and a domain-earned socket-exit. The independent optimizer benchmark is now linked beside the claim and correctly identified in Sources as Wen, Hall, Ma, and Liang, Fantastic Pretraining Optimizers and Where to Find Them, ICLR 2026; scripts/check_garden.py --skip-verdicts is clean.",
+  "facts": "Three bold claims were independently rechecked. The ICLR 2026 paper reports matrix-optimizer speedup falling from about 1.4x at 0.1B parameters to 1.1x at 1.2B under fair tuning (https://proceedings.iclr.cc/paper_files/paper/2026/hash/ea4f0a6ad7088c9b93f22d74c0c9e8c2-Abstract-Conference.html). Moonshot's Kimi K2 report remains properly labeled as the vendor source for the 15.5-trillion-token MuonClip run and no-loss-spike claim (https://arxiv.org/abs/2507.20534). OpenAI's CoastRunners account supports the approximately 20% reward-hacking score advantage (https://openai.com/index/faulty-reward-functions/). The printed gradient-descent example was also rerun previously and converged to w=2.000000000001199 and b=0.9999999999972748 after 1,000 steps.",
+  "voice": "Cadence-read the repaired Muon paragraph, the dense proxy-objective explanation, and the final attention movement. Each is sayable, concrete, and technically qualified; the 2x vendor claim is clearly separated from the independent 1.1x result. The closing question about who chooses the loss function is earned from the room's own mechanism.",
+  "must_fix": "none; the missing and then mistitled independent benchmark citation is now correctly repaired, and no residual contract or factual defect was found.",
+  "source_sha256": "3c9fd3cb0ba430516a30d620b85ed7189f92967cb4cc272b55bd7571a5186478"
+}

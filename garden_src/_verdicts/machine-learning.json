@@ -1,0 +1,9 @@
+{
+  "slug": "machine-learning",
+  "verdict": "PASS",
+  "contract": "All exact frontmatter fields, short orientation, six numbered sections, comparison table, hand-verifiable gradient example, conclusion, typed FACT/HYPOTHESIS/WILD ledger, linked Sources, disclosure, cross-room graph, and domain-earned socket-exit are present. Body prose remains within 2,500–4,500 words and the worked arithmetic checks. The complete repaired source was reread.",
+  "facts": "Three fresh primary checks were completed on 2026-08-25. Samuel's 1959 IBM abstract explicitly says the program learned in 8–10 hours of machine-playing time to play better than its author. The NeurIPS 2022 primary page confirms 45 datasets and tree models remaining state of the art around 10,000 samples. The AlexNet paper confirms 15.3% top-5 error versus 26.2% for the runner-up. The repair now conditions local loss decrease on an exact gradient and sufficiently small step, distinguishes other ML fitting procedures, and describes MNIST's designated split without claiming the public test images remained globally untouched.",
+  "voice": "The scaling paragraph, Zhang/Belkin sequence, and closing no-free-lunch movement pass the read-aloud test. The revised foundational explanations are direct, teachable, and appropriately conditional. The socket-exit stays within bias, selection, memorization, and generalization rather than preaching.",
+  "must_fix": "none; gradient-step conditions, non-gradient model families, MNIST test-set scope, and FACT wording were corrected",
+  "source_sha256": "150ef0b72c79927b17480d875e9d29d56049005de1c464983bfd64182476bff4"
+}

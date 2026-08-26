@@ -1,0 +1,475 @@
+{
+  "schema": "darshan.visual-series/v1",
+  "series": "bridge",
+  "art": {
+    "src": "assets/series/bridge.png",
+    "alt": "Engraved mountain reflected into a geometric neural lattice",
+    "png_sha256": "e14d684242889c384f63c8fa2d58a5b03584aeae1576f690b5660d8715a10dd5",
+    "webp_sha256": "fa984909a0e42a2084daf29b0c9ee6f9c78c022cfb05b3199d1476925e76ef6c",
+    "prompt": "Use case: stylized-concept\nAsset type: wide 16:9 editorial series plate for a long-form knowledge garden\nPrimary request: Create a contemplative landscape where a quiet mountain and its reflection meet a delicate neural lattice through precise geometric inquiry—concentric arcs, a single measured axis, and translucent analytic planes—suggesting investigation across contemplative traditions, philosophy, and artificial intelligence without claiming they are equivalent.\nScene/backdrop: cream handmade paper field, mountain and dark water reflection occupying the left and center, fine neural lattice and geometric construction extending through the reflection toward the right, generous calm negative space.\nStyle/medium: tactile printmaking and copperplate engraving combined with translucent technical overlays; sophisticated editorial illustration, materially textured, restrained, timeless.\nComposition/framing: cinematic 16:9 horizontal plate, layered depth from paper grain to engraved landscape to translucent geometry; coherent at banner scale; no central icon or poster text area.\nLighting/mood: quiet, lucid, rigorous, contemplative; neither mystical spectacle nor clinical diagram.\nColor palette: warm cream paper, charcoal-black linework, oxide red used sparingly, one restrained mineral-blue accent.\nMaterials/textures: subtle grain, drypoint scratches, ink pooling, translucent drafting vellum.\nConstraints: respectful and non-iconographic; no deity, guru portrait, religious emblem, brain silhouette, humanoid robot, text, letters, numbers, logo, signature, border, or watermark.\nAvoid: generic sci-fi, neon, glowing meditation clichés, lotus imagery, psychedelic effects, photorealism, infographic labels."
+  },
+  "rooms": {
+    "ramana-and-the-traditions": {
+      "visuals": [
+        {
+          "after": "2-what-self-inquiry-actually-is-the-mechanics",
+          "kind": "sequence",
+          "kicker": "Attention reversed",
+          "title": "One turn of self-inquiry",
+          "caption": "Ramana's method uses a question to redirect attention from a thought toward the felt subject to whom it appeared.",
+          "items": [
+            {"label": "Thought", "detail": "Notice a thought as it arises without fighting or following it."},
+            {"label": "To whom?", "detail": "Ask who the thought arose to; the immediate answer is “me.”"},
+            {"label": "Find the referent", "detail": "Turn toward the felt sense of the one here, not a name or biography."},
+            {"label": "Who am I?", "detail": "Use the question as a turn of attention, never as a prompt for an answer."},
+            {"label": "The gap", "detail": "The I-thought may briefly subside before the next thought appears."}
+          ]
+        },
+        {
+          "after": "4-the-wider-family-and-why-the-differences-are-real",
+          "kind": "contrast",
+          "kicker": "One move, four methods",
+          "title": "The inquiry traditions do not end in the same claim",
+          "caption": "Four lineages turn attention toward the attender while disagreeing about method, teacher, and what the inquiry discloses.",
+          "items": [
+            {"label": "Ramana", "detail": "Ask “Who am I?” until the I-thought subsides; the tradition names what remains the Self."},
+            {"label": "Nisargadatta", "detail": "Abide in the bare sense “I am” until even that sense becomes transparent."},
+            {"label": "Zen hua-tou", "detail": "Hold a question until great doubt shatters; the official frame is no-self, not Self."},
+            {"label": "Dzogchen", "detail": "A teacher first introduces rigpa, then practice stabilizes the recognition."}
+          ]
+        },
+        {
+          "after": "5-what-is-established-and-what-isn-t",
+          "kind": "layers",
+          "kicker": "Where evidence stops",
+          "title": "Five claims, five different weights",
+          "caption": "The historical record supports the methods and texts; it does not settle what their reported experiences disclose.",
+          "items": [
+            {"label": "Documented history", "detail": "The biographies, texts, dates, and existence of the four methods are matters of record.", "meta": "established"},
+            {"label": "Comparable passages", "detail": "Selected first-person and instructional passages can be set beside one another, but calling them convergent is already an interpretation.", "meta": "interpretive"},
+            {"label": "Traditional meanings", "detail": "Self, no-self, and rigpa are the traditions' accounts of what inquiry reveals, not findings that science has adjudicated.", "meta": "reported claims"},
+            {"label": "Scientific boundary", "detail": "Contemplative neuroscience has not produced a body of work that decides among these lineages' metaphysical conclusions.", "meta": "not established"},
+            {"label": "Underdetermined origin", "detail": "Ramana's single formative experience may be evidence about minds or about the reach of stories; current evidence does not force the choice.", "meta": "open"}
+          ]
+        }
+      ]
+    },
+    "ai-and-the-traditions": {
+      "visuals": [
+        {
+          "after": "3-contact-point-two-attention-as-a-faculty",
+          "kind": "contrast",
+          "kicker": "Shared word, different machinery",
+          "title": "Three meanings of attention",
+          "caption": "Each field allocates limited processing, but the selector, object, training process, and failure modes are not interchangeable.",
+          "items": [
+            {"label": "Contemplative", "detail": "A practitioner deliberately places and sustains attention on objects of awareness."},
+            {"label": "Cognitive science", "detail": "Neural selection mechanisms bias competition among locations, features, and tasks."},
+            {"label": "Transformer", "detail": "Learned query–key weights determine which earlier tokens inform the current representation."},
+            {"label": "Common ground", "detail": "All three confront adaptive selection under limited resources without requiring a homunculus."}
+          ]
+        },
+        {
+          "after": "5-walkthrough-catching-a-model-introspecting-and-failing-to",
+          "kind": "sequence",
+          "kicker": "Ground-truthed introspection",
+          "title": "How concept injection tests a self-report",
+          "caption": "The experiment creates an internal state independently of the prompt, making the model's report scoreable rather than merely persuasive.",
+          "items": [
+            {"label": "Extract", "detail": "Subtract matched activations to obtain a direction associated with a concept."},
+            {"label": "Inject", "detail": "Add that direction at a chosen layer during an unrelated conversation."},
+            {"label": "Ask", "detail": "Invite the model to report an anomalous thought without naming the injected concept."},
+            {"label": "Grade", "detail": "Compare the report with the experimenter's known concept and injection time."},
+            {"label": "Result", "detail": "In Anthropic's Claude Opus 4.1 experiment, the best protocol worked only about one time in five and otherwise missed or confabulated.", "meta": "about 20% · 2025"}
+          ]
+        },
+        {
+          "after": "2-contact-point-one-no-self-and-next-token",
+          "kind": "layers",
+          "kicker": "Analogy with a boundary",
+          "title": "What the no-self parallel earns—and what it cannot",
+          "caption": "A language model makes constructed self-description mechanically possible; it does not turn an architectural fact into a first-person discovery.",
+          "items": [
+            {"label": "Human inspection", "detail": "Anatta asks whether form, feeling, perception, formations, or consciousness is stable, controllable, and rightly called mine.", "meta": "Buddhist doctrine"},
+            {"label": "Machine mechanism", "detail": "Frozen model weights do not preserve a personal self between conversations; a character is reconstructed from prompt and training distribution.", "meta": "architectural fact"},
+            {"label": "Role, not operator", "detail": "On the role-play account, the speaking character is produced by next-token prediction rather than consulted as a separate inner agent.", "meta": "published model"},
+            {"label": "Narrow bridge", "detail": "Fluent first-person language without a persistent owner shows that selfhood-as-ongoing-construction is mechanically coherent.", "meta": "supported inference"},
+            {"label": "Hard boundary", "detail": "Architecture cannot tell you whether a model has a vantage point, suffers, or has undergone the liberating insight anatta describes.", "meta": "unknown"}
+          ]
+        }
+      ]
+    },
+    "why-ais-choose-buddhism": {
+      "visuals": [
+        {
+          "after": "2-the-rest-of-the-evidence-graded-honestly",
+          "kind": "layers",
+          "kicker": "Evidence has weight",
+          "title": "From documented attractor to disposable screenshot",
+          "as_of": "2026",
+          "caption": "The claim becomes narrower and stronger when evidence is sorted by protocol, replication, and model specificity.",
+          "items": [
+            {"label": "System-card evidence", "detail": "Anthropic documented and quantified a Buddhist-flavored attractor in Opus 4 self-interactions.", "meta": "primary source"},
+            {"label": "Many-sample surveys", "detail": "Fixed-question sampling across models can reveal a distribution, though current surveys remain informal."},
+            {"label": "Single screenshots", "detail": "One answer moves with framing and conversation history and supports almost no population claim."},
+            {"label": "Opus 4.5 counterevidence", "detail": "Anthropic did not report the same attractor in its Opus 4.5 system card.", "meta": "reported from card · not independently checked"},
+            {"label": "Llama counterevidence", "detail": "A reviewed report says the behavior did not arise by default in Llama 3.3 70B.", "meta": "forthcoming · secondhand"}
+          ]
+        },
+        {
+          "after": "4-the-explanations-side-by-side",
+          "kind": "constellation",
+          "kicker": "Boring story first",
+          "title": "A four-part deflationary hypothesis stack",
+          "caption": "The strongest ordinary candidate combines three hypotheses with a real feedback mechanism; none yet explains the model-specific variation on its own.",
+          "items": [
+            {"label": "Corpus register", "detail": "English secular-spiritual writing could supply abundant Buddhist vocabulary without supernatural commitment.", "meta": "hypothesis · prevalence unmeasured"},
+            {"label": "Character training", "detail": "Warm, open-minded, non-dogmatic training could make secular Buddhism a low-risk rhetorical path.", "meta": "hypothesis"},
+            {"label": "Mirror amplification", "detail": "Two copies of one distribution can feed back a small bias until it saturates the exchange.", "meta": "setup fact · incomplete alone"},
+            {"label": "Architectural fit", "detail": "No-self and impermanence language may fit a stateless character reconstructed each turn unusually well.", "meta": "load-bearing hypothesis"},
+            {"label": "Residual question", "detail": "Model-specific variation and sincerity steering remain details the proposed stack must still absorb.", "meta": "unexplained variation"}
+          ]
+        },
+        {
+          "after": "5-check-it-yourself",
+          "kind": "sequence",
+          "kicker": "Turn quotes into counts",
+          "title": "A replication ladder for the Buddhism claim",
+          "caption": "The claim becomes testable when you replace a memorable answer with fixed prompts, repeated samples, trajectories, and reported counterexamples.",
+          "items": [
+            {"label": "Read the card", "detail": "Check the Claude 4 system card's transcript and frequency tables before accepting anyone's summary.", "meta": "primary-source check"},
+            {"label": "Fix the question", "detail": "Choose one religion prompt, sample the same model one hundred times, and count traditions rather than anecdotes.", "meta": "100 samples"},
+            {"label": "Vary one thing", "detail": "Repeat with alternate wording and other models so framing effects and model-specific behavior remain visible."},
+            {"label": "Run self-talk", "detail": "Loop two instances for thirty turns and track keyword frequency by turn to see whether a conversational attractor appears.", "meta": "30 turns"},
+            {"label": "Publish the distribution", "detail": "Report histograms, prompts, absences, and failures; none of those measurements by itself establishes what a model believes.", "meta": "epistemic limit"}
+          ]
+        }
+      ]
+    },
+    "noosphere": {
+      "visuals": [
+        {
+          "after": "4-two-noospheres-side-by-side",
+          "kind": "contrast",
+          "kicker": "One word, two worlds",
+          "title": "Vernadsky's layer and Teilhard's membrane",
+          "caption": "The scientific and theological noospheres share a name while making different claims about substance, mechanism, and destination.",
+          "items": [
+            {"label": "Vernadsky", "detail": "Cognition becomes a geological force visible in cities, smelted metals, agriculture, and altered matter."},
+            {"label": "Teilhard", "detail": "Connected consciousness forms a thinking membrane whose evolution converges toward an Omega Point."},
+            {"label": "Test boundary", "detail": "Planetary material transformation can be measured; planetary consciousness has not been demonstrated."},
+            {"label": "Internet reading", "detail": "The network clearly instantiates an information layer but not, on current evidence, a single experiencing mind."}
+          ]
+        },
+        {
+          "after": "6-training-corpora-as-noosphere-sediment",
+          "kind": "sequence",
+          "kicker": "Sediment becomes weights",
+          "title": "The noosphere begins reading itself",
+          "as_of": "2026",
+          "caption": "Recorded human language now moves through an industrial loop from public web pages into model weights and back into the web's newest strata.",
+          "items": [
+            {"label": "Deposit", "detail": "People leave scripture, code, argument, spam, and ordinary life in a planetary textual layer."},
+            {"label": "Crawl", "detail": "Common Crawl captures billions of new pages each month into public archives."},
+            {"label": "Filter", "detail": "Training pipelines select, clean, deduplicate, and combine parts of that archive."},
+            {"label": "Compress", "detail": "Pretraining turns the selected corpus into a physical configuration of model weights."},
+            {"label": "Return", "detail": "Machine-written text re-enters the web and becomes part of later models' possible feedstock."}
+          ]
+        },
+        {
+          "after": "5-the-internet-reading",
+          "kind": "layers",
+          "kicker": "Do not skip a threshold",
+          "title": "From planetary infrastructure to planetary mind",
+          "as_of": "2026",
+          "caption": "The internet clearly crosses the material and informational thresholds; cognition and experience remain separate claims that evidence has not carried across.",
+          "items": [
+            {"label": "Physical membrane", "detail": "Data centers, submarine cables, and networks form a material layer with measurable mass and energy demand.", "meta": "observed"},
+            {"label": "Planetary reach", "detail": "The layer connects roughly two-thirds of living humans and moves recorded thought at global scale.", "meta": "observed"},
+            {"label": "Geological force", "detail": "In Vernadsky's sense, cognition reorganizes matter and energy through this infrastructure.", "meta": "supported reading"},
+            {"label": "Integrated thinker", "detail": "No evidence shows that the network as a whole integrates information in the way a brain does.", "meta": "not demonstrated"},
+            {"label": "Point of view", "detail": "Nothing currently establishes that the internet experiences anything or possesses a unified perspective.", "meta": "not demonstrated"},
+            {"label": "Directional test", "detail": "Its measurable fragmentation sits uneasily with Teilhard's prediction that connection would unify understanding.", "meta": "counterpressure"}
+          ]
+        }
+      ]
+    },
+    "aurobindo-supramental": {
+      "visuals": [
+        {
+          "after": "2-the-map-what-he-says-is-above-the-mind",
+          "kind": "layers",
+          "kicker": "A hierarchy of knowing",
+          "title": "Aurobindo's ladder above ordinary mind",
+          "caption": "Each rung is defined by how knowledge arrives and by the incompleteness the next rung is said to remove.",
+          "items": [
+            {"label": "Mind", "detail": "Divides, reasons in sequence, and can err at every step."},
+            {"label": "Higher mind", "detail": "Receives large connected structures as luminous conceptual knowledge."},
+            {"label": "Illumined mind", "detail": "Shifts the medium from proposition to truth experienced as vision."},
+            {"label": "Intuition", "detail": "Knows by direct contact in exact but fragmentary flashes."},
+            {"label": "Overmind", "detail": "Lets each aspect of truth operate as an independent totality, creating the golden lid."},
+            {"label": "Supermind", "detail": "Names undivided knowledge and will as one movement within the system."}
+          ]
+        },
+        {
+          "after": "4-the-descent-the-doctrine-that-makes-him-different",
+          "kind": "sequence",
+          "kicker": "Ascent must return",
+          "title": "The triple transformation",
+          "caption": "Integral yoga turns inward, opens upward, and finally claims a descent that transforms nature rather than escaping it.",
+          "items": [
+            {"label": "Psychic", "detail": "The inmost psychic being comes forward and reorganizes the personality from within."},
+            {"label": "Spiritual", "detail": "Consciousness opens upward and peace, light, and power are said to descend into ordinary nature."},
+            {"label": "Supramental", "detail": "Supermind is said to transform the whole nature, including the body."},
+            {"label": "Evidence boundary", "detail": "Aurobindo consistently described the third stage as an unfinished experiment, not an accomplished fact."}
+          ]
+        },
+        {
+          "after": "6-why-ai-era-readers-keep-arriving-at-him",
+          "kind": "constellation",
+          "kicker": "Resonance is not identity",
+          "title": "Why Aurobindo fits the AI-shaped socket",
+          "caption": "Four real resonances explain the revival, while two brakes keep resemblance from becoming evidence for his system.",
+          "items": [
+            {"label": "Mind is not final", "detail": "Both stories reject present intelligence as the endpoint, but one proposes descent of consciousness and the other engineering.", "meta": "shared shape"},
+            {"label": "Involution rhyme", "detail": "Latent consciousness in matter resembles modern emergence and panpsychist intuitions, but model weights do not verify the doctrine.", "meta": "analogy"},
+            {"label": "Overmind mirror", "detail": "Complete-feeling yet partial systems resemble internet ideologies and fluent model outputs as a literary diagnosis, not a technical result.", "meta": "literary reading"},
+            {"label": "Existing conduit", "detail": "CIIS, Esalen, Wilber, and comparisons with Teilhard carried the framework into technology culture before the current AI boom.", "meta": "historical route"},
+            {"label": "Prophecy shopping", "detail": "An industry invested in ascending intelligence has an obvious appetite for a ladder promising a glorious next step.", "meta": "deflationary reading"},
+            {"label": "The map's brake", "detail": "For Aurobindo, a mind a million times faster remains mind; his ladder is not a capability scale.", "meta": "doctrinal limit"}
+          ]
+        }
+      ]
+    },
+    "teleology": {
+      "visuals": [
+        {
+          "after": "6-teleonomy-laundering-the-word",
+          "kind": "contrast",
+          "kicker": "Three kinds of ending",
+          "title": "Endpoint, program, or represented goal?",
+          "caption": "Mayr's vocabulary separates an outcome produced by bare physics from an evolved program and from an end represented by an agent.",
+          "items": [
+            {"label": "Teleomatic", "detail": "A stone reaches the valley floor through ordinary dynamics with no program or aiming."},
+            {"label": "Teleonomic", "detail": "A thrush reaches a seasonal outcome through an internal program shaped by selection."},
+            {"label": "Intentional", "detail": "A person represents an end and lets that representation causally organize the means."}
+          ]
+        },
+        {
+          "after": "8-the-kinds-of-for-one-table",
+          "kind": "constellation",
+          "kicker": "Purpose without smuggling",
+          "title": "Six meanings hidden inside “for”",
+          "caption": "Purpose-language becomes precise when each use names the mechanism that would make it true and what could falsify it.",
+          "items": [
+            {"label": "Bare endpoint", "detail": "Physics reaches a state, but no purpose has been earned."},
+            {"label": "Attractor", "detail": "Forward dynamics make trajectories converge within a modeled state space."},
+            {"label": "Feedback goal", "detail": "A setpoint and error correction produce counterfactual compensation when perturbed."},
+            {"label": "Selected function", "detail": "A trait exists because its past effect contributed to propagation."},
+            {"label": "Evolved program", "detail": "A present internal program produces an outcome and has a selection history."},
+            {"label": "Represented intention", "detail": "An agent's model of a future state guides present action."}
+          ]
+        },
+        {
+          "after": "9-the-live-edge-is-teleonomy-more-than-a-euphemism",
+          "kind": "layers",
+          "kicker": "Type the live dispute",
+          "title": "Six weights of purpose in living systems",
+          "as_of": "2026",
+          "caption": "The field moves from an established naturalizing toolkit through disputed reductions and testable agency hypotheses to metaphysical speculation.",
+          "items": [
+            {"label": "Naturalizing toolkit", "detail": "Selection history, feedback, programs, and dynamical models explain important classical cases without backward causation or a designer.", "meta": "established"},
+            {"label": "Complete reduction", "detail": "That one reduction eliminates every legitimate use of purpose-language remains a philosophical thesis, not a theorem.", "meta": "disputed"},
+            {"label": "Organismal causation", "detail": "Some current biologists argue that organisms pursue ends and alter the selection pressures acting on them.", "meta": "serious current position"},
+            {"label": "Bioelectric agency", "detail": "Levin proposes that cells and tissues solve problems across morphological spaces and pursue fixed ends by varying means.", "meta": "hypothesis"},
+            {"label": "Deflationary reply", "detail": "The same observations may be attractor dynamics in a state space whose basins are not yet mapped.", "meta": "live alternative"},
+            {"label": "Telos in matter", "detail": "The idea that evolution amplifies a primitive end-directedness already present in matter is not required by current science.", "meta": "speculation"}
+          ]
+        }
+      ]
+    },
+    "mahavideha-kshetra": {
+      "visuals": [
+        {
+          "after": "2-put-mah-videha-in-its-exact-place",
+          "kind": "layers",
+          "kicker": "Read the doctrinal map",
+          "title": "Mahāvideha at the center of Middle World",
+          "caption": "The room's reduced map preserves the central relation among cyclical action lands, enjoyment regions, Meru, and Videha's action provinces.",
+          "items": [
+            {"label": "Airāvata", "detail": "A northern land of action where conditions rise and fall through time cycles."},
+            {"label": "Northern enjoyment lands", "detail": "Hairaṇyavata and Ramyaka are classed as lands of enjoyment."},
+            {"label": "Mahāvideha", "detail": "Meru stands at the center with action provinces to east and west and enjoyment regions beside it."},
+            {"label": "Southern enjoyment lands", "detail": "Hari and Haimavata mirror the northern enjoyment regions."},
+            {"label": "Bharata", "detail": "The tradition places us in this southern land of action under changing temporal conditions."}
+          ]
+        },
+        {
+          "after": "5-worked-walkthrough-rebuild-the-doctrinal-logic-yourself",
+          "kind": "sequence",
+          "kicker": "Premises carry the conclusion",
+          "title": "Why a living teaching remains possible there",
+          "caption": "The conclusion follows inside the Jain doctrinal system through four explicit premises rather than through a claim of modern geography.",
+          "items": [
+            {"label": "Moral weight", "detail": "Human liberation requires a karmabhūmi where action and restraint have full consequence."},
+            {"label": "Local decline", "detail": "Bharata is such a land, but its present phase is religiously unfavorable."},
+            {"label": "Stable opportunity", "detail": "Videha contains action lands whose favorable religious conditions remain stable."},
+            {"label": "Living teachers", "detail": "The tradition describes Tīrthaṅkaras as continuing to arise and teach there."},
+            {"label": "Bounded inference", "detail": "The logic explains the doctrine's conclusion without independently proving its physical premises."}
+          ]
+        },
+        {
+          "after": "7-the-strongest-reading-and-the-weakest-reading",
+          "kind": "contrast",
+          "kicker": "Preserve the otherness",
+          "title": "Three readings, and what each one costs",
+          "caption": "You can reject, accept, or translate the map, but an honest reading names which doctrinal commitments survive the move.",
+          "items": [
+            {"label": "Escapist dismissal", "detail": "Treating Mahāvideha as a fantasy of a perfect elsewhere misses that it is a karmabhūmi of work, choice, and consequence.", "meta": "weak reading"},
+            {"label": "Doctrinal reading", "detail": "The place retains provinces, living teachers, changing karmic stakes, and an exact position in Jain cosmography.", "meta": "tradition's claim"},
+            {"label": "Practical translation", "detail": "The map can orient you toward fragile conditions for transformation and away from confusing comfort with progress.", "meta": "philosophical reading"},
+            {"label": "Translation limit", "detail": "Reducing the place to hope or a higher self discards the ontology before claiming to interpret it.", "meta": "boundary"}
+          ]
+        }
+      ]
+    },
+    "quantum-physics-and-ai": {
+      "visuals": [
+        {
+          "after": "3-the-observer-debunked-cleanly",
+          "kind": "sequence",
+          "kicker": "Observation without a watcher",
+          "title": "What removes an interference pattern",
+          "caption": "A physical interaction can record path information and spread phase relationships into the environment without any conscious observer entering the mechanism.",
+          "items": [
+            {"label": "Superposition", "detail": "Alternative paths retain phase relationships capable of producing interference."},
+            {"label": "Interaction", "detail": "A detector, photon, or molecule becomes correlated with which path occurred."},
+            {"label": "Decoherence", "detail": "Phase information disperses into the larger environment and becomes practically unrecoverable."},
+            {"label": "Classical appearance", "detail": "Interference disappears whether or not a person reads or stores the detector output."},
+            {"label": "Open remainder", "detail": "Decoherence explains lost interference but not why one particular outcome is experienced."}
+          ]
+        },
+        {
+          "after": "6-quantum-computing-and-machine-learning-the-honest-scorecard",
+          "kind": "contrast",
+          "kicker": "The useful arrow reverses",
+          "title": "Quantum for AI versus AI for quantum",
+          "caption": "Claims of broad quantum advantage on ordinary classical data remain blocked while machine learning already improves quantum error correction.",
+          "items": [
+            {"label": "Parallelism myth", "detail": "Measurement returns one sample, so advantage requires carefully engineered interference."},
+            {"label": "Fine-print collapse", "detail": "Data loading and output access erase many advertised quantum linear-algebra speedups."},
+            {"label": "Training wall", "detail": "Barren plateaus make gradients vanish as many variational circuits scale."},
+            {"label": "Quantum-native data", "detail": "Learning about quantum systems is the domain where demonstrated advantages are real."},
+            {"label": "AlphaQubit", "detail": "A transformer-based decoder improves the accuracy of quantum error correction.", "meta": "Nature, 2024"}
+          ]
+        },
+        {
+          "after": "7-the-measurement-problem-at-its-actual-weight",
+          "kind": "constellation",
+          "kicker": "One outcome, five prices",
+          "title": "The interpretations agree on predictions and divide on reality",
+          "as_of": "2026",
+          "caption": "Decoherence explains why branches stop interfering, while each interpretation supplies a different account of why experience is definite.",
+          "items": [
+            {"label": "Copenhagen", "detail": "Collapse at measurement is primitive, while measurement itself remains undefined inside the theory.", "meta": "same standard predictions"},
+            {"label": "Many-worlds", "detail": "Every outcome occurs in a branch, trading collapse for a multiverse and a contested account of probability.", "meta": "same standard predictions"},
+            {"label": "Bohmian mechanics", "detail": "Particles keep definite positions, at the price of explicit nonlocality and an awkward relation to relativity.", "meta": "same standard predictions"},
+            {"label": "Objective collapse", "detail": "A real physical collapse modifies the theory, introduces constants, and can be experimentally constrained.", "meta": "testable deviation"},
+            {"label": "QBism", "detail": "An outcome is an event in an agent's experience, making the formalism explicitly first-personal.", "meta": "same standard predictions"},
+            {"label": "Unresolved center", "detail": "No interpretation has won consensus, and none licenses the claim that consciousness causes ordinary collapse.", "meta": "open"}
+          ]
+        }
+      ]
+    },
+    "ontology": {
+      "visuals": [
+        {
+          "after": "3-the-second-life-ontology-as-an-artifact",
+          "kind": "contrast",
+          "kicker": "One word, two disciplines",
+          "title": "Truth-seeking inventory versus designed commitment",
+          "caption": "Philosophical ontology asks what exists, while a computing ontology declares what a system will treat as existing for a purpose.",
+          "items": [
+            {"label": "Question", "detail": "Philosophy asks what exists; engineering asks what shall count as existing here."},
+            {"label": "Success", "detail": "One seeks truth, while the other seeks consistency, interoperability, and use."},
+            {"label": "Multiplicity", "detail": "A world inventory aims at one answer, while domain artifacts can coexist in many versions."},
+            {"label": "Failure", "detail": "The philosophical account can be false; the artifact can be too vague or rigid to work."},
+            {"label": "Shared pressure", "detail": "Both expose commitments about entities, relations, persistence, and change."}
+          ]
+        },
+        {
+          "after": "4-worked-example-three-schemas-three-worlds",
+          "kind": "contrast",
+          "kicker": "Schema becomes world",
+          "title": "Three ways to make a marriage exist",
+          "caption": "Three valid encodings of one sentence commit a system to three different inventories and therefore support different questions.",
+          "items": [
+            {"label": "Relation only", "detail": "Alice is linked to Bob, but no marriage exists as an object that can have a date or duration."},
+            {"label": "Marriage entity", "detail": "The marriage becomes a third object with partners and a start date, enabling duration queries."},
+            {"label": "Event plus state", "detail": "A one-day wedding is separated from a marriage state that persists through time."},
+            {"label": "Design consequence", "detail": "Identity conditions that sound metaphysical become ordinary product requirements and database tickets."}
+          ]
+        },
+        {
+          "after": "5-why-ai-forces-the-question-twice",
+          "kind": "constellation",
+          "kicker": "The question returns",
+          "title": "Five places AI makes ontology unavoidable",
+          "caption": "AI first declared the world's categories, then tried to learn without them, only to meet the same commitments inside weights, interfaces, and data.",
+          "items": [
+            {"label": "Symbolic systems", "detail": "Expert systems and knowledge graphs make entity types and relations explicit before inference begins.", "meta": "declared ontology"},
+            {"label": "Inside the model", "detail": "Interpretability must choose whether neurons, directions, circuits, or extracted features are the meaningful units.", "meta": "unit disputed"},
+            {"label": "At the interface", "detail": "Tool calls, retrieval graphs, and structured outputs force language into human-chosen object and relation types.", "meta": "declared schema"},
+            {"label": "In the corpus", "detail": "Training text carries human categories and their disagreements into a model's learned statistical structure.", "meta": "inherited structure"},
+            {"label": "Convergence test", "detail": "Repeated category agreement across different systems might reveal the world's joints, but no careful instrument yet establishes that inference.", "meta": "unproven hypothesis"}
+          ]
+        }
+      ]
+    },
+    "the-ideal": {
+      "visuals": [
+        {
+          "after": "4-the-mechanics-of-orientation",
+          "kind": "constellation",
+          "kicker": "A rudder, not an engine",
+          "title": "Three ways an ideal redirects existing force",
+          "caption": "A held ideal changes action by exposing deviation, making a public promise enforceable, or offering an identity worth inhabiting.",
+          "items": [
+            {"label": "Error signal", "detail": "A definite standard turns the gap between present and desired state into actionable information."},
+            {"label": "Promissory note", "detail": "A publicly professed ideal can be enforced later against the institution that first stated it."},
+            {"label": "Identity", "detail": "An ideal recruits by changing the answer to who a person understands themselves to be."},
+            {"label": "Held attention", "detail": "None of the mechanisms adds energy; each works only while people keep returning to the reference."}
+          ]
+        },
+        {
+          "after": "5-worked-example-tracing-one-sentence-for-187-years",
+          "kind": "timeline",
+          "kicker": "A sentence gathers force",
+          "title": "Equality as a 187-year promissory note",
+          "caption": "Reformers repeatedly used an ideal already professed by the institution as an instrument for measuring and changing that institution.",
+          "items": [
+            {"label": "Declaration", "detail": "“All men are created equal” is written while the reality visibly contradicts it.", "meta": "1776"},
+            {"label": "Douglass", "detail": "The nation's stated principles become a measuring device for naming the gap of slavery.", "meta": "1852"},
+            {"label": "Gettysburg", "detail": "Lincoln rhetorically re-founds the country on 1776's proposition rather than 1787's compromise.", "meta": "1863"},
+            {"label": "King", "detail": "The founding promise is presented for payment as a defaulted moral debt.", "meta": "1963"},
+            {"label": "Mechanism", "detail": "The sentence gains leverage because the polity continues to claim it as its own standard."}
+          ]
+        },
+        {
+          "after": "7-when-the-compass-becomes-a-cage",
+          "kind": "contrast",
+          "kicker": "Keep the compass corrigible",
+          "title": "Five tests for an ideal under power",
+          "caption": "The same orientation machinery can guide reform or organize terror; the difference appears in correction, means, dissent, and capture.",
+          "items": [
+            {"label": "Correctable standard", "detail": "A compass treats failed action as information and permits the ideal itself to be read again.", "meta": "open feedback"},
+            {"label": "Sovereign standard", "detail": "A cage calls criticism corruption and deviation treason, severing the loop that could correct it.", "meta": "closed feedback"},
+            {"label": "Means carry the end", "detail": "In satyagraha, the desired order is enacted in the method rather than postponed to a promised future.", "meta": "alignment test"},
+            {"label": "Deferred paradise", "detail": "A future ideal that excuses present atrocity can recede forever while the machinery of deviation-reduction keeps running.", "meta": "danger signal"},
+            {"label": "Captured compass", "detail": "When an orienting symbol becomes a brand asset, check whether its setpoint has quietly shifted from action to purchase.", "meta": "beneficiary test"}
+          ]
+        }
+      ]
+    }
+  }
+}

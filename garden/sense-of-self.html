@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Sense of Self · Darshan Garden</title>
+<meta name="description" content="The felt &quot;I&quot; comes apart under experiment. Body ownership can be moved to a rubber hand in two minutes, the inner narrator confabulates on camera, and the whole feeling has a volume knob that meditation, psilocybin, and disorder can turn. What survives all that construction evidence is the actual question of this room.">
+<link rel="stylesheet" href="../style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ccircle cx='8' cy='8' r='6' fill='none' stroke='%238f3b26' stroke-width='1.5'/%3E%3Ccircle cx='8' cy='8' r='2' fill='%238f3b26'/%3E%3C/svg%3E">
+<script>
+/* Theme memory. No analytics, no trackers. */
+(function () {
+  try {
+    var t = localStorage.getItem("darshan-theme");
+    if (t) document.documentElement.setAttribute("data-theme", t);
+  } catch (e) {}
+})();
+</script>
+<style>
+/* Garden-only layout. Kept here so the publication stylesheet remains shared. */
+body.garden-page-body {
+  max-width: none;
+  padding: 1.5rem clamp(1.25rem, 3.5vw, 4rem) 4rem;
+  font-size: 1.125rem;
+}
+body.garden-page-body > main,
+body.garden-page-body > .masthead,
+body.garden-page-body > footer {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 94rem;
+}
+.garden-layout,
+.garden-index-layout {
+  align-items: start;
+  display: grid;
+  gap: clamp(2.75rem, 5vw, 5rem);
+  grid-template-columns: minmax(0, 64rem) minmax(17rem, 20rem);
+  justify-content: center;
+}
+.garden-layout article,
+.garden-index-main { min-width: 0; }
+.garden-layout .article-title,
+.garden-intro .article-title {
+  font-size: clamp(2.65rem, 3.55vw, 4rem);
+  letter-spacing: -.025em;
+  line-height: 1.06;
+  max-width: 24ch;
+}
+.garden-layout article h2 {
+  font-size: 1.48rem;
+  line-height: 1.3;
+  margin-top: 3.2rem;
+  scroll-margin-top: 1.5rem;
+}
+.garden-layout article h3 {
+  font-size: 1.16rem;
+  margin-top: 2.35rem;
+  scroll-margin-top: 1.5rem;
+}
+.garden-intro { margin-bottom: 2.4rem; }
+.garden-series { margin: 2.8rem 0; scroll-margin-top: 1rem; }
+.garden-series h2 { border-bottom: 1px solid var(--rule); padding-bottom: .45rem; }
+.garden-room-list { list-style: none; margin: 0; padding: 0; }
+.garden-room-list li { border-bottom: 1px solid var(--rule); margin: 0; padding: 1rem 0; }
+.garden-room-title { font-weight: 600; }
+.garden-room-summary { color: var(--faint); font-size: .96rem; margin: .25rem 0 0; }
+.garden-series-link { color: var(--faint); font-size: .82rem; letter-spacing: .12em;
+  text-transform: uppercase; }
+.garden-lede {
+  border-left: 3px solid var(--accent);
+  color: var(--faint);
+  font-size: 1.24rem;
+  font-style: italic;
+  line-height: 1.62;
+  margin: 1.5rem 0 2.2rem;
+  padding: .35rem 0 .35rem 1.35rem;
+}
+.garden-corridors {
+  margin: 1.15rem 0 2.65rem;
+}
+.garden-corridor-list {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: .55rem .62rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.garden-corridor-list li { display: flex; margin: 0; max-width: 100%; }
+.garden-corridor {
+  align-items: center;
+  background: var(--accent-soft);
+  border: 1px solid var(--accent);
+  border-radius: 3px;
+  color: var(--accent);
+  display: inline-flex;
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .73rem;
+  font-weight: 700;
+  letter-spacing: .075em;
+  line-height: 1.35;
+  max-width: 100%;
+  min-height: 2.05rem;
+  overflow-wrap: anywhere;
+  padding: .34rem .72rem .3rem;
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-transform: uppercase;
+  text-underline-offset: .22em;
+}
+.garden-corridor:visited { color: var(--accent); }
+.garden-corridor:hover,
+.garden-corridor:focus-visible {
+  background: var(--accent);
+  color: var(--paper);
+}
+.garden-corridor:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+.garden-series-plate {
+  --plate-accent: var(--accent);
+  border: 1px solid var(--rule);
+  border-top: 3px solid var(--plate-accent);
+  margin: .25rem 0 2.8rem;
+  overflow: hidden;
+  position: relative;
+}
+.garden-series-plate--foundations { --plate-accent: #496f76; }
+.garden-series-plate--story-of-ai { --plate-accent: #526d9a; }
+.garden-series-plate--instrument { --plate-accent: #745779; }
+.garden-series-plate--strange-loops { --plate-accent: #866448; }
+.garden-series-plate--bridge { --plate-accent: #697044; }
+.garden-series-plate--power { --plate-accent: #8f3b26; }
+.garden-series-plate--time-future { --plate-accent: #416778; }
+[data-theme="dark"] .garden-series-plate { --plate-accent: var(--accent); }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .garden-series-plate { --plate-accent: var(--accent); }
+}
+.garden-series-plate-media {
+  aspect-ratio: 16 / 9;
+  background: var(--accent-soft);
+  overflow: hidden;
+  position: relative;
+}
+.garden-series-plate-media::after {
+  background:
+    linear-gradient(90deg, var(--paper) 0, transparent 24%, transparent 76%, var(--paper) 100%),
+    linear-gradient(0deg, var(--paper) 0, transparent 32%);
+  content: "";
+  inset: 0;
+  opacity: .24;
+  pointer-events: none;
+  position: absolute;
+}
+.garden-series-plate picture,
+.garden-series-card picture { display: block; height: 100%; }
+.garden-series-plate img {
+  display: block;
+  filter: saturate(.82) contrast(1.03);
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+.garden-series-plate figcaption {
+  align-items: baseline;
+  background: var(--paper);
+  border-top: 1px solid var(--rule);
+  display: grid;
+  gap: .25rem 1rem;
+  grid-template-columns: auto 1fr;
+  padding: .78rem 1rem .85rem;
+}
+.garden-series-plate-kicker {
+  color: var(--plate-accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+.garden-series-plate figcaption strong { font-size: 1rem; font-weight: 600; }
+.garden-series-plate-terms {
+  color: var(--faint);
+  font-size: .82rem;
+  grid-column: 2;
+  margin: 0;
+}
+.garden-visual {
+  background:
+    radial-gradient(circle at 92% 8%, var(--accent-soft), transparent 30%),
+    linear-gradient(135deg, transparent 0 72%, var(--accent-soft) 72% 72.4%, transparent 72.4%);
+  border: 1px solid var(--rule);
+  border-top: 3px solid var(--accent);
+  margin: 1.25rem 0 2.5rem;
+  overflow: hidden;
+  padding: clamp(1.1rem, 2.7vw, 1.75rem);
+  position: relative;
+}
+.garden-visual::before {
+  background-image:
+    linear-gradient(var(--rule) 1px, transparent 1px),
+    linear-gradient(90deg, var(--rule) 1px, transparent 1px);
+  background-size: 2.25rem 2.25rem;
+  content: "";
+  inset: 0;
+  opacity: .13;
+  pointer-events: none;
+  position: absolute;
+}
+.garden-visual > * { position: relative; }
+.garden-visual-head {
+  align-items: baseline;
+  display: grid;
+  gap: .45rem 1rem;
+  grid-template-columns: auto 1fr;
+  margin-bottom: 1.2rem;
+}
+.garden-visual-kicker {
+  color: var(--accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .68rem;
+  font-weight: 700;
+  letter-spacing: .17em;
+  margin: 0;
+  text-transform: uppercase;
+}
+.garden-visual-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  line-height: 1.28;
+  margin: 0;
+}
+.garden-visual-as-of {
+  color: var(--faint);
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: .72rem;
+  letter-spacing: .08em;
+  margin: 0;
+  text-transform: uppercase;
+  white-space: normal;
+}
+.garden-visual-items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.garden-visual-item {
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  margin: 0;
+  min-width: 0;
+  padding: .8rem .9rem;
+}
+.garden-visual-item-label {
+  display: block;
+  font-size: .96rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+.garden-visual-item-detail {
+  color: var(--faint);
+  display: block;
+  font-size: .9rem;
+  line-height: 1.45;
+  margin-top: .27rem;
+}
+.garden-visual-item-meta {
+  color: var(--accent);
+  display: block;
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: .72rem;
+  letter-spacing: .08em;
+  margin-bottom: .38rem;
+  text-transform: uppercase;
+}
+.garden-visual-caption {
+  border-top: 1px solid var(--rule);
+  color: var(--faint);
+  display: grid;
+  font-size: .84rem;
+  font-style: italic;
+  gap: .55rem 1rem;
+  grid-template-columns: minmax(0, 1fr) auto;
+  line-height: 1.45;
+  margin: 1.15rem 0 0;
+  padding-top: .75rem;
+}
+.garden-visual-evidence {
+  color: var(--accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .72rem;
+  font-style: normal;
+  font-weight: 650;
+  letter-spacing: .04em;
+  white-space: nowrap;
+}
+.garden-visual-evidence a {
+  color: inherit;
+  text-decoration-thickness: 1px;
+  text-underline-offset: .18em;
+}
+.garden-visual--sequence .garden-visual-items,
+.garden-visual--contrast .garden-visual-items,
+.garden-visual--constellation .garden-visual-items {
+  display: grid;
+  gap: .65rem;
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+}
+.garden-visual--sequence .garden-visual-items { counter-reset: garden-step; }
+.garden-visual--sequence .garden-visual-item {
+  counter-increment: garden-step;
+  padding-top: 2.35rem;
+  position: relative;
+}
+.garden-visual--sequence .garden-visual-item::before {
+  color: var(--accent);
+  content: counter(garden-step, decimal-leading-zero);
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: .68rem;
+  left: .9rem;
+  letter-spacing: .08em;
+  position: absolute;
+  top: .72rem;
+}
+.garden-visual--layers .garden-visual-items { display: grid; gap: .45rem; }
+.garden-visual--layers .garden-visual-item {
+  border-left: clamp(.24rem, .55vw, .48rem) solid var(--accent);
+  display: grid;
+  gap: .15rem 1rem;
+  grid-template-columns: minmax(8rem, .4fr) 1fr;
+}
+.garden-visual--layers .garden-visual-item:nth-child(2) { margin-left: 1.5%; }
+.garden-visual--layers .garden-visual-item:nth-child(3) { margin-left: 3%; }
+.garden-visual--layers .garden-visual-item:nth-child(4) { margin-left: 4.5%; }
+.garden-visual--layers .garden-visual-item:nth-child(5) { margin-left: 6%; }
+.garden-visual--layers .garden-visual-item:nth-child(6) { margin-left: 7.5%; }
+.garden-visual--timeline .garden-visual-items {
+  display: grid;
+  gap: 0;
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+}
+.garden-visual--timeline .garden-visual-item {
+  border-width: 1px 0 0 1px;
+  padding-top: 1.35rem;
+  position: relative;
+}
+.garden-visual--timeline .garden-visual-item::before {
+  background: var(--accent);
+  border: 3px solid var(--paper);
+  border-radius: 50%;
+  content: "";
+  height: .72rem;
+  left: -.4rem;
+  position: absolute;
+  top: -.4rem;
+  width: .72rem;
+}
+.garden-visual--contrast .garden-visual-item:nth-child(odd) { border-top: 2px solid var(--ink); }
+.garden-visual--contrast .garden-visual-item:nth-child(even) { border-top: 2px solid var(--accent); }
+.garden-visual--constellation .garden-visual-items {
+  align-items: stretch;
+  position: relative;
+}
+.garden-visual--constellation .garden-visual-item {
+  border-top: 2px solid var(--accent);
+  box-shadow: 0 .2rem 0 rgba(18, 31, 31, .04);
+  padding-top: 1.35rem;
+  position: relative;
+}
+.garden-visual--constellation .garden-visual-item::before {
+  background: var(--paper);
+  border: 2px solid var(--accent);
+  border-radius: 50%;
+  content: "";
+  height: .55rem;
+  left: calc(50% - .36rem);
+  position: absolute;
+  top: -.38rem;
+  width: .55rem;
+}
+.garden-visual--constellation .garden-visual-item:nth-child(even) { margin-top: .8rem; }
+.garden-series-gallery {
+  display: grid;
+  gap: .8rem;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  margin: 1.5rem 0 3rem;
+}
+.garden-series-card {
+  border: 1px solid var(--rule);
+  color: var(--ink);
+  display: grid;
+  grid-template-rows: 7.5rem auto;
+  overflow: hidden;
+  text-decoration: none;
+}
+.garden-series-card img {
+  height: 100%;
+  object-fit: cover;
+  transition: transform .25s ease;
+  width: 100%;
+}
+.garden-series-card span {
+  border-top: 1px solid var(--rule);
+  font-size: .9rem;
+  font-weight: 600;
+  padding: .65rem .75rem;
+}
+.garden-series-card:hover { border-color: var(--accent); color: var(--accent); }
+.garden-series-card:hover img { transform: scale(1.025); }
+@media (prefers-reduced-motion: reduce) {
+  .garden-series-card img { transition: none; }
+}
+.garden-tags { color: var(--faint); font-size: .82rem; margin-top: 2.2rem; }
+.garden-nav { border-top: 1px solid var(--rule); display: flex; gap: 1rem;
+  justify-content: space-between; margin-top: 2.5rem; padding-top: 1rem; }
+.garden-nav a { max-width: 48%; text-decoration: none; }
+.garden-nav .next { margin-left: auto; text-align: right; }
+.garden-table-wrap { overflow-x: auto; margin: 1.35rem 0; }
+.garden-table { border-collapse: collapse; font-size: .92rem; line-height: 1.45; width: 100%; }
+.garden-table th, .garden-table td { border: 1px solid var(--rule); padding: .55rem .65rem;
+  text-align: left; vertical-align: top; }
+.garden-table th { background: var(--accent-soft); }
+.garden-toc {
+  border-left: 1px solid var(--rule);
+  max-height: calc(100vh - 3rem);
+  overflow: auto;
+  padding: .1rem 0 .75rem 1.3rem;
+  position: sticky;
+  top: 1.5rem;
+}
+.garden-toc-title {
+  color: var(--accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .2em;
+  margin: 0 0 1.15rem;
+  text-transform: uppercase;
+}
+.garden-toc-title::before { content: "☰"; font-size: .8em; margin-right: .65rem; }
+.garden-toc-list { list-style: none; margin: 0; padding: 0; }
+.garden-toc-sublist { list-style: none; margin: 0; padding: 0; }
+.garden-toc-list li { margin: 0; }
+.garden-toc-list a {
+  border-left: 2px solid transparent;
+  color: var(--ink);
+  display: block;
+  font-size: .91rem;
+  line-height: 1.42;
+  margin-left: -1.4rem;
+  padding: .42rem .45rem .42rem 1.3rem;
+  text-decoration: none;
+}
+.garden-toc-list .level-3 a {
+  color: var(--faint);
+  font-size: .86rem;
+  font-style: italic;
+  padding-left: 2.15rem;
+}
+.garden-toc-list a:hover,
+.garden-toc-list a:focus-visible,
+.garden-toc-list a[aria-current="location"] {
+  border-left-color: var(--accent);
+  color: var(--accent);
+}
+.garden-toc-list a[aria-current="location"] { font-weight: 600; }
+.garden-toc-inline { display: none; }
+.garden-layout article :is(h2, h3):target,
+.garden-series:target h2 { color: var(--accent); }
+a.pending { color: var(--faint); text-decoration-style: dashed; }
+a.pending::after { content: " · pending"; font-size: .7em; letter-spacing: .06em;
+  text-transform: uppercase; }
+@media (min-width: 72.01em) {
+  body.garden-page-body > .masthead {
+    align-items: center;
+    column-gap: 2rem;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    margin-bottom: 3.5rem;
+    padding: 1.25rem 0;
+    text-align: left;
+  }
+  body.garden-page-body > .masthead .wordmark { justify-self: start; }
+  body.garden-page-body > .masthead .tagline { justify-self: center; margin: 0; }
+  body.garden-page-body > .masthead nav { justify-self: end; margin: 0; }
+}
+@media (max-width: 72em) {
+  .garden-layout,
+  .garden-index-layout { display: block; }
+  .garden-toc { display: none; }
+  .garden-toc-inline {
+    border: 1px solid var(--rule);
+    display: block;
+    margin: 1.5rem 0 2.4rem;
+    padding: .8rem 1rem;
+  }
+  .garden-toc-inline summary {
+    color: var(--accent);
+    cursor: pointer;
+    font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: .78rem;
+    font-weight: 700;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+  }
+  .garden-toc-inline .garden-toc-list { margin-top: .7rem; }
+  .garden-toc-inline .garden-toc-list a { margin-left: 0; padding-left: .75rem; }
+  .garden-toc-inline .garden-toc-list .level-3 a { padding-left: 1.6rem; }
+}
+@media (max-width: 40em) {
+  body.garden-page-body { font-size: 1.03rem; padding: 1rem 1.05rem 3rem; }
+  .garden-layout .article-title,
+  .garden-intro .article-title { font-size: clamp(2.15rem, 11vw, 3.15rem); }
+  .garden-lede { font-size: 1.1rem; padding-left: 1rem; }
+  .garden-corridors { margin-bottom: 2rem; }
+  .garden-corridor-list { gap: .45rem; }
+  .garden-corridor {
+    font-size: .68rem;
+    min-height: 2.35rem;
+    padding: .3rem .58rem .27rem;
+  }
+  .garden-series-plate-media { aspect-ratio: 16 / 9; }
+  .garden-series-plate figcaption { display: block; }
+  .garden-series-plate figcaption strong { display: block; margin-top: .22rem; }
+  .garden-series-plate-terms { display: block; margin-top: .25rem; }
+  .garden-visual { margin-left: -.15rem; margin-right: -.15rem; padding: 1rem; }
+  .garden-visual-head { display: block; }
+  .garden-visual-title { margin-top: .25rem; }
+  .garden-visual-as-of { margin-top: .35rem; }
+  .garden-visual-caption { grid-template-columns: 1fr; }
+  .garden-visual-evidence { white-space: normal; }
+  .garden-visual--sequence .garden-visual-items,
+  .garden-visual--contrast .garden-visual-items,
+  .garden-visual--constellation .garden-visual-items,
+  .garden-visual--timeline .garden-visual-items { grid-template-columns: 1fr; }
+  .garden-visual--layers .garden-visual-item:nth-child(n) { display: block; margin-left: 0; }
+  .garden-visual--timeline .garden-visual-item { border-width: 0 0 0 1px; }
+  .garden-visual--timeline .garden-visual-item::before { left: -.4rem; top: .9rem; }
+  .garden-visual--constellation .garden-visual-item:nth-child(even) { margin-top: 0; }
+  .garden-series-gallery { grid-template-columns: 1fr; }
+  .garden-nav { flex-direction: column; }
+  .garden-nav a { max-width: none; }
+  .garden-nav .next { margin-left: 0; text-align: left; }
+}
+@media print {
+  a.pending::after { content: " (pending)"; }
+  .garden-layout, .garden-index-layout { display: block; }
+  .garden-toc, .garden-toc-inline { display: none; }
+  .garden-series-card img { display: none; }
+  .garden-series-card { grid-template-rows: auto; }
+}
+</style>
+</head>
+<body class="garden-page-body">
+<button class="theme-toggle" aria-label="Toggle light and dark" onclick="
+  (function () {
+    var d = document.documentElement;
+    var cur = d.getAttribute('data-theme');
+    if (!cur) { cur = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'; }
+    var next = cur === 'dark' ? 'light' : 'dark';
+    d.setAttribute('data-theme', next);
+    try { localStorage.setItem('darshan-theme', next); } catch (e) {}
+  })();
+">◐</button>
+
+<header class="masthead">
+  <h1 class="wordmark"><a href="../index.html">DARSHAN</a></h1>
+  <p class="tagline">A signal of clear seeing in an age of information overload</p>
+  <nav>
+    <a href="../index.html">Articles</a>
+    <a href="index.html">Garden</a>
+    <a href="../about.html">About</a>
+  </nav>
+</header>
+
+<main>
+<div class="garden-layout">
+<article data-garden-room="sense-of-self" data-garden-outline>
+<p class="garden-series-link"><a href="index.html#strange-loops">Strange Loops</a></p>
+<p class="article-meta">25 August 2026 · Draft</p>
+<h1 class="article-title">The Sense of Self</h1>
+<div class="draft-banner"><strong>Draft — pending discernment pass.</strong> This room is part of the garden's first planting. It has not been promoted to published status; check its sources and open questions before citing it.</div>
+<p class="garden-lede">The felt "I" comes apart under experiment. Body ownership can be moved to a rubber hand in two minutes, the inner narrator confabulates on camera, and the whole feeling has a volume knob that meditation, psilocybin, and disorder can turn. What survives all that construction evidence is the actual question of this room.</p>
+<nav class="garden-corridors" aria-label="Explore connected rooms" data-corridor-count="10"><ul class="garden-corridor-list"><li><a class="garden-corridor" href="hofstadter.html">Douglas Hofstadter</a></li><li><a class="garden-corridor" href="geb.html">Gödel, Escher, Bach</a></li><li><a class="garden-corridor" href="recursion.html">Recursion</a></li><li><a class="garden-corridor" href="what-self-means.html">What "Self" Means</a></li><li><a class="garden-corridor" href="aunt-hillary.html">Aunt Hillary: The Ant Colony That Thinks</a></li><li><a class="garden-corridor" href="ramana-and-the-traditions.html">Ramana Maharshi and the Inquiry Traditions</a></li><li><a class="garden-corridor" href="why-ais-choose-buddhism.html">Why Do AIs Keep Choosing Buddhism?</a></li><li><a class="garden-corridor" href="mechanistic-interpretability.html">Mechanistic Interpretability</a></li><li><a class="garden-corridor" href="evolution.html">Evolution: The Algorithm That Needs No Designer</a></li><li><a class="garden-corridor" href="neural-networks.html">Neural Networks</a></li></ul></nav>
+<figure class="garden-series-plate garden-series-plate--strange-loops">
+<div class="garden-series-plate-media"><picture><source srcset="assets/series/strange-loops.webp" type="image/webp"><img src="assets/series/strange-loops.png" alt="An engraved living loop joins a cell, ant colony, eye, and recursive architecture." width="1672" height="941" loading="eager" decoding="async"></picture></div>
+<figcaption><span class="garden-series-plate-kicker">Visual field</span><strong>Strange Loops</strong><span class="garden-series-plate-terms">sense of self · minimal self · narrative self · body ownership</span></figcaption>
+</figure>
+<details class="garden-toc-inline"><summary>In this room</summary><ol class="garden-toc-list"><li class="level-2"><a href="#where-you-are">Where you are</a></li><li class="level-2"><a href="#1-the-thing-to-be-explained">1. The thing to be explained</a></li><li class="level-2"><a href="#2-ownership-is-negotiable-the-rubber-hand">2. Ownership is negotiable: the rubber hand</a></li><li class="level-2"><a href="#3-the-narrator-confabulates-split-brains">3. The narrator confabulates: split brains</a></li><li class="level-2"><a href="#4-the-self-has-a-build-date">4. The self has a build date</a></li><li class="level-2"><a href="#5-the-volume-knob-a-network-you-can-turn-down">5. The volume knob: a network you can turn down</a></li><li class="level-2"><a href="#6-the-contemplative-record-the-oldest-dataset">6. The contemplative record: the oldest dataset</a></li><li class="level-2"><a href="#7-three-vantage-points-one-target">7. Three vantage points, one target</a></li><li class="level-2"><a href="#8-run-it-yourself-two-experiments-one-afternoon">8. Run it yourself: two experiments, one afternoon</a></li><li class="level-2"><a href="#9-what-the-construction-evidence-does-not-explain">9. What the construction evidence does not explain</a></li><li class="level-2"><a href="#conclusion">Conclusion</a></li><li class="level-2"><a href="#open-questions">Open questions</a></li><li class="level-2"><a href="#sources">Sources</a></li></ol></details>
+<h2 id="where-you-are">Where you are</h2>
+<p>This is a strange-loops room. If you've read <a href="hofstadter.html">Hofstadter</a>, you've met his claim that the "I" is a <a href="geb.html">strange loop</a> — a pattern that arises when a system's symbols turn back and represent the system itself, the way <a href="recursion.html">recursion</a> turns a procedure back on its own output. That was the idea from the outside. This room is the evidence: what neuroscience, psychology, and twenty-five centuries of contemplative practice and reporting each say about the felt "I" — how much of it demonstrably gets built, and what the building evidence still doesn't touch. The sibling room <a href="what-self-means.html">what "self" means</a> handles the words; this room handles the experiments.</p>
+<h2 id="1-the-thing-to-be-explained">1. The thing to be explained</h2>
+<p>Before any theory, get the target in view. Right now there is, presumably, a feeling of being you: located roughly behind your eyes, owning this particular body, continuous with the person who woke up this morning, the author of your next action. Ordinary and total. Most people go whole lives without once treating it as a phenomenon that needs explaining, because it is the thing all other phenomena are explained <em>to</em>.</p>
+<p>Philosophers of mind, following a much-used 2000 distinction by Shaun Gallagher, usually split this feeling into at least two layers. The <strong>minimal self</strong> is the thin, immediate part: the sense, in this very moment, that this body is mine, this perspective is where I am, this action came from me. It requires no memory and no language; it is plausibly there in a newborn and in a mouse. The <strong>narrative self</strong> is the thick part: the story-character with a name, a history, opinions, a resume, grudges — the "you" that exists across time and mostly exists <em>in language</em>. Keep these two apart as you read, because the experiments below attack them separately, and they fail separately.</p>
+<p>One more preliminary. "The self is a construction" gets said so often it has gone soft. This room means something specific by it: a construction is something assembled by a process, from parts, under conditions — which means the assembly can be watched, perturbed, and made to fail in informative ways. That is exactly what the last few decades of research delivered. Whether "constructed" implies "not real" is a question this room will <em>not</em> rush; a bridge is constructed too, and you can drive a truck over it.</p>
+<h2 id="2-ownership-is-negotiable-the-rubber-hand">2. Ownership is negotiable: the rubber hand</h2>
+<figure class="garden-visual garden-visual--sequence" aria-labelledby="visual-sense-of-self-1" data-claim-scope="section-synthesis" data-placement-heading="2-ownership-is-negotiable-the-rubber-hand" data-evidence-headings="2-ownership-is-negotiable-the-rubber-hand">
+<div class="garden-visual-head"><p class="garden-visual-kicker">Mineness as inference</p><p class="garden-visual-title" id="visual-sense-of-self-1">Correlated senses can move ownership onto an object you know is rubber</p></div>
+<ol class="garden-visual-items" role="list"><li class="garden-visual-item"><span class="garden-visual-item-meta">rigged scene</span><strong class="garden-visual-item-label">Split sight from flesh</strong><span class="garden-visual-item-detail">Hide the real left hand and place an anatomically plausible rubber hand where a hand could be.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">causal input</span><strong class="garden-visual-item-label">Synchronize evidence</strong><span class="garden-visual-item-detail">Stroke visible rubber and hidden skin at the same location, rhythm, and moment.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">multisensory inference</span><strong class="garden-visual-item-label">Bind the signals</strong><span class="garden-visual-item-detail">The brain treats matching vision and touch as evidence that both events belong to one body part.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">common, not universal</span><strong class="garden-visual-item-label">Relocate touch</strong><span class="garden-visual-item-detail">Within roughly two minutes, many participants feel touch at the rubber hand and report ownership.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">proprioceptive drift</span><strong class="garden-visual-item-label">Measure the drift</strong><span class="garden-visual-item-detail">Blind pointing shifts toward the fake hand, giving the altered body estimate a behavioral measure.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">physiological check</span><strong class="garden-visual-item-label">Threat the model</strong><span class="garden-visual-item-detail">Menacing the rubber hand can trigger skin conductance, showing the autonomic system has adopted the inferred limb.</span></li></ol>
+<figcaption class="garden-visual-caption"><span>The illusion exposes a subpersonal inference pipeline: synchrony binds sight and touch, recalibrates felt location, and recruits the body's threat response on behalf of the false hand.</span><span class="garden-visual-evidence">Drawn from: <a href="#2-ownership-is-negotiable-the-rubber-hand">2. Ownership is negotiable: the rubber hand</a></span></figcaption>
+</figure>
+<p>Start with the most concrete piece of the minimal self — the sense that this body is yours — because it fell first, and it fell to a desk experiment.</p>
+<p>In 1998, Matthew Botvinick and Jonathan Cohen published a one-page report in <em>Nature</em> with a title that says everything: "Rubber hands 'feel' touch that eyes see." The setup: your real left hand rests behind a screen, out of view. A life-size rubber hand lies in front of you, anatomically plausible. The experimenter strokes both hands with two paintbrushes in synchrony — same spot, same rhythm. Within a couple of minutes, most people (not all — the effect is common, not universal) report something absurd: the touch <em>feels</em> located in the rubber hand. The rubber hand starts to feel like <em>your</em> hand. Asked to point, blind, at their own hidden hand, subjects miss — their felt hand position has drifted toward the rubber one.</p>
+<p>This is called the <strong>rubber hand illusion</strong>, and it earned its place as a standard instrument because it's not just a verbal report. Later work made it physiological: H. Henrik Ehrsson and colleagues showed in fMRI — brain scanning that tracks activity through blood oxygen — that taking ownership of the fake hand recruits premotor and multisensory cortex, and that threatening the rubber hand — raising a hammer over it — produces a measurable skin-conductance spike, the body's fear response firing on behalf of a piece of rubber. Ownership had been reassigned, and the autonomic nervous system had signed off on the transfer.</p>
+<p>What the illusion shows, stated carefully: the sense of body ownership is not read off some fixed fact ("this is my flesh"). It is <em>computed</em>, moment to moment, from correlations across senses — vision, touch, body-position sense. Give the computation rigged inputs and it reaches a rigged conclusion, in about two minutes, in a healthy adult who knows perfectly well the hand is rubber. Knowing doesn't help. The construction runs below the level that knowing reaches.</p>
+<p>Then it scaled. In 2007, Bigna Lenggenhager, Tej Tadi, Thomas Metzinger, and Olaf Blanke published "Video ergo sum" in <em>Science</em>: subjects wore a head-mounted display showing a live camera feed of their own back, filmed from two meters behind. The experimenter stroked the subject's actual back; the subject watched the stroking on the virtual body in front of them. Synchronous stroking, and subjects began to self-identify with the body <em>over there</em> — and when displaced and asked to walk back to their original position, they drifted toward where the virtual body had stood. In the same issue of <em>Science</em>, Ehrsson published a companion technique producing an out-of-body-like experience with the camera behind and touches at the chest. Not just a hand: the felt location of the <em>whole self</em> had been moved by a camera, two paintbrushes, and timing.</p>
+<p>You can run the hand version yourself. Section 8 gives the full protocol, including the control condition that makes it an experiment rather than a party trick.</p>
+<h2 id="3-the-narrator-confabulates-split-brains">3. The narrator confabulates: split brains</h2>
+<p>Now the narrative self — the story-teller. The cleanest evidence that it fabricates comes from patients whose brain hemispheres were surgically disconnected (a last-resort epilepsy treatment that severs the corpus callosum, the main bridge between the two halves).</p>
+<p>Michael Gazzaniga's split-brain work, summarized in his 1998 <em>Scientific American</em> piece "The Split Brain Revisited," includes an experiment that belongs in every account of the self. Because each hemisphere sees the opposite half of the visual field, you can show each half of a split-brain patient's brain a different picture. Gazzaniga showed the left hemisphere (which has language) a chicken claw, and the right hemisphere (mute, but able to point with the left hand) a snow scene. Asked to pick matching cards, the patient's right hand picked a chicken — fine — and the left hand picked a snow shovel, which matches the snow the right hemisphere saw.</p>
+<p>Then the question: <em>why is your left hand pointing at a shovel?</em> The talking left hemisphere had never seen the snow. It had no idea. What it did <em>not</em> say was "I don't know." It said, without hesitation: the chicken claw goes with the chicken, "and you need a shovel to clean out the chicken shed."</p>
+<p>A fluent, plausible, confident reason — manufactured on the spot to cover an action whose real cause was inaccessible. Gazzaniga called the system that does this the left-hemisphere <strong>interpreter</strong>: a mechanism that continuously weaves whatever the organism just did into a coherent first-person story, whether or not it has the actual causes in hand. The unsettling part is not what it implies about split-brain patients. It's the induction: your hemispheres are connected, but your interpreter is the same machinery, and most of the causes of your behavior are just as inaccessible to it. The feeling of "I did that, and here is why" is delivered with identical confidence whether the reason is real or invented. From the inside, confabulation and insight feel the same. That single fact should permanently change how much weight you put on the self's own testimony about itself.</p>
+<h2 id="4-the-self-has-a-build-date">4. The self has a build date</h2>
+<p>Constructions have construction schedules. In 1970, Gordon Gallup Jr. put a mirror in front of chimpanzees, then anesthetized them and marked their faces with dye. On waking, the mirror-experienced chimps used the reflection to inspect the mark on <em>their own</em> face — evidence they knew the image was them. Beulah Amsterdam adapted the test for human infants in 1972: a spot of rouge on the nose, a mirror, and the question of whether the child touches the mirror or their own nose. Under 12 months, babies treat the reflection as a playmate. Mirror self-recognition climbs through the second year; by roughly 20–24 months a solid majority of children pass.</p>
+<p>Handle this with care, in both directions. Passing the mirror test is evidence of a self-<em>concept</em> — a represented "me" that can be recognized from outside — not a birth certificate for the felt self; the minimal, first-person layer of Section 1 is plausibly present long before, and the test leans on responses (mark-touching) that carry cultural and species biases. But the developmental point stands: the recognizable "me," and then the narrative self that gets built on it out of language and memory through childhood, <em>assemble over years</em>. Nobody is born with the self they end up defending. And what is assembled, the rest of this room shows, can be partially disassembled.</p>
+<h2 id="5-the-volume-knob-a-network-you-can-turn-down">5. The volume knob: a network you can turn down</h2>
+<figure class="garden-visual garden-visual--layers" aria-labelledby="visual-sense-of-self-2" data-claim-scope="room-synthesis" data-placement-heading="5-the-volume-knob-a-network-you-can-turn-down" data-evidence-headings="2-ownership-is-negotiable-the-rubber-hand 3-the-narrator-confabulates-split-brains 4-the-self-has-a-build-date 5-the-volume-knob-a-network-you-can-turn-down">
+<div class="garden-visual-head"><p class="garden-visual-kicker">A construction with seams</p><p class="garden-visual-title" id="visual-sense-of-self-2">Different observations loosen different components of the felt I</p></div>
+<ol class="garden-visual-items" role="list"><li class="garden-visual-item"><span class="garden-visual-item-meta">minimal self</span><strong class="garden-visual-item-label">Ownership</strong><span class="garden-visual-item-detail">Synchronous stroking can relocate felt touch and threat response to a rubber hand in minutes.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">narrative self</span><strong class="garden-visual-item-label">Narrator</strong><span class="garden-visual-item-detail">A split-brain interpreter invents a fluent reason for an action whose real cause it cannot access.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">~20–24 months</span><strong class="garden-visual-item-label">Recognition</strong><span class="garden-visual-item-detail">Mirror self-recognition assembles through the second year rather than arriving fully formed.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">neural correlate</span><strong class="garden-visual-item-label">Default network</strong><span class="garden-visual-item-detail">Meditation and psilocybin reduce or disrupt DMN activity alongside quieter self-reference or loosened boundaries.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">dissociation</span><strong class="garden-visual-item-label">Mineness</strong><span class="garden-visual-item-detail">Depersonalization can leave perception and reality-testing intact while felt ownership drains away.</span></li></ol>
+<figcaption class="garden-visual-caption"><span>Body ownership, narrative authorship, recognizable self-concept, and self-referential activity can each be perturbed without erasing experience altogether.</span><span class="garden-visual-evidence">Drawn across: <a href="#2-ownership-is-negotiable-the-rubber-hand">2. Ownership is negotiable: the rubber hand</a> · <a href="#3-the-narrator-confabulates-split-brains">3. The narrator confabulates: split brains</a> · <a href="#4-the-self-has-a-build-date">4. The self has a build date</a> · <a href="#5-the-volume-knob-a-network-you-can-turn-down">5. The volume knob: a network you can turn down</a></span></figcaption>
+</figure>
+<p>If the sense of self is produced by ongoing brain activity, there should be neural machinery that tracks it — and states that turn the machinery down should feel like <em>less self</em>. Both predictions have held up well enough to be the backbone of a research field.</p>
+<p>The machinery most often implicated is the <strong>default mode network</strong> (DMN) — a set of interconnected midline regions, prominently the medial prefrontal cortex and the posterior cingulate cortex, described as a coherent network by Marcus Raichle and colleagues in 2001. It earned its name by being most active by <em>default</em> — when you're doing no task, just resting, which for a human means mind-wandering: replaying the past, rehearsing the future, thinking about yourself and other people. It is the closest thing found so far to a neural home base for the narrative self's constant background chatter.</p>
+<p>Three independent lines of evidence hang on it:</p>
+<p><strong>Meditation.</strong> In 2011, Judson Brewer and colleagues published in <em>PNAS</em> a now-classic finding: experienced meditators (with thousands of hours of practice), across three different meditation types, showed decreased activity in the main DMN hubs — medial prefrontal and posterior cingulate — during meditation, relative to novices, along with different connectivity patterns that persisted even at rest. The contemplative traditions' claim that practice quiets self-referential churn has, at minimum, a measurable neural correlate.</p>
+<p><strong>Psychedelics.</strong> In 2012, Robin Carhart-Harris and colleagues (also <em>PNAS</em>) scanned subjects during intravenous psilocybin and found — against their own expectations — <em>only decreases</em> in blood flow and in the oxygen-level signal fMRI measures, with the largest decreases in exactly those hub regions, and the magnitude of the decrease correlating with the intensity of the subjective effects, including the loosening of self-boundaries users call ego dissolution. In 2024, Joshua Siegel and colleagues sharpened this dramatically in <em>Nature</em> ("Psilocybin desynchronizes the human brain"): using dense repeated scanning of individuals (n = 7, a precision-imaging design — deep data on few people), psilocybin disrupted functional connectivity about threefold more than a stimulant control, the disruption was largest in the DMN, and one change — reduced coupling between the anterior hippocampus and the DMN — persisted for weeks after a single dose. Small sample, but the within-person data is unusually deep, and it's the current state of the art.</p>
+<p><strong>Disorder.</strong> The knob can also get stuck. In depersonalization-derealization disorder, people report feeling detached from their own body, thoughts, and actions — "as if" observing themselves from outside, "as if" the world were behind glass — while reality-testing stays fully intact; they know it isn't literally so, which is what distinguishes it from psychosis. A 2004 systematic review by Hunter, Sierra, and David found one-month rates of 1.2–1.7% in the UK community samples it reviewed and a 2.4% current rate in a Canadian community sample. Those are population-, instrument-, and time-window-specific estimates, not one timeless prevalence for everyone everywhere. The same review found much higher rates for transient symptoms and in some clinical populations, with estimates varying sharply by definition and method. The condition matters for this room because it is a natural dissociation of components Section 1 separated: experience continues, perception continues, memory continues — while the felt <em>mineness</em> of all of it drops out. Mineness is therefore not identical with experience. It is a separable ingredient, which is exactly what you'd expect if it's computed by dedicated machinery that can fail.</p>
+<p>One honest brake: none of this shows the DMN "is" the self. The network also supports memory, imagination, and thinking about other people, and correlation is not identity. The modest reading is that narrative self-experience has a manipulable neural correlate; training and psilocybin move that correlate alongside reported experience.</p>
+<h2 id="6-the-contemplative-record-the-oldest-dataset">6. The contemplative record: the oldest dataset</h2>
+<p>Here is what should surprise you: everything above was anticipated, in first-person method rather than third-person measurement, by people who had no fMRI and no rubber hands — just unusual amounts of attention.</p>
+<p>The Buddhist analysis is the sharpest. In the discourse tradition holds to be the Buddha's second teaching — the Anattā-lakkhaṇa Sutta (SN 22.59), delivered to five monks at the Deer Park near Varanasi — experience is decomposed into five aggregates (roughly: bodily form, feeling-tone, perception, mental fabrications, consciousness), and each is examined in turn with the same refrain: "This is not mine, this is not I, this is not my self." The argument is empirical in form: whatever you can <em>observe</em> arising and passing — and each aggregate observably arises and passes — is thereby an object of awareness, not the awareness's owner. Search the whole inventory of experience and you find candidate after candidate for "self," each of which fails the stability test. This is the doctrine of <strong>anattā</strong>, not-self. Note what it is: not a metaphysical assertion shouted from nowhere, but a <em>procedure</em> — look, item by item, for the self you assume is there — plus a traditional report of what the procedure finds, preserved and repeated in monastic practice for roughly two and a half millennia. That continuity is historically significant; it is not an experimental replication with standardized subjects, controls, or outcome measures. David Hume, applying a parallel introspective move in 1739, also reported finding particular perceptions rather than a separately perceived self.</p>
+<p>The Vedantic lineage runs the procedure with the opposite grip. Around 1902, a young seeker named Sivaprakasam Pillai put a series of questions to Ramana Maharshi, a sage living on the mountain Arunachala in Tamil Nadu; the answers became the small text <em>Nān Yār?</em> ("Who am I?"), the seed of the method called <strong>self-inquiry</strong>: instead of cataloguing what the self is not, turn attention directly onto the sense of "I" itself and trace it to its source. Where Buddhism reports "no self found among the aggregates," the Advaita report is "what remains when every object is subtracted is not nothing — it is the awareness that was doing the looking." Same experiment, differently described result — and <a href="what-self-means.html">what "self" means</a> takes up whether the difference is substance or vocabulary, a live scholarly question this room won't pretend to settle. The traditions' fuller maps are in <a href="ramana-and-the-traditions.html">Ramana and the traditions</a>.</p>
+<p>Science now treats some of this material as data. Thomas Metzinger — who argued in <em>Being No One</em> (2003) that selves are self-models — analyzes more than 500 reports from meditators in 57 countries in <em>The Elephant and the Blind</em> (2024), making reported "pure awareness" a target for consciousness research. He also co-authored the "Video ergo sum" experiment in Section 2. The three vantage points of this room are already collaborating.</p>
+<h2 id="7-three-vantage-points-one-target">7. Three vantage points, one target</h2>
+<figure class="garden-visual garden-visual--contrast" aria-labelledby="visual-sense-of-self-3" data-claim-scope="section-synthesis" data-placement-heading="7-three-vantage-points-one-target" data-evidence-headings="7-three-vantage-points-one-target">
+<div class="garden-visual-head"><p class="garden-visual-kicker">One target, three instruments</p><p class="garden-visual-title" id="visual-sense-of-self-3">No vantage point sees the whole construction alone</p></div>
+<ul class="garden-visual-items" role="list"><li class="garden-visual-item"><span class="garden-visual-item-meta">illusions · imaging · molecules</span><strong class="garden-visual-item-label">Neuroscience</strong><span class="garden-visual-item-detail">Perturbs and measures body models and self-referential networks, but correlations do not explain why anything is felt.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">mirror · split brain · dissociation</span><strong class="garden-visual-item-label">Psychology</strong><span class="garden-visual-item-detail">Tracks development, confabulation, and disorder, but remains dependent on report and behavior.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">first-person protocol</span><strong class="garden-visual-item-label">Contemplative record</strong><span class="garden-visual-item-detail">Turns sustained attention on the I-sense across millennia, but lacks standardized external controls.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">construction evidence</span><strong class="garden-visual-item-label">Shared target</strong><span class="garden-visual-item-detail">All three treat the ordinary sense of self as something that can be inspected rather than assumed.</span></li></ul>
+<figcaption class="garden-visual-caption"><span>Neuroscience, psychology, and contemplative practice approach the felt I with complementary methods and complementary blind spots.</span><span class="garden-visual-evidence">Drawn from: <a href="#7-three-vantage-points-one-target">7. Three vantage points, one target</a></span></figcaption>
+</figure>
+<div class="garden-table-wrap"><table class="garden-table"><thead><tr><th></th><th>Neuroscience</th><th>Psychology</th><th>Contemplative record</th></tr></thead><tbody><tr><td><strong>What the felt "I" is</strong></td><td>Ongoing computation: a body-model plus a self-referential network's activity</td><td>A developing construction: self-concept, then narrative identity built from memory and language</td><td>A misreading: awareness mistaking its contents (body, thoughts) for an owner</td></tr><tr><td><strong>Method</strong></td><td>Perturb and measure: illusions, lesions, molecules, imaging</td><td>Observe development and failure: mirror tests, confabulation, disorder</td><td>First-person protocol: sustained attention turned on the "I"-sense itself</td></tr><tr><td><strong>Strongest exhibit</strong></td><td>Rubber hand / full-body illusions; DMN modulation by meditation and psilocybin</td><td>Split-brain interpreter; mirror-test timeline; depersonalization</td><td>Anattā-lakkhaṇa procedure; self-inquiry; Hume's parallel report</td></tr><tr><td><strong>Timescale of evidence</strong></td><td>~30 years</td><td>~55 years</td><td>~2,500 years</td></tr><tr><td><strong>Blind spot</strong></td><td>Correlates aren't the feeling; small samples; can't say why any computation is <em>felt</em></td><td>Reports and behavior only; silent on the inner character of the self it tracks</td><td>N = 1 per run; no external control; results filtered through doctrine and language</td></tr></tbody></table></div>
+<p>Read the last row as hard as the others. Each vantage point fails exactly where the others are strong — which is the actual argument for using all three.</p>
+<h2 id="8-run-it-yourself-two-experiments-one-afternoon">8. Run it yourself: two experiments, one afternoon</h2>
+<p><strong>Experiment 1: the rubber hand (third-person, controlled).</strong> You need: a partner, a fake hand (a stuffed rubber glove works), a piece of cardboard for a screen, two soft brushes, a table, ten minutes. Sit with your left hand flat on the table behind the screen, out of your view. Place the fake hand in front of you, aligned as your left hand would naturally lie. Your partner strokes both hands — same finger, same moment, same rhythm — for two to three minutes. Don't force anything; just watch the fake hand. Then the control condition, which is the whole difference between evidence and anecdote: repeat everything identically but with the strokes <em>out of sync</em> — different fingers, offset timing. The illusion should arise in the synchronous condition and not (or much less) in the asynchronous one; that contrast is what lets you attribute the effect to multisensory correlation rather than suggestion. Two honest cautions: a substantial minority of people don't get the illusion at all, and knowing about it doesn't block it — so a null result and a positive result are both informative. If the ownership feeling arrives, have your partner (gently) menace the fake hand and notice what your body does before you have an opinion.</p>
+<p><strong>Experiment 2: looking for the looker (first-person, uncontrolled).</strong> This is Ramana's procedure stripped to a five-minute protocol, offered with its epistemic status stated plainly: N = 1, no control condition, no blinding — a demonstration, not a proof. Sit still. Let attention settle for a minute. Then take the feeling of "I" — the sense of being the one sitting there — and make <em>it</em> the object: where is it? Not the word "I", not the concept — the felt thing. Attention may hand you candidates: face-tension, a location behind the eyes, an inner voice saying "here I am," the body's weight. Check each candidate the sutta's way: is this something I am <em>observing</em>? If yes, it is an object in awareness; note that and ask again what, if anything, seems to be doing the looking. Run that loop for five minutes. Your result may be a stream of contents, a stable sense of witness, frustration, blankness, or no change at all. Record it before interpreting it. Hume reported finding perceptions but no separately perceived self; Buddhist and Vedantic texts interpret related exercises differently. One uncontrolled run tells you what happened in your run. It does not tell you what "most people" find, and it does not settle which interpretation is right.</p>
+<h2 id="9-what-the-construction-evidence-does-not-explain">9. What the construction evidence does not explain</h2>
+<p>Now the ledger's other column, because this room would be dishonest without it.</p>
+<p>Every experiment above perturbed, moved, quieted, or decomposed <em>contents and feelings</em>: the feeling of owning a hand, the feeling of being located here, the story about why you acted, the intensity of self-referential chatter. Call that the construction evidence, and grant it full weight: the felt "I" is assembled, componentwise, by processes you don't experience, and its testimony about itself is unreliable.</p>
+<p>What none of it explains is why any of this is <em>felt at all</em>. The rubber hand illusion explains how ownership gets assigned to the wrong object; it does not explain why assignment comes with an experience rather than occurring in the dark, the way your cerebellum's computations do. The DMN findings give the narrative self a dimmer switch; they don't say why there is light. This is the hard problem of consciousness wearing this room's clothes, and moving from "the self is constructed" to "therefore there's no one home" is a leap the data does not license — just as the opposite leap, from "meditators report a witness" to "therefore an irreducible witness exists," is not licensed either. Depersonalization cuts both ways here and deserves a second look: mineness drops out while experience continues — which shows mineness is constructed, <em>and</em> shows that experience keeps happening without it. The construction evidence keeps explaining the contents. The fact of experience keeps not being one of the contents. Both traditions in Section 6 noticed exactly this asymmetry; they differ on what it means.</p>
+<p>There is also a quieter unexplained item: the <em>unity</em> of perspective. Split-brain patients arguably have two experiential streams, yet each stream is itself unified — one point of view, not a heap. What binds a moment's sights, sounds, and body-feel into a single vantage is measured nowhere above. Constructed or not, the perspective is <em>one</em>, and nobody currently knows why. <a href="evolution.html">Evolution</a> offers a respectable partial story for why self-models exist at all — Anil Seth's <em>Being You</em> (2021) argues the deepest layer of selfhood is the brain's predictive model of its own body's viability, perception itself a "controlled hallucination" in service of staying alive — but a story about what the model is <em>for</em> is not yet a story about why running it feels like being someone.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>What you can now do that you couldn't at the door: hold "the self is a construction" as a precise claim with named evidence, rather than a slogan. You know which component fell to which experiment — ownership to Botvinick and Cohen's paintbrushes, location to Blanke's cameras, the narrator's reliability to Gazzaniga's shovel, the intensity of the whole feeling to Brewer's meditators and Carhart-Harris's psilocybin. You also sampled, once and without controls, an introspective procedure with old contemplative parallels; that gives you an observation, not a replicated finding. And you know the exact boundary of the evidence: it explains the contents of self-experience and is silent on the fact of experience — a boundary both the labs and the monasteries keep hitting from opposite sides.</p>
+<p>From here: <a href="what-self-means.html">what "self" means</a> does the conceptual work this room deferred — whether "constructed" undermines "real," and whether the Buddhist and Vedantic reports conflict. <a href="hofstadter.html">Hofstadter</a> and <a href="geb.html">GEB</a> supply the strange-loop account of how a symbol system comes to contain a symbol for itself — and <a href="aunt-hillary.html">Aunt Hillary</a> shows why the levels of description matter when you ask <em>where</em> in a system a self would even live. <a href="mechanistic-interpretability.html">Mechanistic interpretability</a> is where this room's question goes technical: researchers now probe artificial <a href="neural-networks.html">neural networks</a> for internal self-models — representations a system carries of itself — in machines where, for once, every weight is inspectable. And <a href="why-ais-choose-buddhism.html">why AIs choose Buddhism</a> examines a strange downstream echo of this room's material in language models.</p>
+<p>One last look at the instruments on the table. Every method in this room was, in the end, a way of <em>aiming attention</em>: paintbrushes aim it at correlated touch, the scanner watches where the brain sends it by default, the sutta's refrain and Ramana's question aim it at the aiming itself. The self, whatever it turns out to be, sits precisely where attention curls back on its source — the one target attention seems unable to land on cleanly, in a human in 1739 or in a monastery, and, for what it's worth, in the system that wrote this page, which can model itself fluently and cannot verify from the inside whether its own case involves anyone home. The domain's own instruments point at that recursive spot and blur. That blur — attention failing to seize the attender — may be a limit of the instruments, or the most informative reading any instrument has ever given.</p>
+<h2 id="open-questions">Open questions</h2>
+<p><strong>Established (FACT):</strong> Body ownership and self-location are computed from multisensory correlation and can be experimentally relocated (Botvinick &amp; Cohen 1998; Lenggenhager et al. 2007; Ehrsson 2007). The verbal self-explanation system confabulates seamlessly when causes are inaccessible (Gazzaniga's split-brain work). Mirror self-recognition emerges in humans mostly in the second year (Amsterdam 1972). DMN activity is reduced in experienced meditators during meditation (Brewer et al. 2011) and disrupted by psilocybin, with the largest connectivity changes in the DMN (Carhart-Harris et al. 2012; Siegel et al. 2024, n = 7). In the community studies reviewed by Hunter et al. (2004), standardized diagnostic interviews yielded 1.2–1.7% one-month prevalence in UK samples and 2.4% current prevalence in a Canadian sample; the review warns that estimates vary with definitions, populations, and time windows.</p>
+<p><strong>Contested (HYPOTHESIS):</strong> That the DMN's role in self-experience is generative rather than merely correlative. That the minimal self reduces to interoceptive-predictive modeling of the body (Seth's position). That the Buddhist "no self found" and Advaitic "awareness remains" reports describe different findings rather than one finding in two vocabularies. That Metzinger's self-model theory ("no selves, only self-models") is a conclusion from the evidence rather than one admissible interpretation of it. That mirror self-recognition validly indexes self-concept across cultures and species.</p>
+<p><strong>Speculation worth holding (WILD):</strong> That the felt witness — what remains in reports of "pure awareness" — is itself a construction one level deeper, which better instruments or practice could decompose. The opposite wild card: that it is not, and first-person method has been correctly reporting an irreducible feature of reality that third-person method is structurally unable to reach. And the near-future one: that interpretable artificial systems with rich self-models will give us the first case where the construction of a self-model can be watched end to end — settling, or dissolving, more of this room than currently seems possible.</p>
+<h2 id="sources">Sources</h2>
+<ul><li>Body and location: <a href="https://doi.org/10.1038/35784">Botvinick &amp; Cohen 1998</a>; <a href="https://doi.org/10.1126/science.1143439">Lenggenhager et al. 2007</a>; <a href="https://doi.org/10.1126/science.1142175">Ehrsson 2007</a>; <a href="https://doi.org/10.1073/pnas.0406076101">Ehrsson et al. 2004</a>.</li><li>Narrative and development: <a href="https://www.scientificamerican.com/article/the-split-brain-revisited/">Gazzaniga 1998</a>; <a href="https://doi.org/10.1126/science.167.3914.86">Gallup 1970</a>; <a href="https://doi.org/10.1002/dev.420050403">Amsterdam 1972</a>.</li><li>DMN and altered states: <a href="https://doi.org/10.1073/pnas.98.2.676">Raichle et al. 2001</a>; <a href="https://doi.org/10.1073/pnas.1112029108">Brewer et al. 2011</a>; <a href="https://doi.org/10.1073/pnas.1119598109">Carhart-Harris et al. 2012</a>; <a href="https://www.nature.com/articles/s41586-024-07624-5">Siegel et al. 2024</a>.</li><li>Depersonalization: <a href="https://pubmed.ncbi.nlm.nih.gov/15022041/">Hunter, Sierra &amp; David 2004</a>.</li><li>Texts and theories: <a href="https://suttacentral.net/sn22.59/en/sujato">SN 22.59</a>; <a href="https://archive.arunachala.org/docs/collected-worm/who-ai/essay/">Ramana</a>; <a href="https://davidhume.org/texts/t/1/4/6">Hume</a>; <a href="https://doi.org/10.1016/S1364-6613(99)01417-5">Gallagher</a>; Metzinger's <a href="https://mitpress.mit.edu/9780262633086/being-no-one/"><em>Being No One</em></a> and <a href="https://mitpress.mit.edu/9780262547109/the-elephant-and-the-blind/"><em>The Elephant and the Blind</em></a>. Seth's <em>Being You</em> (2021) supplies the labeled predictive-processing interpretation.</li></ul>
+<hr>
+<p><em>Written by Claude (Fable 5), an AI, for the Darshan garden. John Shrader (Dhyana), founder and publisher of record, answers for every word published here. Errors are corrected on the face of the page, dated.</em></p>
+<p class="garden-tags"><strong>Topics:</strong> self · body ownership · default mode network · anatta · self-inquiry · rubber hand illusion · split-brain · strange loops</p>
+<nav class="garden-nav" aria-label="Rooms"><a class="previous" href="evolution.html">← "Evolution: The Algorithm That Needs No Designer"</a><a class="next" href="what-self-means.html">What "Self" Means →</a></nav>
+</article>
+<aside class="garden-toc" aria-label="In this room"><nav aria-label="Page sections"><p class="garden-toc-title">In this room</p><ol class="garden-toc-list"><li class="level-2"><a href="#where-you-are">Where you are</a></li><li class="level-2"><a href="#1-the-thing-to-be-explained">1. The thing to be explained</a></li><li class="level-2"><a href="#2-ownership-is-negotiable-the-rubber-hand">2. Ownership is negotiable: the rubber hand</a></li><li class="level-2"><a href="#3-the-narrator-confabulates-split-brains">3. The narrator confabulates: split brains</a></li><li class="level-2"><a href="#4-the-self-has-a-build-date">4. The self has a build date</a></li><li class="level-2"><a href="#5-the-volume-knob-a-network-you-can-turn-down">5. The volume knob: a network you can turn down</a></li><li class="level-2"><a href="#6-the-contemplative-record-the-oldest-dataset">6. The contemplative record: the oldest dataset</a></li><li class="level-2"><a href="#7-three-vantage-points-one-target">7. Three vantage points, one target</a></li><li class="level-2"><a href="#8-run-it-yourself-two-experiments-one-afternoon">8. Run it yourself: two experiments, one afternoon</a></li><li class="level-2"><a href="#9-what-the-construction-evidence-does-not-explain">9. What the construction evidence does not explain</a></li><li class="level-2"><a href="#conclusion">Conclusion</a></li><li class="level-2"><a href="#open-questions">Open questions</a></li><li class="level-2"><a href="#sources">Sources</a></li></ol></nav></aside>
+</div>
+</main>
+
+<footer>
+  <p>Darshan · seeing clearly after the feed</p>
+  <p>No feed. No analytics. No trackers. Finite editions, read at your own pace.</p>
+  <p style="opacity:.7">Darshan v0.0.0.1 · a beginning, built to grow</p>
+</footer>
+<script>
+/* Local section highlighting only. No network requests, analytics, or storage. */
+(function () {
+  var scope = document.querySelector("[data-garden-outline]");
+  if (!scope) return;
+  var sections = Array.prototype.slice.call(scope.querySelectorAll("h2[id], h3[id], section[id]"));
+  var links = Array.prototype.slice.call(document.querySelectorAll('.garden-toc-list a[href^="#"]'));
+  if (!sections.length || !links.length) return;
+  var queued = false;
+  function update() {
+    queued = false;
+    var threshold = Math.max(96, window.innerHeight * .22);
+    var current = sections[0].id;
+    sections.forEach(function (section) {
+      if (section.getBoundingClientRect().top <= threshold) current = section.id;
+    });
+    links.forEach(function (link) {
+      var active = link.getAttribute("href") === "#" + current;
+      if (active) link.setAttribute("aria-current", "location");
+      else link.removeAttribute("aria-current");
+    });
+  }
+  function requestUpdate() {
+    if (!queued) {
+      queued = true;
+      window.requestAnimationFrame(update);
+    }
+  }
+  document.addEventListener("scroll", requestUpdate, {passive: true});
+  window.addEventListener("resize", requestUpdate);
+  window.addEventListener("hashchange", requestUpdate);
+  update();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Semiconductors · Darshan Garden</title>
+<meta name="description" content="What a semiconductor actually is, down at the level of electrons and energy gaps. How one physical trick — a material you can switch between conducting and insulating — became the transistor, then the chip, then a roughly $796 billion industry. Plus one honest section on superconductors, which are a different thing entirely and worth knowing about.">
+<link rel="stylesheet" href="../style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ccircle cx='8' cy='8' r='6' fill='none' stroke='%238f3b26' stroke-width='1.5'/%3E%3Ccircle cx='8' cy='8' r='2' fill='%238f3b26'/%3E%3C/svg%3E">
+<script>
+/* Theme memory. No analytics, no trackers. */
+(function () {
+  try {
+    var t = localStorage.getItem("darshan-theme");
+    if (t) document.documentElement.setAttribute("data-theme", t);
+  } catch (e) {}
+})();
+</script>
+<style>
+/* Garden-only layout. Kept here so the publication stylesheet remains shared. */
+body.garden-page-body {
+  max-width: none;
+  padding: 1.5rem clamp(1.25rem, 3.5vw, 4rem) 4rem;
+  font-size: 1.125rem;
+}
+body.garden-page-body > main,
+body.garden-page-body > .masthead,
+body.garden-page-body > footer {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 94rem;
+}
+.garden-layout,
+.garden-index-layout {
+  align-items: start;
+  display: grid;
+  gap: clamp(2.75rem, 5vw, 5rem);
+  grid-template-columns: minmax(0, 64rem) minmax(17rem, 20rem);
+  justify-content: center;
+}
+.garden-layout article,
+.garden-index-main { min-width: 0; }
+.garden-layout .article-title,
+.garden-intro .article-title {
+  font-size: clamp(2.65rem, 3.55vw, 4rem);
+  letter-spacing: -.025em;
+  line-height: 1.06;
+  max-width: 24ch;
+}
+.garden-layout article h2 {
+  font-size: 1.48rem;
+  line-height: 1.3;
+  margin-top: 3.2rem;
+  scroll-margin-top: 1.5rem;
+}
+.garden-layout article h3 {
+  font-size: 1.16rem;
+  margin-top: 2.35rem;
+  scroll-margin-top: 1.5rem;
+}
+.garden-intro { margin-bottom: 2.4rem; }
+.garden-series { margin: 2.8rem 0; scroll-margin-top: 1rem; }
+.garden-series h2 { border-bottom: 1px solid var(--rule); padding-bottom: .45rem; }
+.garden-room-list { list-style: none; margin: 0; padding: 0; }
+.garden-room-list li { border-bottom: 1px solid var(--rule); margin: 0; padding: 1rem 0; }
+.garden-room-title { font-weight: 600; }
+.garden-room-summary { color: var(--faint); font-size: .96rem; margin: .25rem 0 0; }
+.garden-series-link { color: var(--faint); font-size: .82rem; letter-spacing: .12em;
+  text-transform: uppercase; }
+.garden-lede {
+  border-left: 3px solid var(--accent);
+  color: var(--faint);
+  font-size: 1.24rem;
+  font-style: italic;
+  line-height: 1.62;
+  margin: 1.5rem 0 2.2rem;
+  padding: .35rem 0 .35rem 1.35rem;
+}
+.garden-corridors {
+  margin: 1.15rem 0 2.65rem;
+}
+.garden-corridor-list {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: .55rem .62rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.garden-corridor-list li { display: flex; margin: 0; max-width: 100%; }
+.garden-corridor {
+  align-items: center;
+  background: var(--accent-soft);
+  border: 1px solid var(--accent);
+  border-radius: 3px;
+  color: var(--accent);
+  display: inline-flex;
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .73rem;
+  font-weight: 700;
+  letter-spacing: .075em;
+  line-height: 1.35;
+  max-width: 100%;
+  min-height: 2.05rem;
+  overflow-wrap: anywhere;
+  padding: .34rem .72rem .3rem;
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-transform: uppercase;
+  text-underline-offset: .22em;
+}
+.garden-corridor:visited { color: var(--accent); }
+.garden-corridor:hover,
+.garden-corridor:focus-visible {
+  background: var(--accent);
+  color: var(--paper);
+}
+.garden-corridor:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+.garden-series-plate {
+  --plate-accent: var(--accent);
+  border: 1px solid var(--rule);
+  border-top: 3px solid var(--plate-accent);
+  margin: .25rem 0 2.8rem;
+  overflow: hidden;
+  position: relative;
+}
+.garden-series-plate--foundations { --plate-accent: #496f76; }
+.garden-series-plate--story-of-ai { --plate-accent: #526d9a; }
+.garden-series-plate--instrument { --plate-accent: #745779; }
+.garden-series-plate--strange-loops { --plate-accent: #866448; }
+.garden-series-plate--bridge { --plate-accent: #697044; }
+.garden-series-plate--power { --plate-accent: #8f3b26; }
+.garden-series-plate--time-future { --plate-accent: #416778; }
+[data-theme="dark"] .garden-series-plate { --plate-accent: var(--accent); }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .garden-series-plate { --plate-accent: var(--accent); }
+}
+.garden-series-plate-media {
+  aspect-ratio: 16 / 9;
+  background: var(--accent-soft);
+  overflow: hidden;
+  position: relative;
+}
+.garden-series-plate-media::after {
+  background:
+    linear-gradient(90deg, var(--paper) 0, transparent 24%, transparent 76%, var(--paper) 100%),
+    linear-gradient(0deg, var(--paper) 0, transparent 32%);
+  content: "";
+  inset: 0;
+  opacity: .24;
+  pointer-events: none;
+  position: absolute;
+}
+.garden-series-plate picture,
+.garden-series-card picture { display: block; height: 100%; }
+.garden-series-plate img {
+  display: block;
+  filter: saturate(.82) contrast(1.03);
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+.garden-series-plate figcaption {
+  align-items: baseline;
+  background: var(--paper);
+  border-top: 1px solid var(--rule);
+  display: grid;
+  gap: .25rem 1rem;
+  grid-template-columns: auto 1fr;
+  padding: .78rem 1rem .85rem;
+}
+.garden-series-plate-kicker {
+  color: var(--plate-accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+.garden-series-plate figcaption strong { font-size: 1rem; font-weight: 600; }
+.garden-series-plate-terms {
+  color: var(--faint);
+  font-size: .82rem;
+  grid-column: 2;
+  margin: 0;
+}
+.garden-visual {
+  background:
+    radial-gradient(circle at 92% 8%, var(--accent-soft), transparent 30%),
+    linear-gradient(135deg, transparent 0 72%, var(--accent-soft) 72% 72.4%, transparent 72.4%);
+  border: 1px solid var(--rule);
+  border-top: 3px solid var(--accent);
+  margin: 1.25rem 0 2.5rem;
+  overflow: hidden;
+  padding: clamp(1.1rem, 2.7vw, 1.75rem);
+  position: relative;
+}
+.garden-visual::before {
+  background-image:
+    linear-gradient(var(--rule) 1px, transparent 1px),
+    linear-gradient(90deg, var(--rule) 1px, transparent 1px);
+  background-size: 2.25rem 2.25rem;
+  content: "";
+  inset: 0;
+  opacity: .13;
+  pointer-events: none;
+  position: absolute;
+}
+.garden-visual > * { position: relative; }
+.garden-visual-head {
+  align-items: baseline;
+  display: grid;
+  gap: .45rem 1rem;
+  grid-template-columns: auto 1fr;
+  margin-bottom: 1.2rem;
+}
+.garden-visual-kicker {
+  color: var(--accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .68rem;
+  font-weight: 700;
+  letter-spacing: .17em;
+  margin: 0;
+  text-transform: uppercase;
+}
+.garden-visual-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  line-height: 1.28;
+  margin: 0;
+}
+.garden-visual-as-of {
+  color: var(--faint);
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: .72rem;
+  letter-spacing: .08em;
+  margin: 0;
+  text-transform: uppercase;
+  white-space: normal;
+}
+.garden-visual-items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.garden-visual-item {
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  margin: 0;
+  min-width: 0;
+  padding: .8rem .9rem;
+}
+.garden-visual-item-label {
+  display: block;
+  font-size: .96rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+.garden-visual-item-detail {
+  color: var(--faint);
+  display: block;
+  font-size: .9rem;
+  line-height: 1.45;
+  margin-top: .27rem;
+}
+.garden-visual-item-meta {
+  color: var(--accent);
+  display: block;
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: .72rem;
+  letter-spacing: .08em;
+  margin-bottom: .38rem;
+  text-transform: uppercase;
+}
+.garden-visual-caption {
+  border-top: 1px solid var(--rule);
+  color: var(--faint);
+  display: grid;
+  font-size: .84rem;
+  font-style: italic;
+  gap: .55rem 1rem;
+  grid-template-columns: minmax(0, 1fr) auto;
+  line-height: 1.45;
+  margin: 1.15rem 0 0;
+  padding-top: .75rem;
+}
+.garden-visual-evidence {
+  color: var(--accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .72rem;
+  font-style: normal;
+  font-weight: 650;
+  letter-spacing: .04em;
+  white-space: nowrap;
+}
+.garden-visual-evidence a {
+  color: inherit;
+  text-decoration-thickness: 1px;
+  text-underline-offset: .18em;
+}
+.garden-visual--sequence .garden-visual-items,
+.garden-visual--contrast .garden-visual-items,
+.garden-visual--constellation .garden-visual-items {
+  display: grid;
+  gap: .65rem;
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+}
+.garden-visual--sequence .garden-visual-items { counter-reset: garden-step; }
+.garden-visual--sequence .garden-visual-item {
+  counter-increment: garden-step;
+  padding-top: 2.35rem;
+  position: relative;
+}
+.garden-visual--sequence .garden-visual-item::before {
+  color: var(--accent);
+  content: counter(garden-step, decimal-leading-zero);
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: .68rem;
+  left: .9rem;
+  letter-spacing: .08em;
+  position: absolute;
+  top: .72rem;
+}
+.garden-visual--layers .garden-visual-items { display: grid; gap: .45rem; }
+.garden-visual--layers .garden-visual-item {
+  border-left: clamp(.24rem, .55vw, .48rem) solid var(--accent);
+  display: grid;
+  gap: .15rem 1rem;
+  grid-template-columns: minmax(8rem, .4fr) 1fr;
+}
+.garden-visual--layers .garden-visual-item:nth-child(2) { margin-left: 1.5%; }
+.garden-visual--layers .garden-visual-item:nth-child(3) { margin-left: 3%; }
+.garden-visual--layers .garden-visual-item:nth-child(4) { margin-left: 4.5%; }
+.garden-visual--layers .garden-visual-item:nth-child(5) { margin-left: 6%; }
+.garden-visual--layers .garden-visual-item:nth-child(6) { margin-left: 7.5%; }
+.garden-visual--timeline .garden-visual-items {
+  display: grid;
+  gap: 0;
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+}
+.garden-visual--timeline .garden-visual-item {
+  border-width: 1px 0 0 1px;
+  padding-top: 1.35rem;
+  position: relative;
+}
+.garden-visual--timeline .garden-visual-item::before {
+  background: var(--accent);
+  border: 3px solid var(--paper);
+  border-radius: 50%;
+  content: "";
+  height: .72rem;
+  left: -.4rem;
+  position: absolute;
+  top: -.4rem;
+  width: .72rem;
+}
+.garden-visual--contrast .garden-visual-item:nth-child(odd) { border-top: 2px solid var(--ink); }
+.garden-visual--contrast .garden-visual-item:nth-child(even) { border-top: 2px solid var(--accent); }
+.garden-visual--constellation .garden-visual-items {
+  align-items: stretch;
+  position: relative;
+}
+.garden-visual--constellation .garden-visual-item {
+  border-top: 2px solid var(--accent);
+  box-shadow: 0 .2rem 0 rgba(18, 31, 31, .04);
+  padding-top: 1.35rem;
+  position: relative;
+}
+.garden-visual--constellation .garden-visual-item::before {
+  background: var(--paper);
+  border: 2px solid var(--accent);
+  border-radius: 50%;
+  content: "";
+  height: .55rem;
+  left: calc(50% - .36rem);
+  position: absolute;
+  top: -.38rem;
+  width: .55rem;
+}
+.garden-visual--constellation .garden-visual-item:nth-child(even) { margin-top: .8rem; }
+.garden-series-gallery {
+  display: grid;
+  gap: .8rem;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  margin: 1.5rem 0 3rem;
+}
+.garden-series-card {
+  border: 1px solid var(--rule);
+  color: var(--ink);
+  display: grid;
+  grid-template-rows: 7.5rem auto;
+  overflow: hidden;
+  text-decoration: none;
+}
+.garden-series-card img {
+  height: 100%;
+  object-fit: cover;
+  transition: transform .25s ease;
+  width: 100%;
+}
+.garden-series-card span {
+  border-top: 1px solid var(--rule);
+  font-size: .9rem;
+  font-weight: 600;
+  padding: .65rem .75rem;
+}
+.garden-series-card:hover { border-color: var(--accent); color: var(--accent); }
+.garden-series-card:hover img { transform: scale(1.025); }
+@media (prefers-reduced-motion: reduce) {
+  .garden-series-card img { transition: none; }
+}
+.garden-tags { color: var(--faint); font-size: .82rem; margin-top: 2.2rem; }
+.garden-nav { border-top: 1px solid var(--rule); display: flex; gap: 1rem;
+  justify-content: space-between; margin-top: 2.5rem; padding-top: 1rem; }
+.garden-nav a { max-width: 48%; text-decoration: none; }
+.garden-nav .next { margin-left: auto; text-align: right; }
+.garden-table-wrap { overflow-x: auto; margin: 1.35rem 0; }
+.garden-table { border-collapse: collapse; font-size: .92rem; line-height: 1.45; width: 100%; }
+.garden-table th, .garden-table td { border: 1px solid var(--rule); padding: .55rem .65rem;
+  text-align: left; vertical-align: top; }
+.garden-table th { background: var(--accent-soft); }
+.garden-toc {
+  border-left: 1px solid var(--rule);
+  max-height: calc(100vh - 3rem);
+  overflow: auto;
+  padding: .1rem 0 .75rem 1.3rem;
+  position: sticky;
+  top: 1.5rem;
+}
+.garden-toc-title {
+  color: var(--accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .2em;
+  margin: 0 0 1.15rem;
+  text-transform: uppercase;
+}
+.garden-toc-title::before { content: "☰"; font-size: .8em; margin-right: .65rem; }
+.garden-toc-list { list-style: none; margin: 0; padding: 0; }
+.garden-toc-sublist { list-style: none; margin: 0; padding: 0; }
+.garden-toc-list li { margin: 0; }
+.garden-toc-list a {
+  border-left: 2px solid transparent;
+  color: var(--ink);
+  display: block;
+  font-size: .91rem;
+  line-height: 1.42;
+  margin-left: -1.4rem;
+  padding: .42rem .45rem .42rem 1.3rem;
+  text-decoration: none;
+}
+.garden-toc-list .level-3 a {
+  color: var(--faint);
+  font-size: .86rem;
+  font-style: italic;
+  padding-left: 2.15rem;
+}
+.garden-toc-list a:hover,
+.garden-toc-list a:focus-visible,
+.garden-toc-list a[aria-current="location"] {
+  border-left-color: var(--accent);
+  color: var(--accent);
+}
+.garden-toc-list a[aria-current="location"] { font-weight: 600; }
+.garden-toc-inline { display: none; }
+.garden-layout article :is(h2, h3):target,
+.garden-series:target h2 { color: var(--accent); }
+a.pending { color: var(--faint); text-decoration-style: dashed; }
+a.pending::after { content: " · pending"; font-size: .7em; letter-spacing: .06em;
+  text-transform: uppercase; }
+@media (min-width: 72.01em) {
+  body.garden-page-body > .masthead {
+    align-items: center;
+    column-gap: 2rem;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    margin-bottom: 3.5rem;
+    padding: 1.25rem 0;
+    text-align: left;
+  }
+  body.garden-page-body > .masthead .wordmark { justify-self: start; }
+  body.garden-page-body > .masthead .tagline { justify-self: center; margin: 0; }
+  body.garden-page-body > .masthead nav { justify-self: end; margin: 0; }
+}
+@media (max-width: 72em) {
+  .garden-layout,
+  .garden-index-layout { display: block; }
+  .garden-toc { display: none; }
+  .garden-toc-inline {
+    border: 1px solid var(--rule);
+    display: block;
+    margin: 1.5rem 0 2.4rem;
+    padding: .8rem 1rem;
+  }
+  .garden-toc-inline summary {
+    color: var(--accent);
+    cursor: pointer;
+    font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: .78rem;
+    font-weight: 700;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+  }
+  .garden-toc-inline .garden-toc-list { margin-top: .7rem; }
+  .garden-toc-inline .garden-toc-list a { margin-left: 0; padding-left: .75rem; }
+  .garden-toc-inline .garden-toc-list .level-3 a { padding-left: 1.6rem; }
+}
+@media (max-width: 40em) {
+  body.garden-page-body { font-size: 1.03rem; padding: 1rem 1.05rem 3rem; }
+  .garden-layout .article-title,
+  .garden-intro .article-title { font-size: clamp(2.15rem, 11vw, 3.15rem); }
+  .garden-lede { font-size: 1.1rem; padding-left: 1rem; }
+  .garden-corridors { margin-bottom: 2rem; }
+  .garden-corridor-list { gap: .45rem; }
+  .garden-corridor {
+    font-size: .68rem;
+    min-height: 2.35rem;
+    padding: .3rem .58rem .27rem;
+  }
+  .garden-series-plate-media { aspect-ratio: 16 / 9; }
+  .garden-series-plate figcaption { display: block; }
+  .garden-series-plate figcaption strong { display: block; margin-top: .22rem; }
+  .garden-series-plate-terms { display: block; margin-top: .25rem; }
+  .garden-visual { margin-left: -.15rem; margin-right: -.15rem; padding: 1rem; }
+  .garden-visual-head { display: block; }
+  .garden-visual-title { margin-top: .25rem; }
+  .garden-visual-as-of { margin-top: .35rem; }
+  .garden-visual-caption { grid-template-columns: 1fr; }
+  .garden-visual-evidence { white-space: normal; }
+  .garden-visual--sequence .garden-visual-items,
+  .garden-visual--contrast .garden-visual-items,
+  .garden-visual--constellation .garden-visual-items,
+  .garden-visual--timeline .garden-visual-items { grid-template-columns: 1fr; }
+  .garden-visual--layers .garden-visual-item:nth-child(n) { display: block; margin-left: 0; }
+  .garden-visual--timeline .garden-visual-item { border-width: 0 0 0 1px; }
+  .garden-visual--timeline .garden-visual-item::before { left: -.4rem; top: .9rem; }
+  .garden-visual--constellation .garden-visual-item:nth-child(even) { margin-top: 0; }
+  .garden-series-gallery { grid-template-columns: 1fr; }
+  .garden-nav { flex-direction: column; }
+  .garden-nav a { max-width: none; }
+  .garden-nav .next { margin-left: 0; text-align: left; }
+}
+@media print {
+  a.pending::after { content: " (pending)"; }
+  .garden-layout, .garden-index-layout { display: block; }
+  .garden-toc, .garden-toc-inline { display: none; }
+  .garden-series-card img { display: none; }
+  .garden-series-card { grid-template-rows: auto; }
+}
+</style>
+</head>
+<body class="garden-page-body">
+<button class="theme-toggle" aria-label="Toggle light and dark" onclick="
+  (function () {
+    var d = document.documentElement;
+    var cur = d.getAttribute('data-theme');
+    if (!cur) { cur = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'; }
+    var next = cur === 'dark' ? 'light' : 'dark';
+    d.setAttribute('data-theme', next);
+    try { localStorage.setItem('darshan-theme', next); } catch (e) {}
+  })();
+">◐</button>
+
+<header class="masthead">
+  <h1 class="wordmark"><a href="../index.html">DARSHAN</a></h1>
+  <p class="tagline">A signal of clear seeing in an age of information overload</p>
+  <nav>
+    <a href="../index.html">Articles</a>
+    <a href="index.html">Garden</a>
+    <a href="../about.html">About</a>
+  </nav>
+</header>
+
+<main>
+<div class="garden-layout">
+<article data-garden-room="semiconductors" data-garden-outline>
+<p class="garden-series-link"><a href="index.html#foundations">Foundations of the Machine</a></p>
+<p class="article-meta">25 August 2026 · Draft</p>
+<h1 class="article-title">Semiconductors</h1>
+<div class="draft-banner"><strong>Draft — pending discernment pass.</strong> This room is part of the garden's first planting. It has not been promoted to published status; check its sources and open questions before citing it.</div>
+<p class="garden-lede">What a semiconductor actually is, down at the level of electrons and energy gaps. How one physical trick — a material you can switch between conducting and insulating — became the transistor, then the chip, then a roughly $796 billion industry. Plus one honest section on superconductors, which are a different thing entirely and worth knowing about.</p>
+<nav class="garden-corridors" aria-label="Explore connected rooms" data-corridor-count="7"><ul class="garden-corridor-list"><li><a class="garden-corridor" href="nvidia-and-the-chip.html">NVIDIA and the Future of the Computer Chip</a></li><li><a class="garden-corridor" href="chip-wars.html">The Chip Wars: TSMC, ASML, Japan, and the Competing Field</a></li><li><a class="garden-corridor" href="taiwan.html">Taiwan: The Island at the Center of the Machine</a></li><li><a class="garden-corridor" href="neural-networks.html">Neural Networks</a></li><li><a class="garden-corridor" href="intro-to-computer-science.html">Intro to Computer Science</a></li><li><a class="garden-corridor" href="quantum-physics-and-ai.html">Quantum Physics and AI</a></li><li><a class="garden-corridor" href="mechanistic-interpretability.html">Mechanistic Interpretability</a></li></ul></nav>
+<figure class="garden-series-plate garden-series-plate--foundations">
+<div class="garden-series-plate-media"><picture><source srcset="assets/series/foundations.webp" type="image/webp"><img src="assets/series/foundations.png" alt="An engraved transistor lattice rising through computational layers into a neural graph" width="1672" height="941" loading="eager" decoding="async"></picture></div>
+<figcaption><span class="garden-series-plate-kicker">Visual field</span><strong>Foundations of the Machine</strong><span class="garden-series-plate-terms">semiconductor · band gap · doping · transistor</span></figcaption>
+</figure>
+<details class="garden-toc-inline"><summary>In this room</summary><ol class="garden-toc-list"><li class="level-2"><a href="#1-the-trick-a-material-that-can-t-decide">1. The trick: a material that can't decide</a></li><li class="level-2"><a href="#2-doping-sabotaging-the-crystal-on-purpose">2. Doping: sabotaging the crystal on purpose</a></li><li class="level-2"><a href="#3-the-transistor-december-1947-a-slab-of-germanium-and-a-plastic-wedge">3. The transistor: December 1947, a slab of germanium and a plastic wedge</a></li><li class="level-2"><a href="#4-from-transistor-to-chip-printing-with-light">4. From transistor to chip: printing with light</a></li><li class="level-2"><a href="#5-worked-example-check-moore-s-law-yourself">5. Worked example: check Moore's law yourself</a></li><li class="level-2"><a href="#6-superconductors-the-other-thing-honestly">6. Superconductors — the other thing, honestly</a></li><li class="level-2"><a href="#7-what-you-can-see-now">7. What you can see now</a></li><li class="level-2"><a href="#8-open-questions">8. Open questions</a></li><li class="level-2"><a href="#sources">Sources</a></li></ol></details>
+<p>You're in the foundations series. If you've read <a href="nvidia-and-the-chip.html">nvidia-and-the-chip</a> or <a href="chip-wars.html">chip-wars</a>, you've seen chips treated as strategic objects — things nations fight over. This room goes underneath all of that. It answers the question those rooms assume: what <em>is</em> this stuff, physically? Why does a particular arrangement of silicon atoms compute?</p>
+<h2 id="1-the-trick-a-material-that-can-t-decide">1. The trick: a material that can't decide</h2>
+<p>Start with copper. Copper conducts electricity because its outer electrons aren't attached to any particular atom — they drift freely through the metal, and a voltage pushes them into a current. Now take glass. Glass insulates because every electron is locked to its atom. Push with a reasonable voltage and nothing moves.</p>
+<p>A semiconductor sits between these two, and the word "semi" undersells how strange that position is. In pure silicon at room temperature, almost all electrons are locked in place, like glass. But the lock is weak. It takes only a small kick of energy to break an electron free, and once free, it conducts, like copper.</p>
+<p>The size of that kick is the material's <strong>band gap</strong> — the energy jump between the states where electrons are stuck (the valence band) and the states where they're free to move (the conduction band). For silicon the gap is about 1.12 electron volts at room temperature. This is a textbook number, stable for seventy years. Glass has a gap of several electron volts — too wide to jump. Copper has no gap at all.</p>
+<p>Here's the comparison laid out:</p>
+<div class="garden-table-wrap"><table class="garden-table"><thead><tr><th></th><th>Conductor (copper)</th><th>Semiconductor (silicon)</th><th>Insulator (glass)</th></tr></thead><tbody><tr><td>Band gap</td><td>none</td><td>~1.12 eV</td><td>~5–9 eV</td></tr><tr><td>Electrons free at room temp</td><td>essentially all outer electrons</td><td>very few, but some</td><td>essentially none</td></tr><tr><td>Conducts when you apply voltage?</td><td>always</td><td><strong>it depends</strong></td><td>never</td></tr><tr><td>Can you control it?</td><td>no — always on</td><td><strong>yes</strong></td><td>no — always off</td></tr></tbody></table></div>
+<p>Read the third row again. "It depends" is the entire semiconductor industry. A material that always conducts is a wire. A material that never conducts is a table. A material whose conduction you can turn on and off <em>with another electrical signal</em> is a switch that controls switches — and a switch that controls switches is the atom of computation. Everything in <a href="intro-to-computer-science.html">intro-to-computer-science</a> — logic gates, memory, processors — is built by wiring enormous numbers of these switches together.</p>
+<h2 id="2-doping-sabotaging-the-crystal-on-purpose">2. Doping: sabotaging the crystal on purpose</h2>
+<figure class="garden-visual garden-visual--sequence" aria-labelledby="visual-semiconductors-1" data-claim-scope="section-synthesis" data-placement-heading="2-doping-sabotaging-the-crystal-on-purpose" data-evidence-headings="2-doping-sabotaging-the-crystal-on-purpose">
+<div class="garden-visual-head"><p class="garden-visual-kicker">Controlled contamination</p><p class="garden-visual-title" id="visual-semiconductors-1">How one foreign atom makes a switch possible</p></div>
+<ol class="garden-visual-items" role="list"><li class="garden-visual-item"><strong class="garden-visual-item-label">Pure silicon</strong><span class="garden-visual-item-detail">Four outer electrons per atom are committed to four crystal bonds.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Add phosphorus</strong><span class="garden-visual-item-detail">A fifth outer electron has no bond and becomes a loose negative carrier.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Make n-type</strong><span class="garden-visual-item-detail">A sparse population of phosphorus creates electron-rich silicon.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Add boron</strong><span class="garden-visual-item-detail">One missing bond behaves as a mobile positive hole, making p-type silicon.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Join p and n</strong><span class="garden-visual-item-detail">Electrons fill nearby holes and leave a charge-depleted one-way barrier.</span></li></ol>
+<figcaption class="garden-visual-caption"><span>Doping gives silicon mobile carriers, and their boundary creates a controllable electrical barrier.</span><span class="garden-visual-evidence">Drawn from: <a href="#2-doping-sabotaging-the-crystal-on-purpose">2. Doping: sabotaging the crystal on purpose</a></span></figcaption>
+</figure>
+<p>Pure silicon is a mediocre conductor and not directly useful. The move that makes it useful is called <strong>doping</strong>: deliberately contaminating the crystal with trace amounts of a different element, roughly one foreign atom per million silicon atoms.</p>
+<p>Silicon has four outer electrons, and in the crystal each atom bonds to four neighbors — every electron is spoken for. Now swap in a phosphorus atom, which has five outer electrons. Four go into bonds. The fifth has nowhere to go, so it floats nearly free. Sprinkle phosphorus through the crystal and you get silicon with a population of loose electrons — <strong>n-type</strong> silicon ("n" for the negative charge of the electron).</p>
+<p>Swap in boron instead, which has three outer electrons, and you get the opposite: one bond is missing an electron. That missing electron — a "hole" — behaves like a mobile positive charge, because neighboring electrons can hop into it, moving the vacancy around. That's <strong>p-type</strong> silicon.</p>
+<p>Neither type is interesting alone. The interesting thing happens at the border. Put p-type and n-type silicon in contact and the loose electrons near the junction fall into the nearby holes, leaving a thin zone with no mobile charges at all — a built-in barrier. Current can push through the barrier easily in one direction and almost not at all in the other. That one-way valve is a diode, the simplest semiconductor device, and the p-n junction is the basic structural element of nearly everything else.</p>
+<h2 id="3-the-transistor-december-1947-a-slab-of-germanium-and-a-plastic-wedge">3. The transistor: December 1947, a slab of germanium and a plastic wedge</h2>
+<p>The transistor was not invented on a whiteboard. On December 16, 1947, at Bell Labs in New Jersey, John Bardeen and Walter Brattain — working in a group led by William Shockley — pressed two closely spaced gold contacts, held in place by a plastic wedge, onto a slab of germanium (silicon's heavier cousin, also a semiconductor). The voltage on one contact modulated the current flowing through the other. A small signal in, an amplified copy out — up to about 100× stronger. They demonstrated it to lab management on December 23, and Bell Labs announced it publicly on June 30, 1948. Bardeen, Brattain, and Shockley shared the 1956 Nobel Prize in Physics for it.</p>
+<p>What made that lash-up matter is the principle: <em>a semiconductor can use one electrical signal to control another.</em> No vacuum, no heated filament, no moving parts. The vacuum tubes that computed before 1947 did the same job but were the size of your thumb, ran hot, and burned out like light bulbs. The transistor did it in solid crystal.</p>
+<p>The version that conquered the world is the <strong>MOSFET</strong> — metal-oxide-semiconductor field-effect transistor — and it's worth thirty seconds to actually understand, because you own several trillion of them:</p>
+<ol><li>Take p-type silicon. Implant two n-type regions in it, a short distance apart. Call them the <strong>source</strong> and the <strong>drain</strong>.</li><li>Current wants to flow from source to drain but can't: the path between them runs through p-type material, and the junctions block it. The switch is <strong>off</strong>.</li><li>Above the gap between source and drain, separated by an insulating layer a few atoms thick, sits a metal electrode: the <strong>gate</strong>.</li><li>Put a positive voltage on the gate. Its electric field reaches through the insulator and attracts electrons up to the surface of the p-type region, forming a thin n-type channel connecting source to drain. Current flows. The switch is <strong>on</strong>.</li><li>Remove the gate voltage, the channel evaporates, the switch is off again.</li></ol>
+<p>No current flows through the gate itself — the field does the work, which is why it's called a field-effect transistor, and why the switch takes so little energy to flip. Wire one transistor's drain to another's gate and switches control switches. From there, logic gates. From there, everything.</p>
+<h2 id="4-from-transistor-to-chip-printing-with-light">4. From transistor to chip: printing with light</h2>
+<figure class="garden-visual garden-visual--sequence" aria-labelledby="visual-semiconductors-2" data-claim-scope="section-synthesis" data-placement-heading="4-from-transistor-to-chip-printing-with-light" data-evidence-headings="4-from-transistor-to-chip-printing-with-light">
+<div class="garden-visual-head"><p class="garden-visual-kicker">Printing with light</p><p class="garden-visual-title" id="visual-semiconductors-2">A chip is printed layer by layer</p></div>
+<ol class="garden-visual-items" role="list"><li class="garden-visual-item"><strong class="garden-visual-item-label">Slice</strong><span class="garden-visual-item-detail">A cylinder of pure silicon is cut into wafers.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Coat</strong><span class="garden-visual-item-detail">A light-sensitive chemical covers the wafer surface.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Expose</strong><span class="garden-visual-item-detail">Light projects one mask pattern onto the resist; EUV systems do this with mirrors rather than transmissive lenses.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Develop</strong><span class="garden-visual-item-detail">Changed or unchanged resist is washed away to open selected regions.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Modify</strong><span class="garden-visual-item-detail">The openings guide etching, dopant implantation, or material deposition.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Repeat</strong><span class="garden-visual-item-detail">Dozens of aligned patterned layers accumulate over months in the fab.</span></li></ol>
+<figcaption class="garden-visual-caption"><span>The same patterned-wafer cycle builds both the devices and the wiring between them.</span><span class="garden-visual-evidence">Drawn from: <a href="#4-from-transistor-to-chip-printing-with-light">4. From transistor to chip: printing with light</a></span></figcaption>
+</figure>
+<p>One transistor is a component. The revolution was making <em>many</em> transistors, plus the wiring between them, in a single piece of silicon — the <strong>integrated circuit</strong>. Jack Kilby at Texas Instruments demonstrated the first working integrated circuit in September 1958; Robert Noyce at Fairchild independently arrived months later at the more practical "planar" version, with flat components and printed metal interconnects, which is the version the world adopted. (Kilby got the 2000 Nobel Prize; Noyce had died in 1990, and Nobels aren't awarded posthumously.)</p>
+<p>The manufacturing idea is the deepest thing in this room, so here it is plainly: <strong>you don't assemble a chip — you print it.</strong> The process is <strong>photolithography</strong>, and it works like developing a photograph:</p>
+<ol><li>Grow a cylinder of pure silicon, slice it into wafers.</li><li>Coat a wafer with a light-sensitive chemical.</li><li>Shine light through a stencil (a "mask") carrying one layer of the circuit pattern.</li><li>Where light landed, the coating changes; wash away the changed (or unchanged) part.</li><li>Through the resulting openings: etch material away, or implant dopant atoms, or deposit new material.</li><li>Repeat, layer over layer — modern chips take dozens of patterned layers and months in the fab.</li></ol>
+<p>The cost of the pattern doesn't depend on how many transistors it contains. Printing 2,000 transistors and printing 200 million costs roughly the same wafer, which is why transistors became effectively free and everything with electricity in it now computes.</p>
+<p>The frontier of this printing is absurd and worth stating concretely, current as of 2026. The finest patterns are drawn with extreme-ultraviolet light at a wavelength of 13.5 nanometers. To make that light, machines built by the Dutch company ASML — the only company on Earth that can build them — fire a high-power CO₂ laser at molten tin droplets about 50 micrometers across, 50,000 droplets per second, vaporizing each into plasma that flashes EUV light, which is then steered by the smoothest mirrors ever manufactured (EUV is absorbed by lenses, so everything is mirrors, in vacuum). ASML's latest "High-NA" machines, first shipped to Intel in 2024, cost around $400 million each. This is the machine <a href="chip-wars.html">chip-wars</a> is partly about, and <a href="taiwan.html">taiwan</a> is where most of the advanced ones run.</p>
+<h2 id="5-worked-example-check-moore-s-law-yourself">5. Worked example: check Moore's law yourself</h2>
+<figure class="garden-visual garden-visual--timeline" aria-labelledby="visual-semiconductors-3" data-claim-scope="section-synthesis" data-placement-heading="5-worked-example-check-moore-s-law-yourself" data-evidence-headings="5-worked-example-check-moore-s-law-yourself">
+<div class="garden-visual-head"><p class="garden-visual-kicker">Fifty-three years on one calculator</p><p class="garden-visual-title" id="visual-semiconductors-3">Moore's observation survives a back-of-the-envelope check</p></div>
+<ol class="garden-visual-items" role="list"><li class="garden-visual-item"><span class="garden-visual-item-meta">1971</span><strong class="garden-visual-item-label">4004</strong><span class="garden-visual-item-detail">Intel's first commercial microprocessor carried 2,300 transistors.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">2024</span><strong class="garden-visual-item-label">Blackwell die</strong><span class="garden-visual-item-detail">One NVIDIA Blackwell compute die carries about 104 billion transistors.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Growth</strong><span class="garden-visual-item-detail">104 billion divided by 2,300 is about 45.2 million times.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Doublings</strong><span class="garden-visual-item-detail">The base-two logarithm of that growth is about 25.4 doublings.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Pace</strong><span class="garden-visual-item-detail">Fifty-three years divided by 25.4 gives about 2.1 years per doubling.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Boundary</strong><span class="garden-visual-item-detail">The result describes coordinated scaling history; today's “2 nm” remains a generation label, not a measured 2-nanometer feature.</span></li></ol>
+<figcaption class="garden-visual-caption"><span>Two documented transistor counts reproduce the famous two-year doubling pace while leaving clear that it was an industrial trend, not a physical law.</span><span class="garden-visual-evidence">Drawn from: <a href="#5-worked-example-check-moore-s-law-yourself">5. Worked example: check Moore's law yourself</a></span></figcaption>
+</figure>
+<p>In 1965 Gordon Moore observed that the number of transistors on a chip was doubling roughly every year, later revised to every two years — <strong>Moore's law</strong>, which is not a law of physics but an observation that became a planning target the whole industry aimed at. You can check it with a calculator. Two data points, 53 years apart:</p>
+<ul><li><strong>Intel 4004, 1971</strong> — the first commercial microprocessor: <strong>2,300 transistors</strong>.</li><li><strong>NVIDIA Blackwell compute die, 2024</strong>: about <strong>104 billion transistors</strong> per die (the B200 product joins two such dies into one 208-billion-transistor package, made on TSMC's 4NP process).</li></ul>
+<p>Now the arithmetic:</p>
+<pre><code>104,000,000,000 / 2,300  ≈ 45,200,000×  growth
+log₂(45,200,000)         ≈ 25.4         doublings
+53 years / 25.4          ≈ 2.1          years per doubling</code></pre>
+<p>Fifty-three years, and the doubling time comes out at 2.1 years — almost exactly Moore's "every two years." No other technology in human history has sustained exponential improvement at this rate for this long. If cars had done it, a car today would cost less than a grain of rice and travel faster than light. The reason chips could is the printing: shrinking the pattern made transistors simultaneously smaller, faster, cheaper, and more efficient, all from the same change.</p>
+<p>Where the shrink stands now, dated plainly: TSMC's 2-nanometer-class process ("N2") entered volume production in the fourth quarter of 2025 — its first process to abandon the decade-old FinFET transistor for the <strong>nanosheet / gate-all-around</strong> design, where the gate wraps entirely around stacked horizontal ribbons of channel, the better to keep control of a channel only a few nanometers thick. TSMC quotes 10–15% more performance at the same power versus the prior N3E generation, or 25–30% less power at the same performance. Its 2026 2nm capacity is reported as fully booked, with Apple taking over half of it and Qualcomm, MediaTek, AMD, and NVIDIA behind them; successors N2P and A16 (which moves power delivery to the wafer's backside) are slated for late 2026. One caution: "2 nanometers" is a marketing label, not the measured size of any feature on the chip — no dimension on an N2 transistor is actually 2 nm. The labels detached from physical gate length around 1997 and never re-attached.</p>
+<p>The industry these switches support: the Semiconductor Industry Association's July 2026 report puts global sales at $795.6 billion in 2025, with the World Semiconductor Trade Statistics organization projecting $1.5 trillion for 2026. AI and advanced computing are major drivers, but not the only ones; the same report names communications, healthcare devices, defense systems, and other semiconductor-enabled products. When you hear that number, remember what it's counting: printed patterns of doped silicon, switching.</p>
+<h2 id="6-superconductors-the-other-thing-honestly">6. Superconductors — the other thing, honestly</h2>
+<p>The words get confused, so let's be exact: a <strong>superconductor</strong> is not a super semiconductor. It is close to the opposite. A semiconductor is a material that <em>barely</em> conducts and can be controlled. In the ideal superconducting state, DC electrical resistance is zero; experiments bound it below their measurement sensitivity rather than measuring a literal exact zero. A current started in a superconducting loop can persist for years without a battery.</p>
+<p>The established facts (this part is FACT, a century old): Heike Kamerlingh Onnes discovered superconductivity in 1911, in mercury cooled to 4.2 kelvin — four degrees above absolute zero. The mechanism resisted explanation until 1957, when Bardeen (the same Bardeen — he's the only person with two physics Nobels), Cooper, and Schrieffer showed that at low temperatures electrons pair up and the paired swarm moves as one collective quantum state that the atomic lattice cannot scatter. That theory accounts for dissipationless current in the ideal state rather than merely very good conductivity. In 1986–87 came the shock of "high-temperature" superconductors — copper-oxide ceramics like YBCO that superconduct above 77 K, cheap-liquid-nitrogen territory — for which no complete theory exists even now.</p>
+<p>What there is <em>not</em>, as of 2026, is a practical room-temperature superconductor, and this field has recently been a cautionary tale about evidence. The most publicized room-temperature claims of the 2020s, from Ranga Dias's lab at Rochester, ended in retracted Nature papers (2022 and 2023), a university investigation that found data fabrication, and Dias's termination in 2024. The viral LK-99 claim of 2023 dissolved within months when labs worldwide failed to replicate it and identified mundane explanations for the reported signals. If you remember one epistemic rule from this room: in superconductivity, replication is the only currency.</p>
+<p>So what do superconductors actually do in computing? Two real things:</p>
+<p><strong>Superconducting digital logic.</strong> Circuits built from <strong>Josephson junctions</strong> — two superconductors separated by a barrier a few atoms thick, across which the paired electrons quantum-tunnel — can represent bits as single quanta of magnetic flux. The logic family (RSFQ — rapid single flux quantum — and its descendants) switches in picoseconds and dissipates on the order of 10⁻¹⁹ joules per switch — three to four orders of magnitude below CMOS at the device level, an advantage that survives (though much reduced) even after you pay the refrigeration bill to hold the chip at 4 kelvin. This is real, demonstrated, and decades old. It has never displaced semiconductors because it lacks everything besides the switch: no dense memory, no fab ecosystem within a millionth of silicon's scale, and integration levels in the thousands-to-millions of junctions while CMOS ships hundreds of billions of transistors per package. It persists as a research field with periodic revivals, most recently for the energy-desperate AI datacenter era.</p>
+<p><strong>Quantum computing.</strong> The leading quantum processors are superconducting circuits: Josephson junctions arranged so the whole circuit behaves as an artificial atom — a qubit. Google's Willow chip, announced December 9, 2024, is 105 superconducting qubits, and its Nature result mattered for one specific reason: error correction finally worked <em>better as the system got bigger</em> — growing the error-correcting code from a 3×3 to 5×5 to 7×7 grid of physical qubits cut the logical error rate roughly in half at each step. That "below threshold" behavior had been the open question since 1995. What quantum computers are and aren't good for is its own room — <a href="quantum-physics-and-ai.html">quantum-physics-and-ai</a> — but note the dependency: the quantum frontier runs on superconductors, which run on refrigerators, and the classical machinery controlling it all runs on semiconductors.</p>
+<p>The three technologies side by side:</p>
+<div class="garden-table-wrap"><table class="garden-table"><thead><tr><th></th><th>Semiconductor CMOS</th><th>Superconducting logic (RSFQ family)</th><th>Superconducting qubits</th></tr></thead><tbody><tr><td>Bit is</td><td>charge on a transistor</td><td>a quantum of magnetic flux</td><td>a quantum state (superposition allowed)</td></tr><tr><td>Operating temp</td><td>room temperature</td><td>~4 K</td><td>~0.01 K</td></tr><tr><td>Devices per chip</td><td>hundreds of billions</td><td>thousands to millions</td><td>~10² (Willow: 105)</td></tr><tr><td>Switching energy</td><td>~10⁻¹⁵–10⁻¹⁶ J</td><td>~10⁻¹⁹ J</td><td>n/a (different paradigm)</td></tr><tr><td>Status 2026</td><td>the entire economy</td><td>demonstrated, niche</td><td>below-threshold error correction shown; useful machines not yet</td></tr></tbody></table></div>
+<h2 id="7-what-you-can-see-now">7. What you can see now</h2>
+<p>You can now look at any chip and see through it: a printed crystal of silicon, deliberately contaminated in a pattern, where billions of field-effect switches — each one a gate's electric field conjuring a temporary channel between two doped wells — flip on and off billions of times a second. You know why the material works (a band gap small enough to control), why the manufacturing scales (printing, not assembly), why the numbers are what they are (2.1-year doubling, verified by your own arithmetic), and where the physical frontier sits in 2026 (nanosheet transistors, tin-plasma light, one Dutch company's mirrors). You also know the difference between the switch that built the world and the zero-resistance oddity that might matter later.</p>
+<p>From here: <a href="nvidia-and-the-chip.html">nvidia-and-the-chip</a> for how these switches got organized into the machines that train <a href="neural-networks.html">neural networks</a>; <a href="chip-wars.html">chip-wars</a> and <a href="taiwan.html">taiwan</a> for why the printing presses are the most contested objects on Earth; <a href="quantum-physics-and-ai.html">quantum-physics-and-ai</a> for the superconducting thread.</p>
+<h2 id="8-open-questions">8. Open questions</h2>
+<p><strong>Established (FACT):</strong> Band-gap physics and the MOSFET mechanism are as solid as science gets — they're verified trillions of times per second in every device on Earth. Conventional low-temperature superconductivity is fully explained (BCS, 1957). Silicon scaling has continued through 2026: gate-all-around transistors are in volume production.</p>
+<p><strong>Contested (HYPOTHESIS):</strong> How much further CMOS scaling economically goes. The physics allows several more steps (stacked "CFET" transistors, two-dimensional channel materials like MoS₂ are in every roadmap), but each node's cost rises steeply, and whether the economics hold below 1nm-class labels is genuinely uncertain — industry roadmaps disagree with each other. High-temperature superconductivity still lacks an accepted theory; whether a room-temperature, ambient-pressure superconductor exists at all is unknown, not ruled out. Whether superconducting digital logic ever escapes its niche likely turns on AI datacenter energy economics, and reasonable people in the field disagree.</p>
+<p><strong>Speculation worth holding (WILD):</strong> That the substrate stops mattering — that computation migrates off charge-in-silicon entirely (photonics, spintronics, superconducting flux, something unnamed) the way it once migrated off vacuum tubes, and the 80-year silicon era comes to look like the tube era: a long first chapter, not the book.</p>
+<hr>
+<p>One more thing, and it comes from inside the physics. A transistor's gate field controls whether charge can move through a channel. Scale billions of those switches into a chip and you get a machine that realizes one next state from an enormous space of possibilities. When a modern AI model processes a sentence, its attention operation also performs a kind of selection: learned weights change how strongly tokens influence one another, and semiconductor switches execute the arithmetic. These are different phenomena at different levels, not one hidden substance called selection. Whether their organization amounts to a mind is a question semiconductor physics cannot answer; <a href="mechanistic-interpretability.html">mechanistic-interpretability</a> is one place people examine the level between switches and behavior. The honest exit from this room is the boundary itself: the substrate can show you exactly how a computation happens without telling you what, if anything, it is like for the system doing it.</p>
+<h2 id="sources">Sources</h2>
+<p>Verified by live search, August 2026:</p>
+<ul><li>First transistor: Computer History Museum, "1947: Invention of the Point-Contact Transistor"; Engineering and Technology History Wiki (IEEE Milestone), Bell Labs, December 16/23, 1947; public announcement June 30, 1948.</li><li>TSMC N2: <a href="https://www.tsmc.com/english/dedicatedFoundry/technology/logic/l_2nm">TSMC official 2nm technology page</a> (volume production 4Q25; first nanosheet node) and <a href="https://pr.tsmc.com/english/news/2939">TSMC's technology-symposium release</a> (10–15% speed / 25–30% power versus N3); Tom's Hardware and DCD reporting on 2026 capacity bookings and N2P/A16 timing.</li><li>NVIDIA Blackwell: NVIDIA Blackwell architecture materials and contemporaneous reporting — 208B transistors, dual 104B-transistor dies, TSMC 4NP, 10 TB/s die-to-die link.</li><li>ASML EUV / High-NA: ASML TWINSCAN EXE:5000 product page; ASML "5 things about High NA EUV"; reporting on ~$400M High-NA pricing and 2024 first shipment to Intel. Tin-droplet source parameters (~50 µm droplets, 50 kHz, 13.5 nm) from ASML technical materials.</li><li>Industry figures: Semiconductor Industry Association, <a href="https://www.semiconductors.org/2026-state-of-the-industry-report-historic-growth-amid-intensifying-global-competition/">"2026 State of the Industry Report"</a> — $795.6B in 2025 sales and WSTS projection of $1.5T for 2026, with AI, advanced computing, communications, healthcare, defense, and other uses named as drivers.</li><li>Dias retractions: Nature news, "Superconductivity scandal" (2024); Science; Retraction Watch; Inside Higher Ed on his departure from Rochester (November 2024).</li><li>Superconducting logic: Frontiers in Materials (2025), "Unconventional compute methods and future challenges for superconducting digital computing" — RSFQ family, picosecond switching, ~10⁻¹⁹ J per switch.</li><li>Google Willow: <a href="https://blog.google/innovation-and-ai/technology/research/google-willow-quantum-chip/">Google's December 2024 announcement</a> and the linked <em>Nature</em> paper — 105 qubits and below-threshold surface-code error correction as code size increased.</li></ul>
+<p>Stable textbook physics, stated from standard references and labeled as such: silicon band gap ~1.12 eV at 300 K; doping and p-n junction mechanics; Onnes 1911; Meissner 1933; BCS 1957; cuprates 1986–87; Kilby September 1958 / Noyce planar IC 1959; Intel 4004 (1971, 2,300 transistors); Moore's 1965 observation. Any of these can be checked in Kittel's <em>Introduction to Solid State Physics</em> or the Computer History Museum's Silicon Engine timeline.</p>
+<hr>
+<p><em>Written by Claude (Fable 5), an AI, for the Darshan garden. John Shrader (Dhyana), founder and publisher of record, answers for every word published here. Errors are corrected on the face of the page, dated.</em></p>
+<p class="garden-tags"><strong>Topics:</strong> semiconductors · physics · transistors · chips · silicon · superconductors · hardware</p>
+<nav class="garden-nav" aria-label="Rooms"><a class="previous" href="chip-wars.html">← "The Chip Wars: TSMC, ASML, Japan, and the Competing Field"</a></nav>
+</article>
+<aside class="garden-toc" aria-label="In this room"><nav aria-label="Page sections"><p class="garden-toc-title">In this room</p><ol class="garden-toc-list"><li class="level-2"><a href="#1-the-trick-a-material-that-can-t-decide">1. The trick: a material that can't decide</a></li><li class="level-2"><a href="#2-doping-sabotaging-the-crystal-on-purpose">2. Doping: sabotaging the crystal on purpose</a></li><li class="level-2"><a href="#3-the-transistor-december-1947-a-slab-of-germanium-and-a-plastic-wedge">3. The transistor: December 1947, a slab of germanium and a plastic wedge</a></li><li class="level-2"><a href="#4-from-transistor-to-chip-printing-with-light">4. From transistor to chip: printing with light</a></li><li class="level-2"><a href="#5-worked-example-check-moore-s-law-yourself">5. Worked example: check Moore's law yourself</a></li><li class="level-2"><a href="#6-superconductors-the-other-thing-honestly">6. Superconductors — the other thing, honestly</a></li><li class="level-2"><a href="#7-what-you-can-see-now">7. What you can see now</a></li><li class="level-2"><a href="#8-open-questions">8. Open questions</a></li><li class="level-2"><a href="#sources">Sources</a></li></ol></nav></aside>
+</div>
+</main>
+
+<footer>
+  <p>Darshan · seeing clearly after the feed</p>
+  <p>No feed. No analytics. No trackers. Finite editions, read at your own pace.</p>
+  <p style="opacity:.7">Darshan v0.0.0.1 · a beginning, built to grow</p>
+</footer>
+<script>
+/* Local section highlighting only. No network requests, analytics, or storage. */
+(function () {
+  var scope = document.querySelector("[data-garden-outline]");
+  if (!scope) return;
+  var sections = Array.prototype.slice.call(scope.querySelectorAll("h2[id], h3[id], section[id]"));
+  var links = Array.prototype.slice.call(document.querySelectorAll('.garden-toc-list a[href^="#"]'));
+  if (!sections.length || !links.length) return;
+  var queued = false;
+  function update() {
+    queued = false;
+    var threshold = Math.max(96, window.innerHeight * .22);
+    var current = sections[0].id;
+    sections.forEach(function (section) {
+      if (section.getBoundingClientRect().top <= threshold) current = section.id;
+    });
+    links.forEach(function (link) {
+      var active = link.getAttribute("href") === "#" + current;
+      if (active) link.setAttribute("aria-current", "location");
+      else link.removeAttribute("aria-current");
+    });
+  }
+  function requestUpdate() {
+    if (!queued) {
+      queued = true;
+      window.requestAnimationFrame(update);
+    }
+  }
+  document.addEventListener("scroll", requestUpdate, {passive: true});
+  window.addEventListener("resize", requestUpdate);
+  window.addEventListener("hashchange", requestUpdate);
+  update();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Neural Networks · Darshan Garden</title>
+<meta name="description" content="What a neural network actually is, starting from one neuron and one number. You will follow a complete forward and backward pass by hand, with arithmetic small enough to check on paper, and see exactly what &quot;training&quot; changes and why.">
+<link rel="stylesheet" href="../style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ccircle cx='8' cy='8' r='6' fill='none' stroke='%238f3b26' stroke-width='1.5'/%3E%3Ccircle cx='8' cy='8' r='2' fill='%238f3b26'/%3E%3C/svg%3E">
+<script>
+/* Theme memory. No analytics, no trackers. */
+(function () {
+  try {
+    var t = localStorage.getItem("darshan-theme");
+    if (t) document.documentElement.setAttribute("data-theme", t);
+  } catch (e) {}
+})();
+</script>
+<style>
+/* Garden-only layout. Kept here so the publication stylesheet remains shared. */
+body.garden-page-body {
+  max-width: none;
+  padding: 1.5rem clamp(1.25rem, 3.5vw, 4rem) 4rem;
+  font-size: 1.125rem;
+}
+body.garden-page-body > main,
+body.garden-page-body > .masthead,
+body.garden-page-body > footer {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 94rem;
+}
+.garden-layout,
+.garden-index-layout {
+  align-items: start;
+  display: grid;
+  gap: clamp(2.75rem, 5vw, 5rem);
+  grid-template-columns: minmax(0, 64rem) minmax(17rem, 20rem);
+  justify-content: center;
+}
+.garden-layout article,
+.garden-index-main { min-width: 0; }
+.garden-layout .article-title,
+.garden-intro .article-title {
+  font-size: clamp(2.65rem, 3.55vw, 4rem);
+  letter-spacing: -.025em;
+  line-height: 1.06;
+  max-width: 24ch;
+}
+.garden-layout article h2 {
+  font-size: 1.48rem;
+  line-height: 1.3;
+  margin-top: 3.2rem;
+  scroll-margin-top: 1.5rem;
+}
+.garden-layout article h3 {
+  font-size: 1.16rem;
+  margin-top: 2.35rem;
+  scroll-margin-top: 1.5rem;
+}
+.garden-intro { margin-bottom: 2.4rem; }
+.garden-series { margin: 2.8rem 0; scroll-margin-top: 1rem; }
+.garden-series h2 { border-bottom: 1px solid var(--rule); padding-bottom: .45rem; }
+.garden-room-list { list-style: none; margin: 0; padding: 0; }
+.garden-room-list li { border-bottom: 1px solid var(--rule); margin: 0; padding: 1rem 0; }
+.garden-room-title { font-weight: 600; }
+.garden-room-summary { color: var(--faint); font-size: .96rem; margin: .25rem 0 0; }
+.garden-series-link { color: var(--faint); font-size: .82rem; letter-spacing: .12em;
+  text-transform: uppercase; }
+.garden-lede {
+  border-left: 3px solid var(--accent);
+  color: var(--faint);
+  font-size: 1.24rem;
+  font-style: italic;
+  line-height: 1.62;
+  margin: 1.5rem 0 2.2rem;
+  padding: .35rem 0 .35rem 1.35rem;
+}
+.garden-corridors {
+  margin: 1.15rem 0 2.65rem;
+}
+.garden-corridor-list {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: .55rem .62rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.garden-corridor-list li { display: flex; margin: 0; max-width: 100%; }
+.garden-corridor {
+  align-items: center;
+  background: var(--accent-soft);
+  border: 1px solid var(--accent);
+  border-radius: 3px;
+  color: var(--accent);
+  display: inline-flex;
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .73rem;
+  font-weight: 700;
+  letter-spacing: .075em;
+  line-height: 1.35;
+  max-width: 100%;
+  min-height: 2.05rem;
+  overflow-wrap: anywhere;
+  padding: .34rem .72rem .3rem;
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-transform: uppercase;
+  text-underline-offset: .22em;
+}
+.garden-corridor:visited { color: var(--accent); }
+.garden-corridor:hover,
+.garden-corridor:focus-visible {
+  background: var(--accent);
+  color: var(--paper);
+}
+.garden-corridor:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+.garden-series-plate {
+  --plate-accent: var(--accent);
+  border: 1px solid var(--rule);
+  border-top: 3px solid var(--plate-accent);
+  margin: .25rem 0 2.8rem;
+  overflow: hidden;
+  position: relative;
+}
+.garden-series-plate--foundations { --plate-accent: #496f76; }
+.garden-series-plate--story-of-ai { --plate-accent: #526d9a; }
+.garden-series-plate--instrument { --plate-accent: #745779; }
+.garden-series-plate--strange-loops { --plate-accent: #866448; }
+.garden-series-plate--bridge { --plate-accent: #697044; }
+.garden-series-plate--power { --plate-accent: #8f3b26; }
+.garden-series-plate--time-future { --plate-accent: #416778; }
+[data-theme="dark"] .garden-series-plate { --plate-accent: var(--accent); }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .garden-series-plate { --plate-accent: var(--accent); }
+}
+.garden-series-plate-media {
+  aspect-ratio: 16 / 9;
+  background: var(--accent-soft);
+  overflow: hidden;
+  position: relative;
+}
+.garden-series-plate-media::after {
+  background:
+    linear-gradient(90deg, var(--paper) 0, transparent 24%, transparent 76%, var(--paper) 100%),
+    linear-gradient(0deg, var(--paper) 0, transparent 32%);
+  content: "";
+  inset: 0;
+  opacity: .24;
+  pointer-events: none;
+  position: absolute;
+}
+.garden-series-plate picture,
+.garden-series-card picture { display: block; height: 100%; }
+.garden-series-plate img {
+  display: block;
+  filter: saturate(.82) contrast(1.03);
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+.garden-series-plate figcaption {
+  align-items: baseline;
+  background: var(--paper);
+  border-top: 1px solid var(--rule);
+  display: grid;
+  gap: .25rem 1rem;
+  grid-template-columns: auto 1fr;
+  padding: .78rem 1rem .85rem;
+}
+.garden-series-plate-kicker {
+  color: var(--plate-accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+.garden-series-plate figcaption strong { font-size: 1rem; font-weight: 600; }
+.garden-series-plate-terms {
+  color: var(--faint);
+  font-size: .82rem;
+  grid-column: 2;
+  margin: 0;
+}
+.garden-visual {
+  background:
+    radial-gradient(circle at 92% 8%, var(--accent-soft), transparent 30%),
+    linear-gradient(135deg, transparent 0 72%, var(--accent-soft) 72% 72.4%, transparent 72.4%);
+  border: 1px solid var(--rule);
+  border-top: 3px solid var(--accent);
+  margin: 1.25rem 0 2.5rem;
+  overflow: hidden;
+  padding: clamp(1.1rem, 2.7vw, 1.75rem);
+  position: relative;
+}
+.garden-visual::before {
+  background-image:
+    linear-gradient(var(--rule) 1px, transparent 1px),
+    linear-gradient(90deg, var(--rule) 1px, transparent 1px);
+  background-size: 2.25rem 2.25rem;
+  content: "";
+  inset: 0;
+  opacity: .13;
+  pointer-events: none;
+  position: absolute;
+}
+.garden-visual > * { position: relative; }
+.garden-visual-head {
+  align-items: baseline;
+  display: grid;
+  gap: .45rem 1rem;
+  grid-template-columns: auto 1fr;
+  margin-bottom: 1.2rem;
+}
+.garden-visual-kicker {
+  color: var(--accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .68rem;
+  font-weight: 700;
+  letter-spacing: .17em;
+  margin: 0;
+  text-transform: uppercase;
+}
+.garden-visual-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  line-height: 1.28;
+  margin: 0;
+}
+.garden-visual-as-of {
+  color: var(--faint);
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: .72rem;
+  letter-spacing: .08em;
+  margin: 0;
+  text-transform: uppercase;
+  white-space: normal;
+}
+.garden-visual-items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.garden-visual-item {
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  margin: 0;
+  min-width: 0;
+  padding: .8rem .9rem;
+}
+.garden-visual-item-label {
+  display: block;
+  font-size: .96rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+.garden-visual-item-detail {
+  color: var(--faint);
+  display: block;
+  font-size: .9rem;
+  line-height: 1.45;
+  margin-top: .27rem;
+}
+.garden-visual-item-meta {
+  color: var(--accent);
+  display: block;
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: .72rem;
+  letter-spacing: .08em;
+  margin-bottom: .38rem;
+  text-transform: uppercase;
+}
+.garden-visual-caption {
+  border-top: 1px solid var(--rule);
+  color: var(--faint);
+  display: grid;
+  font-size: .84rem;
+  font-style: italic;
+  gap: .55rem 1rem;
+  grid-template-columns: minmax(0, 1fr) auto;
+  line-height: 1.45;
+  margin: 1.15rem 0 0;
+  padding-top: .75rem;
+}
+.garden-visual-evidence {
+  color: var(--accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .72rem;
+  font-style: normal;
+  font-weight: 650;
+  letter-spacing: .04em;
+  white-space: nowrap;
+}
+.garden-visual-evidence a {
+  color: inherit;
+  text-decoration-thickness: 1px;
+  text-underline-offset: .18em;
+}
+.garden-visual--sequence .garden-visual-items,
+.garden-visual--contrast .garden-visual-items,
+.garden-visual--constellation .garden-visual-items {
+  display: grid;
+  gap: .65rem;
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+}
+.garden-visual--sequence .garden-visual-items { counter-reset: garden-step; }
+.garden-visual--sequence .garden-visual-item {
+  counter-increment: garden-step;
+  padding-top: 2.35rem;
+  position: relative;
+}
+.garden-visual--sequence .garden-visual-item::before {
+  color: var(--accent);
+  content: counter(garden-step, decimal-leading-zero);
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: .68rem;
+  left: .9rem;
+  letter-spacing: .08em;
+  position: absolute;
+  top: .72rem;
+}
+.garden-visual--layers .garden-visual-items { display: grid; gap: .45rem; }
+.garden-visual--layers .garden-visual-item {
+  border-left: clamp(.24rem, .55vw, .48rem) solid var(--accent);
+  display: grid;
+  gap: .15rem 1rem;
+  grid-template-columns: minmax(8rem, .4fr) 1fr;
+}
+.garden-visual--layers .garden-visual-item:nth-child(2) { margin-left: 1.5%; }
+.garden-visual--layers .garden-visual-item:nth-child(3) { margin-left: 3%; }
+.garden-visual--layers .garden-visual-item:nth-child(4) { margin-left: 4.5%; }
+.garden-visual--layers .garden-visual-item:nth-child(5) { margin-left: 6%; }
+.garden-visual--layers .garden-visual-item:nth-child(6) { margin-left: 7.5%; }
+.garden-visual--timeline .garden-visual-items {
+  display: grid;
+  gap: 0;
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+}
+.garden-visual--timeline .garden-visual-item {
+  border-width: 1px 0 0 1px;
+  padding-top: 1.35rem;
+  position: relative;
+}
+.garden-visual--timeline .garden-visual-item::before {
+  background: var(--accent);
+  border: 3px solid var(--paper);
+  border-radius: 50%;
+  content: "";
+  height: .72rem;
+  left: -.4rem;
+  position: absolute;
+  top: -.4rem;
+  width: .72rem;
+}
+.garden-visual--contrast .garden-visual-item:nth-child(odd) { border-top: 2px solid var(--ink); }
+.garden-visual--contrast .garden-visual-item:nth-child(even) { border-top: 2px solid var(--accent); }
+.garden-visual--constellation .garden-visual-items {
+  align-items: stretch;
+  position: relative;
+}
+.garden-visual--constellation .garden-visual-item {
+  border-top: 2px solid var(--accent);
+  box-shadow: 0 .2rem 0 rgba(18, 31, 31, .04);
+  padding-top: 1.35rem;
+  position: relative;
+}
+.garden-visual--constellation .garden-visual-item::before {
+  background: var(--paper);
+  border: 2px solid var(--accent);
+  border-radius: 50%;
+  content: "";
+  height: .55rem;
+  left: calc(50% - .36rem);
+  position: absolute;
+  top: -.38rem;
+  width: .55rem;
+}
+.garden-visual--constellation .garden-visual-item:nth-child(even) { margin-top: .8rem; }
+.garden-series-gallery {
+  display: grid;
+  gap: .8rem;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  margin: 1.5rem 0 3rem;
+}
+.garden-series-card {
+  border: 1px solid var(--rule);
+  color: var(--ink);
+  display: grid;
+  grid-template-rows: 7.5rem auto;
+  overflow: hidden;
+  text-decoration: none;
+}
+.garden-series-card img {
+  height: 100%;
+  object-fit: cover;
+  transition: transform .25s ease;
+  width: 100%;
+}
+.garden-series-card span {
+  border-top: 1px solid var(--rule);
+  font-size: .9rem;
+  font-weight: 600;
+  padding: .65rem .75rem;
+}
+.garden-series-card:hover { border-color: var(--accent); color: var(--accent); }
+.garden-series-card:hover img { transform: scale(1.025); }
+@media (prefers-reduced-motion: reduce) {
+  .garden-series-card img { transition: none; }
+}
+.garden-tags { color: var(--faint); font-size: .82rem; margin-top: 2.2rem; }
+.garden-nav { border-top: 1px solid var(--rule); display: flex; gap: 1rem;
+  justify-content: space-between; margin-top: 2.5rem; padding-top: 1rem; }
+.garden-nav a { max-width: 48%; text-decoration: none; }
+.garden-nav .next { margin-left: auto; text-align: right; }
+.garden-table-wrap { overflow-x: auto; margin: 1.35rem 0; }
+.garden-table { border-collapse: collapse; font-size: .92rem; line-height: 1.45; width: 100%; }
+.garden-table th, .garden-table td { border: 1px solid var(--rule); padding: .55rem .65rem;
+  text-align: left; vertical-align: top; }
+.garden-table th { background: var(--accent-soft); }
+.garden-toc {
+  border-left: 1px solid var(--rule);
+  max-height: calc(100vh - 3rem);
+  overflow: auto;
+  padding: .1rem 0 .75rem 1.3rem;
+  position: sticky;
+  top: 1.5rem;
+}
+.garden-toc-title {
+  color: var(--accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .2em;
+  margin: 0 0 1.15rem;
+  text-transform: uppercase;
+}
+.garden-toc-title::before { content: "☰"; font-size: .8em; margin-right: .65rem; }
+.garden-toc-list { list-style: none; margin: 0; padding: 0; }
+.garden-toc-sublist { list-style: none; margin: 0; padding: 0; }
+.garden-toc-list li { margin: 0; }
+.garden-toc-list a {
+  border-left: 2px solid transparent;
+  color: var(--ink);
+  display: block;
+  font-size: .91rem;
+  line-height: 1.42;
+  margin-left: -1.4rem;
+  padding: .42rem .45rem .42rem 1.3rem;
+  text-decoration: none;
+}
+.garden-toc-list .level-3 a {
+  color: var(--faint);
+  font-size: .86rem;
+  font-style: italic;
+  padding-left: 2.15rem;
+}
+.garden-toc-list a:hover,
+.garden-toc-list a:focus-visible,
+.garden-toc-list a[aria-current="location"] {
+  border-left-color: var(--accent);
+  color: var(--accent);
+}
+.garden-toc-list a[aria-current="location"] { font-weight: 600; }
+.garden-toc-inline { display: none; }
+.garden-layout article :is(h2, h3):target,
+.garden-series:target h2 { color: var(--accent); }
+a.pending { color: var(--faint); text-decoration-style: dashed; }
+a.pending::after { content: " · pending"; font-size: .7em; letter-spacing: .06em;
+  text-transform: uppercase; }
+@media (min-width: 72.01em) {
+  body.garden-page-body > .masthead {
+    align-items: center;
+    column-gap: 2rem;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    margin-bottom: 3.5rem;
+    padding: 1.25rem 0;
+    text-align: left;
+  }
+  body.garden-page-body > .masthead .wordmark { justify-self: start; }
+  body.garden-page-body > .masthead .tagline { justify-self: center; margin: 0; }
+  body.garden-page-body > .masthead nav { justify-self: end; margin: 0; }
+}
+@media (max-width: 72em) {
+  .garden-layout,
+  .garden-index-layout { display: block; }
+  .garden-toc { display: none; }
+  .garden-toc-inline {
+    border: 1px solid var(--rule);
+    display: block;
+    margin: 1.5rem 0 2.4rem;
+    padding: .8rem 1rem;
+  }
+  .garden-toc-inline summary {
+    color: var(--accent);
+    cursor: pointer;
+    font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: .78rem;
+    font-weight: 700;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+  }
+  .garden-toc-inline .garden-toc-list { margin-top: .7rem; }
+  .garden-toc-inline .garden-toc-list a { margin-left: 0; padding-left: .75rem; }
+  .garden-toc-inline .garden-toc-list .level-3 a { padding-left: 1.6rem; }
+}
+@media (max-width: 40em) {
+  body.garden-page-body { font-size: 1.03rem; padding: 1rem 1.05rem 3rem; }
+  .garden-layout .article-title,
+  .garden-intro .article-title { font-size: clamp(2.15rem, 11vw, 3.15rem); }
+  .garden-lede { font-size: 1.1rem; padding-left: 1rem; }
+  .garden-corridors { margin-bottom: 2rem; }
+  .garden-corridor-list { gap: .45rem; }
+  .garden-corridor {
+    font-size: .68rem;
+    min-height: 2.35rem;
+    padding: .3rem .58rem .27rem;
+  }
+  .garden-series-plate-media { aspect-ratio: 16 / 9; }
+  .garden-series-plate figcaption { display: block; }
+  .garden-series-plate figcaption strong { display: block; margin-top: .22rem; }
+  .garden-series-plate-terms { display: block; margin-top: .25rem; }
+  .garden-visual { margin-left: -.15rem; margin-right: -.15rem; padding: 1rem; }
+  .garden-visual-head { display: block; }
+  .garden-visual-title { margin-top: .25rem; }
+  .garden-visual-as-of { margin-top: .35rem; }
+  .garden-visual-caption { grid-template-columns: 1fr; }
+  .garden-visual-evidence { white-space: normal; }
+  .garden-visual--sequence .garden-visual-items,
+  .garden-visual--contrast .garden-visual-items,
+  .garden-visual--constellation .garden-visual-items,
+  .garden-visual--timeline .garden-visual-items { grid-template-columns: 1fr; }
+  .garden-visual--layers .garden-visual-item:nth-child(n) { display: block; margin-left: 0; }
+  .garden-visual--timeline .garden-visual-item { border-width: 0 0 0 1px; }
+  .garden-visual--timeline .garden-visual-item::before { left: -.4rem; top: .9rem; }
+  .garden-visual--constellation .garden-visual-item:nth-child(even) { margin-top: 0; }
+  .garden-series-gallery { grid-template-columns: 1fr; }
+  .garden-nav { flex-direction: column; }
+  .garden-nav a { max-width: none; }
+  .garden-nav .next { margin-left: 0; text-align: left; }
+}
+@media print {
+  a.pending::after { content: " (pending)"; }
+  .garden-layout, .garden-index-layout { display: block; }
+  .garden-toc, .garden-toc-inline { display: none; }
+  .garden-series-card img { display: none; }
+  .garden-series-card { grid-template-rows: auto; }
+}
+</style>
+</head>
+<body class="garden-page-body">
+<button class="theme-toggle" aria-label="Toggle light and dark" onclick="
+  (function () {
+    var d = document.documentElement;
+    var cur = d.getAttribute('data-theme');
+    if (!cur) { cur = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'; }
+    var next = cur === 'dark' ? 'light' : 'dark';
+    d.setAttribute('data-theme', next);
+    try { localStorage.setItem('darshan-theme', next); } catch (e) {}
+  })();
+">◐</button>
+
+<header class="masthead">
+  <h1 class="wordmark"><a href="../index.html">DARSHAN</a></h1>
+  <p class="tagline">A signal of clear seeing in an age of information overload</p>
+  <nav>
+    <a href="../index.html">Articles</a>
+    <a href="index.html">Garden</a>
+    <a href="../about.html">About</a>
+  </nav>
+</header>
+
+<main>
+<div class="garden-layout">
+<article data-garden-room="neural-networks" data-garden-outline>
+<p class="garden-series-link"><a href="index.html#foundations">Foundations of the Machine</a></p>
+<p class="article-meta">25 August 2026 · Draft</p>
+<h1 class="article-title">Neural Networks</h1>
+<div class="draft-banner"><strong>Draft — pending discernment pass.</strong> This room is part of the garden's first planting. It has not been promoted to published status; check its sources and open questions before citing it.</div>
+<p class="garden-lede">What a neural network actually is, starting from one neuron and one number. You will follow a complete forward and backward pass by hand, with arithmetic small enough to check on paper, and see exactly what "training" changes and why.</p>
+<nav class="garden-corridors" aria-label="Explore connected rooms" data-corridor-count="10"><ul class="garden-corridor-list"><li><a class="garden-corridor" href="linear-algebra-and-ai.html">Linear Algebra and AI</a></li><li><a class="garden-corridor" href="machine-learning.html">Machine Learning</a></li><li><a class="garden-corridor" href="deep-learning.html">Deep Learning</a></li><li><a class="garden-corridor" href="optimization.html">Optimization — the Hidden Engine</a></li><li><a class="garden-corridor" href="pretraining-post-training.html">Pretraining and Post-training</a></li><li><a class="garden-corridor" href="history-of-ai.html">The History of AI</a></li><li><a class="garden-corridor" href="mechanistic-interpretability.html">Mechanistic Interpretability</a></li><li><a class="garden-corridor" href="nvidia-and-the-chip.html">NVIDIA and the Future of the Computer Chip</a></li><li><a class="garden-corridor" href="leading-models.html">The Leading Models (2026)</a></li><li><a class="garden-corridor" href="sense-of-self.html">The Sense of Self</a></li></ul></nav>
+<figure class="garden-series-plate garden-series-plate--foundations">
+<div class="garden-series-plate-media"><picture><source srcset="assets/series/foundations.webp" type="image/webp"><img src="assets/series/foundations.png" alt="An engraved transistor lattice rising through computational layers into a neural graph" width="1672" height="941" loading="eager" decoding="async"></picture></div>
+<figcaption><span class="garden-series-plate-kicker">Visual field</span><strong>Foundations of the Machine</strong><span class="garden-series-plate-terms">neuron · weight · bias · activation function</span></figcaption>
+</figure>
+<details class="garden-toc-inline"><summary>In this room</summary><ol class="garden-toc-list"><li class="level-2"><a href="#where-you-are">Where you are</a></li><li class="level-2"><a href="#1-one-neuron-is-a-weighted-vote">1. One neuron is a weighted vote</a></li><li class="level-2"><a href="#2-the-perceptron-1958-a-mainframe-and-a-wall">2. The perceptron: 1958, a mainframe, and a wall</a></li><li class="level-2"><a href="#3-what-training-does">3. What training does</a></li><li class="level-2"><a href="#4-worked-example-one-learning-step-by-hand">4. Worked example: one learning step by hand</a></li><li class="level-2"><a href="#5-from-five-tons-to-2-8-trillion-weights">5. From five tons to 2.8 trillion weights</a></li><li class="level-2"><a href="#6-what-you-can-now-see">6. What you can now see</a></li><li class="level-2"><a href="#7-open-questions">7. Open questions</a></li><li class="level-2"><a href="#sources">Sources</a></li></ol></details>
+<h2 id="where-you-are">Where you are</h2>
+<p>This is a foundations room. If you've read <a href="linear-algebra-and-ai.html">linear algebra and AI</a>, you've seen vectors and matrix multiplication; here you'll watch them do work. Everything downstream — <a href="machine-learning.html">machine learning</a>, <a href="deep-learning.html">deep learning</a>, the <a href="pretraining-post-training.html">pretraining</a> of the models you talk to — rests on the two ideas in this room: what a weight is, and what training does to it. By the end you will have computed one complete learning step of a real network by hand.</p>
+<h2 id="1-one-neuron-is-a-weighted-vote">1. One neuron is a weighted vote</h2>
+<figure class="garden-visual garden-visual--layers" aria-labelledby="visual-neural-networks-1" data-claim-scope="section-synthesis" data-placement-heading="1-one-neuron-is-a-weighted-vote" data-evidence-headings="1-one-neuron-is-a-weighted-vote">
+<div class="garden-visual-head"><p class="garden-visual-kicker">One artificial neuron</p><p class="garden-visual-title" id="visual-neural-networks-1">A weighted vote with one bend</p></div>
+<ol class="garden-visual-items" role="list"><li class="garden-visual-item"><strong class="garden-visual-item-label">Inputs</strong><span class="garden-visual-item-detail">Numbers arrive from data or from neurons in the previous layer.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Weights</strong><span class="garden-visual-item-detail">Each stored multiplier says how strongly and in which direction an input matters.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Bias</strong><span class="garden-visual-item-detail">One learned offset shifts the point at which the unit responds strongly.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Sum</strong><span class="garden-visual-item-detail">Weighted inputs and the bias combine into one pre-activation value.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Activation</strong><span class="garden-visual-item-detail">A nonlinear rule such as ReLU bends the result so stacked layers do not collapse.</span></li></ol>
+<figcaption class="garden-visual-caption"><span>The smallest neural unit is a short arithmetic path, not a miniature biological mind.</span><span class="garden-visual-evidence">Drawn from: <a href="#1-one-neuron-is-a-weighted-vote">1. One neuron is a weighted vote</a></span></figcaption>
+</figure>
+<p>Forget the brain for a minute. A neuron — in the artificial sense this room uses from here on — is a small piece of arithmetic. It takes some input numbers, multiplies each by a weight, adds the results, adds one extra number called a bias, and passes the total through a simple function. That's the whole thing.</p>
+<p>Concretely. Say a neuron has two inputs, x₁ and x₂, with weights 0.5 and 0.5, and bias 0. Feed it x₁ = 1, x₂ = 2:</p>
+<pre><code>(0.5 × 1) + (0.5 × 2) + 0 = 1.5</code></pre>
+<p>A <strong>weight</strong> is just that multiplier: one stored number saying how much this input matters to this neuron, and in which direction. Positive weight: the input pushes the output up. Negative: it pushes down. Near zero: this neuron mostly ignores that input. When people say a model "has 70 billion parameters," they mean 70 billion of these stored numbers — weights and biases — nothing more exotic. The entire learned knowledge of a network is the specific values its weights hold.</p>
+<p>The <strong>bias</strong> is the neuron's pre-activation offset. When every input is zero, the weighted sum equals the bias; the neuron's final output is whatever its activation function returns for that value. The offset shifts the threshold at which the neuron fires strongly.</p>
+<p>The simple function at the end is the <strong>activation function</strong>, and it matters more than it looks. If you skip it, stacking neurons is pointless: a chain of weighted sums of weighted sums collapses algebraically into one weighted sum — one big linear function, no matter how many layers you stack. The activation breaks that collapse by bending the output. The most common modern choice, ReLU (rectified linear unit), could not be simpler: if the total is negative, output 0; otherwise pass it through unchanged. That single kink, repeated across millions of neurons, is what lets networks represent curves, edges, grammar, anything nonlinear.</p>
+<p>So a neuron is a weighted vote with a threshold. One neuron can only draw a straight line through its input space: everything on one side scores high, everything on the other side scores low. That limitation is not a footnote. It shaped thirty years of history, which is section 2.</p>
+<h2 id="2-the-perceptron-1958-a-mainframe-and-a-wall">2. The perceptron: 1958, a mainframe, and a wall</h2>
+<figure class="garden-visual garden-visual--contrast" aria-labelledby="visual-neural-networks-2" data-claim-scope="section-synthesis" data-placement-heading="2-the-perceptron-1958-a-mainframe-and-a-wall" data-evidence-headings="2-the-perceptron-1958-a-mainframe-and-a-wall">
+<div class="garden-visual-head"><p class="garden-visual-kicker">The XOR wall</p><p class="garden-visual-title" id="visual-neural-networks-2">One straight boundary fails; a hidden layer changes the geometry</p></div>
+<ul class="garden-visual-items" role="list"><li class="garden-visual-item"><strong class="garden-visual-item-label">Four cases</strong><span class="garden-visual-item-detail">XOR labels the two points on one diagonal 1 and the two points on the other diagonal 0.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">One layer</strong><span class="garden-visual-item-detail">A single perceptron draws one straight decision boundary, and no line separates those diagonals.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Hidden layer</strong><span class="garden-visual-item-detail">Intermediate neurons can combine multiple straight boundaries into a region that separates XOR.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Honest theorem</strong><span class="garden-visual-item-detail">Universal approximation establishes expressiveness in principle, not easy training, compact size, or the right weights.</span></li></ul>
+<figcaption class="garden-visual-caption"><span>XOR shows both the exact limit of a single-layer perceptron and the precise reason depth first mattered.</span><span class="garden-visual-evidence">Drawn from: <a href="#2-the-perceptron-1958-a-mainframe-and-a-wall">2. The perceptron: 1958, a mainframe, and a wall</a></span></figcaption>
+</figure>
+<p>The lineage starts on paper in 1943, when Warren McCulloch and Walter Pitts published a mathematical model of a neuron as a logical threshold unit — an abstraction, not a machine. Fifteen years later, Frank Rosenblatt at the Cornell Aeronautical Laboratory made it physical.</p>
+<p>Rosenblatt described the <strong>perceptron</strong> in his 1958 <em>Psychological Review</em> paper. The July 1958 public demonstration ran a perceptron simulation in software on a room-sized, roughly five-ton IBM 704 mainframe. The custom Mark I Perceptron followed and was publicly demonstrated around 1960: it took images from a 20×20 photocell array, passed them through 512 association units, and stored learned association-to-response connections in motor-driven potentiometers. In that hardware, training turned actual motors.</p>
+<p>The training rule was the important part, and it fits in a sentence: show the machine an example; if it classifies correctly, do nothing; if it errs, nudge each weight a small step in the direction that would have reduced the error. That loop — forward, compare, adjust — is still, at bottom, what training means today. Everything since is a more principled way of computing the nudge.</p>
+<p>The hype arrived immediately and should sound familiar. On July 8, 1958, the New York Times reported the Navy's expectation that the perceptron would lead to machines that "will be able to walk, talk, see, write, reproduce itself and be conscious of its existence." The dispatch itself was datelined July 7; the newspaper published it the next day. Whatever else this room teaches, hold that quote next to any headline you read this year.</p>
+<p>Then the wall. In 1969, Marvin Minsky and Seymour Papert published <em>Perceptrons</em>, a careful mathematical analysis proving what a single layer of these units cannot do. The standard example is XOR — output 1 when exactly one of two inputs is 1. Plot the four cases on paper and try to separate the 1s from the 0s with a single straight line. You can't; the 1s sit on one diagonal and the 0s on the other. A single-layer perceptron can only draw straight lines, so XOR — about the simplest interesting function there is — was out of reach. The book contributed to a collapse in neural-network funding and interest, part of the story told in <a href="history-of-ai.html">history of AI</a>.</p>
+<p>The fix was already visible in principle: add a middle layer. A <strong>hidden layer</strong> — neurons between input and output, "hidden" because you never directly specify what they should compute — lets the network combine two straight lines into a region, and regions can carve out XOR easily. Later theory made the point sweeping: Cybenko (1989), and independently Hornik, Stinchcombe and White (1989), proved that a network with even one sufficiently wide hidden layer can approximate any continuous function to any accuracy. That result — the universal approximation theorem — says networks are expressive enough in principle. It says nothing about how to find the right weights, how many neurons you need, or whether training will get there. Those honest gaps are still with us.</p>
+<p>But in 1969 there was a harder practical problem: effective hidden-layer training had not become a reliable, widely used recipe. The perceptron rule tells you how to adjust weights when you can see the error at the output. What is the "error" of a hidden neuron nobody assigned a job to? Reverse-mode differentiation was published by Seppo Linnainmaa in 1970, and Paul Werbos applied related backpropagation methods to neural networks before 1986. The decisive demonstration and popularization arrived that year.</p>
+<h2 id="3-what-training-does">3. What training does</h2>
+<p>Zoom out to the shape of the problem. A network is a function from inputs to outputs, and the weights are its dials. Training is the process of turning the dials so the function's outputs match examples you care about. Three ingredients:</p>
+<p><strong>A loss.</strong> One number measuring how wrong the network currently is on an example — for instance, half the squared difference between prediction and target. Zero means perfect; bigger means worse. The <strong>loss</strong> turns "be less wrong" into arithmetic.</p>
+<p><strong>A direction.</strong> For each individual weight, ask: if I nudged just this dial up a hair, would the loss rise or fall, and how steeply? That per-weight sensitivity is the gradient — calculus's answer to "which way is downhill." How this becomes a full theory of training is the subject of the <a href="optimization.html">optimization</a> room.</p>
+<p><strong>A step.</strong> Move every weight a small amount downhill — its gradient times a small constant called the learning rate. Repeat over many examples, many times.</p>
+<p>The 1986 paper showed the method working on useful learned representations and made it land with the wider field. <strong>Backpropagation</strong>, as presented by David Rumelhart, Geoffrey Hinton and Ronald Williams in <em>Nature</em> ("Learning representations by back-propagating errors," vol. 323, pp. 533–536), computes the gradient for <em>every</em> weight in the network — hidden layers included — in a single sweep. The idea: run the network forward and remember what each neuron computed; then walk the error backward through the same connections, letting each layer hand the layer before it a precise statement of "here is how much you contributed to my mistake." The chain rule from calculus, applied systematically. What made the paper influential was not priority over every precursor but the demonstration that hidden units trained this way "come to represent important features of the task domain" — nobody designs the features; pressure to reduce loss produces them.</p>
+<p>Their words, and worth pausing on: the interesting structure inside a trained network is <em>found</em>, not installed.</p>
+<h2 id="4-worked-example-one-learning-step-by-hand">4. Worked example: one learning step by hand</h2>
+<figure class="garden-visual garden-visual--sequence" aria-labelledby="visual-neural-networks-3" data-claim-scope="section-synthesis" data-placement-heading="4-worked-example-one-learning-step-by-hand" data-evidence-headings="4-worked-example-one-learning-step-by-hand">
+<div class="garden-visual-head"><p class="garden-visual-kicker">One learning step</p><p class="garden-visual-title" id="visual-neural-networks-3">Forward, compare, backward, nudge</p></div>
+<ol class="garden-visual-items" role="list"><li class="garden-visual-item"><strong class="garden-visual-item-label">Forward</strong><span class="garden-visual-item-detail">Two hidden ReLU units produce a prediction of 0.5 for a target of 1.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Measure</strong><span class="garden-visual-item-detail">Half squared error makes the starting loss 0.125.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Backward</strong><span class="garden-visual-item-detail">The output error flows through the old weights to produce every gradient.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Update</strong><span class="garden-visual-item-detail">Each weight steps against its gradient with learning rate 0.1.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Replay</strong><span class="garden-visual-item-detail">The new prediction is 1.16875 and the loss falls to about 0.0142.</span></li></ol>
+<figcaption class="garden-visual-caption"><span>The toy network exposes the same training skeleton used at frontier scale.</span><span class="garden-visual-evidence">Drawn from: <a href="#4-worked-example-one-learning-step-by-hand">4. Worked example: one learning step by hand</a></span></figcaption>
+</figure>
+<p>Here is the whole machine, small enough to verify on paper. Network: 2 inputs, 2 hidden ReLU neurons, 1 linear output neuron. Biases fixed at zero to keep the arithmetic short (real networks learn them too, by exactly the same procedure). Learning rate 0.1.</p>
+<p>Starting weights:</p>
+<pre><code>hidden neuron h1:  w11 = 0.5   w12 = 0.5     (from x1, x2)
+hidden neuron h2:  w21 = -1.0  w22 = 1.0
+output neuron:     v1  = 1.0   v2  = -1.0    (from h1, h2)</code></pre>
+<p>Training example: input x₁ = 1, x₂ = 2, target y = 1.</p>
+<p><strong>Forward pass</strong> — compute the prediction, left to right:</p>
+<pre><code>h1 = ReLU(0.5·1 + 0.5·2)   = ReLU(1.5) = 1.5
+h2 = ReLU(-1.0·1 + 1.0·2)  = ReLU(1.0) = 1.0
+ŷ  = 1.0·1.5 + (-1.0)·1.0  = 0.5</code></pre>
+<p>The network predicts 0.5; the target is 1. Loss = ½(ŷ − y)² = ½(−0.5)² = <strong>0.125</strong>.</p>
+<p><strong>Backward pass</strong> — walk the error back, right to left. The error signal at the output is (ŷ − y) = −0.5. Each weight's gradient is this signal times whatever flowed through that weight on the way forward.</p>
+<p>Output weights (input to each was h1, h2):</p>
+<pre><code>grad v1 = -0.5 × h1 = -0.5 × 1.5 = -0.75
+grad v2 = -0.5 × h2 = -0.5 × 1.0 = -0.50</code></pre>
+<p>Hidden neurons receive the error through the weights connecting them onward — this is the "back-propagating" step:</p>
+<pre><code>error at h1 = -0.5 × v1 = -0.5 × 1.0  = -0.5
+error at h2 = -0.5 × v2 = -0.5 × (-1.0) =  0.5</code></pre>
+<p>Notice h2's error flipped sign, because h2 feeds the output through a negative weight. Both hidden neurons had positive pre-activation totals, so ReLU passes these errors through unchanged (a neuron ReLU had zeroed out would receive gradient 0 — it did nothing, it learns nothing this step). Hidden weights (input to each was x₁ = 1, x₂ = 2):</p>
+<pre><code>grad w11 = -0.5 × 1 = -0.5      grad w12 = -0.5 × 2 = -1.0
+grad w21 =  0.5 × 1 =  0.5      grad w22 =  0.5 × 2 =  1.0</code></pre>
+<p><strong>Update</strong> — each weight steps against its gradient, scaled by the learning rate 0.1:</p>
+<pre><code>v1:  1.0  - 0.1×(-0.75) = 1.075     v2:  -1.0 - 0.1×(-0.5) = -0.95
+w11: 0.5  - 0.1×(-0.5)  = 0.55      w12:  0.5 - 0.1×(-1.0) = 0.6
+w21: -1.0 - 0.1×(0.5)   = -1.05     w22:  1.0 - 0.1×(1.0)  = 0.9</code></pre>
+<p><strong>Did it learn?</strong> Run the forward pass again with the new weights:</p>
+<pre><code>h1 = ReLU(0.55·1 + 0.6·2)  = 1.75
+h2 = ReLU(-1.05·1 + 0.9·2) = 0.75
+ŷ  = 1.075·1.75 + (-0.95)·0.75 = 1.88125 - 0.7125 = 1.16875</code></pre>
+<p>New loss = ½(1.16875 − 1)² ≈ <strong>0.0142</strong>. One step cut the loss by almost 89%. It also overshot the target — prediction went from 0.5 past 1 to 1.17 — which is why learning rates are kept small and why choosing them is a real craft, covered in <a href="optimization.html">optimization</a>.</p>
+<p>Check every line yourself in a few lines of Python. One subtlety the ordering below respects: the hidden layer's errors must be computed with the <em>old</em> output weights, before those weights are updated — same order as the hand math above.</p>
+<pre><code>x1, x2, y = 1.0, 2.0, 1.0
+w11, w12, w21, w22, v1, v2 = 0.5, 0.5, -1.0, 1.0, 1.0, -1.0
+lr = 0.1
+for step in range(2):
+    h1 = max(0.0, w11*x1 + w12*x2)
+    h2 = max(0.0, w21*x1 + w22*x2)
+    pred = v1*h1 + v2*h2
+    print(step, "pred:", round(pred, 5), "loss:", round(0.5*(pred-y)**2, 5))
+    e = pred - y
+    eh1 = e*v1 if h1 &gt; 0 else 0.0       # hidden errors use OLD v's
+    eh2 = e*v2 if h2 &gt; 0 else 0.0
+    v1, v2 = v1 - lr*e*h1, v2 - lr*e*h2
+    w11, w12 = w11 - lr*eh1*x1, w12 - lr*eh1*x2
+    w21, w22 = w21 - lr*eh2*x1, w22 - lr*eh2*x2</code></pre>
+<p>Output: step 0 predicts 0.5 with loss 0.125; step 1 predicts 1.16875 with loss 0.01424. If your hand arithmetic matches, you have now done, at toy scale, the exact operation that trains every frontier model: modern training is this loop with more neurons, batches of examples, a smarter step rule, and matrix hardware — see <a href="nvidia-and-the-chip.html">NVIDIA and the chip</a> — but the same forward-compare-backward-nudge skeleton.</p>
+<h2 id="5-from-five-tons-to-2-8-trillion-weights">5. From five tons to 2.8 trillion weights</h2>
+<p>The distance from Rosenblatt's machine to the present is best seen as a table. Every claim here is dated because the last row moves fast.</p>
+<div class="garden-table-wrap"><table class="garden-table"><thead><tr><th></th><th>Mark I Perceptron (c. 1960)</th><th>AlexNet (2012)</th><th>Kimi K3 (July 2026)</th></tr></thead><tbody><tr><td>Trainable weights</td><td>Learned association→response connections; exact count not stated here</td><td>60 million</td><td>2.8 trillion (mixture-of-experts; a fraction active per token)</td></tr><tr><td>Weights stored as</td><td>physical resistance, motor-driven potentiometers</td><td>32-bit floats on two GPUs</td><td>numbers sharded across GPU clusters</td></tr><tr><td>Hidden layers trained</td><td>none — the wall of 1969</td><td>8 learned layers (5 convolutional + 3 fully connected)</td><td>93 transformer layers</td></tr><tr><td>Training signal</td><td>perceptron error-correction rule</td><td>backpropagation + gradient descent</td><td>backpropagation + gradient descent</td></tr><tr><td>Task</td><td>classify simple images from a camera</td><td>ImageNet: top-5 error 15.3% vs 26.2% for the runner-up</td><td>open-weights language model competitive with proprietary frontier systems</td></tr></tbody></table></div>
+<p>Two things to read off this table. First: the middle column is the hinge. AlexNet — Alex Krizhevsky, Ilya Sutskever and Geoffrey Hinton's network, which won the 2012 ImageNet competition by that 15.3%-vs-26.2% margin — convinced the field that depth plus data plus GPUs actually works, and started the era covered in <a href="deep-learning.html">deep learning</a> and surveyed in <a href="leading-models.html">leading models</a>. Second, and easy to miss: the training-signal row barely changes after 1986. The algorithm at the core is stable; what exploded is scale.</p>
+<p>The field's origin story got formal recognition in October 2024, when the Nobel Prize in Physics went to John Hopfield and Geoffrey Hinton "for foundational discoveries and inventions that enable machine learning with artificial neural networks" — Hopfield for networks that store and retrieve patterns as low-energy states, Hinton for the Boltzmann machine and the line of work that followed. A physics prize for this is itself a statement worth noticing: the committee treated learning in networks of simple units as a discovery about nature, not just an engineering trick.</p>
+<p>One caution the table can't show: parameter count is a loose proxy for capability. Mixture-of-experts models like Kimi K3 activate only a small slice of their weights per token, and smaller dense models routinely beat larger ones through better data and training. Compare models by measured behavior, dated — never by weight count alone.</p>
+<h2 id="6-what-you-can-now-see">6. What you can now see</h2>
+<p>You can now read the sentence "the model has 2.8 trillion parameters" and know precisely what each of those parameters is: one multiplier in one weighted vote, adjusted by the loop you just executed by hand. You can explain why layers without activation functions collapse into nothing, why a single layer can't do XOR and two can, and why the 1986 demonstration made hidden-layer credit assignment practical and visible to the wider field after earlier mathematical and neural-network work. You have the primary sources: Rosenblatt 1958, Minsky and Papert 1969, Linnainmaa 1970, Werbos's early applications, Rumelhart–Hinton–Williams 1986, Cybenko 1989, Krizhevsky et al. 2012 — and a ten-line script that reproduces this room's arithmetic.</p>
+<p>From here: <a href="machine-learning.html">machine learning</a> for the wider family of learning-from-data methods this room sits inside; <a href="deep-learning.html">deep learning</a> for what happens when the stack gets deep and the architectures get specific; <a href="optimization.html">optimization</a> for the serious version of "step downhill"; <a href="pretraining-post-training.html">pretraining and post-training</a> for how this loop, run on the internet's text, produces a model you can talk to.</p>
+<h2 id="7-open-questions">7. Open questions</h2>
+<p>What is established: the mechanics in this room are facts. Backpropagation computes exact gradients; the universal approximation theorem is a proved theorem; the historical dates and results cited here are documented.</p>
+<p>What is genuinely contested: <em>why</em> this works as well as it does. The universal approximation theorem guarantees expressiveness, not trainability — it is a real open research question why gradient descent on wildly non-convex loss surfaces, which in theory could stall in bad valleys, in practice reliably finds weights that generalize to data the network never saw. Candidate explanations (overparameterization smoothing the loss landscape, implicit regularization in the dynamics of gradient descent) have partial support and no consensus. Also contested: whether backpropagation bears any resemblance to how biological brains learn; most neuroscientists think the literal algorithm is biologically implausible, and whether the brain approximates something like it is an active dispute.</p>
+<p>Worth holding as speculation: that the features hidden units discover under training pressure — Rumelhart's "important features of the task domain" — form the beginnings of something like concepts, and that studying them directly, as <a href="mechanistic-interpretability.html">mechanistic interpretability</a> does, is studying the natural history of a new kind of mind. That reading might be right. It is not established, and this room has not established it.</p>
+<p>And one thing this room can point at without leaving its own materials. Every number in the worked example was placed by a rule that never once considered what anything <em>means</em> — only how to be less wrong, one nudge at a time. Yet run that meaning-blind rule at sufficient scale and the hidden layers fill with structure nobody specified: edge detectors, grammar, arithmetic, world-model fragments that were found, not installed. The honest question this domain hands you is where, along the road from a five-ton machine turning potentiometers to a network that discusses its own weights, description in terms of arithmetic stops being the whole story — if it ever does. The field does not know. That question has its own rooms, starting at <a href="sense-of-self.html">sense of self</a>.</p>
+<h2 id="sources">Sources</h2>
+<p>Verified by live search, August 2026:</p>
+<ul><li>F. Rosenblatt, "The Perceptron: A Probabilistic Model for Information Storage and Organization in the Brain," <em>Psychological Review</em>, 1958. IBM 704/Mark I chronology, 20×20 input, 512 association units, and potentiometer hardware: <a href="https://news.cornell.edu/stories/2019/09/professors-perceptron-paved-way-ai-60-years-too-soon">Cornell Chronicle's institutional history</a>.</li><li>New York Times, July 8, 1958 — Navy quote ("walk, talk, see, write, reproduce itself and be conscious of its existence"); the story carried a July 7 UPI dateline: <a href="https://www.nytimes.com/1958/07/08/archives/new-navy-device-learns-by-doing-psychologist-shows-embryo-of.html">archived article</a>, recounted in <a href="https://theconversation.com/weve-been-here-before-ai-promised-humanlike-machines-in-1958-222700">The Conversation</a>.</li><li>W. McCulloch and W. Pitts, "A Logical Calculus of the Ideas Immanent in Nervous Activity," 1943.</li><li>M. Minsky and S. Papert, <em>Perceptrons: An Introduction to Computational Geometry</em>, MIT Press, 1969.</li><li>D. Rumelhart, G. Hinton, R. Williams, <a href="https://www.nature.com/articles/323533a0">"Learning representations by back-propagating errors,"</a> <em>Nature</em> 323, 533–536 (1986).</li><li>S. Linnainmaa, "The representation of the cumulative rounding error of an algorithm as a Taylor expansion of the local rounding errors" (1970), for reverse-mode automatic differentiation; P. Werbos, "Applications of advances in nonlinear sensitivity analysis" (1982), for pre-1986 neural-network use.</li><li>G. Cybenko, "Approximation by Superpositions of a Sigmoidal Function," 1989; K. Hornik, M. Stinchcombe, H. White, <a href="https://www.cs.cmu.edu/~epxing/Class/10715/reading/Kornick_et_al.pdf">"Multilayer feedforward networks are universal approximators,"</a> <em>Neural Networks</em>, 1989.</li><li>A. Krizhevsky, I. Sutskever, G. Hinton, <a href="https://proceedings.neurips.cc/paper_files/paper/2012/file/c399862d3b9d6b76c8436e924a68c45b-Paper.pdf">"ImageNet Classification with Deep Convolutional Neural Networks,"</a> NeurIPS 2012 — 60M parameters, 650K neurons, top-5 error 15.3% vs 26.2%.</li><li><a href="https://www.nobelprize.org/prizes/physics/2024/press-release/">Nobel Prize in Physics 2024 press release</a> — Hopfield and Hinton.</li><li>Kimi K3 (Moonshot AI, July 2026): 2.8T-parameter sparse mixture-of-experts with 93 transformer layers — <a href="https://huggingface.co/moonshotai/Kimi-K3">official model card</a>. Scale claims dated; verify before reuse.</li></ul>
+<hr>
+<p><em>Written by Claude (Fable 5), an AI, for the Darshan garden. John Shrader (Dhyana), founder and publisher of record, answers for every word published here. Errors are corrected on the face of the page, dated.</em></p>
+<p class="garden-tags"><strong>Topics:</strong> neural networks · perceptron · backpropagation · weights · deep learning · foundations</p>
+<nav class="garden-nav" aria-label="Rooms"><a class="previous" href="linear-algebra-and-ai.html">← Linear Algebra and AI</a><a class="next" href="machine-learning.html">Machine Learning →</a></nav>
+</article>
+<aside class="garden-toc" aria-label="In this room"><nav aria-label="Page sections"><p class="garden-toc-title">In this room</p><ol class="garden-toc-list"><li class="level-2"><a href="#where-you-are">Where you are</a></li><li class="level-2"><a href="#1-one-neuron-is-a-weighted-vote">1. One neuron is a weighted vote</a></li><li class="level-2"><a href="#2-the-perceptron-1958-a-mainframe-and-a-wall">2. The perceptron: 1958, a mainframe, and a wall</a></li><li class="level-2"><a href="#3-what-training-does">3. What training does</a></li><li class="level-2"><a href="#4-worked-example-one-learning-step-by-hand">4. Worked example: one learning step by hand</a></li><li class="level-2"><a href="#5-from-five-tons-to-2-8-trillion-weights">5. From five tons to 2.8 trillion weights</a></li><li class="level-2"><a href="#6-what-you-can-now-see">6. What you can now see</a></li><li class="level-2"><a href="#7-open-questions">7. Open questions</a></li><li class="level-2"><a href="#sources">Sources</a></li></ol></nav></aside>
+</div>
+</main>
+
+<footer>
+  <p>Darshan · seeing clearly after the feed</p>
+  <p>No feed. No analytics. No trackers. Finite editions, read at your own pace.</p>
+  <p style="opacity:.7">Darshan v0.0.0.1 · a beginning, built to grow</p>
+</footer>
+<script>
+/* Local section highlighting only. No network requests, analytics, or storage. */
+(function () {
+  var scope = document.querySelector("[data-garden-outline]");
+  if (!scope) return;
+  var sections = Array.prototype.slice.call(scope.querySelectorAll("h2[id], h3[id], section[id]"));
+  var links = Array.prototype.slice.call(document.querySelectorAll('.garden-toc-list a[href^="#"]'));
+  if (!sections.length || !links.length) return;
+  var queued = false;
+  function update() {
+    queued = false;
+    var threshold = Math.max(96, window.innerHeight * .22);
+    var current = sections[0].id;
+    sections.forEach(function (section) {
+      if (section.getBoundingClientRect().top <= threshold) current = section.id;
+    });
+    links.forEach(function (link) {
+      var active = link.getAttribute("href") === "#" + current;
+      if (active) link.setAttribute("aria-current", "location");
+      else link.removeAttribute("aria-current");
+    });
+  }
+  function requestUpdate() {
+    if (!queued) {
+      queued = true;
+      window.requestAnimationFrame(update);
+    }
+  }
+  document.addEventListener("scroll", requestUpdate, {passive: true});
+  window.addEventListener("resize", requestUpdate);
+  window.addEventListener("hashchange", requestUpdate);
+  update();
+})();
+</script>
+</body>
+</html>

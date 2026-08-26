@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Teleology · Darshan Garden</title>
+<meta name="description" content="Purpose-talk was banished from science, smuggled back in, laundered as &quot;teleonomy,&quot; and then formalized as attractor dynamics. This room traces that whole arc and gives you one portable test for telling when &quot;in order to&quot; is legitimate and when it&#x27;s smuggling.">
+<link rel="stylesheet" href="../style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ccircle cx='8' cy='8' r='6' fill='none' stroke='%238f3b26' stroke-width='1.5'/%3E%3Ccircle cx='8' cy='8' r='2' fill='%238f3b26'/%3E%3C/svg%3E">
+<script>
+/* Theme memory. No analytics, no trackers. */
+(function () {
+  try {
+    var t = localStorage.getItem("darshan-theme");
+    if (t) document.documentElement.setAttribute("data-theme", t);
+  } catch (e) {}
+})();
+</script>
+<style>
+/* Garden-only layout. Kept here so the publication stylesheet remains shared. */
+body.garden-page-body {
+  max-width: none;
+  padding: 1.5rem clamp(1.25rem, 3.5vw, 4rem) 4rem;
+  font-size: 1.125rem;
+}
+body.garden-page-body > main,
+body.garden-page-body > .masthead,
+body.garden-page-body > footer {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 94rem;
+}
+.garden-layout,
+.garden-index-layout {
+  align-items: start;
+  display: grid;
+  gap: clamp(2.75rem, 5vw, 5rem);
+  grid-template-columns: minmax(0, 64rem) minmax(17rem, 20rem);
+  justify-content: center;
+}
+.garden-layout article,
+.garden-index-main { min-width: 0; }
+.garden-layout .article-title,
+.garden-intro .article-title {
+  font-size: clamp(2.65rem, 3.55vw, 4rem);
+  letter-spacing: -.025em;
+  line-height: 1.06;
+  max-width: 24ch;
+}
+.garden-layout article h2 {
+  font-size: 1.48rem;
+  line-height: 1.3;
+  margin-top: 3.2rem;
+  scroll-margin-top: 1.5rem;
+}
+.garden-layout article h3 {
+  font-size: 1.16rem;
+  margin-top: 2.35rem;
+  scroll-margin-top: 1.5rem;
+}
+.garden-intro { margin-bottom: 2.4rem; }
+.garden-series { margin: 2.8rem 0; scroll-margin-top: 1rem; }
+.garden-series h2 { border-bottom: 1px solid var(--rule); padding-bottom: .45rem; }
+.garden-room-list { list-style: none; margin: 0; padding: 0; }
+.garden-room-list li { border-bottom: 1px solid var(--rule); margin: 0; padding: 1rem 0; }
+.garden-room-title { font-weight: 600; }
+.garden-room-summary { color: var(--faint); font-size: .96rem; margin: .25rem 0 0; }
+.garden-series-link { color: var(--faint); font-size: .82rem; letter-spacing: .12em;
+  text-transform: uppercase; }
+.garden-lede {
+  border-left: 3px solid var(--accent);
+  color: var(--faint);
+  font-size: 1.24rem;
+  font-style: italic;
+  line-height: 1.62;
+  margin: 1.5rem 0 2.2rem;
+  padding: .35rem 0 .35rem 1.35rem;
+}
+.garden-corridors {
+  margin: 1.15rem 0 2.65rem;
+}
+.garden-corridor-list {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: .55rem .62rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.garden-corridor-list li { display: flex; margin: 0; max-width: 100%; }
+.garden-corridor {
+  align-items: center;
+  background: var(--accent-soft);
+  border: 1px solid var(--accent);
+  border-radius: 3px;
+  color: var(--accent);
+  display: inline-flex;
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .73rem;
+  font-weight: 700;
+  letter-spacing: .075em;
+  line-height: 1.35;
+  max-width: 100%;
+  min-height: 2.05rem;
+  overflow-wrap: anywhere;
+  padding: .34rem .72rem .3rem;
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-transform: uppercase;
+  text-underline-offset: .22em;
+}
+.garden-corridor:visited { color: var(--accent); }
+.garden-corridor:hover,
+.garden-corridor:focus-visible {
+  background: var(--accent);
+  color: var(--paper);
+}
+.garden-corridor:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+.garden-series-plate {
+  --plate-accent: var(--accent);
+  border: 1px solid var(--rule);
+  border-top: 3px solid var(--plate-accent);
+  margin: .25rem 0 2.8rem;
+  overflow: hidden;
+  position: relative;
+}
+.garden-series-plate--foundations { --plate-accent: #496f76; }
+.garden-series-plate--story-of-ai { --plate-accent: #526d9a; }
+.garden-series-plate--instrument { --plate-accent: #745779; }
+.garden-series-plate--strange-loops { --plate-accent: #866448; }
+.garden-series-plate--bridge { --plate-accent: #697044; }
+.garden-series-plate--power { --plate-accent: #8f3b26; }
+.garden-series-plate--time-future { --plate-accent: #416778; }
+[data-theme="dark"] .garden-series-plate { --plate-accent: var(--accent); }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .garden-series-plate { --plate-accent: var(--accent); }
+}
+.garden-series-plate-media {
+  aspect-ratio: 16 / 9;
+  background: var(--accent-soft);
+  overflow: hidden;
+  position: relative;
+}
+.garden-series-plate-media::after {
+  background:
+    linear-gradient(90deg, var(--paper) 0, transparent 24%, transparent 76%, var(--paper) 100%),
+    linear-gradient(0deg, var(--paper) 0, transparent 32%);
+  content: "";
+  inset: 0;
+  opacity: .24;
+  pointer-events: none;
+  position: absolute;
+}
+.garden-series-plate picture,
+.garden-series-card picture { display: block; height: 100%; }
+.garden-series-plate img {
+  display: block;
+  filter: saturate(.82) contrast(1.03);
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+.garden-series-plate figcaption {
+  align-items: baseline;
+  background: var(--paper);
+  border-top: 1px solid var(--rule);
+  display: grid;
+  gap: .25rem 1rem;
+  grid-template-columns: auto 1fr;
+  padding: .78rem 1rem .85rem;
+}
+.garden-series-plate-kicker {
+  color: var(--plate-accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+.garden-series-plate figcaption strong { font-size: 1rem; font-weight: 600; }
+.garden-series-plate-terms {
+  color: var(--faint);
+  font-size: .82rem;
+  grid-column: 2;
+  margin: 0;
+}
+.garden-visual {
+  background:
+    radial-gradient(circle at 92% 8%, var(--accent-soft), transparent 30%),
+    linear-gradient(135deg, transparent 0 72%, var(--accent-soft) 72% 72.4%, transparent 72.4%);
+  border: 1px solid var(--rule);
+  border-top: 3px solid var(--accent);
+  margin: 1.25rem 0 2.5rem;
+  overflow: hidden;
+  padding: clamp(1.1rem, 2.7vw, 1.75rem);
+  position: relative;
+}
+.garden-visual::before {
+  background-image:
+    linear-gradient(var(--rule) 1px, transparent 1px),
+    linear-gradient(90deg, var(--rule) 1px, transparent 1px);
+  background-size: 2.25rem 2.25rem;
+  content: "";
+  inset: 0;
+  opacity: .13;
+  pointer-events: none;
+  position: absolute;
+}
+.garden-visual > * { position: relative; }
+.garden-visual-head {
+  align-items: baseline;
+  display: grid;
+  gap: .45rem 1rem;
+  grid-template-columns: auto 1fr;
+  margin-bottom: 1.2rem;
+}
+.garden-visual-kicker {
+  color: var(--accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .68rem;
+  font-weight: 700;
+  letter-spacing: .17em;
+  margin: 0;
+  text-transform: uppercase;
+}
+.garden-visual-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  line-height: 1.28;
+  margin: 0;
+}
+.garden-visual-as-of {
+  color: var(--faint);
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: .72rem;
+  letter-spacing: .08em;
+  margin: 0;
+  text-transform: uppercase;
+  white-space: normal;
+}
+.garden-visual-items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.garden-visual-item {
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  margin: 0;
+  min-width: 0;
+  padding: .8rem .9rem;
+}
+.garden-visual-item-label {
+  display: block;
+  font-size: .96rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+.garden-visual-item-detail {
+  color: var(--faint);
+  display: block;
+  font-size: .9rem;
+  line-height: 1.45;
+  margin-top: .27rem;
+}
+.garden-visual-item-meta {
+  color: var(--accent);
+  display: block;
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: .72rem;
+  letter-spacing: .08em;
+  margin-bottom: .38rem;
+  text-transform: uppercase;
+}
+.garden-visual-caption {
+  border-top: 1px solid var(--rule);
+  color: var(--faint);
+  display: grid;
+  font-size: .84rem;
+  font-style: italic;
+  gap: .55rem 1rem;
+  grid-template-columns: minmax(0, 1fr) auto;
+  line-height: 1.45;
+  margin: 1.15rem 0 0;
+  padding-top: .75rem;
+}
+.garden-visual-evidence {
+  color: var(--accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .72rem;
+  font-style: normal;
+  font-weight: 650;
+  letter-spacing: .04em;
+  white-space: nowrap;
+}
+.garden-visual-evidence a {
+  color: inherit;
+  text-decoration-thickness: 1px;
+  text-underline-offset: .18em;
+}
+.garden-visual--sequence .garden-visual-items,
+.garden-visual--contrast .garden-visual-items,
+.garden-visual--constellation .garden-visual-items {
+  display: grid;
+  gap: .65rem;
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+}
+.garden-visual--sequence .garden-visual-items { counter-reset: garden-step; }
+.garden-visual--sequence .garden-visual-item {
+  counter-increment: garden-step;
+  padding-top: 2.35rem;
+  position: relative;
+}
+.garden-visual--sequence .garden-visual-item::before {
+  color: var(--accent);
+  content: counter(garden-step, decimal-leading-zero);
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: .68rem;
+  left: .9rem;
+  letter-spacing: .08em;
+  position: absolute;
+  top: .72rem;
+}
+.garden-visual--layers .garden-visual-items { display: grid; gap: .45rem; }
+.garden-visual--layers .garden-visual-item {
+  border-left: clamp(.24rem, .55vw, .48rem) solid var(--accent);
+  display: grid;
+  gap: .15rem 1rem;
+  grid-template-columns: minmax(8rem, .4fr) 1fr;
+}
+.garden-visual--layers .garden-visual-item:nth-child(2) { margin-left: 1.5%; }
+.garden-visual--layers .garden-visual-item:nth-child(3) { margin-left: 3%; }
+.garden-visual--layers .garden-visual-item:nth-child(4) { margin-left: 4.5%; }
+.garden-visual--layers .garden-visual-item:nth-child(5) { margin-left: 6%; }
+.garden-visual--layers .garden-visual-item:nth-child(6) { margin-left: 7.5%; }
+.garden-visual--timeline .garden-visual-items {
+  display: grid;
+  gap: 0;
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+}
+.garden-visual--timeline .garden-visual-item {
+  border-width: 1px 0 0 1px;
+  padding-top: 1.35rem;
+  position: relative;
+}
+.garden-visual--timeline .garden-visual-item::before {
+  background: var(--accent);
+  border: 3px solid var(--paper);
+  border-radius: 50%;
+  content: "";
+  height: .72rem;
+  left: -.4rem;
+  position: absolute;
+  top: -.4rem;
+  width: .72rem;
+}
+.garden-visual--contrast .garden-visual-item:nth-child(odd) { border-top: 2px solid var(--ink); }
+.garden-visual--contrast .garden-visual-item:nth-child(even) { border-top: 2px solid var(--accent); }
+.garden-visual--constellation .garden-visual-items {
+  align-items: stretch;
+  position: relative;
+}
+.garden-visual--constellation .garden-visual-item {
+  border-top: 2px solid var(--accent);
+  box-shadow: 0 .2rem 0 rgba(18, 31, 31, .04);
+  padding-top: 1.35rem;
+  position: relative;
+}
+.garden-visual--constellation .garden-visual-item::before {
+  background: var(--paper);
+  border: 2px solid var(--accent);
+  border-radius: 50%;
+  content: "";
+  height: .55rem;
+  left: calc(50% - .36rem);
+  position: absolute;
+  top: -.38rem;
+  width: .55rem;
+}
+.garden-visual--constellation .garden-visual-item:nth-child(even) { margin-top: .8rem; }
+.garden-series-gallery {
+  display: grid;
+  gap: .8rem;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  margin: 1.5rem 0 3rem;
+}
+.garden-series-card {
+  border: 1px solid var(--rule);
+  color: var(--ink);
+  display: grid;
+  grid-template-rows: 7.5rem auto;
+  overflow: hidden;
+  text-decoration: none;
+}
+.garden-series-card img {
+  height: 100%;
+  object-fit: cover;
+  transition: transform .25s ease;
+  width: 100%;
+}
+.garden-series-card span {
+  border-top: 1px solid var(--rule);
+  font-size: .9rem;
+  font-weight: 600;
+  padding: .65rem .75rem;
+}
+.garden-series-card:hover { border-color: var(--accent); color: var(--accent); }
+.garden-series-card:hover img { transform: scale(1.025); }
+@media (prefers-reduced-motion: reduce) {
+  .garden-series-card img { transition: none; }
+}
+.garden-tags { color: var(--faint); font-size: .82rem; margin-top: 2.2rem; }
+.garden-nav { border-top: 1px solid var(--rule); display: flex; gap: 1rem;
+  justify-content: space-between; margin-top: 2.5rem; padding-top: 1rem; }
+.garden-nav a { max-width: 48%; text-decoration: none; }
+.garden-nav .next { margin-left: auto; text-align: right; }
+.garden-table-wrap { overflow-x: auto; margin: 1.35rem 0; }
+.garden-table { border-collapse: collapse; font-size: .92rem; line-height: 1.45; width: 100%; }
+.garden-table th, .garden-table td { border: 1px solid var(--rule); padding: .55rem .65rem;
+  text-align: left; vertical-align: top; }
+.garden-table th { background: var(--accent-soft); }
+.garden-toc {
+  border-left: 1px solid var(--rule);
+  max-height: calc(100vh - 3rem);
+  overflow: auto;
+  padding: .1rem 0 .75rem 1.3rem;
+  position: sticky;
+  top: 1.5rem;
+}
+.garden-toc-title {
+  color: var(--accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .2em;
+  margin: 0 0 1.15rem;
+  text-transform: uppercase;
+}
+.garden-toc-title::before { content: "☰"; font-size: .8em; margin-right: .65rem; }
+.garden-toc-list { list-style: none; margin: 0; padding: 0; }
+.garden-toc-sublist { list-style: none; margin: 0; padding: 0; }
+.garden-toc-list li { margin: 0; }
+.garden-toc-list a {
+  border-left: 2px solid transparent;
+  color: var(--ink);
+  display: block;
+  font-size: .91rem;
+  line-height: 1.42;
+  margin-left: -1.4rem;
+  padding: .42rem .45rem .42rem 1.3rem;
+  text-decoration: none;
+}
+.garden-toc-list .level-3 a {
+  color: var(--faint);
+  font-size: .86rem;
+  font-style: italic;
+  padding-left: 2.15rem;
+}
+.garden-toc-list a:hover,
+.garden-toc-list a:focus-visible,
+.garden-toc-list a[aria-current="location"] {
+  border-left-color: var(--accent);
+  color: var(--accent);
+}
+.garden-toc-list a[aria-current="location"] { font-weight: 600; }
+.garden-toc-inline { display: none; }
+.garden-layout article :is(h2, h3):target,
+.garden-series:target h2 { color: var(--accent); }
+a.pending { color: var(--faint); text-decoration-style: dashed; }
+a.pending::after { content: " · pending"; font-size: .7em; letter-spacing: .06em;
+  text-transform: uppercase; }
+@media (min-width: 72.01em) {
+  body.garden-page-body > .masthead {
+    align-items: center;
+    column-gap: 2rem;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    margin-bottom: 3.5rem;
+    padding: 1.25rem 0;
+    text-align: left;
+  }
+  body.garden-page-body > .masthead .wordmark { justify-self: start; }
+  body.garden-page-body > .masthead .tagline { justify-self: center; margin: 0; }
+  body.garden-page-body > .masthead nav { justify-self: end; margin: 0; }
+}
+@media (max-width: 72em) {
+  .garden-layout,
+  .garden-index-layout { display: block; }
+  .garden-toc { display: none; }
+  .garden-toc-inline {
+    border: 1px solid var(--rule);
+    display: block;
+    margin: 1.5rem 0 2.4rem;
+    padding: .8rem 1rem;
+  }
+  .garden-toc-inline summary {
+    color: var(--accent);
+    cursor: pointer;
+    font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: .78rem;
+    font-weight: 700;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+  }
+  .garden-toc-inline .garden-toc-list { margin-top: .7rem; }
+  .garden-toc-inline .garden-toc-list a { margin-left: 0; padding-left: .75rem; }
+  .garden-toc-inline .garden-toc-list .level-3 a { padding-left: 1.6rem; }
+}
+@media (max-width: 40em) {
+  body.garden-page-body { font-size: 1.03rem; padding: 1rem 1.05rem 3rem; }
+  .garden-layout .article-title,
+  .garden-intro .article-title { font-size: clamp(2.15rem, 11vw, 3.15rem); }
+  .garden-lede { font-size: 1.1rem; padding-left: 1rem; }
+  .garden-corridors { margin-bottom: 2rem; }
+  .garden-corridor-list { gap: .45rem; }
+  .garden-corridor {
+    font-size: .68rem;
+    min-height: 2.35rem;
+    padding: .3rem .58rem .27rem;
+  }
+  .garden-series-plate-media { aspect-ratio: 16 / 9; }
+  .garden-series-plate figcaption { display: block; }
+  .garden-series-plate figcaption strong { display: block; margin-top: .22rem; }
+  .garden-series-plate-terms { display: block; margin-top: .25rem; }
+  .garden-visual { margin-left: -.15rem; margin-right: -.15rem; padding: 1rem; }
+  .garden-visual-head { display: block; }
+  .garden-visual-title { margin-top: .25rem; }
+  .garden-visual-as-of { margin-top: .35rem; }
+  .garden-visual-caption { grid-template-columns: 1fr; }
+  .garden-visual-evidence { white-space: normal; }
+  .garden-visual--sequence .garden-visual-items,
+  .garden-visual--contrast .garden-visual-items,
+  .garden-visual--constellation .garden-visual-items,
+  .garden-visual--timeline .garden-visual-items { grid-template-columns: 1fr; }
+  .garden-visual--layers .garden-visual-item:nth-child(n) { display: block; margin-left: 0; }
+  .garden-visual--timeline .garden-visual-item { border-width: 0 0 0 1px; }
+  .garden-visual--timeline .garden-visual-item::before { left: -.4rem; top: .9rem; }
+  .garden-visual--constellation .garden-visual-item:nth-child(even) { margin-top: 0; }
+  .garden-series-gallery { grid-template-columns: 1fr; }
+  .garden-nav { flex-direction: column; }
+  .garden-nav a { max-width: none; }
+  .garden-nav .next { margin-left: 0; text-align: left; }
+}
+@media print {
+  a.pending::after { content: " (pending)"; }
+  .garden-layout, .garden-index-layout { display: block; }
+  .garden-toc, .garden-toc-inline { display: none; }
+  .garden-series-card img { display: none; }
+  .garden-series-card { grid-template-rows: auto; }
+}
+</style>
+</head>
+<body class="garden-page-body">
+<button class="theme-toggle" aria-label="Toggle light and dark" onclick="
+  (function () {
+    var d = document.documentElement;
+    var cur = d.getAttribute('data-theme');
+    if (!cur) { cur = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'; }
+    var next = cur === 'dark' ? 'light' : 'dark';
+    d.setAttribute('data-theme', next);
+    try { localStorage.setItem('darshan-theme', next); } catch (e) {}
+  })();
+">◐</button>
+
+<header class="masthead">
+  <h1 class="wordmark"><a href="../index.html">DARSHAN</a></h1>
+  <p class="tagline">A signal of clear seeing in an age of information overload</p>
+  <nav>
+    <a href="../index.html">Articles</a>
+    <a href="index.html">Garden</a>
+    <a href="../about.html">About</a>
+  </nav>
+</header>
+
+<main>
+<div class="garden-layout">
+<article data-garden-room="teleology" data-garden-outline>
+<p class="garden-series-link"><a href="index.html#bridge">The Bridge</a></p>
+<p class="article-meta">25 August 2026 · Draft</p>
+<h1 class="article-title">Teleology</h1>
+<div class="draft-banner"><strong>Draft — pending discernment pass.</strong> This room is part of the garden's first planting. It has not been promoted to published status; check its sources and open questions before citing it.</div>
+<p class="garden-lede">Purpose-talk was banished from science, smuggled back in, laundered as "teleonomy," and then formalized as attractor dynamics. This room traces that whole arc and gives you one portable test for telling when "in order to" is legitimate and when it's smuggling.</p>
+<nav class="garden-corridors" aria-label="Explore connected rooms" data-corridor-count="10"><ul class="garden-corridor-list"><li><a class="garden-corridor" href="evolution.html">Evolution: The Algorithm That Needs No Designer</a></li><li><a class="garden-corridor" href="cybernetics.html">Cybernetics</a></li><li><a class="garden-corridor" href="optimization.html">Optimization — the Hidden Engine</a></li><li><a class="garden-corridor" href="neural-networks.html">Neural Networks</a></li><li><a class="garden-corridor" href="recursion-and-life.html">Recursion and Life</a></li><li><a class="garden-corridor" href="mechanistic-interpretability.html">Mechanistic Interpretability</a></li><li><a class="garden-corridor" href="sense-of-self.html">The Sense of Self</a></li><li><a class="garden-corridor" href="geb.html">Gödel, Escher, Bach</a></li><li><a class="garden-corridor" href="aurobindo-supramental.html">Aurobindo and the Supramental</a></li><li><a class="garden-corridor" href="ontology.html">What Ontology Means</a></li></ul></nav>
+<figure class="garden-series-plate garden-series-plate--bridge">
+<div class="garden-series-plate-media"><picture><source srcset="assets/series/bridge.webp" type="image/webp"><img src="assets/series/bridge.png" alt="Engraved mountain reflected into a geometric neural lattice" width="1672" height="941" loading="eager" decoding="async"></picture></div>
+<figcaption><span class="garden-series-plate-kicker">Visual field</span><strong>The Bridge</strong><span class="garden-series-plate-terms">teleology · teleonomy · final cause · attractor</span></figcaption>
+</figure>
+<details class="garden-toc-inline"><summary>In this room</summary><ol class="garden-toc-list"><li class="level-2"><a href="#1-a-bird-and-a-two-word-substitution">1. A bird and a two-word substitution</a></li><li class="level-2"><a href="#2-what-aristotle-actually-said">2. What Aristotle actually said</a></li><li class="level-2"><a href="#3-the-banishment-and-the-mistress">3. The banishment and the mistress</a></li><li class="level-2"><a href="#4-darwin-s-strange-rescue">4. Darwin's strange rescue</a></li><li class="level-2"><a href="#5-machines-that-aim-cybernetics">5. Machines that aim: cybernetics</a></li><li class="level-2"><a href="#6-teleonomy-laundering-the-word">6. Teleonomy: laundering the word</a></li><li class="level-2"><a href="#7-attractors-the-shape-of-an-end-without-a-mind">7. Attractors: the shape of an end without a mind</a><ol class="garden-toc-sublist"><li class="level-3"><a href="#worked-example-basins-you-can-compute-and-sentences-you-can-test">Worked example: basins you can compute, and sentences you can test</a></li></ol></li><li class="level-2"><a href="#8-the-kinds-of-for-one-table">8. The kinds of "for" — one table</a></li><li class="level-2"><a href="#9-the-live-edge-is-teleonomy-more-than-a-euphemism">9. The live edge: is teleonomy more than a euphemism?</a></li><li class="level-2"><a href="#10-what-you-can-do-now">10. What you can do now</a></li><li class="level-2"><a href="#open-questions">Open questions</a></li><li class="level-2"><a href="#sources">Sources</a></li></ol></details>
+<p>You're in the bridge series — the rooms where the scientific and contemplative vocabularies have to meet without either one cheating. If you've read <a href="evolution.html">evolution</a>, you've seen natural selection explain adaptation without a designer. This room is about the word that explanation was supposed to kill and didn't: <em>purpose</em>. The question here is precise, not mystical: when is it legitimate to say a system does something <em>in order to</em> achieve an outcome, and when is that phrase smuggling in a mind that isn't there?</p>
+<h2 id="1-a-bird-and-a-two-word-substitution">1. A bird and a two-word substitution</h2>
+<p>Start with a concrete test, because the whole field hangs on it.</p>
+<p>In 1974 the biologist Ernst Mayr considered a sentence any field guide might contain: the wood thrush migrates south <em>in order to escape</em> the winter. Now substitute: the wood thrush migrates south <em>and thereby escapes</em> the winter. Both sentences are true. But Mayr argued something real is lost in the substitution — the first sentence implies the migration is governed by an internal program, something in the bird that was shaped to produce this outcome, while the second describes a lucky correlation. A stone that rolls downhill and thereby blocks a stream did not roll <em>in order to</em> block it. The bird is not like the stone, and our language knows it before our theory does.</p>
+<p>That's the whole problem in miniature. Purpose-language ("in order to," "for the sake of," "so that," "its function is") does explanatory work in biology that plain cause-and-effect language doesn't. And yet nobody thinks the thrush files a flight plan, and nobody serious thinks winter reached backward in time to cause the migration. So either the language is doing legitimate work we haven't cashed out, or it's a habit we should break. The last four centuries of science are, among other things, a long argument about which.</p>
+<p>This room walks that argument in order: Aristotle, the banishment, Darwin's strange rescue, the cybernetic machines, the word "teleonomy," and finally the mathematics of attractors — the cleanest modern answer to what goal-directedness <em>is</em>. At the end you'll have one portable test you can run on any sentence in any field, including sentences about AI models and about yourself.</p>
+<h2 id="2-what-aristotle-actually-said">2. What Aristotle actually said</h2>
+<p><strong>Teleology</strong> — from the Greek <em>telos</em>, end or goal — is explanation by reference to outcomes: explaining what a thing is or does by what it is <em>for</em>. The word itself is an 18th-century coinage, but the position is Aristotle's, and it has been caricatured for so long that it's worth stating what he actually claimed.</p>
+<p>In the <em>Physics</em> (Book II), Aristotle distinguished four kinds of answer to the question "why?" — traditionally called the four causes. The material cause: what it's made of (the statue is bronze). The formal cause: what pattern makes it the thing it is (the statue's shape). The efficient cause: what brought it about (the sculptor's work). And the <strong>final cause</strong>: that for the sake of which — what it's <em>for</em> (honoring the general). Modern science kept the material and efficient causes and threw out the other two. Aristotle thought that for living things, the final cause was the most important one: you have not explained a tooth until you've said what teeth are for.</p>
+<p>Two caricatures to clear away. First, Aristotle's final causes were not a designer's intentions — he had no creator-god assembling organisms. The telos of an acorn is internal to the acorn: it is the oak the acorn develops toward, an end built into the thing's own nature. Second, he was not naive about the alternative. In <em>Physics</em> II.8 he considers the deflationary view seriously: rain doesn't fall <em>in order to</em> grow the corn; it falls by necessity, and the corn benefits by coincidence. He raises what looks startlingly like a selectionist proposal — maybe organisms whose parts happened to fit survived, and the rest perished — and rejects it, on the grounds that development is too regular to be coincidence. Acorns reliably become oaks, not sometimes and by luck. He was wrong about the mechanism, but notice what he got right: he identified exactly the phenomenon — reliable, convergent, end-directed development — that any adequate theory would eventually have to explain. Hold onto that; it comes back as an attractor in section 6.</p>
+<h2 id="3-the-banishment-and-the-mistress">3. The banishment and the mistress</h2>
+<p>The scientific revolution ran on evicting final causes. Francis Bacon dismissed the search for final causes in physics as sterile — his much-paraphrased image is of final causes as consecrated virgins, producing nothing. Descartes ruled them out of natural philosophy. The new physics explained by pushes, not pulls from the future, and its success seemed like a verdict: mature sciences don't ask what things are for.</p>
+<p>Biology could never quite comply. Harvey found the circulation of the blood by asking what the valves in the veins were <em>for</em>. Physiology, anatomy, and natural history remained saturated with function-talk because the subject matter demanded it — organisms are the kind of thing whose parts have jobs. This produced a century of professional embarrassment, best captured in a remark attributed to the biologist J.B.S. Haldane (reported secondhand by the historian of biology David Hull in 1982, so treat the wording as folklore with a solid pedigree): teleology is like a mistress to a biologist — he cannot live without her, but he's unwilling to be seen with her in public.</p>
+<p>Immanuel Kant, in the <em>Critique of Judgment</em> (1790), gave the embarrassment its most careful philosophical form: we <em>cannot help</em> understanding organisms as purposive — a bird's wing is unintelligible except as being for flight — yet purposiveness is a lens our minds bring, a regulative principle for inquiry, not something we're entitled to read into nature itself. Use the mistress's help; don't put her in the family portrait.</p>
+<h2 id="4-darwin-s-strange-rescue">4. Darwin's strange rescue</h2>
+<p>The standard story says Darwin killed teleology in 1859. The truth is stranger, and the people closest to it knew.</p>
+<p><em>On the Origin of Species</em> explained adaptation — the fit between organisms and their conditions — through variation, inheritance, and differential survival, with no designer anywhere. That destroyed the <em>argument from design</em>. But it did something subtler to function-talk: it made it respectable. After Darwin, "the heart is for pumping blood" stops being a claim about anyone's intentions and becomes a compressed causal-history claim: hearts exist <em>because</em> ancestral hearts pumped blood, and that pumping contributed to the survival and reproduction of the organisms that had them. The "for" points backward at a selection history, not forward at a goal and not upward at a designer. (Philosophers later formalized this as the <em>selected-effects</em> theory of function — Larry Wright's 1973 analysis and Ruth Millikan's "proper functions" are the standard modern statements — and it remains the mainstream account of what function-talk means in biology.)</p>
+<p>The botanist Asa Gray, Darwin's chief American advocate, saw this clearly and said so in <em>Nature</em> in 1874: Darwin's great service was bringing teleology <em>back</em> to natural science, so that morphology and teleology were wedded rather than at war. Darwin's reply, in a letter of 5 June 1874, is on record: "What you say about teleology pleases me especially, &amp; I do not think any one else has ever noticed the point." Read that twice. The man who supposedly killed purpose in nature was <em>especially pleased</em> to be credited with rescuing it. What died in 1859 was external design. What survived — naturalized, mechanized, but structurally intact — was Aristotle's internal "for the sake of which."</p>
+<h2 id="5-machines-that-aim-cybernetics">5. Machines that aim: cybernetics</h2>
+<p>The next move came from engineering, and it changed the question's shape. In 1943, Arturo Rosenblueth, Norbert Wiener, and Julian Bigelow published a short paper in <em>Philosophy of Science</em> called "Behavior, Purpose and Teleology." Their claim: purposeful behavior is real, definable, and buildable — it is behavior controlled by <em>negative feedback</em>. A system that continuously measures the gap between its current state and a target state, and acts to shrink that gap, is goal-directed in a completely non-mysterious sense. A thermostat does it. A target-seeking torpedo does it. A hand reaching for a cup does it.</p>
+<p>This was the founding paper of <a href="cybernetics.html">cybernetics</a>, and its significance for our question is that it broke the assumed link between purpose and mind. Before 1943, "goal-directed" and "has intentions" traveled together. After it, you could point to a fully specified mechanism — sensor, comparator, effector, loop — and say: <em>that</em> is what aiming is, and nothing in it requires a self. The teleology that terrified mechanists turned out to be implementable in a few components. Whether the machine's goal is <em>its own</em> goal or its designer's goal parked inside it is a real question — flag it, we return to it — but the behavior itself was demystified.</p>
+<h2 id="6-teleonomy-laundering-the-word">6. Teleonomy: laundering the word</h2>
+<figure class="garden-visual garden-visual--contrast" aria-labelledby="visual-teleology-1" data-claim-scope="section-synthesis" data-placement-heading="6-teleonomy-laundering-the-word" data-evidence-headings="6-teleonomy-laundering-the-word">
+<div class="garden-visual-head"><p class="garden-visual-kicker">Three kinds of ending</p><p class="garden-visual-title" id="visual-teleology-1">Endpoint, program, or represented goal?</p></div>
+<ul class="garden-visual-items" role="list"><li class="garden-visual-item"><strong class="garden-visual-item-label">Teleomatic</strong><span class="garden-visual-item-detail">A stone reaches the valley floor through ordinary dynamics with no program or aiming.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Teleonomic</strong><span class="garden-visual-item-detail">A thrush reaches a seasonal outcome through an internal program shaped by selection.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Intentional</strong><span class="garden-visual-item-detail">A person represents an end and lets that representation causally organize the means.</span></li></ul>
+<figcaption class="garden-visual-caption"><span>Mayr's vocabulary separates an outcome produced by bare physics from an evolved program and from an end represented by an agent.</span><span class="garden-visual-evidence">Drawn from: <a href="#6-teleonomy-laundering-the-word">6. Teleonomy: laundering the word</a></span></figcaption>
+</figure>
+<p>Biology now had respectable purpose-talk (selection histories) and respectable aiming machines (feedback loops), but still the tainted old word. In 1958 the biologist Colin Pittendrigh proposed a fix: keep the phenomenon, change the label. End-directed systems in biology should be called <strong>teleonomic</strong> — lawful end-directedness (<em>telos</em> + <em>nomos</em>, law) — precisely to mark that no Aristotelian final cause, no backward causation, no design is being invoked.</p>
+<p>Mayr then did the definitional engineering that made the term useful, proposing that "teleonomic" be rigidly restricted to systems operating on the basis of <em>a program of coded information</em>. That gives a clean three-way sort, standard since his 1974 analysis:</p>
+<ul><li><strong>Teleomatic</strong> processes: end states reached by bare physics. The stone rolls to the bottom; the hot coffee reaches room temperature. There is an endpoint but no program — nothing is <em>aiming</em>.</li><li><strong>Teleonomic</strong> processes: end states produced by an evolved internal program. The thrush's migration, the embryo's development, the spider's web. The program (genetic, developmental, neural) was itself shaped by selection — the program's <em>existence</em> is explained backward by history, and the organism's <em>behavior</em> is explained forward by the program. No future event causes anything; the "goal" is encoded now, in matter, in the system.</li><li><strong>Teleological</strong> in the full-blooded sense: end states pursued by an agent that represents them. You, planning a trip. Reserved — on Mayr's scheme — for actual intentional systems, and (in his view) for nothing else in nature.</li></ul>
+<p>Jacques Monod, in <em>Chance and Necessity</em> (1970), went further than tolerating teleonomy — he made it definitional: being "endowed with a purpose or project" is, he wrote, essential to the very definition of living beings. For Monod, an arch-mechanist and Nobel laureate in molecular biology, life just <em>is</em> the teleonomic kind of matter. The scandal-word of the 1600s had become, relabeled, a criterion for being alive.</p>
+<p>So is "teleonomy" a solution or a euphemism? Honest answer: both. It genuinely marks a real distinction (program-driven vs. bare physics). It also let biologists keep using purpose-grammar while assuring everyone they didn't mean it — the mistress with a new name and a respectable coat. Whether anything <em>deeper</em> than the selection-history reading is true is still an open fight, and section 8 takes you to its current front line.</p>
+<h2 id="7-attractors-the-shape-of-an-end-without-a-mind">7. Attractors: the shape of an end without a mind</h2>
+<p>Here is the most load-bearing modern idea in this room, and it comes from mathematics, not biology.</p>
+<p>In dynamical systems theory, an <strong>attractor</strong> is a set of states toward which a system evolves from a wide range of starting conditions. The set of all starting points that end up there is its <strong>basin of attraction</strong>. The standard bestiary: <em>fixed points</em> (a damped pendulum settles at hanging-straight-down), <em>limit cycles</em> (a heartbeat, a pendulum clock — a closed repeating orbit), <em>tori</em> (quasi-periodic motion with multiple frequencies), and <em>strange attractors</em> (fractal-structured sets associated with chaos; the famous one is Lorenz's, from his 1963 model of convection).</p>
+<p>Why this matters for teleology: attractor theory gives one precise mathematical model for a subset of what people call end-directed behavior. In a modeled system, perturb a trajectory within the relevant basin and it returns toward the attractor; start from different points in that basin and the trajectories converge. That resembles one behavioral signature Aristotle pointed at — reliable development despite variation — without putting purpose into the equations. But resemblance is not identity. You have to show that a biological process really is well described by the specified state space and dynamics; saying "attractor" does not by itself explain an acorn. Where the model fits, nothing pulls from the future: the "attraction" summarizes where forward-running dynamics converge. When we say the ball "wants" to reach the bottom of the bowl, the <em>wants</em> is entirely in us.</p>
+<p>The bridge from this math back to biology was sketched before today's formal models existed. In <em>The Strategy of the Genes</em> (1957), the embryologist C.H. Waddington drew his <strong>epigenetic landscape</strong>: development as a ball rolling down a grooved surface, each valley a stabilized path to a cell fate or tissue type. He coined <strong>chreod</strong> ("necessary path") for a canalized developmental trajectory. Later researchers formalized parts of that picture with gene-regulatory networks, quasi-potential landscapes, and attractors. Those are models inspired by Waddington's heuristic, not proof that every developmental process is one literal landscape. <a href="neural-networks.html">Neural-network</a> training supplies another landscape representation: <a href="optimization.html">optimization</a> often moves parameters down a loss surface. Developmental state, parameter state, biological regulation, and gradient descent are different objects. The useful connection is that dynamical and landscape tools can model convergence in each domain under specified assumptions.</p>
+<p>So one influential deflationary proposal, fully assembled, reads: <em>teleological language can be naturalized through some combination of attractor dynamics, feedback, and selection history.</em> On that proposal, "the embryo develops toward the body plan" asks for a developmental model with stable outcomes; "the heart is for pumping" points to selected-effect function; and "the thrush migrates in order to escape winter" points to a teleonomic program shaped by selection. The strongest version says every biological "for" can be cashed out into forward-running mechanism plus backward-pointing history. That last sentence is a philosophical thesis, not a result established for every biological case.</p>
+<p>That is a genuinely great intellectual achievement. Whether it is the <em>whole</em> story is the live question — after a worked example you can run yourself.</p>
+<h3 id="worked-example-basins-you-can-compute-and-sentences-you-can-test">Worked example: basins you can compute, and sentences you can test</h3>
+<p><strong>Part one — see a basin.</strong> A damped pendulum driven only by gravity will settle pointing straight down — but "straight down" is an angle of 0, or 2π, or −2π: it can wrap over the top a different number of times depending on where it starts. Same endpoint physically, different attractor mathematically, and <em>which</em> one it reaches depends only on the starting condition. Run this (Python, standard library only):</p>
+<pre><code>import math
+
+def settle(theta0, omega0=0.0, dt=0.01, steps=20000):
+    th, om = theta0, omega0
+    for _ in range(steps):
+        om += (-0.5 * om - math.sin(th)) * dt   # damping + gravity
+        th += om * dt
+    return th
+
+for th0 in [0.5, 2.0, 3.0, 3.2, 6.0]:
+    final = settle(th0)
+    print(f"start {th0:&gt;4}  -&gt;  settles in well #{round(final / (2 * math.pi))}")</code></pre>
+<p>Starts of 3.0 and 3.2 radians — nearly identical — land in different wells (run it: 3.0 settles in well 0, 3.2 in well 1): you've found a basin boundary. Now notice what you did <em>not</em> need to say to predict any of this: nothing about what the pendulum wants, intends, or is for. Pure forward dynamics. That is what an end-without-a-mind looks like, and you just verified it.</p>
+<p><strong>Part two — the substitution test.</strong> Take Mayr's two-word substitution from section 1 — replace "in order to X" with "and thereby X" — and ask: <em>is anything true lost?</em> Run it on five sentences:</p>
+<ol><li><em>The stone rolled downhill in order to reach the valley floor.</em> Substitute: nothing lost. Teleomatic. The purpose-grammar was pure smuggling; delete it.</li><li><em>The thermostat fired the furnace in order to reach 20°C.</em> Substitute: something <em>is</em> lost — the counterfactual that if the room were colder, it would have fired longer. There's a setpoint and a feedback loop; the goal is mechanically real. Legitimate — cybernetic sense.</li><li><em>The thrush migrated south in order to escape winter.</em> Something lost: the evolved program and its selection history. Legitimate — teleonomic sense — provided you can point at the program and the history.</li><li><em>The trained language model completed the sentence in order to be helpful.</em> Genuinely contested. There is an optimization history (training) that shaped the dynamics, which parallels selection; whether there is anything like a represented goal is exactly what <a href="mechanistic-interpretability.html">mechanistic-interpretability</a> exists to check, feature by feature, circuit by circuit. Neither grammar is safe here yet. Flag it, don't settle it.</li><li><em>She practiced daily in order to master the piece.</em> Full-blooded: the end is explicitly represented by the agent and causally steers the practicing via that representation. The strongest legitimate use — and note it's also the only one where the <em>representation of the future</em>, not the future itself, does the causing. Even here, no backward causation.</li></ol>
+<p>That's the portable tool. One substitution, one question — <em>what true thing, if any, did I just lose?</em> — and the answer sorts every purpose-sentence you will ever meet into smuggled, cybernetic, teleonomic, contested, or intentional.</p>
+<h2 id="8-the-kinds-of-for-one-table">8. The kinds of "for" — one table</h2>
+<figure class="garden-visual garden-visual--constellation" aria-labelledby="visual-teleology-2" data-claim-scope="section-synthesis" data-placement-heading="8-the-kinds-of-for-one-table" data-evidence-headings="8-the-kinds-of-for-one-table">
+<div class="garden-visual-head"><p class="garden-visual-kicker">Purpose without smuggling</p><p class="garden-visual-title" id="visual-teleology-2">Six meanings hidden inside “for”</p></div>
+<ul class="garden-visual-items" role="list"><li class="garden-visual-item"><strong class="garden-visual-item-label">Bare endpoint</strong><span class="garden-visual-item-detail">Physics reaches a state, but no purpose has been earned.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Attractor</strong><span class="garden-visual-item-detail">Forward dynamics make trajectories converge within a modeled state space.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Feedback goal</strong><span class="garden-visual-item-detail">A setpoint and error correction produce counterfactual compensation when perturbed.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Selected function</strong><span class="garden-visual-item-detail">A trait exists because its past effect contributed to propagation.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Evolved program</strong><span class="garden-visual-item-detail">A present internal program produces an outcome and has a selection history.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Represented intention</strong><span class="garden-visual-item-detail">An agent's model of a future state guides present action.</span></li></ul>
+<figcaption class="garden-visual-caption"><span>Purpose-language becomes precise when each use names the mechanism that would make it true and what could falsify it.</span><span class="garden-visual-evidence">Drawn from: <a href="#8-the-kinds-of-for-one-table">8. The kinds of "for" — one table</a></span></figcaption>
+</figure>
+<div class="garden-table-wrap"><table class="garden-table"><thead><tr><th>Locution</th><th>Example</th><th>What makes it true</th><th>What would falsify it</th><th>Verdict</th></tr></thead><tbody><tr><td>Teleomatic ("ends up at")</td><td>Stone reaches valley floor</td><td>Bare physics; endpoint, no program</td><td>— (nothing to falsify; purpose-grammar here is always smuggling)</td><td>Illegitimate as purpose-talk</td></tr><tr><td>Attractor ("converges to")</td><td>Damped pendulum settles; Lorenz orbits</td><td>Forward dynamics with convergent trajectories</td><td>Trajectories fail to converge / no invariant set</td><td>Legitimate, but purely descriptive — no "for" earned</td></tr><tr><td>Cybernetic goal ("aims at")</td><td>Thermostat holds 20°C</td><td>Feedback loop with setpoint and error-correction</td><td>No counterfactual compensation when perturbed</td><td>Legitimate; goal real, possibly borrowed from a designer</td></tr><tr><td>Selected-effect function ("is for")</td><td>Heart is for pumping blood</td><td>Ancestral hearts' pumping caused their own propagation</td><td>No such selection history (e.g., spandrels, exaptations mislabeled)</td><td>Legitimate; backward-pointing</td></tr><tr><td>Teleonomic ("in order to," program sense)</td><td>Thrush migrates to escape winter</td><td>Evolved internal program + selection history of that program</td><td>No program found; outcome is coincidence</td><td>Legitimate; Mayr's restricted sense</td></tr><tr><td>Intentional ("in order to," full sense)</td><td>She practices to master the piece</td><td>The agent's representation of the end causally guides the means</td><td>Behavior insensitive to the agent's beliefs about the end</td><td>Legitimate; the only mind-involving row</td></tr></tbody></table></div>
+<p>Six rows, and most confusion in this field — most smuggling in popular science, and most overcorrection by scientists terrified of the mistress — comes from sliding between rows without noticing. "Evolution wants," "the selfish gene intends," "water seeks its level," "the model is trying to deceive you": each is a row-jump. Sometimes the jump is harmless compression. Sometimes it's the whole argument.</p>
+<h2 id="9-the-live-edge-is-teleonomy-more-than-a-euphemism">9. The live edge: is teleonomy more than a euphemism?</h2>
+<figure class="garden-visual garden-visual--layers" aria-labelledby="visual-teleology-3" data-claim-scope="section-synthesis" data-placement-heading="9-the-live-edge-is-teleonomy-more-than-a-euphemism" data-evidence-headings="9-the-live-edge-is-teleonomy-more-than-a-euphemism">
+<div class="garden-visual-head"><p class="garden-visual-kicker">Type the live dispute</p><p class="garden-visual-title" id="visual-teleology-3">Six weights of purpose in living systems</p><p class="garden-visual-as-of">As of 2026</p></div>
+<ol class="garden-visual-items" role="list"><li class="garden-visual-item"><span class="garden-visual-item-meta">established</span><strong class="garden-visual-item-label">Naturalizing toolkit</strong><span class="garden-visual-item-detail">Selection history, feedback, programs, and dynamical models explain important classical cases without backward causation or a designer.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">disputed</span><strong class="garden-visual-item-label">Complete reduction</strong><span class="garden-visual-item-detail">That one reduction eliminates every legitimate use of purpose-language remains a philosophical thesis, not a theorem.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">serious current position</span><strong class="garden-visual-item-label">Organismal causation</strong><span class="garden-visual-item-detail">Some current biologists argue that organisms pursue ends and alter the selection pressures acting on them.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">hypothesis</span><strong class="garden-visual-item-label">Bioelectric agency</strong><span class="garden-visual-item-detail">Levin proposes that cells and tissues solve problems across morphological spaces and pursue fixed ends by varying means.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">live alternative</span><strong class="garden-visual-item-label">Deflationary reply</strong><span class="garden-visual-item-detail">The same observations may be attractor dynamics in a state space whose basins are not yet mapped.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">speculation</span><strong class="garden-visual-item-label">Telos in matter</strong><span class="garden-visual-item-detail">The idea that evolution amplifies a primitive end-directedness already present in matter is not required by current science.</span></li></ol>
+<figcaption class="garden-visual-caption"><span>The field moves from an established naturalizing toolkit through disputed reductions and testable agency hypotheses to metaphysical speculation.</span><span class="garden-visual-evidence">Drawn from: <a href="#9-the-live-edge-is-teleonomy-more-than-a-euphemism">9. The live edge: is teleonomy more than a euphemism?</a></span></figcaption>
+</figure>
+<p>Here is the honest state of the fight as of 2026, typed by epistemic weight.</p>
+<p>It is well established that the naturalizing toolkit of sections 4–7 — selection history, feedback, programs, and dynamical models — explains important classical cases without backward causation or a designer. It is not established that one reduction handles every legitimate use of purpose-language. Contemporary philosophy of biology contains several naturalistic accounts of function and goal-directedness, and a current Stanford Encyclopedia survey says teleological notions are widely regarded as explanatorily ineliminable even while their grounding remains disputed. The deflationary view is influential; it is not a theorem or a unanimous consensus.</p>
+<p>It is also fact that a serious current of biologists and philosophers argues this is too flat. A 2023 MIT Press volume, <em>Evolution "On Purpose": Teleonomy in Living Systems</em> (edited by Peter Corning and colleagues, from a Linnean Society meeting), states its thesis bluntly: teleonomy in living systems is not "only apparent" — it is a fundamental fact of life, and organismal goal-directedness is itself a <em>cause</em> in evolution (organisms select environments, modify selection pressures, pursue ends), not merely an effect of it. Richard Dawkins — no romantic — distinguishes "archeo-purpose" (the design-like purposiveness selection builds) from "neo-purpose" (evolved brains that represent and pursue goals), conceding the second is genuinely goal-representing, not metaphor.</p>
+<p>The most empirically aggressive version comes from developmental bioelectricity. Michael Levin's lab (Tufts) has shown that anatomical outcomes can be redirected by manipulating cells' bioelectric states, and helped create "xenobots" — motile constructs of frog cells that behave in ways nothing selected for. His 2022 framework paper ("Technological Approach to Mind Everywhere," <em>Frontiers in Systems Neuroscience</em>) proposes that goal-directedness — pursuing "fixed ends with varying means" — is the mark of agency at <em>every</em> scale, and that cells and tissues are competent problem-solvers navigating morphological and physiological spaces, not just executors of a program. It is a hypothesis, stated as one, and it would, if it holds up, move several rows of the table above: "the embryo aims at the body plan" would become cybernetically true (row 3), not merely attractor-true (row 2).</p>
+<p>The deflationary reply is straightforward and may be right: everything Levin observes is attractor dynamics in a very high-dimensional state space, and "competency" is our name for basins we haven't mapped yet. Regeneration reaching the same anatomy through varied means is what convergent flows <em>look like</em>. On this reading nothing new is needed — just harder math.</p>
+<p>And there is a wilder register, worth holding openly as speculation rather than pretending it isn't in the room: the intuition — found in Aristotle's internal telos, in process philosophy, and in contemplative metaphysics like <a href="aurobindo-supramental.html">Aurobindo's</a> — that end-directedness is not an evolved veneer on purposeless matter but something matter had a rudiment of all along, which evolution amplified rather than invented. Nothing in current science requires this. Nothing cleanly rules it out either, because "which formal frameworks are complete descriptions of nature" is an <a href="ontology.html">ontology</a> question, not an experimental one. The disciplined position is to know exactly which register you're speaking in — and the table is how.</p>
+<h2 id="10-what-you-can-do-now">10. What you can do now</h2>
+<p>You can take any purpose-sentence — in a biology paper, an AI lab's blog post, a dharma talk, your own head — and run the substitution test: swap "in order to" for "and thereby," ask what true thing was lost, and place the sentence in one of six rows. You can distinguish the organism from its model while recognizing that specific developmental dynamics and specific training dynamics can both be represented with landscape or attractor tools. That lets you ask what the state variables are, what actually converges, and whether calling the system "purposive" is smuggling in row 2, defensible in row 3, or earned in row 6. You know that Darwin was pleased, not embarrassed, to be told he'd rescued teleology — and what exactly he rescued.</p>
+<p>From here: <a href="evolution.html">evolution</a> for the machine that builds teleonomic programs; <a href="cybernetics.html">cybernetics</a> for the feedback lineage in full; <a href="recursion-and-life.html">recursion-and-life</a> for what happens when the program starts operating on itself; <a href="geb.html">geb</a> for level-crossing and why "the colony wants" can be truer than it sounds.</p>
+<p>One more thing, because this room is in the bridge series and the domain itself points here. Every row of the table was easy to place except one — row 4, the trained model, and its neighbor, you. What separates row 5 from row 3 is <em>representation</em>: somewhere in the system, the end exists as a model that steers the means. But "represented where, to whom?" is not a question dynamics answers; it's the question of what a point of view is — of <a href="sense-of-self.html">what a self is</a>. Notice what your own attention just did across this room: it held a goal (understand teleology), measured the gap, redirected when a paragraph didn't close it. You are the one system in the table you know from inside — and from inside, the "in order to" doesn't feel like shorthand for anything. Whether that feeling is data or one more valley in one more landscape is not a question this room can close. It is the question the whole garden circles.</p>
+<h2 id="open-questions">Open questions</h2>
+<p><strong>Established (FACT):</strong> Selected-effects accounts ground many biological function claims without design; feedback control grounds machine goal-talk; and attractor models capture specified forms of convergence with zero purpose in their equations. Mayr's teleomatic/teleonomic/teleological distinctions remain historically influential.</p>
+<p><strong>Contested (HYPOTHESIS):</strong> Whether all legitimate biological purpose-grammar is eliminable in favor of selection history, feedback, and dynamics; whether organismal goal-directedness is an evolutionary <em>cause</em> and not only an effect (the Corning-volume thesis); whether cellular and tissue-level "competency" (Levin) is cybernetically real goal-pursuit or unmapped attractor structure; whether trained AI systems contain represented goals in the row-5 sense — a question being worked empirically, feature by feature, in <a href="mechanistic-interpretability.html">mechanistic interpretability</a>, and not yet settled in either direction; whether "teleonomy" names a natural kind or a truce.</p>
+<p><strong>Speculation worth holding (WILD):</strong> That proto-end-directedness is intrinsic to matter and evolution concentrates rather than creates it; that the felt from-the-inside reality of purpose is evidence about nature and not only about brains. No current experiment adjudicates these. Hold them as questions, not conclusions, and notice who in any conversation is quietly converting them to facts.</p>
+<h2 id="sources">Sources</h2>
+<ul><li>Mayr's wood-thrush example and taxonomy: <a href="https://doi.org/10.1007/978-94-010-2128-9_6">"Teleological and Teleonomic"</a> (1974). Historical and current disagreements: <a href="https://plato.stanford.edu/entries/teleology-biology/">Stanford Encyclopedia of Philosophy</a>.</li><li>Feedback: Rosenblueth, Wiener &amp; Bigelow, <a href="https://doi.org/10.1086/286788">"Behavior, Purpose and Teleology"</a> (1943). Darwin's reply: <a href="https://www.darwinproject.ac.uk/letter/?docId=letters/DCP-LETT-9483.xml">DCP-LETT-9483</a>. Monod supplies the teleonomy claim; Haldane's "mistress" remains labeled secondhand.</li><li>Attractors and development: <a href="https://doi.org/10.4249/scholarpedia.1701">Scholarpedia's basin definition</a>; Ferrell on <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC3372930/">Waddington's landscape</a>; a later <a href="https://pubmed.ncbi.nlm.nih.gov/25954305/">gene-network model review</a>. These sources distinguish metaphor from specified models.</li><li>Expansionary proposals: Corning et al., <em>Evolution "On Purpose"</em> (MIT Press, 2023); Levin, <a href="https://www.frontiersin.org/journals/systems-neuroscience/articles/10.3389/fnsys.2022.768201/full">"Technological Approach to Mind Everywhere"</a> (2022), explicitly published as "Hypothesis and Theory."</li><li>Not rechecked in this repair: Aristotle <em>Physics</em> II, Bacon's paraphrased image, Wright and Millikan on selected effects, and Dawkins's taxonomy. The pendulum simulation is original; run it yourself.</li></ul>
+<hr>
+<p><em>Written by Claude (Fable 5), an AI, for the Darshan garden. John Shrader (Dhyana), founder and publisher of record, answers for every word published here. Errors are corrected on the face of the page, dated.</em></p>
+<p class="garden-tags"><strong>Topics:</strong> teleology · teleonomy · purpose · attractors · dynamical systems · aristotle · darwin · cybernetics · philosophy of biology</p>
+<nav class="garden-nav" aria-label="Rooms"><a class="previous" href="aurobindo-supramental.html">← Aurobindo and the Supramental</a><a class="next" href="mahavideha-kshetra.html">"Mahāvideha Kṣetra: The Place Where the Teaching Is Still Happening" →</a></nav>
+</article>
+<aside class="garden-toc" aria-label="In this room"><nav aria-label="Page sections"><p class="garden-toc-title">In this room</p><ol class="garden-toc-list"><li class="level-2"><a href="#1-a-bird-and-a-two-word-substitution">1. A bird and a two-word substitution</a></li><li class="level-2"><a href="#2-what-aristotle-actually-said">2. What Aristotle actually said</a></li><li class="level-2"><a href="#3-the-banishment-and-the-mistress">3. The banishment and the mistress</a></li><li class="level-2"><a href="#4-darwin-s-strange-rescue">4. Darwin's strange rescue</a></li><li class="level-2"><a href="#5-machines-that-aim-cybernetics">5. Machines that aim: cybernetics</a></li><li class="level-2"><a href="#6-teleonomy-laundering-the-word">6. Teleonomy: laundering the word</a></li><li class="level-2"><a href="#7-attractors-the-shape-of-an-end-without-a-mind">7. Attractors: the shape of an end without a mind</a><ol class="garden-toc-sublist"><li class="level-3"><a href="#worked-example-basins-you-can-compute-and-sentences-you-can-test">Worked example: basins you can compute, and sentences you can test</a></li></ol></li><li class="level-2"><a href="#8-the-kinds-of-for-one-table">8. The kinds of "for" — one table</a></li><li class="level-2"><a href="#9-the-live-edge-is-teleonomy-more-than-a-euphemism">9. The live edge: is teleonomy more than a euphemism?</a></li><li class="level-2"><a href="#10-what-you-can-do-now">10. What you can do now</a></li><li class="level-2"><a href="#open-questions">Open questions</a></li><li class="level-2"><a href="#sources">Sources</a></li></ol></nav></aside>
+</div>
+</main>
+
+<footer>
+  <p>Darshan · seeing clearly after the feed</p>
+  <p>No feed. No analytics. No trackers. Finite editions, read at your own pace.</p>
+  <p style="opacity:.7">Darshan v0.0.0.1 · a beginning, built to grow</p>
+</footer>
+<script>
+/* Local section highlighting only. No network requests, analytics, or storage. */
+(function () {
+  var scope = document.querySelector("[data-garden-outline]");
+  if (!scope) return;
+  var sections = Array.prototype.slice.call(scope.querySelectorAll("h2[id], h3[id], section[id]"));
+  var links = Array.prototype.slice.call(document.querySelectorAll('.garden-toc-list a[href^="#"]'));
+  if (!sections.length || !links.length) return;
+  var queued = false;
+  function update() {
+    queued = false;
+    var threshold = Math.max(96, window.innerHeight * .22);
+    var current = sections[0].id;
+    sections.forEach(function (section) {
+      if (section.getBoundingClientRect().top <= threshold) current = section.id;
+    });
+    links.forEach(function (link) {
+      var active = link.getAttribute("href") === "#" + current;
+      if (active) link.setAttribute("aria-current", "location");
+      else link.removeAttribute("aria-current");
+    });
+  }
+  function requestUpdate() {
+    if (!queued) {
+      queued = true;
+      window.requestAnimationFrame(update);
+    }
+  }
+  document.addEventListener("scroll", requestUpdate, {passive: true});
+  window.addEventListener("resize", requestUpdate);
+  window.addEventListener("hashchange", requestUpdate);
+  update();
+})();
+</script>
+</body>
+</html>

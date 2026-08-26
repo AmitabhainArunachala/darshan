@@ -1,0 +1,9 @@
+{
+  "slug": "trends-gap",
+  "verdict": "PASS",
+  "contract": "Fresh full reread confirms valid frontmatter and declared links, numbered arc, comparison tables, two checkable walkthroughs plus an operational agency template, conclusion, typed open questions, strong primary-source ledger, truthful Codex disclosure, and an earned measurement/attention exit. The repaired sample size is now 5,172 in both body and Sources, and the structural checker is clean.",
+  "facts": "Three load-bearing claim families were rechecked against primary sources. The final Quarterly Journal of Economics article reports 5,172 customer-support agents and a 15% average increase in resolved chats per hour (https://doi.org/10.1093/qje/qjae044). ICAO reports about 1.8 billion scheduled passengers and a 60.1% fall in 2020, while the cited World Bank report records the pre-crisis 4.72-billion forecast; the room keeps forecast and outcome denominators distinct (https://www.icao.int/world-air-transport-2020; https://documents1.worldbank.org/curated/en/219551617185429671/pdf/Air-Transport-Annual-Report-2019.pdf). The Census Bureau reports 19.8% business AI use for the period ending 3 May 2026 and explicitly explains the November 2025 wording expansion, which the room correctly treats as a measurement break (https://www.census.gov/library/stories/2026/05/ai-use-businesses.html).",
+  "voice": "Cadence-read the densest regime-change paragraph, the capability/diffusion/reorganization/outcome synthesis, and the final signpost passage. They remain direct and careful, and the room repeatedly refuses to generalize one workflow's 15% effect to the whole economy. The final attention turn follows naturally from measurement choice rather than being bolted on.",
+  "must_fix": "none; the 5,179-to-5,172 repair matches the final QJE publication and no residual issue was found.",
+  "source_sha256": "b4ac85e0b144cb5bcc81e64e59cca9af37974659c4bc5b176e940d4d41e2b377"
+}

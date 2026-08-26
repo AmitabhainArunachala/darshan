@@ -1,0 +1,26 @@
+{
+  "schema": "darshan.visual-verdict-series/v1",
+  "series": "instrument",
+  "reviewer": "/root/audit_visuals_story_loops",
+  "reviewed_at": "2026-08-25",
+  "rooms": {
+    "mechanistic-interpretability": {
+      "verdict": "PASS",
+      "visual_sha256": "60a0c76df1e9e245baf57b8f2998181786f60005b1257243f3dd925dc7e2644b",
+      "source_sha256": "8c6314623a5aa27befbf1013326a6e79e2877380577e96f6ca93793c674a4dbc",
+      "evidence": "Checked the neuron/feature/circuit ladder against section 2, the Dallas→Texas→Austin causal trace against section 6, and the sparse-autoencoder correction against section 4. The ladder now contains exactly the source's three rungs and the SAE panel is dated 25 August 2026.",
+      "facts": "The ladder says neurons are often polysemantic rather than universally meaningless; the attribution graph includes both California→Sacramento and Byzantium→Constantinople interventions; and the SAE panel preserves the task-bounded dense-probe result, approximately 30% cross-seed overlap in one setting, and discovery-versus-control distinction.",
+      "uncertainty": "Attribution graphs use an interpretable replacement model and yielded satisfying insight on only a minority of prompts. SAE features can be interpretable and steerable without being the model's native computational atoms, and millions of learned features do not mean millions of human-recognizable concepts.",
+      "must_fix": "none — the prior absolute neuron title, extra behavior rung, and millions-of-recognizable-concepts overclaim were corrected."
+    },
+    "top-papers-mi": {
+      "verdict": "PASS",
+      "visual_sha256": "27c69fa70d34234a3ff49e44a2df558626bfc8e28404e9a747bb26d0b98aaca8",
+      "source_sha256": "fa3f9ba57fed559195d6b4fe94f0ec851a3bbdd5547fc168a130704e8acb2792",
+      "evidence": "Checked the five-era arc against section 8, the induction-head procedure against section 7, and the 2024 dictionary wave against section 5. Every paper family, date range, probe step, and limitation has a source counterpart.",
+      "facts": "The induction probe repeats 25 tokens, inspects 12×12 GPT-2-small heads, scores the offset-24 stripe, treats scores above 0.4 as candidates, and requires ablation for causal support. The dictionary panel accurately distinguishes millions of learned features from the smaller recognizably conceptual subset and includes proxy, dark-matter, and multi-dimensional-geometry limits.",
+      "uncertainty": "The twenty-paper set and its era boundaries are editorial. A threshold flags induction-head candidates rather than proving the mechanism, and sparse decomposition quality does not establish that dictionary entries are the model's true computational atoms.",
+      "must_fix": "none — the frontier dictionary language is now scoped to learned features with only a subset recognizable as concepts."
+    }
+  }
+}

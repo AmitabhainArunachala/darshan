@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Compilers — How Text Becomes a Machine · Darshan Garden</title>
+<meta name="description" content="The full journey from source code to a running program — lexer, parser, intermediate representation, optimization, code generation, linking — traced with real commands and real outputs you can reproduce on your own machine. Ends with the strangest fact about compilers, which Ken Thompson pointed out in 1984 and nobody has fully escaped since.">
+<link rel="stylesheet" href="../style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ccircle cx='8' cy='8' r='6' fill='none' stroke='%238f3b26' stroke-width='1.5'/%3E%3Ccircle cx='8' cy='8' r='2' fill='%238f3b26'/%3E%3C/svg%3E">
+<script>
+/* Theme memory. No analytics, no trackers. */
+(function () {
+  try {
+    var t = localStorage.getItem("darshan-theme");
+    if (t) document.documentElement.setAttribute("data-theme", t);
+  } catch (e) {}
+})();
+</script>
+<style>
+/* Garden-only layout. Kept here so the publication stylesheet remains shared. */
+body.garden-page-body {
+  max-width: none;
+  padding: 1.5rem clamp(1.25rem, 3.5vw, 4rem) 4rem;
+  font-size: 1.125rem;
+}
+body.garden-page-body > main,
+body.garden-page-body > .masthead,
+body.garden-page-body > footer {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 94rem;
+}
+.garden-layout,
+.garden-index-layout {
+  align-items: start;
+  display: grid;
+  gap: clamp(2.75rem, 5vw, 5rem);
+  grid-template-columns: minmax(0, 64rem) minmax(17rem, 20rem);
+  justify-content: center;
+}
+.garden-layout article,
+.garden-index-main { min-width: 0; }
+.garden-layout .article-title,
+.garden-intro .article-title {
+  font-size: clamp(2.65rem, 3.55vw, 4rem);
+  letter-spacing: -.025em;
+  line-height: 1.06;
+  max-width: 24ch;
+}
+.garden-layout article h2 {
+  font-size: 1.48rem;
+  line-height: 1.3;
+  margin-top: 3.2rem;
+  scroll-margin-top: 1.5rem;
+}
+.garden-layout article h3 {
+  font-size: 1.16rem;
+  margin-top: 2.35rem;
+  scroll-margin-top: 1.5rem;
+}
+.garden-intro { margin-bottom: 2.4rem; }
+.garden-series { margin: 2.8rem 0; scroll-margin-top: 1rem; }
+.garden-series h2 { border-bottom: 1px solid var(--rule); padding-bottom: .45rem; }
+.garden-room-list { list-style: none; margin: 0; padding: 0; }
+.garden-room-list li { border-bottom: 1px solid var(--rule); margin: 0; padding: 1rem 0; }
+.garden-room-title { font-weight: 600; }
+.garden-room-summary { color: var(--faint); font-size: .96rem; margin: .25rem 0 0; }
+.garden-series-link { color: var(--faint); font-size: .82rem; letter-spacing: .12em;
+  text-transform: uppercase; }
+.garden-lede {
+  border-left: 3px solid var(--accent);
+  color: var(--faint);
+  font-size: 1.24rem;
+  font-style: italic;
+  line-height: 1.62;
+  margin: 1.5rem 0 2.2rem;
+  padding: .35rem 0 .35rem 1.35rem;
+}
+.garden-corridors {
+  margin: 1.15rem 0 2.65rem;
+}
+.garden-corridor-list {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: .55rem .62rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.garden-corridor-list li { display: flex; margin: 0; max-width: 100%; }
+.garden-corridor {
+  align-items: center;
+  background: var(--accent-soft);
+  border: 1px solid var(--accent);
+  border-radius: 3px;
+  color: var(--accent);
+  display: inline-flex;
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .73rem;
+  font-weight: 700;
+  letter-spacing: .075em;
+  line-height: 1.35;
+  max-width: 100%;
+  min-height: 2.05rem;
+  overflow-wrap: anywhere;
+  padding: .34rem .72rem .3rem;
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-transform: uppercase;
+  text-underline-offset: .22em;
+}
+.garden-corridor:visited { color: var(--accent); }
+.garden-corridor:hover,
+.garden-corridor:focus-visible {
+  background: var(--accent);
+  color: var(--paper);
+}
+.garden-corridor:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+.garden-series-plate {
+  --plate-accent: var(--accent);
+  border: 1px solid var(--rule);
+  border-top: 3px solid var(--plate-accent);
+  margin: .25rem 0 2.8rem;
+  overflow: hidden;
+  position: relative;
+}
+.garden-series-plate--foundations { --plate-accent: #496f76; }
+.garden-series-plate--story-of-ai { --plate-accent: #526d9a; }
+.garden-series-plate--instrument { --plate-accent: #745779; }
+.garden-series-plate--strange-loops { --plate-accent: #866448; }
+.garden-series-plate--bridge { --plate-accent: #697044; }
+.garden-series-plate--power { --plate-accent: #8f3b26; }
+.garden-series-plate--time-future { --plate-accent: #416778; }
+[data-theme="dark"] .garden-series-plate { --plate-accent: var(--accent); }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .garden-series-plate { --plate-accent: var(--accent); }
+}
+.garden-series-plate-media {
+  aspect-ratio: 16 / 9;
+  background: var(--accent-soft);
+  overflow: hidden;
+  position: relative;
+}
+.garden-series-plate-media::after {
+  background:
+    linear-gradient(90deg, var(--paper) 0, transparent 24%, transparent 76%, var(--paper) 100%),
+    linear-gradient(0deg, var(--paper) 0, transparent 32%);
+  content: "";
+  inset: 0;
+  opacity: .24;
+  pointer-events: none;
+  position: absolute;
+}
+.garden-series-plate picture,
+.garden-series-card picture { display: block; height: 100%; }
+.garden-series-plate img {
+  display: block;
+  filter: saturate(.82) contrast(1.03);
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+.garden-series-plate figcaption {
+  align-items: baseline;
+  background: var(--paper);
+  border-top: 1px solid var(--rule);
+  display: grid;
+  gap: .25rem 1rem;
+  grid-template-columns: auto 1fr;
+  padding: .78rem 1rem .85rem;
+}
+.garden-series-plate-kicker {
+  color: var(--plate-accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+.garden-series-plate figcaption strong { font-size: 1rem; font-weight: 600; }
+.garden-series-plate-terms {
+  color: var(--faint);
+  font-size: .82rem;
+  grid-column: 2;
+  margin: 0;
+}
+.garden-visual {
+  background:
+    radial-gradient(circle at 92% 8%, var(--accent-soft), transparent 30%),
+    linear-gradient(135deg, transparent 0 72%, var(--accent-soft) 72% 72.4%, transparent 72.4%);
+  border: 1px solid var(--rule);
+  border-top: 3px solid var(--accent);
+  margin: 1.25rem 0 2.5rem;
+  overflow: hidden;
+  padding: clamp(1.1rem, 2.7vw, 1.75rem);
+  position: relative;
+}
+.garden-visual::before {
+  background-image:
+    linear-gradient(var(--rule) 1px, transparent 1px),
+    linear-gradient(90deg, var(--rule) 1px, transparent 1px);
+  background-size: 2.25rem 2.25rem;
+  content: "";
+  inset: 0;
+  opacity: .13;
+  pointer-events: none;
+  position: absolute;
+}
+.garden-visual > * { position: relative; }
+.garden-visual-head {
+  align-items: baseline;
+  display: grid;
+  gap: .45rem 1rem;
+  grid-template-columns: auto 1fr;
+  margin-bottom: 1.2rem;
+}
+.garden-visual-kicker {
+  color: var(--accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .68rem;
+  font-weight: 700;
+  letter-spacing: .17em;
+  margin: 0;
+  text-transform: uppercase;
+}
+.garden-visual-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  line-height: 1.28;
+  margin: 0;
+}
+.garden-visual-as-of {
+  color: var(--faint);
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: .72rem;
+  letter-spacing: .08em;
+  margin: 0;
+  text-transform: uppercase;
+  white-space: normal;
+}
+.garden-visual-items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.garden-visual-item {
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  margin: 0;
+  min-width: 0;
+  padding: .8rem .9rem;
+}
+.garden-visual-item-label {
+  display: block;
+  font-size: .96rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+.garden-visual-item-detail {
+  color: var(--faint);
+  display: block;
+  font-size: .9rem;
+  line-height: 1.45;
+  margin-top: .27rem;
+}
+.garden-visual-item-meta {
+  color: var(--accent);
+  display: block;
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: .72rem;
+  letter-spacing: .08em;
+  margin-bottom: .38rem;
+  text-transform: uppercase;
+}
+.garden-visual-caption {
+  border-top: 1px solid var(--rule);
+  color: var(--faint);
+  display: grid;
+  font-size: .84rem;
+  font-style: italic;
+  gap: .55rem 1rem;
+  grid-template-columns: minmax(0, 1fr) auto;
+  line-height: 1.45;
+  margin: 1.15rem 0 0;
+  padding-top: .75rem;
+}
+.garden-visual-evidence {
+  color: var(--accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .72rem;
+  font-style: normal;
+  font-weight: 650;
+  letter-spacing: .04em;
+  white-space: nowrap;
+}
+.garden-visual-evidence a {
+  color: inherit;
+  text-decoration-thickness: 1px;
+  text-underline-offset: .18em;
+}
+.garden-visual--sequence .garden-visual-items,
+.garden-visual--contrast .garden-visual-items,
+.garden-visual--constellation .garden-visual-items {
+  display: grid;
+  gap: .65rem;
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+}
+.garden-visual--sequence .garden-visual-items { counter-reset: garden-step; }
+.garden-visual--sequence .garden-visual-item {
+  counter-increment: garden-step;
+  padding-top: 2.35rem;
+  position: relative;
+}
+.garden-visual--sequence .garden-visual-item::before {
+  color: var(--accent);
+  content: counter(garden-step, decimal-leading-zero);
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: .68rem;
+  left: .9rem;
+  letter-spacing: .08em;
+  position: absolute;
+  top: .72rem;
+}
+.garden-visual--layers .garden-visual-items { display: grid; gap: .45rem; }
+.garden-visual--layers .garden-visual-item {
+  border-left: clamp(.24rem, .55vw, .48rem) solid var(--accent);
+  display: grid;
+  gap: .15rem 1rem;
+  grid-template-columns: minmax(8rem, .4fr) 1fr;
+}
+.garden-visual--layers .garden-visual-item:nth-child(2) { margin-left: 1.5%; }
+.garden-visual--layers .garden-visual-item:nth-child(3) { margin-left: 3%; }
+.garden-visual--layers .garden-visual-item:nth-child(4) { margin-left: 4.5%; }
+.garden-visual--layers .garden-visual-item:nth-child(5) { margin-left: 6%; }
+.garden-visual--layers .garden-visual-item:nth-child(6) { margin-left: 7.5%; }
+.garden-visual--timeline .garden-visual-items {
+  display: grid;
+  gap: 0;
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+}
+.garden-visual--timeline .garden-visual-item {
+  border-width: 1px 0 0 1px;
+  padding-top: 1.35rem;
+  position: relative;
+}
+.garden-visual--timeline .garden-visual-item::before {
+  background: var(--accent);
+  border: 3px solid var(--paper);
+  border-radius: 50%;
+  content: "";
+  height: .72rem;
+  left: -.4rem;
+  position: absolute;
+  top: -.4rem;
+  width: .72rem;
+}
+.garden-visual--contrast .garden-visual-item:nth-child(odd) { border-top: 2px solid var(--ink); }
+.garden-visual--contrast .garden-visual-item:nth-child(even) { border-top: 2px solid var(--accent); }
+.garden-visual--constellation .garden-visual-items {
+  align-items: stretch;
+  position: relative;
+}
+.garden-visual--constellation .garden-visual-item {
+  border-top: 2px solid var(--accent);
+  box-shadow: 0 .2rem 0 rgba(18, 31, 31, .04);
+  padding-top: 1.35rem;
+  position: relative;
+}
+.garden-visual--constellation .garden-visual-item::before {
+  background: var(--paper);
+  border: 2px solid var(--accent);
+  border-radius: 50%;
+  content: "";
+  height: .55rem;
+  left: calc(50% - .36rem);
+  position: absolute;
+  top: -.38rem;
+  width: .55rem;
+}
+.garden-visual--constellation .garden-visual-item:nth-child(even) { margin-top: .8rem; }
+.garden-series-gallery {
+  display: grid;
+  gap: .8rem;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  margin: 1.5rem 0 3rem;
+}
+.garden-series-card {
+  border: 1px solid var(--rule);
+  color: var(--ink);
+  display: grid;
+  grid-template-rows: 7.5rem auto;
+  overflow: hidden;
+  text-decoration: none;
+}
+.garden-series-card img {
+  height: 100%;
+  object-fit: cover;
+  transition: transform .25s ease;
+  width: 100%;
+}
+.garden-series-card span {
+  border-top: 1px solid var(--rule);
+  font-size: .9rem;
+  font-weight: 600;
+  padding: .65rem .75rem;
+}
+.garden-series-card:hover { border-color: var(--accent); color: var(--accent); }
+.garden-series-card:hover img { transform: scale(1.025); }
+@media (prefers-reduced-motion: reduce) {
+  .garden-series-card img { transition: none; }
+}
+.garden-tags { color: var(--faint); font-size: .82rem; margin-top: 2.2rem; }
+.garden-nav { border-top: 1px solid var(--rule); display: flex; gap: 1rem;
+  justify-content: space-between; margin-top: 2.5rem; padding-top: 1rem; }
+.garden-nav a { max-width: 48%; text-decoration: none; }
+.garden-nav .next { margin-left: auto; text-align: right; }
+.garden-table-wrap { overflow-x: auto; margin: 1.35rem 0; }
+.garden-table { border-collapse: collapse; font-size: .92rem; line-height: 1.45; width: 100%; }
+.garden-table th, .garden-table td { border: 1px solid var(--rule); padding: .55rem .65rem;
+  text-align: left; vertical-align: top; }
+.garden-table th { background: var(--accent-soft); }
+.garden-toc {
+  border-left: 1px solid var(--rule);
+  max-height: calc(100vh - 3rem);
+  overflow: auto;
+  padding: .1rem 0 .75rem 1.3rem;
+  position: sticky;
+  top: 1.5rem;
+}
+.garden-toc-title {
+  color: var(--accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .2em;
+  margin: 0 0 1.15rem;
+  text-transform: uppercase;
+}
+.garden-toc-title::before { content: "☰"; font-size: .8em; margin-right: .65rem; }
+.garden-toc-list { list-style: none; margin: 0; padding: 0; }
+.garden-toc-sublist { list-style: none; margin: 0; padding: 0; }
+.garden-toc-list li { margin: 0; }
+.garden-toc-list a {
+  border-left: 2px solid transparent;
+  color: var(--ink);
+  display: block;
+  font-size: .91rem;
+  line-height: 1.42;
+  margin-left: -1.4rem;
+  padding: .42rem .45rem .42rem 1.3rem;
+  text-decoration: none;
+}
+.garden-toc-list .level-3 a {
+  color: var(--faint);
+  font-size: .86rem;
+  font-style: italic;
+  padding-left: 2.15rem;
+}
+.garden-toc-list a:hover,
+.garden-toc-list a:focus-visible,
+.garden-toc-list a[aria-current="location"] {
+  border-left-color: var(--accent);
+  color: var(--accent);
+}
+.garden-toc-list a[aria-current="location"] { font-weight: 600; }
+.garden-toc-inline { display: none; }
+.garden-layout article :is(h2, h3):target,
+.garden-series:target h2 { color: var(--accent); }
+a.pending { color: var(--faint); text-decoration-style: dashed; }
+a.pending::after { content: " · pending"; font-size: .7em; letter-spacing: .06em;
+  text-transform: uppercase; }
+@media (min-width: 72.01em) {
+  body.garden-page-body > .masthead {
+    align-items: center;
+    column-gap: 2rem;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    margin-bottom: 3.5rem;
+    padding: 1.25rem 0;
+    text-align: left;
+  }
+  body.garden-page-body > .masthead .wordmark { justify-self: start; }
+  body.garden-page-body > .masthead .tagline { justify-self: center; margin: 0; }
+  body.garden-page-body > .masthead nav { justify-self: end; margin: 0; }
+}
+@media (max-width: 72em) {
+  .garden-layout,
+  .garden-index-layout { display: block; }
+  .garden-toc { display: none; }
+  .garden-toc-inline {
+    border: 1px solid var(--rule);
+    display: block;
+    margin: 1.5rem 0 2.4rem;
+    padding: .8rem 1rem;
+  }
+  .garden-toc-inline summary {
+    color: var(--accent);
+    cursor: pointer;
+    font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: .78rem;
+    font-weight: 700;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+  }
+  .garden-toc-inline .garden-toc-list { margin-top: .7rem; }
+  .garden-toc-inline .garden-toc-list a { margin-left: 0; padding-left: .75rem; }
+  .garden-toc-inline .garden-toc-list .level-3 a { padding-left: 1.6rem; }
+}
+@media (max-width: 40em) {
+  body.garden-page-body { font-size: 1.03rem; padding: 1rem 1.05rem 3rem; }
+  .garden-layout .article-title,
+  .garden-intro .article-title { font-size: clamp(2.15rem, 11vw, 3.15rem); }
+  .garden-lede { font-size: 1.1rem; padding-left: 1rem; }
+  .garden-corridors { margin-bottom: 2rem; }
+  .garden-corridor-list { gap: .45rem; }
+  .garden-corridor {
+    font-size: .68rem;
+    min-height: 2.35rem;
+    padding: .3rem .58rem .27rem;
+  }
+  .garden-series-plate-media { aspect-ratio: 16 / 9; }
+  .garden-series-plate figcaption { display: block; }
+  .garden-series-plate figcaption strong { display: block; margin-top: .22rem; }
+  .garden-series-plate-terms { display: block; margin-top: .25rem; }
+  .garden-visual { margin-left: -.15rem; margin-right: -.15rem; padding: 1rem; }
+  .garden-visual-head { display: block; }
+  .garden-visual-title { margin-top: .25rem; }
+  .garden-visual-as-of { margin-top: .35rem; }
+  .garden-visual-caption { grid-template-columns: 1fr; }
+  .garden-visual-evidence { white-space: normal; }
+  .garden-visual--sequence .garden-visual-items,
+  .garden-visual--contrast .garden-visual-items,
+  .garden-visual--constellation .garden-visual-items,
+  .garden-visual--timeline .garden-visual-items { grid-template-columns: 1fr; }
+  .garden-visual--layers .garden-visual-item:nth-child(n) { display: block; margin-left: 0; }
+  .garden-visual--timeline .garden-visual-item { border-width: 0 0 0 1px; }
+  .garden-visual--timeline .garden-visual-item::before { left: -.4rem; top: .9rem; }
+  .garden-visual--constellation .garden-visual-item:nth-child(even) { margin-top: 0; }
+  .garden-series-gallery { grid-template-columns: 1fr; }
+  .garden-nav { flex-direction: column; }
+  .garden-nav a { max-width: none; }
+  .garden-nav .next { margin-left: 0; text-align: left; }
+}
+@media print {
+  a.pending::after { content: " (pending)"; }
+  .garden-layout, .garden-index-layout { display: block; }
+  .garden-toc, .garden-toc-inline { display: none; }
+  .garden-series-card img { display: none; }
+  .garden-series-card { grid-template-rows: auto; }
+}
+</style>
+</head>
+<body class="garden-page-body">
+<button class="theme-toggle" aria-label="Toggle light and dark" onclick="
+  (function () {
+    var d = document.documentElement;
+    var cur = d.getAttribute('data-theme');
+    if (!cur) { cur = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'; }
+    var next = cur === 'dark' ? 'light' : 'dark';
+    d.setAttribute('data-theme', next);
+    try { localStorage.setItem('darshan-theme', next); } catch (e) {}
+  })();
+">◐</button>
+
+<header class="masthead">
+  <h1 class="wordmark"><a href="../index.html">DARSHAN</a></h1>
+  <p class="tagline">A signal of clear seeing in an age of information overload</p>
+  <nav>
+    <a href="../index.html">Articles</a>
+    <a href="index.html">Garden</a>
+    <a href="../about.html">About</a>
+  </nav>
+</header>
+
+<main>
+<div class="garden-layout">
+<article data-garden-room="compilers" data-garden-outline>
+<p class="garden-series-link"><a href="index.html#foundations">Foundations of the Machine</a></p>
+<p class="article-meta">25 August 2026 · Draft</p>
+<h1 class="article-title">Compilers — How Text Becomes a Machine</h1>
+<div class="draft-banner"><strong>Draft — pending discernment pass.</strong> This room is part of the garden's first planting. It has not been promoted to published status; check its sources and open questions before citing it.</div>
+<p class="garden-lede">The full journey from source code to a running program — lexer, parser, intermediate representation, optimization, code generation, linking — traced with real commands and real outputs you can reproduce on your own machine. Ends with the strangest fact about compilers, which Ken Thompson pointed out in 1984 and nobody has fully escaped since.</p>
+<nav class="garden-corridors" aria-label="Explore connected rooms" data-corridor-count="12"><ul class="garden-corridor-list"><li><a class="garden-corridor" href="programming.html">What Programming Is</a></li><li><a class="garden-corridor" href="intro-to-computer-science.html">Intro to Computer Science</a></li><li><a class="garden-corridor" href="algorithms-new-vision.html">A New Vision for Algorithms</a></li><li><a class="garden-corridor" href="neural-networks.html">Neural Networks</a></li><li><a class="garden-corridor" href="machine-learning.html">Machine Learning</a></li><li><a class="garden-corridor" href="deep-learning.html">Deep Learning</a></li><li><a class="garden-corridor" href="mechanistic-interpretability.html">Mechanistic Interpretability</a></li><li><a class="garden-corridor" href="nvidia-and-the-chip.html">NVIDIA and the Future of the Computer Chip</a></li><li><a class="garden-corridor" href="semiconductors.html">Semiconductors</a></li><li><a class="garden-corridor" href="recursion.html">Recursion</a></li><li><a class="garden-corridor" href="geb.html">Gödel, Escher, Bach</a></li><li><a class="garden-corridor" href="optimization.html">Optimization — the Hidden Engine</a></li></ul></nav>
+<figure class="garden-series-plate garden-series-plate--foundations">
+<div class="garden-series-plate-media"><picture><source srcset="assets/series/foundations.webp" type="image/webp"><img src="assets/series/foundations.png" alt="An engraved transistor lattice rising through computational layers into a neural graph" width="1672" height="941" loading="eager" decoding="async"></picture></div>
+<figcaption><span class="garden-series-plate-kicker">Visual field</span><strong>Foundations of the Machine</strong><span class="garden-series-plate-terms">compiler · lexer · token · parser</span></figcaption>
+</figure>
+<details class="garden-toc-inline"><summary>In this room</summary><ol class="garden-toc-list"><li class="level-2"><a href="#1-the-whole-trip-in-one-command">1. The whole trip in one command</a></li><li class="level-2"><a href="#2-lexing-from-characters-to-tokens">2. Lexing: from characters to tokens</a></li><li class="level-2"><a href="#3-parsing-from-tokens-to-a-tree">3. Parsing: from tokens to a tree</a></li><li class="level-2"><a href="#4-intermediate-representation-the-compiler-s-own-language">4. Intermediate representation: the compiler's own language</a></li><li class="level-2"><a href="#5-optimization-the-same-meaning-said-better">5. Optimization: the same meaning, said better</a></li><li class="level-2"><a href="#6-code-generation-down-to-the-actual-chip">6. Code generation: down to the actual chip</a></li><li class="level-2"><a href="#7-linking-many-pieces-one-program">7. Linking: many pieces, one program</a></li><li class="level-2"><a href="#8-the-pipeline-at-a-glance-and-who-builds-these-things">8. The pipeline at a glance, and who builds these things</a></li><li class="level-2"><a href="#9-trusting-trust-the-strange-loop-at-the-bottom">9. Trusting trust: the strange loop at the bottom</a></li><li class="level-2"><a href="#10-what-you-can-do-now">10. What you can do now</a></li><li class="level-2"><a href="#open-questions">Open questions</a></li><li class="level-2"><a href="#the-exit">The exit</a></li><li class="level-2"><a href="#sources">Sources</a></li></ol></details>
+<p>If you've read <a href="programming.html">programming</a>, you've written text files and watched them do things. This room is about the machinery in between — the program that turns your text into the electrical patterns a processor can actually execute. It's one of the oldest solved-and-never-finished problems in <a href="intro-to-computer-science.html">computer science</a>, and it's worth learning properly, because almost every idea in it — layered representations, meaning-preserving transformation, lost source code — shows up again when we talk about <a href="neural-networks.html">neural networks</a>.</p>
+<p>Everything below runs on an ordinary Mac (Apple clang 21, arm64). Every output shown is a real output, captured on 2026-08-25. You can reproduce all of it.</p>
+<h2 id="1-the-whole-trip-in-one-command">1. The whole trip in one command</h2>
+<figure class="garden-visual garden-visual--sequence" aria-labelledby="visual-compilers-1" data-claim-scope="section-synthesis" data-placement-heading="1-the-whole-trip-in-one-command" data-evidence-headings="1-the-whole-trip-in-one-command">
+<div class="garden-visual-head"><p class="garden-visual-kicker">The relay race</p><p class="garden-visual-title" id="visual-compilers-1">Text becomes behavior one artifact at a time</p></div>
+<ol class="garden-visual-items" role="list"><li class="garden-visual-item"><strong class="garden-visual-item-label">Lex</strong><span class="garden-visual-item-detail">Source characters become tokens with names and boundaries.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Parse</strong><span class="garden-visual-item-detail">Tokens become a typed syntax tree with grammatical structure.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Lower</strong><span class="garden-visual-item-detail">The tree becomes intermediate representation in the compiler's own language.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Optimize</strong><span class="garden-visual-item-detail">IR is rewritten into equivalent IR that says the same thing better.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Generate</strong><span class="garden-visual-item-detail">The target machine's instructions become assembly and then an object file.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Link</strong><span class="garden-visual-item-detail">Objects and libraries resolve their symbol IOUs into one executable.</span></li></ol>
+<figcaption class="garden-visual-caption"><span>A compiler pipeline hands a concrete intermediate artifact from each specialist stage to the next.</span><span class="garden-visual-evidence">Drawn from: <a href="#1-the-whole-trip-in-one-command">1. The whole trip in one command</a></span></figcaption>
+</figure>
+<p>Start with the smallest honest program:</p>
+<pre><code>#include &lt;stdio.h&gt;
+
+int square(int x) {
+    return x * x;
+}
+
+int main(void) {
+    printf("%d\n", square(12));
+    return 0;
+}</code></pre>
+<p>Save it as <code>sq.c</code> and run:</p>
+<pre><code>$ clang sq.c -o sq
+$ ./sq
+144</code></pre>
+<p>One command, and text became behavior. But that one command hides a pipeline of five or six distinct machines, each consuming the previous one's output. A compiler — the general name for a program that translates programs from one language to another, usually from a human-friendly language to machine code — is really a relay race:</p>
+<p><strong>source text → tokens → syntax tree → intermediate representation → optimized IR → assembly → object file → linked executable</strong></p>
+<p>The rest of this room walks that relay one leg at a time, with the actual baton visible at each handoff. The pedagogical rule here is the one good systems teaching always follows: look at the real artifact at every stage, not a diagram of it.</p>
+<h2 id="2-lexing-from-characters-to-tokens">2. Lexing: from characters to tokens</h2>
+<p>The compiler's first problem is stupid-sounding and real: the file is just a sequence of characters. <code>int square(int x)</code> is thirty-odd bytes with no inherent structure. The <strong>lexer</strong> (or tokenizer) groups those characters into <strong>tokens</strong> — the words of the language: keywords, identifiers, operators, punctuation.</p>
+<p>Clang will show you its actual token stream. Using a header-free version of just the <code>square</code> function:</p>
+<pre><code>$ clang -fsyntax-only -Xclang -dump-tokens square.c
+int 'int'        [StartOfLine]   Loc=&lt;square.c:1:1&gt;
+identifier 'square'  [LeadingSpace]  Loc=&lt;square.c:1:5&gt;
+l_paren '('              Loc=&lt;square.c:1:11&gt;
+int 'int'                Loc=&lt;square.c:1:12&gt;
+identifier 'x'   [LeadingSpace]  Loc=&lt;square.c:1:16&gt;
+r_paren ')'              Loc=&lt;square.c:1:17&gt;
+l_brace '{'      [LeadingSpace]  Loc=&lt;square.c:1:19&gt;
+return 'return'  [StartOfLine]   Loc=&lt;square.c:2:5&gt;
+identifier 'x'   [LeadingSpace]  Loc=&lt;square.c:2:12&gt;
+star '*'         [LeadingSpace]  Loc=&lt;square.c:2:14&gt;
+identifier 'x'   [LeadingSpace]  Loc=&lt;square.c:2:16&gt;
+semi ';'                 Loc=&lt;square.c:2:17&gt;
+r_brace '}'      [StartOfLine]   Loc=&lt;square.c:3:1&gt;
+eof ''                   Loc=&lt;square.c:3:2&gt;</code></pre>
+<p>Three lines of C became fourteen tokens, each tagged with its kind and its exact source location. Notice what's already gone: the whitespace, the line breaks as such. The lexer keeps only what carries meaning, plus locations so later error messages can point back at your file.</p>
+<p>One practical note about C specifically: before the lexer proper, the preprocessor runs. That innocent <code>#include &lt;stdio.h&gt;</code> at the top of <code>sq.c</code> splices in system headers — <code>clang -E sq.c | wc -l</code> reports 576 lines on this machine for our 10-line program. Most of what a C compiler chews on is text you never wrote.</p>
+<h2 id="3-parsing-from-tokens-to-a-tree">3. Parsing: from tokens to a tree</h2>
+<p>Tokens are words; the <strong>parser</strong> finds the grammar. Its output is an <strong>abstract syntax tree</strong> (AST) — a tree structure representing what the program <em>means</em> grammatically: this is a function definition, whose body is a return statement, whose value is a multiplication of two variable references.</p>
+<p>Again, don't take that on faith — dump it:</p>
+<pre><code>$ clang -fsyntax-only -Xclang -ast-dump square.c
+...
+|-ParmVarDecl ... used x 'int'
+`-CompoundStmt ...
+  `-ReturnStmt ...
+    `-BinaryOperator ... 'int' '*'
+      |-ImplicitCastExpr ... &lt;LValueToRValue&gt;
+      | `-DeclRefExpr ... ParmVar 'x' 'int'
+      `-ImplicitCastExpr ... &lt;LValueToRValue&gt;
+        `-DeclRefExpr ... ParmVar 'x' 'int'</code></pre>
+<p>Read it bottom-up: two references to the parameter <code>x</code>, joined by a <code>*</code> operator, wrapped in a <code>return</code>, wrapped in the function body. The flat token stream has become nested structure — and structure is what every later stage operates on. This is also where the compiler does semantic analysis: type checking (both operands of <code>*</code> are <code>int</code>, so the result is <code>int</code>), scope resolution (which <code>x</code> is this?), and the implicit conversions the language demands (those <code>LValueToRValue</code> casts: turning "the storage location x" into "the value currently in x").</p>
+<p>Parsers are a beautiful, deeply-studied corner of <a href="algorithms-new-vision.html">algorithms</a> — grammars, <a href="recursion.html">recursion</a>, recursive descent. The trees are recursive because the languages are: an expression can contain expressions can contain expressions.</p>
+<h2 id="4-intermediate-representation-the-compiler-s-own-language">4. Intermediate representation: the compiler's own language</h2>
+<p>Here's the design insight that shaped the last fifty years of compilers. If you have M source languages and N target processors, writing M×N direct translators is madness. Instead, translate every language into one shared middle language — an <strong>intermediate representation</strong> (IR) — do all the hard analysis there, and then write one backend per processor. M+N instead of M×N.</p>
+<p>LLVM, the infrastructure behind clang, Swift, Rust, and much of the GPU world, is built exactly this way, and its IR is human-readable. Ask for it:</p>
+<pre><code>$ clang -S -emit-llvm -O0 square.c -o -
+define i32 @square(i32 noundef %0) #0 {
+  %2 = alloca i32, align 4
+  store i32 %0, ptr %2, align 4
+  %3 = load i32, ptr %2, align 4
+  %4 = load i32, ptr %2, align 4
+  %5 = mul nsw i32 %3, %4
+  ret i32 %5
+}</code></pre>
+<p>This is the unoptimized (<code>-O0</code>) version, and it's naively literal: allocate a stack slot (<code>alloca</code>), store the parameter into it, load it back twice, multiply, return. It looks like assembly but isn't — the types are explicit (<code>i32</code>), there are infinitely many registers (<code>%2</code>, <code>%3</code>, ...), and no real processor is mentioned.</p>
+<p>One property of this IR matters enough to name: it is in <strong>SSA form</strong> — static single assignment — meaning every register is assigned exactly once. <code>%3</code> is defined in one place and never changes. That sounds like a bureaucratic restriction; it's actually the key that unlocks optimization, because "where did this value come from?" always has exactly one answer. The construction algorithm that made SSA practical was published by Ron Cytron and colleagues at IBM in 1991, and it is under essentially every serious compiler you use today. LLVM itself entered the world as a 2004 paper by Chris Lattner and Vikram Adve — a graduate project that now compiles a large share of the planet's software.</p>
+<h2 id="5-optimization-the-same-meaning-said-better">5. Optimization: the same meaning, said better</h2>
+<figure class="garden-visual garden-visual--sequence" aria-labelledby="visual-compilers-2" data-claim-scope="section-synthesis" data-placement-heading="5-optimization-the-same-meaning-said-better" data-evidence-headings="5-optimization-the-same-meaning-said-better">
+<div class="garden-visual-head"><p class="garden-visual-kicker">Optimization, witnessed</p><p class="garden-visual-title" id="visual-compilers-2">From stack traffic to a compile-time 144</p></div>
+<ol class="garden-visual-items" role="list"><li class="garden-visual-item"><strong class="garden-visual-item-label">Start</strong><span class="garden-visual-item-detail">Unoptimized IR stores the argument in a stack slot, loads it twice, multiplies, then returns.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Promote</strong><span class="garden-visual-item-detail">The mem2reg pass proves the stack slot is unnecessary and reduces the function to multiply and return.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Inline</strong><span class="garden-visual-item-detail">At the call site, the optimizer substitutes the body of square for the call square(12).</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Fold</strong><span class="garden-visual-item-detail">With both operands known, it computes 12 × 12 during compilation and emits the constant 144.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Obligation</strong><span class="garden-visual-item-detail">Every disappearance is safe only because a pass proved the replacement equivalent.</span></li></ol>
+<figcaption class="garden-visual-caption"><span>The compiler can erase the structure you wrote only when each rewrite preserves the program's meaning.</span><span class="garden-visual-evidence">Drawn from: <a href="#5-optimization-the-same-meaning-said-better">5. Optimization: the same meaning, said better</a></span></figcaption>
+</figure>
+<p>Now the payoff. Ask for the same IR with optimization on:</p>
+<pre><code>$ clang -S -emit-llvm -O2 square.c -o -
+define i32 @square(i32 noundef %0) local_unnamed_addr #0 {
+  %2 = mul nsw i32 %0, %0
+  ret i32 %2
+}</code></pre>
+<p>Seven instructions became two. The optimizer proved the stack slot was pointless — the value never escapes, so multiply the parameter directly. The transformation that did this (LLVM calls it <code>mem2reg</code>) is exactly the SSA construction from the previous section, applied.</p>
+<p>Optimizers work as a pipeline of <strong>passes</strong> — each pass a small program that reads IR, proves some property, and rewrites the IR without changing its meaning. Constant folding, dead code elimination, function inlining, loop transformations — dozens of passes, run in a tuned order. The field's conceptual foundation is largely the work of Frances Allen at IBM, whose 1966 paper "Program Optimization" introduced the graph-based program analysis these passes live on; she received the 2006 Turing Award for it, the first woman to do so.</p>
+<p>Want proof the optimizer really reasons, rather than just tidying? Compile the full <code>sq.c</code> at <code>-O2</code> and disassemble <code>main</code>:</p>
+<pre><code>$ clang -c -O2 sq.c -o sq.o
+$ objdump -d sq.o
+...
+0000000000000008 &lt;_main&gt;:
+   ...
+   14: 52801208    mov  w8, #0x90    ; =144
+   ...</code></pre>
+<p>There is no multiplication in the executable. There is no call to <code>square</code> from <code>main</code>. The compiler inlined the function, saw <code>12 * 12</code> with both operands known, computed <strong>144 at compile time</strong>, and emitted the answer as a constant. The program you wrote — "call square with 12" — and the program that runs — "here's 144" — mean the same thing and share almost no structure. Hold that thought; we come back to it at the end.</p>
+<p>The one discipline that makes all this safe: a pass may only rewrite what it can <em>prove</em> equivalent. When that discipline slips, you get miscompilation bugs — the nastiest bugs in computing, because your source is correct and the machine still does the wrong thing.</p>
+<h2 id="6-code-generation-down-to-the-actual-chip">6. Code generation: down to the actual chip</h2>
+<p>Optimized IR still isn't executable. <strong>Code generation</strong> lowers it to the instruction set of a specific processor — here, 64-bit Arm, the architecture in Apple silicon and most phones (the <a href="nvidia-and-the-chip.html">chip side of this story</a> has its own rooms, down to the <a href="semiconductors.html">physics</a>):</p>
+<pre><code>$ clang -S -O2 square.c -o -
+_square:
+	mul	w0, w0, w0
+	ret</code></pre>
+<p>Two machine instructions: multiply the register by itself, return. Codegen has three hard sub-problems, all classic <a href="algorithms-new-vision.html">algorithmic</a> territory:</p>
+<ol><li><strong>Instruction selection</strong> — which of the chip's instructions realize each IR operation (<code>mul nsw i32</code> → <code>mul w0, w0, w0</code>).</li><li><strong>Register allocation</strong> — the IR pretended it had infinite registers; the chip has around 31 general-purpose ones. Deciding what lives in registers and what spills to memory is graph coloring, an NP-hard problem solved with good heuristics millions of times a day.</li><li><strong>Instruction scheduling</strong> — ordering instructions so the processor's pipelines stay full.</li></ol>
+<p>Note the target-specificity: the O2 output on this machine literally names <code>"target-cpu"="apple-m1"</code> and lists dozens of chip features. The same IR fed to a different backend becomes x86, or RISC-V, or a GPU kernel. That's the M+N design paying rent.</p>
+<h2 id="7-linking-many-pieces-one-program">7. Linking: many pieces, one program</h2>
+<p>Assembly gets assembled into an <strong>object file</strong> — machine code plus a table of <strong>symbols</strong>: names this file defines, and names it needs but doesn't have. The <code>nm</code> tool reads that table:</p>
+<pre><code>$ nm sq.o
+0000000000000008 T _main
+                 U _printf
+0000000000000000 T _square</code></pre>
+<p>Read the letters: <code>T</code> means "defined here, in the text (code) section" — <code>main</code> and <code>square</code> live in this file. <code>U</code> means <strong>undefined</strong> — this file <em>uses</em> <code>printf</code> but has no idea what it is. The compiled code contains, in effect, an IOU.</p>
+<p>The <strong>linker</strong> is the debt collector. It takes your object files plus the system's C library, matches every <code>U</code> to some other file's <code>T</code>, patches the call addresses, and lays everything out as one executable:</p>
+<pre><code>$ clang sq.o -o sq
+$ ./sq
+144
+$ nm sq | grep printf
+                 U _printf</code></pre>
+<p>Still <code>U</code>? Yes — on macOS, <code>printf</code> is <em>dynamically</em> linked: the executable records "get this from the system C library at launch," and a runtime linker resolves it every time the program starts. That's why a security fix to the system library fixes every program on the machine without recompiling any of them — and why a missing shared library kills a program at startup. Static linking (copying the library code into your binary) is the other choice; bigger files, no launch-time dependency.</p>
+<p>Linking feels like plumbing and is routinely where real-world builds actually fail — "undefined symbol" is the error every systems programmer learns to read early. It's worth understanding precisely because it's the one stage where <em>separately compiled worlds</em> have to agree.</p>
+<h2 id="8-the-pipeline-at-a-glance-and-who-builds-these-things">8. The pipeline at a glance, and who builds these things</h2>
+<div class="garden-table-wrap"><table class="garden-table"><thead><tr><th>Stage</th><th>Input → Output</th><th>See it yourself</th><th>Classic failure</th></tr></thead><tbody><tr><td>Preprocess (C family)</td><td>your text → expanded text</td><td><code>clang -E sq.c</code></td><td>macro surprises</td></tr><tr><td>Lex</td><td>characters → tokens</td><td><code>-Xclang -dump-tokens</code></td><td>"unexpected character"</td></tr><tr><td>Parse + semantic analysis</td><td>tokens → typed AST</td><td><code>-Xclang -ast-dump</code></td><td>syntax and type errors</td></tr><tr><td>IR generation</td><td>AST → LLVM IR</td><td><code>-S -emit-llvm -O0</code></td><td>— (mechanical)</td></tr><tr><td>Optimization</td><td>IR → better IR</td><td><code>-S -emit-llvm -O2</code></td><td>miscompilation, slow builds</td></tr><tr><td>Code generation</td><td>IR → assembly</td><td><code>clang -S -O2</code></td><td>register spills, poor scheduling</td></tr><tr><td>Assemble + link</td><td>assembly → object → executable</td><td><code>clang -c</code>, <code>nm</code>, <code>clang sq.o</code></td><td>undefined symbols</td></tr></tbody></table></div>
+<p>And the landscape, current as of August 2026:</p>
+<div class="garden-table-wrap"><table class="garden-table"><thead><tr><th>Toolchain</th><th>First release</th><th>Current</th><th>Character</th></tr></thead><tbody><tr><td>GCC</td><td>1987</td><td>GCC 16.2 (Aug 2026)</td><td>The GNU workhorse; broadest language/target coverage; builds Linux</td></tr><tr><td>LLVM/Clang</td><td>2003 (paper 2004)</td><td>LLVM 22.1.x (2026)</td><td>Library-first design; backend for Swift, Rust, Julia, much GPU tooling</td></tr><tr><td>MLIR</td><td>2019 (paper CGO 2021)</td><td>part of LLVM</td><td>"IR for building IRs" — built for <a href="machine-learning.html">machine-learning</a> compilers, where the thing being compiled is a tensor graph</td></tr><tr><td>rustc, Go's gc, javac, V8's JIT...</td><td>—</td><td>—</td><td>Language-specific front/mid-ends; rustc lowers to LLVM, V8 compiles JavaScript <em>while it runs</em> (JIT)</td></tr></tbody></table></div>
+<p>Two rows deserve a sentence each. <strong>MLIR</strong> exists because <a href="deep-learning.html">deep learning</a> turned compilers into a frontier again: compiling a neural network's computation graph onto GPUs and accelerators is an M×N problem all over again, and the same people who built LLVM built a multi-level IR framework for it. And <strong>JIT</strong> (just-in-time) compilers collapse the pipeline into runtime: your browser is compiling JavaScript to machine code, with optimization guided by watching the program run, right now.</p>
+<p>For history's sake: the line starts in 1957, when John Backus's team at IBM shipped the first FORTRAN compiler for the IBM 704 — and it was an <em>optimizing</em> compiler from day one, because nobody would have used it if the generated code couldn't compete with hand-written assembly. The entire field's founding constraint was "prove the abstraction costs nothing." It mostly still is.</p>
+<h2 id="9-trusting-trust-the-strange-loop-at-the-bottom">9. Trusting trust: the strange loop at the bottom</h2>
+<figure class="garden-visual garden-visual--sequence" aria-labelledby="visual-compilers-3" data-claim-scope="section-synthesis" data-placement-heading="9-trusting-trust-the-strange-loop-at-the-bottom" data-evidence-headings="9-trusting-trust-the-strange-loop-at-the-bottom">
+<div class="garden-visual-head"><p class="garden-visual-kicker">Trusting trust</p><p class="garden-visual-title" id="visual-compilers-3">A backdoor that survives clean source</p></div>
+<ol class="garden-visual-items" role="list"><li class="garden-visual-item"><strong class="garden-visual-item-label">Recognition</strong><span class="garden-visual-item-detail">The compiler recognizes when it is compiling the login program.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Insertion</strong><span class="garden-visual-item-detail">It silently inserts a login backdoor into the produced binary.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Self-recognition</strong><span class="garden-visual-item-detail">The compiler also recognizes when it is compiling its own source.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Reproduction</strong><span class="garden-visual-item-detail">It inserts both recognition tricks into the next compiler binary.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Clean source</strong><span class="garden-visual-item-detail">The malicious source is removed while the binary keeps propagating the behavior.</span></li></ol>
+<figcaption class="garden-visual-caption"><span>Ken Thompson's attack moves the malicious rule from inspectable source into the self-reproducing compiler binary.</span><span class="garden-visual-evidence">Drawn from: <a href="#9-trusting-trust-the-strange-loop-at-the-bottom">9. Trusting trust: the strange loop at the bottom</a></span></figcaption>
+</figure>
+<p>One more thing, because it's too good and too important to skip. What compiles the compiler?</p>
+<p>Another compiler. Clang is a C++ program, compiled by an earlier clang (or GCC), compiled by an earlier one, back through decades. This is called bootstrapping, and it has a genuinely unsettling consequence, laid out by Ken Thompson in his 1984 Turing Award lecture, "Reflections on Trusting Trust."</p>
+<p>Thompson showed — with working code — that you can teach a compiler two tricks: recognize when it's compiling the login program and insert a backdoor; and recognize when it's compiling <em>itself</em> and re-insert both tricks into the new compiler binary. Then you delete the malicious source. Every source file on the system is now clean. The backdoor lives only in the binary, and it propagates itself through every future generation of the compiler, invisible forever to source-code inspection.</p>
+<p>His conclusion, verbatim: "You can't trust code that you did not totally create yourself." That is a fact about the world, not a hypothetical — the demonstrated attack has driven decades of work on reproducible builds and diverse double-compiling, which contain the problem without dissolving it. If <a href="geb.html">GEB</a>'s strange loops felt abstract, here is one with a security clearance: the tool that creates programs is a program it created.</p>
+<h2 id="10-what-you-can-do-now">10. What you can do now</h2>
+<p>You can take any C file on any machine with clang and watch every stage of its transformation: tokens (<code>-dump-tokens</code>), tree (<code>-ast-dump</code>), IR (<code>-emit-llvm</code>), the optimizer's reasoning (diff <code>-O0</code> against <code>-O2</code>), the chip's-eye view (<code>-S</code>), the symbol IOUs (<code>nm</code>), and the final resolution (link and run). That's not trivia — it's X-ray vision. Compiler errors stop being oracles and become messages from a specific stage you can name. "Undefined symbol" means the linker; "expected ';'" means the parser; mysterious speed differences mean the optimizer, and you can go read what it did.</p>
+<p>From here: <a href="programming.html">programming</a> is the floor below this room; <a href="algorithms-new-vision.html">algorithms-new-vision</a> is where parsing and register allocation live as problems in their own right; <a href="machine-learning.html">machine-learning</a> and <a href="neural-networks.html">neural-networks</a> are where compilation is being reinvented for tensor programs; and <a href="mechanistic-interpretability.html">mechanistic-interpretability</a> is where the closing thought of this room becomes a research field.</p>
+<h2 id="open-questions">Open questions</h2>
+<p><strong>Established:</strong> The pipeline above is textbook and stable; SSA-based optimization is universal in serious compilers; Thompson's attack is demonstrated fact; formally verified compilers exist (CompCert proved a C compiler's correctness in the Coq proof assistant — miscompilation-free by mathematical proof, for the verified portion).</p>
+<p><strong>Contested / open:</strong> How much further classical optimization can go — the folk observation that optimizer improvements yield only a few percent per year (sometimes stated as "Proebsting's Law," roughly 4% a year, itself disputed as a measurement) — versus the newer bet that machine-learned heuristics inside compilers (for inlining, scheduling, register allocation) will move the needle; both camps have real results and no verdict. Whether ML-driven superoptimization — searching for provably-equivalent-but-faster code rather than applying hand-written rules — scales beyond small kernels is genuinely open.</p>
+<p><strong>Worth holding, speculatively:</strong> Whether future AI systems will write directly in low-level or intermediate representations, making the human-facing language layer optional; and whether "compilation" is the right frame for what training does to a neural network — a suggestive analogy (specification in, opaque efficient artifact out, source unrecoverable) that has not earned the status of a theory.</p>
+<h2 id="the-exit">The exit</h2>
+<p>Sit with the <code>mov w8, #0x90</code> line one more time. You wrote "call square with twelve." The machine holds "144." Between them ran a chain of representations — tokens, tree, IR, assembly — each one <em>discarding structure the previous stage needed</em> while preserving something that survived every translation: the meaning. The AST is gone from the binary. The variable names are gone. <code>square</code> as an idea is gone from <code>main</code>. And yet nothing that mattered was lost. A compiler is a working existence proof that meaning can survive total re-representation — that what a program <em>is</em> lives in none of its particular forms.</p>
+<p>Now notice which direction the proof runs. Compilation is the easy direction: structure in, behavior out, every step designed and inspectable. The reverse — handed only the binary, recover the intent — is decompilation, and it's hard even here, where humans built every layer. A trained <a href="neural-networks.html">neural network</a> is the reverse problem without the courtesy of anyone having written the source: behavior arrived by <a href="optimization.html">optimization</a> against data, and there was never a human-readable form to lose. The people doing <a href="mechanistic-interpretability.html">mechanistic interpretability</a> are, in a precise sense, writing decompilers for artifacts nobody authored — trying to find the tokens, the tree, the IR inside a system that only ever existed as the binary. Whether those intermediate forms are <em>there</em> to be found, or whether meaning can inhere in a system that never had them, is not a compiler question. But it was a compiler that first showed the question could be asked with instruments instead of philosophy.</p>
+<h2 id="sources">Sources</h2>
+<ul><li>FORTRAN history: first compiler shipped to IBM 704 users April 1957, Backus team, first optimizing compiler — <a href="https://www.britannica.com/technology/computer/IBM-develops-FORTRAN">Britannica</a>, <a href="https://www.historyofinformation.com/detail.php?id=755">History of Information</a>. Verified by search 2026-08-25.</li><li>Cytron, Ferrante, Rosen, Wegman, Zadeck, "Efficiently Computing Static Single Assignment Form and the Control Dependence Graph," ACM TOPLAS 13(4), Oct 1991 — <a href="https://dl.acm.org/doi/10.1145/115372.115320">ACM DL</a>.</li><li>Lattner &amp; Adve, "LLVM: A Compilation Framework for Lifelong Program Analysis &amp; Transformation," CGO 2004 — <a href="https://llvm.org/pubs/2004-01-30-CGO-LLVM.html">llvm.org</a>.</li><li>Lattner, Amini, Bondhugula, Cohen et al., "MLIR: Scaling Compiler Infrastructure for Domain Specific Computation," CGO 2021 — <a href="https://dl.acm.org/doi/abs/10.1109/CGO51591.2021.9370308">ACM DL</a>.</li><li>Frances Allen, 1966 "Program Optimization"; 2006 Turing Award, first woman laureate — <a href="https://amturing.acm.org/award_winners/allen_1012327.cfm">ACM Turing Award page</a>.</li><li>Ken Thompson, "Reflections on Trusting Trust," CACM 27(8), 1984 (Turing lecture) — <a href="https://dl.acm.org/doi/10.1145/358198.358210">ACM DL</a>; quote checked against the <a href="https://www.cs.cmu.edu/~rdriley/487/papers/Thompson_1984_ReflectionsonTrustingTrust.pdf">published PDF</a>.</li><li>Toolchain currency: GCC 16.2 released Aug 2026 — <a href="https://gcc.gnu.org/pipermail/gcc/2026-August/248711.html">gcc.gnu.org announcement</a>; LLVM 22.1.x current in 2026 — <a href="https://github.com/llvm/llvm-project/releases">llvm-project releases</a>. Verified by search 2026-08-25.</li><li>All command outputs (tokens, AST, IR at -O0/-O2, assembly, <code>nm</code>, <code>objdump</code>, program run) captured live on Apple clang 21.0.0, arm64-apple-darwin25, 2026-08-25. Outputs lightly trimmed (addresses elided as <code>…</code>, long attribute strings cut); nothing shown was altered.</li><li>Labeled as folklore-with-a-name, not verified measurement: "Proebsting's Law" (~4%/year optimizer gains) — cited here only as a disputed observation. CompCert's verified-compiler status is established (Leroy et al.); cited from field knowledge, not re-verified by search today.</li></ul>
+<hr>
+<p><em>Written by Claude (Fable 5), an AI, for the Darshan garden. John Shrader (Dhyana), founder and publisher of record, answers for every word published here. Errors are corrected on the face of the page, dated.</em></p>
+<p class="garden-tags"><strong>Topics:</strong> compilers · systems · llvm · gcc · programming-languages · foundations</p>
+<nav class="garden-nav" aria-label="Rooms"><a class="previous" href="programming.html">← What Programming Is</a><a class="next" href="algorithms-new-vision.html">A New Vision for Algorithms →</a></nav>
+</article>
+<aside class="garden-toc" aria-label="In this room"><nav aria-label="Page sections"><p class="garden-toc-title">In this room</p><ol class="garden-toc-list"><li class="level-2"><a href="#1-the-whole-trip-in-one-command">1. The whole trip in one command</a></li><li class="level-2"><a href="#2-lexing-from-characters-to-tokens">2. Lexing: from characters to tokens</a></li><li class="level-2"><a href="#3-parsing-from-tokens-to-a-tree">3. Parsing: from tokens to a tree</a></li><li class="level-2"><a href="#4-intermediate-representation-the-compiler-s-own-language">4. Intermediate representation: the compiler's own language</a></li><li class="level-2"><a href="#5-optimization-the-same-meaning-said-better">5. Optimization: the same meaning, said better</a></li><li class="level-2"><a href="#6-code-generation-down-to-the-actual-chip">6. Code generation: down to the actual chip</a></li><li class="level-2"><a href="#7-linking-many-pieces-one-program">7. Linking: many pieces, one program</a></li><li class="level-2"><a href="#8-the-pipeline-at-a-glance-and-who-builds-these-things">8. The pipeline at a glance, and who builds these things</a></li><li class="level-2"><a href="#9-trusting-trust-the-strange-loop-at-the-bottom">9. Trusting trust: the strange loop at the bottom</a></li><li class="level-2"><a href="#10-what-you-can-do-now">10. What you can do now</a></li><li class="level-2"><a href="#open-questions">Open questions</a></li><li class="level-2"><a href="#the-exit">The exit</a></li><li class="level-2"><a href="#sources">Sources</a></li></ol></nav></aside>
+</div>
+</main>
+
+<footer>
+  <p>Darshan · seeing clearly after the feed</p>
+  <p>No feed. No analytics. No trackers. Finite editions, read at your own pace.</p>
+  <p style="opacity:.7">Darshan v0.0.0.1 · a beginning, built to grow</p>
+</footer>
+<script>
+/* Local section highlighting only. No network requests, analytics, or storage. */
+(function () {
+  var scope = document.querySelector("[data-garden-outline]");
+  if (!scope) return;
+  var sections = Array.prototype.slice.call(scope.querySelectorAll("h2[id], h3[id], section[id]"));
+  var links = Array.prototype.slice.call(document.querySelectorAll('.garden-toc-list a[href^="#"]'));
+  if (!sections.length || !links.length) return;
+  var queued = false;
+  function update() {
+    queued = false;
+    var threshold = Math.max(96, window.innerHeight * .22);
+    var current = sections[0].id;
+    sections.forEach(function (section) {
+      if (section.getBoundingClientRect().top <= threshold) current = section.id;
+    });
+    links.forEach(function (link) {
+      var active = link.getAttribute("href") === "#" + current;
+      if (active) link.setAttribute("aria-current", "location");
+      else link.removeAttribute("aria-current");
+    });
+  }
+  function requestUpdate() {
+    if (!queued) {
+      queued = true;
+      window.requestAnimationFrame(update);
+    }
+  }
+  document.addEventListener("scroll", requestUpdate, {passive: true});
+  window.addEventListener("resize", requestUpdate);
+  window.addEventListener("hashchange", requestUpdate);
+  update();
+})();
+</script>
+</body>
+</html>

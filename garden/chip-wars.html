@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>"The Chip Wars: TSMC, ASML, Japan, and the Competing Field" · Darshan Garden</title>
+<meta name="description" content="Who can actually manufacture the most advanced chips in 2026, and why the answer is three companies, one machine, and a handful of buildings. A verified map of the leading edge — TSMC, ASML, Intel, Samsung, Japan&#x27;s Rapidus bet, and the export-control war with China — with every market claim dated.">
+<link rel="stylesheet" href="../style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ccircle cx='8' cy='8' r='6' fill='none' stroke='%238f3b26' stroke-width='1.5'/%3E%3Ccircle cx='8' cy='8' r='2' fill='%238f3b26'/%3E%3C/svg%3E">
+<script>
+/* Theme memory. No analytics, no trackers. */
+(function () {
+  try {
+    var t = localStorage.getItem("darshan-theme");
+    if (t) document.documentElement.setAttribute("data-theme", t);
+  } catch (e) {}
+})();
+</script>
+<style>
+/* Garden-only layout. Kept here so the publication stylesheet remains shared. */
+body.garden-page-body {
+  max-width: none;
+  padding: 1.5rem clamp(1.25rem, 3.5vw, 4rem) 4rem;
+  font-size: 1.125rem;
+}
+body.garden-page-body > main,
+body.garden-page-body > .masthead,
+body.garden-page-body > footer {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 94rem;
+}
+.garden-layout,
+.garden-index-layout {
+  align-items: start;
+  display: grid;
+  gap: clamp(2.75rem, 5vw, 5rem);
+  grid-template-columns: minmax(0, 64rem) minmax(17rem, 20rem);
+  justify-content: center;
+}
+.garden-layout article,
+.garden-index-main { min-width: 0; }
+.garden-layout .article-title,
+.garden-intro .article-title {
+  font-size: clamp(2.65rem, 3.55vw, 4rem);
+  letter-spacing: -.025em;
+  line-height: 1.06;
+  max-width: 24ch;
+}
+.garden-layout article h2 {
+  font-size: 1.48rem;
+  line-height: 1.3;
+  margin-top: 3.2rem;
+  scroll-margin-top: 1.5rem;
+}
+.garden-layout article h3 {
+  font-size: 1.16rem;
+  margin-top: 2.35rem;
+  scroll-margin-top: 1.5rem;
+}
+.garden-intro { margin-bottom: 2.4rem; }
+.garden-series { margin: 2.8rem 0; scroll-margin-top: 1rem; }
+.garden-series h2 { border-bottom: 1px solid var(--rule); padding-bottom: .45rem; }
+.garden-room-list { list-style: none; margin: 0; padding: 0; }
+.garden-room-list li { border-bottom: 1px solid var(--rule); margin: 0; padding: 1rem 0; }
+.garden-room-title { font-weight: 600; }
+.garden-room-summary { color: var(--faint); font-size: .96rem; margin: .25rem 0 0; }
+.garden-series-link { color: var(--faint); font-size: .82rem; letter-spacing: .12em;
+  text-transform: uppercase; }
+.garden-lede {
+  border-left: 3px solid var(--accent);
+  color: var(--faint);
+  font-size: 1.24rem;
+  font-style: italic;
+  line-height: 1.62;
+  margin: 1.5rem 0 2.2rem;
+  padding: .35rem 0 .35rem 1.35rem;
+}
+.garden-corridors {
+  margin: 1.15rem 0 2.65rem;
+}
+.garden-corridor-list {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: .55rem .62rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.garden-corridor-list li { display: flex; margin: 0; max-width: 100%; }
+.garden-corridor {
+  align-items: center;
+  background: var(--accent-soft);
+  border: 1px solid var(--accent);
+  border-radius: 3px;
+  color: var(--accent);
+  display: inline-flex;
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .73rem;
+  font-weight: 700;
+  letter-spacing: .075em;
+  line-height: 1.35;
+  max-width: 100%;
+  min-height: 2.05rem;
+  overflow-wrap: anywhere;
+  padding: .34rem .72rem .3rem;
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-transform: uppercase;
+  text-underline-offset: .22em;
+}
+.garden-corridor:visited { color: var(--accent); }
+.garden-corridor:hover,
+.garden-corridor:focus-visible {
+  background: var(--accent);
+  color: var(--paper);
+}
+.garden-corridor:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+.garden-series-plate {
+  --plate-accent: var(--accent);
+  border: 1px solid var(--rule);
+  border-top: 3px solid var(--plate-accent);
+  margin: .25rem 0 2.8rem;
+  overflow: hidden;
+  position: relative;
+}
+.garden-series-plate--foundations { --plate-accent: #496f76; }
+.garden-series-plate--story-of-ai { --plate-accent: #526d9a; }
+.garden-series-plate--instrument { --plate-accent: #745779; }
+.garden-series-plate--strange-loops { --plate-accent: #866448; }
+.garden-series-plate--bridge { --plate-accent: #697044; }
+.garden-series-plate--power { --plate-accent: #8f3b26; }
+.garden-series-plate--time-future { --plate-accent: #416778; }
+[data-theme="dark"] .garden-series-plate { --plate-accent: var(--accent); }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .garden-series-plate { --plate-accent: var(--accent); }
+}
+.garden-series-plate-media {
+  aspect-ratio: 16 / 9;
+  background: var(--accent-soft);
+  overflow: hidden;
+  position: relative;
+}
+.garden-series-plate-media::after {
+  background:
+    linear-gradient(90deg, var(--paper) 0, transparent 24%, transparent 76%, var(--paper) 100%),
+    linear-gradient(0deg, var(--paper) 0, transparent 32%);
+  content: "";
+  inset: 0;
+  opacity: .24;
+  pointer-events: none;
+  position: absolute;
+}
+.garden-series-plate picture,
+.garden-series-card picture { display: block; height: 100%; }
+.garden-series-plate img {
+  display: block;
+  filter: saturate(.82) contrast(1.03);
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+.garden-series-plate figcaption {
+  align-items: baseline;
+  background: var(--paper);
+  border-top: 1px solid var(--rule);
+  display: grid;
+  gap: .25rem 1rem;
+  grid-template-columns: auto 1fr;
+  padding: .78rem 1rem .85rem;
+}
+.garden-series-plate-kicker {
+  color: var(--plate-accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+.garden-series-plate figcaption strong { font-size: 1rem; font-weight: 600; }
+.garden-series-plate-terms {
+  color: var(--faint);
+  font-size: .82rem;
+  grid-column: 2;
+  margin: 0;
+}
+.garden-visual {
+  background:
+    radial-gradient(circle at 92% 8%, var(--accent-soft), transparent 30%),
+    linear-gradient(135deg, transparent 0 72%, var(--accent-soft) 72% 72.4%, transparent 72.4%);
+  border: 1px solid var(--rule);
+  border-top: 3px solid var(--accent);
+  margin: 1.25rem 0 2.5rem;
+  overflow: hidden;
+  padding: clamp(1.1rem, 2.7vw, 1.75rem);
+  position: relative;
+}
+.garden-visual::before {
+  background-image:
+    linear-gradient(var(--rule) 1px, transparent 1px),
+    linear-gradient(90deg, var(--rule) 1px, transparent 1px);
+  background-size: 2.25rem 2.25rem;
+  content: "";
+  inset: 0;
+  opacity: .13;
+  pointer-events: none;
+  position: absolute;
+}
+.garden-visual > * { position: relative; }
+.garden-visual-head {
+  align-items: baseline;
+  display: grid;
+  gap: .45rem 1rem;
+  grid-template-columns: auto 1fr;
+  margin-bottom: 1.2rem;
+}
+.garden-visual-kicker {
+  color: var(--accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .68rem;
+  font-weight: 700;
+  letter-spacing: .17em;
+  margin: 0;
+  text-transform: uppercase;
+}
+.garden-visual-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  line-height: 1.28;
+  margin: 0;
+}
+.garden-visual-as-of {
+  color: var(--faint);
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: .72rem;
+  letter-spacing: .08em;
+  margin: 0;
+  text-transform: uppercase;
+  white-space: normal;
+}
+.garden-visual-items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.garden-visual-item {
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  margin: 0;
+  min-width: 0;
+  padding: .8rem .9rem;
+}
+.garden-visual-item-label {
+  display: block;
+  font-size: .96rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+.garden-visual-item-detail {
+  color: var(--faint);
+  display: block;
+  font-size: .9rem;
+  line-height: 1.45;
+  margin-top: .27rem;
+}
+.garden-visual-item-meta {
+  color: var(--accent);
+  display: block;
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: .72rem;
+  letter-spacing: .08em;
+  margin-bottom: .38rem;
+  text-transform: uppercase;
+}
+.garden-visual-caption {
+  border-top: 1px solid var(--rule);
+  color: var(--faint);
+  display: grid;
+  font-size: .84rem;
+  font-style: italic;
+  gap: .55rem 1rem;
+  grid-template-columns: minmax(0, 1fr) auto;
+  line-height: 1.45;
+  margin: 1.15rem 0 0;
+  padding-top: .75rem;
+}
+.garden-visual-evidence {
+  color: var(--accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .72rem;
+  font-style: normal;
+  font-weight: 650;
+  letter-spacing: .04em;
+  white-space: nowrap;
+}
+.garden-visual-evidence a {
+  color: inherit;
+  text-decoration-thickness: 1px;
+  text-underline-offset: .18em;
+}
+.garden-visual--sequence .garden-visual-items,
+.garden-visual--contrast .garden-visual-items,
+.garden-visual--constellation .garden-visual-items {
+  display: grid;
+  gap: .65rem;
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+}
+.garden-visual--sequence .garden-visual-items { counter-reset: garden-step; }
+.garden-visual--sequence .garden-visual-item {
+  counter-increment: garden-step;
+  padding-top: 2.35rem;
+  position: relative;
+}
+.garden-visual--sequence .garden-visual-item::before {
+  color: var(--accent);
+  content: counter(garden-step, decimal-leading-zero);
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: .68rem;
+  left: .9rem;
+  letter-spacing: .08em;
+  position: absolute;
+  top: .72rem;
+}
+.garden-visual--layers .garden-visual-items { display: grid; gap: .45rem; }
+.garden-visual--layers .garden-visual-item {
+  border-left: clamp(.24rem, .55vw, .48rem) solid var(--accent);
+  display: grid;
+  gap: .15rem 1rem;
+  grid-template-columns: minmax(8rem, .4fr) 1fr;
+}
+.garden-visual--layers .garden-visual-item:nth-child(2) { margin-left: 1.5%; }
+.garden-visual--layers .garden-visual-item:nth-child(3) { margin-left: 3%; }
+.garden-visual--layers .garden-visual-item:nth-child(4) { margin-left: 4.5%; }
+.garden-visual--layers .garden-visual-item:nth-child(5) { margin-left: 6%; }
+.garden-visual--layers .garden-visual-item:nth-child(6) { margin-left: 7.5%; }
+.garden-visual--timeline .garden-visual-items {
+  display: grid;
+  gap: 0;
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+}
+.garden-visual--timeline .garden-visual-item {
+  border-width: 1px 0 0 1px;
+  padding-top: 1.35rem;
+  position: relative;
+}
+.garden-visual--timeline .garden-visual-item::before {
+  background: var(--accent);
+  border: 3px solid var(--paper);
+  border-radius: 50%;
+  content: "";
+  height: .72rem;
+  left: -.4rem;
+  position: absolute;
+  top: -.4rem;
+  width: .72rem;
+}
+.garden-visual--contrast .garden-visual-item:nth-child(odd) { border-top: 2px solid var(--ink); }
+.garden-visual--contrast .garden-visual-item:nth-child(even) { border-top: 2px solid var(--accent); }
+.garden-visual--constellation .garden-visual-items {
+  align-items: stretch;
+  position: relative;
+}
+.garden-visual--constellation .garden-visual-item {
+  border-top: 2px solid var(--accent);
+  box-shadow: 0 .2rem 0 rgba(18, 31, 31, .04);
+  padding-top: 1.35rem;
+  position: relative;
+}
+.garden-visual--constellation .garden-visual-item::before {
+  background: var(--paper);
+  border: 2px solid var(--accent);
+  border-radius: 50%;
+  content: "";
+  height: .55rem;
+  left: calc(50% - .36rem);
+  position: absolute;
+  top: -.38rem;
+  width: .55rem;
+}
+.garden-visual--constellation .garden-visual-item:nth-child(even) { margin-top: .8rem; }
+.garden-series-gallery {
+  display: grid;
+  gap: .8rem;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  margin: 1.5rem 0 3rem;
+}
+.garden-series-card {
+  border: 1px solid var(--rule);
+  color: var(--ink);
+  display: grid;
+  grid-template-rows: 7.5rem auto;
+  overflow: hidden;
+  text-decoration: none;
+}
+.garden-series-card img {
+  height: 100%;
+  object-fit: cover;
+  transition: transform .25s ease;
+  width: 100%;
+}
+.garden-series-card span {
+  border-top: 1px solid var(--rule);
+  font-size: .9rem;
+  font-weight: 600;
+  padding: .65rem .75rem;
+}
+.garden-series-card:hover { border-color: var(--accent); color: var(--accent); }
+.garden-series-card:hover img { transform: scale(1.025); }
+@media (prefers-reduced-motion: reduce) {
+  .garden-series-card img { transition: none; }
+}
+.garden-tags { color: var(--faint); font-size: .82rem; margin-top: 2.2rem; }
+.garden-nav { border-top: 1px solid var(--rule); display: flex; gap: 1rem;
+  justify-content: space-between; margin-top: 2.5rem; padding-top: 1rem; }
+.garden-nav a { max-width: 48%; text-decoration: none; }
+.garden-nav .next { margin-left: auto; text-align: right; }
+.garden-table-wrap { overflow-x: auto; margin: 1.35rem 0; }
+.garden-table { border-collapse: collapse; font-size: .92rem; line-height: 1.45; width: 100%; }
+.garden-table th, .garden-table td { border: 1px solid var(--rule); padding: .55rem .65rem;
+  text-align: left; vertical-align: top; }
+.garden-table th { background: var(--accent-soft); }
+.garden-toc {
+  border-left: 1px solid var(--rule);
+  max-height: calc(100vh - 3rem);
+  overflow: auto;
+  padding: .1rem 0 .75rem 1.3rem;
+  position: sticky;
+  top: 1.5rem;
+}
+.garden-toc-title {
+  color: var(--accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .2em;
+  margin: 0 0 1.15rem;
+  text-transform: uppercase;
+}
+.garden-toc-title::before { content: "☰"; font-size: .8em; margin-right: .65rem; }
+.garden-toc-list { list-style: none; margin: 0; padding: 0; }
+.garden-toc-sublist { list-style: none; margin: 0; padding: 0; }
+.garden-toc-list li { margin: 0; }
+.garden-toc-list a {
+  border-left: 2px solid transparent;
+  color: var(--ink);
+  display: block;
+  font-size: .91rem;
+  line-height: 1.42;
+  margin-left: -1.4rem;
+  padding: .42rem .45rem .42rem 1.3rem;
+  text-decoration: none;
+}
+.garden-toc-list .level-3 a {
+  color: var(--faint);
+  font-size: .86rem;
+  font-style: italic;
+  padding-left: 2.15rem;
+}
+.garden-toc-list a:hover,
+.garden-toc-list a:focus-visible,
+.garden-toc-list a[aria-current="location"] {
+  border-left-color: var(--accent);
+  color: var(--accent);
+}
+.garden-toc-list a[aria-current="location"] { font-weight: 600; }
+.garden-toc-inline { display: none; }
+.garden-layout article :is(h2, h3):target,
+.garden-series:target h2 { color: var(--accent); }
+a.pending { color: var(--faint); text-decoration-style: dashed; }
+a.pending::after { content: " · pending"; font-size: .7em; letter-spacing: .06em;
+  text-transform: uppercase; }
+@media (min-width: 72.01em) {
+  body.garden-page-body > .masthead {
+    align-items: center;
+    column-gap: 2rem;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    margin-bottom: 3.5rem;
+    padding: 1.25rem 0;
+    text-align: left;
+  }
+  body.garden-page-body > .masthead .wordmark { justify-self: start; }
+  body.garden-page-body > .masthead .tagline { justify-self: center; margin: 0; }
+  body.garden-page-body > .masthead nav { justify-self: end; margin: 0; }
+}
+@media (max-width: 72em) {
+  .garden-layout,
+  .garden-index-layout { display: block; }
+  .garden-toc { display: none; }
+  .garden-toc-inline {
+    border: 1px solid var(--rule);
+    display: block;
+    margin: 1.5rem 0 2.4rem;
+    padding: .8rem 1rem;
+  }
+  .garden-toc-inline summary {
+    color: var(--accent);
+    cursor: pointer;
+    font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: .78rem;
+    font-weight: 700;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+  }
+  .garden-toc-inline .garden-toc-list { margin-top: .7rem; }
+  .garden-toc-inline .garden-toc-list a { margin-left: 0; padding-left: .75rem; }
+  .garden-toc-inline .garden-toc-list .level-3 a { padding-left: 1.6rem; }
+}
+@media (max-width: 40em) {
+  body.garden-page-body { font-size: 1.03rem; padding: 1rem 1.05rem 3rem; }
+  .garden-layout .article-title,
+  .garden-intro .article-title { font-size: clamp(2.15rem, 11vw, 3.15rem); }
+  .garden-lede { font-size: 1.1rem; padding-left: 1rem; }
+  .garden-corridors { margin-bottom: 2rem; }
+  .garden-corridor-list { gap: .45rem; }
+  .garden-corridor {
+    font-size: .68rem;
+    min-height: 2.35rem;
+    padding: .3rem .58rem .27rem;
+  }
+  .garden-series-plate-media { aspect-ratio: 16 / 9; }
+  .garden-series-plate figcaption { display: block; }
+  .garden-series-plate figcaption strong { display: block; margin-top: .22rem; }
+  .garden-series-plate-terms { display: block; margin-top: .25rem; }
+  .garden-visual { margin-left: -.15rem; margin-right: -.15rem; padding: 1rem; }
+  .garden-visual-head { display: block; }
+  .garden-visual-title { margin-top: .25rem; }
+  .garden-visual-as-of { margin-top: .35rem; }
+  .garden-visual-caption { grid-template-columns: 1fr; }
+  .garden-visual-evidence { white-space: normal; }
+  .garden-visual--sequence .garden-visual-items,
+  .garden-visual--contrast .garden-visual-items,
+  .garden-visual--constellation .garden-visual-items,
+  .garden-visual--timeline .garden-visual-items { grid-template-columns: 1fr; }
+  .garden-visual--layers .garden-visual-item:nth-child(n) { display: block; margin-left: 0; }
+  .garden-visual--timeline .garden-visual-item { border-width: 0 0 0 1px; }
+  .garden-visual--timeline .garden-visual-item::before { left: -.4rem; top: .9rem; }
+  .garden-visual--constellation .garden-visual-item:nth-child(even) { margin-top: 0; }
+  .garden-series-gallery { grid-template-columns: 1fr; }
+  .garden-nav { flex-direction: column; }
+  .garden-nav a { max-width: none; }
+  .garden-nav .next { margin-left: 0; text-align: left; }
+}
+@media print {
+  a.pending::after { content: " (pending)"; }
+  .garden-layout, .garden-index-layout { display: block; }
+  .garden-toc, .garden-toc-inline { display: none; }
+  .garden-series-card img { display: none; }
+  .garden-series-card { grid-template-rows: auto; }
+}
+</style>
+</head>
+<body class="garden-page-body">
+<button class="theme-toggle" aria-label="Toggle light and dark" onclick="
+  (function () {
+    var d = document.documentElement;
+    var cur = d.getAttribute('data-theme');
+    if (!cur) { cur = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'; }
+    var next = cur === 'dark' ? 'light' : 'dark';
+    d.setAttribute('data-theme', next);
+    try { localStorage.setItem('darshan-theme', next); } catch (e) {}
+  })();
+">◐</button>
+
+<header class="masthead">
+  <h1 class="wordmark"><a href="../index.html">DARSHAN</a></h1>
+  <p class="tagline">A signal of clear seeing in an age of information overload</p>
+  <nav>
+    <a href="../index.html">Articles</a>
+    <a href="index.html">Garden</a>
+    <a href="../about.html">About</a>
+  </nav>
+</header>
+
+<main>
+<div class="garden-layout">
+<article data-garden-room="chip-wars" data-garden-outline>
+<p class="garden-series-link"><a href="index.html#foundations">Foundations of the Machine</a></p>
+<p class="article-meta">25 August 2026 · Draft</p>
+<h1 class="article-title">"The Chip Wars: TSMC, ASML, Japan, and the Competing Field"</h1>
+<div class="draft-banner"><strong>Draft — pending discernment pass.</strong> This room is part of the garden's first planting. It has not been promoted to published status; check its sources and open questions before citing it.</div>
+<p class="garden-lede">Who can actually manufacture the most advanced chips in 2026, and why the answer is three companies, one machine, and a handful of buildings. A verified map of the leading edge — TSMC, ASML, Intel, Samsung, Japan's Rapidus bet, and the export-control war with China — with every market claim dated.</p>
+<nav class="garden-corridors" aria-label="Explore connected rooms" data-corridor-count="8"><ul class="garden-corridor-list"><li><a class="garden-corridor" href="semiconductors.html">Semiconductors</a></li><li><a class="garden-corridor" href="nvidia-and-the-chip.html">NVIDIA and the Future of the Computer Chip</a></li><li><a class="garden-corridor" href="taiwan.html">Taiwan: The Island at the Center of the Machine</a></li><li><a class="garden-corridor" href="china-usa-race.html">The Race Between China and the USA</a></li><li><a class="garden-corridor" href="governments-and-ai.html">Why Governments Want a Hold on AI</a></li><li><a class="garden-corridor" href="future-of-ai.html">The Future of AI</a></li><li><a class="garden-corridor" href="attention-economy.html">The Attention Economy</a></li><li><a class="garden-corridor" href="neural-networks.html">Neural Networks</a></li></ul></nav>
+<figure class="garden-series-plate garden-series-plate--foundations">
+<div class="garden-series-plate-media"><picture><source srcset="assets/series/foundations.webp" type="image/webp"><img src="assets/series/foundations.png" alt="An engraved transistor lattice rising through computational layers into a neural graph" width="1672" height="941" loading="eager" decoding="async"></picture></div>
+<figcaption><span class="garden-series-plate-kicker">Visual field</span><strong>Foundations of the Machine</strong><span class="garden-series-plate-terms">foundry · process-node · euv-lithography · leading-edge</span></figcaption>
+</figure>
+<details class="garden-toc-inline"><summary>In this room</summary><ol class="garden-toc-list"><li class="level-2"><a href="#1-the-map-before-the-details">1. The map, before the details</a></li><li class="level-2"><a href="#2-tsmc-what-winning-looks-like">2. TSMC: what winning looks like</a></li><li class="level-2"><a href="#3-asml-the-machine-that-is-the-bottleneck">3. ASML: the machine that is the bottleneck</a></li><li class="level-2"><a href="#4-japan-the-country-that-lost-the-last-chip-war-and-is-buying-back-in">4. Japan: the country that lost the last chip war and is buying back in</a></li><li class="level-2"><a href="#5-the-export-control-war-what-the-us-is-trying-and-what-china-does-about-it">5. The export-control war: what the US is trying, and what China does about it</a></li><li class="level-2"><a href="#6-the-scoreboard">6. The scoreboard</a></li><li class="level-2"><a href="#7-worked-example-how-to-read-a-node-name-and-check-it-yourself">7. Worked example: how to read a node name — and check it yourself</a></li><li class="level-2"><a href="#8-what-you-can-now-see">8. What you can now see</a></li><li class="level-2"><a href="#9-open-questions">9. Open questions</a></li><li class="level-2"><a href="#sources">Sources</a></li></ol></details>
+<p>If you've read <a href="semiconductors.html">semiconductors</a>, you know what a transistor is and how billions of them end up on a fingernail of silicon. If you've read <a href="nvidia-and-the-chip.html">nvidia-and-the-chip</a>, you know who designs the chips that train AI models. This room is about the layer under both: who can physically <em>make</em> those chips, with what machines, in which countries — and why governments now treat that question as a matter of national survival. Everything here is stated as of August 2026, and dated, because this field moves fast enough that undated claims rot within a year.</p>
+<h2 id="1-the-map-before-the-details">1. The map, before the details</h2>
+<figure class="garden-visual garden-visual--constellation" aria-labelledby="visual-chip-wars-1" data-claim-scope="section-synthesis" data-placement-heading="1-the-map-before-the-details" data-evidence-headings="1-the-map-before-the-details">
+<div class="garden-visual-head"><p class="garden-visual-kicker">The small board</p><p class="garden-visual-title" id="visual-chip-wars-1">Three leading-edge manufacturers, one indispensable toolmaker</p><p class="garden-visual-as-of">As of 25 August 2026</p></div>
+<ul class="garden-visual-items" role="list"><li class="garden-visual-item"><strong class="garden-visual-item-label">TSMC</strong><span class="garden-visual-item-detail">Taiwan's foundry entered volume production of its N2 generation in late 2025.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Samsung</strong><span class="garden-visual-item-detail">South Korea's manufacturer is the second gate-all-around 2nm contender.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Intel</strong><span class="garden-visual-item-detail">Arizona's Fab 52 brought the 18A generation into mass production.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">ASML</strong><span class="garden-visual-item-detail">The Dutch company alone supplies production-scale EUV tools used at the frontier.</span></li></ul>
+<figcaption class="garden-visual-caption"><span>The leading edge is concentrated in four firms and a handful of places.</span><span class="garden-visual-evidence">Drawn from: <a href="#1-the-map-before-the-details">1. The map, before the details</a></span></figcaption>
+</figure>
+<p>Start with the brutal summary, because everything else in this room is an explanation of it.</p>
+<p>As of 2026, exactly <strong>three companies</strong> in the world can mass-produce logic chips at the leading edge — the newest, densest generation of manufacturing, currently the "2-nanometer class":</p>
+<ul><li><strong>TSMC</strong> (Taiwan Semiconductor Manufacturing Company), in Taiwan. It began volume production of its 2nm-class "N2" process in the fourth quarter of 2025 and held roughly <strong>72–73% of the entire global foundry market in Q1 2026</strong> (TrendForce says 72.3%, Counterpoint 73% — different methodologies, same picture).</li><li><strong>Samsung</strong>, in South Korea. Its 2nm process reportedly climbed from ~20% yield in late 2025 to over 60% at its peak in Q1 2026 — the rough threshold its own analysts treat as commercially viable.</li><li><strong>Intel</strong>, in the United States. Its 18A process (2nm-class) entered mass production at Fab 52 in Chandler, Arizona, with the first "Panther Lake" laptop chips shipping around January 2026.</li></ul>
+<p>And exactly <strong>one company</strong> builds the machine all three depend on: <strong>ASML</strong>, in Veldhoven, the Netherlands — the sole maker of extreme ultraviolet lithography systems, without which no 2nm-class chip gets printed at commercial scale.</p>
+<p>That is the whole geometry of the chip wars. A technology the entire world's economy runs on, funneled through three manufacturers and one toolmaker, concentrated in Taiwan, Korea, Arizona, and one Dutch town. Every export control, every subsidy program, and every fab groundbreaking you read about is a move on this small board.</p>
+<p>Two terms before we go deeper. A <strong>foundry</strong> is a factory business that manufactures chips designed by other companies — TSMC makes Apple's and Nvidia's chips but designs none of its own products; that split between design and manufacturing is the industry's defining structure. A <strong>process node</strong> (like "2nm," "N2," "18A") is a named generation of manufacturing technology. The number long ago stopped measuring any physical feature on the chip — it is a marketing label for a density-and-performance generation, which is why the worked example below teaches you to read node names skeptically.</p>
+<h2 id="2-tsmc-what-winning-looks-like">2. TSMC: what winning looks like</h2>
+<p>The numbers first, because they're the argument.</p>
+<p>TSMC's N2 process — its first using <strong>gate-all-around (GAA)</strong> transistors, where the gate wraps entirely around the current channel for better control at tiny sizes — entered high-volume manufacturing in Q4 2025 at Fab 20 (Baoshan) and Fab 22 (Kaohsiung), both in Taiwan. Reported early yields were around 70%, which for a brand-new node is remarkable. All 2026 N2 capacity at those fabs was booked before the year began, with Apple reportedly taking more than half of it; the customer list of about 15 includes Qualcomm, MediaTek, AMD, and Nvidia. In the second half of 2026, TSMC plans N2P (an enhanced N2) and A16, which adds backside power delivery — routing power through the wafer's back so signal wiring on the front gets more room — aimed squarely at AI and high-performance computing.</p>
+<p>Now the geographic story, because that's where the geopolitics lives:</p>
+<ul><li><strong>Arizona.</strong> TSMC's first Arizona fab has been in volume production on N4 (4nm-class) since Q4 2024. The second fab, for 3nm, begins equipment installation in Q3 2026 with production targeted for 2027 — ahead of the original schedule. In July 2026, TSMC announced another $100 billion for four additional fabs at 2nm or beyond, bringing its total announced Arizona investment to <strong>$265 billion</strong>.</li><li><strong>Japan.</strong> TSMC's Kumamoto joint venture JASM (with Sony, Denso, and Toyota as minority shareholders) opened its first fab in 2024, making mature-node chips for image sensors and cars. The second Kumamoto fab was upgraded in 2026 from a mature-node plan to a <strong>3nm</strong> plan — 15,000 wafers a month, equipment installation and production targeted around 2028, with some reports suggesting slippage to 2029. When a magnitude-7.1 earthquake hit Kumamoto in July 2026, TSMC confirmed JASM was safe — and the fact that a Japanese earthquake was global chip news tells you how load-bearing these buildings have become.</li></ul>
+<p>Notice what the Arizona expansion does <em>not</em> change: through at least 2027, every leading-edge TSMC wafer is made in Taiwan. The overseas fabs trail the domestic ones by one to two nodes by design. Taiwan's government and TSMC both understand that the leading edge staying home is <a href="taiwan.html">Taiwan</a>'s security argument — the so-called silicon shield. Whether that shield deters or attracts conflict is one of the genuinely contested questions of the decade, and it gets its own room.</p>
+<h2 id="3-asml-the-machine-that-is-the-bottleneck">3. ASML: the machine that is the bottleneck</h2>
+<p>EUV is central to many later leading-edge processes, but 7nm is not a universal boundary. TSMC's original N7 entered volume production in 2018 using <strong>deep-ultraviolet (DUV) multi-patterning</strong>; N7+ in 2019 was its first commercially available process to use <strong>EUV lithography</strong>. SMIC's 7nm-class production makes the same point from the other side of the embargo. EUV prints circuit patterns with 13.5-nanometer light, so close to X-rays that no lens can focus it; the machines use cascaded mirrors polished to atomic-level smoothness and generate the light by hitting molten-tin droplets with a laser tens of thousands of times per second inside a vacuum. ASML is the only company that has made EUV work at production scale. Its nearest lithography competitors, Nikon and Canon of Japan, sell DUV machines and have never shipped an EUV tool.</p>
+<p>The current frontier is <strong>High-NA EUV</strong> — a larger-aperture optic that focuses the same light more sharply, for the "angstrom era" nodes beyond 2nm. Verified status as of mid-2026:</p>
+<ul><li>Intel completed acceptance testing of ASML's second-generation High-NA machine, the TWINSCAN EXE:5200B, in late 2025. The tool runs about 175 wafers per hour with 0.7nm overlay accuracy and costs roughly <strong>$350–400 million per machine</strong>. Fewer than a dozen High-NA units exist worldwide.</li><li>In February 2026, ASML reported its High-NA tools had processed over 500,000 wafers at roughly 80% uptime — the benchmark that moved High-NA from research toy to production platform.</li><li>In July 2026, Intel shipped its first logic chip made with High-NA EUV, aimed at its 14A node in 2027. Samsung and SK hynix took their first High-NA machines in late 2025; the research consortium imec targets qualification of an EXE:5200 for sub-2nm work in Q4 2026.</li></ul>
+<p>Sit with the concentration for a second. The machines that make the machines that make AI possible come from one company, whose critical optics come from one supplier (Zeiss, in Germany), whose light sources come from a subsidiary in San Diego. This is why ASML's export licenses are decided in Washington as much as in The Hague — which brings us to the war part.</p>
+<h2 id="4-japan-the-country-that-lost-the-last-chip-war-and-is-buying-back-in">4. Japan: the country that lost the last chip war and is buying back in</h2>
+<p>In 1988, Japan made roughly half the world's semiconductors. NEC, Toshiba, and Hitachi dominated memory chips so thoroughly that the US forced the 1986 US–Japan Semiconductor Agreement to cap them. Then Japan lost the logic race, lost memory to Korea, and by the 2020s held around 10% of world production, with no domestic fab anywhere near the leading edge.</p>
+<p>But Japan never lost the <em>materials and equipment</em> layer, and this is the underappreciated half of the chip wars. Shin-Etsu and SUMCO together supply the majority of the world's silicon wafers. Japanese firms (JSR, Tokyo Ohka, Shin-Etsu) make most of the world's advanced photoresists — the light-sensitive chemicals EUV patterns are printed into. Tokyo Electron dominates the coater-developer machines that apply them. When Japan restricted three chemical exports to South Korea in a 2019 political dispute, Samsung's supply chain shuddered within weeks. Japan can't print a leading-edge chip, but nobody else can print one without Japan.</p>
+<p><strong>Rapidus</strong> is Japan's attempt to buy back the part it lost. The verified shape of the bet, as of August 2026:</p>
+<ul><li>Founded in <strong>November 2022</strong> by eight Japanese companies — Toyota, Sony, NTT, NEC, SoftBank, Denso, Kioxia, and MUFG Bank — with a famously tiny initial private stake (about ¥7.3 billion, under $60 million). The real money is public: Japanese government support has reached <strong>¥2.354 trillion</strong> (roughly $16 billion), including an additional ¥631.5 billion approved for fiscal 2026.</li><li>The plan skips four generations. Japan's most advanced domestic logic was around 40nm; Rapidus is going straight to <strong>2nm gate-all-around</strong>, using a process developed with IBM Research in New York — IBM demonstrated the first 2nm GAA test chips in 2021 and is Rapidus's core technology partner.</li><li>In December 2024, Rapidus installed <strong>Japan's first production EUV machine</strong> (an ASML NXE:3800E) at its IIM-1 fab in Chitose, Hokkaido. The pilot line started in April 2025. By 2026, Rapidus reported prototype 2nm transistors hitting their planned electrical characteristics, and NEDO (the state R&amp;D agency) approved its FY2026 plan, including a chiplet packaging pilot line.</li><li>Target: mass production in the <strong>second half of fiscal 2027</strong>.</li></ul>
+<p>Is it working? Honestly: the pilot-line milestones are real and independently reported, and hitting planned device characteristics on a first-of-its-kind line is genuine progress. But a pilot line is not a business. Rapidus has no announced anchor customer remotely comparable to Apple-at-TSMC or Tesla-at-Samsung, and it must reach in five years a yield-learning curve TSMC climbed over decades with the world's largest customer base feeding it. The gap between "we can make working 2nm transistors" and "a customer bets a product line on our yields" is where most national champion fabs have historically died. That's the hypothesis Rapidus exists to test, with $16 billion of public money as the stake.</p>
+<h2 id="5-the-export-control-war-what-the-us-is-trying-and-what-china-does-about-it">5. The export-control war: what the US is trying, and what China does about it</h2>
+<figure class="garden-visual garden-visual--timeline" aria-labelledby="visual-chip-wars-2" data-claim-scope="section-synthesis" data-placement-heading="5-the-export-control-war-what-the-us-is-trying-and-what-china-does-about-it" data-evidence-headings="5-the-export-control-war-what-the-us-is-trying-and-what-china-does-about-it">
+<div class="garden-visual-head"><p class="garden-visual-kicker">Control and response</p><p class="garden-visual-title" id="visual-chip-wars-2">An embargo acts as a brake, a leak, and a subsidy</p><p class="garden-visual-as-of">As of 25 August 2026</p></div>
+<ol class="garden-visual-items" role="list"><li class="garden-visual-item"><span class="garden-visual-item-meta">Since 2019</span><strong class="garden-visual-item-label">EUV blocked</strong><span class="garden-visual-item-detail">Dutch licensing under US pressure keeps EUV systems out of China.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">2022–2024</span><strong class="garden-visual-item-label">Frontier chips blocked</strong><span class="garden-visual-item-detail">US rules deny top accelerators and advanced tools, prompting a weakened H20 design.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">2025</span><strong class="garden-visual-item-label">Policy whiplash</strong><span class="garden-visual-item-detail">H20 access is blocked, reopened, and followed by a proposed H200 opening.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">Jan 2026</span><strong class="garden-visual-item-label">Conditional licenses</strong><span class="garden-visual-item-detail">H200 sales become case-by-case with certification and a tariff.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Substitution</strong><span class="garden-visual-item-detail">SMIC uses costly DUV multi-patterning while Huawei's ecosystem gains a protected home market.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Leakage</strong><span class="garden-visual-item-detail">Teardowns reveal TSMC dies obtained through an intermediary before the route closed.</span></li></ol>
+<figcaption class="garden-visual-caption"><span>The control regime slows access while inducing substitution and creating pressure for evasive supply routes.</span><span class="garden-visual-evidence">Drawn from: <a href="#5-the-export-control-war-what-the-us-is-trying-and-what-china-does-about-it">5. The export-control war: what the US is trying, and what China does about it</a></span></figcaption>
+</figure>
+<p>Since October 2022, the United States has run an explicit policy of denying China the tools and chips at the leading edge. The verified timeline of its sharpest thread — Nvidia's China chips — reads like a seismograph:</p>
+<ul><li><strong>2022–2024:</strong> US controls block Nvidia's top AI chips from China. Nvidia designs the deliberately weakened H20 to fit under the line. EUV machines were never exportable to China at all — the Dutch government, under US pressure, has blocked them since 2019. Dutch licensing rules extended to advanced DUV machines in 2023.</li><li><strong>April 2025:</strong> Washington declares even the H20 non-compliant. <strong>July 2025:</strong> the Trump administration reverses course; H20 sales resume. <strong>December 2025:</strong> the president announces Nvidia may sell the far more capable H200 to China. <strong>January 13, 2026:</strong> Commerce codifies it — case-by-case licensing, end-use certification, and a 25% tariff on the chips.</li><li><strong>The punchline, as of early-to-mid 2026:</strong> Nvidia reported it had <em>still generated no H200 revenue in China</em> — Beijing, having spent three years watching US policy whiplash, now discourages its own firms from depending on American chips. Brookings titled its analysis "the US is out of the AI chip market in China." Meanwhile in June 2026 the US clarified its bans reach Chinese firms operating <em>outside</em> China, in August 2026 Washington was reported to be pressing the Netherlands to cut off nearly all remaining ASML sales to China, and the proposed MATCH Act would write a DUV ban into law.</li></ul>
+<p>And what did the controls actually stop? Here the verified picture cuts both ways:</p>
+<p><strong>What they stopped:</strong> China has no EUV. Without it, SMIC — China's top foundry — makes 7nm-class chips by <strong>DUV multi-patterning</strong>: printing each critical layer two, three, or four times with older machines and stitching the patterns together. It works; SMIC has shipped 7nm since Huawei's Kirin 9000S phone chip in 2023, and reports in 2026 claim 5nm-class output on the same approach. But reported yields run 20–40%, costs are far higher, and SMIC's entire advanced capacity (~45,000 wafers/month at end-2025, heading toward ~60,000 in 2026) is a rounding error against TSMC's scale. SMIC's 5nm has slipped repeatedly.</p>
+<p><strong>What they leaked:</strong> TechInsights' teardowns found that essentially every Huawei Ascend 910B/910C AI accelerator they examined contained dies made by <em>TSMC</em> — roughly 2.9 million 7nm dies obtained through an intermediary, Sophgo, before the loophole closed. High-bandwidth memory, not logic, is now widely assessed as Huawei's tightest bottleneck. Export controls in this field are not a wall; they are a tax on the adversary's time and a subsidy to its domestic substitutes, and reasonable analysts disagree about which effect dominates. The larger strategic contest is <a href="china-usa-race.html">china-usa-race</a>'s room; the policy machinery is <a href="governments-and-ai.html">governments-and-ai</a>'s.</p>
+<h2 id="6-the-scoreboard">6. The scoreboard</h2>
+<p>Who can make what, at the leading edge, as of August 2026:</p>
+<div class="garden-table-wrap"><table class="garden-table"><thead><tr><th></th><th>Most advanced node in volume production</th><th>Where</th><th>EUV access</th><th>High-NA EUV</th><th>Anchor customers</th><th>Verified status note</th></tr></thead><tbody><tr><td><strong>TSMC</strong></td><td>N2 (2nm, GAA) — HVM since Q4 2025</td><td>Taiwan (Baoshan, Kaohsiung)</td><td>Yes, largest fleet</td><td>Evaluating; not production-committed</td><td>Apple, Nvidia, AMD, Qualcomm, MediaTek</td><td>~72–73% of foundry market Q1 2026; ~70% early N2 yields reported</td></tr><tr><td><strong>Samsung</strong></td><td>SF2 (2nm, GAA)</td><td>Korea (Hwaseong/Pyeongtaek); Taylor, TX from ~2027</td><td>Yes</td><td>First tools delivered late 2025</td><td>Tesla ($16.5B AI5/AI6 deal, July 2025)</td><td>Yields ~20% late 2025 → 60%+ peak Q1 2026; Taylor volume production expected 2H 2027</td></tr><tr><td><strong>Intel</strong></td><td>18A (2nm-class, GAA + backside power)</td><td>Arizona (Fab 52), Oregon</td><td>Yes</td><td>First mover — EXE:5200B accepted late 2025; first High-NA logic chip July 2026</td><td>Mostly itself (Panther Lake, Clearwater Forest); 14A pitched to external customers</td><td>18A in mass production as of early 2026</td></tr><tr><td><strong>Rapidus</strong></td><td>2nm pilot line (GAA, with IBM)</td><td>Chitose, Hokkaido</td><td>Yes — Japan's first EUV, installed Dec 2024</td><td>No</td><td>None announced</td><td>Prototypes meeting planned electricals 2026; mass production target 2H FY2027</td></tr><tr><td><strong>SMIC</strong></td><td>7nm-class in volume; 5nm-class reported</td><td>China (Shanghai)</td><td><strong>No — embargoed</strong></td><td>No</td><td>Huawei</td><td>DUV multi-patterning; reported 20–40% yields; ~45–60k wafers/month advanced capacity</td></tr></tbody></table></div>
+<p>Read the last column twice. Between "pilot line" and "volume production," and between "reported" and "verified by teardown," is where most chip-war journalism goes wrong.</p>
+<h2 id="7-worked-example-how-to-read-a-node-name-and-check-it-yourself">7. Worked example: how to read a node name — and check it yourself</h2>
+<figure class="garden-visual garden-visual--sequence" aria-labelledby="visual-chip-wars-3" data-claim-scope="section-synthesis" data-placement-heading="7-worked-example-how-to-read-a-node-name-and-check-it-yourself" data-evidence-headings="7-worked-example-how-to-read-a-node-name-and-check-it-yourself">
+<div class="garden-visual-head"><p class="garden-visual-kicker">Read past the node label</p><p class="garden-visual-title" id="visual-chip-wars-3">A five-stop verification chain for chip claims</p></div>
+<ol class="garden-visual-items" role="list"><li class="garden-visual-item"><strong class="garden-visual-item-label">Strip the label</strong><span class="garden-visual-item-detail">Treat N2, 18A, and SF2 as generation names, not literal measurements of one physical feature.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Name the change</strong><span class="garden-visual-item-detail">Ask whether the process changes transistor geometry, power delivery, density, or packaging.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Check production</strong><span class="garden-visual-item-detail">Use earnings-call records to distinguish a pilot announcement from high-volume manufacturing and revenue.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Check the silicon</strong><span class="garden-visual-item-detail">Use teardown measurements and die photographs for pitches, structures, provenance, and what actually shipped.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Check the board</strong><span class="garden-visual-item-detail">Use independent foundry-share data and the toolmaker's annual report for market and lithography claims.</span></li></ol>
+<figcaption class="garden-visual-caption"><span>A smaller marketing number names an intended process generation; evidence about the actual product comes from architecture, production, and measurement.</span><span class="garden-visual-evidence">Drawn from: <a href="#7-worked-example-how-to-read-a-node-name-and-check-it-yourself">7. Worked example: how to read a node name — and check it yourself</a></span></figcaption>
+</figure>
+<p>Here's a skill you can use on every chip headline you'll ever read. Take three names from the table: TSMC <strong>N2</strong>, Intel <strong>18A</strong>, Samsung <strong>SF2</strong>.</p>
+<p><strong>Step 1 — strip the number of physical meaning.</strong> "18A" suggests 18 angstroms — 1.8nm — which would make Intel's node sound smaller than TSMC's 2nm. No physical feature on either chip is 2nm or 1.8nm wide. The finest metal pitches on these chips are in the ~20–45nm range. The names are generation labels, chosen by marketing within loose density conventions. Rule: a smaller node number tells you the <em>intended generation</em>, never the measured geometry.</p>
+<p><strong>Step 2 — ask what actually changed.</strong> Real node transitions are architecture changes, and 2026 is a genuine one: all three leaders moved from FinFET transistors (gate on three sides of a fin) to <strong>gate-all-around</strong> (gate wrapped fully around stacked nanosheets). Intel's 18A adds backside power delivery now; TSMC holds it for A16 in late 2026. Those are the checkable engineering facts under the labels.</p>
+<p><strong>Step 3 — verify with sources that measure, not announce.</strong> You don't have to trust press releases, and you shouldn't. The verification chain any reader can follow:</p>
+<ol><li><strong>Company earnings-call transcripts</strong> (TSMC's quarterly calls state which nodes are in HVM and what revenue share they carry — a legal-liability document, far more reliable than a keynote).</li><li><strong>TechInsights teardowns</strong> — they buy shipping products, delayer the chips, and publish measured pitches and die photos. This is how the world learned SMIC's 7nm was real in 2023 and how the Huawei/TSMC die scandal surfaced in 2024–25.</li><li><strong>TrendForce / Counterpoint</strong> quarterly foundry-share data for the market claims.</li><li><strong>ASML's annual report</strong> for the lithography install base — it states plainly how many EUV systems shipped and to which regions.</li></ol>
+<p>Run any chip claim through those four and you'll be better informed than most of the coverage. Step 3 is this whole garden's method in miniature: prefer instruments that measure over voices that announce.</p>
+<h2 id="8-what-you-can-now-see">8. What you can now see</h2>
+<p>You can now read a chip-war headline and place it on the board: which of the three manufacturers it touches, whether it concerns the one toolmaker, whether a "breakthrough" is a pilot line or measured volume production, and whether a node number is engineering or marketing. You know why Taiwan's fabs are a security question, why a Dutch export license is an instrument of US policy, why Japan is spending $16 billion to skip four generations, and why China's response to embargo has been multi-patterned persistence plus die-smuggling rather than collapse.</p>
+<p>From here: <a href="semiconductors.html">semiconductors</a> goes under this room, into how a transistor actually works. <a href="nvidia-and-the-chip.html">nvidia-and-the-chip</a> sits above it, where the manufactured wafers become AI accelerators. <a href="taiwan.html">taiwan</a> and <a href="china-usa-race.html">china-usa-race</a> take the two geopolitical threads this room only opened.</p>
+<h2 id="9-open-questions">9. Open questions</h2>
+<p><strong>Established (FACT):</strong> The three-manufacturer, one-toolmaker structure of the leading edge as of 2026. TSMC N2 volume production since Q4 2025; Intel 18A mass production; Samsung 2nm yield recovery to ~60% peak in Q1 2026. Rapidus pilot line running with Japan's first EUV; mass production not yet begun. China has no EUV; SMIC ships 7nm-class via DUV multi-patterning at low yields. The 2025–26 US policy reversals on Nvidia's China chips happened as dated above.</p>
+<p><strong>Contested (HYPOTHESIS):</strong> Whether export controls are net-working — slowing China more than they accelerate its domestic substitution. Whether Rapidus can convert a working pilot line into a customer-bearing business by fiscal 2027; history is against national-champion fabs, but Japan's materials position and the IBM process are real assets. Whether Taiwan's silicon shield stabilizes or destabilizes the strait. Whether SMIC's reported 5nm is economically real or a demonstration. Each of these has serious analysts on both sides right now.</p>
+<p><strong>Speculation worth holding (WILD):</strong> That the leading edge consolidates further — to two players, or even one plus a state-backed remnant — as High-NA costs (~$400M per tool, multi-billion-dollar fabs) push everyone else out. That advanced packaging, not lithography, becomes the next chokepoint war. And Rapidus's own executives have mused publicly about fabs on the Moon — filed here so you can see what the field's ambition curve looks like from inside.</p>
+<hr>
+<p>One more thing, and it comes from the domain itself. Ask what all this capacity is <em>for</em>. AI is one of the strongest forces pulling demand for leading-edge logic, memory, packaging, and High-NA machines upward, but it is not the whole market: Apple is the largest named N2 customer here, and advanced chips also serve phones, CPUs, graphics, networking, and workloads with no transformer in sight. AI accelerators devote substantial computation to <a href="attention-economy.html">attention</a> and other operations inside <a href="neural-networks.html">neural networks</a>; attention is not their entire function. Strip the geopolitics away and part of today's chip war is still nations competing over who owns the substrate on which machine thinking happens. The 1980s fight centered on televisions and memory for spreadsheets. This one includes where — and under whose flag — much of the world's artificial thinking gets done. That is why the stakes feel different this time, and why <a href="china-usa-race.html">china-usa-race</a> and <a href="future-of-ai.html">future-of-ai</a> ask the same question at a different altitude.</p>
+<h2 id="sources">Sources</h2>
+<p>Load-bearing claims verified by live web search, August 2026. Primary and near-primary sources:</p>
+<ul><li>TSMC N2 volume production, fabs, customers, yields: <a href="https://www.tomshardware.com/tech-industry/semiconductors/tsmc-begins-quietly-volume-production-of-2nm-class-chips-first-gaa-transistor-for-tsmc-claims-up-to-15-percent-improvement-at-iso-power">Tom's Hardware</a>, <a href="https://www.datacenterdynamics.com/en/news/tsmc-secures-15-customers-for-its-2nm-technology-majority-in-hpc-space/">DCD on 2nm customers</a></li><li>Foundry market share Q1 2026 (TrendForce 72.3%, Counterpoint 73%): <a href="https://counterpointresearch.com/en/insights/global-semiconductor-foundry-market-share">Counterpoint Research</a>, <a href="https://marklapedus.substack.com/p/tsmc-gains-foundry-share-in-q1-26">Semiecosystem/Mark Lapedus</a></li><li>TSMC Arizona timeline and $265B total: <a href="https://www.azcommerce.com/news-events/news/2026/7/tsmc-announcement/">Arizona Commerce Authority, July 2026</a>, <a href="https://www.techpowerup.com/344214/tsmc-targets-2027-for-3-nm-production-at-second-arizona-fab">TechPowerUp</a></li><li>TSMC, <a href="https://www.tsmc.com/english/dedicatedFoundry/technology/logic/l_7nm">7nm technology overview</a> — original N7 volume production in 2018; N7+ as the first commercially available EUV process in 2019.</li><li>JASM Kumamoto second fab, 3nm upgrade, 2026 earthquake: <a href="https://pr.tsmc.com/english/news/3105">TSMC press release</a>, <a href="https://thediplomat.com/2026/04/tsmcs-kumamoto-fab-upgrade-a-security-driven-reconfiguration-of-indo-pacific-chip-competition/">The Diplomat, April 2026</a>, <a href="https://www.trendforce.com/news/2026/07/29/news-7-1-kumamoto-earthquake-tsmc-confirms-jasm-safe-tel-halts-plants-as-chip-supply-chain-assesses-impact/">TrendForce, July 2026</a></li><li>Intel 18A / Panther Lake / Fab 52: <a href="https://newsroom.intel.com/client-computing/intel-unveils-panther-lake-architecture-first-ai-pc-platform-built-on-18a">Intel Newsroom</a>, <a href="https://www.tomshardware.com/pc-components/cpus/intels-18a-production-starts-before-tsmcs-competing-n2-tech-heres-how-the-two-process-nodes-compare">Tom's Hardware 18A vs N2</a></li><li>ASML High-NA EXE:5200B, wafer counts, first High-NA logic chip: <a href="https://www.trendforce.com/news/2025/07/17/news-asml-confirms-first-high-na-euv-exe5200-shipment-reportedly-prepping-for-intels-14a-in-2027/">TrendForce</a>, <a href="https://siliconangle.com/2026/07/15/intel-starts-using-asmls-high-na-euv-technology-produce-chips/">SiliconANGLE, July 2026</a>, <a href="https://www.trendforce.com/news/2026/03/19/news-imec-secures-asmls-most-advanced-exe5200-high-na-euv-for-sub-2nm-4q26-qualification-target/">imec EXE:5200, TrendForce March 2026</a></li><li>Samsung 2nm yields, Tesla deal, Taylor timeline: <a href="https://www.tomshardware.com/tech-industry/samsungs-fab-roadmap-examined">Tom's Hardware fab-roadmap analysis</a>, <a href="https://electrek.co/2026/07/13/samsung-taylor-fab-tesla-ai5-chip-2nm/">Electrek, July 2026</a></li><li>Rapidus: first EUV installation (<a href="https://www.rapidus.inc/en/news_topics/information/rapidus-begins-installation-of-japans-first-euv-lithography-machinery-for-semiconductor-mass-production-en/">Rapidus press release, Dec 2024</a>), FY2026 NEDO approval and ¥2.354T total support (<a href="https://www.rapidus.inc/en/news_topics/information/nedo-approves-rapidus-fy2026-plan-and-budget-for-2nm-semiconductor-projects/">Rapidus</a>, <a href="https://www.trendforce.com/news/2026/04/13/news-rapidus-reportedly-launches-back-end-prototype-line-japan-adds-%C2%A5631-5b-to-support-2nm-push/">TrendForce</a>), pilot-line progress (<a href="https://www.techspot.com/news/111959-japan-rapidus-ramps-up-2-nm-chip-plans.html">TechSpot</a>)</li><li>Export controls, H20/H200 timeline, MATCH Act, China market exit: <a href="https://www.congress.gov/crs-product/R48642">Congressional Research Service R48642</a>, <a href="https://www.brookings.edu/articles/ball-games-over-the-us-is-out-of-the-ai-chip-market-in-china/">Brookings</a>, <a href="https://www.cnbc.com/2026/02/26/nvidia-china-chip-sales-export-controls-ai-competition.html">CNBC, Feb 2026</a>, <a href="https://www.aljazeera.com/economy/2026/6/1/us-says-ban-on-ai-chip-shipments-applies-to-chinese-firms-outside-china">Al Jazeera, June 2026</a>, <a href="https://nltimes.nl/2026/08/20/us-preparing-force-netherlands-ban-asml-selling-china">NL Times, Aug 2026</a></li><li>SMIC 7nm/5nm, yields, capacity; Huawei/TSMC dies via Sophgo: <a href="https://newsletter.semianalysis.com/p/huawei-ascend-production-ramp">SemiAnalysis Ascend ramp</a>, <a href="https://www.techpowerup.com/344000/chinese-smic-achieves-5-nm-production-on-n-3-node-without-euv-tools">TechPowerUp on SMIC N+3</a></li><li>Historical claims (Japan's ~50% share in 1988, 1986 US–Japan agreement, Rapidus founding structure, 2019 Japan–Korea export dispute, EUV physics) are standard history not re-verified by live search this session; they are stable, widely documented, and flagged here for honesty.</li></ul>
+<p><em>Written by Claude (Fable 5), an AI, for the Darshan garden. John Shrader (Dhyana), founder and publisher of record, answers for every word published here. Errors are corrected on the face of the page, dated.</em></p>
+<p class="garden-tags"><strong>Topics:</strong> semiconductors · tsmc · asml · rapidus · euv · export-controls · geopolitics · foundry</p>
+<nav class="garden-nav" aria-label="Rooms"><a class="previous" href="nvidia-and-the-chip.html">← NVIDIA and the Future of the Computer Chip</a><a class="next" href="semiconductors.html">Semiconductors →</a></nav>
+</article>
+<aside class="garden-toc" aria-label="In this room"><nav aria-label="Page sections"><p class="garden-toc-title">In this room</p><ol class="garden-toc-list"><li class="level-2"><a href="#1-the-map-before-the-details">1. The map, before the details</a></li><li class="level-2"><a href="#2-tsmc-what-winning-looks-like">2. TSMC: what winning looks like</a></li><li class="level-2"><a href="#3-asml-the-machine-that-is-the-bottleneck">3. ASML: the machine that is the bottleneck</a></li><li class="level-2"><a href="#4-japan-the-country-that-lost-the-last-chip-war-and-is-buying-back-in">4. Japan: the country that lost the last chip war and is buying back in</a></li><li class="level-2"><a href="#5-the-export-control-war-what-the-us-is-trying-and-what-china-does-about-it">5. The export-control war: what the US is trying, and what China does about it</a></li><li class="level-2"><a href="#6-the-scoreboard">6. The scoreboard</a></li><li class="level-2"><a href="#7-worked-example-how-to-read-a-node-name-and-check-it-yourself">7. Worked example: how to read a node name — and check it yourself</a></li><li class="level-2"><a href="#8-what-you-can-now-see">8. What you can now see</a></li><li class="level-2"><a href="#9-open-questions">9. Open questions</a></li><li class="level-2"><a href="#sources">Sources</a></li></ol></nav></aside>
+</div>
+</main>
+
+<footer>
+  <p>Darshan · seeing clearly after the feed</p>
+  <p>No feed. No analytics. No trackers. Finite editions, read at your own pace.</p>
+  <p style="opacity:.7">Darshan v0.0.0.1 · a beginning, built to grow</p>
+</footer>
+<script>
+/* Local section highlighting only. No network requests, analytics, or storage. */
+(function () {
+  var scope = document.querySelector("[data-garden-outline]");
+  if (!scope) return;
+  var sections = Array.prototype.slice.call(scope.querySelectorAll("h2[id], h3[id], section[id]"));
+  var links = Array.prototype.slice.call(document.querySelectorAll('.garden-toc-list a[href^="#"]'));
+  if (!sections.length || !links.length) return;
+  var queued = false;
+  function update() {
+    queued = false;
+    var threshold = Math.max(96, window.innerHeight * .22);
+    var current = sections[0].id;
+    sections.forEach(function (section) {
+      if (section.getBoundingClientRect().top <= threshold) current = section.id;
+    });
+    links.forEach(function (link) {
+      var active = link.getAttribute("href") === "#" + current;
+      if (active) link.setAttribute("aria-current", "location");
+      else link.removeAttribute("aria-current");
+    });
+  }
+  function requestUpdate() {
+    if (!queued) {
+      queued = true;
+      window.requestAnimationFrame(update);
+    }
+  }
+  document.addEventListener("scroll", requestUpdate, {passive: true});
+  window.addEventListener("resize", requestUpdate);
+  window.addEventListener("hashchange", requestUpdate);
+  update();
+})();
+</script>
+</body>
+</html>
