@@ -1,0 +1,80 @@
+{
+  "schema": "darshan.visual-verdict-series/v1",
+  "series": "story-of-ai",
+  "reviewer": "/root/audit_visuals_story_loops",
+  "reviewed_at": "2026-08-25",
+  "rooms": {
+    "history-of-ai": {
+      "verdict": "PASS",
+      "visual_sha256": "054091b7a2ca609f723445f8f75c10a008e80c30fba0a5bf017e8b028b6cce9a",
+      "source_sha256": "a7ece31b98a1b354cae193600eee85ac4e6596ce19bd4d65dabffcf4044bf08b",
+      "evidence": "Checked all three panels against sections 6 (quiet decades), 7 (the XOR proof), and 3 (the first winter). The repaired timeline now stays inside section 6, orders the 2006–2012 ingredients coherently, and no longer borrows the AlexNet result from section 8.",
+      "facts": "The backpropagation, statistical turn, Deep Blue, GPU, training-craft, and ImageNet cards match the room; the four XOR inequalities and OR/AND hidden-unit construction are exact; and the Minsky–Papert versus Lighthill distinction preserves theorem, judgment, audit, and hindsight as different claim types.",
+      "uncertainty": "Causal accounts of an AI winter are historiography rather than a single-variable experiment. The visual keeps the compute-and-data diagnosis marked as visible in hindsight and does not turn the funding narrative into a mathematical consequence.",
+      "must_fix": "none — the prior cross-section AlexNet item and timeline-order defect were removed before this verdict."
+    },
+    "evolution-of-ai": {
+      "verdict": "PASS",
+      "visual_sha256": "30a5a3dd31274f3f91cc1407b9d5d76a5db09145e92e1fe1bd1fe96b50593733",
+      "source_sha256": "a6694fa6c7e7faf018bd0eef18f42d36afc82857b0e30e3f43f6c0a0bfb46fd3",
+      "evidence": "Checked the panels against sections 7 (selection-pressure table), 8 (the machine-translation lineage), and 2 (symbolic AI's resource fit and collapse). Each insertion heading directly supports its cards and caption.",
+      "facts": "The five overlapping eras reproduce the room's dated table, the translation sequence preserves rules, phrase statistics, neural sequence models, and general models as successive bottleneck changes, and the symbolic sequence accurately joins scarce compute, expert rules, XCON/Lisp machines, brittleness, and workstation disruption.",
+      "uncertainty": "The era boundaries overlap and are an explanatory taxonomy, not biological species boundaries. The agent phase and the word ‘now’ are perishable, so the current selection-pressure panel is explicitly dated 25 August 2026.",
+      "must_fix": "none — the visuals state the evolutionary framing as a model of selection pressures rather than a literal biological identity."
+    },
+    "future-of-ai": {
+      "verdict": "PASS",
+      "visual_sha256": "2cc63b22e9b29076ae0009d699bbcf6a36b8f1fe12cd1b32384e10dd43687642",
+      "source_sha256": "bcbc8d3272560dd720cd15c9e904801cd65f56e4bb121f678697d1d8b2d4c4f0",
+      "evidence": "Checked the three scenario panel against section 5, the extrapolation sequence against section 6, and the forecasting protocol against section 1. The two perishable quantitative panels are dated 25 August 2026.",
+      "facts": "The arithmetic is internally correct: 9,600/320 is 30, about 4.9 doublings, and five windows of 89, 131, and about 196 days yield 445, 655, and about 983 days. The scenario cards preserve assumptions and falsifiers rather than presenting outcomes as facts.",
+      "uncertainty": "The METR horizon, confidence interval, reliability threshold, fitted window, and transfer from evaluations to deployed autonomy all remain explicit uncertainties. Dates are conditional extrapolations, not predictions.",
+      "must_fix": "none — the panels visibly date the moving evidence and keep measurement, scenario, and speculation separate."
+    },
+    "leading-models": {
+      "verdict": "PASS",
+      "visual_sha256": "6f54d78665c304afe709d980d70298db0d4c7d71974589b6580ff4bb8eaae890",
+      "source_sha256": "d9fe970d365de2740271e304ad03c9dbe49ccbf599835fdc199a19b1b3aa2443",
+      "evidence": "Checked the ecosystem map against the dated table in section 4, the workload-cost comparison against the worked arithmetic in section 6, and the access-control timeline against section 5. The table and cost panels carry the 25 August 2026 as-of date.",
+      "facts": "The 400K-input/30K-output calculations reproduce $2.75, $1.96, and $0.32 from the room's listed rates; the ecosystem panel keeps context, price, weights, and access as separate axes; and the June–July Fable/Mythos sequence matches the room's six dated events.",
+      "uncertainty": "Model names, availability, context windows, list prices, licenses, and policy access can change quickly. The panels say to verify live, distinguish promised from confirmed weights, and do not equate token price with completed-task cost.",
+      "must_fix": "none — every perishable comparison is explicitly dated or framed as a historical episode."
+    },
+    "benchmarks": {
+      "verdict": "PASS",
+      "visual_sha256": "150ebc290f349bb8c9ebf98932737baee0f0c9dd261356d9e1cb8806856e96cc",
+      "source_sha256": "b57bf5c0eaecfe2b6f2e265ca63e89333ef66c9d9321df5cd2e9f198168cbe98",
+      "evidence": "Checked the benchmark lifecycle against section 3, the five Goodhart mechanisms against section 4, and the HLE audit sequence against section 6. All cards remain within their declared evidence sections.",
+      "facts": "The panels accurately separate contamination, test-focused training, leaderboard variants, instrument ownership, and answer-key defects. The HLE panel preserves 2,500 questions, the approximately 18–29% audited-subset defect range, the illustrative 15% whole-exam assumption, and the 26.9% versus 44% protocol difference.",
+      "uncertainty": "The 15% whole-exam defect rate is explicitly an assumption, not an audit result; the measured error ranges apply to bio/chem subsets; and scores remain inseparable from model, scaffold, tools, and protocol.",
+      "must_fix": "none — the visual does not promote the illustrative defect rate or a bare benchmark score into a general intelligence claim."
+    },
+    "cybernetics": {
+      "verdict": "PASS",
+      "visual_sha256": "3fc07e360ed24889f37eaaf9412dde23a4dd7d3b7f14338b02c53b929e7aaa15",
+      "source_sha256": "89c34d42f127ad7a202f6deb77049aec0683a399f653e33238f6f3ab8f3a7e9b",
+      "evidence": "Checked the three-stop feedback timeline against section 2, Ashby's paper game against section 6, and the cybernetics/symbolic-AI/modern-ML comparison against section 7. The feedback timeline was narrowed so it no longer borrows later-room claims.",
+      "facts": "The Watt-governor, Maxwell 1868, and Wiener 1948 sequence is supported; the 3-disturbance/3-response game collapses outcomes to one while the 2-response regulator leaves at least two; and the comparison preserves each field's object, mathematics, and characteristic success criterion.",
+      "uncertainty": "Calling modern training and deployed agents cybernetic descendants is a structural interpretation, not a claim that all ML systems satisfy control-theoretic stability. The final card keeps the missing-guarantees claim scoped as an unresolved debt.",
+      "must_fix": "none — the historical timeline and the broader interpretive comparison now have distinct, correct evidence boundaries."
+    },
+    "top-papers-ai": {
+      "verdict": "PASS",
+      "visual_sha256": "e033ebe3dbb3af8ff348916d3c33ba84ac7a4b62a3e7d8cebc60e02236948d19",
+      "source_sha256": "e897dc96d1d4e38378e0a9b97c2bc0d9c9d9b740b3b42aa1c237628a5360686b",
+      "evidence": "Checked the twenty-paper relay against section 6, the hand-worked attention calculation against section 7, and the 2012–2016 sequence against section 4. Each panel is a distinct synthesis rather than a duplicate list.",
+      "facts": "The attention scores 1.41 and 0 softmax to roughly 0.80/0.20 and mix values to [8,2]. The landmark sequence correctly distinguishes DQN's reward-guided action from AlphaGo's added policy/value-guided tree search, removing the earlier implication that DQN itself performs tree search.",
+      "uncertainty": "A top-twenty canon and the grouping into four batons are editorial choices. The room supplies one limitation per paper, and the panels do not convert inclusion or historical influence into proof that later systems are understood.",
+      "must_fix": "none — the corrected DQN/AlphaGo card now assigns reward and search to the appropriate systems."
+    },
+    "top-papers-ml": {
+      "verdict": "PASS",
+      "visual_sha256": "8fe6e86d0a71c3c82b47c5cb64446489df5980a85305891735c3ce9151c7480c",
+      "source_sha256": "80bb619e81363cf87bcc3ad90b833b81019d10ade6a886b036152ef6d46bb898",
+      "evidence": "Checked the canon timeline against section 7, the full perceptron trace against section 8, and the generalization-theory comparison against section 6. Labels, dates, equations, and caveats all track the source.",
+      "facts": "The OR trace starts at zero, makes four corrections, converges to weights (0,1,1), and yields dot products 0,1,1,2; changing the labels to XOR prevents convergence. The final panel correctly separates random-label memorization, the interpolation spike, second descent, and the still-open explanatory mechanism.",
+      "uncertainty": "The twenty-paper selection is a curated canon rather than an objective ranking. Random-label memorization and double descent falsify simple capacity stories but do not by themselves supply a complete theory of deep generalization.",
+      "must_fix": "none — the panels preserve the distinction between demonstrated phenomena and the unresolved general theory."
+    }
+  }
+}

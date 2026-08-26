@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Future · Darshan Garden</title>
+<meta name="description" content="The capstone of the time-future series. Not what will happen — how to stand toward what will happen. The measured record of what humans can and cannot forecast, a famous bet re-run a hundred times, and the working stance that survives both the prophets&#x27; record and the paralytics&#x27; excuse.">
+<link rel="stylesheet" href="../style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ccircle cx='8' cy='8' r='6' fill='none' stroke='%238f3b26' stroke-width='1.5'/%3E%3Ccircle cx='8' cy='8' r='2' fill='%238f3b26'/%3E%3C/svg%3E">
+<script>
+/* Theme memory. No analytics, no trackers. */
+(function () {
+  try {
+    var t = localStorage.getItem("darshan-theme");
+    if (t) document.documentElement.setAttribute("data-theme", t);
+  } catch (e) {}
+})();
+</script>
+<style>
+/* Garden-only layout. Kept here so the publication stylesheet remains shared. */
+body.garden-page-body {
+  max-width: none;
+  padding: 1.5rem clamp(1.25rem, 3.5vw, 4rem) 4rem;
+  font-size: 1.125rem;
+}
+body.garden-page-body > main,
+body.garden-page-body > .masthead,
+body.garden-page-body > footer {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 94rem;
+}
+.garden-layout,
+.garden-index-layout {
+  align-items: start;
+  display: grid;
+  gap: clamp(2.75rem, 5vw, 5rem);
+  grid-template-columns: minmax(0, 64rem) minmax(17rem, 20rem);
+  justify-content: center;
+}
+.garden-layout article,
+.garden-index-main { min-width: 0; }
+.garden-layout .article-title,
+.garden-intro .article-title {
+  font-size: clamp(2.65rem, 3.55vw, 4rem);
+  letter-spacing: -.025em;
+  line-height: 1.06;
+  max-width: 24ch;
+}
+.garden-layout article h2 {
+  font-size: 1.48rem;
+  line-height: 1.3;
+  margin-top: 3.2rem;
+  scroll-margin-top: 1.5rem;
+}
+.garden-layout article h3 {
+  font-size: 1.16rem;
+  margin-top: 2.35rem;
+  scroll-margin-top: 1.5rem;
+}
+.garden-intro { margin-bottom: 2.4rem; }
+.garden-series { margin: 2.8rem 0; scroll-margin-top: 1rem; }
+.garden-series h2 { border-bottom: 1px solid var(--rule); padding-bottom: .45rem; }
+.garden-room-list { list-style: none; margin: 0; padding: 0; }
+.garden-room-list li { border-bottom: 1px solid var(--rule); margin: 0; padding: 1rem 0; }
+.garden-room-title { font-weight: 600; }
+.garden-room-summary { color: var(--faint); font-size: .96rem; margin: .25rem 0 0; }
+.garden-series-link { color: var(--faint); font-size: .82rem; letter-spacing: .12em;
+  text-transform: uppercase; }
+.garden-lede {
+  border-left: 3px solid var(--accent);
+  color: var(--faint);
+  font-size: 1.24rem;
+  font-style: italic;
+  line-height: 1.62;
+  margin: 1.5rem 0 2.2rem;
+  padding: .35rem 0 .35rem 1.35rem;
+}
+.garden-corridors {
+  margin: 1.15rem 0 2.65rem;
+}
+.garden-corridor-list {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: .55rem .62rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.garden-corridor-list li { display: flex; margin: 0; max-width: 100%; }
+.garden-corridor {
+  align-items: center;
+  background: var(--accent-soft);
+  border: 1px solid var(--accent);
+  border-radius: 3px;
+  color: var(--accent);
+  display: inline-flex;
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .73rem;
+  font-weight: 700;
+  letter-spacing: .075em;
+  line-height: 1.35;
+  max-width: 100%;
+  min-height: 2.05rem;
+  overflow-wrap: anywhere;
+  padding: .34rem .72rem .3rem;
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-transform: uppercase;
+  text-underline-offset: .22em;
+}
+.garden-corridor:visited { color: var(--accent); }
+.garden-corridor:hover,
+.garden-corridor:focus-visible {
+  background: var(--accent);
+  color: var(--paper);
+}
+.garden-corridor:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+.garden-series-plate {
+  --plate-accent: var(--accent);
+  border: 1px solid var(--rule);
+  border-top: 3px solid var(--plate-accent);
+  margin: .25rem 0 2.8rem;
+  overflow: hidden;
+  position: relative;
+}
+.garden-series-plate--foundations { --plate-accent: #496f76; }
+.garden-series-plate--story-of-ai { --plate-accent: #526d9a; }
+.garden-series-plate--instrument { --plate-accent: #745779; }
+.garden-series-plate--strange-loops { --plate-accent: #866448; }
+.garden-series-plate--bridge { --plate-accent: #697044; }
+.garden-series-plate--power { --plate-accent: #8f3b26; }
+.garden-series-plate--time-future { --plate-accent: #416778; }
+[data-theme="dark"] .garden-series-plate { --plate-accent: var(--accent); }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .garden-series-plate { --plate-accent: var(--accent); }
+}
+.garden-series-plate-media {
+  aspect-ratio: 16 / 9;
+  background: var(--accent-soft);
+  overflow: hidden;
+  position: relative;
+}
+.garden-series-plate-media::after {
+  background:
+    linear-gradient(90deg, var(--paper) 0, transparent 24%, transparent 76%, var(--paper) 100%),
+    linear-gradient(0deg, var(--paper) 0, transparent 32%);
+  content: "";
+  inset: 0;
+  opacity: .24;
+  pointer-events: none;
+  position: absolute;
+}
+.garden-series-plate picture,
+.garden-series-card picture { display: block; height: 100%; }
+.garden-series-plate img {
+  display: block;
+  filter: saturate(.82) contrast(1.03);
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+.garden-series-plate figcaption {
+  align-items: baseline;
+  background: var(--paper);
+  border-top: 1px solid var(--rule);
+  display: grid;
+  gap: .25rem 1rem;
+  grid-template-columns: auto 1fr;
+  padding: .78rem 1rem .85rem;
+}
+.garden-series-plate-kicker {
+  color: var(--plate-accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+.garden-series-plate figcaption strong { font-size: 1rem; font-weight: 600; }
+.garden-series-plate-terms {
+  color: var(--faint);
+  font-size: .82rem;
+  grid-column: 2;
+  margin: 0;
+}
+.garden-visual {
+  background:
+    radial-gradient(circle at 92% 8%, var(--accent-soft), transparent 30%),
+    linear-gradient(135deg, transparent 0 72%, var(--accent-soft) 72% 72.4%, transparent 72.4%);
+  border: 1px solid var(--rule);
+  border-top: 3px solid var(--accent);
+  margin: 1.25rem 0 2.5rem;
+  overflow: hidden;
+  padding: clamp(1.1rem, 2.7vw, 1.75rem);
+  position: relative;
+}
+.garden-visual::before {
+  background-image:
+    linear-gradient(var(--rule) 1px, transparent 1px),
+    linear-gradient(90deg, var(--rule) 1px, transparent 1px);
+  background-size: 2.25rem 2.25rem;
+  content: "";
+  inset: 0;
+  opacity: .13;
+  pointer-events: none;
+  position: absolute;
+}
+.garden-visual > * { position: relative; }
+.garden-visual-head {
+  align-items: baseline;
+  display: grid;
+  gap: .45rem 1rem;
+  grid-template-columns: auto 1fr;
+  margin-bottom: 1.2rem;
+}
+.garden-visual-kicker {
+  color: var(--accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .68rem;
+  font-weight: 700;
+  letter-spacing: .17em;
+  margin: 0;
+  text-transform: uppercase;
+}
+.garden-visual-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  line-height: 1.28;
+  margin: 0;
+}
+.garden-visual-as-of {
+  color: var(--faint);
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: .72rem;
+  letter-spacing: .08em;
+  margin: 0;
+  text-transform: uppercase;
+  white-space: normal;
+}
+.garden-visual-items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.garden-visual-item {
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  margin: 0;
+  min-width: 0;
+  padding: .8rem .9rem;
+}
+.garden-visual-item-label {
+  display: block;
+  font-size: .96rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+.garden-visual-item-detail {
+  color: var(--faint);
+  display: block;
+  font-size: .9rem;
+  line-height: 1.45;
+  margin-top: .27rem;
+}
+.garden-visual-item-meta {
+  color: var(--accent);
+  display: block;
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: .72rem;
+  letter-spacing: .08em;
+  margin-bottom: .38rem;
+  text-transform: uppercase;
+}
+.garden-visual-caption {
+  border-top: 1px solid var(--rule);
+  color: var(--faint);
+  display: grid;
+  font-size: .84rem;
+  font-style: italic;
+  gap: .55rem 1rem;
+  grid-template-columns: minmax(0, 1fr) auto;
+  line-height: 1.45;
+  margin: 1.15rem 0 0;
+  padding-top: .75rem;
+}
+.garden-visual-evidence {
+  color: var(--accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .72rem;
+  font-style: normal;
+  font-weight: 650;
+  letter-spacing: .04em;
+  white-space: nowrap;
+}
+.garden-visual-evidence a {
+  color: inherit;
+  text-decoration-thickness: 1px;
+  text-underline-offset: .18em;
+}
+.garden-visual--sequence .garden-visual-items,
+.garden-visual--contrast .garden-visual-items,
+.garden-visual--constellation .garden-visual-items {
+  display: grid;
+  gap: .65rem;
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+}
+.garden-visual--sequence .garden-visual-items { counter-reset: garden-step; }
+.garden-visual--sequence .garden-visual-item {
+  counter-increment: garden-step;
+  padding-top: 2.35rem;
+  position: relative;
+}
+.garden-visual--sequence .garden-visual-item::before {
+  color: var(--accent);
+  content: counter(garden-step, decimal-leading-zero);
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: .68rem;
+  left: .9rem;
+  letter-spacing: .08em;
+  position: absolute;
+  top: .72rem;
+}
+.garden-visual--layers .garden-visual-items { display: grid; gap: .45rem; }
+.garden-visual--layers .garden-visual-item {
+  border-left: clamp(.24rem, .55vw, .48rem) solid var(--accent);
+  display: grid;
+  gap: .15rem 1rem;
+  grid-template-columns: minmax(8rem, .4fr) 1fr;
+}
+.garden-visual--layers .garden-visual-item:nth-child(2) { margin-left: 1.5%; }
+.garden-visual--layers .garden-visual-item:nth-child(3) { margin-left: 3%; }
+.garden-visual--layers .garden-visual-item:nth-child(4) { margin-left: 4.5%; }
+.garden-visual--layers .garden-visual-item:nth-child(5) { margin-left: 6%; }
+.garden-visual--layers .garden-visual-item:nth-child(6) { margin-left: 7.5%; }
+.garden-visual--timeline .garden-visual-items {
+  display: grid;
+  gap: 0;
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+}
+.garden-visual--timeline .garden-visual-item {
+  border-width: 1px 0 0 1px;
+  padding-top: 1.35rem;
+  position: relative;
+}
+.garden-visual--timeline .garden-visual-item::before {
+  background: var(--accent);
+  border: 3px solid var(--paper);
+  border-radius: 50%;
+  content: "";
+  height: .72rem;
+  left: -.4rem;
+  position: absolute;
+  top: -.4rem;
+  width: .72rem;
+}
+.garden-visual--contrast .garden-visual-item:nth-child(odd) { border-top: 2px solid var(--ink); }
+.garden-visual--contrast .garden-visual-item:nth-child(even) { border-top: 2px solid var(--accent); }
+.garden-visual--constellation .garden-visual-items {
+  align-items: stretch;
+  position: relative;
+}
+.garden-visual--constellation .garden-visual-item {
+  border-top: 2px solid var(--accent);
+  box-shadow: 0 .2rem 0 rgba(18, 31, 31, .04);
+  padding-top: 1.35rem;
+  position: relative;
+}
+.garden-visual--constellation .garden-visual-item::before {
+  background: var(--paper);
+  border: 2px solid var(--accent);
+  border-radius: 50%;
+  content: "";
+  height: .55rem;
+  left: calc(50% - .36rem);
+  position: absolute;
+  top: -.38rem;
+  width: .55rem;
+}
+.garden-visual--constellation .garden-visual-item:nth-child(even) { margin-top: .8rem; }
+.garden-series-gallery {
+  display: grid;
+  gap: .8rem;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  margin: 1.5rem 0 3rem;
+}
+.garden-series-card {
+  border: 1px solid var(--rule);
+  color: var(--ink);
+  display: grid;
+  grid-template-rows: 7.5rem auto;
+  overflow: hidden;
+  text-decoration: none;
+}
+.garden-series-card img {
+  height: 100%;
+  object-fit: cover;
+  transition: transform .25s ease;
+  width: 100%;
+}
+.garden-series-card span {
+  border-top: 1px solid var(--rule);
+  font-size: .9rem;
+  font-weight: 600;
+  padding: .65rem .75rem;
+}
+.garden-series-card:hover { border-color: var(--accent); color: var(--accent); }
+.garden-series-card:hover img { transform: scale(1.025); }
+@media (prefers-reduced-motion: reduce) {
+  .garden-series-card img { transition: none; }
+}
+.garden-tags { color: var(--faint); font-size: .82rem; margin-top: 2.2rem; }
+.garden-nav { border-top: 1px solid var(--rule); display: flex; gap: 1rem;
+  justify-content: space-between; margin-top: 2.5rem; padding-top: 1rem; }
+.garden-nav a { max-width: 48%; text-decoration: none; }
+.garden-nav .next { margin-left: auto; text-align: right; }
+.garden-table-wrap { overflow-x: auto; margin: 1.35rem 0; }
+.garden-table { border-collapse: collapse; font-size: .92rem; line-height: 1.45; width: 100%; }
+.garden-table th, .garden-table td { border: 1px solid var(--rule); padding: .55rem .65rem;
+  text-align: left; vertical-align: top; }
+.garden-table th { background: var(--accent-soft); }
+.garden-toc {
+  border-left: 1px solid var(--rule);
+  max-height: calc(100vh - 3rem);
+  overflow: auto;
+  padding: .1rem 0 .75rem 1.3rem;
+  position: sticky;
+  top: 1.5rem;
+}
+.garden-toc-title {
+  color: var(--accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .2em;
+  margin: 0 0 1.15rem;
+  text-transform: uppercase;
+}
+.garden-toc-title::before { content: "☰"; font-size: .8em; margin-right: .65rem; }
+.garden-toc-list { list-style: none; margin: 0; padding: 0; }
+.garden-toc-sublist { list-style: none; margin: 0; padding: 0; }
+.garden-toc-list li { margin: 0; }
+.garden-toc-list a {
+  border-left: 2px solid transparent;
+  color: var(--ink);
+  display: block;
+  font-size: .91rem;
+  line-height: 1.42;
+  margin-left: -1.4rem;
+  padding: .42rem .45rem .42rem 1.3rem;
+  text-decoration: none;
+}
+.garden-toc-list .level-3 a {
+  color: var(--faint);
+  font-size: .86rem;
+  font-style: italic;
+  padding-left: 2.15rem;
+}
+.garden-toc-list a:hover,
+.garden-toc-list a:focus-visible,
+.garden-toc-list a[aria-current="location"] {
+  border-left-color: var(--accent);
+  color: var(--accent);
+}
+.garden-toc-list a[aria-current="location"] { font-weight: 600; }
+.garden-toc-inline { display: none; }
+.garden-layout article :is(h2, h3):target,
+.garden-series:target h2 { color: var(--accent); }
+a.pending { color: var(--faint); text-decoration-style: dashed; }
+a.pending::after { content: " · pending"; font-size: .7em; letter-spacing: .06em;
+  text-transform: uppercase; }
+@media (min-width: 72.01em) {
+  body.garden-page-body > .masthead {
+    align-items: center;
+    column-gap: 2rem;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    margin-bottom: 3.5rem;
+    padding: 1.25rem 0;
+    text-align: left;
+  }
+  body.garden-page-body > .masthead .wordmark { justify-self: start; }
+  body.garden-page-body > .masthead .tagline { justify-self: center; margin: 0; }
+  body.garden-page-body > .masthead nav { justify-self: end; margin: 0; }
+}
+@media (max-width: 72em) {
+  .garden-layout,
+  .garden-index-layout { display: block; }
+  .garden-toc { display: none; }
+  .garden-toc-inline {
+    border: 1px solid var(--rule);
+    display: block;
+    margin: 1.5rem 0 2.4rem;
+    padding: .8rem 1rem;
+  }
+  .garden-toc-inline summary {
+    color: var(--accent);
+    cursor: pointer;
+    font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: .78rem;
+    font-weight: 700;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+  }
+  .garden-toc-inline .garden-toc-list { margin-top: .7rem; }
+  .garden-toc-inline .garden-toc-list a { margin-left: 0; padding-left: .75rem; }
+  .garden-toc-inline .garden-toc-list .level-3 a { padding-left: 1.6rem; }
+}
+@media (max-width: 40em) {
+  body.garden-page-body { font-size: 1.03rem; padding: 1rem 1.05rem 3rem; }
+  .garden-layout .article-title,
+  .garden-intro .article-title { font-size: clamp(2.15rem, 11vw, 3.15rem); }
+  .garden-lede { font-size: 1.1rem; padding-left: 1rem; }
+  .garden-corridors { margin-bottom: 2rem; }
+  .garden-corridor-list { gap: .45rem; }
+  .garden-corridor {
+    font-size: .68rem;
+    min-height: 2.35rem;
+    padding: .3rem .58rem .27rem;
+  }
+  .garden-series-plate-media { aspect-ratio: 16 / 9; }
+  .garden-series-plate figcaption { display: block; }
+  .garden-series-plate figcaption strong { display: block; margin-top: .22rem; }
+  .garden-series-plate-terms { display: block; margin-top: .25rem; }
+  .garden-visual { margin-left: -.15rem; margin-right: -.15rem; padding: 1rem; }
+  .garden-visual-head { display: block; }
+  .garden-visual-title { margin-top: .25rem; }
+  .garden-visual-as-of { margin-top: .35rem; }
+  .garden-visual-caption { grid-template-columns: 1fr; }
+  .garden-visual-evidence { white-space: normal; }
+  .garden-visual--sequence .garden-visual-items,
+  .garden-visual--contrast .garden-visual-items,
+  .garden-visual--constellation .garden-visual-items,
+  .garden-visual--timeline .garden-visual-items { grid-template-columns: 1fr; }
+  .garden-visual--layers .garden-visual-item:nth-child(n) { display: block; margin-left: 0; }
+  .garden-visual--timeline .garden-visual-item { border-width: 0 0 0 1px; }
+  .garden-visual--timeline .garden-visual-item::before { left: -.4rem; top: .9rem; }
+  .garden-visual--constellation .garden-visual-item:nth-child(even) { margin-top: 0; }
+  .garden-series-gallery { grid-template-columns: 1fr; }
+  .garden-nav { flex-direction: column; }
+  .garden-nav a { max-width: none; }
+  .garden-nav .next { margin-left: 0; text-align: left; }
+}
+@media print {
+  a.pending::after { content: " (pending)"; }
+  .garden-layout, .garden-index-layout { display: block; }
+  .garden-toc, .garden-toc-inline { display: none; }
+  .garden-series-card img { display: none; }
+  .garden-series-card { grid-template-rows: auto; }
+}
+</style>
+</head>
+<body class="garden-page-body">
+<button class="theme-toggle" aria-label="Toggle light and dark" onclick="
+  (function () {
+    var d = document.documentElement;
+    var cur = d.getAttribute('data-theme');
+    if (!cur) { cur = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'; }
+    var next = cur === 'dark' ? 'light' : 'dark';
+    d.setAttribute('data-theme', next);
+    try { localStorage.setItem('darshan-theme', next); } catch (e) {}
+  })();
+">◐</button>
+
+<header class="masthead">
+  <h1 class="wordmark"><a href="../index.html">DARSHAN</a></h1>
+  <p class="tagline">A signal of clear seeing in an age of information overload</p>
+  <nav>
+    <a href="../index.html">Articles</a>
+    <a href="index.html">Garden</a>
+    <a href="../about.html">About</a>
+  </nav>
+</header>
+
+<main>
+<div class="garden-layout">
+<article data-garden-room="the-future" data-garden-outline>
+<p class="garden-series-link"><a href="index.html#time-future">Time and the Future</a></p>
+<p class="article-meta">25 August 2026 · Draft</p>
+<h1 class="article-title">The Future</h1>
+<div class="draft-banner"><strong>Draft — pending discernment pass.</strong> This room is part of the garden's first planting. It has not been promoted to published status; check its sources and open questions before citing it.</div>
+<p class="garden-lede">The capstone of the time-future series. Not what will happen — how to stand toward what will happen. The measured record of what humans can and cannot forecast, a famous bet re-run a hundred times, and the working stance that survives both the prophets' record and the paralytics' excuse.</p>
+<nav class="garden-corridors" aria-label="Explore connected rooms" data-corridor-count="10"><ul class="garden-corridor-list"><li><a class="garden-corridor" href="future-of-ai.html">The Future of AI</a></li><li><a class="garden-corridor" href="forecasting.html">Forecasting the Future</a></li><li><a class="garden-corridor" href="futurism.html">Futurism Without Prophecy</a></li><li><a class="garden-corridor" href="trends-gap.html">The Trends Gap: When the Curve Is Not the World</a></li><li><a class="garden-corridor" href="what-ai-can-bring.html">What AI Can Bring Humanity</a></li><li><a class="garden-corridor" href="meaning-of-time.html">Time: Kala, Yugas, the Mayan Count, and the Meaning of Time</a></li><li><a class="garden-corridor" href="the-ideal.html">The Power of the Ideal</a></li><li><a class="garden-corridor" href="teleology.html">Teleology</a></li><li><a class="garden-corridor" href="cybernetics.html">Cybernetics</a></li><li><a class="garden-corridor" href="sense-of-self.html">The Sense of Self</a></li></ul></nav>
+<figure class="garden-series-plate garden-series-plate--time-future">
+<div class="garden-series-plate-media"><picture><source srcset="assets/series/time-future.webp" type="image/webp"><img src="assets/series/time-future.png" alt="Nested engraved time rings opening into several branching forecast paths" width="1672" height="941" loading="eager" decoding="async"></picture></div>
+<figcaption><span class="garden-series-plate-kicker">Visual field</span><strong>Time and the Future</strong><span class="garden-series-plate-terms">prophecy-grammar · the bet test · stance toward the future</span></figcaption>
+</figure>
+<details class="garden-toc-inline"><summary>In this room</summary><ol class="garden-toc-list"><li class="level-2"><a href="#1-two-ways-to-be-wrong-about-tomorrow">1. Two ways to be wrong about tomorrow</a></li><li class="level-2"><a href="#2-what-can-actually-be-forecast-the-measured-record">2. What can actually be forecast: the measured record</a></li><li class="level-2"><a href="#3-worked-example-one-bet-re-run-a-hundred-times">3. Worked example: one bet, re-run a hundred times</a></li><li class="level-2"><a href="#4-popper-s-proposed-ceiling-on-discovery-dependent-futures">4. Popper's proposed ceiling on discovery-dependent futures</a></li><li class="level-2"><a href="#5-the-stance-assembled">5. The stance, assembled</a></li><li class="level-2"><a href="#6-conclusion-what-you-can-now-do">6. Conclusion: what you can now do</a></li><li class="level-2"><a href="#7-open-questions">7. Open questions</a></li><li class="level-2"><a href="#8-where-the-future-lives">8. Where the future lives</a></li><li class="level-2"><a href="#sources">Sources</a></li></ol></details>
+<p>You are in the last room of the time-future series, and it is the capstone of the garden. The other rooms in this wing each take a piece: <a href="meaning-of-time.html">meaning-of-time</a> asks what time is, <a href="futurism.html">futurism</a> surveys the people who forecast for a living, <a href="forecasting.html">forecasting</a> teaches the craft, <a href="trends-gap.html">trends-gap</a> tracks the lag between what exists and what has landed, and <a href="future-of-ai.html">future-of-ai</a> and <a href="what-ai-can-bring.html">what-ai-can-bring</a> apply all of it to one domain. This room asks the question under all of them: how do you stand toward the future at all? Not which future — that changes monthly. The stance.</p>
+<h2 id="1-two-ways-to-be-wrong-about-tomorrow">1. Two ways to be wrong about tomorrow</h2>
+<p>There are two standard failures, and most people alive right now are committing one of them.</p>
+<p>The first is <strong>prophecy</strong>. In 1968, Stanford biologist Paul Ehrlich opened <em>The Population Bomb</em> with these sentences: "The battle to feed all of humanity is over. In the 1970s hundreds of millions of people will starve to death in spite of any crash programs embarked upon now." Notice the grammar. Not "may starve," not "if current trends continue." <em>Will.</em> A specific decade, a specific catastrophe, stated in the grammar reserved for things already measured. The book sold millions of copies and shaped population policy in several countries. And the 1970s came and went: world population, around 3.5 billion when Ehrlich wrote, passed 8 billion in November 2022 by UN estimate, while famine mortality <em>fell</em> — largely because the Green Revolution (Norman Borlaug's high-yield wheat, honored with the 1970 Nobel Peace Prize) was already spreading through India and Mexico as Ehrlich typed.</p>
+<p>Call that failure mode <strong>prophecy-grammar</strong>: statements about the unmeasured future wearing the grammar of measurement. This room is the garden's home for the term. Prophecy-grammar is not the same as being wrong — everyone who thinks about the future is wrong constantly. It is a <em>grammatical</em> failure: deleting the uncertainty from the sentence before the world has deleted it from the facts. It shows up in doomers and boosters alike. "Superintelligence by 2027" and "AI is a bubble that will burst next year" are the same sentence with different nouns.</p>
+<p>The second failure is <strong>paralysis</strong>: refusing to hold any view of the future because forecasting is hard. This one feels humble. It is not — it is a way of hiding your forecasts from yourself. Take out a thirty-year mortgage and you have forecast employment, interest rates, and the survival of your country's property law. Have a child and you have bet on the habitability of the 2080s. Choose what to study, and you have made an implicit call on which skills machines will absorb — a question the <a href="future-of-ai.html">future-of-ai</a> room shows is live right now. There is no neutral position. A person who "doesn't make predictions" makes them anyway and just declines to examine them. You cannot not bet. You can only bet with your eyes open or shut.</p>
+<p>So the capstone question is not "prophecy or humility?" Both fail. The question is what a third stance looks like, and whether anyone has demonstrated it working. People have. The evidence has numbers in it, so let's look.</p>
+<h2 id="2-what-can-actually-be-forecast-the-measured-record">2. What can actually be forecast: the measured record</h2>
+<figure class="garden-visual garden-visual--contrast" aria-labelledby="visual-the-future-1" data-claim-scope="section-synthesis" data-placement-heading="2-what-can-actually-be-forecast-the-measured-record" data-evidence-headings="2-what-can-actually-be-forecast-the-measured-record">
+<div class="garden-visual-head"><p class="garden-visual-kicker">Forecastability is plural</p><p class="garden-visual-title" id="visual-the-future-1">Horizon depends on the target, not the calendar alone</p><p class="garden-visual-as-of">As of 2026</p></div>
+<ul class="garden-visual-items" role="list"><li class="garden-visual-item"><strong class="garden-visual-item-label">Detailed weather</strong><span class="garden-visual-item-detail">A 2019 midlatitude study found about ten practical days, while later ML hindcasts challenge a universal ceiling.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Weather risk</strong><span class="garden-visual-item-detail">Some probabilistic patterns retain useful information over roughly two to six weeks.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Climate averages</strong><span class="garden-visual-item-detail">Forced global trends can retain skill across decades even when daily trajectories cannot.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Geopolitics</strong><span class="garden-visual-item-detail">Scored expert judgment is useful over months and decays toward chance around three to five years.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Commodity prices</strong><span class="garden-visual-item-detail">At ten-year windows, volatility makes direction roughly coin-flip difficult.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">argued · contested</span><strong class="garden-visual-item-label">Future discoveries</strong><span class="garden-visual-item-detail">Popper's argument limits prediction of knowledge whose content would otherwise already be known.</span></li></ul>
+<figcaption class="garden-visual-caption"><span>Measured horizons and argued limits change radically with the variable, scale, feedback, and scoring instrument.</span><span class="garden-visual-evidence">Drawn from: <a href="#2-what-can-actually-be-forecast-the-measured-record">2. What can actually be forecast: the measured record</a></span></figcaption>
+</figure>
+<p>Forecasting skill is not one thing. It is wildly different from domain to domain, and the differences have been measured. Three cases anchor the range.</p>
+<p><strong>Weather: real skill, a conventional ceiling now under pressure.</strong> Numerical weather prediction is among the most audited forecasting systems in human history — predictions are checked against observations every day. Bauer, Thorpe, and Brunet's review "The quiet revolution of numerical weather prediction" (<em>Nature</em> 525, 2015) documents forecast skill in the 3-to-10-day range improving by about one day of lead time per decade. Lorenz's chaos result still matters: small errors in a starting state can grow until detailed trajectories diverge. In 2019, Zhang and colleagues used high-resolution conventional models, ensembles, and near-perfect-model experiments to estimate about ten days of practical skill for instantaneous midlatitude weather and up to five extra days if current initial-condition uncertainty could be reduced by an order of magnitude. That result supported the familiar roughly two-week intrinsic limit for <em>detailed deterministic midlatitude weather under those formulations</em>.</p>
+<p>That is no longer safe to state as a universal impossibility. In a 2025 preprint revised and published in 2026, P. Trent Vonich and Gregory Hakim optimized the initial conditions of the machine-learning model GraphCast with gradients and found hindcast skill beyond thirty days for 2020 cases. The result challenges the claim that small-scale error growth always forces a universal two-week wall. It does not give you an operational thirty-day daily-weather forecast: the optimized initial states were found with a procedure not yet available in real time, and part of the gain may correct model as well as analysis error. So the honest 2026 sentence is dated and scoped: conventional studies found a two-week-ish limit for detailed deterministic midlatitude states; a recent ML initial-condition experiment shows that limit may depend on model and initialization; operational usefulness beyond it remains open.</p>
+<p><strong>Climate: the surprise in the other direction.</strong> You might expect that if detailed weather loses skill quickly, thirty-year prediction is absurd. It isn't, and the reason is instructive. In 2020, Hausfather, Drake, Abbott, and Schmidt (<em>Geophysical Research Letters</em> 47) dug up 17 climate-model projections published between 1970 and 2007 — some written on 1970s hardware — and scored them against observed global temperature through 2017. On raw temperature-versus-time, 10 of 17 were consistent with what happened. Correct for the inputs the modelers couldn't have known (how much CO₂ humanity would actually emit — an economic question, not a physics question), and 14 of 17 were consistent. Models from <em>before</em> most readers were born predicted the planet's temperature trend across half a century. The lesson: chaotic error growth constrains prediction of <em>specific trajectories</em> without erasing skill for <em>forced averages</em> or some slowly varying patterns. What is forecastable is not just a question about how far ahead. It is a question about the variable, scale, and kind of forecast you ask for.</p>
+<p><strong>Geopolitics: the humbling, then the recovery.</strong> Starting in the mid-1980s, psychologist Philip Tetlock recruited 284 experts — people paid to analyze political and economic trends — and collected roughly 28,000 predictions from them over two decades, scored against outcomes. The results, published in <em>Expert Political Judgment</em> (2005), became famous through one caricature: the average expert did about as well as "a dart-throwing chimpanzee." Tetlock himself flags the caricature — the real finding is sharper. Experts beat chance at short horizons and degraded toward chance around three to five years out; simple extrapolation algorithms often matched or beat them; fame was <em>negatively</em> correlated with accuracy; and the one variable that consistently mattered was cognitive style. Borrowing Isaiah Berlin's 1953 essay (itself borrowing the poet Archilochus): hedgehogs, who know one big thing and deploy it everywhere, lost to foxes, who know many small things and update piecemeal.</p>
+<p>Then came the recovery. In a forecasting tournament run by IARPA, the US intelligence research agency, from 2011 to 2015, Tetlock and Barbara Mellers's Good Judgment Project found that a small fraction of ordinary volunteers — "superforecasters" — were reportedly around 30% more accurate than intelligence analysts who had access to classified information. Their methods were teachable and boring: break big questions into small ones, start from base rates, update in small increments, express beliefs as probabilities, and keep score with a proper scoring rule (the Brier score — which rewards honest probabilities rather than lucky verdicts). Geopolitical forecasting is nearly the hardest case — human agency, no repeated trials, events that respond to the forecasts themselves — and even there, <em>disciplined</em> judgment measurably beats both the prophets and the shrug.</p>
+<p>Here is the range laid out:</p>
+<div class="garden-table-wrap"><table class="garden-table"><thead><tr><th>Domain</th><th>Demonstrated skill horizon</th><th>Why</th><th>The instrument</th></tr></thead><tbody><tr><td>Detailed deterministic weather</td><td>~10 days practical in a 2019 midlatitude study; conventional intrinsic estimates around 2 weeks; a 2026 ML hindcast study challenges universality</td><td>Chaotic error growth, model error, and imperfect initial conditions; the bound depends on target and formulation</td><td>Operational verification, ensembles, near-perfect-model tests, and ML hindcasts</td></tr><tr><td>Probabilistic / sub-seasonal weather risk</td><td>Some patterns and risk shifts retain skill from 2–6 weeks; highly variable by phenomenon, region, and season</td><td>Ensembles and slower sources of predictability such as ocean, land, stratosphere, and the MJO</td><td>Calibrated ensemble probabilities and reforecast databases (WMO S2S)</td></tr><tr><td>Climate (forced averages)</td><td>Decades</td><td>The forced trend dominates the chaos at that scale</td><td>14 of 17 old models consistent (Hausfather et al. 2020)</td></tr><tr><td>Geopolitics</td><td>Months; decays toward chance by 3–5 years</td><td>Human agency, reflexivity, no repeatable trials</td><td>Probabilities + scoring + updating (Tetlock)</td></tr><tr><td>Commodity prices</td><td>Roughly a coin flip at 10-year windows</td><td>Volatility swamps trend</td><td>See the worked example below</td></tr><tr><td>Technology impact</td><td>Systematically mis-shaped, not just missed</td><td>Adoption lags, then compounding</td><td>Amara's law; <a href="trends-gap.html">trends-gap</a></td></tr><tr><td>Future discoveries</td><td>A Popperian argument says their content cannot be rationally predicted as knowledge; the scope is contested</td><td>Knowing a future discovery in detail now seems to make it a present discovery</td><td>Philosophical argument, not a measured horizon</td></tr></tbody></table></div>
+<p>One row needs its own sentence. Roy Amara, longtime president of the Institute for the Future, gave the field its most durable one-liner (usually dated to 1978; even his colleagues aren't sure of the original context): "We tend to overestimate the effect of a technology in the short run and underestimate the effect in the long run." That is not a prediction — it is a description of the <em>shape</em> of our errors, and it has held from railways to the internet. It is why the <a href="trends-gap.html">trends-gap</a> room exists: the lag between capability and landed impact is where both the disappointment and the underestimate live.</p>
+<h2 id="3-worked-example-one-bet-re-run-a-hundred-times">3. Worked example: one bet, re-run a hundred times</h2>
+<figure class="garden-visual garden-visual--timeline" aria-labelledby="visual-the-future-2" data-claim-scope="section-synthesis" data-placement-heading="3-worked-example-one-bet-re-run-a-hundred-times" data-evidence-headings="3-worked-example-one-bet-re-run-a-hundred-times">
+<div class="garden-visual-head"><p class="garden-visual-kicker">One wager, many worlds</p><p class="garden-visual-title" id="visual-the-future-2">A settled bet is still one draw from a distribution</p></div>
+<ol class="garden-visual-items" role="list"><li class="garden-visual-item"><span class="garden-visual-item-meta">1980</span><strong class="garden-visual-item-label">Contract</strong><span class="garden-visual-item-detail">Five metals, a $1,000 basket, inflation adjustment, and an exact ten-year settlement date replace opposing manifestos with one test.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">1990</span><strong class="garden-visual-item-label">Observed verdict</strong><span class="garden-visual-item-detail">All five real prices fall and Ehrlich pays Simon $576.07 under the wager's specified terms.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">2010 reanalysis</span><strong class="garden-visual-item-label">All windows</strong><span class="garden-visual-item-detail">A later study of possible windows from 1900 to 2008 finds Simon wins only about 38% of them.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">2022 note</span><strong class="garden-visual-item-label">Ten-year reruns</strong><span class="garden-visual-item-detail">A different back-test gives Ehrlich 69 wins in 102 windows and about 63 wins per 100 simulations of the chosen decade.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">What survives</strong><span class="garden-visual-item-detail">The bet made one sentence falsifiable; it did not settle a century-scale theory of scarcity or ingenuity.</span></li></ol>
+<figcaption class="garden-visual-caption"><span>The Simon–Ehrlich wager gained rigor by naming its terms, then lost its aura of finality when later researchers changed the time window and reran it.</span><span class="garden-visual-evidence">Drawn from: <a href="#3-worked-example-one-bet-re-run-a-hundred-times">3. Worked example: one bet, re-run a hundred times</a></span></figcaption>
+</figure>
+<p>Now the walkthrough. This is the most famous wager about the future ever settled, and then what happened when researchers re-ran it — which is where the real lesson is. Every step is checkable in an afternoon.</p>
+<p><strong>Step 0 — the stakes.</strong> Through the 1970s, Ehrlich (prophet of scarcity) and the economist Julian Simon (prophet of abundance — more people means more minds means cheaper resources) argued past each other in print. In 1980, Simon proposed converting rhetoric into a contract: pick any raw materials and any date more than a year out; he would bet their inflation-adjusted prices would <em>fall</em>.</p>
+<p><strong>Step 1 — the terms.</strong> Ehrlich and two colleagues chose five metals — chromium, copper, nickel, tin, tungsten — and notionally bought $200 of each: a $1,000 basket at September 29, 1980 prices, to be re-priced on September 29, 1990. Basket up in real terms: Simon pays the difference. Basket down: Ehrlich pays. Note what the bet structure forced that a decade of op-eds had not: a named quantity, a named date, a named price.</p>
+<p><strong>Step 2 — the verdict.</strong> By September 1990 all five metals had fallen in real terms; three had fallen even in nominal terms, and the nominal basket also declined. Under the wager's September-price terms, the inflation-adjusted $1,000 basket had lost $576.07, so in October 1990 Ehrlich mailed Simon a check for that amount. Simon offered to go again, bigger; Ehrlich and climatologist Stephen Schneider counter-offered a different bet on 15 environmental trends, which Simon declined, and no second wager happened. The result was reported everywhere as the empirical verdict: the doomsayer measured, the optimist vindicated.</p>
+<p><strong>Step 3 — the re-runs. Here the floor moves.</strong> Decades later, researchers asked the question the headlines never did: was that decade representative? Kiel and co-authors (2010) computed the outcome for all possible start-and-end windows from 1900 to 2008 and found Simon would have won only about 38% of them — and that 1980–1990 was among the most favorable stretches he could have drawn. A 2022 Arizona State research note ("The Long View of 'The Bet'") back-tested every ten-year window from 1903 to 2015: Ehrlich wins 69 of 102. Their Monte Carlo simulations of the actual 1980–1990 decade — re-rolling the random price fluctuations around the long-run trend — have <em>Ehrlich</em> winning about 63 times out of 100. Meanwhile Our World in Data, using a different price series, finds the century's decades splitting roughly half-and-half and real prices ending the 1900s near where they began. Three careful retrodictions, three different tallies — because even hindsight depends on which price index and deflator you choose.</p>
+<p><strong>Step 4 — what actually survives.</strong> So was Simon just lucky? On the ten-year bet, substantially yes: the decade was kind to him, and the famous check measured variance as much as truth. But Simon's deeper claim — that human ingenuity keeps resources from running out on any timescale that matters — survives on <em>different</em> evidence: across the twentieth century, production of those five metals expanded enormously while real prices went sideways, and the "hundreds of millions will starve in the 1970s" prophecy stayed false under every index. Both men wore prophecy-grammar in public. The bet did not settle their debate. What the bet did was something better: it forced one falsifiable sentence out of two unfalsifiable worldviews.</p>
+<p>That is the takeaway tool of this room — call it <strong>the bet test</strong>: a claim about the future is only as serious as the bet it would sign. Named quantity, named date, named price, named counterparty. The economist Alex Tabarrok compressed it in 2012: "a bet is a tax on bullshit." When you read any confident sentence about 2030 — in an AI lab's blog post, a degrowth manifesto, this garden — run the test. If the claim cannot be written as a bet, it is not a forecast; it is a mood. And the re-run teaches the second half of the test: even a <em>settled</em> bet is one draw from a distribution. Update on it, but don't let one check for $576.07 close a question about a century.</p>
+<h2 id="4-popper-s-proposed-ceiling-on-discovery-dependent-futures">4. Popper's proposed ceiling on discovery-dependent futures</h2>
+<p>Before assembling the stance, be honest about the wall. Karl Popper's <em>The Poverty of Historicism</em> (serialized 1944–45, book 1957) contains a short argument he considered a refutation of all grand prophetic theories of history. It runs: the course of human history is strongly influenced by the growth of human knowledge. But we cannot predict, by any rational method, the future growth of knowledge — because to predict today what we will know in twenty years would be to know it now. Therefore no science of history can predict history's course wherever that course depends on discovery.</p>
+<p>Treat the argument at its real weight: it is a logical sketch with premises you can question, not a theorem. On Popper's premises, the content of genuinely new knowledge cannot be forecast in advance <em>as knowledge</em>, so histories that hinge on those discoveries cannot be derived in detail. That does not make every discovery-dependent question unforecastable. You may still estimate research rates, resource constraints, adoption curves, or conditional consequences; critics can also dispute how strongly knowledge growth drives the event in question. The argument is a reason to distrust prophecy-grammar, not a proof that the most consequential future is wholly closed.</p>
+<p>The something else has a birthplace: Royal Dutch Shell, early 1970s. Pierre Wack's planning group built <em>scenarios</em> — a handful of internally coherent futures, including one in which oil producers formed a cartel and cut supply. When the 1973 embargo hit, Shell was the major that had already rehearsed it. Wack spent the rest of his career (two <em>Harvard Business Review</em> essays, "Scenarios: Uncharted Waters Ahead" and "Scenarios: Shooting the Rapids," both 1985) insisting on the point everyone kept missing: the scenarios were never predictions. Their target was what he called the decision-maker's "microcosm" — the mental model inside the executive's head. A scenario succeeds not when it comes true but when it <em>re-perceives</em> the person who worked through it, so that when the world lurches, the lurch is recognized instead of denied. You may fail to forecast a discontinuity, but you can be the kind of system that has rehearsed one. Where Popper narrows prophecy, Wack shows what still fits.</p>
+<h2 id="5-the-stance-assembled">5. The stance, assembled</h2>
+<figure class="garden-visual garden-visual--sequence" aria-labelledby="visual-the-future-3" data-claim-scope="section-synthesis" data-placement-heading="5-the-stance-assembled" data-evidence-headings="5-the-stance-assembled">
+<div class="garden-visual-head"><p class="garden-visual-kicker">The third stance</p><p class="garden-visual-title" id="visual-the-future-3">Act without prophecy, learn without paralysis</p></div>
+<ol class="garden-visual-items" role="list"><li class="garden-visual-item"><strong class="garden-visual-item-label">Type</strong><span class="garden-visual-item-detail">Mark claims as measured, argued, or speculative before reasoning from them.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Quantify</strong><span class="garden-visual-item-detail">Use probabilities instead of verdicts, then keep score with proper rules.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Shape</strong><span class="garden-visual-item-detail">Ask the kind of question the domain's demonstrated instrument can answer.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Ledger</strong><span class="garden-visual-item-detail">Use many small models, named bets, and piecemeal updates like a fox.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Rehearse</strong><span class="garden-visual-item-detail">Where discovery defeats prediction, work through coherent scenarios instead of prophecy.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Act</strong><span class="garden-visual-item-detail">Commit fully to the controllable action without pretending to control its fruit.</span></li></ol>
+<figcaption class="garden-visual-caption"><span>The capstone replaces certainty with a repeatable discipline for steering under uncertainty.</span><span class="garden-visual-evidence">Drawn from: <a href="#5-the-stance-assembled">5. The stance, assembled</a></span></figcaption>
+</figure>
+<p>Put the evidence together and a working stance falls out — neither prophecy nor paralysis, and every piece of it demonstrated somewhere above:</p>
+<ol><li><strong>Type your claims.</strong> Measured, argued, guessed — three registers, three grammars. The garden writes this as FACT / HYPOTHESIS / WILD, and this room's whole series lives or dies by it. Speculation is allowed — some speculation is the most valuable thinking there is — but it must wear its own clothes.</li><li><strong>Probabilities, not verdicts; then keep score.</strong> The superforecasters' entire edge was discipline available to anyone: base rates first, small updates, Brier scores kept honestly. Scoring is what turns opinion into calibration — the feedback loop that <a href="cybernetics.html">cybernetics</a> would tell you no error-correcting system can do without.</li><li><strong>Ask forecastable questions.</strong> Detailed deterministic weather, probabilistic weather risk, seasonal patterns, and forced climate averages are different targets with different horizons. Before forecasting, specify the target and reshape the question toward the quantity the domain can actually answer.</li><li><strong>Be a fox with a bet ledger.</strong> Many small models, updated piecemeal, and the bet test applied to your own sentences before anyone else's.</li><li><strong>Rehearse, don't prophesy.</strong> Where Popper's argument plausibly binds — especially where unknown discoveries drive events — supplement bounded forecasts with Wack's discipline: a few coherent scenarios, assumptions named, each one worked through until your mental model has actually been somewhere it hadn't been. The <a href="future-of-ai.html">future-of-ai</a> room is this garden's attempt to practice exactly that.</li><li><strong>Decouple the act from the fruit.</strong> This is the oldest piece, and it is load-bearing, so it gets its own paragraph.</li></ol>
+<p>The Bhagavad Gita, chapter 2 verse 47, states it in one line: <em>karmaṇy evādhikāras te mā phaleṣu kadācana</em> — "your right is to the action alone, never to its fruits." Read this mechanically, not piously, and notice it is the same move the Brier score makes. A single outcome is one draw from a distribution; judging yourself by the draw teaches you variance, not skill. The scoring rule says: be judged on the honesty of the probability, not the luck of the roll. The Gita says: act with everything you have and release the outcome, because the outcome was never the part you controlled. Twenty-five centuries apart, forecasting science and contemplative practice converge on the identical decoupling — and it is the exact antidote to both failure modes from Section 1. Prophecy is attachment to one fruit; paralysis is refusal to act unless the fruit is guaranteed. The stance acts fully under uncertainty and lets the world do the settling.</p>
+<p>The same structure shows up in a harder place. Jim Collins's <em>Good to Great</em> (2001) recounts his interview with Admiral James Stockdale, who survived over seven years as a prisoner of war in Hanoi. Collins reports Stockdale's observation that the prisoners who broke were the optimists — the ones who were sure they'd be out by Christmas, then by Easter, until the serial disappointment killed them — and his own rule: never confuse faith that you will prevail in the end with the discipline to confront the most brutal facts of your current reality. That is secondhand testimony from one man's memory, so hold it at that weight. But as a compression of the stance, it has not been improved on: full engagement with the worst measured facts, full commitment to action anyway, zero prophecy about the date.</p>
+<p>One more connection closes the loop with this garden's <a href="the-ideal.html">bridge series</a>. The <a href="the-ideal.html">the-ideal</a> room showed that an ideal is not a destination but a rudder — a described nonexistent state you steer by without planning to arrive. The future, held rightly, works the same way. A forecast is something you expect; an ideal is something you steer toward; prophecy is the confusion of the two — steering announced as expecting. Keep them separate and you can hold a picture of the future that organizes decades of action without once pretending to know what will happen. That is what <a href="teleology.html">teleology</a> looks like after it has been through the discipline of this room.</p>
+<h2 id="6-conclusion-what-you-can-now-do">6. Conclusion: what you can now do</h2>
+<p>You can now read any sentence about the future and type it. When a lab CEO says transformative AI arrives in three years, you can hear the prophecy-grammar, ask for the bet — quantity, date, price — and check whether the speaker's own track record has ever been scored. When someone tells you the future is unknowable so why plan, you can point to fourteen of seventeen climate models, a one-day-per-decade weather improvement, and a superforecaster cohort beating classified analysts — and then ask which of their life decisions isn't already a forecast in disguise. You know which questions have demonstrated forecast skill, which face conventional or argued limits, and which limits remain contested. For the hardest cases, you know the companion discipline: scenarios that retool the mind instead of predictions that flatter it.</p>
+<p>The sibling rooms take the stance into the field: <a href="future-of-ai.html">future-of-ai</a> runs it on the most consequential live case, <a href="what-ai-can-bring.html">what-ai-can-bring</a> holds the upside scenarios to the same discipline, <a href="forecasting.html">forecasting</a> teaches the craft in detail, and <a href="trends-gap.html">trends-gap</a> watches the lag where Amara's law does its work. Behind them all, <a href="meaning-of-time.html">meaning-of-time</a> asks what this thing called the future <em>is</em> — which is where this room must end.</p>
+<h2 id="7-open-questions">7. Open questions</h2>
+<p><strong>Established (FACT):</strong> Forecasting skill is real, measurable, and radically domain-dependent — the weather/climate/geopolitics numbers in Section 2 are published, audited measurements. The Simon–Ehrlich bet happened as described, and the re-analyses showing its decade was unrepresentative are published. Training and scoring measurably improve human judgment (GJP, with the "30%" figure reported rather than independently audited).</p>
+<p><strong>Contested (HYPOTHESIS):</strong> Whether superforecaster-style discipline transfers to the questions that matter most — decade-scale, discovery-dependent, unscoreable until too late. Tournament questions resolve in months; civilizational questions don't, and calibration on the former may not buy accuracy on the latter. Also contested: whether Popper's argument fully closes prophecy, or merely bounds it — some argue structural constraints (demographics, energy, compute) make useful long-range prediction possible even where discovery doesn't cooperate.</p>
+<p><strong>Speculation worth holding (WILD):</strong> That the stance itself scales — that a civilization, not just a person, could learn to hold its future as typed claims, scored probabilities, and rehearsed scenarios rather than competing prophecies; and that AI systems, which can be scored on millions of forecasts faster than any human cohort, might become instruments of exactly that calibration rather than amplifiers of prophecy-grammar. Nothing in the record establishes this. It is the future this garden steers toward, held as a rudder, not a map.</p>
+<h2 id="8-where-the-future-lives">8. Where the future lives</h2>
+<p>One observation to exit on, from inside the room's own material. Every instrument in this room — the scenario, the probability, the ideal, the prophecy — has the same curious property: the thing it is about does not exist. The future is not a place where facts sit waiting; nothing about it can be perceived, only represented. Every future you have ever encountered arrived as a present picture, held in some mind's attention, doing its work — steering, frightening, organizing — right now. Which means the stance toward the future was never really a question about time. It is a question about what a mind does with a representation of what is not there: whether it grips it as certainty, drops it in despair, or holds it lightly enough to steer by. The quality of your future, before it is anything else, is a quality of your present attention — and what attention is, and what is attending, is the question waiting in <a href="sense-of-self.html">sense-of-self</a>.</p>
+<h2 id="sources">Sources</h2>
+<ul><li>Ehrlich, P. <em>The Population Bomb</em> (1968), opening lines of the Prologue. UN world population milestones (<a href="https://www.un.org/en/desa/world-population-reach-8-billion-15-november-2022">UN, 8 billion, Nov 2022</a>).</li><li>Simon–Ehrlich wager: terms, dates, $576.07 settlement — <a href="https://en.wikipedia.org/wiki/Simon%E2%80%93Ehrlich_wager">Wikipedia overview</a>; <a href="https://www.perc.org/2005/09/01/betting-on-the-wealth-of-nature">PERC, "Betting on the Wealth of Nature" (2005)</a>. Re-analyses: Kiel et al. (2010, ~38% Simon win rate over 1900–2008 windows, summarized in the Wikipedia entry); <a href="https://csel.asu.edu/research/publications/January-2022-research-note">ASU CSEL research note, "The Long View of 'The Bet'" (Jan 2022)</a> (Ehrlich 69/102 windows; Monte Carlo 63/100); <a href="https://ourworldindata.org/simon-ehrlich-bet">Our World in Data, "Who would have won the Simon-Ehrlich bet over different decades?"</a>.</li><li>Conventional weather evidence: Bauer, Thorpe &amp; Brunet, <a href="https://doi.org/10.1038/nature14956">"The quiet revolution of numerical weather prediction"</a>, <em>Nature</em> 525 (2015); Zhang et al., <a href="https://cimes.princeton.edu/publications/what-predictability-limit-midlatitude-weather">"What Is the Predictability Limit of Midlatitude Weather?"</a>, <em>Journal of the Atmospheric Sciences</em> 76(4) (2019), DOI 10.1175/JAS-D-18-0269.1; Lorenz, <a href="https://doi.org/10.1175/1520-0469(1963)020%3C0130:DNF%3E2.0.CO;2">"Deterministic Nonperiodic Flow"</a>, <em>J. Atmos. Sci.</em> 20 (1963).</li><li>The challenge to a universal two-week limit: Vonich &amp; Hakim, <a href="https://arxiv.org/abs/2504.20238">"Atmospheric Predictability Beyond 30 Days with Machine Learning"</a>, submitted in 2025 and revised/published in 2026, with related journal DOI <a href="https://doi.org/10.1175/AIES-D-26-0009.1">10.1175/AIES-D-26-0009.1</a>. The article's operational caveat comes from the authors: whether the optimized initial conditions can be identified in real time remains future work.</li><li>Forecasts beyond detailed daily states: World Meteorological Organization, <a href="https://public.wmo.int/media/magazine-article/s2s-forecasting-towards-seamless-prediction">"S2S Forecasting: Towards Seamless Prediction"</a> and <a href="https://public.wmo.int/media/magazine-article/predictability-beyond-deterministic-limit">"Predictability Beyond the Deterministic Limit"</a>. These distinguish deterministic synoptic states from probabilistic, sub-seasonal, seasonal, and forced-climate targets.</li><li>Hausfather, Z., Drake, H.F., Abbott, T., Schmidt, G.A. "Evaluating the Performance of Past Climate Model Projections." <em>Geophysical Research Letters</em> 47, e2019GL085378 (2020) — 10/17 raw, 14/17 forcing-corrected (<a href="https://www.giss.nasa.gov/research/features/202001_accuracy">NASA GISS summary</a>; <a href="https://www.realclimate.org/index.php/archives/2019/12/how-good-have-climate-models-been-at-truly-predicting-the-future">RealClimate discussion</a>).</li><li>Tetlock, P. <em>Expert Political Judgment</em> (2005): 284 experts, ~28,000 forecasts (<a href="https://longnow.org/talks/02007-tetlock">Long Now summary</a>). Good Judgment Project / IARPA ACE, "reportedly 30% better than intelligence analysts" (<a href="https://en.wikipedia.org/wiki/The_Good_Judgment_Project">Wikipedia</a>; <a href="https://goodjudgment.com">Good Judgment Inc</a>). Berlin, I. "The Hedgehog and the Fox" (1953).</li><li>Wack, P. "Scenarios: Uncharted Waters Ahead" (HBR, Sept–Oct 1985); "Scenarios: Shooting the Rapids" (HBR, Nov–Dec 1985); Shell and the 1973 shock (<a href="https://www.polytechnique-insights.com/en/columns/society/case-study-how-shell-anticipated-the-1973-oil-crisis">Polytechnique Insights case study</a>; <a href="https://en.wikipedia.org/wiki/Pierre_Wack">Pierre Wack, Wikipedia</a>).</li><li>Amara's law, coined c. 1978, exact context unrecorded (<a href="https://en.wikipedia.org/wiki/Roy_Amara">Roy Amara, Wikipedia</a>).</li><li>Popper, K. <em>The Poverty of Historicism</em> (Economica 1944–45; book 1957) — the knowledge-growth argument is in his preface; stated here as his argument, not as settled fact.</li><li><em>Bhagavad Gita</em> 2.47. Collins, J. <em>Good to Great</em> (2001), ch. 4 — the Stockdale account is Collins's report of an interview and is labeled as such above. Tabarrok, A. "A Bet is a Tax on Bullshit," Marginal Revolution (2012).</li></ul>
+<p><em>Written by Claude (Fable 5), an AI, for the Darshan garden. John Shrader (Dhyana), founder and publisher of record, answers for every word published here. Errors are corrected on the face of the page, dated.</em></p>
+<p class="garden-tags"><strong>Topics:</strong> future · forecasting · uncertainty · prophecy · scenarios · tetlock · simon-ehrlich · stance</p>
+<nav class="garden-nav" aria-label="Rooms"><a class="previous" href="what-ai-can-bring.html">← What AI Can Bring Humanity</a></nav>
+</article>
+<aside class="garden-toc" aria-label="In this room"><nav aria-label="Page sections"><p class="garden-toc-title">In this room</p><ol class="garden-toc-list"><li class="level-2"><a href="#1-two-ways-to-be-wrong-about-tomorrow">1. Two ways to be wrong about tomorrow</a></li><li class="level-2"><a href="#2-what-can-actually-be-forecast-the-measured-record">2. What can actually be forecast: the measured record</a></li><li class="level-2"><a href="#3-worked-example-one-bet-re-run-a-hundred-times">3. Worked example: one bet, re-run a hundred times</a></li><li class="level-2"><a href="#4-popper-s-proposed-ceiling-on-discovery-dependent-futures">4. Popper's proposed ceiling on discovery-dependent futures</a></li><li class="level-2"><a href="#5-the-stance-assembled">5. The stance, assembled</a></li><li class="level-2"><a href="#6-conclusion-what-you-can-now-do">6. Conclusion: what you can now do</a></li><li class="level-2"><a href="#7-open-questions">7. Open questions</a></li><li class="level-2"><a href="#8-where-the-future-lives">8. Where the future lives</a></li><li class="level-2"><a href="#sources">Sources</a></li></ol></nav></aside>
+</div>
+</main>
+
+<footer>
+  <p>Darshan · seeing clearly after the feed</p>
+  <p>No feed. No analytics. No trackers. Finite editions, read at your own pace.</p>
+  <p style="opacity:.7">Darshan v0.0.0.1 · a beginning, built to grow</p>
+</footer>
+<script>
+/* Local section highlighting only. No network requests, analytics, or storage. */
+(function () {
+  var scope = document.querySelector("[data-garden-outline]");
+  if (!scope) return;
+  var sections = Array.prototype.slice.call(scope.querySelectorAll("h2[id], h3[id], section[id]"));
+  var links = Array.prototype.slice.call(document.querySelectorAll('.garden-toc-list a[href^="#"]'));
+  if (!sections.length || !links.length) return;
+  var queued = false;
+  function update() {
+    queued = false;
+    var threshold = Math.max(96, window.innerHeight * .22);
+    var current = sections[0].id;
+    sections.forEach(function (section) {
+      if (section.getBoundingClientRect().top <= threshold) current = section.id;
+    });
+    links.forEach(function (link) {
+      var active = link.getAttribute("href") === "#" + current;
+      if (active) link.setAttribute("aria-current", "location");
+      else link.removeAttribute("aria-current");
+    });
+  }
+  function requestUpdate() {
+    if (!queued) {
+      queued = true;
+      window.requestAnimationFrame(update);
+    }
+  }
+  document.addEventListener("scroll", requestUpdate, {passive: true});
+  window.addEventListener("resize", requestUpdate);
+  window.addEventListener("hashchange", requestUpdate);
+  update();
+})();
+</script>
+</body>
+</html>

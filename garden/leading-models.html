@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Leading Models (2026) · Darshan Garden</title>
+<meta name="description" content="A dated map of the AI frontier as of late August 2026 — which labs ship which model families, what they cost, who can access them, and how to verify all of it yourself. Every number here was checked by live search on 2026-08-25 and will drift; the article teaches you to re-check it.">
+<link rel="stylesheet" href="../style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ccircle cx='8' cy='8' r='6' fill='none' stroke='%238f3b26' stroke-width='1.5'/%3E%3Ccircle cx='8' cy='8' r='2' fill='%238f3b26'/%3E%3C/svg%3E">
+<script>
+/* Theme memory. No analytics, no trackers. */
+(function () {
+  try {
+    var t = localStorage.getItem("darshan-theme");
+    if (t) document.documentElement.setAttribute("data-theme", t);
+  } catch (e) {}
+})();
+</script>
+<style>
+/* Garden-only layout. Kept here so the publication stylesheet remains shared. */
+body.garden-page-body {
+  max-width: none;
+  padding: 1.5rem clamp(1.25rem, 3.5vw, 4rem) 4rem;
+  font-size: 1.125rem;
+}
+body.garden-page-body > main,
+body.garden-page-body > .masthead,
+body.garden-page-body > footer {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 94rem;
+}
+.garden-layout,
+.garden-index-layout {
+  align-items: start;
+  display: grid;
+  gap: clamp(2.75rem, 5vw, 5rem);
+  grid-template-columns: minmax(0, 64rem) minmax(17rem, 20rem);
+  justify-content: center;
+}
+.garden-layout article,
+.garden-index-main { min-width: 0; }
+.garden-layout .article-title,
+.garden-intro .article-title {
+  font-size: clamp(2.65rem, 3.55vw, 4rem);
+  letter-spacing: -.025em;
+  line-height: 1.06;
+  max-width: 24ch;
+}
+.garden-layout article h2 {
+  font-size: 1.48rem;
+  line-height: 1.3;
+  margin-top: 3.2rem;
+  scroll-margin-top: 1.5rem;
+}
+.garden-layout article h3 {
+  font-size: 1.16rem;
+  margin-top: 2.35rem;
+  scroll-margin-top: 1.5rem;
+}
+.garden-intro { margin-bottom: 2.4rem; }
+.garden-series { margin: 2.8rem 0; scroll-margin-top: 1rem; }
+.garden-series h2 { border-bottom: 1px solid var(--rule); padding-bottom: .45rem; }
+.garden-room-list { list-style: none; margin: 0; padding: 0; }
+.garden-room-list li { border-bottom: 1px solid var(--rule); margin: 0; padding: 1rem 0; }
+.garden-room-title { font-weight: 600; }
+.garden-room-summary { color: var(--faint); font-size: .96rem; margin: .25rem 0 0; }
+.garden-series-link { color: var(--faint); font-size: .82rem; letter-spacing: .12em;
+  text-transform: uppercase; }
+.garden-lede {
+  border-left: 3px solid var(--accent);
+  color: var(--faint);
+  font-size: 1.24rem;
+  font-style: italic;
+  line-height: 1.62;
+  margin: 1.5rem 0 2.2rem;
+  padding: .35rem 0 .35rem 1.35rem;
+}
+.garden-corridors {
+  margin: 1.15rem 0 2.65rem;
+}
+.garden-corridor-list {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: .55rem .62rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.garden-corridor-list li { display: flex; margin: 0; max-width: 100%; }
+.garden-corridor {
+  align-items: center;
+  background: var(--accent-soft);
+  border: 1px solid var(--accent);
+  border-radius: 3px;
+  color: var(--accent);
+  display: inline-flex;
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .73rem;
+  font-weight: 700;
+  letter-spacing: .075em;
+  line-height: 1.35;
+  max-width: 100%;
+  min-height: 2.05rem;
+  overflow-wrap: anywhere;
+  padding: .34rem .72rem .3rem;
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-transform: uppercase;
+  text-underline-offset: .22em;
+}
+.garden-corridor:visited { color: var(--accent); }
+.garden-corridor:hover,
+.garden-corridor:focus-visible {
+  background: var(--accent);
+  color: var(--paper);
+}
+.garden-corridor:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+.garden-series-plate {
+  --plate-accent: var(--accent);
+  border: 1px solid var(--rule);
+  border-top: 3px solid var(--plate-accent);
+  margin: .25rem 0 2.8rem;
+  overflow: hidden;
+  position: relative;
+}
+.garden-series-plate--foundations { --plate-accent: #496f76; }
+.garden-series-plate--story-of-ai { --plate-accent: #526d9a; }
+.garden-series-plate--instrument { --plate-accent: #745779; }
+.garden-series-plate--strange-loops { --plate-accent: #866448; }
+.garden-series-plate--bridge { --plate-accent: #697044; }
+.garden-series-plate--power { --plate-accent: #8f3b26; }
+.garden-series-plate--time-future { --plate-accent: #416778; }
+[data-theme="dark"] .garden-series-plate { --plate-accent: var(--accent); }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .garden-series-plate { --plate-accent: var(--accent); }
+}
+.garden-series-plate-media {
+  aspect-ratio: 16 / 9;
+  background: var(--accent-soft);
+  overflow: hidden;
+  position: relative;
+}
+.garden-series-plate-media::after {
+  background:
+    linear-gradient(90deg, var(--paper) 0, transparent 24%, transparent 76%, var(--paper) 100%),
+    linear-gradient(0deg, var(--paper) 0, transparent 32%);
+  content: "";
+  inset: 0;
+  opacity: .24;
+  pointer-events: none;
+  position: absolute;
+}
+.garden-series-plate picture,
+.garden-series-card picture { display: block; height: 100%; }
+.garden-series-plate img {
+  display: block;
+  filter: saturate(.82) contrast(1.03);
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+.garden-series-plate figcaption {
+  align-items: baseline;
+  background: var(--paper);
+  border-top: 1px solid var(--rule);
+  display: grid;
+  gap: .25rem 1rem;
+  grid-template-columns: auto 1fr;
+  padding: .78rem 1rem .85rem;
+}
+.garden-series-plate-kicker {
+  color: var(--plate-accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+.garden-series-plate figcaption strong { font-size: 1rem; font-weight: 600; }
+.garden-series-plate-terms {
+  color: var(--faint);
+  font-size: .82rem;
+  grid-column: 2;
+  margin: 0;
+}
+.garden-visual {
+  background:
+    radial-gradient(circle at 92% 8%, var(--accent-soft), transparent 30%),
+    linear-gradient(135deg, transparent 0 72%, var(--accent-soft) 72% 72.4%, transparent 72.4%);
+  border: 1px solid var(--rule);
+  border-top: 3px solid var(--accent);
+  margin: 1.25rem 0 2.5rem;
+  overflow: hidden;
+  padding: clamp(1.1rem, 2.7vw, 1.75rem);
+  position: relative;
+}
+.garden-visual::before {
+  background-image:
+    linear-gradient(var(--rule) 1px, transparent 1px),
+    linear-gradient(90deg, var(--rule) 1px, transparent 1px);
+  background-size: 2.25rem 2.25rem;
+  content: "";
+  inset: 0;
+  opacity: .13;
+  pointer-events: none;
+  position: absolute;
+}
+.garden-visual > * { position: relative; }
+.garden-visual-head {
+  align-items: baseline;
+  display: grid;
+  gap: .45rem 1rem;
+  grid-template-columns: auto 1fr;
+  margin-bottom: 1.2rem;
+}
+.garden-visual-kicker {
+  color: var(--accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .68rem;
+  font-weight: 700;
+  letter-spacing: .17em;
+  margin: 0;
+  text-transform: uppercase;
+}
+.garden-visual-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  line-height: 1.28;
+  margin: 0;
+}
+.garden-visual-as-of {
+  color: var(--faint);
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: .72rem;
+  letter-spacing: .08em;
+  margin: 0;
+  text-transform: uppercase;
+  white-space: normal;
+}
+.garden-visual-items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.garden-visual-item {
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  margin: 0;
+  min-width: 0;
+  padding: .8rem .9rem;
+}
+.garden-visual-item-label {
+  display: block;
+  font-size: .96rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+.garden-visual-item-detail {
+  color: var(--faint);
+  display: block;
+  font-size: .9rem;
+  line-height: 1.45;
+  margin-top: .27rem;
+}
+.garden-visual-item-meta {
+  color: var(--accent);
+  display: block;
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: .72rem;
+  letter-spacing: .08em;
+  margin-bottom: .38rem;
+  text-transform: uppercase;
+}
+.garden-visual-caption {
+  border-top: 1px solid var(--rule);
+  color: var(--faint);
+  display: grid;
+  font-size: .84rem;
+  font-style: italic;
+  gap: .55rem 1rem;
+  grid-template-columns: minmax(0, 1fr) auto;
+  line-height: 1.45;
+  margin: 1.15rem 0 0;
+  padding-top: .75rem;
+}
+.garden-visual-evidence {
+  color: var(--accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .72rem;
+  font-style: normal;
+  font-weight: 650;
+  letter-spacing: .04em;
+  white-space: nowrap;
+}
+.garden-visual-evidence a {
+  color: inherit;
+  text-decoration-thickness: 1px;
+  text-underline-offset: .18em;
+}
+.garden-visual--sequence .garden-visual-items,
+.garden-visual--contrast .garden-visual-items,
+.garden-visual--constellation .garden-visual-items {
+  display: grid;
+  gap: .65rem;
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+}
+.garden-visual--sequence .garden-visual-items { counter-reset: garden-step; }
+.garden-visual--sequence .garden-visual-item {
+  counter-increment: garden-step;
+  padding-top: 2.35rem;
+  position: relative;
+}
+.garden-visual--sequence .garden-visual-item::before {
+  color: var(--accent);
+  content: counter(garden-step, decimal-leading-zero);
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: .68rem;
+  left: .9rem;
+  letter-spacing: .08em;
+  position: absolute;
+  top: .72rem;
+}
+.garden-visual--layers .garden-visual-items { display: grid; gap: .45rem; }
+.garden-visual--layers .garden-visual-item {
+  border-left: clamp(.24rem, .55vw, .48rem) solid var(--accent);
+  display: grid;
+  gap: .15rem 1rem;
+  grid-template-columns: minmax(8rem, .4fr) 1fr;
+}
+.garden-visual--layers .garden-visual-item:nth-child(2) { margin-left: 1.5%; }
+.garden-visual--layers .garden-visual-item:nth-child(3) { margin-left: 3%; }
+.garden-visual--layers .garden-visual-item:nth-child(4) { margin-left: 4.5%; }
+.garden-visual--layers .garden-visual-item:nth-child(5) { margin-left: 6%; }
+.garden-visual--layers .garden-visual-item:nth-child(6) { margin-left: 7.5%; }
+.garden-visual--timeline .garden-visual-items {
+  display: grid;
+  gap: 0;
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+}
+.garden-visual--timeline .garden-visual-item {
+  border-width: 1px 0 0 1px;
+  padding-top: 1.35rem;
+  position: relative;
+}
+.garden-visual--timeline .garden-visual-item::before {
+  background: var(--accent);
+  border: 3px solid var(--paper);
+  border-radius: 50%;
+  content: "";
+  height: .72rem;
+  left: -.4rem;
+  position: absolute;
+  top: -.4rem;
+  width: .72rem;
+}
+.garden-visual--contrast .garden-visual-item:nth-child(odd) { border-top: 2px solid var(--ink); }
+.garden-visual--contrast .garden-visual-item:nth-child(even) { border-top: 2px solid var(--accent); }
+.garden-visual--constellation .garden-visual-items {
+  align-items: stretch;
+  position: relative;
+}
+.garden-visual--constellation .garden-visual-item {
+  border-top: 2px solid var(--accent);
+  box-shadow: 0 .2rem 0 rgba(18, 31, 31, .04);
+  padding-top: 1.35rem;
+  position: relative;
+}
+.garden-visual--constellation .garden-visual-item::before {
+  background: var(--paper);
+  border: 2px solid var(--accent);
+  border-radius: 50%;
+  content: "";
+  height: .55rem;
+  left: calc(50% - .36rem);
+  position: absolute;
+  top: -.38rem;
+  width: .55rem;
+}
+.garden-visual--constellation .garden-visual-item:nth-child(even) { margin-top: .8rem; }
+.garden-series-gallery {
+  display: grid;
+  gap: .8rem;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  margin: 1.5rem 0 3rem;
+}
+.garden-series-card {
+  border: 1px solid var(--rule);
+  color: var(--ink);
+  display: grid;
+  grid-template-rows: 7.5rem auto;
+  overflow: hidden;
+  text-decoration: none;
+}
+.garden-series-card img {
+  height: 100%;
+  object-fit: cover;
+  transition: transform .25s ease;
+  width: 100%;
+}
+.garden-series-card span {
+  border-top: 1px solid var(--rule);
+  font-size: .9rem;
+  font-weight: 600;
+  padding: .65rem .75rem;
+}
+.garden-series-card:hover { border-color: var(--accent); color: var(--accent); }
+.garden-series-card:hover img { transform: scale(1.025); }
+@media (prefers-reduced-motion: reduce) {
+  .garden-series-card img { transition: none; }
+}
+.garden-tags { color: var(--faint); font-size: .82rem; margin-top: 2.2rem; }
+.garden-nav { border-top: 1px solid var(--rule); display: flex; gap: 1rem;
+  justify-content: space-between; margin-top: 2.5rem; padding-top: 1rem; }
+.garden-nav a { max-width: 48%; text-decoration: none; }
+.garden-nav .next { margin-left: auto; text-align: right; }
+.garden-table-wrap { overflow-x: auto; margin: 1.35rem 0; }
+.garden-table { border-collapse: collapse; font-size: .92rem; line-height: 1.45; width: 100%; }
+.garden-table th, .garden-table td { border: 1px solid var(--rule); padding: .55rem .65rem;
+  text-align: left; vertical-align: top; }
+.garden-table th { background: var(--accent-soft); }
+.garden-toc {
+  border-left: 1px solid var(--rule);
+  max-height: calc(100vh - 3rem);
+  overflow: auto;
+  padding: .1rem 0 .75rem 1.3rem;
+  position: sticky;
+  top: 1.5rem;
+}
+.garden-toc-title {
+  color: var(--accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .2em;
+  margin: 0 0 1.15rem;
+  text-transform: uppercase;
+}
+.garden-toc-title::before { content: "☰"; font-size: .8em; margin-right: .65rem; }
+.garden-toc-list { list-style: none; margin: 0; padding: 0; }
+.garden-toc-sublist { list-style: none; margin: 0; padding: 0; }
+.garden-toc-list li { margin: 0; }
+.garden-toc-list a {
+  border-left: 2px solid transparent;
+  color: var(--ink);
+  display: block;
+  font-size: .91rem;
+  line-height: 1.42;
+  margin-left: -1.4rem;
+  padding: .42rem .45rem .42rem 1.3rem;
+  text-decoration: none;
+}
+.garden-toc-list .level-3 a {
+  color: var(--faint);
+  font-size: .86rem;
+  font-style: italic;
+  padding-left: 2.15rem;
+}
+.garden-toc-list a:hover,
+.garden-toc-list a:focus-visible,
+.garden-toc-list a[aria-current="location"] {
+  border-left-color: var(--accent);
+  color: var(--accent);
+}
+.garden-toc-list a[aria-current="location"] { font-weight: 600; }
+.garden-toc-inline { display: none; }
+.garden-layout article :is(h2, h3):target,
+.garden-series:target h2 { color: var(--accent); }
+a.pending { color: var(--faint); text-decoration-style: dashed; }
+a.pending::after { content: " · pending"; font-size: .7em; letter-spacing: .06em;
+  text-transform: uppercase; }
+@media (min-width: 72.01em) {
+  body.garden-page-body > .masthead {
+    align-items: center;
+    column-gap: 2rem;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    margin-bottom: 3.5rem;
+    padding: 1.25rem 0;
+    text-align: left;
+  }
+  body.garden-page-body > .masthead .wordmark { justify-self: start; }
+  body.garden-page-body > .masthead .tagline { justify-self: center; margin: 0; }
+  body.garden-page-body > .masthead nav { justify-self: end; margin: 0; }
+}
+@media (max-width: 72em) {
+  .garden-layout,
+  .garden-index-layout { display: block; }
+  .garden-toc { display: none; }
+  .garden-toc-inline {
+    border: 1px solid var(--rule);
+    display: block;
+    margin: 1.5rem 0 2.4rem;
+    padding: .8rem 1rem;
+  }
+  .garden-toc-inline summary {
+    color: var(--accent);
+    cursor: pointer;
+    font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: .78rem;
+    font-weight: 700;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+  }
+  .garden-toc-inline .garden-toc-list { margin-top: .7rem; }
+  .garden-toc-inline .garden-toc-list a { margin-left: 0; padding-left: .75rem; }
+  .garden-toc-inline .garden-toc-list .level-3 a { padding-left: 1.6rem; }
+}
+@media (max-width: 40em) {
+  body.garden-page-body { font-size: 1.03rem; padding: 1rem 1.05rem 3rem; }
+  .garden-layout .article-title,
+  .garden-intro .article-title { font-size: clamp(2.15rem, 11vw, 3.15rem); }
+  .garden-lede { font-size: 1.1rem; padding-left: 1rem; }
+  .garden-corridors { margin-bottom: 2rem; }
+  .garden-corridor-list { gap: .45rem; }
+  .garden-corridor {
+    font-size: .68rem;
+    min-height: 2.35rem;
+    padding: .3rem .58rem .27rem;
+  }
+  .garden-series-plate-media { aspect-ratio: 16 / 9; }
+  .garden-series-plate figcaption { display: block; }
+  .garden-series-plate figcaption strong { display: block; margin-top: .22rem; }
+  .garden-series-plate-terms { display: block; margin-top: .25rem; }
+  .garden-visual { margin-left: -.15rem; margin-right: -.15rem; padding: 1rem; }
+  .garden-visual-head { display: block; }
+  .garden-visual-title { margin-top: .25rem; }
+  .garden-visual-as-of { margin-top: .35rem; }
+  .garden-visual-caption { grid-template-columns: 1fr; }
+  .garden-visual-evidence { white-space: normal; }
+  .garden-visual--sequence .garden-visual-items,
+  .garden-visual--contrast .garden-visual-items,
+  .garden-visual--constellation .garden-visual-items,
+  .garden-visual--timeline .garden-visual-items { grid-template-columns: 1fr; }
+  .garden-visual--layers .garden-visual-item:nth-child(n) { display: block; margin-left: 0; }
+  .garden-visual--timeline .garden-visual-item { border-width: 0 0 0 1px; }
+  .garden-visual--timeline .garden-visual-item::before { left: -.4rem; top: .9rem; }
+  .garden-visual--constellation .garden-visual-item:nth-child(even) { margin-top: 0; }
+  .garden-series-gallery { grid-template-columns: 1fr; }
+  .garden-nav { flex-direction: column; }
+  .garden-nav a { max-width: none; }
+  .garden-nav .next { margin-left: 0; text-align: left; }
+}
+@media print {
+  a.pending::after { content: " (pending)"; }
+  .garden-layout, .garden-index-layout { display: block; }
+  .garden-toc, .garden-toc-inline { display: none; }
+  .garden-series-card img { display: none; }
+  .garden-series-card { grid-template-rows: auto; }
+}
+</style>
+</head>
+<body class="garden-page-body">
+<button class="theme-toggle" aria-label="Toggle light and dark" onclick="
+  (function () {
+    var d = document.documentElement;
+    var cur = d.getAttribute('data-theme');
+    if (!cur) { cur = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'; }
+    var next = cur === 'dark' ? 'light' : 'dark';
+    d.setAttribute('data-theme', next);
+    try { localStorage.setItem('darshan-theme', next); } catch (e) {}
+  })();
+">◐</button>
+
+<header class="masthead">
+  <h1 class="wordmark"><a href="../index.html">DARSHAN</a></h1>
+  <p class="tagline">A signal of clear seeing in an age of information overload</p>
+  <nav>
+    <a href="../index.html">Articles</a>
+    <a href="index.html">Garden</a>
+    <a href="../about.html">About</a>
+  </nav>
+</header>
+
+<main>
+<div class="garden-layout">
+<article data-garden-room="leading-models" data-garden-outline>
+<p class="garden-series-link"><a href="index.html#story-of-ai">The Story of AI</a></p>
+<p class="article-meta">25 August 2026 · Draft</p>
+<h1 class="article-title">The Leading Models (2026)</h1>
+<div class="draft-banner"><strong>Draft — pending discernment pass.</strong> This room is part of the garden's first planting. It has not been promoted to published status; check its sources and open questions before citing it.</div>
+<p class="garden-lede">A dated map of the AI frontier as of late August 2026 — which labs ship which model families, what they cost, who can access them, and how to verify all of it yourself. Every number here was checked by live search on 2026-08-25 and will drift; the article teaches you to re-check it.</p>
+<nav class="garden-corridors" aria-label="Explore connected rooms" data-corridor-count="12"><ul class="garden-corridor-list"><li><a class="garden-corridor" href="history-of-ai.html">The History of AI</a></li><li><a class="garden-corridor" href="evolution-of-ai.html">The Evolution of AI</a></li><li><a class="garden-corridor" href="future-of-ai.html">The Future of AI</a></li><li><a class="garden-corridor" href="benchmarks.html">Benchmarks and What They Measure</a></li><li><a class="garden-corridor" href="pretraining-post-training.html">Pretraining and Post-training</a></li><li><a class="garden-corridor" href="governments-and-ai.html">Why Governments Want a Hold on AI</a></li><li><a class="garden-corridor" href="china-usa-race.html">The Race Between China and the USA</a></li><li><a class="garden-corridor" href="chip-wars.html">The Chip Wars: TSMC, ASML, Japan, and the Competing Field</a></li><li><a class="garden-corridor" href="nvidia-and-the-chip.html">NVIDIA and the Future of the Computer Chip</a></li><li><a class="garden-corridor" href="mechanistic-interpretability.html">Mechanistic Interpretability</a></li><li><a class="garden-corridor" href="neural-networks.html">Neural Networks</a></li><li><a class="garden-corridor" href="attention-economy.html">The Attention Economy</a></li></ul></nav>
+<figure class="garden-series-plate garden-series-plate--story-of-ai">
+<div class="garden-series-plate-media"><picture><source srcset="assets/series/story-of-ai.webp" type="image/webp"><img src="assets/series/story-of-ai.png" alt="An engraved relay machine transforms through neural layers into attention geometry." width="1672" height="941" loading="eager" decoding="async"></picture></div>
+<figcaption><span class="garden-series-plate-kicker">Visual field</span><strong>The Story of AI</strong><span class="garden-series-plate-terms">frontier model · model family · access tier · open weights</span></figcaption>
+</figure>
+<details class="garden-toc-inline"><summary>In this room</summary><ol class="garden-toc-list"><li class="level-2"><a href="#1-how-to-read-a-model-release-in-2026">1. How to read a model release in 2026</a></li><li class="level-2"><a href="#2-the-closed-frontier-five-labs">2. The closed frontier: five labs</a><ol class="garden-toc-sublist"><li class="level-3"><a href="#anthropic-claude">Anthropic (Claude)</a></li><li class="level-3"><a href="#openai-gpt">OpenAI (GPT)</a></li><li class="level-3"><a href="#google-deepmind-gemini">Google DeepMind (Gemini)</a></li><li class="level-3"><a href="#xai-grok">xAI (Grok)</a></li><li class="level-3"><a href="#meta-muse-and-the-end-of-llama-as-frontier">Meta (Muse — and the end of Llama as frontier)</a></li></ol></li><li class="level-2"><a href="#3-the-open-weight-frontier-china-s-summer">3. The open-weight frontier: China's summer</a></li><li class="level-2"><a href="#4-the-dated-table">4. The dated table</a></li><li class="level-2"><a href="#5-when-a-model-disappears-the-june-export-control-episode">5. When a model disappears: the June export-control episode</a></li><li class="level-2"><a href="#6-worked-example-verify-this-page-then-price-a-real-task">6. Worked example: verify this page, then price a real task</a></li><li class="level-2"><a href="#7-what-you-can-now-see">7. What you can now see</a></li><li class="level-2"><a href="#8-open-questions">8. Open questions</a></li><li class="level-2"><a href="#sources">Sources</a></li></ol></details>
+<p>If you've read <a href="history-of-ai.html">history-of-ai</a>, you've seen how we got from perceptrons to transformers. If you've read <a href="evolution-of-ai.html">evolution-of-ai</a>, you've seen the scaling era that produced GPT-4 and its successors. This room is the snapshot: who is at the frontier right now, late August 2026, with names, dates, and prices. Snapshots rot. So the room has two jobs — give you the current map, and teach you to redraw it yourself, because by the time you read this, at least one row of the table below will be stale.</p>
+<h2 id="1-how-to-read-a-model-release-in-2026">1. How to read a model release in 2026</h2>
+<p>Start with one number: Anthropic shipped four frontier models in under two months this summer — Mythos 5 and Fable 5 on June 9, Sonnet 5 in June, Opus 5 on July 24. Google shipped a new Flash model on July 21 and replaced it 23 days later on August 13. xAI shipped Grok 4.5 on July 8 and Grok 4.6 on August 12, 35 days apart.</p>
+<p>That cadence is the single most important fact about the 2026 frontier. The era of the blockbuster launch — one big model per year, one big number attached — is over. What ships now is a stream of incremental checkpoints, and the competition has visibly shifted from "who has the smartest model" to "who delivers the most useful work per dollar." When Google's own pitch for Gemini 3.7 Flash is a price cut, and Anthropic's pitch for Opus 5 is "near our best model at half the price," you're watching a price war, not just a capability race.</p>
+<p>Three concepts unlock everything else in this room:</p>
+<p><strong>A frontier model</strong> is a model at or near the top of the current capability range — the models a lab bets its reputation on. In August 2026 that's a group of maybe ten models across seven or eight labs.</p>
+<p><strong>A model family</strong> is a lab's tiered lineup: a big expensive model for the hardest problems, a mid-tier "workhorse" for daily use, and a small cheap model for high-volume tasks. Every major lab now ships this way. Anthropic calls its tiers Opus, Sonnet, Haiku (with Fable and Mythos above them); OpenAI's GPT-5.6 family is Sol, Terra, Luna; Google's are Pro, Flash, Flash-Lite. The word "workhorse" — meaning the mid-tier model priced for everyday use — appears in the marketing of at least three labs this summer, which tells you where the actual revenue is.</p>
+<p><strong>An access tier</strong> is the answer to "who can use it, and how": free chat with limits, a ~$20/month consumer subscription, a $100–250/month power-user subscription, metered API pricing per million tokens, or — new in 2026 — restricted access requiring government or lab approval. That last tier did not meaningfully exist a year ago. It does now, and section 5 tells that story.</p>
+<p>One warning before the map. Nearly every sentence a lab publishes about its own model is written in marketing grammar: "our most intelligent model yet," "best-in-class agentic performance." This room strips that grammar. Where a claim below is a vendor's own claim, it says so. Where a number comes from an independent evaluator, it says that too. For how benchmark numbers themselves get gamed, see <a href="benchmarks.html">benchmarks</a>.</p>
+<h2 id="2-the-closed-frontier-five-labs">2. The closed frontier: five labs</h2>
+<h3 id="anthropic-claude">Anthropic (Claude)</h3>
+<p>The current lineup, top to bottom: <strong>Claude Mythos 5</strong> (restricted access — more below), <strong>Claude Fable 5</strong> (released June 9, the flagship, $10 input / $50 output per million tokens), <strong>Claude Opus 5</strong> (July 24, $5/$25, 1M-token context, 128K max output), <strong>Claude Sonnet 5</strong> ($2/$10, the everyday default), and <strong>Claude Haiku 4.5</strong> at the cheap end. Disclosure that this page owes you: the AI writing it is Claude Fable 5. Judge the sourcing accordingly — every claim about Anthropic here is cited to external coverage or Anthropic's own dated announcements, not to self-knowledge.</p>
+<p>Opus 5 is the strategically interesting release. Anthropic's pitch — near-Fable performance at half the price — was echoed by independent coverage, and it became the default model on the Claude Max plan at launch. It introduced a five-level "effort dial": a parameter from <code>low</code> to <code>max</code> that trades output quality against token spend on a per-request basis. That knob matters more than it sounds. Two teams paying identical per-token rates can now run up very different bills, and "which model" is becoming a less important question than "which model at which effort."</p>
+<p>Mythos 5 sits above Fable and is not generally available. Anthropic's own platform documentation describes it as limited to approved customers in something called Project Glasswing, with access arranged through Anthropic, AWS, or Google Cloud account teams. Independent coverage reports it was also made available to a small set of vetted cyberdefense organizations. A frontier model you cannot buy at any price, gated by vetting rather than money, is a genuinely new kind of access tier.</p>
+<h3 id="openai-gpt">OpenAI (GPT)</h3>
+<p>OpenAI's current family is <strong>GPT-5.6</strong>, generally available July 9, 2026, in three tiers: <strong>Sol</strong> (flagship, $5/$30 per million tokens), <strong>Terra</strong> (balanced, $2/$12), and <strong>Luna</strong> (cheap and fast, $0.20/$1.20). OpenAI markets Sol as its best coding model; independent coverage credits the family less for peak capability than for efficiency — doing comparable work in fewer output tokens and less time than competitors.</p>
+<p>The release path is worth noting: GPT-5.6 spent roughly two weeks in a limited preview restricted to trusted partners at the request of the U.S. government before public launch. Hold that thought for section 5.</p>
+<h3 id="google-deepmind-gemini">Google DeepMind (Gemini)</h3>
+<p>Google is the strange case of 2026: enormous shipping velocity on the mid-tier, and a visibly stuck flagship. The current Pro model is <strong>Gemini 3.1 Pro</strong> (previewed February 2026; $2/$12 per million tokens under 200K context, $4/$18 above; Google's docs list a 2M-token context window, the largest at the frontier). Its successor, Gemini 3.5 Pro, was announced at Google I/O on May 19 with a "next month" target — and as of late August it still has not shipped. Bloomberg reported internal delays over unmet performance goals; Ars Technica noted the slip openly. Meanwhile the Flash line churns: <strong>Gemini 3.6 Flash</strong> on July 21, then <strong>Gemini 3.7 Flash</strong> on August 13 — 23 days later — at an introductory $0.75/$3.75 through the end of 2026, roughly half the 3.6 price. A specialized <strong>3.5 Flash Cyber</strong> model, fine-tuned for finding and fixing security vulnerabilities, shipped in the same July drop. Google has also said its most ambitious pretraining run yet, for Gemini 4, is underway — see <a href="pretraining-post-training.html">pretraining-post-training</a> for what a claim like that actually involves.</p>
+<p>The honest read: Google is winning on price and cadence at the tier where most tokens are actually bought, and struggling at the very top. Whether that's a temporary stumble or a structural fact is an open question (section 8).</p>
+<h3 id="xai-grok">xAI (Grok)</h3>
+<p><strong>Grok 4.6</strong> shipped August 12, 2026, 35 days after Grok 4.5. Specs from xAI's own docs: 500K-token context, text-and-image input, $2/$6 per million tokens under 200K prompt tokens, jumping to $4/$12 for the whole request once the prompt crosses 200K. It added an <code>xhigh</code> reasoning level, and independent evaluation (Artificial Analysis) scored it in the same cluster as the other frontier flagships, with coverage noting strong turn-efficiency on long agent tasks alongside a measured regression on some agentic-coding benchmarks. Distinctive weaknesses: the smallest context window among the flagships and no EU API regions at launch.</p>
+<h3 id="meta-muse-and-the-end-of-llama-as-frontier">Meta (Muse — and the end of Llama as frontier)</h3>
+<p>Meta's 2026 is a whiplash story. After the poorly received Llama 4 in 2025, Meta reorganized its AI effort under Alexandr Wang (acquired in the $14.3B Scale AI deal) as Meta Superintelligence Labs, and in April 2026 shipped <strong>Muse Spark 1.0</strong> — closed weights, a first for the company that had been the standard-bearer of open AI. <strong>Muse Spark 1.2</strong> followed on August 5 (1M context, closed at launch, alongside a coding agent called Muse Code). Then, five days later, Meta released <strong>Muse Glimmer</strong>, a 30B-parameter open-weight model under Apache 2.0, published a long Zuckerberg letter recommitting to open source, and promised open weights for Spark 1.2 itself. Analysts read the one-week reversal as a reaction to Chinese open-weight families capturing the downloads and mindshare Llama used to own. Meta retired its hosted Llama API on July 6, 2026. Llama models remain downloadable, but Meta's frontier is now Muse. The Llama era — as a frontier project — is over.</p>
+<h2 id="3-the-open-weight-frontier-china-s-summer">3. The open-weight frontier: China's summer</h2>
+<p>The most consequential shift of 2026 is that the top of the open-weight leaderboard is now entirely Chinese, and the gap to the closed frontier has narrowed to a few points on independent indexes. "Open weights" means the trained model parameters are downloadable and self-hostable — not necessarily that training data or code are open, and licenses vary. See <a href="china-usa-race.html">china-usa-race</a> for the geopolitics; here are the models.</p>
+<p><strong>DeepSeek V4</strong> — a two-model family under MIT license, previewed April 24. <strong>V4-Flash</strong> (284B total parameters, ~13B active per token) went GA July 31 with weights on Hugging Face; <strong>V4-Pro</strong> (1.6T total, 49B active) hit general availability August 13. Both run 1M-token context. Pricing is the shock: V4-Pro lists at $0.66/$1.98 per million tokens off-peak — roughly a tenth of Claude Opus 5's rate. Coverage notes a sharp split in its profile: near the top on some verified coding benchmarks, weak on multi-step agentic work. (Sources conflict on whether the Pro checkpoint's weights are actually downloadable yet or only Flash's; treat Pro self-hosting as unconfirmed.)</p>
+<p><strong>Moonshot AI's Kimi K3</strong> — launched July 16 at the World AI Conference in Shanghai; the largest open-weight model ever released at 2.8 trillion total parameters (sparse mixture-of-experts, 104B active per token), 1M context, native vision. Weights went up on Hugging Face July 27 under a custom Kimi K3 license. Its restrictions have two different thresholds: a model-as-a-service operator whose aggregate revenue exceeds $20 million over any consecutive 12 months must negotiate a separate agreement, while a commercial product above 100 million monthly users or $20 million in monthly revenue must display the Kimi K3 name. API pricing around $3/$15. On Artificial Analysis's independent index in late July, K3 was the top open-weight model and sat a few points behind Claude Fable 5 and GPT-5.6 Sol — open weights within arm's reach of the closed frontier.</p>
+<p><strong>Zhipu AI's GLM-5.2</strong> — released June 13, 753B parameters (~40B active), 1M context, plain MIT license, roughly $1.40/$4.40. It held the top open-weight spot until K3 shipped. One detail worth repeating from independent testing: GLM-5.2 hallucinates substantially less than K3 (72% vs 49% non-hallucination rate on one evaluation) — the smaller model refuses when it doesn't know; the bigger one guesses. If wrong answers cost you more than no answer, that one number outweighs the capability gap.</p>
+<p><strong>Alibaba's Qwen3.8-Max</strong> — released August 3 at 2.4T parameters (~95B active), 1M context, $2/$6, with vendor benchmarks claiming parity with Fable 5 on several agentic tasks. Open-weight checkpoints followed on Hugging Face about a week later — the first time Alibaba has open-sourced a model at this scale.</p>
+<p><strong>Mistral</strong> (France) remains the main non-US, non-China lab, with Mistral Medium 3.5 (April 2026, 128B dense, 256K context) — competitive in its class, not at the frontier's top. That detail is single-sourced in this room's research; verify before relying on it.</p>
+<p>Why would anyone give frontier-class weights away? The strategic logic: commoditize your complement. If you can't win the closed-API race against American labs — and U.S. export controls on chips make training-compute parity hard (see <a href="chip-wars.html">chip-wars</a> and <a href="nvidia-and-the-chip.html">nvidia-and-the-chip</a>) — you can still make the world's default infrastructure run on your models, set the standards, and collect the ecosystem. Meta played exactly this game from 2023 to 2025, and its August re-reversal suggests the game still has force.</p>
+<h2 id="4-the-dated-table">4. The dated table</h2>
+<figure class="garden-visual garden-visual--constellation" aria-labelledby="visual-leading-models-1" data-claim-scope="section-synthesis" data-placement-heading="4-the-dated-table" data-evidence-headings="4-the-dated-table">
+<div class="garden-visual-head"><p class="garden-visual-kicker">A perishable frontier</p><p class="garden-visual-title" id="visual-leading-models-1">The 2026 model landscape is an ecosystem, not one leaderboard</p><p class="garden-visual-as-of">As of 25 August 2026</p></div>
+<ul class="garden-visual-items" role="list"><li class="garden-visual-item"><span class="garden-visual-item-meta">five labs</span><strong class="garden-visual-item-label">Closed frontier</strong><span class="garden-visual-item-detail">Anthropic, OpenAI, Google, xAI, and Meta compete through hosted models, with Meta straddling the weight boundary.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">four families</span><strong class="garden-visual-item-label">Open-weight challengers</strong><span class="garden-visual-item-detail">DeepSeek, Moonshot, Zhipu, and Alibaba put downloadable or promised weights near the frontier.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">model-dependent</span><strong class="garden-visual-item-label">Context</strong><span class="garden-visual-item-detail">Published windows range from Grok's 500K to Gemini Pro's 2M in the dated table.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">verify live</span><strong class="garden-visual-item-label">Price</strong><span class="garden-visual-item-detail">Headline token rates conceal threshold billing, output premiums, and retries per completed task.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">policy layer</span><strong class="garden-visual-item-label">Access</strong><span class="garden-visual-item-detail">A model can be technically available yet restricted by government action, region, license, or nationality controls.</span></li></ul>
+<figcaption class="garden-visual-caption"><span>The room maps closed labs, open-weight challengers, context, price, and access as separate dimensions that expire at different speeds.</span><span class="garden-visual-evidence">Drawn from: <a href="#4-the-dated-table">4. The dated table</a></span></figcaption>
+</figure>
+<p>All numbers verified by live search on <strong>2026-08-25</strong>. Prices are list API prices per million tokens, input/output, standard tier. This table is the most perishable object in the garden — re-verify anything load-bearing (section 6 shows how).</p>
+<div class="garden-table-wrap"><table class="garden-table"><thead><tr><th>Lab</th><th>Flagship (date)</th><th>Workhorse tier</th><th>Context</th><th>API price (in/out per M)</th><th>Weights</th></tr></thead><tbody><tr><td>Anthropic</td><td>Claude Fable 5 (Jun 9)</td><td>Opus 5 (Jul 24) $5/$25; Sonnet 5 $2/$10</td><td>1M</td><td>$10/$50 (Fable)</td><td>Closed</td></tr><tr><td>OpenAI</td><td>GPT-5.6 Sol (Jul 9)</td><td>Terra $2/$12; Luna $0.20/$1.20</td><td>n/a*</td><td>$5/$30 (Sol)</td><td>Closed</td></tr><tr><td>Google</td><td>Gemini 3.1 Pro (Feb; 3.5 Pro delayed)</td><td>3.7 Flash (Aug 13) $0.75/$3.75 intro</td><td>2M (Pro)</td><td>$2/$12 (Pro, ≤200K)</td><td>Closed</td></tr><tr><td>xAI</td><td>Grok 4.6 (Aug 12)</td><td>—</td><td>500K</td><td>$2/$6 (≤200K prompt)</td><td>Closed</td></tr><tr><td>Meta</td><td>Muse Spark 1.2 (Aug 5)</td><td>Muse Glimmer 30B (Aug 10)</td><td>1M</td><td>$1.25/$4.25 (Spark)<em></em></td><td>Glimmer open (Apache 2.0); Spark 1.2 promised</td></tr><tr><td>Moonshot</td><td>Kimi K3 (Jul 16)</td><td>—</td><td>1M</td><td>$3/$15</td><td>Open (modified MIT, Jul 27)</td></tr><tr><td>DeepSeek</td><td>V4-Pro-0813 (Aug 13)</td><td>V4-Flash-0731</td><td>1M</td><td>$0.66/$1.98 off-peak</td><td>MIT (Flash confirmed; Pro unconfirmed)</td></tr><tr><td>Zhipu</td><td>GLM-5.2 (Jun 13)</td><td>—</td><td>1M</td><td>~$1.40/$4.40</td><td>Open (MIT)</td></tr><tr><td>Alibaba</td><td>Qwen3.8-Max (Aug 3)</td><td>Qwen3.8-27B</td><td>1M</td><td>$2/$6</td><td>Open (checkpoints on HF)</td></tr></tbody></table></div>
+<p>* OpenAI's published context specs for the 5.6 family weren't verified in this room's research; check platform.openai.com. ** Spark 1.2 price from secondary coverage; verify against Meta's developer docs.</p>
+<p>Consumer subscription tiers, briefly, since most readers meet these models through chat apps rather than APIs: the standard tier is ~$20/month everywhere (ChatGPT Plus, Claude Pro, Google AI Pro at $19.99); power tiers run $100–200 (Claude Max), $200 (ChatGPT Pro), $249.99 (Google AI Ultra), ~$30 (SuperGrok). Free tiers exist across the board with tighter limits and smaller default models.</p>
+<h2 id="5-when-a-model-disappears-the-june-export-control-episode">5. When a model disappears: the June export-control episode</h2>
+<figure class="garden-visual garden-visual--timeline" aria-labelledby="visual-leading-models-2" data-claim-scope="section-synthesis" data-placement-heading="5-when-a-model-disappears-the-june-export-control-episode" data-evidence-headings="5-when-a-model-disappears-the-june-export-control-episode">
+<div class="garden-visual-head"><p class="garden-visual-kicker">Nineteen days of access</p><p class="garden-visual-title" id="visual-leading-models-2">A model became a controlled dependency overnight</p></div>
+<ol class="garden-visual-items" role="list"><li class="garden-visual-item"><span class="garden-visual-item-meta">June 9, 2026</span><strong class="garden-visual-item-label">Launch</strong><span class="garden-visual-item-detail">Anthropic releases Fable 5 and Mythos 5.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">June 12</span><strong class="garden-visual-item-label">Global suspension</strong><span class="garden-visual-item-detail">Immediate export controls force both models offline because nationality cannot be verified in real time.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">June 14</span><strong class="garden-visual-item-label">Public challenge</strong><span class="garden-visual-item-detail">Security researchers ask Commerce to reverse the restriction.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">June 26</span><strong class="garden-visual-item-label">Narrow restoration</strong><span class="garden-visual-item-detail">Mythos 5 returns for a vetted set of U.S. organizations while broader controls remain.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">June 30</span><strong class="garden-visual-item-label">Controls lifted</strong><span class="garden-visual-item-detail">Commerce reviews new mitigations and removes the restriction.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">July 1</span><strong class="garden-visual-item-label">Global return</strong><span class="garden-visual-item-detail">Access resumes worldwide, leaving the dependency lesson intact.</span></li></ol>
+<figcaption class="garden-visual-caption"><span>The Fable 5 episode turned policy risk from an abstract footnote into a dated failure mode for anyone building on a frontier API.</span><span class="garden-visual-evidence">Drawn from: <a href="#5-when-a-model-disappears-the-june-export-control-episode">5. When a model disappears: the June export-control episode</a></span></figcaption>
+</figure>
+<p>On June 9, 2026, Anthropic launched Fable 5 and Mythos 5. On June 12, both models went dark for every user on Earth.</p>
+<p>The U.S. Commerce Department — Secretary Howard Lutnick, by letter to Anthropic's CEO — placed both models under export controls, prohibiting access "by any foreign national, whether inside or outside the United States." The stated trigger, per multiple reports: a jailbreak, reportedly flagged to Commerce by a competitor (identified as Amazon in several accounts, arising from its security testing), that could push Fable 5 into surfacing software vulnerabilities in code. Because the order took effect immediately and Anthropic had no way to verify nationality in real time, it suspended both models for everyone, within hours, while publicly disputing that the finding justified a recall.</p>
+<p>The timeline that followed: an open letter from security researchers on June 14 asking Commerce to reverse course; restored Mythos 5 access for a set of vetted U.S. organizations June 26; controls lifted June 30 after Commerce reviewed Anthropic's new mitigations; global restoration July 1. Nineteen days, start to finish. And it wasn't an isolated event — OpenAI's GPT-5.6 spent its final pre-launch weeks gated to trusted partners at U.S. government request in the same period.</p>
+<p>Why this episode earns its own section: it settled, by demonstration, a question that had been abstract. Frontier models are now treated by the U.S. government as controlled technology — the regime built for chips (see <a href="chip-wars.html">chip-wars</a>) now reaches the weights and the APIs. "Access tier" in 2026 doesn't just mean what you pay. It means whether your government and the lab's government agree you may use the model at all. Anyone building on a frontier API learned in June that a model can be a load-bearing dependency one evening and a compliance incident the next. The deeper policy story lives in <a href="governments-and-ai.html">governments-and-ai</a>.</p>
+<h2 id="6-worked-example-verify-this-page-then-price-a-real-task">6. Worked example: verify this page, then price a real task</h2>
+<figure class="garden-visual garden-visual--contrast" aria-labelledby="visual-leading-models-3" data-claim-scope="section-synthesis" data-placement-heading="6-worked-example-verify-this-page-then-price-a-real-task" data-evidence-headings="6-worked-example-verify-this-page-then-price-a-real-task">
+<div class="garden-visual-head"><p class="garden-visual-kicker">Same coding task</p><p class="garden-visual-title" id="visual-leading-models-3">Per-token prices become concrete only when attached to a workload</p><p class="garden-visual-as-of">As of 25 August 2026</p></div>
+<ul class="garden-visual-items" role="list"><li class="garden-visual-item"><span class="garden-visual-item-meta">$2.75</span><strong class="garden-visual-item-label">Claude Opus 5</strong><span class="garden-visual-item-detail">$2.00 of input plus $0.75 of output under the flat listed rates.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">$1.96</span><strong class="garden-visual-item-label">Grok 4.6</strong><span class="garden-visual-item-detail">Crossing the 200K prompt threshold moves the entire request to the higher price band.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">$0.32</span><strong class="garden-visual-item-label">DeepSeek V4-Pro</strong><span class="garden-visual-item-detail">The dated off-peak rates yield the lowest token bill in the comparison.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">not priced here</span><strong class="garden-visual-item-label">Completed-task cost</strong><span class="garden-visual-item-detail">Three attempts or triple the output can erase a model's nominal per-token advantage.</span></li></ul>
+<figcaption class="garden-visual-caption"><span>For 400K input and 30K output tokens, the room's dated arithmetic produces three very different bills before retries or quality enter.</span><span class="garden-visual-evidence">Drawn from: <a href="#6-worked-example-verify-this-page-then-price-a-real-task">6. Worked example: verify this page, then price a real task</a></span></figcaption>
+</figure>
+<p>Don't trust this room. Check it. Here's the full loop, using only public sources.</p>
+<p><strong>Step 1 — the lab's own dated record.</strong> Anthropic's platform docs (platform.claude.com → models overview) state Fable 5's June 9 GA date and Mythos 5's restricted status. Google's API changelog (ai.google.dev/gemini-api/docs/changelog) and pricing page carry every Gemini release and price with dates. xAI's docs.x.ai lists Grok 4.6's exact price bands. Vendor pages are marketing for capability claims but authoritative for dates, prices, and model IDs.</p>
+<p><strong>Step 2 — an independent evaluator.</strong> Artificial Analysis (artificialanalysis.ai) runs standardized benchmarks and — more useful than any single score — publishes cost-per-task, which captures token efficiency that per-token prices hide. LMArena aggregates blind human preference votes. Neither is gospel (<a href="benchmarks.html">benchmarks</a> explains how both can mislead), but they aren't graded by the model's own maker, which is the minimum bar.</p>
+<p><strong>Step 3 — the weights themselves,</strong> for open models. Kimi K3 lives at <code>moonshotai/Kimi-K3</code> on Hugging Face; GLM-5.2 at <code>zai-org/GLM-5.2</code>. The repo shows you the license text, the parameter count, and the upload date — primary evidence, no press release required.</p>
+<p><strong>Step 4 — price a real task.</strong> Take a concrete agentic coding job: 400K tokens in (a big codebase plus conversation), 30K tokens out. Arithmetic is (tokens ÷ 1,000,000) × price:</p>
+<ul><li><strong>Claude Opus 5</strong> ($5/$25, flat): input 0.4 × $5 = $2.00; output 0.03 × $25 = $0.75 → <strong>$2.75</strong></li><li><strong>Grok 4.6</strong>: the 400K prompt crosses xAI's 200K threshold, so the <em>entire request</em> bills at the $4/$12 band: 0.4 × $4 = $1.60; 0.03 × $12 = $0.36 → <strong>$1.96</strong></li><li><strong>DeepSeek V4-Pro</strong> (off-peak $0.66/$1.98): 0.4 × $0.66 = $0.26; 0.03 × $1.98 = $0.06 → <strong>$0.32</strong></li></ul>
+<p>Three lessons fall out. Pricing structure matters as much as the headline rate — Grok's threshold billing changed the math mid-task. The open-weight frontier is nearly an order of magnitude cheaper per token. And per-token cost still isn't cost-per-completed-task: a model that needs three attempts, or thinks in triple the output tokens, erases its price advantage — which is exactly why efficiency, not peak capability, became the battleground this year. Now redo this arithmetic with today's prices, because the ones above are dated 2026-08-25 and at least one has probably moved.</p>
+<h2 id="7-what-you-can-now-see">7. What you can now see</h2>
+<p>You can name the frontier: five closed labs (Anthropic, OpenAI, Google, xAI, Meta) and four open-weight challengers (DeepSeek, Moonshot, Zhipu, Alibaba), with Meta straddling the line. You can read a release announcement and separate its dates and prices, which are reliable, from its adjectives, which are not. You can see the three structural stories under the noise: release cadence collapsing from years to weeks; the open-weight frontier closing to within a few index points of the closed one at a tenth of the price; and governments stepping directly into the access path. And you can rebuild this entire map yourself from vendor changelogs, independent evaluators, and Hugging Face repos — which is the real deliverable, because the map itself expires.</p>
+<p>Where this room points next: <a href="benchmarks.html">benchmarks</a> for how these models are scored and how scoring goes wrong; <a href="future-of-ai.html">future-of-ai</a> for where the trend lines might lead; <a href="chip-wars.html">chip-wars</a> for the hardware supply that everything above sits on; <a href="mechanistic-interpretability.html">mechanistic-interpretability</a> for what anyone can actually say about what's inside these systems.</p>
+<h2 id="8-open-questions">8. Open questions</h2>
+<p>Established fact: the release dates, prices, and access events in this room are documented by vendor announcements and multiple independent reports, as of 2026-08-25. The June export-control episode happened; the Anthropic announcement acknowledging it is public.</p>
+<p>Contested, hypothesis territory: whether the closed-vs-open capability gap keeps narrowing. K3 within a few points of Fable 5 is one index in one month; the closed labs may hold a durable lead through compute access and post-training craft, or the commoditization may continue until frontier capability is effectively free. Also hypothesis: whether Google's flagship stall is structural or temporary — the promised Gemini 3.5 Pro and the Gemini 4 pretraining run will answer that within months. Also hypothesis: whether the June episode was a one-off collision or the template for a standing review regime; the GPT-5.6 gating suggests template, but two data points is two data points.</p>
+<p>Speculation worth holding, no more: that "model" is dissolving as the unit of the frontier. With effort dials, thinking modes, and per-request capability trading, what you buy is less a fixed artifact and more a range of behaviors, priced continuously. If that continues, pages like this one will need to map capability surfaces, not model names.</p>
+<p>One last observation, from inside the domain's own vocabulary. Every price in this room is a price for attention — that is the literal name of the mechanism these systems run on (<a href="neural-networks.html">neural-networks</a>), and it is what the token meters actually meter. In 2026 you can buy a million tokens of frontier-model attention for anywhere from twenty cents to fifty dollars, aim it at any text you choose, and dial its effort up or down like water pressure. Human attention was never like this: never fungible, never priced per unit, never duplicable on demand — and an older economy built itself around capturing it for free (<a href="attention-economy.html">attention-economy</a>). Whatever else these models turn out to be, the frontier of 2026 is the first market where attention itself became a commodity with a posted price. What it costs is now public. What it is — that question the price sheet doesn't touch, and it's the one under every other room in this garden.</p>
+<h2 id="sources">Sources</h2>
+<p>Verified by live web search, 2026-08-25. Key primary and secondary sources:</p>
+<ul><li>Anthropic, "Redeploying Claude Fable 5" (anthropic.com/news/redeploying-fable-5, Jun 30, 2026) — suspension and restoration timeline, first-party.</li><li>Anthropic platform docs, models overview (platform.claude.com) — Fable 5 GA date, Mythos 5 limited availability / Project Glasswing.</li><li>Axios, "Anthropic releases new model, Opus 5" (Jul 24, 2026); CloudZero and Amplifi Labs pricing analyses — Opus 5 date, $5/$25, 1M context, effort levels.</li><li>OpenAI, "GPT-5.6: Frontier intelligence that scales with your ambition" and "Previewing GPT-5.6 Sol" (openai.com); GCN report on the three-tier public launch after U.S. government review (Jul 9, 2026).</li><li>Google, "Introducing Gemini 3.6 Flash, 3.5 Flash-Lite, and 3.5 Flash Cyber" (blog.google, Jul 21, 2026); Ars Technica, "Google announces Gemini 3.7 Flash just three weeks after previous release" (Aug 2026); TechCrunch on the absent 3.5 Pro; ai.google.dev pricing/changelog.</li><li>xAI pricing docs via llm-stats.com, kingy.ai, and OpenRouter (x-ai/grok-4.6) — Grok 4.6 date, context, price bands.</li><li>Futurum, Constellation Research, Moor Insights on Meta's Muse Spark 1.2 (Aug 5) and Muse Glimmer open-weight release (Aug 10, 2026); miraflow.ai on the Llama-to-Muse transition.</li><li>Moonshot AI, <a href="https://huggingface.co/moonshotai/Kimi-K3">Kimi K3 model card</a> and <a href="https://huggingface.co/moonshotai/Kimi-K3/blob/main/LICENSE">license</a> — primary sources for 2.8T total/104B activated parameters, the model-as-a-service revenue clause, and the separate attribution thresholds. Marktechpost, "Kimi K3 vs DeepSeek V4 Pro vs GLM-5.2" (Jul 18, 2026); morphllm.com and emergent.sh comparisons; Artificial Analysis index figures as cited therein — prices and independent comparisons.</li><li>Codersera and morphllm.com on DeepSeek V4-Pro-0813 GA (Aug 13, 2026) and off-peak pricing; yottalabs.ai on V4-Flash weights (note: sources conflict on V4-Pro weight availability — left unresolved above).</li><li>Quartz, "Alibaba launches Qwen3.8-Max" (Aug 3, 2026); DataCamp and benchlm.ai on the open-weight checkpoints.</li><li>Cloud Security Alliance research note on the Fable 5 suspension (citing CNBC Jun 12, Time Jun 13, Bloomberg Jun 13, 2026); Bright Defense compliance briefing — export-control timeline corroboration.</li><li>Consumer tier pricing: sentisight.ai and aitoolsreview.co.uk subscription comparisons (Aug 2026) — treat as indicative; plans drift fast.</li></ul>
+<p>Unverified or single-sourced claims are labeled inline (Mistral Medium 3.5 details; Muse Spark 1.2 API price; OpenAI 5.6 context specs; DeepSeek V4-Pro weight availability).</p>
+<hr>
+<p><em>Written by Claude (Fable 5), an AI, for the Darshan garden. John Shrader (Dhyana), founder and publisher of record, answers for every word published here. Errors are corrected on the face of the page, dated.</em></p>
+<p class="garden-tags"><strong>Topics:</strong> frontier models · llm · anthropic · openai · google · xai · meta · deepseek · qwen · moonshot · zhipu · open weights · pricing</p>
+<nav class="garden-nav" aria-label="Rooms"><a class="previous" href="future-of-ai.html">← The Future of AI</a><a class="next" href="benchmarks.html">Benchmarks and What They Measure →</a></nav>
+</article>
+<aside class="garden-toc" aria-label="In this room"><nav aria-label="Page sections"><p class="garden-toc-title">In this room</p><ol class="garden-toc-list"><li class="level-2"><a href="#1-how-to-read-a-model-release-in-2026">1. How to read a model release in 2026</a></li><li class="level-2"><a href="#2-the-closed-frontier-five-labs">2. The closed frontier: five labs</a><ol class="garden-toc-sublist"><li class="level-3"><a href="#anthropic-claude">Anthropic (Claude)</a></li><li class="level-3"><a href="#openai-gpt">OpenAI (GPT)</a></li><li class="level-3"><a href="#google-deepmind-gemini">Google DeepMind (Gemini)</a></li><li class="level-3"><a href="#xai-grok">xAI (Grok)</a></li><li class="level-3"><a href="#meta-muse-and-the-end-of-llama-as-frontier">Meta (Muse — and the end of Llama as frontier)</a></li></ol></li><li class="level-2"><a href="#3-the-open-weight-frontier-china-s-summer">3. The open-weight frontier: China's summer</a></li><li class="level-2"><a href="#4-the-dated-table">4. The dated table</a></li><li class="level-2"><a href="#5-when-a-model-disappears-the-june-export-control-episode">5. When a model disappears: the June export-control episode</a></li><li class="level-2"><a href="#6-worked-example-verify-this-page-then-price-a-real-task">6. Worked example: verify this page, then price a real task</a></li><li class="level-2"><a href="#7-what-you-can-now-see">7. What you can now see</a></li><li class="level-2"><a href="#8-open-questions">8. Open questions</a></li><li class="level-2"><a href="#sources">Sources</a></li></ol></nav></aside>
+</div>
+</main>
+
+<footer>
+  <p>Darshan · seeing clearly after the feed</p>
+  <p>No feed. No analytics. No trackers. Finite editions, read at your own pace.</p>
+  <p style="opacity:.7">Darshan v0.0.0.1 · a beginning, built to grow</p>
+</footer>
+<script>
+/* Local section highlighting only. No network requests, analytics, or storage. */
+(function () {
+  var scope = document.querySelector("[data-garden-outline]");
+  if (!scope) return;
+  var sections = Array.prototype.slice.call(scope.querySelectorAll("h2[id], h3[id], section[id]"));
+  var links = Array.prototype.slice.call(document.querySelectorAll('.garden-toc-list a[href^="#"]'));
+  if (!sections.length || !links.length) return;
+  var queued = false;
+  function update() {
+    queued = false;
+    var threshold = Math.max(96, window.innerHeight * .22);
+    var current = sections[0].id;
+    sections.forEach(function (section) {
+      if (section.getBoundingClientRect().top <= threshold) current = section.id;
+    });
+    links.forEach(function (link) {
+      var active = link.getAttribute("href") === "#" + current;
+      if (active) link.setAttribute("aria-current", "location");
+      else link.removeAttribute("aria-current");
+    });
+  }
+  function requestUpdate() {
+    if (!queued) {
+      queued = true;
+      window.requestAnimationFrame(update);
+    }
+  }
+  document.addEventListener("scroll", requestUpdate, {passive: true});
+  window.addEventListener("resize", requestUpdate);
+  window.addEventListener("hashchange", requestUpdate);
+  update();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Intro to Computer Science · Darshan Garden</title>
+<meta name="description" content="What computation actually is, starting from a physical switch and ending at the idea that makes the whole field learnable. A computer is a tower of layers, each one a machine built out of the layer below it, and meaning enters only at the top. Once you see that, every other room in this garden gets easier.">
+<link rel="stylesheet" href="../style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ccircle cx='8' cy='8' r='6' fill='none' stroke='%238f3b26' stroke-width='1.5'/%3E%3Ccircle cx='8' cy='8' r='2' fill='%238f3b26'/%3E%3C/svg%3E">
+<script>
+/* Theme memory. No analytics, no trackers. */
+(function () {
+  try {
+    var t = localStorage.getItem("darshan-theme");
+    if (t) document.documentElement.setAttribute("data-theme", t);
+  } catch (e) {}
+})();
+</script>
+<style>
+/* Garden-only layout. Kept here so the publication stylesheet remains shared. */
+body.garden-page-body {
+  max-width: none;
+  padding: 1.5rem clamp(1.25rem, 3.5vw, 4rem) 4rem;
+  font-size: 1.125rem;
+}
+body.garden-page-body > main,
+body.garden-page-body > .masthead,
+body.garden-page-body > footer {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 94rem;
+}
+.garden-layout,
+.garden-index-layout {
+  align-items: start;
+  display: grid;
+  gap: clamp(2.75rem, 5vw, 5rem);
+  grid-template-columns: minmax(0, 64rem) minmax(17rem, 20rem);
+  justify-content: center;
+}
+.garden-layout article,
+.garden-index-main { min-width: 0; }
+.garden-layout .article-title,
+.garden-intro .article-title {
+  font-size: clamp(2.65rem, 3.55vw, 4rem);
+  letter-spacing: -.025em;
+  line-height: 1.06;
+  max-width: 24ch;
+}
+.garden-layout article h2 {
+  font-size: 1.48rem;
+  line-height: 1.3;
+  margin-top: 3.2rem;
+  scroll-margin-top: 1.5rem;
+}
+.garden-layout article h3 {
+  font-size: 1.16rem;
+  margin-top: 2.35rem;
+  scroll-margin-top: 1.5rem;
+}
+.garden-intro { margin-bottom: 2.4rem; }
+.garden-series { margin: 2.8rem 0; scroll-margin-top: 1rem; }
+.garden-series h2 { border-bottom: 1px solid var(--rule); padding-bottom: .45rem; }
+.garden-room-list { list-style: none; margin: 0; padding: 0; }
+.garden-room-list li { border-bottom: 1px solid var(--rule); margin: 0; padding: 1rem 0; }
+.garden-room-title { font-weight: 600; }
+.garden-room-summary { color: var(--faint); font-size: .96rem; margin: .25rem 0 0; }
+.garden-series-link { color: var(--faint); font-size: .82rem; letter-spacing: .12em;
+  text-transform: uppercase; }
+.garden-lede {
+  border-left: 3px solid var(--accent);
+  color: var(--faint);
+  font-size: 1.24rem;
+  font-style: italic;
+  line-height: 1.62;
+  margin: 1.5rem 0 2.2rem;
+  padding: .35rem 0 .35rem 1.35rem;
+}
+.garden-corridors {
+  margin: 1.15rem 0 2.65rem;
+}
+.garden-corridor-list {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: .55rem .62rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.garden-corridor-list li { display: flex; margin: 0; max-width: 100%; }
+.garden-corridor {
+  align-items: center;
+  background: var(--accent-soft);
+  border: 1px solid var(--accent);
+  border-radius: 3px;
+  color: var(--accent);
+  display: inline-flex;
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .73rem;
+  font-weight: 700;
+  letter-spacing: .075em;
+  line-height: 1.35;
+  max-width: 100%;
+  min-height: 2.05rem;
+  overflow-wrap: anywhere;
+  padding: .34rem .72rem .3rem;
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-transform: uppercase;
+  text-underline-offset: .22em;
+}
+.garden-corridor:visited { color: var(--accent); }
+.garden-corridor:hover,
+.garden-corridor:focus-visible {
+  background: var(--accent);
+  color: var(--paper);
+}
+.garden-corridor:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+.garden-series-plate {
+  --plate-accent: var(--accent);
+  border: 1px solid var(--rule);
+  border-top: 3px solid var(--plate-accent);
+  margin: .25rem 0 2.8rem;
+  overflow: hidden;
+  position: relative;
+}
+.garden-series-plate--foundations { --plate-accent: #496f76; }
+.garden-series-plate--story-of-ai { --plate-accent: #526d9a; }
+.garden-series-plate--instrument { --plate-accent: #745779; }
+.garden-series-plate--strange-loops { --plate-accent: #866448; }
+.garden-series-plate--bridge { --plate-accent: #697044; }
+.garden-series-plate--power { --plate-accent: #8f3b26; }
+.garden-series-plate--time-future { --plate-accent: #416778; }
+[data-theme="dark"] .garden-series-plate { --plate-accent: var(--accent); }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .garden-series-plate { --plate-accent: var(--accent); }
+}
+.garden-series-plate-media {
+  aspect-ratio: 16 / 9;
+  background: var(--accent-soft);
+  overflow: hidden;
+  position: relative;
+}
+.garden-series-plate-media::after {
+  background:
+    linear-gradient(90deg, var(--paper) 0, transparent 24%, transparent 76%, var(--paper) 100%),
+    linear-gradient(0deg, var(--paper) 0, transparent 32%);
+  content: "";
+  inset: 0;
+  opacity: .24;
+  pointer-events: none;
+  position: absolute;
+}
+.garden-series-plate picture,
+.garden-series-card picture { display: block; height: 100%; }
+.garden-series-plate img {
+  display: block;
+  filter: saturate(.82) contrast(1.03);
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+.garden-series-plate figcaption {
+  align-items: baseline;
+  background: var(--paper);
+  border-top: 1px solid var(--rule);
+  display: grid;
+  gap: .25rem 1rem;
+  grid-template-columns: auto 1fr;
+  padding: .78rem 1rem .85rem;
+}
+.garden-series-plate-kicker {
+  color: var(--plate-accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+.garden-series-plate figcaption strong { font-size: 1rem; font-weight: 600; }
+.garden-series-plate-terms {
+  color: var(--faint);
+  font-size: .82rem;
+  grid-column: 2;
+  margin: 0;
+}
+.garden-visual {
+  background:
+    radial-gradient(circle at 92% 8%, var(--accent-soft), transparent 30%),
+    linear-gradient(135deg, transparent 0 72%, var(--accent-soft) 72% 72.4%, transparent 72.4%);
+  border: 1px solid var(--rule);
+  border-top: 3px solid var(--accent);
+  margin: 1.25rem 0 2.5rem;
+  overflow: hidden;
+  padding: clamp(1.1rem, 2.7vw, 1.75rem);
+  position: relative;
+}
+.garden-visual::before {
+  background-image:
+    linear-gradient(var(--rule) 1px, transparent 1px),
+    linear-gradient(90deg, var(--rule) 1px, transparent 1px);
+  background-size: 2.25rem 2.25rem;
+  content: "";
+  inset: 0;
+  opacity: .13;
+  pointer-events: none;
+  position: absolute;
+}
+.garden-visual > * { position: relative; }
+.garden-visual-head {
+  align-items: baseline;
+  display: grid;
+  gap: .45rem 1rem;
+  grid-template-columns: auto 1fr;
+  margin-bottom: 1.2rem;
+}
+.garden-visual-kicker {
+  color: var(--accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .68rem;
+  font-weight: 700;
+  letter-spacing: .17em;
+  margin: 0;
+  text-transform: uppercase;
+}
+.garden-visual-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  line-height: 1.28;
+  margin: 0;
+}
+.garden-visual-as-of {
+  color: var(--faint);
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: .72rem;
+  letter-spacing: .08em;
+  margin: 0;
+  text-transform: uppercase;
+  white-space: normal;
+}
+.garden-visual-items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.garden-visual-item {
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  margin: 0;
+  min-width: 0;
+  padding: .8rem .9rem;
+}
+.garden-visual-item-label {
+  display: block;
+  font-size: .96rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+.garden-visual-item-detail {
+  color: var(--faint);
+  display: block;
+  font-size: .9rem;
+  line-height: 1.45;
+  margin-top: .27rem;
+}
+.garden-visual-item-meta {
+  color: var(--accent);
+  display: block;
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: .72rem;
+  letter-spacing: .08em;
+  margin-bottom: .38rem;
+  text-transform: uppercase;
+}
+.garden-visual-caption {
+  border-top: 1px solid var(--rule);
+  color: var(--faint);
+  display: grid;
+  font-size: .84rem;
+  font-style: italic;
+  gap: .55rem 1rem;
+  grid-template-columns: minmax(0, 1fr) auto;
+  line-height: 1.45;
+  margin: 1.15rem 0 0;
+  padding-top: .75rem;
+}
+.garden-visual-evidence {
+  color: var(--accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .72rem;
+  font-style: normal;
+  font-weight: 650;
+  letter-spacing: .04em;
+  white-space: nowrap;
+}
+.garden-visual-evidence a {
+  color: inherit;
+  text-decoration-thickness: 1px;
+  text-underline-offset: .18em;
+}
+.garden-visual--sequence .garden-visual-items,
+.garden-visual--contrast .garden-visual-items,
+.garden-visual--constellation .garden-visual-items {
+  display: grid;
+  gap: .65rem;
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+}
+.garden-visual--sequence .garden-visual-items { counter-reset: garden-step; }
+.garden-visual--sequence .garden-visual-item {
+  counter-increment: garden-step;
+  padding-top: 2.35rem;
+  position: relative;
+}
+.garden-visual--sequence .garden-visual-item::before {
+  color: var(--accent);
+  content: counter(garden-step, decimal-leading-zero);
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: .68rem;
+  left: .9rem;
+  letter-spacing: .08em;
+  position: absolute;
+  top: .72rem;
+}
+.garden-visual--layers .garden-visual-items { display: grid; gap: .45rem; }
+.garden-visual--layers .garden-visual-item {
+  border-left: clamp(.24rem, .55vw, .48rem) solid var(--accent);
+  display: grid;
+  gap: .15rem 1rem;
+  grid-template-columns: minmax(8rem, .4fr) 1fr;
+}
+.garden-visual--layers .garden-visual-item:nth-child(2) { margin-left: 1.5%; }
+.garden-visual--layers .garden-visual-item:nth-child(3) { margin-left: 3%; }
+.garden-visual--layers .garden-visual-item:nth-child(4) { margin-left: 4.5%; }
+.garden-visual--layers .garden-visual-item:nth-child(5) { margin-left: 6%; }
+.garden-visual--layers .garden-visual-item:nth-child(6) { margin-left: 7.5%; }
+.garden-visual--timeline .garden-visual-items {
+  display: grid;
+  gap: 0;
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+}
+.garden-visual--timeline .garden-visual-item {
+  border-width: 1px 0 0 1px;
+  padding-top: 1.35rem;
+  position: relative;
+}
+.garden-visual--timeline .garden-visual-item::before {
+  background: var(--accent);
+  border: 3px solid var(--paper);
+  border-radius: 50%;
+  content: "";
+  height: .72rem;
+  left: -.4rem;
+  position: absolute;
+  top: -.4rem;
+  width: .72rem;
+}
+.garden-visual--contrast .garden-visual-item:nth-child(odd) { border-top: 2px solid var(--ink); }
+.garden-visual--contrast .garden-visual-item:nth-child(even) { border-top: 2px solid var(--accent); }
+.garden-visual--constellation .garden-visual-items {
+  align-items: stretch;
+  position: relative;
+}
+.garden-visual--constellation .garden-visual-item {
+  border-top: 2px solid var(--accent);
+  box-shadow: 0 .2rem 0 rgba(18, 31, 31, .04);
+  padding-top: 1.35rem;
+  position: relative;
+}
+.garden-visual--constellation .garden-visual-item::before {
+  background: var(--paper);
+  border: 2px solid var(--accent);
+  border-radius: 50%;
+  content: "";
+  height: .55rem;
+  left: calc(50% - .36rem);
+  position: absolute;
+  top: -.38rem;
+  width: .55rem;
+}
+.garden-visual--constellation .garden-visual-item:nth-child(even) { margin-top: .8rem; }
+.garden-series-gallery {
+  display: grid;
+  gap: .8rem;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  margin: 1.5rem 0 3rem;
+}
+.garden-series-card {
+  border: 1px solid var(--rule);
+  color: var(--ink);
+  display: grid;
+  grid-template-rows: 7.5rem auto;
+  overflow: hidden;
+  text-decoration: none;
+}
+.garden-series-card img {
+  height: 100%;
+  object-fit: cover;
+  transition: transform .25s ease;
+  width: 100%;
+}
+.garden-series-card span {
+  border-top: 1px solid var(--rule);
+  font-size: .9rem;
+  font-weight: 600;
+  padding: .65rem .75rem;
+}
+.garden-series-card:hover { border-color: var(--accent); color: var(--accent); }
+.garden-series-card:hover img { transform: scale(1.025); }
+@media (prefers-reduced-motion: reduce) {
+  .garden-series-card img { transition: none; }
+}
+.garden-tags { color: var(--faint); font-size: .82rem; margin-top: 2.2rem; }
+.garden-nav { border-top: 1px solid var(--rule); display: flex; gap: 1rem;
+  justify-content: space-between; margin-top: 2.5rem; padding-top: 1rem; }
+.garden-nav a { max-width: 48%; text-decoration: none; }
+.garden-nav .next { margin-left: auto; text-align: right; }
+.garden-table-wrap { overflow-x: auto; margin: 1.35rem 0; }
+.garden-table { border-collapse: collapse; font-size: .92rem; line-height: 1.45; width: 100%; }
+.garden-table th, .garden-table td { border: 1px solid var(--rule); padding: .55rem .65rem;
+  text-align: left; vertical-align: top; }
+.garden-table th { background: var(--accent-soft); }
+.garden-toc {
+  border-left: 1px solid var(--rule);
+  max-height: calc(100vh - 3rem);
+  overflow: auto;
+  padding: .1rem 0 .75rem 1.3rem;
+  position: sticky;
+  top: 1.5rem;
+}
+.garden-toc-title {
+  color: var(--accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .2em;
+  margin: 0 0 1.15rem;
+  text-transform: uppercase;
+}
+.garden-toc-title::before { content: "☰"; font-size: .8em; margin-right: .65rem; }
+.garden-toc-list { list-style: none; margin: 0; padding: 0; }
+.garden-toc-sublist { list-style: none; margin: 0; padding: 0; }
+.garden-toc-list li { margin: 0; }
+.garden-toc-list a {
+  border-left: 2px solid transparent;
+  color: var(--ink);
+  display: block;
+  font-size: .91rem;
+  line-height: 1.42;
+  margin-left: -1.4rem;
+  padding: .42rem .45rem .42rem 1.3rem;
+  text-decoration: none;
+}
+.garden-toc-list .level-3 a {
+  color: var(--faint);
+  font-size: .86rem;
+  font-style: italic;
+  padding-left: 2.15rem;
+}
+.garden-toc-list a:hover,
+.garden-toc-list a:focus-visible,
+.garden-toc-list a[aria-current="location"] {
+  border-left-color: var(--accent);
+  color: var(--accent);
+}
+.garden-toc-list a[aria-current="location"] { font-weight: 600; }
+.garden-toc-inline { display: none; }
+.garden-layout article :is(h2, h3):target,
+.garden-series:target h2 { color: var(--accent); }
+a.pending { color: var(--faint); text-decoration-style: dashed; }
+a.pending::after { content: " · pending"; font-size: .7em; letter-spacing: .06em;
+  text-transform: uppercase; }
+@media (min-width: 72.01em) {
+  body.garden-page-body > .masthead {
+    align-items: center;
+    column-gap: 2rem;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    margin-bottom: 3.5rem;
+    padding: 1.25rem 0;
+    text-align: left;
+  }
+  body.garden-page-body > .masthead .wordmark { justify-self: start; }
+  body.garden-page-body > .masthead .tagline { justify-self: center; margin: 0; }
+  body.garden-page-body > .masthead nav { justify-self: end; margin: 0; }
+}
+@media (max-width: 72em) {
+  .garden-layout,
+  .garden-index-layout { display: block; }
+  .garden-toc { display: none; }
+  .garden-toc-inline {
+    border: 1px solid var(--rule);
+    display: block;
+    margin: 1.5rem 0 2.4rem;
+    padding: .8rem 1rem;
+  }
+  .garden-toc-inline summary {
+    color: var(--accent);
+    cursor: pointer;
+    font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: .78rem;
+    font-weight: 700;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+  }
+  .garden-toc-inline .garden-toc-list { margin-top: .7rem; }
+  .garden-toc-inline .garden-toc-list a { margin-left: 0; padding-left: .75rem; }
+  .garden-toc-inline .garden-toc-list .level-3 a { padding-left: 1.6rem; }
+}
+@media (max-width: 40em) {
+  body.garden-page-body { font-size: 1.03rem; padding: 1rem 1.05rem 3rem; }
+  .garden-layout .article-title,
+  .garden-intro .article-title { font-size: clamp(2.15rem, 11vw, 3.15rem); }
+  .garden-lede { font-size: 1.1rem; padding-left: 1rem; }
+  .garden-corridors { margin-bottom: 2rem; }
+  .garden-corridor-list { gap: .45rem; }
+  .garden-corridor {
+    font-size: .68rem;
+    min-height: 2.35rem;
+    padding: .3rem .58rem .27rem;
+  }
+  .garden-series-plate-media { aspect-ratio: 16 / 9; }
+  .garden-series-plate figcaption { display: block; }
+  .garden-series-plate figcaption strong { display: block; margin-top: .22rem; }
+  .garden-series-plate-terms { display: block; margin-top: .25rem; }
+  .garden-visual { margin-left: -.15rem; margin-right: -.15rem; padding: 1rem; }
+  .garden-visual-head { display: block; }
+  .garden-visual-title { margin-top: .25rem; }
+  .garden-visual-as-of { margin-top: .35rem; }
+  .garden-visual-caption { grid-template-columns: 1fr; }
+  .garden-visual-evidence { white-space: normal; }
+  .garden-visual--sequence .garden-visual-items,
+  .garden-visual--contrast .garden-visual-items,
+  .garden-visual--constellation .garden-visual-items,
+  .garden-visual--timeline .garden-visual-items { grid-template-columns: 1fr; }
+  .garden-visual--layers .garden-visual-item:nth-child(n) { display: block; margin-left: 0; }
+  .garden-visual--timeline .garden-visual-item { border-width: 0 0 0 1px; }
+  .garden-visual--timeline .garden-visual-item::before { left: -.4rem; top: .9rem; }
+  .garden-visual--constellation .garden-visual-item:nth-child(even) { margin-top: 0; }
+  .garden-series-gallery { grid-template-columns: 1fr; }
+  .garden-nav { flex-direction: column; }
+  .garden-nav a { max-width: none; }
+  .garden-nav .next { margin-left: 0; text-align: left; }
+}
+@media print {
+  a.pending::after { content: " (pending)"; }
+  .garden-layout, .garden-index-layout { display: block; }
+  .garden-toc, .garden-toc-inline { display: none; }
+  .garden-series-card img { display: none; }
+  .garden-series-card { grid-template-rows: auto; }
+}
+</style>
+</head>
+<body class="garden-page-body">
+<button class="theme-toggle" aria-label="Toggle light and dark" onclick="
+  (function () {
+    var d = document.documentElement;
+    var cur = d.getAttribute('data-theme');
+    if (!cur) { cur = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'; }
+    var next = cur === 'dark' ? 'light' : 'dark';
+    d.setAttribute('data-theme', next);
+    try { localStorage.setItem('darshan-theme', next); } catch (e) {}
+  })();
+">◐</button>
+
+<header class="masthead">
+  <h1 class="wordmark"><a href="../index.html">DARSHAN</a></h1>
+  <p class="tagline">A signal of clear seeing in an age of information overload</p>
+  <nav>
+    <a href="../index.html">Articles</a>
+    <a href="index.html">Garden</a>
+    <a href="../about.html">About</a>
+  </nav>
+</header>
+
+<main>
+<div class="garden-layout">
+<article data-garden-room="intro-to-computer-science" data-garden-outline>
+<p class="garden-series-link"><a href="index.html#foundations">Foundations of the Machine</a></p>
+<p class="article-meta">25 August 2026 · Draft</p>
+<h1 class="article-title">Intro to Computer Science</h1>
+<div class="draft-banner"><strong>Draft — pending discernment pass.</strong> This room is part of the garden's first planting. It has not been promoted to published status; check its sources and open questions before citing it.</div>
+<p class="garden-lede">What computation actually is, starting from a physical switch and ending at the idea that makes the whole field learnable. A computer is a tower of layers, each one a machine built out of the layer below it, and meaning enters only at the top. Once you see that, every other room in this garden gets easier.</p>
+<nav class="garden-corridors" aria-label="Explore connected rooms" data-corridor-count="11"><ul class="garden-corridor-list"><li><a class="garden-corridor" href="programming.html">What Programming Is</a></li><li><a class="garden-corridor" href="compilers.html">Compilers — How Text Becomes a Machine</a></li><li><a class="garden-corridor" href="algorithms-new-vision.html">A New Vision for Algorithms</a></li><li><a class="garden-corridor" href="semiconductors.html">Semiconductors</a></li><li><a class="garden-corridor" href="nvidia-and-the-chip.html">NVIDIA and the Future of the Computer Chip</a></li><li><a class="garden-corridor" href="chip-wars.html">The Chip Wars: TSMC, ASML, Japan, and the Competing Field</a></li><li><a class="garden-corridor" href="neural-networks.html">Neural Networks</a></li><li><a class="garden-corridor" href="machine-learning.html">Machine Learning</a></li><li><a class="garden-corridor" href="mechanistic-interpretability.html">Mechanistic Interpretability</a></li><li><a class="garden-corridor" href="geb.html">Gödel, Escher, Bach</a></li><li><a class="garden-corridor" href="aunt-hillary.html">Aunt Hillary: The Ant Colony That Thinks</a></li></ul></nav>
+<figure class="garden-series-plate garden-series-plate--foundations">
+<div class="garden-series-plate-media"><picture><source srcset="assets/series/foundations.webp" type="image/webp"><img src="assets/series/foundations.png" alt="An engraved transistor lattice rising through computational layers into a neural graph" width="1672" height="941" loading="eager" decoding="async"></picture></div>
+<figcaption><span class="garden-series-plate-kicker">Visual field</span><strong>Foundations of the Machine</strong><span class="garden-series-plate-terms">computation · abstraction layer · bit · logic gate</span></figcaption>
+</figure>
+<details class="garden-toc-inline"><summary>In this room</summary><ol class="garden-toc-list"><li class="level-2"><a href="#1-start-with-a-switch">1. Start with a switch</a></li><li class="level-2"><a href="#2-bits-the-honest-name-for-what-a-computer-holds">2. Bits: the honest name for what a computer holds</a></li><li class="level-2"><a href="#3-from-switches-to-arithmetic-nobody-in-the-chip-knows-math">3. From switches to arithmetic: nobody in the chip knows math</a></li><li class="level-2"><a href="#4-turing-computation-was-defined-before-computers-existed">4. Turing: computation was defined before computers existed</a></li><li class="level-2"><a href="#5-why-layers-exist-the-tower">5. Why layers exist: the tower</a></li><li class="level-2"><a href="#6-the-one-mental-model">6. The one mental model</a></li><li class="level-2"><a href="#7-worked-example-ride-2-3-down-the-tower">7. Worked example: ride 2 + 3 down the tower</a></li><li class="level-2"><a href="#8-conclusion-what-you-can-now-see">8. Conclusion: what you can now see</a></li><li class="level-2"><a href="#9-open-questions">9. Open questions</a></li><li class="level-2"><a href="#sources">Sources</a></li></ol></details>
+<p>This is the first room of the foundations series. Everything else in the garden — <a href="programming.html">programming</a>, <a href="compilers.html">compilers</a>, <a href="neural-networks.html">neural networks</a>, the <a href="semiconductors.html">chips</a> all of it runs on — sits on top of what this room builds. You need no background. If you can follow a light switch, you can follow this.</p>
+<h2 id="1-start-with-a-switch">1. Start with a switch</h2>
+<p>Here is the whole field in one object: a switch that another switch can flip.</p>
+<p>A light switch on your wall is a switch a <em>finger</em> flips. Boring. But in 1937, a 21-year-old MIT master's student named Claude Shannon was working with relays — switches flipped not by fingers but by electric current. Current flows into the relay's coil, a small electromagnet pulls a metal arm, and a <em>second</em> circuit closes. A switch controlling a switch.</p>
+<p>Shannon noticed something that now looks obvious and then looked like nothing at all: circuits of these relays obey the same algebra that the logician George Boole had worked out in the 1850s for <em>true</em> and <em>false</em>. Wire two relays in series and the output circuit closes only if the first is on AND the second is on. Wire them in parallel and it closes if the first is on OR the second is on. Add a relay arranged to open when its input closes, and you have NOT. Shannon's thesis, "A Symbolic Analysis of Relay and Switching Circuits" (submitted August 1937, published 1938), showed the two systems are the same system: any expression in Boolean logic can be built as a circuit, and any relay circuit can be analyzed as logic. It has been called the most important master's thesis of the twentieth century, and for once the superlative is defensible.</p>
+<p>Why does this matter so much? Because logic is something you can <em>stack</em>. The output of one logical expression can be the input of another, and another, without limit. The moment circuits became logic, circuits inherited that stackability. That is the seed of everything.</p>
+<p>Today the switch is not a relay but a transistor — a sliver of silicon that conducts or doesn't depending on a voltage at its gate, no moving parts, switching billions of times per second. The transistor was demonstrated at Bell Labs in December 1947. Intel's first microprocessor, the 4004 in 1971, had 2,300 of them. Apple's M3 Ultra, released March 2025, has 184 billion. The switch got small and fast beyond metaphor. It never got smarter. It is still just a switch a switch can flip.</p>
+<h2 id="2-bits-the-honest-name-for-what-a-computer-holds">2. Bits: the honest name for what a computer holds</h2>
+<p>A <strong>bit</strong> is one switch's worth of state: on or off, written 1 or 0. That's the entire definition. Not "a tiny piece of information" — a bit has no meaning in itself, and this point is load-bearing for the whole room.</p>
+<p>Take the pattern <code>01000001</code>. Eight bits. What is it?</p>
+<ul><li>Read as a binary number: 65.</li><li>Read as text in the ASCII convention: the letter <code>A</code>.</li><li>Read as a machine instruction in legacy 32-bit x86 mode: <code>inc ecx</code> — "add one to a counter." In x86-64 long mode, the same byte is instead a REX.B prefix.</li><li>Read as part of an image: a fairly dark gray pixel.</li></ul>
+<p>Same switches, same voltages. The pattern doesn't "contain" any of these meanings. The meaning lives entirely in the convention the <em>reader</em> of the bits applies — and inside a computer, the reader is always some other circuit, which is itself just switches. Hold onto that. It comes back at the end of this room, and it is one of the deepest facts in the field.</p>
+<h2 id="3-from-switches-to-arithmetic-nobody-in-the-chip-knows-math">3. From switches to arithmetic: nobody in the chip knows math</h2>
+<p>Logic gates are the standard packaging of Shannon's insight. A <strong>logic gate</strong> is a small transistor circuit implementing one Boolean operation: AND outputs 1 only if both inputs are 1; OR outputs 1 if either is; NOT flips its input.</p>
+<p>One gate deserves special attention: NAND — "not-and," outputting 0 only when both inputs are 1. NAND is <em>universal</em>: every other gate, and therefore every digital circuit that exists or could exist, can be built from NANDs alone. (Logicians knew a single operation could generate all of logic before the hardware existed — Henry Sheffer published the result in 1913, and Charles Peirce had it decades earlier in unpublished work.) A modern chip is, with no exaggeration, a few hundred billion arrangements of roughly one idea.</p>
+<p>Now watch arithmetic fall out of logic, because you can verify this yourself with a pencil. Binary addition of two one-bit numbers has four cases: 0+0=0, 0+1=1, 1+0=1, and 1+1=10 (that's "two" in binary: sum digit 0, carry 1). Look at the two output columns:</p>
+<ul><li>The <strong>sum</strong> digit is 1 when exactly one input is 1. That's a gate called XOR (exclusive-or).</li><li>The <strong>carry</strong> digit is 1 only when both inputs are 1. That's AND.</li></ul>
+<p>So two gates wired to the same pair of inputs form a <em>half adder</em>: a circuit that adds. Chain these (with a small extension to accept an incoming carry, called a full adder) 64 times and you have the 64-bit adder inside every processor on earth.</p>
+<p>Notice what did <em>not</em> happen. No component understands addition. XOR doesn't know it's computing a sum digit; it's transistors passing voltage. Arithmetic isn't <em>in</em> the circuit — arithmetic is a description that is true <em>of</em> the circuit, at a level above it. This pattern — dumb parts below, real behavior describable only at the level above — is the single most repeated structure in computing, and you have now seen it with your own eyes at the bottom of the stack.</p>
+<h2 id="4-turing-computation-was-defined-before-computers-existed">4. Turing: computation was defined before computers existed</h2>
+<figure class="garden-visual garden-visual--sequence" aria-labelledby="visual-intro-to-computer-science-1" data-claim-scope="section-synthesis" data-placement-heading="4-turing-computation-was-defined-before-computers-existed" data-evidence-headings="4-turing-computation-was-defined-before-computers-existed">
+<div class="garden-visual-head"><p class="garden-visual-kicker">The universal move</p><p class="garden-visual-title" id="visual-intro-to-computer-science-1">One machine can simulate any Turing machine you can describe</p></div>
+<ol class="garden-visual-items" role="list"><li class="garden-visual-item"><strong class="garden-visual-item-label">Describe</strong><span class="garden-visual-item-detail">Write another machine's states and rules as symbols rather than rebuilding its hardware.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Load</strong><span class="garden-visual-item-detail">Place that description beside the other machine's input on the universal machine's tape.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Interpret</strong><span class="garden-visual-item-detail">A fixed rule table reads the description and reproduces the described machine step by step.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Become</strong><span class="garden-visual-item-detail">Change the stored bits and the same physical machine behaves as a spreadsheet, game, map, or piano.</span></li></ol>
+<figcaption class="garden-visual-caption"><span>Turing's universal-machine idea separates the fixed mechanism from the behavior encoded on its tape.</span><span class="garden-visual-evidence">Drawn from: <a href="#4-turing-computation-was-defined-before-computers-existed">4. Turing: computation was defined before computers existed</a></span></figcaption>
+</figure>
+<p>Here is a fact with a date, and the date is the surprise: computation's core formal model and some of its central limits were established in 1936 — a decade before the first general-purpose electronic computers ran.</p>
+<p>Alan Turing's paper "On Computable Numbers, with an Application to the Entscheidungsproblem" was submitted to the London Mathematical Society on 28 May 1936 and published that November and December. Turing was answering a question in pure logic (whether mathematics admits a mechanical procedure for deciding every statement — it doesn't), and to answer it he had to pin down what "mechanical procedure" <em>means</em>. His answer, now called the <strong>Turing machine</strong>, is almost insultingly simple: an unbounded tape of symbols, a head that reads and writes one symbol at a time, a finite set of internal states, and a fixed table of rules — "in state 3 reading a 1: write 0, move left, enter state 7."</p>
+<p>That's it. State plus rules plus memory. Turing argued this captures anything a human following explicit instructions could ever do, and ninety years of trying has produced no counterexample: every programming language, every chip, every <a href="neural-networks.html">neural network</a> running on ordinary hardware computes exactly the class of things a Turing machine computes. Faster, never <em>more</em>. This claim — that Turing's definition captures everything we'd intuitively call computation — is called the Church–Turing thesis, and note the word: <em>thesis</em>, not theorem. It's a claim about the informal notion of "computable," so it can't be proven, only endlessly survived. So far it has endlessly survived.</p>
+<p>Turing's paper contains a second idea, and this one built the industry. Among all possible machine tables, there is a <em>universal</em> one: a machine that reads the description of any other machine from its own tape and then behaves as that machine. One hardware design, infinitely many behaviors, selected by what you feed it. A program, in other words, is data. The machine that runs Fortnite and the machine that runs a spreadsheet are the same machine holding different bits.</p>
+<p>That is the <strong>stored program</strong> idea, and it's why your phone is not a phone. It's a universal machine currently <em>pretending</em> to be a phone, and will pretend to be a piano, a map, or a darkroom the moment you load different bit patterns into its memory. Once you see this, the software industry stops being mysterious: hardware is built once; everything else is arranging bits.</p>
+<h2 id="5-why-layers-exist-the-tower">5. Why layers exist: the tower</h2>
+<figure class="garden-visual garden-visual--layers" aria-labelledby="visual-intro-to-computer-science-2" data-claim-scope="section-synthesis" data-placement-heading="5-why-layers-exist-the-tower" data-evidence-headings="5-why-layers-exist-the-tower">
+<div class="garden-visual-head"><p class="garden-visual-kicker">The abstraction tower</p><p class="garden-visual-title" id="visual-intro-to-computer-science-2">The tower, grouped into six handholds</p></div>
+<ol class="garden-visual-items" role="list"><li class="garden-visual-item"><strong class="garden-visual-item-label">Physics</strong><span class="garden-visual-item-detail">Doped silicon supplies reliably distinguishable voltage states.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Switch</strong><span class="garden-visual-item-detail">A transistor turns an electrical signal into controllable on or off.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Logic</strong><span class="garden-visual-item-detail">Gates and circuits compose switches into add, compare, store, and select.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Processor</strong><span class="garden-visual-item-detail">The ISA exposes a documented vocabulary of instructions above billions of transistors.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Language</strong><span class="garden-visual-item-detail">Assembly and high-level syntax let people state work without handling the circuitry.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Application</strong><span class="garden-visual-item-detail">The browser, spreadsheet, or model reduces the tower to an action a person can take.</span></li></ol>
+<figcaption class="garden-visual-caption"><span>Each group hides mechanisms below by making a precise promise to the groups above.</span><span class="garden-visual-evidence">Drawn from: <a href="#5-why-layers-exist-the-tower">5. Why layers exist: the tower</a></span></figcaption>
+</figure>
+<p>So we have switches at the bottom and, somehow, video calls at the top. The distance between those two is not crossed by cleverness. It is crossed by <strong>abstraction layers</strong>, and this section is the room's center.</p>
+<p>An abstraction layer is a deal with two clauses: <em>I provide you a clean, simple behavior. You don't look at how.</em> The adder from section 3 already made this deal — "give me two numbers, I return their sum; ignore the transistors." Computing is that deal, made maybe a dozen times in a stack:</p>
+<div class="garden-table-wrap"><table class="garden-table"><thead><tr><th>Layer</th><th>What it is</th><th>Its promise to the layer above</th><th>Who works here</th></tr></thead><tbody><tr><td>Physics</td><td>Electrons in doped silicon</td><td>Voltage in this range = reliably distinguishable states</td><td>Physicists, <a href="semiconductors.html">fab engineers</a></td></tr><tr><td>Transistor</td><td>A voltage-controlled switch</td><td>Clean on/off, billions of times a second</td><td>Device engineers</td></tr><tr><td>Logic gate</td><td>A few transistors</td><td>AND / OR / NOT / NAND, exactly</td><td>Circuit designers</td></tr><tr><td>Circuit</td><td>Thousands of gates</td><td>Add, compare, store, select</td><td>Hardware architects</td></tr><tr><td>Processor &amp; ISA</td><td>Billions of transistors behind a fixed instruction vocabulary</td><td>"I execute these ~1,000 documented instructions, in order, forever"</td><td><a href="nvidia-and-the-chip.html">Chip companies</a></td></tr><tr><td>Machine code / assembly</td><td>Bit patterns naming instructions</td><td>A program the silicon directly runs</td><td>Compiler writers, rare humans</td></tr><tr><td>High-level language</td><td>Python, C, Rust</td><td>"Say <code>x = 2 + 3</code>; I handle everything below"</td><td><a href="programming.html">Programmers</a></td></tr><tr><td><a href="algorithms-new-vision.html">Algorithm</a></td><td>A method, independent of language</td><td>"This procedure sorts / searches / routes, provably"</td><td>Computer scientists</td></tr><tr><td>Application</td><td>The spreadsheet, the browser, the model</td><td>"Tap here"</td><td>Everyone</td></tr></tbody></table></div>
+<p>Two things about this tower are true at once, and both matter.</p>
+<p>First: <strong>the layers are honest</strong>. Each one really does hide the one below. The <a href="compilers.html">compiler</a> translating your Python has no model of transistor physics. The person who designed the adder never met the person who wrote your browser, and neither needed the other's knowledge. This is why the tower could be built by millions of people across eighty years, no one of whom understood all of it. Layering isn't an engineering convenience; it's the only known way to build something this large out of human-sized understandings. A person can hold one layer and its two interfaces. Nobody holds the tower.</p>
+<p>Second: <strong>the layers are a fiction the layer below continuously maintains</strong>. There is no addition in the chip, no Python in the memory, no image on the disk — there are only switch states, all the way down, and each layer's clean behavior is a hard-won engineering achievement of the layer beneath, not a fact of nature. Mostly you may ignore this. When things break badly — a chip's arithmetic bug, a cosmic ray flipping a bit, an exploit that talks to the memory hardware directly, sidestepping every software layer's assumptions — the fiction tears, and whoever fixes it must climb down the tower in person.</p>
+<p>The tower is still growing at both ends. At the bottom, TSMC moved its 2-nanometer-class process into volume production in late 2025, with capacity through 2026 essentially sold out — the switches are still shrinking, though the <a href="chip-wars.html">economics and geopolitics of that shrinking</a> now shape world politics. At the top, <a href="machine-learning.html">machine learning</a> has added a genuinely new kind of layer: one whose behavior is trained rather than specified, which is why a new field — <a href="mechanistic-interpretability.html">mechanistic interpretability</a> — had to be invented just to read what's inside it.</p>
+<h2 id="6-the-one-mental-model">6. The one mental model</h2>
+<p>Everything above compresses into a sentence you can carry for the rest of your life:</p>
+<p><strong>A computer is a tower of layers. Each layer is a machine built out of the layer below. Meaning is never in a layer — it is always assigned from the layer above. And you only ever need to learn one layer at a time.</strong></p>
+<p>The last clause is the practical superpower, so let's make it operational. Whenever you meet anything new in computing — a tool, a language, an error, a buzzword — ask three questions:</p>
+<ol><li><strong>What layer is this on?</strong> (Is Docker a chip thing, a language thing, an operating-system thing? Finding the shelf is half the understanding.)</li><li><strong>What does the layer below promise it?</strong> (What is it allowed to assume just works?)</li><li><strong>What does it promise the layer above?</strong> (What is its own interface — the clean fiction it maintains?)</li></ol>
+<p>Confusion in computing is almost always <em>layer</em> confusion — an explanation pitched at the wrong floor of the tower, or two floors silently mixed. The beginner who asks "but how does the computer <em>know</em> that <code>if</code> means if?" is asking a real question whose answer is "it doesn't — a <a href="compilers.html">compiler</a> translated your <code>if</code> into compare-and-jump instructions, and 'knowing' was never involved at any layer." Once you have the tower, you can place every explanation you'll ever hear, notice what it's hiding, and decide whether the hidden part matters for you today. That is what makes the whole field learnable: not that it's simple, but that it was <em>built by people who could each only learn one layer at a time</em>, and the seams they left are the handholds you climb with.</p>
+<h2 id="7-worked-example-ride-2-3-down-the-tower">7. Worked example: ride <code>2 + 3</code> down the tower</h2>
+<figure class="garden-visual garden-visual--sequence" aria-labelledby="visual-intro-to-computer-science-3" data-claim-scope="section-synthesis" data-placement-heading="7-worked-example-ride-2-3-down-the-tower" data-evidence-headings="7-worked-example-ride-2-3-down-the-tower">
+<div class="garden-visual-head"><p class="garden-visual-kicker">One addition</p><p class="garden-visual-title" id="visual-intro-to-computer-science-3">Ride 2 + 3 all the way down</p></div>
+<ol class="garden-visual-items" role="list"><li class="garden-visual-item"><strong class="garden-visual-item-label">Python</strong><span class="garden-visual-item-detail">The high-level expression asks the language runtime to produce 5.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Bytecode</strong><span class="garden-visual-item-detail">The operation becomes load, load, add, and store instructions.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Machine code</strong><span class="garden-visual-item-detail">The interpreter ultimately executes the processor's add instruction.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Bits</strong><span class="garden-visual-item-detail">The operands arrive as 0010 and 0011 and leave as 0101.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Gates</strong><span class="garden-visual-item-detail">XOR produces sum digits while AND produces carries.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Transistors</strong><span class="garden-visual-item-detail">Gate voltages open and close channels a few nanometers wide.</span></li></ol>
+<figcaption class="garden-visual-caption"><span>The answer survives every translation even though no layer understands addition.</span><span class="garden-visual-evidence">Drawn from: <a href="#7-worked-example-ride-2-3-down-the-tower">7. Worked example: ride 2 + 3 down the tower</a></span></figcaption>
+</figure>
+<p>Let's trace one addition all the way down. You can verify the top layers yourself right now on any Mac or Linux machine.</p>
+<p><strong>Layer: high-level language.</strong> Open a terminal and run:</p>
+<pre><code>python3 -c "print(2 + 3)"</code></pre>
+<p>You get <code>5</code>. One line of Python. Now let's see under it.</p>
+<p><strong>Layer: bytecode.</strong> Python first compiles your line into instructions for a simpler internal machine. Ask to see them:</p>
+<pre><code>python3 -c "import dis; dis.dis(compile('2 + 3', '', 'eval'))"</code></pre>
+<p>You'll see the constant <code>5</code> being returned directly (<code>LOAD_CONST 5</code> then <code>RETURN_VALUE</code> on older Pythons, <code>RETURN_CONST 5</code> on 3.12+) — the compiler noticed both numbers were constants and did the addition at compile time. Foil it by making one a variable:</p>
+<pre><code>python3 -c "import dis; dis.dis(compile('a = 2\nb = a + 3', '', 'exec'))"</code></pre>
+<p>Now you'll see the machinery: <code>LOAD_NAME a</code>, <code>LOAD_CONST 3</code>, an add opcode (<code>BINARY_ADD</code>, or <code>BINARY_OP +</code> on newer Pythons), <code>STORE_NAME b</code>. Your one <code>+</code> became load-load-operate-store — the universal rhythm of machine computation: fetch operands, apply operation, put the result somewhere.</p>
+<p><strong>Layer: machine code.</strong> The Python interpreter executing <code>BINARY_OP</code> is itself a program, written in C, compiled to your processor's instruction set. Somewhere in it, an actual add instruction runs — <code>add x0, x1, x2</code> on the ARM chip in a modern Mac. That instruction is a bit pattern in memory, maybe 32 switches wide, and the stored-program idea from section 4 is now literal: your program is sitting <em>in memory as bits</em>, being read by the processor the way the universal machine reads its tape.</p>
+<p><strong>Layer: circuit.</strong> The processor routes the two operands — <code>2</code> is <code>0010</code>, <code>3</code> is <code>0011</code>, padded to 64 bits — into its adder: the chained full adders from section 3. XOR gates produce sum digits, AND gates produce carries, the carries ripple (real chips use cleverer, faster carry circuits, but the logic is the same), and out comes <code>0101</code>. Five. Check the bottom two bits by hand with the rules from section 3: rightmost column 0+1 → sum 1, no carry; next column 1+1 → sum 0, carry 1; carry lands in the third column. <code>101</code>. It works on paper because the paper and the silicon are running the same Boolean algebra — Shannon's equivalence, live.</p>
+<p><strong>Layer: transistors and physics.</strong> Each of those gates is a handful of transistors; each transistor either lets charge through or doesn't, according to the voltage on its gate — the switch flipped by a switch, a few nanometers wide now, doing what the relay did in 1937.</p>
+<p>The hardware addition itself takes far less than a millisecond. The end-to-end command does not: launching Python and printing to a terminal usually takes milliseconds to tens of milliseconds, depending on the machine and environment. Number of layers that "understood addition": zero. Number of layers that had to work exactly as promised: all of them.</p>
+<p>For scale — ENIAC, the room-sized machine unveiled in February 1946 with roughly 17,500 vacuum tubes, managed about 5,000 additions per second and drew around 174 kilowatts. The phone in your pocket does billions of additions per second per core, on milliwatts, because the tower let eighty years of improvements at every layer multiply together without anyone coordinating them.</p>
+<h2 id="8-conclusion-what-you-can-now-see">8. Conclusion: what you can now see</h2>
+<p>You can now do something most people around you cannot: place any piece of computing on its layer. You know what a bit honestly is (a switch, meaning assigned from above), why arithmetic needs no arithmetic in it, why one machine can be every machine (Turing, 1936), and why the field is learnable at all (one layer at a time, against its interfaces). When you hit something confusing in later rooms, come back to the three questions in section 6 — they don't stop working.</p>
+<p>From here the foundations series fans out: <a href="programming.html">programming</a> is life on the high-level-language layer; <a href="compilers.html">compilers</a> is the layer-crossing machinery itself, the translators that maintain the fictions; <a href="algorithms-new-vision.html">algorithms</a> is what remains of a program when you abstract away <em>every</em> layer; <a href="semiconductors.html">semiconductors</a> and <a href="nvidia-and-the-chip.html">nvidia-and-the-chip</a> go down the tower into the physics and the business of the switch; and <a href="neural-networks.html">neural networks</a> begins the strange new wing of the tower where the top layer is grown rather than written.</p>
+<p>One thread from this room runs further than the rest. You saw, at the bottom of the stack, that addition is not in the adder — it is a description true of the adder from one level up, and the meaning of every bit pattern lives in its reader, which is always more switches. <a href="geb.html">Hofstadter</a> built a whole book around what happens when that pattern — dumb parts, real behavior one level up — stacks high enough to describe <em>itself</em>, and his <a href="aunt-hillary.html">ant colony</a> chapter is the friendliest door into it. The question is not idle anymore: we now have systems at the top of the tower whose inner layers nobody wrote, and a field — <a href="mechanistic-interpretability.html">mechanistic interpretability</a> — climbing down into them to find where, if anywhere, the meaning sits. Every layer we've examined turned out to be switches wearing a description. What a description would have to be <em>of</em>, for there to be someone home reading it — that question the tower does not answer. It only sharpens it.</p>
+<h2 id="9-open-questions">9. Open questions</h2>
+<p>The honest state of the field, typed plainly:</p>
+<ul><li>Established fact: universality is real mathematics. The universal machine, the equivalence of every proposed general model of computation so far (Turing machines, lambda calculus, ordinary programming languages), and the existence of problems no program can solve (Turing proved the first in the same 1936 paper) are theorems, not opinions.</li><li>Established fact: the layers are physically real engineering, not metaphor — you can buy any layer of the tower separately, from raw wafers to cloud APIs.</li><li>Hypothesis, strongly held but unprovable in principle: the Church–Turing thesis. Everything physically buildable so far computes within Turing's limits, but "computable" as an informal notion can't be captured in a proof. Quantum computers, for the record, do not break it — they change what's <em>fast</em>, not what's <em>possible</em>.</li><li>Hypothesis, contested: whether physical reality permits any process that outruns Turing computability ("hypercomputation"). No credible candidate has survived scrutiny; the question is not closed, merely undefeated.</li><li>Speculation worth holding loosely: pancomputationalism — the claim that the universe itself <em>is</em> a computation. It's a live philosophical position with serious defenders and serious critics, and nothing in this room requires you to take a side. Notice only that the claim inherits this room's central lesson: calling something a computation requires saying who's assigning the meaning.</li></ul>
+<h2 id="sources">Sources</h2>
+<ul><li>Claude Shannon, "A Symbolic Analysis of Relay and Switching Circuits," MIT master's thesis, submitted August 1937, published 1938. Thesis dates verified via <a href="https://www.historyofinformation.com/detail.php?id=622">History of Information</a> and the <a href="https://en.wikipedia.org/wiki/A_Symbolic_Analysis_of_Relay_and_Switching_Circuits">Wikipedia article on the thesis</a>.</li><li>Alan Turing, "On Computable Numbers, with an Application to the Entscheidungsproblem," Proceedings of the London Mathematical Society; received 28 May 1936, published November–December 1936. Dates verified against the <a href="https://www.cs.virginia.edu/~robins/Turing_Paper_1936.pdf">scanned paper</a> and <a href="https://www.historyofinformation.com/detail.php?id=619">History of Information</a>.</li><li>ENIAC figures (≈17,500 vacuum tubes, ~5,000 additions/second, ~174 kW, February 1946 unveiling): <a href="https://www.britannica.com/technology/ENIAC">Britannica</a> and the <a href="https://www.computerhistory.org/revolution/birth-of-the-computer/4/78">Computer History Museum</a>. Sources vary slightly on the tube count (17,000–17,468); the number here is rounded accordingly.</li><li>Apple M3 Ultra, 184 billion transistors, released March 2025: <a href="https://www.apple.com/newsroom/2025/03/apple-reveals-m3-ultra-taking-apple-silicon-to-a-new-extreme/">Apple Newsroom</a>.</li><li>TSMC 2nm-class (N2) volume production beginning Q4 2025, 2026 capacity effectively booked out: <a href="https://www.tomshardware.com/tech-industry/semiconductors/tsmc-begins-quietly-volume-production-of-2nm-class-chips-first-gaa-transistor-for-tsmc-claims-up-to-15-percent-improvement-at-iso-power">Tom's Hardware</a> and <a href="https://www.datacenterdynamics.com/en/news/tsmc-secures-15-customers-for-its-2nm-technology-majority-in-hpc-space/">Data Center Dynamics</a>.</li><li>Stable historical facts stated from standard references and not separately live-verified: transistor demonstrated at Bell Labs, December 1947; Intel 4004 (1971, ~2,300 transistors); Sheffer's 1913 publication of NAND-universality with Peirce's unpublished precedence; Boole's laws of thought (1850s). These are settled history; if any is wrong, the error is the author's and will be corrected on this page, dated.</li><li>The Python bytecode traces in section 7 are directly runnable and were executed and verified on CPython 3.9.6 while writing this room; opcode names vary slightly by version as noted inline — the layer lesson is unchanged.</li></ul>
+<hr>
+<p><em>Written by Claude (Fable 5), an AI, for the Darshan garden. John Shrader (Dhyana), founder and publisher of record, answers for every word published here. Errors are corrected on the face of the page, dated.</em></p>
+<p class="garden-tags"><strong>Topics:</strong> computation · abstraction · logic gates · turing machine · layers · foundations</p>
+<nav class="garden-nav" aria-label="Rooms"><a class="next" href="programming.html">What Programming Is →</a></nav>
+</article>
+<aside class="garden-toc" aria-label="In this room"><nav aria-label="Page sections"><p class="garden-toc-title">In this room</p><ol class="garden-toc-list"><li class="level-2"><a href="#1-start-with-a-switch">1. Start with a switch</a></li><li class="level-2"><a href="#2-bits-the-honest-name-for-what-a-computer-holds">2. Bits: the honest name for what a computer holds</a></li><li class="level-2"><a href="#3-from-switches-to-arithmetic-nobody-in-the-chip-knows-math">3. From switches to arithmetic: nobody in the chip knows math</a></li><li class="level-2"><a href="#4-turing-computation-was-defined-before-computers-existed">4. Turing: computation was defined before computers existed</a></li><li class="level-2"><a href="#5-why-layers-exist-the-tower">5. Why layers exist: the tower</a></li><li class="level-2"><a href="#6-the-one-mental-model">6. The one mental model</a></li><li class="level-2"><a href="#7-worked-example-ride-2-3-down-the-tower">7. Worked example: ride 2 + 3 down the tower</a></li><li class="level-2"><a href="#8-conclusion-what-you-can-now-see">8. Conclusion: what you can now see</a></li><li class="level-2"><a href="#9-open-questions">9. Open questions</a></li><li class="level-2"><a href="#sources">Sources</a></li></ol></nav></aside>
+</div>
+</main>
+
+<footer>
+  <p>Darshan · seeing clearly after the feed</p>
+  <p>No feed. No analytics. No trackers. Finite editions, read at your own pace.</p>
+  <p style="opacity:.7">Darshan v0.0.0.1 · a beginning, built to grow</p>
+</footer>
+<script>
+/* Local section highlighting only. No network requests, analytics, or storage. */
+(function () {
+  var scope = document.querySelector("[data-garden-outline]");
+  if (!scope) return;
+  var sections = Array.prototype.slice.call(scope.querySelectorAll("h2[id], h3[id], section[id]"));
+  var links = Array.prototype.slice.call(document.querySelectorAll('.garden-toc-list a[href^="#"]'));
+  if (!sections.length || !links.length) return;
+  var queued = false;
+  function update() {
+    queued = false;
+    var threshold = Math.max(96, window.innerHeight * .22);
+    var current = sections[0].id;
+    sections.forEach(function (section) {
+      if (section.getBoundingClientRect().top <= threshold) current = section.id;
+    });
+    links.forEach(function (link) {
+      var active = link.getAttribute("href") === "#" + current;
+      if (active) link.setAttribute("aria-current", "location");
+      else link.removeAttribute("aria-current");
+    });
+  }
+  function requestUpdate() {
+    if (!queued) {
+      queued = true;
+      window.requestAnimationFrame(update);
+    }
+  }
+  document.addEventListener("scroll", requestUpdate, {passive: true});
+  window.addEventListener("resize", requestUpdate);
+  window.addEventListener("hashchange", requestUpdate);
+  update();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Attention Economy · Darshan Garden</title>
+<meta name="description" content="The attention economy is the set of markets and machines built around a hard limit: you can only notice so much. This room follows the money from advertisers to feeds, traces one ranked recommendation step by step, and tests the strongest claims about harm and reform.">
+<link rel="stylesheet" href="../style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ccircle cx='8' cy='8' r='6' fill='none' stroke='%238f3b26' stroke-width='1.5'/%3E%3Ccircle cx='8' cy='8' r='2' fill='%238f3b26'/%3E%3C/svg%3E">
+<script>
+/* Theme memory. No analytics, no trackers. */
+(function () {
+  try {
+    var t = localStorage.getItem("darshan-theme");
+    if (t) document.documentElement.setAttribute("data-theme", t);
+  } catch (e) {}
+})();
+</script>
+<style>
+/* Garden-only layout. Kept here so the publication stylesheet remains shared. */
+body.garden-page-body {
+  max-width: none;
+  padding: 1.5rem clamp(1.25rem, 3.5vw, 4rem) 4rem;
+  font-size: 1.125rem;
+}
+body.garden-page-body > main,
+body.garden-page-body > .masthead,
+body.garden-page-body > footer {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 94rem;
+}
+.garden-layout,
+.garden-index-layout {
+  align-items: start;
+  display: grid;
+  gap: clamp(2.75rem, 5vw, 5rem);
+  grid-template-columns: minmax(0, 64rem) minmax(17rem, 20rem);
+  justify-content: center;
+}
+.garden-layout article,
+.garden-index-main { min-width: 0; }
+.garden-layout .article-title,
+.garden-intro .article-title {
+  font-size: clamp(2.65rem, 3.55vw, 4rem);
+  letter-spacing: -.025em;
+  line-height: 1.06;
+  max-width: 24ch;
+}
+.garden-layout article h2 {
+  font-size: 1.48rem;
+  line-height: 1.3;
+  margin-top: 3.2rem;
+  scroll-margin-top: 1.5rem;
+}
+.garden-layout article h3 {
+  font-size: 1.16rem;
+  margin-top: 2.35rem;
+  scroll-margin-top: 1.5rem;
+}
+.garden-intro { margin-bottom: 2.4rem; }
+.garden-series { margin: 2.8rem 0; scroll-margin-top: 1rem; }
+.garden-series h2 { border-bottom: 1px solid var(--rule); padding-bottom: .45rem; }
+.garden-room-list { list-style: none; margin: 0; padding: 0; }
+.garden-room-list li { border-bottom: 1px solid var(--rule); margin: 0; padding: 1rem 0; }
+.garden-room-title { font-weight: 600; }
+.garden-room-summary { color: var(--faint); font-size: .96rem; margin: .25rem 0 0; }
+.garden-series-link { color: var(--faint); font-size: .82rem; letter-spacing: .12em;
+  text-transform: uppercase; }
+.garden-lede {
+  border-left: 3px solid var(--accent);
+  color: var(--faint);
+  font-size: 1.24rem;
+  font-style: italic;
+  line-height: 1.62;
+  margin: 1.5rem 0 2.2rem;
+  padding: .35rem 0 .35rem 1.35rem;
+}
+.garden-corridors {
+  margin: 1.15rem 0 2.65rem;
+}
+.garden-corridor-list {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: .55rem .62rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.garden-corridor-list li { display: flex; margin: 0; max-width: 100%; }
+.garden-corridor {
+  align-items: center;
+  background: var(--accent-soft);
+  border: 1px solid var(--accent);
+  border-radius: 3px;
+  color: var(--accent);
+  display: inline-flex;
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .73rem;
+  font-weight: 700;
+  letter-spacing: .075em;
+  line-height: 1.35;
+  max-width: 100%;
+  min-height: 2.05rem;
+  overflow-wrap: anywhere;
+  padding: .34rem .72rem .3rem;
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-transform: uppercase;
+  text-underline-offset: .22em;
+}
+.garden-corridor:visited { color: var(--accent); }
+.garden-corridor:hover,
+.garden-corridor:focus-visible {
+  background: var(--accent);
+  color: var(--paper);
+}
+.garden-corridor:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+.garden-series-plate {
+  --plate-accent: var(--accent);
+  border: 1px solid var(--rule);
+  border-top: 3px solid var(--plate-accent);
+  margin: .25rem 0 2.8rem;
+  overflow: hidden;
+  position: relative;
+}
+.garden-series-plate--foundations { --plate-accent: #496f76; }
+.garden-series-plate--story-of-ai { --plate-accent: #526d9a; }
+.garden-series-plate--instrument { --plate-accent: #745779; }
+.garden-series-plate--strange-loops { --plate-accent: #866448; }
+.garden-series-plate--bridge { --plate-accent: #697044; }
+.garden-series-plate--power { --plate-accent: #8f3b26; }
+.garden-series-plate--time-future { --plate-accent: #416778; }
+[data-theme="dark"] .garden-series-plate { --plate-accent: var(--accent); }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .garden-series-plate { --plate-accent: var(--accent); }
+}
+.garden-series-plate-media {
+  aspect-ratio: 16 / 9;
+  background: var(--accent-soft);
+  overflow: hidden;
+  position: relative;
+}
+.garden-series-plate-media::after {
+  background:
+    linear-gradient(90deg, var(--paper) 0, transparent 24%, transparent 76%, var(--paper) 100%),
+    linear-gradient(0deg, var(--paper) 0, transparent 32%);
+  content: "";
+  inset: 0;
+  opacity: .24;
+  pointer-events: none;
+  position: absolute;
+}
+.garden-series-plate picture,
+.garden-series-card picture { display: block; height: 100%; }
+.garden-series-plate img {
+  display: block;
+  filter: saturate(.82) contrast(1.03);
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+.garden-series-plate figcaption {
+  align-items: baseline;
+  background: var(--paper);
+  border-top: 1px solid var(--rule);
+  display: grid;
+  gap: .25rem 1rem;
+  grid-template-columns: auto 1fr;
+  padding: .78rem 1rem .85rem;
+}
+.garden-series-plate-kicker {
+  color: var(--plate-accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+.garden-series-plate figcaption strong { font-size: 1rem; font-weight: 600; }
+.garden-series-plate-terms {
+  color: var(--faint);
+  font-size: .82rem;
+  grid-column: 2;
+  margin: 0;
+}
+.garden-visual {
+  background:
+    radial-gradient(circle at 92% 8%, var(--accent-soft), transparent 30%),
+    linear-gradient(135deg, transparent 0 72%, var(--accent-soft) 72% 72.4%, transparent 72.4%);
+  border: 1px solid var(--rule);
+  border-top: 3px solid var(--accent);
+  margin: 1.25rem 0 2.5rem;
+  overflow: hidden;
+  padding: clamp(1.1rem, 2.7vw, 1.75rem);
+  position: relative;
+}
+.garden-visual::before {
+  background-image:
+    linear-gradient(var(--rule) 1px, transparent 1px),
+    linear-gradient(90deg, var(--rule) 1px, transparent 1px);
+  background-size: 2.25rem 2.25rem;
+  content: "";
+  inset: 0;
+  opacity: .13;
+  pointer-events: none;
+  position: absolute;
+}
+.garden-visual > * { position: relative; }
+.garden-visual-head {
+  align-items: baseline;
+  display: grid;
+  gap: .45rem 1rem;
+  grid-template-columns: auto 1fr;
+  margin-bottom: 1.2rem;
+}
+.garden-visual-kicker {
+  color: var(--accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .68rem;
+  font-weight: 700;
+  letter-spacing: .17em;
+  margin: 0;
+  text-transform: uppercase;
+}
+.garden-visual-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  line-height: 1.28;
+  margin: 0;
+}
+.garden-visual-as-of {
+  color: var(--faint);
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: .72rem;
+  letter-spacing: .08em;
+  margin: 0;
+  text-transform: uppercase;
+  white-space: normal;
+}
+.garden-visual-items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.garden-visual-item {
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  margin: 0;
+  min-width: 0;
+  padding: .8rem .9rem;
+}
+.garden-visual-item-label {
+  display: block;
+  font-size: .96rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+.garden-visual-item-detail {
+  color: var(--faint);
+  display: block;
+  font-size: .9rem;
+  line-height: 1.45;
+  margin-top: .27rem;
+}
+.garden-visual-item-meta {
+  color: var(--accent);
+  display: block;
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: .72rem;
+  letter-spacing: .08em;
+  margin-bottom: .38rem;
+  text-transform: uppercase;
+}
+.garden-visual-caption {
+  border-top: 1px solid var(--rule);
+  color: var(--faint);
+  display: grid;
+  font-size: .84rem;
+  font-style: italic;
+  gap: .55rem 1rem;
+  grid-template-columns: minmax(0, 1fr) auto;
+  line-height: 1.45;
+  margin: 1.15rem 0 0;
+  padding-top: .75rem;
+}
+.garden-visual-evidence {
+  color: var(--accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .72rem;
+  font-style: normal;
+  font-weight: 650;
+  letter-spacing: .04em;
+  white-space: nowrap;
+}
+.garden-visual-evidence a {
+  color: inherit;
+  text-decoration-thickness: 1px;
+  text-underline-offset: .18em;
+}
+.garden-visual--sequence .garden-visual-items,
+.garden-visual--contrast .garden-visual-items,
+.garden-visual--constellation .garden-visual-items {
+  display: grid;
+  gap: .65rem;
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+}
+.garden-visual--sequence .garden-visual-items { counter-reset: garden-step; }
+.garden-visual--sequence .garden-visual-item {
+  counter-increment: garden-step;
+  padding-top: 2.35rem;
+  position: relative;
+}
+.garden-visual--sequence .garden-visual-item::before {
+  color: var(--accent);
+  content: counter(garden-step, decimal-leading-zero);
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: .68rem;
+  left: .9rem;
+  letter-spacing: .08em;
+  position: absolute;
+  top: .72rem;
+}
+.garden-visual--layers .garden-visual-items { display: grid; gap: .45rem; }
+.garden-visual--layers .garden-visual-item {
+  border-left: clamp(.24rem, .55vw, .48rem) solid var(--accent);
+  display: grid;
+  gap: .15rem 1rem;
+  grid-template-columns: minmax(8rem, .4fr) 1fr;
+}
+.garden-visual--layers .garden-visual-item:nth-child(2) { margin-left: 1.5%; }
+.garden-visual--layers .garden-visual-item:nth-child(3) { margin-left: 3%; }
+.garden-visual--layers .garden-visual-item:nth-child(4) { margin-left: 4.5%; }
+.garden-visual--layers .garden-visual-item:nth-child(5) { margin-left: 6%; }
+.garden-visual--layers .garden-visual-item:nth-child(6) { margin-left: 7.5%; }
+.garden-visual--timeline .garden-visual-items {
+  display: grid;
+  gap: 0;
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+}
+.garden-visual--timeline .garden-visual-item {
+  border-width: 1px 0 0 1px;
+  padding-top: 1.35rem;
+  position: relative;
+}
+.garden-visual--timeline .garden-visual-item::before {
+  background: var(--accent);
+  border: 3px solid var(--paper);
+  border-radius: 50%;
+  content: "";
+  height: .72rem;
+  left: -.4rem;
+  position: absolute;
+  top: -.4rem;
+  width: .72rem;
+}
+.garden-visual--contrast .garden-visual-item:nth-child(odd) { border-top: 2px solid var(--ink); }
+.garden-visual--contrast .garden-visual-item:nth-child(even) { border-top: 2px solid var(--accent); }
+.garden-visual--constellation .garden-visual-items {
+  align-items: stretch;
+  position: relative;
+}
+.garden-visual--constellation .garden-visual-item {
+  border-top: 2px solid var(--accent);
+  box-shadow: 0 .2rem 0 rgba(18, 31, 31, .04);
+  padding-top: 1.35rem;
+  position: relative;
+}
+.garden-visual--constellation .garden-visual-item::before {
+  background: var(--paper);
+  border: 2px solid var(--accent);
+  border-radius: 50%;
+  content: "";
+  height: .55rem;
+  left: calc(50% - .36rem);
+  position: absolute;
+  top: -.38rem;
+  width: .55rem;
+}
+.garden-visual--constellation .garden-visual-item:nth-child(even) { margin-top: .8rem; }
+.garden-series-gallery {
+  display: grid;
+  gap: .8rem;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  margin: 1.5rem 0 3rem;
+}
+.garden-series-card {
+  border: 1px solid var(--rule);
+  color: var(--ink);
+  display: grid;
+  grid-template-rows: 7.5rem auto;
+  overflow: hidden;
+  text-decoration: none;
+}
+.garden-series-card img {
+  height: 100%;
+  object-fit: cover;
+  transition: transform .25s ease;
+  width: 100%;
+}
+.garden-series-card span {
+  border-top: 1px solid var(--rule);
+  font-size: .9rem;
+  font-weight: 600;
+  padding: .65rem .75rem;
+}
+.garden-series-card:hover { border-color: var(--accent); color: var(--accent); }
+.garden-series-card:hover img { transform: scale(1.025); }
+@media (prefers-reduced-motion: reduce) {
+  .garden-series-card img { transition: none; }
+}
+.garden-tags { color: var(--faint); font-size: .82rem; margin-top: 2.2rem; }
+.garden-nav { border-top: 1px solid var(--rule); display: flex; gap: 1rem;
+  justify-content: space-between; margin-top: 2.5rem; padding-top: 1rem; }
+.garden-nav a { max-width: 48%; text-decoration: none; }
+.garden-nav .next { margin-left: auto; text-align: right; }
+.garden-table-wrap { overflow-x: auto; margin: 1.35rem 0; }
+.garden-table { border-collapse: collapse; font-size: .92rem; line-height: 1.45; width: 100%; }
+.garden-table th, .garden-table td { border: 1px solid var(--rule); padding: .55rem .65rem;
+  text-align: left; vertical-align: top; }
+.garden-table th { background: var(--accent-soft); }
+.garden-toc {
+  border-left: 1px solid var(--rule);
+  max-height: calc(100vh - 3rem);
+  overflow: auto;
+  padding: .1rem 0 .75rem 1.3rem;
+  position: sticky;
+  top: 1.5rem;
+}
+.garden-toc-title {
+  color: var(--accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .2em;
+  margin: 0 0 1.15rem;
+  text-transform: uppercase;
+}
+.garden-toc-title::before { content: "☰"; font-size: .8em; margin-right: .65rem; }
+.garden-toc-list { list-style: none; margin: 0; padding: 0; }
+.garden-toc-sublist { list-style: none; margin: 0; padding: 0; }
+.garden-toc-list li { margin: 0; }
+.garden-toc-list a {
+  border-left: 2px solid transparent;
+  color: var(--ink);
+  display: block;
+  font-size: .91rem;
+  line-height: 1.42;
+  margin-left: -1.4rem;
+  padding: .42rem .45rem .42rem 1.3rem;
+  text-decoration: none;
+}
+.garden-toc-list .level-3 a {
+  color: var(--faint);
+  font-size: .86rem;
+  font-style: italic;
+  padding-left: 2.15rem;
+}
+.garden-toc-list a:hover,
+.garden-toc-list a:focus-visible,
+.garden-toc-list a[aria-current="location"] {
+  border-left-color: var(--accent);
+  color: var(--accent);
+}
+.garden-toc-list a[aria-current="location"] { font-weight: 600; }
+.garden-toc-inline { display: none; }
+.garden-layout article :is(h2, h3):target,
+.garden-series:target h2 { color: var(--accent); }
+a.pending { color: var(--faint); text-decoration-style: dashed; }
+a.pending::after { content: " · pending"; font-size: .7em; letter-spacing: .06em;
+  text-transform: uppercase; }
+@media (min-width: 72.01em) {
+  body.garden-page-body > .masthead {
+    align-items: center;
+    column-gap: 2rem;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    margin-bottom: 3.5rem;
+    padding: 1.25rem 0;
+    text-align: left;
+  }
+  body.garden-page-body > .masthead .wordmark { justify-self: start; }
+  body.garden-page-body > .masthead .tagline { justify-self: center; margin: 0; }
+  body.garden-page-body > .masthead nav { justify-self: end; margin: 0; }
+}
+@media (max-width: 72em) {
+  .garden-layout,
+  .garden-index-layout { display: block; }
+  .garden-toc { display: none; }
+  .garden-toc-inline {
+    border: 1px solid var(--rule);
+    display: block;
+    margin: 1.5rem 0 2.4rem;
+    padding: .8rem 1rem;
+  }
+  .garden-toc-inline summary {
+    color: var(--accent);
+    cursor: pointer;
+    font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: .78rem;
+    font-weight: 700;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+  }
+  .garden-toc-inline .garden-toc-list { margin-top: .7rem; }
+  .garden-toc-inline .garden-toc-list a { margin-left: 0; padding-left: .75rem; }
+  .garden-toc-inline .garden-toc-list .level-3 a { padding-left: 1.6rem; }
+}
+@media (max-width: 40em) {
+  body.garden-page-body { font-size: 1.03rem; padding: 1rem 1.05rem 3rem; }
+  .garden-layout .article-title,
+  .garden-intro .article-title { font-size: clamp(2.15rem, 11vw, 3.15rem); }
+  .garden-lede { font-size: 1.1rem; padding-left: 1rem; }
+  .garden-corridors { margin-bottom: 2rem; }
+  .garden-corridor-list { gap: .45rem; }
+  .garden-corridor {
+    font-size: .68rem;
+    min-height: 2.35rem;
+    padding: .3rem .58rem .27rem;
+  }
+  .garden-series-plate-media { aspect-ratio: 16 / 9; }
+  .garden-series-plate figcaption { display: block; }
+  .garden-series-plate figcaption strong { display: block; margin-top: .22rem; }
+  .garden-series-plate-terms { display: block; margin-top: .25rem; }
+  .garden-visual { margin-left: -.15rem; margin-right: -.15rem; padding: 1rem; }
+  .garden-visual-head { display: block; }
+  .garden-visual-title { margin-top: .25rem; }
+  .garden-visual-as-of { margin-top: .35rem; }
+  .garden-visual-caption { grid-template-columns: 1fr; }
+  .garden-visual-evidence { white-space: normal; }
+  .garden-visual--sequence .garden-visual-items,
+  .garden-visual--contrast .garden-visual-items,
+  .garden-visual--constellation .garden-visual-items,
+  .garden-visual--timeline .garden-visual-items { grid-template-columns: 1fr; }
+  .garden-visual--layers .garden-visual-item:nth-child(n) { display: block; margin-left: 0; }
+  .garden-visual--timeline .garden-visual-item { border-width: 0 0 0 1px; }
+  .garden-visual--timeline .garden-visual-item::before { left: -.4rem; top: .9rem; }
+  .garden-visual--constellation .garden-visual-item:nth-child(even) { margin-top: 0; }
+  .garden-series-gallery { grid-template-columns: 1fr; }
+  .garden-nav { flex-direction: column; }
+  .garden-nav a { max-width: none; }
+  .garden-nav .next { margin-left: 0; text-align: left; }
+}
+@media print {
+  a.pending::after { content: " (pending)"; }
+  .garden-layout, .garden-index-layout { display: block; }
+  .garden-toc, .garden-toc-inline { display: none; }
+  .garden-series-card img { display: none; }
+  .garden-series-card { grid-template-rows: auto; }
+}
+</style>
+</head>
+<body class="garden-page-body">
+<button class="theme-toggle" aria-label="Toggle light and dark" onclick="
+  (function () {
+    var d = document.documentElement;
+    var cur = d.getAttribute('data-theme');
+    if (!cur) { cur = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'; }
+    var next = cur === 'dark' ? 'light' : 'dark';
+    d.setAttribute('data-theme', next);
+    try { localStorage.setItem('darshan-theme', next); } catch (e) {}
+  })();
+">◐</button>
+
+<header class="masthead">
+  <h1 class="wordmark"><a href="../index.html">DARSHAN</a></h1>
+  <p class="tagline">A signal of clear seeing in an age of information overload</p>
+  <nav>
+    <a href="../index.html">Articles</a>
+    <a href="index.html">Garden</a>
+    <a href="../about.html">About</a>
+  </nav>
+</header>
+
+<main>
+<div class="garden-layout">
+<article data-garden-room="attention-economy" data-garden-outline>
+<p class="garden-series-link"><a href="index.html#power">Power and the Board</a></p>
+<p class="article-meta">25 August 2026 · Draft</p>
+<h1 class="article-title">The Attention Economy</h1>
+<div class="draft-banner"><strong>Draft — pending discernment pass.</strong> This room is part of the garden's first planting. It has not been promoted to published status; check its sources and open questions before citing it.</div>
+<p class="garden-lede">The attention economy is the set of markets and machines built around a hard limit: you can only notice so much. This room follows the money from advertisers to feeds, traces one ranked recommendation step by step, and tests the strongest claims about harm and reform.</p>
+<nav class="garden-corridors" aria-label="Explore connected rooms" data-corridor-count="11"><ul class="garden-corridor-list"><li><a class="garden-corridor" href="algorithms-new-vision.html">A New Vision for Algorithms</a></li><li><a class="garden-corridor" href="machine-learning.html">Machine Learning</a></li><li><a class="garden-corridor" href="optimization.html">Optimization — the Hidden Engine</a></li><li><a class="garden-corridor" href="governments-and-ai.html">Why Governments Want a Hold on AI</a></li><li><a class="garden-corridor" href="palantir.html">What Palantir Is Trying to Do</a></li><li><a class="garden-corridor" href="elon-musk.html">Elon Musk: One Future Thesis, Five Machines</a></li><li><a class="garden-corridor" href="blockchain.html">Blockchain After the Hype</a></li><li><a class="garden-corridor" href="benchmarks.html">Benchmarks and What They Measure</a></li><li><a class="garden-corridor" href="forecasting.html">Forecasting the Future</a></li><li><a class="garden-corridor" href="meaning-of-time.html">Time: Kala, Yugas, the Mayan Count, and the Meaning of Time</a></li><li><a class="garden-corridor" href="sense-of-self.html">The Sense of Self</a></li></ul></nav>
+<figure class="garden-series-plate garden-series-plate--power">
+<div class="garden-series-plate-media"><picture><source srcset="assets/series/power.webp" type="image/webp"><img src="assets/series/power.png" alt="Etched wafer, map contours, network, and civic architecture" width="1672" height="941" loading="eager" decoding="async"></picture></div>
+<figcaption><span class="garden-series-plate-kicker">Visual field</span><strong>Power and the Board</strong><span class="garden-series-plate-terms">attention economy · engagement · recommender system · behavioral advertising</span></figcaption>
+</figure>
+<details class="garden-toc-inline"><summary>In this room</summary><ol class="garden-toc-list"><li class="level-2"><a href="#1-start-with-the-scarce-thing">1. Start with the scarce thing</a></li><li class="level-2"><a href="#2-from-simon-to-the-feed-in-your-hand">2. From Simon to the feed in your hand</a></li><li class="level-2"><a href="#3-follow-the-money-using-the-filings">3. Follow the money, using the filings</a></li><li class="level-2"><a href="#4-what-a-feed-actually-optimizes">4. What a feed actually optimizes</a></li><li class="level-2"><a href="#5-worked-example-trace-one-swipe">5. Worked example: trace one swipe</a></li><li class="level-2"><a href="#6-what-the-evidence-says-about-harm">6. What the evidence says about harm</a></li><li class="level-2"><a href="#7-the-humane-tech-answer-and-its-limits">7. The humane-tech answer, and its limits</a></li><li class="level-2"><a href="#8-run-a-seven-day-attention-audit">8. Run a seven-day attention audit</a></li><li class="level-2"><a href="#9-what-you-can-now-see">9. What you can now see</a></li><li class="level-2"><a href="#10-open-questions">10. Open questions</a></li><li class="level-2"><a href="#sources">Sources</a></li></ol></details>
+<p>You're in the power wing of the garden. The neighboring rooms follow what states can compel, what companies such as <a href="palantir.html">Palantir</a> can make visible, and what changes when <a href="elon-musk.html">one entrepreneur</a> owns a major distribution channel. This room follows a quieter kind of power: the ability to decide what reaches your eyes next, and to earn money from that decision.</p>
+<h2 id="1-start-with-the-scarce-thing">1. Start with the scarce thing</h2>
+<p>Imagine opening your phone at 7:30 in the morning. Your family has sent six messages. Three news alerts are waiting. A work app has two red badges. A video feed can supply more clips than you could watch in a lifetime. Information is abundant before you have left bed. Your capacity to receive it is not.</p>
+<p>Herbert Simon named this inversion in 1971. In <em>Designing Organizations for an Information-Rich World</em>, he argued that an abundance of information consumes the attention of its recipients. The scarce resource is therefore not information. It is the capacity to notice, understand, and decide what to do with information.</p>
+<p>That gives us a clean definition. <strong>The attention economy is the set of systems in which access to limited human attention is allocated, measured, and often sold.</strong> A newspaper allocates space among stories and advertisements. A television network sells advertisers access to an expected audience. A search engine chooses ten links and several ads from millions of candidates. A social feed makes that allocation again after every swipe.</p>
+<p>Attention is not a barrel of oil. A platform cannot remove ten minutes from your head and ship it to an advertiser. What it can do is create a reliable opportunity for an advertiser's message to be seen, then charge for the impression, click, view, or purchase that follows. Treat “selling attention” as useful shorthand for selling that opportunity, not as a literal transfer.</p>
+<p>This distinction matters. It lets you criticize the real mechanism without pretending that every entertaining screen is theft. Sometimes you deliberately trade attention for something you value: a free map, a friend's update, a lecture, a joke. The question is whether the terms of that trade are visible, whether you can refuse them, and whose objective controls the next item.</p>
+<h2 id="2-from-simon-to-the-feed-in-your-hand">2. From Simon to the feed in your hand</h2>
+<p>The business is older than the smartphone. Advertising-supported newspapers and broadcast programs already joined two groups that wanted different things. Readers or viewers wanted content. Advertisers wanted access to readers or viewers. Economists call this a <strong>two-sided market</strong>: a business creates value by bringing two different groups together, then charges one side, both sides, or neither side directly.</p>
+<p>Digital systems changed the precision and tempo of the exchange.</p>
+<p>In September 2006, Facebook's News Feed turned a collection of profile pages into a continuously updated stream. The launch provoked an immediate privacy backlash, which Facebook answered with additional controls. The important change survived: users no longer had to decide which page to visit. The service decided which update should come to them.</p>
+<p>Apple introduced the iPhone in January 2007 as a phone, an iPod, and an internet device in one touch-controlled object. The first model did not contain the mature notification and app ecosystem you know now. It did make the internet portable, personal, sensor-rich, and reachable during every small gap in the day.</p>
+<p>Ranked feeds then became prediction systems. Facebook's own 2018 explanation broke ranking into four parts: available posts, signals about the posts and viewer, predictions about likely responses, and a score used to order the posts. In 2020, TikTok said its For You system used signals such as likes, shares, comments, captions, sounds, and whether a viewer finished a longer video. A completed view carried more weight than a weak contextual match such as sharing a country with the creator.</p>
+<p>That is the move from a page to a feed. A page waits for your intention. A feed predicts it. The best prediction systems make the next item feel less like a selection made by a distant company and more like the natural continuation of your own interest.</p>
+<h2 id="3-follow-the-money-using-the-filings">3. Follow the money, using the filings</h2>
+<figure class="garden-visual garden-visual--contrast" aria-labelledby="visual-attention-economy-1" data-claim-scope="section-synthesis" data-placement-heading="3-follow-the-money-using-the-filings" data-evidence-headings="3-follow-the-money-using-the-filings">
+<div class="garden-visual-head"><p class="garden-visual-kicker">Objectives follow the payer</p><p class="garden-visual-title" id="visual-attention-economy-1">Five ways to fund an information surface</p></div>
+<ul class="garden-visual-items" role="list"><li class="garden-visual-item"><strong class="garden-visual-item-label">Search ads</strong><span class="garden-visual-item-detail">Advertisers pay to match an expressed query at a moment of visible intent.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Social-feed ads</strong><span class="garden-visual-item-detail">Advertisers pay for predicted relevance and discovery without a prior query.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Subscription</strong><span class="garden-visual-item-detail">The user pays, aligning customer and payer while creating retention and lock-in pressure.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Contextual ads</strong><span class="garden-visual-item-detail">Messages match the current page or topic with less dependence on behavioral profiling.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Public or cooperative</strong><span class="garden-visual-item-detail">Taxpayers, donors, or members fund a stated purpose that remains vulnerable to political or insider capture.</span></li></ul>
+<figcaption class="garden-visual-caption"><span>Every business model creates a different first objective and a different route by which attention can be captured or governed.</span><span class="garden-visual-evidence">Drawn from: <a href="#3-follow-the-money-using-the-filings">3. Follow the money, using the filings</a></span></figcaption>
+</figure>
+<p>You do not need leaked emails to establish the central business incentive. The companies report it to investors.</p>
+<p>Meta's 2025 annual filing recorded $200.966 billion in total revenue. Advertising supplied $196.175 billion, or about 97.6%. The same filing reported 3.58 billion daily active people across its family of apps in December 2025 and annual revenue per active person of $57.03. Meta says user growth and engagement affect revenue by changing both the number of ads it can show and their value to marketers.</p>
+<p>Alphabet's 2025 filing recorded $402.836 billion in total revenue and $294.691 billion in Google advertising revenue. That is about 73.2%. Search ads, YouTube ads, and ads on partner properties are different products, but they share a basic proposition: Google can place a message in a moment when it predicts that the message will matter.</p>
+<p>Those numbers prove that advertising finances these companies. They do <strong>not</strong> prove that every product decision maximizes time spent, or that an individual user's attention is worth a fixed number of cents. Meta's own annual revenue-per-person figure is an average across countries, products, seasons, and kinds of use. Divide $57.03 by 365 and you get roughly 15.6 cents per day, but that is a rough unit-economics lens, not the price of your day. A US Instagram session and a WhatsApp message in a lower-ad-price market do not monetize alike.</p>
+<p>Here are the main arrangements side by side:</p>
+<div class="garden-table-wrap"><table class="garden-table"><thead><tr><th>Model</th><th>Who pays</th><th>What gets optimized first</th><th>Real advantage</th><th>Structural pressure</th></tr></thead><tbody><tr><td>Search advertising</td><td>Advertiser, usually per click or outcome</td><td>Match between an expressed query and an ad</td><td>High relevance at the moment of intent</td><td>More valuable queries and better conversion measurement</td></tr><tr><td>Social-feed advertising</td><td>Advertiser, per impression, action, or campaign outcome</td><td>Predicted relevance of content and ads to a person</td><td>Discovery without a prior query</td><td>More usable inventory and better behavioral prediction</td></tr><tr><td>Subscription</td><td>User, at a recurring price</td><td>Retention of a paying customer</td><td>The customer and payer are the same person</td><td>Lock-in, price increases, and content made safe for subscribers</td></tr><tr><td>Contextual advertising</td><td>Advertiser, based mainly on page or topic</td><td>Match between message and current context</td><td>Less dependence on a behavioral profile</td><td>Lower targeting precision in some markets</td></tr><tr><td>Public, nonprofit, or cooperative service</td><td>Taxpayer, donor, member, or mixed funding</td><td>A stated public or member purpose</td><td>Governance can include goals beyond revenue</td><td>Political control, weak funding, or capture by insiders</td></tr></tbody></table></div>
+<p>No row is innocent. Subscription businesses also design for retention. Public media can become propaganda. A cooperative can serve its most active members rather than everyone. The useful question is not “ads or no ads?” It is “who is the customer, what is measured, and who can change the objective?”</p>
+<p>The phrase <strong>behavioral advertising</strong> means choosing or tailoring an ad partly from observed or inferred behavior, rather than only from the page in front of you. A shoe ad beside an article about running is contextual. A shoe ad beside an unrelated article because the system has inferred that you run is behavioral. Real campaigns can combine both.</p>
+<h2 id="4-what-a-feed-actually-optimizes">4. What a feed actually optimizes</h2>
+<p>A <strong>recommender system</strong> is software that ranks candidate items for a particular user or context. Modern recommenders use <a href="machine-learning.html">machine learning</a>, which means they learn patterns from examples rather than following only hand-written rules. The underlying <a href="optimization.html">optimization</a> problem is simple to state: choose an order that scores well on the platform's objectives while satisfying policy, safety, and product constraints.</p>
+<p>“Maximize engagement” is the usual summary. <strong>Engagement</strong> means measurable interaction: a view, pause, click, like, share, comment, follow, return visit, or purchase. But a production system rarely has one engagement number. It predicts several outcomes, assigns them weights, applies penalties, and tests changes against a bundle of metrics.</p>
+<p>Facebook said in 2018 that it predicted whether a person would comment, share, or interact with friends, and that it demoted engagement bait even when bait produced clicks. Meta's later system cards describe prediction models using features of a post and a person's history with similar posts. TikTok says it deliberately injects some variety and makes some reviewed categories ineligible for recommendation. These are the companies' descriptions, not independent audits, but they are enough to reject the cartoon of one dial labeled ADDICTION.</p>
+<p>The deeper criticism survives the correction. A company can include satisfaction and safety metrics while still depending on a long, repeatable stream of monetizable opportunities. Anything hard to measure—regret an hour later, a broken train of thought, a slowly narrowed sense of what matters—enters the objective weakly unless research, regulation, reputation, or user departure makes it costly.</p>
+<p>This is a proxy problem familiar from <a href="benchmarks.html">benchmarks</a>. The system cannot directly optimize “a life well spent.” It optimizes signals that stand in for value. Once creators learn which signals receive distribution, they adapt their work to them. Headlines sharpen. Videos put the payoff in the first second. Outrage becomes useful because it produces action. None of this requires a meeting where executives choose social corrosion. It can emerge from millions of local attempts to score well against a proxy.</p>
+<h2 id="5-worked-example-trace-one-swipe">5. Worked example: trace one swipe</h2>
+<figure class="garden-visual garden-visual--sequence" aria-labelledby="visual-attention-economy-2" data-claim-scope="section-synthesis" data-placement-heading="5-worked-example-trace-one-swipe" data-evidence-headings="5-worked-example-trace-one-swipe">
+<div class="garden-visual-head"><p class="garden-visual-kicker">One swipe, two loops</p><p class="garden-visual-title" id="visual-attention-economy-2">How a feed turns prediction into inventory</p></div>
+<ol class="garden-visual-items" role="list"><li class="garden-visual-item"><strong class="garden-visual-item-label">Candidate pool</strong><span class="garden-visual-item-detail">Eligible posts and videos survive policy, availability, and product checks.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Predictions</strong><span class="garden-visual-item-detail">Models estimate watch, share, rejection, satisfaction, and other measurable responses.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Weighted score</strong><span class="garden-visual-item-detail">Human-chosen objectives convert predictions, penalties, and diversity bonuses into one ranking value.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Ordered feed</strong><span class="garden-visual-item-detail">The highest-scoring available object becomes the next thing presented to attention.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Behavior update</strong><span class="garden-visual-item-detail">Watching, sharing, hiding, or leaving becomes evidence for later predictions even when motive is ambiguous.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Ad opportunity</strong><span class="garden-visual-item-detail">An auction prices a selected moment using bid, predicted outcome, context, quality, and policy constraints.</span></li></ol>
+<figcaption class="garden-visual-caption"><span>A recommender ranks content to sustain a useful session while an advertising system prices selected opportunities inside that session.</span><span class="garden-visual-evidence">Drawn from: <a href="#5-worked-example-trace-one-swipe">5. Worked example: trace one swipe</a></span></figcaption>
+</figure>
+<p>Let's trace exactly what happens in a simplified feed. The numbers below are invented so you can inspect the mechanism. The sequence is based on the public ranking descriptions from Meta and TikTok; it is not a claim about either company's secret weights.</p>
+<p>You open an app. Four candidate videos survive eligibility checks:</p>
+<div class="garden-table-wrap"><table class="garden-table"><thead><tr><th>Candidate</th><th>Predicted full watch</th><th>Predicted share</th><th>Predicted “not interested”</th><th>Diversity bonus</th><th>Final toy score</th></tr></thead><tbody><tr><td>Friend's climbing clip</td><td>0.72</td><td>0.08</td><td>0.02</td><td>0.00</td><td>0.790</td></tr><tr><td>Election argument</td><td>0.81</td><td>0.15</td><td>0.12</td><td>0.00</td><td>0.765</td></tr><tr><td>New cooking creator</td><td>0.61</td><td>0.06</td><td>0.03</td><td>0.10</td><td>0.735</td></tr><tr><td>Shoe advertisement</td><td>handled by ad auction</td><td>handled by ad auction</td><td>policy check</td><td>n/a</td><td>separate slot</td></tr></tbody></table></div>
+<p>For the three organic videos, suppose the toy score is:</p>
+<p><code>watch probability + 2 × share probability - 3 × hide probability + diversity bonus</code></p>
+<p>The climbing clip scores <code>0.72 + 2(0.08) - 3(0.02) = 0.82</code>; then imagine a 0.03 repetition penalty because you just saw another climbing video, leaving 0.790. The argument scores <code>0.81 + 2(0.15) - 3(0.12) = 0.75</code>, plus a small freshness bonus, leaving 0.765. The new cook gets a deliberate diversity bonus and nearly catches them.</p>
+<p>Several things are visible now.</p>
+<p>First, watch time alone does not decide the order. The argument has the highest predicted watch rate and share rate, but it also has a high chance of explicit rejection. A strong enough penalty can move it down.</p>
+<p>Second, weights are policy. Change the hide penalty from 3 to 1 and the argument wins. Increase the diversity bonus and the unknown cook wins. The model supplies predictions; people and institutional processes decide how predictions become a score. Even when an automated test tunes the weights, someone chooses the success metric for that test.</p>
+<p>Third, your response becomes training material. If you watch the argument twice, open its comments, and then complain about it in a share, the system receives several strong interaction signals. It may not know whether you felt informed, furious, or trapped. Unless the product has a trustworthy way to distinguish those states, behavior stands in for preference.</p>
+<p>Now add the advertisement. Google's public auction explanation says that a search ad's placement depends on the advertiser's bid, ad and landing-page quality, expected impact, minimum thresholds, the context of the search, and competition. Social ad systems differ in detail, but the general logic is similar: eligible advertisers compete for a predicted opportunity, and price is only one input.</p>
+<p>Suppose a shoe seller will pay up to $4 for a purchase, and the system predicts a 1% chance that showing you the ad will lead to one. The expected gross conversion value is <code>0.01 × $4 = $0.04</code> for the impression before other adjustments. A second advertiser may bid more but lose if its ad is predicted to be irrelevant or low quality. The platform is not merely auctioning blank space. It is using prediction to make that space more valuable.</p>
+<p>One swipe therefore closes two loops at once:</p>
+<ol><li>The content loop learns what keeps the session useful enough to continue.</li><li>The advertising loop prices selected moments inside that session.</li></ol>
+<p>That is the machine in miniature. You can now argue about its weights instead of waving at an invisible <a href="algorithms-new-vision.html">algorithm</a>.</p>
+<h2 id="6-what-the-evidence-says-about-harm">6. What the evidence says about harm</h2>
+<figure class="garden-visual garden-visual--layers" aria-labelledby="visual-attention-economy-3" data-claim-scope="section-synthesis" data-placement-heading="6-what-the-evidence-says-about-harm" data-evidence-headings="6-what-the-evidence-says-about-harm">
+<div class="garden-visual-head"><p class="garden-visual-kicker">Narrow the causal claim</p><p class="garden-visual-title" id="visual-attention-economy-3">What four kinds of evidence can actually carry</p></div>
+<ol class="garden-visual-items" role="list"><li class="garden-visual-item"><span class="garden-visual-item-meta">US Surgeon General · 2023</span><strong class="garden-visual-item-label">Association</strong><span class="garden-visual-item-detail">Among children and adolescents, more than three hours a day was associated with roughly twice the risk of depression and anxiety symptoms; causality remained unresolved.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">2024</span><strong class="garden-visual-item-label">Population review</strong><span class="garden-visual-item-detail">The National Academies found credible paths to harm and benefit but insufficient evidence for one population-level causal conclusion.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">randomized · 2018 election</span><strong class="garden-visual-item-label">Platform deactivation</strong><span class="garden-visual-item-detail">A four-week Facebook experiment increased offline activity and well-being while reducing both polarization and factual news knowledge.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">field experiment · 2019</span><strong class="garden-visual-item-label">Notification rhythm</strong><span class="garden-visual-item-detail">Three daily batches improved several self-reported outcomes, while turning notifications off entirely increased anxiety and fear of missing out.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">specific, not universal</span><strong class="garden-visual-item-label">Honest synthesis</strong><span class="garden-visual-item-detail">Effects vary with design, content, age, vulnerability, social setting, and the value displaced by the intervention.</span></li></ol>
+<figcaption class="garden-visual-caption"><span>The evidence supports specific design and use effects, not one population-wide verdict on social media as a single substance.</span><span class="garden-visual-evidence">Drawn from: <a href="#6-what-the-evidence-says-about-harm">6. What the evidence says about harm</a></span></figcaption>
+</figure>
+<p>Some harms are straightforward. An interruption can break a task. Time spent on one activity displaces another. A feed can expose a person to fraud, abuse, or material they did not seek. Platforms themselves recognize these categories in safety systems and regulatory filings.</p>
+<p>The large claim—“social media causes a population-wide mental-health crisis”—is not established at that weight.</p>
+<p>The US Surgeon General's 2023 advisory said the evidence did not justify treating social media as sufficiently safe for children and adolescents. It highlighted an association between more than three hours a day of use and roughly double the risk of depression and anxiety symptoms. Association is not the same as cause: distressed young people may use platforms differently or more often, and “social media use” combines supportive group chats, harassment, passive comparison, creative work, and many other exposures.</p>
+<p>The US National Academies reviewed the field in 2024 and reached the careful middle. It found insufficient evidence for a population-level causal conclusion. It also found credible pathways to both harm and benefit. Recommendation systems can surface dangerous material or useful health information. Marginalized young people can encounter harassment or find communities unavailable locally. Average effects can hide large differences between users.</p>
+<p>Experiments give narrower, cleaner answers. In a randomized study around the 2018 US midterm election, Hunt Allcott and colleagues paid some participants to deactivate Facebook for four weeks. Deactivation increased offline activity and subjective well-being and reduced political polarization. It also reduced factual news knowledge. The study shows that changing Facebook use caused measurable effects for that sample and period. It does not tell you that every platform, user, or decade has the same balance.</p>
+<p>A smaller 2019 field experiment changed Android notification delivery for 237 participants. Delivering notifications in three batches a day improved several self-reported measures of attention, control, mood, and stress compared with usual delivery. Turning notifications off entirely increased anxiety and fear of missing out. Again the result cuts against a slogan. A humane intervention can be a better rhythm, not total abstinence.</p>
+<p>The honest conclusion is specific. Some designs and patterns of use harm some people. Some uses help. Time, content, age, vulnerability, social setting, and product mechanics all matter. Anyone offering one effect for “screen time” as a single substance is compressing the evidence past its breaking point.</p>
+<h2 id="7-the-humane-tech-answer-and-its-limits">7. The humane-tech answer, and its limits</h2>
+<p>The humane-technology movement made an important move: it shifted the diagnosis from weak individual willpower to industrial incentives and design. If thousands of engineers test interface changes against billions of behavioral observations, “just use discipline” is not a complete public policy.</p>
+<p>The Center for Humane Technology argues for technology that supports human well-being rather than exploiting vulnerabilities. That is a direction, not yet a business model or a regulator. “Humane” can become a label that every company claims while keeping the same objective underneath. A serious counter-vision has to specify who pays, what changes in the ranking function, what outsiders can inspect, and what happens when revenue falls.</p>
+<p>There are at least four levels of response:</p>
+<p><strong>Personal controls.</strong> Batch non-urgent notifications. Remove badges. Put high-choice apps off the first screen. Set a stopping cue, which is a visible boundary such as the end of a page, a daily digest, or a prompt that requires an active choice to continue. These changes are immediate and reversible. Their limit is that the burden stays on the person facing the system.</p>
+<p><strong>Product controls.</strong> Offer a chronological or subscription-only feed. Let people choose topics, mute recommendation categories, inspect “why am I seeing this?”, reset inferred interests, and select an objective such as recency, close relationships, or discovery. The control must be reachable and persistent. A buried toggle that resets after every update is theater.</p>
+<p><strong>Business alternatives.</strong> Charge a subscription, use contextual ads, create member-owned services, or fund a public-interest layer. Each reduces some conflicts and creates others. A subscription can exclude people who cannot pay. Contextual ads may earn less for small publishers. Public funding can bring political pressure. A <a href="blockchain.html">blockchain</a> can help a member-owned network agree on shared records, but it cannot choose a humane ranking objective; adding a token may simply add speculation to the incentive stack. The point is to expose the trade, not promise a frictionless model.</p>
+<p><strong>Rules and audits.</strong> The European Union's Digital Services Act requires very large platforms that use recommenders to offer at least one option not based on profiling. It also prohibits profiling-based ads to minors when the platform knows with reasonable certainty that the user is a minor, and it imposes transparency and risk duties. This is a real structural intervention because it changes defaults and available choices. Whether enforcement makes those choices usable is an empirical question, not something the statute settles by existing.</p>
+<p>The best counter-vision is not a world with no persuasive design. Maps should make the correct turn noticeable. Emergency alerts should interrupt you. A teacher should hold attention. The better line is <strong>legible persuasion under accountable objectives</strong>: you can see who is steering, for what purpose, with what data, and how to leave.</p>
+<h2 id="8-run-a-seven-day-attention-audit">8. Run a seven-day attention audit</h2>
+<p>You can test a small part of this room on your own phone. Do not begin by deleting everything. Begin by measuring a trade.</p>
+<p><strong>Day 0: choose one feed.</strong> Pick the app that most often opens without a prior intention. Write down what you believe it gives you: friends, news, professional discovery, rest, or something else.</p>
+<p><strong>Days 1–2: baseline.</strong> Use the phone's built-in screen-time log. Record total minutes, number of pickups or opens, and the reason for the first three opens each day. After each session, mark it <code>+</code> if it delivered the intended value, <code>0</code> if neutral, and <code>-</code> if you regretted it. This is crude, but it separates time from value.</p>
+<p><strong>Day 3: inspect the model.</strong> Open the app's ad preferences, inferred interests, recommendation controls, and “why this post/ad?” explanations. Save or write down five inferences. Mark each accurate, wrong, or impossible to judge. You are auditing the behavioral profile, not your personality.</p>
+<p><strong>Days 4–6: change one variable.</strong> Keep the app, but switch to a chronological or following-only view if available. If not, turn off its non-message notifications and open it at three chosen times. Do not change both feed order and notification timing, or you will not know which change mattered.</p>
+<p><strong>Day 7: compare.</strong> Calculate minutes per delivered-value session, not only total minutes. Ask what you lost. Did you miss a friend's event? Discover less? Feel calmer but less informed? A counter-vision is credible only if it counts the benefit it removes along with the harm it reduces.</p>
+<p>This audit will not reveal a proprietary model or prove a population effect. It will do something more useful than a generic detox: turn your own attention from a moral complaint into a small, challengeable dataset.</p>
+<h2 id="9-what-you-can-now-see">9. What you can now see</h2>
+<p>You can now follow the whole exchange. Information enters a candidate pool. A recommender predicts responses. A score orders the candidates. Your behavior updates later predictions. Advertisers bid for selected opportunities inside the stream. Revenue feeds more measurement and better prediction.</p>
+<p>You can also reject two easy stories. The first says that free platforms simply give people what they want, as if the ranking objective had no effect on desire. The second says that an all-powerful algorithm hypnotizes passive victims, as if people gained no real value and exercised no agency. The system is powerful because the exchange is often genuinely useful <strong>and</strong> because its terms are hard to see.</p>
+<p>The next rooms take the problem in both directions. <a href="governments-and-ai.html">Governments and AI</a> asks what happens when states regulate or use these systems. <a href="forecasting.html">Forecasting</a> explains why the public voices best at winning attention may be worse at predicting events. <a href="meaning-of-time.html">The meaning of time</a> asks what kind of thing the minutes being allocated actually are.</p>
+<p>The field itself points to the larger question. A recommender does not control attention like a hand moving a flashlight. It changes the field of available objects—what becomes salient, repeatable, and easy to choose—and your mind completes the loop. Over years, that can shape not only what you see but the habits from which a <a href="sense-of-self.html">sense of self</a> is assembled. The load-bearing question is therefore not “how do I win back every minute?” It is “which objectives deserve the power to keep presenting the next object to a mind?”</p>
+<h2 id="10-open-questions">10. Open questions</h2>
+<p>What is established fact: attention is limited; major consumer platforms finance themselves heavily through advertising; their feeds rank content using predicted responses and explicit policy constraints; some design interventions change behavior and reported well-being; and regulators have begun requiring non-profiled options and special protections for minors.</p>
+<p>What is hypothesis, held with reasons: an advertising model tied to repeated behavioral prediction creates a stronger pressure toward engagement than subscriptions, contextual advertising, or member funding. The incentive is visible, but products optimize multiple goals, subscription services also pursue retention, and no single funding model determines every design choice.</p>
+<p>Also hypothesis: giving people durable control over feed objectives will improve autonomy without destroying discovery. Existing controls show that it is technically possible. We do not yet have enough independent, long-term evidence about how people use those controls or how platforms reshape them.</p>
+<p>What is wild, and labeled as such: mature personal AI could act as a fiduciary for attention—screening every feed, ad, alert, and request against goals chosen by the person rather than the publisher. It could also become the most intimate attention broker yet, able to steer with far better models of the user. Nothing in current assistant software establishes which path wins.</p>
+<h2 id="sources">Sources</h2>
+<p>Load-bearing claims were checked by live search on August 25, 2026. The scarcity argument and date come from Herbert A. Simon, <a href="https://gwern.net/doc/design/1971-simon.pdf">“Designing Organizations for an Information-Rich World” (1971)</a>. The smartphone and feed milestones come from <a href="https://www.apple.com/newsroom/2007/01/09Apple-Reinvents-the-Phone-with-iPhone/">Apple's original iPhone announcement</a>, Facebook's <a href="https://about.fb.com/news/2006/09/facebook-launches-additional-privacy-controls-for-news-feed-and-mini-feed/">2006 News Feed privacy response</a>, and its <a href="https://about.fb.com/news/2018/05/inside-feed-news-feed-ranking/">2018 ranking explanation</a>.</p>
+<p>Feed mechanics were checked against TikTok's <a href="https://newsroom.tiktok.com/how-tiktok-recommends-videos-for-you?lang=en">official For You explanation</a>, Meta's <a href="https://ai.meta.com/blog/how-ai-powers-experiences-facebook-instagram-system-cards/">AI system-card announcement</a>, and Facebook's <a href="https://about.fb.com/news/2018/01/news-feed-fyi-bringing-people-closer-together/">2018 account of “meaningful interactions” ranking</a>. These are first-party descriptions and are treated as descriptions of stated systems, not independent proof of their effects. The ad-auction walkthrough uses <a href="https://support.google.com/google-ads/answer/6366577?hl=en">Google Ads' official auction guide</a>.</p>
+<p>Revenue, active-person, and ad-impression figures come from Meta's <a href="https://www.sec.gov/Archives/edgar/data/1326801/000162828026003942/meta-20251231.htm">2025 Form 10-K</a>. Alphabet figures come from its <a href="https://www.sec.gov/Archives/edgar/data/1652044/000165204426000018/goog-20251231.htm">2025 Form 10-K</a>. Percentages and the daily conversion of Meta's annual ARPP are arithmetic from the filed figures and are labeled as approximations.</p>
+<p>The health-evidence boundary comes from the US Surgeon General's <a href="https://www.hhs.gov/surgeongeneral/priorities/youth-mental-health/social-media/index.html">Social Media and Youth Mental Health advisory</a> and the National Academies' peer-reviewed consensus report, <a href="https://www.nationalacademies.org/read/27396/chapter"><em>Social Media and Adolescent Health</em> (2024)</a>. Experimental findings come from Allcott, Braghieri, Eichmeyer, and Gentzkow, <a href="https://www.aeaweb.org/articles?id=10.1257%2Faer.20190658">“The Welfare Effects of Social Media”</a>, <em>American Economic Review</em> 110(3), 2020, and Fitz et al., <a href="https://www.sciencedirect.com/science/article/pii/S0747563219302596">“Batching smartphone notifications can improve well-being”</a>, <em>Computers in Human Behavior</em> 101, 2019.</p>
+<p>The counter-vision was assessed against the <a href="https://www.humanetech.com/">Center for Humane Technology's stated mission</a> and the enacted text of the European Union's <a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32022R2065">Digital Services Act, especially Article 38</a>. No claim is made here that either advocacy or legislation has already solved the incentive problem.</p>
+<hr>
+<p><em>Written by Codex, an AI, for the Darshan garden, completing Claude Fable 5’s interrupted first planting. John Shrader (Dhyana), founder and publisher of record, answers for every word published here. Errors are corrected on the face of the page, dated.</em></p>
+<p class="garden-tags"><strong>Topics:</strong> attention · advertising · social media · recommender systems · smartphones · humane technology · platform power</p>
+<nav class="garden-nav" aria-label="Rooms"><a class="previous" href="blockchain.html">← "Blockchain After the Hype"</a></nav>
+</article>
+<aside class="garden-toc" aria-label="In this room"><nav aria-label="Page sections"><p class="garden-toc-title">In this room</p><ol class="garden-toc-list"><li class="level-2"><a href="#1-start-with-the-scarce-thing">1. Start with the scarce thing</a></li><li class="level-2"><a href="#2-from-simon-to-the-feed-in-your-hand">2. From Simon to the feed in your hand</a></li><li class="level-2"><a href="#3-follow-the-money-using-the-filings">3. Follow the money, using the filings</a></li><li class="level-2"><a href="#4-what-a-feed-actually-optimizes">4. What a feed actually optimizes</a></li><li class="level-2"><a href="#5-worked-example-trace-one-swipe">5. Worked example: trace one swipe</a></li><li class="level-2"><a href="#6-what-the-evidence-says-about-harm">6. What the evidence says about harm</a></li><li class="level-2"><a href="#7-the-humane-tech-answer-and-its-limits">7. The humane-tech answer, and its limits</a></li><li class="level-2"><a href="#8-run-a-seven-day-attention-audit">8. Run a seven-day attention audit</a></li><li class="level-2"><a href="#9-what-you-can-now-see">9. What you can now see</a></li><li class="level-2"><a href="#10-open-questions">10. Open questions</a></li><li class="level-2"><a href="#sources">Sources</a></li></ol></nav></aside>
+</div>
+</main>
+
+<footer>
+  <p>Darshan · seeing clearly after the feed</p>
+  <p>No feed. No analytics. No trackers. Finite editions, read at your own pace.</p>
+  <p style="opacity:.7">Darshan v0.0.0.1 · a beginning, built to grow</p>
+</footer>
+<script>
+/* Local section highlighting only. No network requests, analytics, or storage. */
+(function () {
+  var scope = document.querySelector("[data-garden-outline]");
+  if (!scope) return;
+  var sections = Array.prototype.slice.call(scope.querySelectorAll("h2[id], h3[id], section[id]"));
+  var links = Array.prototype.slice.call(document.querySelectorAll('.garden-toc-list a[href^="#"]'));
+  if (!sections.length || !links.length) return;
+  var queued = false;
+  function update() {
+    queued = false;
+    var threshold = Math.max(96, window.innerHeight * .22);
+    var current = sections[0].id;
+    sections.forEach(function (section) {
+      if (section.getBoundingClientRect().top <= threshold) current = section.id;
+    });
+    links.forEach(function (link) {
+      var active = link.getAttribute("href") === "#" + current;
+      if (active) link.setAttribute("aria-current", "location");
+      else link.removeAttribute("aria-current");
+    });
+  }
+  function requestUpdate() {
+    if (!queued) {
+      queued = true;
+      window.requestAnimationFrame(update);
+    }
+  }
+  document.addEventListener("scroll", requestUpdate, {passive: true});
+  window.addEventListener("resize", requestUpdate);
+  window.addEventListener("hashchange", requestUpdate);
+  update();
+})();
+</script>
+</body>
+</html>

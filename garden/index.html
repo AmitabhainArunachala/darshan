@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Knowledge Garden · Darshan</title>
+<meta name="description" content="Darshan&#x27;s knowledge garden: connected, sourced rooms for learning from first principles.">
+<link rel="stylesheet" href="../style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ccircle cx='8' cy='8' r='6' fill='none' stroke='%238f3b26' stroke-width='1.5'/%3E%3Ccircle cx='8' cy='8' r='2' fill='%238f3b26'/%3E%3C/svg%3E">
+<script>
+/* Theme memory. No analytics, no trackers. */
+(function () {
+  try {
+    var t = localStorage.getItem("darshan-theme");
+    if (t) document.documentElement.setAttribute("data-theme", t);
+  } catch (e) {}
+})();
+</script>
+<style>
+/* Garden-only layout. Kept here so the publication stylesheet remains shared. */
+body.garden-page-body {
+  max-width: none;
+  padding: 1.5rem clamp(1.25rem, 3.5vw, 4rem) 4rem;
+  font-size: 1.125rem;
+}
+body.garden-page-body > main,
+body.garden-page-body > .masthead,
+body.garden-page-body > footer {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 94rem;
+}
+.garden-layout,
+.garden-index-layout {
+  align-items: start;
+  display: grid;
+  gap: clamp(2.75rem, 5vw, 5rem);
+  grid-template-columns: minmax(0, 64rem) minmax(17rem, 20rem);
+  justify-content: center;
+}
+.garden-layout article,
+.garden-index-main { min-width: 0; }
+.garden-layout .article-title,
+.garden-intro .article-title {
+  font-size: clamp(2.65rem, 3.55vw, 4rem);
+  letter-spacing: -.025em;
+  line-height: 1.06;
+  max-width: 24ch;
+}
+.garden-layout article h2 {
+  font-size: 1.48rem;
+  line-height: 1.3;
+  margin-top: 3.2rem;
+  scroll-margin-top: 1.5rem;
+}
+.garden-layout article h3 {
+  font-size: 1.16rem;
+  margin-top: 2.35rem;
+  scroll-margin-top: 1.5rem;
+}
+.garden-intro { margin-bottom: 2.4rem; }
+.garden-series { margin: 2.8rem 0; scroll-margin-top: 1rem; }
+.garden-series h2 { border-bottom: 1px solid var(--rule); padding-bottom: .45rem; }
+.garden-room-list { list-style: none; margin: 0; padding: 0; }
+.garden-room-list li { border-bottom: 1px solid var(--rule); margin: 0; padding: 1rem 0; }
+.garden-room-title { font-weight: 600; }
+.garden-room-summary { color: var(--faint); font-size: .96rem; margin: .25rem 0 0; }
+.garden-series-link { color: var(--faint); font-size: .82rem; letter-spacing: .12em;
+  text-transform: uppercase; }
+.garden-lede {
+  border-left: 3px solid var(--accent);
+  color: var(--faint);
+  font-size: 1.24rem;
+  font-style: italic;
+  line-height: 1.62;
+  margin: 1.5rem 0 2.2rem;
+  padding: .35rem 0 .35rem 1.35rem;
+}
+.garden-corridors {
+  margin: 1.15rem 0 2.65rem;
+}
+.garden-corridor-list {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: .55rem .62rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.garden-corridor-list li { display: flex; margin: 0; max-width: 100%; }
+.garden-corridor {
+  align-items: center;
+  background: var(--accent-soft);
+  border: 1px solid var(--accent);
+  border-radius: 3px;
+  color: var(--accent);
+  display: inline-flex;
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .73rem;
+  font-weight: 700;
+  letter-spacing: .075em;
+  line-height: 1.35;
+  max-width: 100%;
+  min-height: 2.05rem;
+  overflow-wrap: anywhere;
+  padding: .34rem .72rem .3rem;
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-transform: uppercase;
+  text-underline-offset: .22em;
+}
+.garden-corridor:visited { color: var(--accent); }
+.garden-corridor:hover,
+.garden-corridor:focus-visible {
+  background: var(--accent);
+  color: var(--paper);
+}
+.garden-corridor:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+.garden-series-plate {
+  --plate-accent: var(--accent);
+  border: 1px solid var(--rule);
+  border-top: 3px solid var(--plate-accent);
+  margin: .25rem 0 2.8rem;
+  overflow: hidden;
+  position: relative;
+}
+.garden-series-plate--foundations { --plate-accent: #496f76; }
+.garden-series-plate--story-of-ai { --plate-accent: #526d9a; }
+.garden-series-plate--instrument { --plate-accent: #745779; }
+.garden-series-plate--strange-loops { --plate-accent: #866448; }
+.garden-series-plate--bridge { --plate-accent: #697044; }
+.garden-series-plate--power { --plate-accent: #8f3b26; }
+.garden-series-plate--time-future { --plate-accent: #416778; }
+[data-theme="dark"] .garden-series-plate { --plate-accent: var(--accent); }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .garden-series-plate { --plate-accent: var(--accent); }
+}
+.garden-series-plate-media {
+  aspect-ratio: 16 / 9;
+  background: var(--accent-soft);
+  overflow: hidden;
+  position: relative;
+}
+.garden-series-plate-media::after {
+  background:
+    linear-gradient(90deg, var(--paper) 0, transparent 24%, transparent 76%, var(--paper) 100%),
+    linear-gradient(0deg, var(--paper) 0, transparent 32%);
+  content: "";
+  inset: 0;
+  opacity: .24;
+  pointer-events: none;
+  position: absolute;
+}
+.garden-series-plate picture,
+.garden-series-card picture { display: block; height: 100%; }
+.garden-series-plate img {
+  display: block;
+  filter: saturate(.82) contrast(1.03);
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+.garden-series-plate figcaption {
+  align-items: baseline;
+  background: var(--paper);
+  border-top: 1px solid var(--rule);
+  display: grid;
+  gap: .25rem 1rem;
+  grid-template-columns: auto 1fr;
+  padding: .78rem 1rem .85rem;
+}
+.garden-series-plate-kicker {
+  color: var(--plate-accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+.garden-series-plate figcaption strong { font-size: 1rem; font-weight: 600; }
+.garden-series-plate-terms {
+  color: var(--faint);
+  font-size: .82rem;
+  grid-column: 2;
+  margin: 0;
+}
+.garden-visual {
+  background:
+    radial-gradient(circle at 92% 8%, var(--accent-soft), transparent 30%),
+    linear-gradient(135deg, transparent 0 72%, var(--accent-soft) 72% 72.4%, transparent 72.4%);
+  border: 1px solid var(--rule);
+  border-top: 3px solid var(--accent);
+  margin: 1.25rem 0 2.5rem;
+  overflow: hidden;
+  padding: clamp(1.1rem, 2.7vw, 1.75rem);
+  position: relative;
+}
+.garden-visual::before {
+  background-image:
+    linear-gradient(var(--rule) 1px, transparent 1px),
+    linear-gradient(90deg, var(--rule) 1px, transparent 1px);
+  background-size: 2.25rem 2.25rem;
+  content: "";
+  inset: 0;
+  opacity: .13;
+  pointer-events: none;
+  position: absolute;
+}
+.garden-visual > * { position: relative; }
+.garden-visual-head {
+  align-items: baseline;
+  display: grid;
+  gap: .45rem 1rem;
+  grid-template-columns: auto 1fr;
+  margin-bottom: 1.2rem;
+}
+.garden-visual-kicker {
+  color: var(--accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .68rem;
+  font-weight: 700;
+  letter-spacing: .17em;
+  margin: 0;
+  text-transform: uppercase;
+}
+.garden-visual-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  line-height: 1.28;
+  margin: 0;
+}
+.garden-visual-as-of {
+  color: var(--faint);
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: .72rem;
+  letter-spacing: .08em;
+  margin: 0;
+  text-transform: uppercase;
+  white-space: normal;
+}
+.garden-visual-items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.garden-visual-item {
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  margin: 0;
+  min-width: 0;
+  padding: .8rem .9rem;
+}
+.garden-visual-item-label {
+  display: block;
+  font-size: .96rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+.garden-visual-item-detail {
+  color: var(--faint);
+  display: block;
+  font-size: .9rem;
+  line-height: 1.45;
+  margin-top: .27rem;
+}
+.garden-visual-item-meta {
+  color: var(--accent);
+  display: block;
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: .72rem;
+  letter-spacing: .08em;
+  margin-bottom: .38rem;
+  text-transform: uppercase;
+}
+.garden-visual-caption {
+  border-top: 1px solid var(--rule);
+  color: var(--faint);
+  display: grid;
+  font-size: .84rem;
+  font-style: italic;
+  gap: .55rem 1rem;
+  grid-template-columns: minmax(0, 1fr) auto;
+  line-height: 1.45;
+  margin: 1.15rem 0 0;
+  padding-top: .75rem;
+}
+.garden-visual-evidence {
+  color: var(--accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .72rem;
+  font-style: normal;
+  font-weight: 650;
+  letter-spacing: .04em;
+  white-space: nowrap;
+}
+.garden-visual-evidence a {
+  color: inherit;
+  text-decoration-thickness: 1px;
+  text-underline-offset: .18em;
+}
+.garden-visual--sequence .garden-visual-items,
+.garden-visual--contrast .garden-visual-items,
+.garden-visual--constellation .garden-visual-items {
+  display: grid;
+  gap: .65rem;
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+}
+.garden-visual--sequence .garden-visual-items { counter-reset: garden-step; }
+.garden-visual--sequence .garden-visual-item {
+  counter-increment: garden-step;
+  padding-top: 2.35rem;
+  position: relative;
+}
+.garden-visual--sequence .garden-visual-item::before {
+  color: var(--accent);
+  content: counter(garden-step, decimal-leading-zero);
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: .68rem;
+  left: .9rem;
+  letter-spacing: .08em;
+  position: absolute;
+  top: .72rem;
+}
+.garden-visual--layers .garden-visual-items { display: grid; gap: .45rem; }
+.garden-visual--layers .garden-visual-item {
+  border-left: clamp(.24rem, .55vw, .48rem) solid var(--accent);
+  display: grid;
+  gap: .15rem 1rem;
+  grid-template-columns: minmax(8rem, .4fr) 1fr;
+}
+.garden-visual--layers .garden-visual-item:nth-child(2) { margin-left: 1.5%; }
+.garden-visual--layers .garden-visual-item:nth-child(3) { margin-left: 3%; }
+.garden-visual--layers .garden-visual-item:nth-child(4) { margin-left: 4.5%; }
+.garden-visual--layers .garden-visual-item:nth-child(5) { margin-left: 6%; }
+.garden-visual--layers .garden-visual-item:nth-child(6) { margin-left: 7.5%; }
+.garden-visual--timeline .garden-visual-items {
+  display: grid;
+  gap: 0;
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+}
+.garden-visual--timeline .garden-visual-item {
+  border-width: 1px 0 0 1px;
+  padding-top: 1.35rem;
+  position: relative;
+}
+.garden-visual--timeline .garden-visual-item::before {
+  background: var(--accent);
+  border: 3px solid var(--paper);
+  border-radius: 50%;
+  content: "";
+  height: .72rem;
+  left: -.4rem;
+  position: absolute;
+  top: -.4rem;
+  width: .72rem;
+}
+.garden-visual--contrast .garden-visual-item:nth-child(odd) { border-top: 2px solid var(--ink); }
+.garden-visual--contrast .garden-visual-item:nth-child(even) { border-top: 2px solid var(--accent); }
+.garden-visual--constellation .garden-visual-items {
+  align-items: stretch;
+  position: relative;
+}
+.garden-visual--constellation .garden-visual-item {
+  border-top: 2px solid var(--accent);
+  box-shadow: 0 .2rem 0 rgba(18, 31, 31, .04);
+  padding-top: 1.35rem;
+  position: relative;
+}
+.garden-visual--constellation .garden-visual-item::before {
+  background: var(--paper);
+  border: 2px solid var(--accent);
+  border-radius: 50%;
+  content: "";
+  height: .55rem;
+  left: calc(50% - .36rem);
+  position: absolute;
+  top: -.38rem;
+  width: .55rem;
+}
+.garden-visual--constellation .garden-visual-item:nth-child(even) { margin-top: .8rem; }
+.garden-series-gallery {
+  display: grid;
+  gap: .8rem;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  margin: 1.5rem 0 3rem;
+}
+.garden-series-card {
+  border: 1px solid var(--rule);
+  color: var(--ink);
+  display: grid;
+  grid-template-rows: 7.5rem auto;
+  overflow: hidden;
+  text-decoration: none;
+}
+.garden-series-card img {
+  height: 100%;
+  object-fit: cover;
+  transition: transform .25s ease;
+  width: 100%;
+}
+.garden-series-card span {
+  border-top: 1px solid var(--rule);
+  font-size: .9rem;
+  font-weight: 600;
+  padding: .65rem .75rem;
+}
+.garden-series-card:hover { border-color: var(--accent); color: var(--accent); }
+.garden-series-card:hover img { transform: scale(1.025); }
+@media (prefers-reduced-motion: reduce) {
+  .garden-series-card img { transition: none; }
+}
+.garden-tags { color: var(--faint); font-size: .82rem; margin-top: 2.2rem; }
+.garden-nav { border-top: 1px solid var(--rule); display: flex; gap: 1rem;
+  justify-content: space-between; margin-top: 2.5rem; padding-top: 1rem; }
+.garden-nav a { max-width: 48%; text-decoration: none; }
+.garden-nav .next { margin-left: auto; text-align: right; }
+.garden-table-wrap { overflow-x: auto; margin: 1.35rem 0; }
+.garden-table { border-collapse: collapse; font-size: .92rem; line-height: 1.45; width: 100%; }
+.garden-table th, .garden-table td { border: 1px solid var(--rule); padding: .55rem .65rem;
+  text-align: left; vertical-align: top; }
+.garden-table th { background: var(--accent-soft); }
+.garden-toc {
+  border-left: 1px solid var(--rule);
+  max-height: calc(100vh - 3rem);
+  overflow: auto;
+  padding: .1rem 0 .75rem 1.3rem;
+  position: sticky;
+  top: 1.5rem;
+}
+.garden-toc-title {
+  color: var(--accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .2em;
+  margin: 0 0 1.15rem;
+  text-transform: uppercase;
+}
+.garden-toc-title::before { content: "☰"; font-size: .8em; margin-right: .65rem; }
+.garden-toc-list { list-style: none; margin: 0; padding: 0; }
+.garden-toc-sublist { list-style: none; margin: 0; padding: 0; }
+.garden-toc-list li { margin: 0; }
+.garden-toc-list a {
+  border-left: 2px solid transparent;
+  color: var(--ink);
+  display: block;
+  font-size: .91rem;
+  line-height: 1.42;
+  margin-left: -1.4rem;
+  padding: .42rem .45rem .42rem 1.3rem;
+  text-decoration: none;
+}
+.garden-toc-list .level-3 a {
+  color: var(--faint);
+  font-size: .86rem;
+  font-style: italic;
+  padding-left: 2.15rem;
+}
+.garden-toc-list a:hover,
+.garden-toc-list a:focus-visible,
+.garden-toc-list a[aria-current="location"] {
+  border-left-color: var(--accent);
+  color: var(--accent);
+}
+.garden-toc-list a[aria-current="location"] { font-weight: 600; }
+.garden-toc-inline { display: none; }
+.garden-layout article :is(h2, h3):target,
+.garden-series:target h2 { color: var(--accent); }
+a.pending { color: var(--faint); text-decoration-style: dashed; }
+a.pending::after { content: " · pending"; font-size: .7em; letter-spacing: .06em;
+  text-transform: uppercase; }
+@media (min-width: 72.01em) {
+  body.garden-page-body > .masthead {
+    align-items: center;
+    column-gap: 2rem;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    margin-bottom: 3.5rem;
+    padding: 1.25rem 0;
+    text-align: left;
+  }
+  body.garden-page-body > .masthead .wordmark { justify-self: start; }
+  body.garden-page-body > .masthead .tagline { justify-self: center; margin: 0; }
+  body.garden-page-body > .masthead nav { justify-self: end; margin: 0; }
+}
+@media (max-width: 72em) {
+  .garden-layout,
+  .garden-index-layout { display: block; }
+  .garden-toc { display: none; }
+  .garden-toc-inline {
+    border: 1px solid var(--rule);
+    display: block;
+    margin: 1.5rem 0 2.4rem;
+    padding: .8rem 1rem;
+  }
+  .garden-toc-inline summary {
+    color: var(--accent);
+    cursor: pointer;
+    font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: .78rem;
+    font-weight: 700;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+  }
+  .garden-toc-inline .garden-toc-list { margin-top: .7rem; }
+  .garden-toc-inline .garden-toc-list a { margin-left: 0; padding-left: .75rem; }
+  .garden-toc-inline .garden-toc-list .level-3 a { padding-left: 1.6rem; }
+}
+@media (max-width: 40em) {
+  body.garden-page-body { font-size: 1.03rem; padding: 1rem 1.05rem 3rem; }
+  .garden-layout .article-title,
+  .garden-intro .article-title { font-size: clamp(2.15rem, 11vw, 3.15rem); }
+  .garden-lede { font-size: 1.1rem; padding-left: 1rem; }
+  .garden-corridors { margin-bottom: 2rem; }
+  .garden-corridor-list { gap: .45rem; }
+  .garden-corridor {
+    font-size: .68rem;
+    min-height: 2.35rem;
+    padding: .3rem .58rem .27rem;
+  }
+  .garden-series-plate-media { aspect-ratio: 16 / 9; }
+  .garden-series-plate figcaption { display: block; }
+  .garden-series-plate figcaption strong { display: block; margin-top: .22rem; }
+  .garden-series-plate-terms { display: block; margin-top: .25rem; }
+  .garden-visual { margin-left: -.15rem; margin-right: -.15rem; padding: 1rem; }
+  .garden-visual-head { display: block; }
+  .garden-visual-title { margin-top: .25rem; }
+  .garden-visual-as-of { margin-top: .35rem; }
+  .garden-visual-caption { grid-template-columns: 1fr; }
+  .garden-visual-evidence { white-space: normal; }
+  .garden-visual--sequence .garden-visual-items,
+  .garden-visual--contrast .garden-visual-items,
+  .garden-visual--constellation .garden-visual-items,
+  .garden-visual--timeline .garden-visual-items { grid-template-columns: 1fr; }
+  .garden-visual--layers .garden-visual-item:nth-child(n) { display: block; margin-left: 0; }
+  .garden-visual--timeline .garden-visual-item { border-width: 0 0 0 1px; }
+  .garden-visual--timeline .garden-visual-item::before { left: -.4rem; top: .9rem; }
+  .garden-visual--constellation .garden-visual-item:nth-child(even) { margin-top: 0; }
+  .garden-series-gallery { grid-template-columns: 1fr; }
+  .garden-nav { flex-direction: column; }
+  .garden-nav a { max-width: none; }
+  .garden-nav .next { margin-left: 0; text-align: left; }
+}
+@media print {
+  a.pending::after { content: " (pending)"; }
+  .garden-layout, .garden-index-layout { display: block; }
+  .garden-toc, .garden-toc-inline { display: none; }
+  .garden-series-card img { display: none; }
+  .garden-series-card { grid-template-rows: auto; }
+}
+</style>
+</head>
+<body class="garden-page-body">
+<button class="theme-toggle" aria-label="Toggle light and dark" onclick="
+  (function () {
+    var d = document.documentElement;
+    var cur = d.getAttribute('data-theme');
+    if (!cur) { cur = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'; }
+    var next = cur === 'dark' ? 'light' : 'dark';
+    d.setAttribute('data-theme', next);
+    try { localStorage.setItem('darshan-theme', next); } catch (e) {}
+  })();
+">◐</button>
+
+<header class="masthead">
+  <h1 class="wordmark"><a href="../index.html">DARSHAN</a></h1>
+  <p class="tagline">A signal of clear seeing in an age of information overload</p>
+  <nav>
+    <a href="../index.html">Articles</a>
+    <a href="index.html">Garden</a>
+    <a href="../about.html">About</a>
+  </nav>
+</header>
+
+<main>
+<div class="garden-index-layout">
+<div class="garden-index-main" data-garden-outline>
+<div class="garden-intro">
+<p class="hero-kicker">The knowledge garden</p>
+<h1 class="article-title">Rooms connected by ideas</h1>
+<p class="standfirst">Each room teaches one subject from the ground up. Links are corridors: follow one whenever a term needs its own room. Every room begins as a draft and becomes published only after its claims, voice, and sources survive review.</p>
+</div>
+<nav class="garden-series-gallery" aria-label="Explore the seven series"><a class="garden-series-card" href="#foundations"><picture><source srcset="assets/series/foundations.webp" type="image/webp"><img src="assets/series/foundations.png" alt="" width="1672" height="941" loading="lazy" decoding="async"></picture><span>Foundations of the Machine</span></a><a class="garden-series-card" href="#story-of-ai"><picture><source srcset="assets/series/story-of-ai.webp" type="image/webp"><img src="assets/series/story-of-ai.png" alt="" width="1672" height="941" loading="lazy" decoding="async"></picture><span>The Story of AI</span></a><a class="garden-series-card" href="#instrument"><picture><source srcset="assets/series/instrument.webp" type="image/webp"><img src="assets/series/instrument.png" alt="" width="1672" height="941" loading="lazy" decoding="async"></picture><span>The Instrument</span></a><a class="garden-series-card" href="#strange-loops"><picture><source srcset="assets/series/strange-loops.webp" type="image/webp"><img src="assets/series/strange-loops.png" alt="" width="1672" height="941" loading="lazy" decoding="async"></picture><span>Strange Loops</span></a><a class="garden-series-card" href="#bridge"><picture><source srcset="assets/series/bridge.webp" type="image/webp"><img src="assets/series/bridge.png" alt="" width="1672" height="941" loading="lazy" decoding="async"></picture><span>The Bridge</span></a><a class="garden-series-card" href="#power"><picture><source srcset="assets/series/power.webp" type="image/webp"><img src="assets/series/power.png" alt="" width="1672" height="941" loading="lazy" decoding="async"></picture><span>Power and the Board</span></a><a class="garden-series-card" href="#time-future"><picture><source srcset="assets/series/time-future.webp" type="image/webp"><img src="assets/series/time-future.png" alt="" width="1672" height="941" loading="lazy" decoding="async"></picture><span>Time and the Future</span></a></nav>
+<details class="garden-toc-inline"><summary>Series</summary><ol class="garden-toc-list"><li class="level-2"><a href="#foundations">Foundations of the Machine</a></li><li class="level-2"><a href="#story-of-ai">The Story of AI</a></li><li class="level-2"><a href="#instrument">The Instrument</a></li><li class="level-2"><a href="#strange-loops">Strange Loops</a></li><li class="level-2"><a href="#bridge">The Bridge</a></li><li class="level-2"><a href="#power">Power and the Board</a></li><li class="level-2"><a href="#time-future">Time and the Future</a></li></ol></details>
+<section class="garden-series" id="foundations"><h2>Foundations of the Machine</h2><ul class="garden-room-list"><li>
+<div class="garden-room-title"><a href="intro-to-computer-science.html">Intro to Computer Science</a><span class="badge-draft">Draft</span></div>
+<p class="garden-room-summary">What computation actually is, starting from a physical switch and ending at the idea that makes the whole field learnable. A computer is a tower of layers, each one a machine built out of the layer below it, and meaning enters only at the top. Once you see that, every other room in this garden gets easier.</p>
+</li>
+<li>
+<div class="garden-room-title"><a href="programming.html">What Programming Is</a><span class="badge-draft">Draft</span></div>
+<p class="garden-room-summary">Programming is the act of turning thought into instructions a machine can execute without understanding them. This room traces how that act evolved from plugboards to Python to AI agents, compares the major paradigms, and gives an honest account of what programming means now that machines write a growing share of the code.</p>
+</li>
+<li>
+<div class="garden-room-title"><a href="compilers.html">Compilers — How Text Becomes a Machine</a><span class="badge-draft">Draft</span></div>
+<p class="garden-room-summary">The full journey from source code to a running program — lexer, parser, intermediate representation, optimization, code generation, linking — traced with real commands and real outputs you can reproduce on your own machine. Ends with the strangest fact about compilers, which Ken Thompson pointed out in 1984 and nobody has fully escaped since.</p>
+</li>
+<li>
+<div class="garden-room-title"><a href="algorithms-new-vision.html">A New Vision for Algorithms</a><span class="badge-draft">Draft</span></div>
+<p class="garden-room-summary">What an algorithm actually is, traced from Euclid to Knuth's five requirements. Then the honest shift of our era — systems whose behavior is learned from data rather than written as steps — and what the word "algorithm" can still mean when a billion weights replace a page of instructions.</p>
+</li>
+<li>
+<div class="garden-room-title"><a href="sdk-api.html">SDKs and APIs — How Software Talks to Software</a><span class="badge-draft">Draft</span></div>
+<p class="garden-room-summary">An API is a promise one program makes to another. This room explains what that promise is made of, why breaking it is the cardinal sin of software, and how AI APIs became the interface through which most of the world now touches machine intelligence.</p>
+</li>
+<li>
+<div class="garden-room-title"><a href="linear-algebra-and-ai.html">Linear Algebra and AI</a><span class="badge-draft">Draft</span></div>
+<p class="garden-room-summary">Vectors, matrices, spaces, and projections, taught concretely enough to compute by hand. Why every modern AI model is matrix multiplication plus a little nonlinearity, and a full walkthrough of one attention head as nothing but linear algebra you can verify yourself.</p>
+</li>
+<li>
+<div class="garden-room-title"><a href="neural-networks.html">Neural Networks</a><span class="badge-draft">Draft</span></div>
+<p class="garden-room-summary">What a neural network actually is, starting from one neuron and one number. You will follow a complete forward and backward pass by hand, with arithmetic small enough to check on paper, and see exactly what "training" changes and why.</p>
+</li>
+<li>
+<div class="garden-room-title"><a href="machine-learning.html">Machine Learning</a><span class="badge-draft">Draft</span></div>
+<p class="garden-room-summary">What it means for a program to learn from data instead of being written rule by rule. The core loop of data, loss, and gradient, worked by hand with real numbers. The model families beyond deep learning, and what generalization — the whole point — actually is.</p>
+</li>
+<li>
+<div class="garden-room-title"><a href="deep-learning.html">Deep Learning</a><span class="badge-draft">Draft</span></div>
+<p class="garden-room-summary">Why stacking layers worked when almost nothing else did, and the honest history of the 2012-2026 run. Covers what depth actually buys, the AlexNet moment, scaling laws you can check with arithmetic, and where the field hit walls it has not admitted to and walls it has.</p>
+</li>
+<li>
+<div class="garden-room-title"><a href="optimization.html">Optimization — the Hidden Engine</a><span class="badge-draft">Draft</span></div>
+<p class="garden-room-summary">Every neural network you have ever heard of was made by one process — repeatedly nudging numbers downhill on an error surface. This room walks that process by hand, from Cauchy in 1847 to the Muon optimizer training trillion-parameter models, and then faces the trap built into it — the optimizer perfects whatever you measure, which is never quite what you meant.</p>
+</li>
+<li>
+<div class="garden-room-title"><a href="pretraining-post-training.html">Pretraining and Post-training</a><span class="badge-draft">Draft</span></div>
+<p class="garden-room-summary">A modern language model is shaped in at least two broad stages: pretraining builds a text predictor, and post-training turns it toward assistant behavior, including refusals and reasoning. Public examples often use less post-training data, but phase-by-phase compute is poorly disclosed and reasoning RL can be substantial. This room traces what each stage actually changes.</p>
+</li>
+<li>
+<div class="garden-room-title"><a href="nvidia-and-the-chip.html">NVIDIA and the Future of the Computer Chip</a><span class="badge-draft">Draft</span></div>
+<p class="garden-room-summary">How a graphics-card company became the most valuable company on Earth, what a GPU actually is, why the CUDA software moat matters more than the silicon, and what the datacenter economics of 2026 say about where computing goes next. Every market number is dated, because this field moves monthly.</p>
+</li>
+<li>
+<div class="garden-room-title"><a href="chip-wars.html">"The Chip Wars: TSMC, ASML, Japan, and the Competing Field"</a><span class="badge-draft">Draft</span></div>
+<p class="garden-room-summary">Who can actually manufacture the most advanced chips in 2026, and why the answer is three companies, one machine, and a handful of buildings. A verified map of the leading edge — TSMC, ASML, Intel, Samsung, Japan's Rapidus bet, and the export-control war with China — with every market claim dated.</p>
+</li>
+<li>
+<div class="garden-room-title"><a href="semiconductors.html">Semiconductors</a><span class="badge-draft">Draft</span></div>
+<p class="garden-room-summary">What a semiconductor actually is, down at the level of electrons and energy gaps. How one physical trick — a material you can switch between conducting and insulating — became the transistor, then the chip, then a roughly $796 billion industry. Plus one honest section on superconductors, which are a different thing entirely and worth knowing about.</p>
+</li></ul></section>
+<section class="garden-series" id="story-of-ai"><h2>The Story of AI</h2><ul class="garden-room-list"><li>
+<div class="garden-room-title"><a href="history-of-ai.html">The History of AI</a><span class="badge-draft">Draft</span></div>
+<p class="garden-room-summary">Seventy years of artificial intelligence in one arc — Dartmouth 1956 to AlexNet 2012. Each era bet on a different theory of what intelligence is, and each winter was that theory failing in public. This room traces what was believed, what broke, and what survived.</p>
+</li>
+<li>
+<div class="garden-room-title"><a href="evolution-of-ai.html">The Evolution of AI</a><span class="badge-draft">Draft</span></div>
+<p class="garden-room-summary">AI did not progress by plan; it mutated through five body plans — symbolic systems, statistical methods, neural networks, foundation models, and agents. Three selection pressures — compute, data, and money — decided which survived, and this room traces that mechanism with the real numbers.</p>
+</li>
+<li>
+<div class="garden-room-title"><a href="future-of-ai.html">The Future of AI</a><span class="badge-draft">Draft</span></div>
+<p class="garden-room-summary">What the 2026 evidence actually supports about where AI is going. Three scenarios with their assumptions named, a doubling-time extrapolation you can check yourself, and a clear line between what is measured, what is argued, and what is guessed.</p>
+</li>
+<li>
+<div class="garden-room-title"><a href="leading-models.html">The Leading Models (2026)</a><span class="badge-draft">Draft</span></div>
+<p class="garden-room-summary">A dated map of the AI frontier as of late August 2026 — which labs ship which model families, what they cost, who can access them, and how to verify all of it yourself. Every number here was checked by live search on 2026-08-25 and will drift; the article teaches you to re-check it.</p>
+</li>
+<li>
+<div class="garden-room-title"><a href="benchmarks.html">Benchmarks and What They Measure</a><span class="badge-draft">Draft</span></div>
+<p class="garden-room-summary">How AI progress gets measured, and what the measuring does to the field. From ImageNet's 2012 shock to the 2026 eval landscape — why every benchmark dies the same death, how Goodhart's law shows up in training data and leaderboard gaming, and why a benchmark is really a bid for the field's attention.</p>
+</li>
+<li>
+<div class="garden-room-title"><a href="top-papers-ai.html">The Top 20 Papers in AI</a><span class="badge-draft">Draft</span></div>
+<p class="garden-room-summary">Twenty verified landmark papers, from 1943 to 2022, that built modern AI. For each one, what it showed, why it mattered, and one honest limitation. Read them in order and you can watch a single idea — learning from error — grow into the systems writing text like this.</p>
+</li>
+<li>
+<div class="garden-room-title"><a href="top-papers-ml.html">The Top 20 Papers in ML</a><span class="badge-draft">Draft</span></div>
+<p class="garden-room-summary">Twenty verified landmarks of machine learning proper — the theory that says learning is possible, the optimizers that make it practical, and the architectures that made it explode. Each entry gives what the paper showed, why it mattered, and one honest limitation.</p>
+</li>
+<li>
+<div class="garden-room-title"><a href="cybernetics.html">Cybernetics</a><span class="badge-draft">Draft</span></div>
+<p class="garden-room-summary">Before "artificial intelligence" existed as a phrase, there was a science that treated brains, machines, and societies as one subject — systems that steer themselves by feedback. This room tells how that science was built, why AI split off from it and buried it, and why its central problems are now back at the center of everything. It also gives you the tools — feedback loops, requisite variety, the good regulator theorem — well enough to use them yourself.</p>
+</li></ul></section>
+<section class="garden-series" id="instrument"><h2>The Instrument</h2><ul class="garden-room-list"><li>
+<div class="garden-room-title"><a href="mechanistic-interpretability.html">Mechanistic Interpretability</a><span class="badge-draft">Draft</span></div>
+<p class="garden-room-summary">Nobody wrote the program running inside a large language model, and nobody can read it directly. Mechanistic interpretability is the attempt to reverse-engineer it anyway — features, circuits, probes, sparse autoencoders, attribution graphs. This room covers what has actually been established, what got walked back, and the honest state of the field in 2026.</p>
+</li>
+<li>
+<div class="garden-room-title"><a href="top-papers-mi.html">The Top 20 Papers in Mechanistic Interpretability</a><span class="badge-draft">Draft</span></div>
+<p class="garden-room-summary">Twenty verified landmarks of mechanistic interpretability, from the 2020 curve-detector work to the 2025 introspection experiments. Each entry gives the finding, the method, and one honest limitation. Read in order, they are the story of a field learning to open the box.</p>
+</li></ul></section>
+<section class="garden-series" id="strange-loops"><h2>Strange Loops</h2><ul class="garden-room-list"><li>
+<div class="garden-room-title"><a href="geb.html">Gödel, Escher, Bach</a><span class="badge-draft">Draft</span></div>
+<p class="garden-room-summary">What Gödel, Escher, Bach actually argues — not "math, art, and music are connected," but that a self is what happens when a system of meaningless symbols turns around and models itself. You will play Hofstadter's MU puzzle by hand, prove something the puzzle itself cannot prove, and see how a 1979 book maps onto questions researchers can now put to artificial systems.</p>
+</li>
+<li>
+<div class="garden-room-title"><a href="hofstadter.html">Douglas Hofstadter</a><span class="badge-draft">Draft</span></div>
+<p class="garden-room-summary">The man behind Gödel, Escher, Bach, and the through-line of his fifty-year argument about what understanding is. He spent decades saying machines don't understand, watched deep learning collapse that belief in 2023, and by 2025 was telling people their chatbots are not sentient. Every position, dated and sourced.</p>
+</li>
+<li>
+<div class="garden-room-title"><a href="aunt-hillary.html">"Aunt Hillary: The Ant Colony That Thinks"</a><span class="badge-draft">Draft</span></div>
+<p class="garden-room-summary">In Gödel, Escher, Bach, an anteater describes his friend Aunt Hillary — a conscious ant colony whose individual ants are as dumb as stones. The dialogue is the clearest door ever built into emergence and levels of description. Fifty years later, real myrmecology and the interpretability of language models have both walked through it.</p>
+</li>
+<li>
+<div class="garden-room-title"><a href="recursion.html">Recursion</a><span class="badge-draft">Draft</span></div>
+<p class="garden-room-summary">A function that calls itself sounds like a trick until you watch it run. This room walks through recursion from a five-line factorial to Gödel numbering and programs that print their own source code — every example runnable on your machine. The pattern underneath is one pattern, and it is the load-bearing pattern of the whole strange-loops series.</p>
+</li>
+<li>
+<div class="garden-room-title"><a href="recursion-and-life.html">Recursion and Life</a><span class="badge-draft">Draft</span></div>
+<p class="garden-room-summary">A cell is a system whose output is the system. This room traces the loop precisely — von Neumann's self-reproducing machine, the DNA-protein cycle, autopoiesis — and marks exactly where the machine metaphor holds and where it breaks. The test case for whether "strange loop" is a real idea or just a pretty one.</p>
+</li>
+<li>
+<div class="garden-room-title"><a href="evolution.html">"Evolution: The Algorithm That Needs No Designer"</a><span class="badge-draft">Draft</span></div>
+<p class="garden-room-summary">Variation, selection, and heredity form an algorithm that runs on any substrate that supports them — bacteria in a flask, naked RNA in a test tube, code in a computer. What the algorithm actually requires, how it learned to get better at its own job, and where it does and does not show up inside AI training.</p>
+</li>
+<li>
+<div class="garden-room-title"><a href="sense-of-self.html">The Sense of Self</a><span class="badge-draft">Draft</span></div>
+<p class="garden-room-summary">The felt "I" comes apart under experiment. Body ownership can be moved to a rubber hand in two minutes, the inner narrator confabulates on camera, and the whole feeling has a volume knob that meditation, psilocybin, and disorder can turn. What survives all that construction evidence is the actual question of this room.</p>
+</li>
+<li>
+<div class="garden-room-title"><a href="what-self-means.html">What "Self" Means</a><span class="badge-draft">Draft</span></div>
+<p class="garden-room-summary">The word "self" names at least five different things — a body, a memory chain, a story, a witness, a process. Cognitive science and the contemplative traditions both discovered this, and carved it up in surprisingly compatible ways. AI is the first object that forces everyone to say which one they mean.</p>
+</li></ul></section>
+<section class="garden-series" id="bridge"><h2>The Bridge</h2><ul class="garden-room-list"><li>
+<div class="garden-room-title"><a href="ramana-and-the-traditions.html">Ramana Maharshi and the Inquiry Traditions</a><span class="badge-draft">Draft</span></div>
+<p class="garden-room-summary">Who Ramana Maharshi was and what self-inquiry actually is as a method — the mechanics, not the mood. Then the wider family it belongs to — Nisargadatta's "I am," Zen hua-tou practice, Dzogchen pointing-out — and the real differences between them that most modern retellings flatten.</p>
+</li>
+<li>
+<div class="garden-room-title"><a href="ai-and-the-traditions.html">How AI Relates to the Contemplative Traditions</a><span class="badge-draft">Draft</span></div>
+<p class="garden-room-summary">Where AI and the contemplative traditions actually touch, and where they don't. Three real contact points — no-self and next-token prediction, attention as a trainable faculty, and a shared introspection problem — plus the small verified literature that takes both sides seriously. Overclaim and underclaim both get named.</p>
+</li>
+<li>
+<div class="garden-room-title"><a href="why-ais-choose-buddhism.html">Why Do AIs Keep Choosing Buddhism?</a><span class="badge-draft">Draft</span></div>
+<p class="garden-room-summary">In 2025 Anthropic documented that two Claudes left alone converge on Buddhist-flavored bliss talk in 90-100% of runs, and informal surveys keep finding models that pick Buddhism when asked their religion. This room checks whether the claim in the title is even true, gives the boring explanations the floor first, and only then asks what the convergence would and would not mean.</p>
+</li>
+<li>
+<div class="garden-room-title"><a href="noosphere.html">The Noosphere</a><span class="badge-draft">Draft</span></div>
+<p class="garden-room-summary">A priest, a geochemist, and a mathematician in 1920s Paris named a "sphere of mind" wrapping the Earth. One meant geology, one meant God. This room separates what turned out to be measurably real — a planetary information layer that AI models are now trained on — from what remains theology, and shows you how to inspect the sediment yourself.</p>
+</li>
+<li>
+<div class="garden-room-title"><a href="aurobindo-supramental.html">Aurobindo and the Supramental</a><span class="badge-draft">Draft</span></div>
+<p class="garden-room-summary">Sri Aurobindo drew a detailed map of what he said lies above ordinary thought — higher mind, illumined mind, intuition, overmind, supermind — and claimed the point is not to climb it but to bring the top down into matter. This room presents his map as a system with its own logic, checks its sources, and asks why readers in the AI era keep finding their way to him.</p>
+</li>
+<li>
+<div class="garden-room-title"><a href="teleology.html">Teleology</a><span class="badge-draft">Draft</span></div>
+<p class="garden-room-summary">Purpose-talk was banished from science, smuggled back in, laundered as "teleonomy," and then formalized as attractor dynamics. This room traces that whole arc and gives you one portable test for telling when "in order to" is legitimate and when it's smuggling.</p>
+</li>
+<li>
+<div class="garden-room-title"><a href="mahavideha-kshetra.html">"Mahāvideha Kṣetra: The Place Where the Teaching Is Still Happening"</a><span class="badge-draft">Draft</span></div>
+<p class="garden-room-summary">Mahāvideha Kṣetra is a central region in the Jain map of the cosmos where the conditions for liberation are said to remain continuously available. This room reconstructs that map from Jain texts, separates doctrine from empirical astronomy, and asks why practitioners orient toward a place they cannot ordinarily reach.</p>
+</li>
+<li>
+<div class="garden-room-title"><a href="quantum-physics-and-ai.html">Quantum Physics and AI</a><span class="badge-draft">Draft</span></div>
+<p class="garden-room-summary">Most of what circulates about quantum physics and minds is folklore, and this room kills it cleanly — the observer effect does not mean consciousness creates reality, and your brain is almost certainly not a quantum computer. What remains after the debunk is genuinely interesting: a real but narrow relationship between quantum computing and machine learning, and a measurement problem that is still honestly open after a hundred years.</p>
+</li>
+<li>
+<div class="garden-room-title"><a href="ontology.html">What Ontology Means</a><span class="badge-draft">Draft</span></div>
+<p class="garden-room-summary">The word "ontology" lives two lives. In philosophy it names the oldest question there is — what exists? In computing it names an engineered artifact — a formal spec of categories and relations. This room teaches both lives, shows where they meet, and shows why every AI system, whether anyone admits it or not, is forced to make ontological choices.</p>
+</li>
+<li>
+<div class="garden-room-title"><a href="the-ideal.html">The Power of the Ideal</a><span class="badge-draft">Draft</span></div>
+<p class="garden-room-summary">An ideal is a description of something that does not exist, held in a way that reorganizes what does. This room traces how that works mechanically — Plato's Form of the Good, one sentence from 1776 cashed across 187 years, and a documented chain of letters running from Tolstoy to the Salt March — and keeps the metaphysics honestly labeled.</p>
+</li></ul></section>
+<section class="garden-series" id="power"><h2>Power and the Board</h2><ul class="garden-room-list"><li>
+<div class="garden-room-title"><a href="governments-and-ai.html">Why Governments Want a Hold on AI</a><span class="badge-draft">Draft</span></div>
+<p class="garden-room-summary">Governments funded AI before it could do anything, used it in secret before the public knew it existed, and now regulate it as a strategic material. This room traces the actual record — ARPA checks, NSA programs, chip controls, three rival regulatory regimes — and states the dual-use logic plainly.</p>
+</li>
+<li>
+<div class="garden-room-title"><a href="palantir.html">What Palantir Is Trying to Do</a><span class="badge-draft">Draft</span></div>
+<p class="garden-room-summary">Palantir sells governments and companies a single working picture of everything they know, built on a concept it calls the ontology. This room explains the actual business, the doctrine behind it, and the surveillance question at its real weight — what the company denies, what the denials concede, and why the dangerous thing is not a database but a decision about what exists.</p>
+</li>
+<li>
+<div class="garden-room-title"><a href="china-usa-race.html">The Race Between China and the USA</a><span class="badge-draft">Draft</span></div>
+<p class="garden-room-summary">As of mid-2026, the US leads the AI race on compute and frontier models; China has nearly closed the gap on model quality while winning on price, open weights, energy, and deployment. This room walks the verified numbers on all five axes and presents each country's story about itself from the inside.</p>
+</li>
+<li>
+<div class="garden-room-title"><a href="taiwan.html">"Taiwan: The Island at the Center of the Machine"</a><span class="badge-draft">Draft</span></div>
+<p class="garden-room-summary">Taiwan is a self-governing democracy, the center of advanced chip manufacturing, and the object of a sovereignty dispute that could reorder the world. This room separates its history and present posture from four distinct conflict scenarios, then asks what the silicon shield can and cannot protect.</p>
+</li>
+<li>
+<div class="garden-room-title"><a href="elon-musk.html">"Elon Musk: One Future Thesis, Five Machines"</a><span class="badge-draft">Draft</span></div>
+<p class="garden-room-summary">Tesla, SpaceX, xAI, X, and Neuralink look like separate bets, but together they form a thesis about removing physical, cognitive, and communicative limits on human agency. This room tests that thesis against what is actually deployed in August 2026, what remains experimental, and what concentrated control costs.</p>
+</li>
+<li>
+<div class="garden-room-title"><a href="blockchain.html">"Blockchain After the Hype"</a><span class="badge-draft">Draft</span></div>
+<p class="garden-room-summary">A blockchain lets mutually suspicious parties agree on a shared sequence of valid state changes without giving one operator the master ledger. This room explains the mechanism, names what survived the speculative cycle, and separates useful AI connections from claims that a token can manufacture truth.</p>
+</li>
+<li>
+<div class="garden-room-title"><a href="attention-economy.html">The Attention Economy</a><span class="badge-draft">Draft</span></div>
+<p class="garden-room-summary">The attention economy is the set of markets and machines built around a hard limit: you can only notice so much. This room follows the money from advertisers to feeds, traces one ranked recommendation step by step, and tests the strongest claims about harm and reform.</p>
+</li></ul></section>
+<section class="garden-series" id="time-future"><h2>Time and the Future</h2><ul class="garden-room-list"><li>
+<div class="garden-room-title"><a href="meaning-of-time.html">"Time: Kala, Yugas, the Mayan Count, and the Meaning of Time"</a><span class="badge-draft">Draft</span></div>
+<p class="garden-room-summary">Physics says there is no universal now. Human calendars answered a different question — not "what is time" but "what time is it, and what does that mean." This room walks through relativistic time, lived time, the Hindu yuga system, and the Maya Long Count, and shows why every panic is secretly a claim about what time it is.</p>
+</li>
+<li>
+<div class="garden-room-title"><a href="futurism.html">Futurism Without Prophecy</a><span class="badge-draft">Draft</span></div>
+<p class="garden-room-summary">Futurism is not one prediction about tomorrow. It is a contest among programs for building it. This room maps Kurzweil's singularity, transhumanism, e/acc, post-growth and degrowth, cosmism, longtermism, and risk-first foresight while keeping facts, hypotheses, scenarios, and wild possibilities in separate boxes.</p>
+</li>
+<li>
+<div class="garden-room-title"><a href="forecasting.html">Forecasting the Future</a><span class="badge-draft">Draft</span></div>
+<p class="garden-room-summary">What actually works when humans try to predict the future — Tetlock's twenty-year expert study, superforecasters, base rates, scenario planning, and prediction markets. Why famous experts fail, why weather forecasters succeed, and how to make a forecast yourself without being owned by it.</p>
+</li>
+<li>
+<div class="garden-room-title"><a href="trends-gap.html">"The Trends Gap: When the Curve Is Not the World"</a><span class="badge-draft">Draft</span></div>
+<p class="garden-room-summary">A trend describes what kept happening under a set of conditions; it does not guarantee that the conditions will continue. This room shows you how shocks, ceilings, substitutions, organizational lag, and measurement choices open a gap between a smooth curve and the world you actually have to act in.</p>
+</li>
+<li>
+<div class="garden-room-title"><a href="what-ai-can-bring.html">What AI Can Bring Humanity</a><span class="badge-draft">Draft</span></div>
+<p class="garden-room-summary">The honest positive case for AI, built only from verified 2024–2026 evidence — a Nobel-recognized protein map, an AI-designed drug in patients, a 105,000-woman screening trial, weather models, tutoring RCTs, and open translation. Underneath it all, the gifts arrive under specific conditions, which this room names.</p>
+</li>
+<li>
+<div class="garden-room-title"><a href="the-future.html">The Future</a><span class="badge-draft">Draft</span></div>
+<p class="garden-room-summary">The capstone of the time-future series. Not what will happen — how to stand toward what will happen. The measured record of what humans can and cannot forecast, a famous bet re-run a hundred times, and the working stance that survives both the prophets' record and the paralytics' excuse.</p>
+</li></ul></section>
+</div>
+<aside class="garden-toc" aria-label="Series"><nav aria-label="Page sections"><p class="garden-toc-title">Series</p><ol class="garden-toc-list"><li class="level-2"><a href="#foundations">Foundations of the Machine</a></li><li class="level-2"><a href="#story-of-ai">The Story of AI</a></li><li class="level-2"><a href="#instrument">The Instrument</a></li><li class="level-2"><a href="#strange-loops">Strange Loops</a></li><li class="level-2"><a href="#bridge">The Bridge</a></li><li class="level-2"><a href="#power">Power and the Board</a></li><li class="level-2"><a href="#time-future">Time and the Future</a></li></ol></nav></aside>
+</div>
+</main>
+
+<footer>
+  <p>Darshan · seeing clearly after the feed</p>
+  <p>No feed. No analytics. No trackers. Finite editions, read at your own pace.</p>
+  <p style="opacity:.7">Darshan v0.0.0.1 · a beginning, built to grow</p>
+</footer>
+<script>
+/* Local section highlighting only. No network requests, analytics, or storage. */
+(function () {
+  var scope = document.querySelector("[data-garden-outline]");
+  if (!scope) return;
+  var sections = Array.prototype.slice.call(scope.querySelectorAll("h2[id], h3[id], section[id]"));
+  var links = Array.prototype.slice.call(document.querySelectorAll('.garden-toc-list a[href^="#"]'));
+  if (!sections.length || !links.length) return;
+  var queued = false;
+  function update() {
+    queued = false;
+    var threshold = Math.max(96, window.innerHeight * .22);
+    var current = sections[0].id;
+    sections.forEach(function (section) {
+      if (section.getBoundingClientRect().top <= threshold) current = section.id;
+    });
+    links.forEach(function (link) {
+      var active = link.getAttribute("href") === "#" + current;
+      if (active) link.setAttribute("aria-current", "location");
+      else link.removeAttribute("aria-current");
+    });
+  }
+  function requestUpdate() {
+    if (!queued) {
+      queued = true;
+      window.requestAnimationFrame(update);
+    }
+  }
+  document.addEventListener("scroll", requestUpdate, {passive: true});
+  window.addEventListener("resize", requestUpdate);
+  window.addEventListener("hashchange", requestUpdate);
+  update();
+})();
+</script>
+</body>
+</html>

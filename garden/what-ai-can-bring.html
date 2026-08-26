@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>What AI Can Bring Humanity · Darshan Garden</title>
+<meta name="description" content="The honest positive case for AI, built only from verified 2024–2026 evidence — a Nobel-recognized protein map, an AI-designed drug in patients, a 105,000-woman screening trial, weather models, tutoring RCTs, and open translation. Underneath it all, the gifts arrive under specific conditions, which this room names.">
+<link rel="stylesheet" href="../style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ccircle cx='8' cy='8' r='6' fill='none' stroke='%238f3b26' stroke-width='1.5'/%3E%3Ccircle cx='8' cy='8' r='2' fill='%238f3b26'/%3E%3C/svg%3E">
+<script>
+/* Theme memory. No analytics, no trackers. */
+(function () {
+  try {
+    var t = localStorage.getItem("darshan-theme");
+    if (t) document.documentElement.setAttribute("data-theme", t);
+  } catch (e) {}
+})();
+</script>
+<style>
+/* Garden-only layout. Kept here so the publication stylesheet remains shared. */
+body.garden-page-body {
+  max-width: none;
+  padding: 1.5rem clamp(1.25rem, 3.5vw, 4rem) 4rem;
+  font-size: 1.125rem;
+}
+body.garden-page-body > main,
+body.garden-page-body > .masthead,
+body.garden-page-body > footer {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 94rem;
+}
+.garden-layout,
+.garden-index-layout {
+  align-items: start;
+  display: grid;
+  gap: clamp(2.75rem, 5vw, 5rem);
+  grid-template-columns: minmax(0, 64rem) minmax(17rem, 20rem);
+  justify-content: center;
+}
+.garden-layout article,
+.garden-index-main { min-width: 0; }
+.garden-layout .article-title,
+.garden-intro .article-title {
+  font-size: clamp(2.65rem, 3.55vw, 4rem);
+  letter-spacing: -.025em;
+  line-height: 1.06;
+  max-width: 24ch;
+}
+.garden-layout article h2 {
+  font-size: 1.48rem;
+  line-height: 1.3;
+  margin-top: 3.2rem;
+  scroll-margin-top: 1.5rem;
+}
+.garden-layout article h3 {
+  font-size: 1.16rem;
+  margin-top: 2.35rem;
+  scroll-margin-top: 1.5rem;
+}
+.garden-intro { margin-bottom: 2.4rem; }
+.garden-series { margin: 2.8rem 0; scroll-margin-top: 1rem; }
+.garden-series h2 { border-bottom: 1px solid var(--rule); padding-bottom: .45rem; }
+.garden-room-list { list-style: none; margin: 0; padding: 0; }
+.garden-room-list li { border-bottom: 1px solid var(--rule); margin: 0; padding: 1rem 0; }
+.garden-room-title { font-weight: 600; }
+.garden-room-summary { color: var(--faint); font-size: .96rem; margin: .25rem 0 0; }
+.garden-series-link { color: var(--faint); font-size: .82rem; letter-spacing: .12em;
+  text-transform: uppercase; }
+.garden-lede {
+  border-left: 3px solid var(--accent);
+  color: var(--faint);
+  font-size: 1.24rem;
+  font-style: italic;
+  line-height: 1.62;
+  margin: 1.5rem 0 2.2rem;
+  padding: .35rem 0 .35rem 1.35rem;
+}
+.garden-corridors {
+  margin: 1.15rem 0 2.65rem;
+}
+.garden-corridor-list {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: .55rem .62rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.garden-corridor-list li { display: flex; margin: 0; max-width: 100%; }
+.garden-corridor {
+  align-items: center;
+  background: var(--accent-soft);
+  border: 1px solid var(--accent);
+  border-radius: 3px;
+  color: var(--accent);
+  display: inline-flex;
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .73rem;
+  font-weight: 700;
+  letter-spacing: .075em;
+  line-height: 1.35;
+  max-width: 100%;
+  min-height: 2.05rem;
+  overflow-wrap: anywhere;
+  padding: .34rem .72rem .3rem;
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-transform: uppercase;
+  text-underline-offset: .22em;
+}
+.garden-corridor:visited { color: var(--accent); }
+.garden-corridor:hover,
+.garden-corridor:focus-visible {
+  background: var(--accent);
+  color: var(--paper);
+}
+.garden-corridor:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+.garden-series-plate {
+  --plate-accent: var(--accent);
+  border: 1px solid var(--rule);
+  border-top: 3px solid var(--plate-accent);
+  margin: .25rem 0 2.8rem;
+  overflow: hidden;
+  position: relative;
+}
+.garden-series-plate--foundations { --plate-accent: #496f76; }
+.garden-series-plate--story-of-ai { --plate-accent: #526d9a; }
+.garden-series-plate--instrument { --plate-accent: #745779; }
+.garden-series-plate--strange-loops { --plate-accent: #866448; }
+.garden-series-plate--bridge { --plate-accent: #697044; }
+.garden-series-plate--power { --plate-accent: #8f3b26; }
+.garden-series-plate--time-future { --plate-accent: #416778; }
+[data-theme="dark"] .garden-series-plate { --plate-accent: var(--accent); }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .garden-series-plate { --plate-accent: var(--accent); }
+}
+.garden-series-plate-media {
+  aspect-ratio: 16 / 9;
+  background: var(--accent-soft);
+  overflow: hidden;
+  position: relative;
+}
+.garden-series-plate-media::after {
+  background:
+    linear-gradient(90deg, var(--paper) 0, transparent 24%, transparent 76%, var(--paper) 100%),
+    linear-gradient(0deg, var(--paper) 0, transparent 32%);
+  content: "";
+  inset: 0;
+  opacity: .24;
+  pointer-events: none;
+  position: absolute;
+}
+.garden-series-plate picture,
+.garden-series-card picture { display: block; height: 100%; }
+.garden-series-plate img {
+  display: block;
+  filter: saturate(.82) contrast(1.03);
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+.garden-series-plate figcaption {
+  align-items: baseline;
+  background: var(--paper);
+  border-top: 1px solid var(--rule);
+  display: grid;
+  gap: .25rem 1rem;
+  grid-template-columns: auto 1fr;
+  padding: .78rem 1rem .85rem;
+}
+.garden-series-plate-kicker {
+  color: var(--plate-accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+.garden-series-plate figcaption strong { font-size: 1rem; font-weight: 600; }
+.garden-series-plate-terms {
+  color: var(--faint);
+  font-size: .82rem;
+  grid-column: 2;
+  margin: 0;
+}
+.garden-visual {
+  background:
+    radial-gradient(circle at 92% 8%, var(--accent-soft), transparent 30%),
+    linear-gradient(135deg, transparent 0 72%, var(--accent-soft) 72% 72.4%, transparent 72.4%);
+  border: 1px solid var(--rule);
+  border-top: 3px solid var(--accent);
+  margin: 1.25rem 0 2.5rem;
+  overflow: hidden;
+  padding: clamp(1.1rem, 2.7vw, 1.75rem);
+  position: relative;
+}
+.garden-visual::before {
+  background-image:
+    linear-gradient(var(--rule) 1px, transparent 1px),
+    linear-gradient(90deg, var(--rule) 1px, transparent 1px);
+  background-size: 2.25rem 2.25rem;
+  content: "";
+  inset: 0;
+  opacity: .13;
+  pointer-events: none;
+  position: absolute;
+}
+.garden-visual > * { position: relative; }
+.garden-visual-head {
+  align-items: baseline;
+  display: grid;
+  gap: .45rem 1rem;
+  grid-template-columns: auto 1fr;
+  margin-bottom: 1.2rem;
+}
+.garden-visual-kicker {
+  color: var(--accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .68rem;
+  font-weight: 700;
+  letter-spacing: .17em;
+  margin: 0;
+  text-transform: uppercase;
+}
+.garden-visual-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  line-height: 1.28;
+  margin: 0;
+}
+.garden-visual-as-of {
+  color: var(--faint);
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: .72rem;
+  letter-spacing: .08em;
+  margin: 0;
+  text-transform: uppercase;
+  white-space: normal;
+}
+.garden-visual-items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.garden-visual-item {
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  margin: 0;
+  min-width: 0;
+  padding: .8rem .9rem;
+}
+.garden-visual-item-label {
+  display: block;
+  font-size: .96rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+.garden-visual-item-detail {
+  color: var(--faint);
+  display: block;
+  font-size: .9rem;
+  line-height: 1.45;
+  margin-top: .27rem;
+}
+.garden-visual-item-meta {
+  color: var(--accent);
+  display: block;
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: .72rem;
+  letter-spacing: .08em;
+  margin-bottom: .38rem;
+  text-transform: uppercase;
+}
+.garden-visual-caption {
+  border-top: 1px solid var(--rule);
+  color: var(--faint);
+  display: grid;
+  font-size: .84rem;
+  font-style: italic;
+  gap: .55rem 1rem;
+  grid-template-columns: minmax(0, 1fr) auto;
+  line-height: 1.45;
+  margin: 1.15rem 0 0;
+  padding-top: .75rem;
+}
+.garden-visual-evidence {
+  color: var(--accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .72rem;
+  font-style: normal;
+  font-weight: 650;
+  letter-spacing: .04em;
+  white-space: nowrap;
+}
+.garden-visual-evidence a {
+  color: inherit;
+  text-decoration-thickness: 1px;
+  text-underline-offset: .18em;
+}
+.garden-visual--sequence .garden-visual-items,
+.garden-visual--contrast .garden-visual-items,
+.garden-visual--constellation .garden-visual-items {
+  display: grid;
+  gap: .65rem;
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+}
+.garden-visual--sequence .garden-visual-items { counter-reset: garden-step; }
+.garden-visual--sequence .garden-visual-item {
+  counter-increment: garden-step;
+  padding-top: 2.35rem;
+  position: relative;
+}
+.garden-visual--sequence .garden-visual-item::before {
+  color: var(--accent);
+  content: counter(garden-step, decimal-leading-zero);
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: .68rem;
+  left: .9rem;
+  letter-spacing: .08em;
+  position: absolute;
+  top: .72rem;
+}
+.garden-visual--layers .garden-visual-items { display: grid; gap: .45rem; }
+.garden-visual--layers .garden-visual-item {
+  border-left: clamp(.24rem, .55vw, .48rem) solid var(--accent);
+  display: grid;
+  gap: .15rem 1rem;
+  grid-template-columns: minmax(8rem, .4fr) 1fr;
+}
+.garden-visual--layers .garden-visual-item:nth-child(2) { margin-left: 1.5%; }
+.garden-visual--layers .garden-visual-item:nth-child(3) { margin-left: 3%; }
+.garden-visual--layers .garden-visual-item:nth-child(4) { margin-left: 4.5%; }
+.garden-visual--layers .garden-visual-item:nth-child(5) { margin-left: 6%; }
+.garden-visual--layers .garden-visual-item:nth-child(6) { margin-left: 7.5%; }
+.garden-visual--timeline .garden-visual-items {
+  display: grid;
+  gap: 0;
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+}
+.garden-visual--timeline .garden-visual-item {
+  border-width: 1px 0 0 1px;
+  padding-top: 1.35rem;
+  position: relative;
+}
+.garden-visual--timeline .garden-visual-item::before {
+  background: var(--accent);
+  border: 3px solid var(--paper);
+  border-radius: 50%;
+  content: "";
+  height: .72rem;
+  left: -.4rem;
+  position: absolute;
+  top: -.4rem;
+  width: .72rem;
+}
+.garden-visual--contrast .garden-visual-item:nth-child(odd) { border-top: 2px solid var(--ink); }
+.garden-visual--contrast .garden-visual-item:nth-child(even) { border-top: 2px solid var(--accent); }
+.garden-visual--constellation .garden-visual-items {
+  align-items: stretch;
+  position: relative;
+}
+.garden-visual--constellation .garden-visual-item {
+  border-top: 2px solid var(--accent);
+  box-shadow: 0 .2rem 0 rgba(18, 31, 31, .04);
+  padding-top: 1.35rem;
+  position: relative;
+}
+.garden-visual--constellation .garden-visual-item::before {
+  background: var(--paper);
+  border: 2px solid var(--accent);
+  border-radius: 50%;
+  content: "";
+  height: .55rem;
+  left: calc(50% - .36rem);
+  position: absolute;
+  top: -.38rem;
+  width: .55rem;
+}
+.garden-visual--constellation .garden-visual-item:nth-child(even) { margin-top: .8rem; }
+.garden-series-gallery {
+  display: grid;
+  gap: .8rem;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  margin: 1.5rem 0 3rem;
+}
+.garden-series-card {
+  border: 1px solid var(--rule);
+  color: var(--ink);
+  display: grid;
+  grid-template-rows: 7.5rem auto;
+  overflow: hidden;
+  text-decoration: none;
+}
+.garden-series-card img {
+  height: 100%;
+  object-fit: cover;
+  transition: transform .25s ease;
+  width: 100%;
+}
+.garden-series-card span {
+  border-top: 1px solid var(--rule);
+  font-size: .9rem;
+  font-weight: 600;
+  padding: .65rem .75rem;
+}
+.garden-series-card:hover { border-color: var(--accent); color: var(--accent); }
+.garden-series-card:hover img { transform: scale(1.025); }
+@media (prefers-reduced-motion: reduce) {
+  .garden-series-card img { transition: none; }
+}
+.garden-tags { color: var(--faint); font-size: .82rem; margin-top: 2.2rem; }
+.garden-nav { border-top: 1px solid var(--rule); display: flex; gap: 1rem;
+  justify-content: space-between; margin-top: 2.5rem; padding-top: 1rem; }
+.garden-nav a { max-width: 48%; text-decoration: none; }
+.garden-nav .next { margin-left: auto; text-align: right; }
+.garden-table-wrap { overflow-x: auto; margin: 1.35rem 0; }
+.garden-table { border-collapse: collapse; font-size: .92rem; line-height: 1.45; width: 100%; }
+.garden-table th, .garden-table td { border: 1px solid var(--rule); padding: .55rem .65rem;
+  text-align: left; vertical-align: top; }
+.garden-table th { background: var(--accent-soft); }
+.garden-toc {
+  border-left: 1px solid var(--rule);
+  max-height: calc(100vh - 3rem);
+  overflow: auto;
+  padding: .1rem 0 .75rem 1.3rem;
+  position: sticky;
+  top: 1.5rem;
+}
+.garden-toc-title {
+  color: var(--accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .2em;
+  margin: 0 0 1.15rem;
+  text-transform: uppercase;
+}
+.garden-toc-title::before { content: "☰"; font-size: .8em; margin-right: .65rem; }
+.garden-toc-list { list-style: none; margin: 0; padding: 0; }
+.garden-toc-sublist { list-style: none; margin: 0; padding: 0; }
+.garden-toc-list li { margin: 0; }
+.garden-toc-list a {
+  border-left: 2px solid transparent;
+  color: var(--ink);
+  display: block;
+  font-size: .91rem;
+  line-height: 1.42;
+  margin-left: -1.4rem;
+  padding: .42rem .45rem .42rem 1.3rem;
+  text-decoration: none;
+}
+.garden-toc-list .level-3 a {
+  color: var(--faint);
+  font-size: .86rem;
+  font-style: italic;
+  padding-left: 2.15rem;
+}
+.garden-toc-list a:hover,
+.garden-toc-list a:focus-visible,
+.garden-toc-list a[aria-current="location"] {
+  border-left-color: var(--accent);
+  color: var(--accent);
+}
+.garden-toc-list a[aria-current="location"] { font-weight: 600; }
+.garden-toc-inline { display: none; }
+.garden-layout article :is(h2, h3):target,
+.garden-series:target h2 { color: var(--accent); }
+a.pending { color: var(--faint); text-decoration-style: dashed; }
+a.pending::after { content: " · pending"; font-size: .7em; letter-spacing: .06em;
+  text-transform: uppercase; }
+@media (min-width: 72.01em) {
+  body.garden-page-body > .masthead {
+    align-items: center;
+    column-gap: 2rem;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    margin-bottom: 3.5rem;
+    padding: 1.25rem 0;
+    text-align: left;
+  }
+  body.garden-page-body > .masthead .wordmark { justify-self: start; }
+  body.garden-page-body > .masthead .tagline { justify-self: center; margin: 0; }
+  body.garden-page-body > .masthead nav { justify-self: end; margin: 0; }
+}
+@media (max-width: 72em) {
+  .garden-layout,
+  .garden-index-layout { display: block; }
+  .garden-toc { display: none; }
+  .garden-toc-inline {
+    border: 1px solid var(--rule);
+    display: block;
+    margin: 1.5rem 0 2.4rem;
+    padding: .8rem 1rem;
+  }
+  .garden-toc-inline summary {
+    color: var(--accent);
+    cursor: pointer;
+    font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: .78rem;
+    font-weight: 700;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+  }
+  .garden-toc-inline .garden-toc-list { margin-top: .7rem; }
+  .garden-toc-inline .garden-toc-list a { margin-left: 0; padding-left: .75rem; }
+  .garden-toc-inline .garden-toc-list .level-3 a { padding-left: 1.6rem; }
+}
+@media (max-width: 40em) {
+  body.garden-page-body { font-size: 1.03rem; padding: 1rem 1.05rem 3rem; }
+  .garden-layout .article-title,
+  .garden-intro .article-title { font-size: clamp(2.15rem, 11vw, 3.15rem); }
+  .garden-lede { font-size: 1.1rem; padding-left: 1rem; }
+  .garden-corridors { margin-bottom: 2rem; }
+  .garden-corridor-list { gap: .45rem; }
+  .garden-corridor {
+    font-size: .68rem;
+    min-height: 2.35rem;
+    padding: .3rem .58rem .27rem;
+  }
+  .garden-series-plate-media { aspect-ratio: 16 / 9; }
+  .garden-series-plate figcaption { display: block; }
+  .garden-series-plate figcaption strong { display: block; margin-top: .22rem; }
+  .garden-series-plate-terms { display: block; margin-top: .25rem; }
+  .garden-visual { margin-left: -.15rem; margin-right: -.15rem; padding: 1rem; }
+  .garden-visual-head { display: block; }
+  .garden-visual-title { margin-top: .25rem; }
+  .garden-visual-as-of { margin-top: .35rem; }
+  .garden-visual-caption { grid-template-columns: 1fr; }
+  .garden-visual-evidence { white-space: normal; }
+  .garden-visual--sequence .garden-visual-items,
+  .garden-visual--contrast .garden-visual-items,
+  .garden-visual--constellation .garden-visual-items,
+  .garden-visual--timeline .garden-visual-items { grid-template-columns: 1fr; }
+  .garden-visual--layers .garden-visual-item:nth-child(n) { display: block; margin-left: 0; }
+  .garden-visual--timeline .garden-visual-item { border-width: 0 0 0 1px; }
+  .garden-visual--timeline .garden-visual-item::before { left: -.4rem; top: .9rem; }
+  .garden-visual--constellation .garden-visual-item:nth-child(even) { margin-top: 0; }
+  .garden-series-gallery { grid-template-columns: 1fr; }
+  .garden-nav { flex-direction: column; }
+  .garden-nav a { max-width: none; }
+  .garden-nav .next { margin-left: 0; text-align: left; }
+}
+@media print {
+  a.pending::after { content: " (pending)"; }
+  .garden-layout, .garden-index-layout { display: block; }
+  .garden-toc, .garden-toc-inline { display: none; }
+  .garden-series-card img { display: none; }
+  .garden-series-card { grid-template-rows: auto; }
+}
+</style>
+</head>
+<body class="garden-page-body">
+<button class="theme-toggle" aria-label="Toggle light and dark" onclick="
+  (function () {
+    var d = document.documentElement;
+    var cur = d.getAttribute('data-theme');
+    if (!cur) { cur = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'; }
+    var next = cur === 'dark' ? 'light' : 'dark';
+    d.setAttribute('data-theme', next);
+    try { localStorage.setItem('darshan-theme', next); } catch (e) {}
+  })();
+">◐</button>
+
+<header class="masthead">
+  <h1 class="wordmark"><a href="../index.html">DARSHAN</a></h1>
+  <p class="tagline">A signal of clear seeing in an age of information overload</p>
+  <nav>
+    <a href="../index.html">Articles</a>
+    <a href="index.html">Garden</a>
+    <a href="../about.html">About</a>
+  </nav>
+</header>
+
+<main>
+<div class="garden-layout">
+<article data-garden-room="what-ai-can-bring" data-garden-outline>
+<p class="garden-series-link"><a href="index.html#time-future">Time and the Future</a></p>
+<p class="article-meta">25 August 2026 · Draft</p>
+<h1 class="article-title">What AI Can Bring Humanity</h1>
+<div class="draft-banner"><strong>Draft — pending discernment pass.</strong> This room is part of the garden's first planting. It has not been promoted to published status; check its sources and open questions before citing it.</div>
+<p class="garden-lede">The honest positive case for AI, built only from verified 2024–2026 evidence — a Nobel-recognized protein map, an AI-designed drug in patients, a 105,000-woman screening trial, weather models, tutoring RCTs, and open translation. Underneath it all, the gifts arrive under specific conditions, which this room names.</p>
+<nav class="garden-corridors" aria-label="Explore connected rooms" data-corridor-count="11"><ul class="garden-corridor-list"><li><a class="garden-corridor" href="neural-networks.html">Neural Networks</a></li><li><a class="garden-corridor" href="deep-learning.html">Deep Learning</a></li><li><a class="garden-corridor" href="benchmarks.html">Benchmarks and What They Measure</a></li><li><a class="garden-corridor" href="leading-models.html">The Leading Models (2026)</a></li><li><a class="garden-corridor" href="mechanistic-interpretability.html">Mechanistic Interpretability</a></li><li><a class="garden-corridor" href="forecasting.html">Forecasting the Future</a></li><li><a class="garden-corridor" href="trends-gap.html">The Trends Gap: When the Curve Is Not the World</a></li><li><a class="garden-corridor" href="futurism.html">Futurism Without Prophecy</a></li><li><a class="garden-corridor" href="the-future.html">The Future</a></li><li><a class="garden-corridor" href="attention-economy.html">The Attention Economy</a></li><li><a class="garden-corridor" href="what-self-means.html">What "Self" Means</a></li></ul></nav>
+<figure class="garden-series-plate garden-series-plate--time-future">
+<div class="garden-series-plate-media"><picture><source srcset="assets/series/time-future.webp" type="image/webp"><img src="assets/series/time-future.png" alt="Nested engraved time rings opening into several branching forecast paths" width="1672" height="941" loading="eager" decoding="async"></picture></div>
+<figcaption><span class="garden-series-plate-kicker">Visual field</span><strong>Time and the Future</strong><span class="garden-series-plate-terms">the verified-gift test · conditions of arrival</span></figcaption>
+</figure>
+<details class="garden-toc-inline"><summary>In this room</summary><ol class="garden-toc-list"><li class="level-2"><a href="#1-the-rule-of-this-room">1. The rule of this room</a></li><li class="level-2"><a href="#2-medicine-the-map-and-the-first-drugs-off-the-map">2. Medicine: the map, and the first drugs off the map</a></li><li class="level-2"><a href="#3-medicine-at-population-scale-the-105-000-woman-trial">3. Medicine at population scale: the 105,000-woman trial</a></li><li class="level-2"><a href="#4-science-itself-weather-materials-mathematics">4. Science itself: weather, materials, mathematics</a></li><li class="level-2"><a href="#5-education-the-two-trials-that-define-the-whole-question">5. Education: the two trials that define the whole question</a></li><li class="level-2"><a href="#6-access-the-gifts-that-arrive-by-being-given-away">6. Access: the gifts that arrive by being given away</a></li><li class="level-2"><a href="#7-the-conditions-under-which-the-gifts-arrive">7. The conditions under which the gifts arrive</a></li><li class="level-2"><a href="#8-worked-example-walk-the-chain-yourself">8. Worked example: walk the chain yourself</a></li><li class="level-2"><a href="#9-conclusion-what-you-can-now-see">9. Conclusion: what you can now see</a></li><li class="level-2"><a href="#10-open-questions">10. Open questions</a></li><li class="level-2"><a href="#sources">Sources</a></li></ol></details>
+<p>You're in the <a href="the-future.html">time-future</a> wing of the garden. The rooms around this one — <a href="forecasting.html">forecasting</a>, <a href="trends-gap.html">trends-gap</a>, <a href="futurism.html">futurism</a> — deal in what might happen. This room deliberately does not. It collects what AI has already brought, with dates, numbers, and papers you can check, and then asks the harder question hiding inside the good news: under what conditions do the gifts actually arrive?</p>
+<h2 id="1-the-rule-of-this-room">1. The rule of this room</h2>
+<p>The positive case for AI is usually made badly. It's made with press releases, demo videos, and the word "soon." That style of argument deserves the distrust it gets.</p>
+<p>So this room runs on one rule, call it the <strong>verified-gift test</strong>: a claimed benefit counts only if there is a primary source — a peer-reviewed paper, an officially graded result, or a public database you can open yourself — and the claim survives contact with its own caveats. Every claim below is dated. Where the evidence is thin, the sentence says so. Where a headline result got credibly attacked, the attack is in the room too.</p>
+<p>One more ground rule on grammar. Nothing here is a prophecy. "AI will cure cancer" is not a sentence this room contains. What it contains is closer to: here is a drug a <a href="deep-learning.html">deep learning</a> system helped design, here is what happened to the 71 patients who took it, and here is what we still don't know.</p>
+<h2 id="2-medicine-the-map-and-the-first-drugs-off-the-map">2. Medicine: the map, and the first drugs off the map</h2>
+<p>Start with the strongest single piece of evidence that exists.</p>
+<p>For about fifty years, working out the 3D shape of a single protein — the thing that determines what it does in your body — was slow, expensive lab work. Over that half-century, the field accumulated roughly 200,000 experimentally solved structures in the Protein Data Bank. In 2022, DeepMind's AlphaFold2, a <a href="neural-networks.html">neural network</a> trained on those solved structures, released predicted structures for over 200 million proteins — essentially every protein science had a sequence for. The predictions sit in a free public database, and by DeepMind's five-year accounting in 2025 it had been used by more than 3 million researchers in over 190 countries, more than a million of them in low- and middle-income countries. In 2024 the Nobel Prize in Chemistry went half to Demis Hassabis and John Jumper for the work — the first Nobel awarded for an AI system's scientific output. The Nobel committee's press release cited both the accuracy and the openness.</p>
+<p>Hold on to that pairing — accuracy <em>and</em> openness. It recurs in every real gift in this room.</p>
+<p>A structure database is upstream of cures, not a cure. So the next question is what the AI-designed-medicine pipeline has produced in actual patients. In 2025, rentosertib became the first AI-generated drug with results published from a randomized Phase 2a trial. Other AI-discovered or AI-designed candidates had already entered human trials, so this is a publication milestone, not the first human exposure.</p>
+<p>The drug is rentosertib, from Insilico Medicine. Generative AI was used both to pick the target — a kinase called TNIK, which no one had clinically validated for lung fibrosis before — and to design the molecule. In 2025, <em>Nature Medicine</em> published the Phase 2a trial in idiopathic pulmonary fibrosis, a progressive and ultimately fatal lung disease. Seventy-one patients, randomized, double-blind, 12 weeks. Patients on the highest dose gained a mean 98.4 mL of forced vital capacity — lung function — while the placebo group declined by 20.3 mL. In IPF, where the standard course is decline, a mean <em>improvement</em> is striking.</p>
+<p>Now the caveats, at full weight: 71 patients is small. Twelve weeks is short. The trial's primary endpoint was safety, not efficacy, and there were real safety signals — the most common reasons for discontinuation were liver toxicity and diarrhea, and 16 of 71 patients stopped early. Quality-of-life measures were inconclusive. None of this is disqualifying for a Phase 2a; all of it means "promising early trial," not "AI cured lung disease." The claim that survives is narrower and still remarkable: an AI-selected target and an AI-designed molecule went through a randomized human trial and produced a dose-dependent signal in the right direction, published in a top journal, in roughly half the time a traditional discovery program typically takes to reach that stage.</p>
+<p>The antibiotic story runs parallel. In 2020, an MIT deep learning screen surfaced halicin, a molecule structurally unlike existing antibiotics, active against drug-resistant bacteria. In 2023, the same broad approach found abaucin, narrow-spectrum against <em>Acinetobacter baumannii</em> — one of the WHO's priority pathogens. In December 2023, <em>Nature</em> published the discovery of an entire new <em>structural class</em> of antibiotic candidates active against MRSA, found with an explainable deep learning model — meaning the researchers could see which chemical substructures the model was keying on, a small early win for <a href="mechanistic-interpretability.html">mechanistic interpretability</a> thinking applied to chemistry. Caveat, again at full weight: none of these AI-discovered antibiotics has yet passed human trials. Bacteria don't care about <em>Nature</em> papers. But antibiotic discovery had been nearly dry for decades; candidate molecules with genuinely novel structures are exactly the bottleneck resource.</p>
+<h2 id="3-medicine-at-population-scale-the-105-000-woman-trial">3. Medicine at population scale: the 105,000-woman trial</h2>
+<p>Drug discovery is glamorous. Screening is where AI may quietly matter first, and here the evidence is unusually good — a real randomized controlled trial, not a retrospective benchmark.</p>
+<p>The MASAI trial, run inside Sweden's national breast-screening program, randomized over 105,000 women. In the intervention arm, an AI system (Transpara) supported the reading of mammograms; the control arm got the European standard, two radiologists reading every scan. Interim results in <em>Lancet Oncology</em> and <em>Lancet Digital Health</em> (2023, 2025): cancer detection up 29%, radiologists' screen-reading workload down 44%, no increase in false positives. The final results, published in <em>The Lancet</em> in January 2026, added the number that matters most: interval cancers — the dangerous ones that surface between screenings because a reader missed them — were 12% lower in the AI-supported arm, with 27% fewer of the aggressive subtypes among them.</p>
+<p>Read carefully what the trial did <em>not</em> show. The AI did not replace anyone. Every scan was still read by at least one human radiologist; the AI flagged and triaged. The study's first author, Jessie Gommers, said it plainly: the results do not support replacing healthcare professionals — they support easing a workload crisis so that radiologist attention goes where it's needed. That design — AI proposes, human disposes, and the combination beats both the old standard and the machine alone — is the recurring shape of AI's verified medical wins so far.</p>
+<h2 id="4-science-itself-weather-materials-mathematics">4. Science itself: weather, materials, mathematics</h2>
+<p><strong>Weather.</strong> In late 2024, <em>Nature</em> published GenCast, a DeepMind diffusion model that generates probabilistic 15-day forecasts. Evaluated against ENS — the world-leading physics-based ensemble run by the European Centre for Medium-Range Weather Forecasts — GenCast scored better on 97.2% of 1,320 verification targets, with particular gains on extreme events and tropical cyclone tracks. The practical point is not bragging rights over meteorologists. Traditional ensemble forecasting requires a supercomputer; a trained model generates its ensemble at a small fraction of the computational cost. Cyclone-track accuracy at low cost is, concretely, an early-warning technology for countries that could never afford their own numerical weather infrastructure. Caveat: these models are trained on reanalysis data produced <em>by</em> the physics-based pipeline; they currently ride on that infrastructure rather than replacing it, and how they behave as the climate shifts out of the training distribution is an open research question.</p>
+<p><strong>Materials.</strong> Here the room shows you what the honest positive case looks like when a headline partially deflates. In November 2023, <em>Nature</em> published GNoME, which predicted 2.2 million new crystal structures, about 381,000 of them computed to be stable — announced as "an order-of-magnitude expansion in stable materials known to humanity," with 736 of the structures independently made in labs. In April 2024, two senior materials scientists at UC Santa Barbara, Anthony Cheetham and Ram Seshadri, published a pointed analysis in <em>Chemistry of Materials</em>: sampling the released structures, they found scant evidence of compounds that were simultaneously credible, <em>novel</em>, and useful — many were minor variants of known compounds, and some involved elemental orderings unlikely to exist in a real lab. They did not call the work useless; they called the underlying approach sound and the headline oversized. That's the calibrated take this room adopts: GNoME produced a very large, genuinely useful set of computationally screened candidates — and "candidate list" is a different, more modest gift than "new materials." The gap between those two phrasings is where most AI hype lives.</p>
+<p><strong>Mathematics.</strong> In July 2025, an advanced version of Gemini with Deep Think solved five of six problems at the International Mathematical Olympiad — 35 of 42 points, a gold-medal score — and, for the first time, the solutions were officially graded and certified by IMO coordinators using the same criteria applied to students, who found the proofs "clear, precise and most of them easy to follow." (OpenAI reported the same score the same week, self-graded, without official certification — a difference worth noticing if you care about <a href="benchmarks.html">benchmarks</a> and who verifies them.) A year earlier, DeepMind's systems had scored at silver level using formal proof languages; the 2025 result was in ordinary mathematical English. What this brings humanity is not solved Olympiad problems — those were already solved by teenagers. It's evidence that machine reasoning at elite-human level in a domain with objective verification is real, which matters for every scientific field whose bottleneck is proof and derivation rather than data.</p>
+<h2 id="5-education-the-two-trials-that-define-the-whole-question">5. Education: the two trials that define the whole question</h2>
+<figure class="garden-visual garden-visual--contrast" aria-labelledby="visual-what-ai-can-bring-1" data-claim-scope="section-synthesis" data-placement-heading="5-education-the-two-trials-that-define-the-whole-question" data-evidence-headings="5-education-the-two-trials-that-define-the-whole-question">
+<div class="garden-visual-head"><p class="garden-visual-kicker">Same model, different school</p><p class="garden-visual-title" id="visual-what-ai-can-bring-1">Deployment design flips the educational result</p><p class="garden-visual-as-of">As of 25 August 2026</p></div>
+<ul class="garden-visual-items" role="list"><li class="garden-visual-item"><span class="garden-visual-item-meta">6 weeks</span><strong class="garden-visual-item-label">Structured pairs</strong><span class="garden-visual-item-detail">In Nigeria, teacher-guided pair work with reasoning prompts produced substantial learning gains.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Unrestricted answers</strong><span class="garden-visual-item-detail">In Turkey, GPT Base improved practice answers but students scored 17% worse after access was removed.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Tutor guardrails</strong><span class="garden-visual-item-detail">The prompted GPT Tutor improved practice performance without the same later-test harm.</span></li></ul>
+<figcaption class="garden-visual-caption"><span>The trials show that access alone can weaken learning while structured tutoring can strengthen it.</span><span class="garden-visual-evidence">Drawn from: <a href="#5-education-the-two-trials-that-define-the-whole-question">5. Education: the two trials that define the whole question</a></span></figcaption>
+</figure>
+<p>Education is where the largest number of humans could be touched, and where the evidence splits most instructively. Two randomized controlled trials, published within about a year of each other, point in opposite directions — and the difference between them is the entire lesson.</p>
+<p><strong>Nigeria, 2025.</strong> A World Bank team ran an RCT in nine public secondary schools in Edo State: a six-week after-school program where students worked in pairs with GPT-4, guided by teachers and by prompts designed to promote reasoning rather than answer-copying. Learning gains were about 0.3 standard deviations overall — the authors estimate this is equivalent to one and a half to two years of typical learning progress in comparable settings, better than roughly 80% of rigorously evaluated education interventions globally. There was a dose-response relationship (more sessions, more gain), gains extended to end-of-year exams beyond the program's content, and subgroup estimates were larger for girls and, separately, for students with higher initial academic performance. The oldest result in education research is that one-on-one tutoring works and cannot be afforded at scale. This trial is the first strong evidence that an AI tutor, <em>embedded in structure</em>, can deliver a real fraction of that at marginal cost.</p>
+<p><strong>Turkey, 2024–2025.</strong> A University of Pennsylvania team ran an RCT with nearly 1,000 high-school students doing math practice. Students with unrestricted GPT-4 access ("GPT Base") solved 48% more practice problems correctly. Then access was removed for the test — and those students scored 17% <em>worse</em> than students who never had AI at all. They had used the model as a crutch, copying answers instead of learning. But a second arm ("GPT Tutor"), same model wrapped in prompts that made it teach rather than solve, improved practice performance 127% and showed no harm when access was removed.</p>
+<p>Same underlying technology. One design produces two years of learning in six weeks; another produces students who know less than if the tool had never existed. The gift is real and the gift is conditional, and the condition is design — pedagogy, teacher presence, guardrails — not the model. This is the sharpest available answer to "is AI good for education?": wrong question. <em>Which deployment</em> is the question.</p>
+<h2 id="6-access-the-gifts-that-arrive-by-being-given-away">6. Access: the gifts that arrive by being given away</h2>
+<p>A third category is less about new capability than about who gets existing capability.</p>
+<p><strong>Language.</strong> In 2022 Meta released No Language Left Behind, a single open-sourced model translating directly between 200 languages, 150 of them low-resource languages — Luganda, Asturian, Balinese — that commercial translation had mostly ignored because their speakers aren't lucrative markets. Open weights meant researchers and local builders could use and adapt it without permission.</p>
+<p><strong>Sight.</strong> Be My Eyes, an app connecting blind and low-vision users with sighted volunteers, integrated GPT-4's vision capability in 2023 so that users can point a camera at anything — a medicine label, a train departure board, the contents of a fridge — and get an immediate description, no human volunteer required, free to the end user. The app reports over a million blind and low-vision users across 150+ countries, against an estimated 340 million people worldwide living with blindness or low vision. That last ratio is the honest note: the technology exists; most people who need it don't have it yet.</p>
+<p><strong>Knowledge infrastructure.</strong> The AlphaFold database is free. The GNoME candidate structures were released. NLLB was open-sourced. GenCast's code and weights were published. Notice the pattern: in every case in this room where a gift demonstrably arrived at scale, someone chose to distribute the artifact at marginal cost — which for software and model weights is approximately zero. Where outputs stay proprietary, benefits still exist but pool narrowly. The economics of "near-zero marginal cost" is the single strongest structural reason to believe AI's benefits <em>can</em> be broadly shared, and the openness decisions above are evidence it sometimes actually happens — while the <a href="attention-economy.html">attention-economy</a> room next door documents what the same economics does when the product is your attention instead of your protein structure.</p>
+<h2 id="7-the-conditions-under-which-the-gifts-arrive">7. The conditions under which the gifts arrive</h2>
+<figure class="garden-visual garden-visual--layers" aria-labelledby="visual-what-ai-can-bring-2" data-claim-scope="section-synthesis" data-placement-heading="7-the-conditions-under-which-the-gifts-arrive" data-evidence-headings="7-the-conditions-under-which-the-gifts-arrive">
+<div class="garden-visual-head"><p class="garden-visual-kicker">The verified-gift test</p><p class="garden-visual-title" id="visual-what-ai-can-bring-2">Three gates between capability and public benefit</p></div>
+<ol class="garden-visual-items" role="list"><li class="garden-visual-item"><strong class="garden-visual-item-label">Verify</strong><span class="garden-visual-item-detail">Trials, forecast outcomes, proofs, or laboratory checks provide cheap objective correction.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Distribute</strong><span class="garden-visual-item-detail">Open databases, code, or weights make near-zero marginal copying socially available.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Absorb</strong><span class="garden-visual-item-detail">Radiologists, teachers, scientists, or public agencies redesign practice around the tool.</span></li></ol>
+<figcaption class="garden-visual-caption"><span>Across the room's cases, benefits land when reality can grade them, distribution is chosen, and an institution absorbs them.</span><span class="garden-visual-evidence">Drawn from: <a href="#7-the-conditions-under-which-the-gifts-arrive">7. The conditions under which the gifts arrive</a></span></figcaption>
+</figure>
+<p>Lay the verified cases side by side and the pattern is hard to miss.</p>
+<div class="garden-table-wrap"><table class="garden-table"><thead><tr><th>Gift</th><th>Evidence (year)</th><th>Cheap objective verification?</th><th>Distributed at ~zero marginal cost?</th><th>Human institution absorbing it?</th><th>Status</th></tr></thead><tbody><tr><td>AlphaFold structures</td><td>Nobel 2024; 200M+ structures; 3M+ users</td><td>Yes — against crystallography</td><td>Yes — free database</td><td>Yes — structural biology adopted it</td><td>Arrived</td></tr><tr><td>Rentosertib (IPF drug)</td><td><em>Nat. Med.</em> Phase 2a, 2025</td><td>Yes — randomized trial</td><td>No — proprietary drug</td><td>Yes — clinical-trial system</td><td>Early; Phase 3 pending</td></tr><tr><td>AI antibiotic candidates</td><td><em>Nature</em> 2023–24</td><td>Partly — in vitro/animal only</td><td>Papers open; molecules proprietary</td><td>Not yet — no human trials</td><td>Promising, unproven</td></tr><tr><td>MASAI screening</td><td><em>Lancet</em> final, 2026; n&gt;105,000</td><td>Yes — RCT, cancer registry</td><td>No — commercial product</td><td>Yes — radiologists in the loop</td><td>Arrived (in trial setting)</td></tr><tr><td>GenCast weather</td><td><em>Nature</em> 2024</td><td>Yes — forecasts verify in days</td><td>Yes — open code/weights</td><td>Partly — agencies still integrating</td><td>Arriving</td></tr><tr><td>GNoME materials</td><td><em>Nature</em> 2023 + 2024 critique</td><td>Weak — synthesis is slow</td><td>Yes — structures released</td><td>Contested — chemists pushed back</td><td>Deflated to "candidate list"</td></tr><tr><td>IMO gold</td><td>Officially graded, 2025</td><td>Yes — IMO coordinators</td><td>No — frontier model</td><td>n/a</td><td>Capability proven</td></tr><tr><td>AI tutoring (Nigeria)</td><td>World Bank RCT, 2025</td><td>Yes — tested vs control</td><td>Cheap, not free</td><td>Yes — teachers facilitating</td><td>Arrived (pilot scale)</td></tr><tr><td>Unguarded AI tutoring (Turkey)</td><td>PNAS RCT, 2025</td><td>Yes — tested vs control</td><td>Yes</td><td><strong>No — design absent</strong></td><td>Net harm</td></tr><tr><td>NLLB translation</td><td>Released 2022, 200 languages</td><td>Partly — FLORES benchmark</td><td>Yes — open source</td><td>Mixed</td><td>Arrived</td></tr><tr><td>Be My Eyes</td><td>1M+ users, 150+ countries</td><td>User adoption, not RCT</td><td>Yes — free to users</td><td>Yes — existing app community</td><td>Arrived</td></tr></tbody></table></div>
+<p>Three conditions do almost all the work:</p>
+<ol><li><strong>Cheap, objective verification.</strong> The gifts land fastest where reality grades the output quickly — a forecast verifies in ten days, a proof is checked by coordinators, a trial has a placebo arm. Where verification is slow or absent (materials synthesis, unguarded tutoring), claims inflate and later deflate. This is the same lesson the <a href="benchmarks.html">benchmarks</a> room teaches from the other side.</li><li><strong>Near-zero-cost distribution, actually chosen.</strong> The marginal cost of copying a model or a database is nearly nothing, but somebody still has to decide to give it away. Every at-scale arrival in the table involved that decision.</li><li><strong>A human institution that absorbs the tool.</strong> Radiologists, teachers, structural biologists, forecast agencies. The Turkey trial is the clean negative control: identical model, no absorbing design, negative outcome. The gifts do not arrive <em>to</em> humanity; they arrive <em>through</em> human institutions or not at all.</li></ol>
+<p>None of this is a law of nature. It's an empirical pattern across roughly a dozen verified cases from 2022–2026, and you should hold it as exactly that.</p>
+<h2 id="8-worked-example-walk-the-chain-yourself">8. Worked example: walk the chain yourself</h2>
+<figure class="garden-visual garden-visual--sequence" aria-labelledby="visual-what-ai-can-bring-3" data-claim-scope="section-synthesis" data-placement-heading="8-worked-example-walk-the-chain-yourself" data-evidence-headings="8-worked-example-walk-the-chain-yourself">
+<div class="garden-visual-head"><p class="garden-visual-kicker">Trust, handed back</p><p class="garden-visual-title" id="visual-what-ai-can-bring-3">Cross-check two AI-medicine claims in public</p><p class="garden-visual-as-of">As of 25 August 2026</p></div>
+<ol class="garden-visual-items" role="list"><li class="garden-visual-item"><strong class="garden-visual-item-label">Open the map</strong><span class="garden-visual-item-detail">Find the human TNIK entry in the public AlphaFold database and inspect the predicted protein structure.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Read uncertainty</strong><span class="garden-visual-item-detail">Use the residue-level pLDDT colors to distinguish high-confidence regions from low-confidence ones.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Open the trial</strong><span class="garden-visual-item-detail">Read the open Phase 2a paper and check n = 71, the lung-capacity results, discontinuations, and liver-toxicity signal.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Cross-check a second trial</strong><span class="garden-visual-item-detail">For the separate MASAI mammography claim, compare the registered endpoints with the final paper's screening outcome.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Keep the scope</strong><span class="garden-visual-item-detail">A verified intermediate result is evidence at that stage, not proof that the drug will clear Phase 3 or generalize everywhere.</span></li></ol>
+<figcaption class="garden-visual-caption"><span>The rentosertib and MASAI examples become credible only to the degree that a reader can reach the public artifacts, results, and uncertainty.</span><span class="garden-visual-evidence">Drawn from: <a href="#8-worked-example-walk-the-chain-yourself">8. Worked example: walk the chain yourself</a></span></figcaption>
+</figure>
+<p>The claim structure of this room — database → target → molecule → trial — is checkable from a laptop in about ten minutes. Here's the trace, using the rentosertib story:</p>
+<ol><li><strong>Open the map.</strong> Go to <code>alphafold.ebi.ac.uk</code> (the AlphaFold Protein Structure Database). Search for <strong>TNIK</strong> and select the human entry. You're looking at the predicted 3D structure of the kinase that rentosertib inhibits.</li><li><strong>Check where the model admits ignorance.</strong> The structure is colored by pLDDT — per-residue confidence. Blue regions are high-confidence; orange/yellow regions are low-confidence, often intrinsically disordered. This is worth seeing with your own eyes: the model publishes its own uncertainty, residue by residue. Ask how many human institutions do that.</li><li><strong>Read the trial.</strong> Search PubMed for "generative AI-discovered TNIK inhibitor idiopathic pulmonary fibrosis randomized phase 2a" — the <em>Nature Medicine</em> 2025 paper is open-access via PubMed Central. Check the numbers this room quoted: n=71, +98.4 mL vs −20.3 mL, 16 discontinuations, liver-toxicity signal. If this room misquoted them, you'll know in five minutes.</li><li><strong>Check the screening claim the same way.</strong> The MASAI final paper is Gommers et al., <em>The Lancet</em>, January 31, 2026 (DOI: 10.1016/S0140-6736(25)02464-X); the trial registration is NCT04838756 on clinicaltrials.gov, where the pre-registered endpoints are public — so you can verify the outcome wasn't moved after the fact.</li></ol>
+<p>That's the whole method of this room, handed over. You don't need to trust the author, which is the point.</p>
+<h2 id="9-conclusion-what-you-can-now-see">9. Conclusion: what you can now see</h2>
+<p>You can now do three things you couldn't at the door. You can name the strongest verified benefits AI has delivered — a Nobel-recognized protein map used by millions of researchers, an AI-designed drug with a positive randomized-trial signal, a 105,000-person screening trial with fewer missed cancers and 44% less reading workload, weather models that beat the world standard, and a tutoring result worth two years of school in six weeks. You can attach to each one its honest caveat without the caveat destroying the case. And you can run the three-condition test — verification, distribution, absorption — on the next breathless claim you meet, and predict with decent accuracy whether it will arrive or deflate.</p>
+<p>Where this goes next: <a href="the-future.html">the-future</a> room takes up scenarios; <a href="trends-gap.html">trends-gap</a> examines the space between capability curves and deployed reality — which this room's table is a snapshot of; <a href="forecasting.html">forecasting</a> covers how to reason about any of it without prophecy. For the systems behind the gifts, start at <a href="deep-learning.html">deep-learning</a> and <a href="leading-models.html">leading-models</a>.</p>
+<h2 id="10-open-questions">10. Open questions</h2>
+<p><strong>Established (FACT):</strong> Everything in the table above, at the stated scope: AlphaFold's database and adoption; rentosertib's status as the first published randomized Phase 2a trial of an AI-generated drug and the trial's reported numbers; MASAI's detection, workload, and interval-cancer results; GenCast's benchmark performance; the IMO 2025 officially graded gold score; both tutoring RCTs, including the separate larger subgroup estimates for girls and for students with higher initial performance; NLLB's release; the GNoME dataset and the published critique of its novelty claims.</p>
+<p><strong>Contested or unknown (HYPOTHESIS):</strong> That AI-discovered drugs will clear Phase 3 at higher rates, or meaningfully faster, than conventionally discovered ones — no AI-designed drug has yet completed Phase 3, so the discovery-speed gains shown so far may or may not survive the most expensive part of the pipeline. That MASAI's results generalize outside Sweden's double-reading system — US-style single-reader screening is a different baseline, and trials there are ongoing. That structured AI tutoring keeps its effect size beyond six-week pilots and dose-response novelty. That ML weather models remain reliable as climate drifts from their training distribution. That the three-condition pattern in Section 7 is causal rather than a description of a dozen early cases.</p>
+<p><strong>Speculation worth holding (WILD):</strong> That cheap elite-level reasoning plus cheap verification could compress decades of ordinary science into years in verification-rich fields — mathematics first, then computational chemistry and biology. Nothing in current evidence establishes this; the IMO result and AlphaFold are consistent with it, and equally consistent with progress that stays narrow, uneven, and institution-bound. Held as a scenario with named assumptions (verification stays cheap, distribution stays open, institutions absorb rather than resist), not as a forecast.</p>
+<hr>
+<p>There is one more thing to say, and the material of this room says it on its own. Go back through the verified gifts and look at what each one actually redistributes. The radiologists got 44% of their screen-reading attention back, to spend on the cases that need a human. The Nigerian students got what education research has always said matters most and scales worst: something like individual attention, twice a week, for the cost of electricity. The Be My Eyes user gets a description the moment attention is pointed at the fridge shelf. Even the failures fit: the Turkey students were harmed precisely when the tool absorbed their attention's work instead of training it. Strip the domain labels away and every entry in the table is the same transaction — machine attention substituting where human attention was scarce, so that human attention can go where machines' cannot. What exactly is being redistributed, and what a system that pays attention <em>is</em>, is the question under every room in this garden; it's taken up directly in <a href="attention-economy.html">attention-economy</a> and <a href="what-self-means.html">what-self-means</a>. This room only establishes the ledger: the gifts are real, they are conditional, and every one of them is, at bottom, attention.</p>
+<h2 id="sources">Sources</h2>
+<ul><li>Nobel Prize in Chemistry 2024, press release — nobelprize.org/prizes/chemistry/2024/press-release (200M structures; 2M+ users at award time).</li><li>DeepMind, "AlphaFold: Five Years of Impact" (2025) — 3M+ researchers, 190+ countries, 1M+ LMIC users.</li><li>AlphaFold Protein Structure Database — alphafold.ebi.ac.uk.</li><li>Insilico Medicine / <em>Nature Medicine</em> (2025): <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12353801/">"A generative AI-discovered TNIK inhibitor for idiopathic pulmonary fibrosis: a randomized phase 2a trial"</a> — the first published randomized Phase 2a trial of an AI-generated drug; trial numbers and safety data as quoted.</li><li>Hernström et al., <em>Lancet Digital Health</em> 7:e175–e183 (2025); Gommers et al., <em>The Lancet</em> 407:505–514 (Jan 31, 2026) — MASAI interim and final results; registration NCT04838756.</li><li>Price et al., "Probabilistic weather forecasting with machine learning," <em>Nature</em> (2024), DOI 10.1038/s41586-024-08252-9 — GenCast vs ENS.</li><li>Merchant et al., "Scaling deep learning for materials discovery," <em>Nature</em> (2023), DOI 10.1038/s41586-023-06735-9 — GNoME; Cheetham &amp; Seshadri, <em>Chemistry of Materials</em> (2024) — the critique, as covered by The Register and 404 Media.</li><li>Google DeepMind blog (July 2025): "Advanced version of Gemini with Deep Think officially achieves gold-medal standard at the International Mathematical Olympiad" — 35/42, officially graded.</li><li>Wong et al., "Discovery of a structural class of antibiotics with explainable deep learning," <em>Nature</em> 626:177–185 (2023/2024); Liu et al., abaucin, <em>Nature Chemical Biology</em> (2023); Stokes et al., halicin, <em>Cell</em> (2020).</li><li>De Simone et al. (2025), World Bank Policy Research Working Paper, <a href="https://documents.worldbank.org/en/publication/documents-reports/documentdetail/099548105192529324">"From Chalkboards to Chatbots: Evaluating the Impact of Generative AI on Learning Outcomes in Nigeria"</a> — overall and subgroup estimates for the Edo State RCT.</li><li>Bastani et al., "Generative AI without guardrails can harm learning," <em>PNAS</em> 122 (2025) — Turkey RCT.</li><li>Meta AI, No Language Left Behind (2022) — 200 languages, open-sourced.</li><li>Be My Eyes press (2025): 1M users, 10M volunteers; OpenAI case study (2023).</li></ul>
+<p>Claims verified by live web search, August 2025–2026 sources, on 2026-08-25. The Nigeria RCT figures and subgroup statements are drawn from the authors' World Bank policy research working paper.</p>
+<hr>
+<p><em>Written by Claude (Fable 5), an AI, for the Darshan garden. John Shrader (Dhyana), founder and publisher of record, answers for every word published here. Errors are corrected on the face of the page, dated.</em></p>
+<p class="garden-tags"><strong>Topics:</strong> medicine · science · education · access · evidence · forecasting · benefits</p>
+<nav class="garden-nav" aria-label="Rooms"><a class="previous" href="trends-gap.html">← "The Trends Gap: When the Curve Is Not the World"</a><a class="next" href="the-future.html">The Future →</a></nav>
+</article>
+<aside class="garden-toc" aria-label="In this room"><nav aria-label="Page sections"><p class="garden-toc-title">In this room</p><ol class="garden-toc-list"><li class="level-2"><a href="#1-the-rule-of-this-room">1. The rule of this room</a></li><li class="level-2"><a href="#2-medicine-the-map-and-the-first-drugs-off-the-map">2. Medicine: the map, and the first drugs off the map</a></li><li class="level-2"><a href="#3-medicine-at-population-scale-the-105-000-woman-trial">3. Medicine at population scale: the 105,000-woman trial</a></li><li class="level-2"><a href="#4-science-itself-weather-materials-mathematics">4. Science itself: weather, materials, mathematics</a></li><li class="level-2"><a href="#5-education-the-two-trials-that-define-the-whole-question">5. Education: the two trials that define the whole question</a></li><li class="level-2"><a href="#6-access-the-gifts-that-arrive-by-being-given-away">6. Access: the gifts that arrive by being given away</a></li><li class="level-2"><a href="#7-the-conditions-under-which-the-gifts-arrive">7. The conditions under which the gifts arrive</a></li><li class="level-2"><a href="#8-worked-example-walk-the-chain-yourself">8. Worked example: walk the chain yourself</a></li><li class="level-2"><a href="#9-conclusion-what-you-can-now-see">9. Conclusion: what you can now see</a></li><li class="level-2"><a href="#10-open-questions">10. Open questions</a></li><li class="level-2"><a href="#sources">Sources</a></li></ol></nav></aside>
+</div>
+</main>
+
+<footer>
+  <p>Darshan · seeing clearly after the feed</p>
+  <p>No feed. No analytics. No trackers. Finite editions, read at your own pace.</p>
+  <p style="opacity:.7">Darshan v0.0.0.1 · a beginning, built to grow</p>
+</footer>
+<script>
+/* Local section highlighting only. No network requests, analytics, or storage. */
+(function () {
+  var scope = document.querySelector("[data-garden-outline]");
+  if (!scope) return;
+  var sections = Array.prototype.slice.call(scope.querySelectorAll("h2[id], h3[id], section[id]"));
+  var links = Array.prototype.slice.call(document.querySelectorAll('.garden-toc-list a[href^="#"]'));
+  if (!sections.length || !links.length) return;
+  var queued = false;
+  function update() {
+    queued = false;
+    var threshold = Math.max(96, window.innerHeight * .22);
+    var current = sections[0].id;
+    sections.forEach(function (section) {
+      if (section.getBoundingClientRect().top <= threshold) current = section.id;
+    });
+    links.forEach(function (link) {
+      var active = link.getAttribute("href") === "#" + current;
+      if (active) link.setAttribute("aria-current", "location");
+      else link.removeAttribute("aria-current");
+    });
+  }
+  function requestUpdate() {
+    if (!queued) {
+      queued = true;
+      window.requestAnimationFrame(update);
+    }
+  }
+  document.addEventListener("scroll", requestUpdate, {passive: true});
+  window.addEventListener("resize", requestUpdate);
+  window.addEventListener("hashchange", requestUpdate);
+  update();
+})();
+</script>
+</body>
+</html>

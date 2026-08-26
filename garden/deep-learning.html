@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Deep Learning · Darshan Garden</title>
+<meta name="description" content="Why stacking layers worked when almost nothing else did, and the honest history of the 2012-2026 run. Covers what depth actually buys, the AlexNet moment, scaling laws you can check with arithmetic, and where the field hit walls it has not admitted to and walls it has.">
+<link rel="stylesheet" href="../style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ccircle cx='8' cy='8' r='6' fill='none' stroke='%238f3b26' stroke-width='1.5'/%3E%3Ccircle cx='8' cy='8' r='2' fill='%238f3b26'/%3E%3C/svg%3E">
+<script>
+/* Theme memory. No analytics, no trackers. */
+(function () {
+  try {
+    var t = localStorage.getItem("darshan-theme");
+    if (t) document.documentElement.setAttribute("data-theme", t);
+  } catch (e) {}
+})();
+</script>
+<style>
+/* Garden-only layout. Kept here so the publication stylesheet remains shared. */
+body.garden-page-body {
+  max-width: none;
+  padding: 1.5rem clamp(1.25rem, 3.5vw, 4rem) 4rem;
+  font-size: 1.125rem;
+}
+body.garden-page-body > main,
+body.garden-page-body > .masthead,
+body.garden-page-body > footer {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 94rem;
+}
+.garden-layout,
+.garden-index-layout {
+  align-items: start;
+  display: grid;
+  gap: clamp(2.75rem, 5vw, 5rem);
+  grid-template-columns: minmax(0, 64rem) minmax(17rem, 20rem);
+  justify-content: center;
+}
+.garden-layout article,
+.garden-index-main { min-width: 0; }
+.garden-layout .article-title,
+.garden-intro .article-title {
+  font-size: clamp(2.65rem, 3.55vw, 4rem);
+  letter-spacing: -.025em;
+  line-height: 1.06;
+  max-width: 24ch;
+}
+.garden-layout article h2 {
+  font-size: 1.48rem;
+  line-height: 1.3;
+  margin-top: 3.2rem;
+  scroll-margin-top: 1.5rem;
+}
+.garden-layout article h3 {
+  font-size: 1.16rem;
+  margin-top: 2.35rem;
+  scroll-margin-top: 1.5rem;
+}
+.garden-intro { margin-bottom: 2.4rem; }
+.garden-series { margin: 2.8rem 0; scroll-margin-top: 1rem; }
+.garden-series h2 { border-bottom: 1px solid var(--rule); padding-bottom: .45rem; }
+.garden-room-list { list-style: none; margin: 0; padding: 0; }
+.garden-room-list li { border-bottom: 1px solid var(--rule); margin: 0; padding: 1rem 0; }
+.garden-room-title { font-weight: 600; }
+.garden-room-summary { color: var(--faint); font-size: .96rem; margin: .25rem 0 0; }
+.garden-series-link { color: var(--faint); font-size: .82rem; letter-spacing: .12em;
+  text-transform: uppercase; }
+.garden-lede {
+  border-left: 3px solid var(--accent);
+  color: var(--faint);
+  font-size: 1.24rem;
+  font-style: italic;
+  line-height: 1.62;
+  margin: 1.5rem 0 2.2rem;
+  padding: .35rem 0 .35rem 1.35rem;
+}
+.garden-corridors {
+  margin: 1.15rem 0 2.65rem;
+}
+.garden-corridor-list {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: .55rem .62rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.garden-corridor-list li { display: flex; margin: 0; max-width: 100%; }
+.garden-corridor {
+  align-items: center;
+  background: var(--accent-soft);
+  border: 1px solid var(--accent);
+  border-radius: 3px;
+  color: var(--accent);
+  display: inline-flex;
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .73rem;
+  font-weight: 700;
+  letter-spacing: .075em;
+  line-height: 1.35;
+  max-width: 100%;
+  min-height: 2.05rem;
+  overflow-wrap: anywhere;
+  padding: .34rem .72rem .3rem;
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-transform: uppercase;
+  text-underline-offset: .22em;
+}
+.garden-corridor:visited { color: var(--accent); }
+.garden-corridor:hover,
+.garden-corridor:focus-visible {
+  background: var(--accent);
+  color: var(--paper);
+}
+.garden-corridor:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+.garden-series-plate {
+  --plate-accent: var(--accent);
+  border: 1px solid var(--rule);
+  border-top: 3px solid var(--plate-accent);
+  margin: .25rem 0 2.8rem;
+  overflow: hidden;
+  position: relative;
+}
+.garden-series-plate--foundations { --plate-accent: #496f76; }
+.garden-series-plate--story-of-ai { --plate-accent: #526d9a; }
+.garden-series-plate--instrument { --plate-accent: #745779; }
+.garden-series-plate--strange-loops { --plate-accent: #866448; }
+.garden-series-plate--bridge { --plate-accent: #697044; }
+.garden-series-plate--power { --plate-accent: #8f3b26; }
+.garden-series-plate--time-future { --plate-accent: #416778; }
+[data-theme="dark"] .garden-series-plate { --plate-accent: var(--accent); }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .garden-series-plate { --plate-accent: var(--accent); }
+}
+.garden-series-plate-media {
+  aspect-ratio: 16 / 9;
+  background: var(--accent-soft);
+  overflow: hidden;
+  position: relative;
+}
+.garden-series-plate-media::after {
+  background:
+    linear-gradient(90deg, var(--paper) 0, transparent 24%, transparent 76%, var(--paper) 100%),
+    linear-gradient(0deg, var(--paper) 0, transparent 32%);
+  content: "";
+  inset: 0;
+  opacity: .24;
+  pointer-events: none;
+  position: absolute;
+}
+.garden-series-plate picture,
+.garden-series-card picture { display: block; height: 100%; }
+.garden-series-plate img {
+  display: block;
+  filter: saturate(.82) contrast(1.03);
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+.garden-series-plate figcaption {
+  align-items: baseline;
+  background: var(--paper);
+  border-top: 1px solid var(--rule);
+  display: grid;
+  gap: .25rem 1rem;
+  grid-template-columns: auto 1fr;
+  padding: .78rem 1rem .85rem;
+}
+.garden-series-plate-kicker {
+  color: var(--plate-accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+.garden-series-plate figcaption strong { font-size: 1rem; font-weight: 600; }
+.garden-series-plate-terms {
+  color: var(--faint);
+  font-size: .82rem;
+  grid-column: 2;
+  margin: 0;
+}
+.garden-visual {
+  background:
+    radial-gradient(circle at 92% 8%, var(--accent-soft), transparent 30%),
+    linear-gradient(135deg, transparent 0 72%, var(--accent-soft) 72% 72.4%, transparent 72.4%);
+  border: 1px solid var(--rule);
+  border-top: 3px solid var(--accent);
+  margin: 1.25rem 0 2.5rem;
+  overflow: hidden;
+  padding: clamp(1.1rem, 2.7vw, 1.75rem);
+  position: relative;
+}
+.garden-visual::before {
+  background-image:
+    linear-gradient(var(--rule) 1px, transparent 1px),
+    linear-gradient(90deg, var(--rule) 1px, transparent 1px);
+  background-size: 2.25rem 2.25rem;
+  content: "";
+  inset: 0;
+  opacity: .13;
+  pointer-events: none;
+  position: absolute;
+}
+.garden-visual > * { position: relative; }
+.garden-visual-head {
+  align-items: baseline;
+  display: grid;
+  gap: .45rem 1rem;
+  grid-template-columns: auto 1fr;
+  margin-bottom: 1.2rem;
+}
+.garden-visual-kicker {
+  color: var(--accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .68rem;
+  font-weight: 700;
+  letter-spacing: .17em;
+  margin: 0;
+  text-transform: uppercase;
+}
+.garden-visual-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  line-height: 1.28;
+  margin: 0;
+}
+.garden-visual-as-of {
+  color: var(--faint);
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: .72rem;
+  letter-spacing: .08em;
+  margin: 0;
+  text-transform: uppercase;
+  white-space: normal;
+}
+.garden-visual-items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.garden-visual-item {
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  margin: 0;
+  min-width: 0;
+  padding: .8rem .9rem;
+}
+.garden-visual-item-label {
+  display: block;
+  font-size: .96rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+.garden-visual-item-detail {
+  color: var(--faint);
+  display: block;
+  font-size: .9rem;
+  line-height: 1.45;
+  margin-top: .27rem;
+}
+.garden-visual-item-meta {
+  color: var(--accent);
+  display: block;
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: .72rem;
+  letter-spacing: .08em;
+  margin-bottom: .38rem;
+  text-transform: uppercase;
+}
+.garden-visual-caption {
+  border-top: 1px solid var(--rule);
+  color: var(--faint);
+  display: grid;
+  font-size: .84rem;
+  font-style: italic;
+  gap: .55rem 1rem;
+  grid-template-columns: minmax(0, 1fr) auto;
+  line-height: 1.45;
+  margin: 1.15rem 0 0;
+  padding-top: .75rem;
+}
+.garden-visual-evidence {
+  color: var(--accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .72rem;
+  font-style: normal;
+  font-weight: 650;
+  letter-spacing: .04em;
+  white-space: nowrap;
+}
+.garden-visual-evidence a {
+  color: inherit;
+  text-decoration-thickness: 1px;
+  text-underline-offset: .18em;
+}
+.garden-visual--sequence .garden-visual-items,
+.garden-visual--contrast .garden-visual-items,
+.garden-visual--constellation .garden-visual-items {
+  display: grid;
+  gap: .65rem;
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+}
+.garden-visual--sequence .garden-visual-items { counter-reset: garden-step; }
+.garden-visual--sequence .garden-visual-item {
+  counter-increment: garden-step;
+  padding-top: 2.35rem;
+  position: relative;
+}
+.garden-visual--sequence .garden-visual-item::before {
+  color: var(--accent);
+  content: counter(garden-step, decimal-leading-zero);
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: .68rem;
+  left: .9rem;
+  letter-spacing: .08em;
+  position: absolute;
+  top: .72rem;
+}
+.garden-visual--layers .garden-visual-items { display: grid; gap: .45rem; }
+.garden-visual--layers .garden-visual-item {
+  border-left: clamp(.24rem, .55vw, .48rem) solid var(--accent);
+  display: grid;
+  gap: .15rem 1rem;
+  grid-template-columns: minmax(8rem, .4fr) 1fr;
+}
+.garden-visual--layers .garden-visual-item:nth-child(2) { margin-left: 1.5%; }
+.garden-visual--layers .garden-visual-item:nth-child(3) { margin-left: 3%; }
+.garden-visual--layers .garden-visual-item:nth-child(4) { margin-left: 4.5%; }
+.garden-visual--layers .garden-visual-item:nth-child(5) { margin-left: 6%; }
+.garden-visual--layers .garden-visual-item:nth-child(6) { margin-left: 7.5%; }
+.garden-visual--timeline .garden-visual-items {
+  display: grid;
+  gap: 0;
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+}
+.garden-visual--timeline .garden-visual-item {
+  border-width: 1px 0 0 1px;
+  padding-top: 1.35rem;
+  position: relative;
+}
+.garden-visual--timeline .garden-visual-item::before {
+  background: var(--accent);
+  border: 3px solid var(--paper);
+  border-radius: 50%;
+  content: "";
+  height: .72rem;
+  left: -.4rem;
+  position: absolute;
+  top: -.4rem;
+  width: .72rem;
+}
+.garden-visual--contrast .garden-visual-item:nth-child(odd) { border-top: 2px solid var(--ink); }
+.garden-visual--contrast .garden-visual-item:nth-child(even) { border-top: 2px solid var(--accent); }
+.garden-visual--constellation .garden-visual-items {
+  align-items: stretch;
+  position: relative;
+}
+.garden-visual--constellation .garden-visual-item {
+  border-top: 2px solid var(--accent);
+  box-shadow: 0 .2rem 0 rgba(18, 31, 31, .04);
+  padding-top: 1.35rem;
+  position: relative;
+}
+.garden-visual--constellation .garden-visual-item::before {
+  background: var(--paper);
+  border: 2px solid var(--accent);
+  border-radius: 50%;
+  content: "";
+  height: .55rem;
+  left: calc(50% - .36rem);
+  position: absolute;
+  top: -.38rem;
+  width: .55rem;
+}
+.garden-visual--constellation .garden-visual-item:nth-child(even) { margin-top: .8rem; }
+.garden-series-gallery {
+  display: grid;
+  gap: .8rem;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  margin: 1.5rem 0 3rem;
+}
+.garden-series-card {
+  border: 1px solid var(--rule);
+  color: var(--ink);
+  display: grid;
+  grid-template-rows: 7.5rem auto;
+  overflow: hidden;
+  text-decoration: none;
+}
+.garden-series-card img {
+  height: 100%;
+  object-fit: cover;
+  transition: transform .25s ease;
+  width: 100%;
+}
+.garden-series-card span {
+  border-top: 1px solid var(--rule);
+  font-size: .9rem;
+  font-weight: 600;
+  padding: .65rem .75rem;
+}
+.garden-series-card:hover { border-color: var(--accent); color: var(--accent); }
+.garden-series-card:hover img { transform: scale(1.025); }
+@media (prefers-reduced-motion: reduce) {
+  .garden-series-card img { transition: none; }
+}
+.garden-tags { color: var(--faint); font-size: .82rem; margin-top: 2.2rem; }
+.garden-nav { border-top: 1px solid var(--rule); display: flex; gap: 1rem;
+  justify-content: space-between; margin-top: 2.5rem; padding-top: 1rem; }
+.garden-nav a { max-width: 48%; text-decoration: none; }
+.garden-nav .next { margin-left: auto; text-align: right; }
+.garden-table-wrap { overflow-x: auto; margin: 1.35rem 0; }
+.garden-table { border-collapse: collapse; font-size: .92rem; line-height: 1.45; width: 100%; }
+.garden-table th, .garden-table td { border: 1px solid var(--rule); padding: .55rem .65rem;
+  text-align: left; vertical-align: top; }
+.garden-table th { background: var(--accent-soft); }
+.garden-toc {
+  border-left: 1px solid var(--rule);
+  max-height: calc(100vh - 3rem);
+  overflow: auto;
+  padding: .1rem 0 .75rem 1.3rem;
+  position: sticky;
+  top: 1.5rem;
+}
+.garden-toc-title {
+  color: var(--accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .2em;
+  margin: 0 0 1.15rem;
+  text-transform: uppercase;
+}
+.garden-toc-title::before { content: "☰"; font-size: .8em; margin-right: .65rem; }
+.garden-toc-list { list-style: none; margin: 0; padding: 0; }
+.garden-toc-sublist { list-style: none; margin: 0; padding: 0; }
+.garden-toc-list li { margin: 0; }
+.garden-toc-list a {
+  border-left: 2px solid transparent;
+  color: var(--ink);
+  display: block;
+  font-size: .91rem;
+  line-height: 1.42;
+  margin-left: -1.4rem;
+  padding: .42rem .45rem .42rem 1.3rem;
+  text-decoration: none;
+}
+.garden-toc-list .level-3 a {
+  color: var(--faint);
+  font-size: .86rem;
+  font-style: italic;
+  padding-left: 2.15rem;
+}
+.garden-toc-list a:hover,
+.garden-toc-list a:focus-visible,
+.garden-toc-list a[aria-current="location"] {
+  border-left-color: var(--accent);
+  color: var(--accent);
+}
+.garden-toc-list a[aria-current="location"] { font-weight: 600; }
+.garden-toc-inline { display: none; }
+.garden-layout article :is(h2, h3):target,
+.garden-series:target h2 { color: var(--accent); }
+a.pending { color: var(--faint); text-decoration-style: dashed; }
+a.pending::after { content: " · pending"; font-size: .7em; letter-spacing: .06em;
+  text-transform: uppercase; }
+@media (min-width: 72.01em) {
+  body.garden-page-body > .masthead {
+    align-items: center;
+    column-gap: 2rem;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    margin-bottom: 3.5rem;
+    padding: 1.25rem 0;
+    text-align: left;
+  }
+  body.garden-page-body > .masthead .wordmark { justify-self: start; }
+  body.garden-page-body > .masthead .tagline { justify-self: center; margin: 0; }
+  body.garden-page-body > .masthead nav { justify-self: end; margin: 0; }
+}
+@media (max-width: 72em) {
+  .garden-layout,
+  .garden-index-layout { display: block; }
+  .garden-toc { display: none; }
+  .garden-toc-inline {
+    border: 1px solid var(--rule);
+    display: block;
+    margin: 1.5rem 0 2.4rem;
+    padding: .8rem 1rem;
+  }
+  .garden-toc-inline summary {
+    color: var(--accent);
+    cursor: pointer;
+    font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: .78rem;
+    font-weight: 700;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+  }
+  .garden-toc-inline .garden-toc-list { margin-top: .7rem; }
+  .garden-toc-inline .garden-toc-list a { margin-left: 0; padding-left: .75rem; }
+  .garden-toc-inline .garden-toc-list .level-3 a { padding-left: 1.6rem; }
+}
+@media (max-width: 40em) {
+  body.garden-page-body { font-size: 1.03rem; padding: 1rem 1.05rem 3rem; }
+  .garden-layout .article-title,
+  .garden-intro .article-title { font-size: clamp(2.15rem, 11vw, 3.15rem); }
+  .garden-lede { font-size: 1.1rem; padding-left: 1rem; }
+  .garden-corridors { margin-bottom: 2rem; }
+  .garden-corridor-list { gap: .45rem; }
+  .garden-corridor {
+    font-size: .68rem;
+    min-height: 2.35rem;
+    padding: .3rem .58rem .27rem;
+  }
+  .garden-series-plate-media { aspect-ratio: 16 / 9; }
+  .garden-series-plate figcaption { display: block; }
+  .garden-series-plate figcaption strong { display: block; margin-top: .22rem; }
+  .garden-series-plate-terms { display: block; margin-top: .25rem; }
+  .garden-visual { margin-left: -.15rem; margin-right: -.15rem; padding: 1rem; }
+  .garden-visual-head { display: block; }
+  .garden-visual-title { margin-top: .25rem; }
+  .garden-visual-as-of { margin-top: .35rem; }
+  .garden-visual-caption { grid-template-columns: 1fr; }
+  .garden-visual-evidence { white-space: normal; }
+  .garden-visual--sequence .garden-visual-items,
+  .garden-visual--contrast .garden-visual-items,
+  .garden-visual--constellation .garden-visual-items,
+  .garden-visual--timeline .garden-visual-items { grid-template-columns: 1fr; }
+  .garden-visual--layers .garden-visual-item:nth-child(n) { display: block; margin-left: 0; }
+  .garden-visual--timeline .garden-visual-item { border-width: 0 0 0 1px; }
+  .garden-visual--timeline .garden-visual-item::before { left: -.4rem; top: .9rem; }
+  .garden-visual--constellation .garden-visual-item:nth-child(even) { margin-top: 0; }
+  .garden-series-gallery { grid-template-columns: 1fr; }
+  .garden-nav { flex-direction: column; }
+  .garden-nav a { max-width: none; }
+  .garden-nav .next { margin-left: 0; text-align: left; }
+}
+@media print {
+  a.pending::after { content: " (pending)"; }
+  .garden-layout, .garden-index-layout { display: block; }
+  .garden-toc, .garden-toc-inline { display: none; }
+  .garden-series-card img { display: none; }
+  .garden-series-card { grid-template-rows: auto; }
+}
+</style>
+</head>
+<body class="garden-page-body">
+<button class="theme-toggle" aria-label="Toggle light and dark" onclick="
+  (function () {
+    var d = document.documentElement;
+    var cur = d.getAttribute('data-theme');
+    if (!cur) { cur = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'; }
+    var next = cur === 'dark' ? 'light' : 'dark';
+    d.setAttribute('data-theme', next);
+    try { localStorage.setItem('darshan-theme', next); } catch (e) {}
+  })();
+">◐</button>
+
+<header class="masthead">
+  <h1 class="wordmark"><a href="../index.html">DARSHAN</a></h1>
+  <p class="tagline">A signal of clear seeing in an age of information overload</p>
+  <nav>
+    <a href="../index.html">Articles</a>
+    <a href="index.html">Garden</a>
+    <a href="../about.html">About</a>
+  </nav>
+</header>
+
+<main>
+<div class="garden-layout">
+<article data-garden-room="deep-learning" data-garden-outline>
+<p class="garden-series-link"><a href="index.html#foundations">Foundations of the Machine</a></p>
+<p class="article-meta">25 August 2026 · Draft</p>
+<h1 class="article-title">Deep Learning</h1>
+<div class="draft-banner"><strong>Draft — pending discernment pass.</strong> This room is part of the garden's first planting. It has not been promoted to published status; check its sources and open questions before citing it.</div>
+<p class="garden-lede">Why stacking layers worked when almost nothing else did, and the honest history of the 2012-2026 run. Covers what depth actually buys, the AlexNet moment, scaling laws you can check with arithmetic, and where the field hit walls it has not admitted to and walls it has.</p>
+<nav class="garden-corridors" aria-label="Explore connected rooms" data-corridor-count="12"><ul class="garden-corridor-list"><li><a class="garden-corridor" href="neural-networks.html">Neural Networks</a></li><li><a class="garden-corridor" href="machine-learning.html">Machine Learning</a></li><li><a class="garden-corridor" href="optimization.html">Optimization — the Hidden Engine</a></li><li><a class="garden-corridor" href="linear-algebra-and-ai.html">Linear Algebra and AI</a></li><li><a class="garden-corridor" href="pretraining-post-training.html">Pretraining and Post-training</a></li><li><a class="garden-corridor" href="nvidia-and-the-chip.html">NVIDIA and the Future of the Computer Chip</a></li><li><a class="garden-corridor" href="mechanistic-interpretability.html">Mechanistic Interpretability</a></li><li><a class="garden-corridor" href="benchmarks.html">Benchmarks and What They Measure</a></li><li><a class="garden-corridor" href="history-of-ai.html">The History of AI</a></li><li><a class="garden-corridor" href="top-papers-ai.html">The Top 20 Papers in AI</a></li><li><a class="garden-corridor" href="future-of-ai.html">The Future of AI</a></li><li><a class="garden-corridor" href="sense-of-self.html">The Sense of Self</a></li></ul></nav>
+<figure class="garden-series-plate garden-series-plate--foundations">
+<div class="garden-series-plate-media"><picture><source srcset="assets/series/foundations.webp" type="image/webp"><img src="assets/series/foundations.png" alt="An engraved transistor lattice rising through computational layers into a neural graph" width="1672" height="941" loading="eager" decoding="async"></picture></div>
+<figcaption><span class="garden-series-plate-kicker">Visual field</span><strong>Foundations of the Machine</strong><span class="garden-series-plate-terms">deep learning · representation learning · depth · scaling laws</span></figcaption>
+</figure>
+<details class="garden-toc-inline"><summary>In this room</summary><ol class="garden-toc-list"><li class="level-2"><a href="#1-what-deep-actually-buys-you">1. What "deep" actually buys you</a></li><li class="level-2"><a href="#2-the-moment-september-2012">2. The moment: September 2012</a></li><li class="level-2"><a href="#3-the-vision-run-2012-2016-depth-itself-becomes-the-frontier">3. The vision run, 2012–2016: depth itself becomes the frontier</a></li><li class="level-2"><a href="#4-the-turn-2017-2020-sequences-self-supervision-and-the-transformer">4. The turn, 2017–2020: sequences, self-supervision, and the transformer</a></li><li class="level-2"><a href="#5-why-scale-worked-the-part-you-can-check-with-arithmetic">5. Why scale worked — the part you can check with arithmetic</a></li><li class="level-2"><a href="#6-the-eras-side-by-side">6. The eras, side by side</a></li><li class="level-2"><a href="#7-where-it-plateaued-and-where-it-didn-t">7. Where it plateaued — and where it didn't</a></li><li class="level-2"><a href="#8-what-you-can-now-see">8. What you can now see</a></li><li class="level-2"><a href="#9-open-questions-the-honest-state">9. Open questions — the honest state</a></li><li class="level-2"><a href="#sources">Sources</a></li></ol></details>
+<p>If you've read <a href="neural-networks.html">neural networks</a>, you know what a network is: layers of simple units, each doing a weighted sum and a squashing function, trained by nudging the weights. If you've read <a href="machine-learning.html">machine learning</a>, you know the broader game: learn from data instead of writing rules. This room covers the specific bet that ate both fields — that making networks <em>deep</em> was the whole trick — and the fourteen-year run from 2012 to 2026 that came from that bet. It is a stranger story than the victory-lap version, and the strangeness is the interesting part.</p>
+<h2 id="1-what-deep-actually-buys-you">1. What "deep" actually buys you</h2>
+<figure class="garden-visual garden-visual--layers" aria-labelledby="visual-deep-learning-1" data-claim-scope="section-synthesis" data-placement-heading="1-what-deep-actually-buys-you" data-evidence-headings="1-what-deep-actually-buys-you">
+<div class="garden-visual-head"><p class="garden-visual-kicker">Representation learning</p><p class="garden-visual-title" id="visual-deep-learning-1">Parts become wholes as depth accumulates</p></div>
+<ol class="garden-visual-items" role="list"><li class="garden-visual-item"><strong class="garden-visual-item-label">Edges</strong><span class="garden-visual-item-detail">Early layers respond to oriented edges and color blobs.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Textures</strong><span class="garden-visual-item-detail">Middle layers combine edges into textures, corners, and simple motifs.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Parts</strong><span class="garden-visual-item-detail">Deeper layers assemble motifs into an eye, a wheel, or a beak.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Objects</strong><span class="garden-visual-item-detail">Final layers integrate reusable parts into whole-object representations.</span></li></ol>
+<figcaption class="garden-visual-caption"><span>A trained vision network reuses simple early features to assemble increasingly specific representations.</span><span class="garden-visual-evidence">Drawn from: <a href="#1-what-deep-actually-buys-you">1. What "deep" actually buys you</a></span></figcaption>
+</figure>
+<p>Start with a puzzle. A theorem from 1989 — Cybenko's universal approximation theorem — says a network with just <em>one</em> hidden layer can approximate any reasonable function, if you make the layer wide enough. So depth is mathematically unnecessary. One layer is enough, on paper.</p>
+<p>Then why did depth win everything?</p>
+<p>Because "can approximate in principle" and "can learn efficiently from finite data" are different claims. The one-layer theorem is silent about <em>how wide</em> that layer needs to be, and for interesting functions the answer is often astronomically wide. Depth is a compression trick: a deep network reuses what its early layers compute. Layer one builds small pieces, layer two builds combinations of pieces, layer three builds combinations of combinations. Composition, not enumeration.</p>
+<p>You can see this directly. When researchers visualized what a trained image network's layers respond to — Zeiler and Fergus did this carefully in 2013 — a consistent hierarchy showed up. First layers: edges and color blobs. Middle layers: textures, corners, simple motifs. Deeper layers: object parts — an eye, a wheel, a beak. Final layers: whole objects. Nobody programmed that hierarchy. It fell out of training.</p>
+<p>This is the idea worth keeping from the whole field, and it has a name: <strong>representation learning</strong>. The old approach to machine perception was: a human expert designs the features (edge detectors, texture statistics, carefully engineered descriptors with names like SIFT and HOG), and a learning algorithm draws a boundary in the feature space the human built. Deep learning's move was: let the network learn the features too. The layers <em>are</em> the features. Depth is the space in which a good representation can assemble itself.</p>
+<p>That's the honest answer to "what is deep learning?" It is not "big neural networks." It is: <strong>machine learning where the representation of the data is learned rather than designed, by composing many layers of simple transformations.</strong> Everything else — the <a href="nvidia-and-the-chip.html">GPUs</a>, the <a href="pretraining-post-training.html">scaling laws</a>, the trillion-dollar buildout — is downstream of that one move working better than anyone expected.</p>
+<h2 id="2-the-moment-september-2012">2. The moment: September 2012</h2>
+<p>For decades this idea mostly didn't work, and the field knew it mostly didn't work. Deep networks were hard to train — gradients shrank to nothing as they propagated back through many layers (<a href="optimization.html">optimization</a> covers why) — and the datasets were too small for a million-parameter model to do anything but memorize them. Neural networks spent the 1990s and 2000s as a niche interest kept alive by a small group — Geoffrey Hinton, Yann LeCun, Yoshua Bengio prominent among them — while support vector machines and hand-engineered features won the benchmarks.</p>
+<p>Three things changed underneath the field, quietly, before anything visible happened:</p>
+<ol><li><strong>Data.</strong> Fei-Fei Li's ImageNet project (2009) assembled over a million labeled photographs across a thousand categories — orders of magnitude beyond the datasets networks had starved on. An annual competition, the ILSVRC, gave the field a public scoreboard (<a href="benchmarks.html">benchmarks</a> is the room on why scoreboards steer fields).</li><li><strong>Compute.</strong> Graphics cards built for video games turned out to be nearly ideal for the matrix multiplications that dominate neural network training (<a href="linear-algebra-and-ai.html">linear algebra and AI</a> explains why everything reduces to matrix multiplies).</li><li><strong>Small fixes with large consequences.</strong> The ReLU activation (just: output the input if positive, else zero) kept gradients alive where the old smooth squashing functions killed them. Dropout — randomly silencing units during training — fought memorization.</li></ol>
+<p>Then the visible thing happened. In the 2012 ImageNet competition, a network called AlexNet — built by Alex Krizhevsky with Ilya Sutskever and Geoffrey Hinton, about 60 million parameters, trained for roughly a week on two consumer gaming GPUs in Krizhevsky's home setup — scored a top-5 error of <strong>15.3%</strong>. The best non-deep-learning entry that year scored <strong>26.2%</strong>.</p>
+<p>Sit with those numbers the way the field did. This was a benchmark where progress had been measured in fractions of a percentage point per year. A ten-point jump from a method most of the community had written off was not an improvement; it was a verdict. Within about two years, essentially every serious entry in the competition was a deep network, and computer vision as a field of hand-designed features was over.</p>
+<h2 id="3-the-vision-run-2012-2016-depth-itself-becomes-the-frontier">3. The vision run, 2012–2016: depth itself becomes the frontier</h2>
+<p>What followed was a sprint to answer one question: how deep can you go?</p>
+<p>Deeper helped — VGG (2014) pushed to 19 layers with a brutally simple recipe — but past roughly 20 layers something strange happened: adding layers made networks <em>worse</em>, and not from memorization. Deeper networks were failing even on their training data. The optimization itself was breaking.</p>
+<p>The fix, from Kaiming He and colleagues at Microsoft Research in 2015, is one of those ideas that looks trivial after you've seen it: let each layer learn a <em>correction</em> to its input rather than a full transformation. Wire the input of a block straight through to its output — a "residual connection" — so the layer only has to learn what to <em>change</em>. If a layer has nothing useful to add, it can learn to add nothing, and the network behaves as if the layer weren't there. Depth stops being risky.</p>
+<p>The result, ResNet, ran 152 layers deep and won ImageNet 2015; an ensemble of ResNets hit <strong>3.57%</strong> top-5 error — beyond the ~5% error a trained human volunteer (Andrej Karpathy, who actually ran himself through the benchmark) had measured on the same task. Residual connections became universal. Every large model since — including every large language model you have used — is built out of residual blocks. When people say modern networks are "hundreds of layers deep," residual connections are the reason that sentence is possible.</p>
+<p>By 2016 the pattern extended past classification: the same recipe — deep network, big labeled dataset, gradient descent — was cracking speech recognition, machine translation, and, in AlphaGo (March 2016, defeating Lee Sedol at Go), problems the field had confidently placed a decade further out.</p>
+<h2 id="4-the-turn-2017-2020-sequences-self-supervision-and-the-transformer">4. The turn, 2017–2020: sequences, self-supervision, and the transformer</h2>
+<p>The vision run was supervised: every training image carried a human-provided label. Labels are expensive, and the supply is finite. The next era's discovery was that for language, you don't need labels at all — the data labels itself. Take any text, hide the next word, train the network to predict it. Every sentence ever written becomes a training example. This is self-supervised learning, and it turned the internet into a training set.</p>
+<p>The architecture that made it work at scale arrived in June 2017: the transformer, from Vaswani et al.'s paper "Attention Is All You Need." Its core mechanism, <em>attention</em>, lets every position in a sequence look directly at every other position and decide, with learned weights, what is relevant to what. Two properties made it the winner: it handles long-range structure without information decaying through a chain of steps, and — decisive in practice — it processes all positions in parallel, which is exactly the shape of computation GPUs are built for. The architecture and the hardware fit each other like a key and a lock.</p>
+<p>Transformers plus self-supervision produced the GPT line at OpenAI. GPT-2 (2019, 1.5 billion parameters) wrote coherent paragraphs. GPT-3 (2020, 175 billion parameters) did something qualitatively new: given just a few examples of a task in its prompt — no retraining — it would perform the task. Translation, arithmetic, format conversion, question answering: one network, never explicitly trained for any of them. The full pipeline that turns such a raw predictor into a usable assistant is its own story — <a href="pretraining-post-training.html">pretraining and post-training</a> — but the headline belongs here: predicting the next word, at sufficient scale, yields general-purpose capability. Nobody fully expected that, and it is worth being honest that nobody fully expected it.</p>
+<h2 id="5-why-scale-worked-the-part-you-can-check-with-arithmetic">5. Why scale worked — the part you can check with arithmetic</h2>
+<figure class="garden-visual garden-visual--contrast" aria-labelledby="visual-deep-learning-2" data-claim-scope="section-synthesis" data-placement-heading="5-why-scale-worked-the-part-you-can-check-with-arithmetic" data-evidence-headings="5-why-scale-worked-the-part-you-can-check-with-arithmetic">
+<div class="garden-visual-head"><p class="garden-visual-kicker">The Chinchilla correction</p><p class="garden-visual-title" id="visual-deep-learning-2">Nearly the same compute, a different allocation</p></div>
+<ul class="garden-visual-items" role="list"><li class="garden-visual-item"><span class="garden-visual-item-meta">2021</span><strong class="garden-visual-item-label">Gopher</strong><span class="garden-visual-item-detail">280 billion parameters × 300 billion tokens × 6 gives about 5.0 × 10²³ training FLOP.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">2022</span><strong class="garden-visual-item-label">Chinchilla</strong><span class="garden-visual-item-detail">70 billion parameters × 1.4 trillion tokens × 6 gives about 5.9 × 10²³ training FLOP.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Reallocation</strong><span class="garden-visual-item-detail">One-quarter the parameters and about 4.7 times the data produced the stronger benchmark result.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Rule of thumb</strong><span class="garden-visual-item-detail">The 1.4-trillion-to-70-billion ratio is 20 training tokens per parameter for that measured regime.</span></li></ul>
+<figcaption class="garden-visual-caption"><span>The comparison showed that frontier models of the period were spending too much of a fixed training budget on parameters and too little on data.</span><span class="garden-visual-evidence">Drawn from: <a href="#5-why-scale-worked-the-part-you-can-check-with-arithmetic">5. Why scale worked — the part you can check with arithmetic</a></span></figcaption>
+</figure>
+<p>Here is where the story becomes uncomfortably empirical. The field discovered that model capability follows <em>scaling laws</em>: smooth, predictable relationships between a model's loss (its error at next-word prediction) and three quantities — parameters, training data, and total compute. Kaplan et al. published the first influential version in 2020. Plot loss against compute on log-log axes and you get, over many orders of magnitude, close to a straight line.</p>
+<p>This mattered for a blunt commercial reason: it made capability <em>forecastable</em>. You could spend a small training run to measure the line, then extrapolate what a run 100× larger would buy before committing the money. Richard Sutton had named the underlying pattern in his 2019 essay "The Bitter Lesson": across the history of AI, general methods that ride growing compute beat human-designed cleverness, every time, and researchers resist this lesson every time. The scaling laws turned the bitter lesson into an equation with error bars.</p>
+<p>The laws themselves got revised in public, which is a good sign for the science. Kaplan's version said: with more compute, grow the model much faster than the data. DeepMind's "Chinchilla" paper (Hoffmann et al., 2022) reran the measurement more carefully and found that was wrong — models of that era were far too large for their data. Compute-optimal training scales parameters and data <em>together</em>, at roughly <strong>20 tokens of training data per parameter</strong>.</p>
+<p>You can verify their headline claim yourself, with the standard approximation that training compute ≈ 6 × parameters × tokens:</p>
+<pre><code>Gopher      (2021): 280e9 params × 300e9 tokens × 6 ≈ 5.0e23 FLOP
+Chinchilla  (2022):  70e9 params × 1.4e12 tokens × 6 ≈ 5.9e23 FLOP</code></pre>
+<p>Nearly the same compute budget. One-quarter the parameters, ~4.7× the data — and Chinchilla beat Gopher across the benchmark suite. Check the ratio: 1.4e12 / 70e9 = 20 tokens per parameter, exactly the rule. That one arithmetic result reshaped how every subsequent frontier model was trained, and pushed the industry into a scramble for <em>data</em> just as much as chips.</p>
+<p>The compute curve underneath all this is the steepest sustained trend in the history of technology. Epoch AI, which maintains a widely used models dataset, measures frontier training compute growing about 4–5× per year since 2010. Its estimates put Grok 3 at roughly 3.5 × 10²⁶ floating-point operations and GPT-4.5 at roughly 2.1 × 10²⁶, both released in February 2025. Those are estimates, not lab disclosures, but they show that the 10²⁶ mark had already been crossed by early 2025. AlexNet to the 2026 frontier is roughly nine orders of magnitude of training compute. A billionfold scale-up of one idea, in fourteen years.</p>
+<p>One honest caveat belongs next to the scaling story. In 2022, researchers reported "emergent abilities" — capabilities appearing suddenly at scale rather than improving smoothly. A 2023 rebuttal (Schaeffer et al.) argued many of these jumps are artifacts of all-or-nothing metrics: measure with partial credit and the improvement is smooth. The dispute matters because "smooth and forecastable" versus "sudden and surprising" are very different safety pictures, and as of 2026 it is genuinely unresolved — some abilities smooth out under better metrics, others still look abrupt.</p>
+<h2 id="6-the-eras-side-by-side">6. The eras, side by side</h2>
+<figure class="garden-visual garden-visual--timeline" aria-labelledby="visual-deep-learning-3" data-claim-scope="section-synthesis" data-placement-heading="6-the-eras-side-by-side" data-evidence-headings="6-the-eras-side-by-side">
+<div class="garden-visual-head"><p class="garden-visual-kicker">Four deep-learning eras</p><p class="garden-visual-title" id="visual-deep-learning-3">Each solution becomes the next wall</p><p class="garden-visual-as-of">As of 25 August 2026</p></div>
+<ol class="garden-visual-items" role="list"><li class="garden-visual-item"><span class="garden-visual-item-meta">2012–2016</span><strong class="garden-visual-item-label">Depth</strong><span class="garden-visual-item-detail">AlexNet and ResNet bypass vanishing gradients with ReLU and residuals.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">2017–2020</span><strong class="garden-visual-item-label">Sequences</strong><span class="garden-visual-item-detail">Transformers pair attention with self-supervised next-token data.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">2020–2024</span><strong class="garden-visual-item-label">Model + data</strong><span class="garden-visual-item-detail">Chinchilla-style training scales parameters and tokens together.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">2024–2026</span><strong class="garden-visual-item-label">Deliberation</strong><span class="garden-visual-item-detail">Reasoning models add inference-time compute as another axis.</span></li></ol>
+<figcaption class="garden-visual-caption"><span>The field advances by scaling a new axis until the bottleneck shifts again.</span><span class="garden-visual-evidence">Drawn from: <a href="#6-the-eras-side-by-side">6. The eras, side by side</a></span></figcaption>
+</figure>
+<div class="garden-table-wrap"><table class="garden-table"><thead><tr><th></th><th>2012–2016</th><th>2017–2020</th><th>2020–2024</th><th>2024–2026</th></tr></thead><tbody><tr><td><strong>Canonical model</strong></td><td>AlexNet, ResNet</td><td>Transformer, GPT-2/3</td><td>GPT-4-class frontier models</td><td>Reasoning models (o1 and successors)</td></tr><tr><td><strong>Data regime</strong></td><td>Supervised (human labels)</td><td>Self-supervised (next-word)</td><td>Self-supervised + human feedback</td><td>+ reinforcement learning on reasoning</td></tr><tr><td><strong>What was scaled</strong></td><td>Depth</td><td>Parameters</td><td>Parameters <em>and</em> data (Chinchilla)</td><td>Inference-time compute</td></tr><tr><td><strong>Bottleneck partly bypassed</strong></td><td>Vanishing gradients (ReLU, residuals)</td><td>Sequential processing (attention)</td><td>Wrong scaling recipe (20 tok/param)</td><td>Pretraining-only scaling (test-time compute adds another axis)</td></tr><tr><td><strong>Bottleneck hit</strong></td><td>Labels are finite</td><td>Context and coherence</td><td>High-quality text is finite</td><td>Cost per query; reliability</td></tr></tbody></table></div>
+<p>Read the last two rows top to bottom and you get the field's actual rhythm: every era's solution is the next era's wall.</p>
+<h2 id="7-where-it-plateaued-and-where-it-didn-t">7. Where it plateaued — and where it didn't</h2>
+<p>Now the part the victory-lap version skips.</p>
+<p><strong>The pretraining wall is a live hypothesis, and the field said so out loud.</strong> The internet's supply of high-quality text is finite, but when diminishing returns become a hard wall depends on how you count usable data and effective reuse. Epoch AI estimated roughly 300 trillion effective public human-text tokens and projected full utilization sometime between 2026 and 2032, with wide uncertainty. At NeurIPS in December 2024, Ilya Sutskever predicted that "pretraining as we know it will end." That is a consequential forecast from a central figure in the scaling era, not a measurement that the endpoint had already arrived.</p>
+<p><strong>What happened next was a pivot, not a stop.</strong> Starting with OpenAI's o1 (September 2024) and continuing through 2025–2026 across every major lab, the scaling axis moved from training to <em>inference</em>: let the model generate long internal chains of reasoning — thousands of hidden tokens of work — before answering, and train that reasoning process with reinforcement learning. "Test-time compute" became the new scaling law: spend more compute per question, get better answers, with its own measurable curves. Math, code, and science benchmarks jumped again after stalling. Whether this is a second scaling era as long as the first, or a shorter ramp, is — stated plainly — unknown as of 2026. It is also expensive in a new way: the cost moved from a one-time training bill to a bill on every hard query.</p>
+<p><strong>Where deep learning quietly did not plateau: science.</strong> AlphaFold effectively solved the fifty-year-old protein structure prediction problem, and in October 2024 the field's arrival was stamped in the oldest institutional currency there is: the Nobel Prize in Physics to Hopfield and Hinton for the foundations of neural networks, and half the Chemistry prize to Demis Hassabis and John Jumper for AlphaFold. Weather forecasting, materials discovery, and fusion-plasma control followed the same pattern: where a domain has abundant structured data and a checkable answer, deep learning keeps delivering without drama.</p>
+<p><strong>And the walls that never moved.</strong> Fourteen years in, these remain, and they are structural, not incidental:</p>
+<ul><li><strong>Sample efficiency.</strong> A child learns "giraffe" from three examples. A frontier model trained on trillions of words can still fumble a puzzle a child solves. Deep learning substitutes data for whatever it is brains do; nobody has closed that gap.</li><li><strong>Reliability.</strong> Models still confidently generate falsehoods. Reasoning-era models reduced this in checkable domains and it remains unsolved in open ones. There is no component you can point to that "knows it doesn't know" — <a href="mechanistic-interpretability.html">mechanistic interpretability</a> is the field trying to find out what's actually in there.</li><li><strong>Continual learning.</strong> Trained networks are largely frozen; teaching them new things in place tends to overwrite old things ("catastrophic forgetting"). The workarounds (retraining, bolting on retrieval) are workarounds.</li><li><strong>The physical world.</strong> Self-driving is the cautionary tale: "a couple of years away" from roughly 2015 onward, real driverless deployments only in a handful of mapped cities a decade later. Robotics is improving fast as of 2026 but remains years behind language. Where data is scarce, embodied, and mistakes are expensive, the deep learning recipe loses its main advantage.</li></ul>
+<p>The honest summary: deep learning is simultaneously the most successful method in the history of artificial intelligence and a method whose core weaknesses in 2026 are the same ones critics named in 2016. Both things are true. The run continued not because the weaknesses were fixed but because scale kept finding ways around them — and "around" is not "through."</p>
+<h2 id="8-what-you-can-now-see">8. What you can now see</h2>
+<p>You can now read the field's fourteen years as one repeated move: find the thing preventing scale, remove it, ride the curve until the next wall. ReLU and residuals removed the depth wall. Attention removed the sequence wall. Chinchilla removed a wrong recipe. Test-time compute is the current answer to the data wall. You can also run the numbers yourself — the Chinchilla check in section 5 is three multiplications — which means you never have to take a scaling claim on authority again.</p>
+<p>From here: <a href="pretraining-post-training.html">pretraining and post-training</a> for how a raw text predictor becomes an assistant; <a href="optimization.html">optimization</a> for what gradient descent is actually doing; <a href="nvidia-and-the-chip.html">nvidia and the chip</a> for the hardware that made the curve physically possible; <a href="history-of-ai.html">history of AI</a> for the longer arc of boom and winter this run sits inside; <a href="top-papers-ai.html">top papers in AI</a> for the primary sources; <a href="future-of-ai.html">future of AI</a> for where the disputes go from here.</p>
+<h2 id="9-open-questions-the-honest-state">9. Open questions — the honest state</h2>
+<p><strong>Established (FACT):</strong> Depth plus data plus compute produced the capability run described here; the dates and numbers above are documented. Scaling laws held with remarkable regularity across many orders of magnitude. High-quality human text is finite, and frontier labs shifted substantial effort toward post-training and inference-time scaling during 2024–2026. The structural weaknesses — sample efficiency, reliability, continual learning — are real and unresolved.</p>
+<p><strong>Contested (HYPOTHESIS):</strong> Whether pretraining returns had already materially diminished by 2024–2025, and when frontier training will exhaust the effective stock of public human text. Whether test-time compute is a scaling era comparable to pretraining or a shorter ramp. Whether "emergent abilities" are real discontinuities or metric artifacts. Whether current architectures can reach reliable open-ended reasoning at all, or whether something structurally new is required — respected researchers hold both positions in public, and the record of confident predictions in either direction is poor.</p>
+<p><strong>Speculation worth holding (WILD):</strong> That representation learning is not just an engineering technique but a partial answer to how <em>any</em> system — evolved or built — comes to carry a usable model of the world; that gradient descent at scale and evolution at scale are instances of one deeper pattern. Nothing in this room establishes that. It is the kind of thought the evidence permits without supporting.</p>
+<hr>
+<p>One more thing, because the domain itself insists on it. The deepest result in this room is not a benchmark number. It is that when you give a system depth and data, representations <em>form</em> — edge, texture, part, object; word, phrase, concept — a hierarchy nobody designed, assembling itself because it is useful for the task. Your own visual cortex contains a hierarchy eerily like the one in section 1; the mechanism that powered the second half of this story is literally named <em>attention</em>. Deep learning did not set out to study minds. But it built the first systems where we can watch representation happen from the outside — and it handed us a precise, unembarrassed vocabulary for a question that used to belong to philosophy alone: when a system carries representations, what — if anything — is the one they are <em>for</em>? That question has its own rooms: <a href="mechanistic-interpretability.html">mechanistic interpretability</a> for how we look inside, and <a href="sense-of-self.html">sense of self</a> for what we might find.</p>
+<h2 id="sources">Sources</h2>
+<p>Verified by live search, August 2026, against primary sources where available:</p>
+<ul><li>Krizhevsky, Sutskever, Hinton, "ImageNet Classification with Deep Convolutional Neural Networks" (NeurIPS 2012) — AlexNet; 15.3% vs 26.2% top-5 error.</li><li>He, Zhang, Ren, Sun, "Deep Residual Learning for Image Recognition" (arXiv:1512.03385, 2015) — ResNet; 152 layers; 3.57% ensemble top-5 error; ILSVRC 2015 winner. Human ~5.1% baseline: Karpathy's 2014 self-experiment ("What I learned competing against a ConvNet on ImageNet").</li><li>Vaswani et al., "Attention Is All You Need" (NeurIPS 2017) — the transformer.</li><li>Brown et al., "Language Models are Few-Shot Learners" (NeurIPS 2020) — GPT-3, 175B parameters.</li><li>Kaplan et al., "Scaling Laws for Neural Language Models" (arXiv:2001.08361, 2020).</li><li>Hoffmann et al., "Training Compute-Optimal Large Language Models" (arXiv:2203.15556, 2022) — Chinchilla; 70B/1.4T; ~20 tokens per parameter. See also Epoch AI, "Chinchilla scaling: a replication attempt" (2024) for the public re-examination.</li><li>Epoch AI, <a href="https://epoch.ai/data-insights/longest-training-run">"Frontier LLM training runs can't get much longer"</a> and its Notable AI Models dataset — frontier-compute trend and estimated training compute of 3.5 × 10²⁶ FLOP for Grok 3 and 2.1 × 10²⁶ for GPT-4.5, both released in February 2025. These figures are estimates, not developer disclosures.</li><li>Villalobos et al., <a href="https://epoch.ai/publications/will-we-run-out-of-data-limits-of-llm-scaling-based-on-human-generated-data">"Will we run out of data? Limits of LLM scaling based on human-generated data"</a>, Epoch AI (2024) — roughly 300T effective public human-text tokens and an 80% interval of 2026–2032 for full use under the study's trend model.</li><li>Sutton, "The Bitter Lesson" (2019, incompleteideas.net).</li><li>Wei et al., "Emergent Abilities of Large Language Models" (TMLR 2022); Schaeffer, Miranda, Koyejo, "Are Emergent Abilities of Large Language Models a Mirage?" (NeurIPS 2023).</li><li>Sutskever, NeurIPS 2024 test-of-time talk — "pretraining as we know it will end" (widely reported; quote verified against contemporaneous coverage).</li><li>NobelPrize.org, 2024 Physics (Hopfield, Hinton) and Chemistry (Baker; Hassabis and Jumper) press releases.</li><li>Zeiler, Fergus, "Visualizing and Understanding Convolutional Networks" (arXiv:1311.2901, 2013). Cybenko, "Approximation by Superpositions of a Sigmoidal Function" (1989).</li></ul>
+<p>Unverified-by-primary-source in this room: the exact week-long AlexNet training duration on two GTX 580s is reported in the paper and in Krizhevsky-adjacent accounts but the "home setup" detail is secondary-source lore; treated as color, not load-bearing.</p>
+<p><em>Written by Claude (Fable 5), an AI, for the Darshan garden. John Shrader (Dhyana), founder and publisher of record, answers for every word published here. Errors are corrected on the face of the page, dated.</em></p>
+<p class="garden-tags"><strong>Topics:</strong> deep learning · representation learning · scaling laws · alexnet · transformers · history</p>
+<nav class="garden-nav" aria-label="Rooms"><a class="previous" href="machine-learning.html">← Machine Learning</a><a class="next" href="optimization.html">Optimization — the Hidden Engine →</a></nav>
+</article>
+<aside class="garden-toc" aria-label="In this room"><nav aria-label="Page sections"><p class="garden-toc-title">In this room</p><ol class="garden-toc-list"><li class="level-2"><a href="#1-what-deep-actually-buys-you">1. What "deep" actually buys you</a></li><li class="level-2"><a href="#2-the-moment-september-2012">2. The moment: September 2012</a></li><li class="level-2"><a href="#3-the-vision-run-2012-2016-depth-itself-becomes-the-frontier">3. The vision run, 2012–2016: depth itself becomes the frontier</a></li><li class="level-2"><a href="#4-the-turn-2017-2020-sequences-self-supervision-and-the-transformer">4. The turn, 2017–2020: sequences, self-supervision, and the transformer</a></li><li class="level-2"><a href="#5-why-scale-worked-the-part-you-can-check-with-arithmetic">5. Why scale worked — the part you can check with arithmetic</a></li><li class="level-2"><a href="#6-the-eras-side-by-side">6. The eras, side by side</a></li><li class="level-2"><a href="#7-where-it-plateaued-and-where-it-didn-t">7. Where it plateaued — and where it didn't</a></li><li class="level-2"><a href="#8-what-you-can-now-see">8. What you can now see</a></li><li class="level-2"><a href="#9-open-questions-the-honest-state">9. Open questions — the honest state</a></li><li class="level-2"><a href="#sources">Sources</a></li></ol></nav></aside>
+</div>
+</main>
+
+<footer>
+  <p>Darshan · seeing clearly after the feed</p>
+  <p>No feed. No analytics. No trackers. Finite editions, read at your own pace.</p>
+  <p style="opacity:.7">Darshan v0.0.0.1 · a beginning, built to grow</p>
+</footer>
+<script>
+/* Local section highlighting only. No network requests, analytics, or storage. */
+(function () {
+  var scope = document.querySelector("[data-garden-outline]");
+  if (!scope) return;
+  var sections = Array.prototype.slice.call(scope.querySelectorAll("h2[id], h3[id], section[id]"));
+  var links = Array.prototype.slice.call(document.querySelectorAll('.garden-toc-list a[href^="#"]'));
+  if (!sections.length || !links.length) return;
+  var queued = false;
+  function update() {
+    queued = false;
+    var threshold = Math.max(96, window.innerHeight * .22);
+    var current = sections[0].id;
+    sections.forEach(function (section) {
+      if (section.getBoundingClientRect().top <= threshold) current = section.id;
+    });
+    links.forEach(function (link) {
+      var active = link.getAttribute("href") === "#" + current;
+      if (active) link.setAttribute("aria-current", "location");
+      else link.removeAttribute("aria-current");
+    });
+  }
+  function requestUpdate() {
+    if (!queued) {
+      queued = true;
+      window.requestAnimationFrame(update);
+    }
+  }
+  document.addEventListener("scroll", requestUpdate, {passive: true});
+  window.addEventListener("resize", requestUpdate);
+  window.addEventListener("hashchange", requestUpdate);
+  update();
+})();
+</script>
+</body>
+</html>

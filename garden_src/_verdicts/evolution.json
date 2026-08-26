@@ -1,0 +1,9 @@
+{
+  "slug": "evolution",
+  "verdict": "PASS",
+  "contract": "All nine required frontmatter keys are present. The current 4,345-word room has a four-sentence orientation, numbered descriptive sections, a real evolution-versus-learning comparison table, a runnable cumulative-selection example, conclusion, typed FACT/HYPOTHESIS/WILD questions, live sources, disclosure, valid slug.html corridors, and a domain-earned socket-exit. A fresh full reread on 2026-08-25 confirms the opening repair without introducing a new structural defect.",
+  "facts": "The opening now accurately calls the Lenski LTEE 'one of the longest-running experimental-evolution studies' rather than the world's longest-running biology experiment. That scope agrees with the official LTEE record while avoiding conflict with much older studies such as Park Grass and the Beal seed experiment. The three previously checked claim families remain sound: LTEE's 80,000-generation milestone and citrate history, Q-beta's extreme sequence reduction under cell-free selection, and DeepMind's documented AlphaEvolve results. The room distinguishes selection, learning, and metaphor carefully and preserves uncertainty around evolvability and open-ended evolution.",
+  "voice": "The citrate replay, Q-beta compression, AlphaEvolve passage, and exit were reread aloud. They stay concrete and conversational despite their density. The revised first line now opens with justified precision instead of an unsupported world-record flourish.",
+  "must_fix": "none. The unqualified longest-running-biology-experiment claim is correctly scoped, and no residual contract, factual, voice, disclosure, link, or socket issue remains.",
+  "source_sha256": "f13e5b591ba69a834cc4fa5adc3eb96f5614c23c41eb886d921f159ab731639e"
+}

@@ -1,0 +1,134 @@
+{
+  "schema": "darshan.visual-verdict-series/v1",
+  "series": "foundations",
+  "reviewer": "/root/audit_visuals_foundations_time",
+  "reviewed_at": "2026-08-25",
+  "rooms": {
+    "intro-to-computer-science": {
+      "verdict": "PASS",
+      "visual_sha256": "edc04302147c1e38ec30ec11262bf168968c82ff9903987996869ebe837b8f49",
+      "source_sha256": "84b41c558eb150d9839444ebd7e8e7bed92ef6af4cfd5b1d5b6e96c61cee2f83",
+      "evidence": "Reviewed the six-group abstraction tower against section 5, the 2 + 3 descent against section 7, and the universal-machine sequence against section 4; all three declared heading anchors exist and bound the figure to the supporting passage.",
+      "facts": "The grouped tower now says explicitly that it compresses the source's finer layers, the binary addition and gate roles agree with the worked arithmetic, and the universal-machine title is correctly limited to describable Turing machines.",
+      "uncertainty": "The transistor-scale wording remains a pedagogical compression, while the Church–Turing framing and the distinction between simulation and physical identity remain visible in the room rather than being promoted into a stronger visual claim.",
+      "must_fix": "none; the three visuals are supported, distinct, and correctly scoped."
+    },
+    "programming": {
+      "verdict": "PASS",
+      "visual_sha256": "22b3d5669230ac82aca8505c4c30a7604bea9be5c787ca0246df593195ea0d73",
+      "source_sha256": "ca8646dd4ec292ac7c2cd5f9ad223e30d8bd3a28d975ba6f320a033f09e0d90c",
+      "evidence": "Checked the dated abstraction timeline against section 2, the imperative/functional/declarative comparison and total of 220 against section 4, and the problem–team theory–source–handoff layers against section 5.",
+      "facts": "The historical dates and language roles match the room, the worked examples compute the same answer in all three grammars, and the Naur-inspired distinction between source text and a team's living theory is faithfully summarized.",
+      "uncertainty": "The final timeline rung is explicitly bound to 25 August 2026, so the relative word 'Now' cannot silently masquerade as a timeless date; claims about plain language as programming remain the room's dated extrapolation.",
+      "must_fix": "none; chronology, arithmetic, and the maintenance-theory caveat are preserved."
+    },
+    "compilers": {
+      "verdict": "PASS",
+      "visual_sha256": "5485ca05d57e98290a3fc240b79dc414d979d5a6bc270d8e8cc3036f2246f25a",
+      "source_sha256": "806b86ddaef3e747bddc7cbd59375083e3265c92f4bb7a1a9f98e28a73f28abd",
+      "evidence": "Traced the artifact relay through section 1, every trusting-trust step through section 9, and the mem2reg–inline–constant-fold sequence through section 5 and its displayed LLVM IR and call-site disassembly.",
+      "facts": "The pipeline names the correct intermediate artifacts, Thompson's self-reproducing compiler attack is represented in the right causal order, and the corrected optimization title no longer repeats the source prose's six-versus-seven instruction-count ambiguity.",
+      "uncertainty": "The optimization visual deliberately crosses from function-local promotion to call-site inlining and folding, and its labels now make that scope change explicit instead of claiming a single literal instruction-count collapse.",
+      "must_fix": "none; the previous instruction-count problem is removed and all three sequences remain evidence-bound."
+    },
+    "linear-algebra-and-ai": {
+      "verdict": "PASS",
+      "visual_sha256": "d6e701c67e297422548bd6897bfa4ecd3124963c03edddb849617eb26bcdabb9",
+      "source_sha256": "146e7ed1c3084f52164171795a71332b4bf4c41840433562b11d80437dc8fad2",
+      "evidence": "Reviewed the projection bottleneck against section 3, the linear-composition/nonlinearity layers against section 4, and the query–key–value attention procedure against every arithmetic stage in section 5.",
+      "facts": "GPT-2 small's 768-dimensional residual width and 64-dimensional head projections match the source, matrix-only depth correctly collapses algebraically, and scaled dot-product attention proceeds through projection, scoring, scaling, softmax, and value movement.",
+      "uncertainty": "The low-rank 'keyhole' is a model-specific explanatory example rather than a claim about every architecture, and softmax is presented at the mathematical level while implementation rounding and causal masks remain outside the compact figure.",
+      "must_fix": "none; dimensions, operations, and explanatory boundaries are accurate."
+    },
+    "neural-networks": {
+      "verdict": "PASS",
+      "visual_sha256": "2c2010495ecd9487b514ee6df77fb95f6b838ac3a99ead9f2e8b6e7413730986",
+      "source_sha256": "719f8af09409a2e3e5ae2e89f457ab8f8a4a5239a111b24bbd322ba93069baf2",
+      "evidence": "Checked the neuron arithmetic path against section 1, the XOR/perceptron boundary against section 2, and every forward, loss, backward, update, and replay number against the hand-worked example in section 4.",
+      "facts": "The starting prediction 0.5, loss 0.125, learning rate 0.1, updated prediction 1.16875, and approximately 0.0142 loss all agree with the source; the XOR and universal-approximation qualifications are also retained.",
+      "uncertainty": "The toy update is explicitly a training skeleton rather than a claim that frontier optimizers or architectures are identical, and universal approximation is correctly limited to expressiveness rather than easy training or compactness.",
+      "must_fix": "none; numerical checks and theorem boundaries pass."
+    },
+    "machine-learning": {
+      "verdict": "PASS",
+      "visual_sha256": "ba1c3b1ea0f8ee4999aaa6f6110f3e8cadc7e44fd8aedf54acce238ca2d66324",
+      "source_sha256": "150ef0b72c79927b17480d875e9d29d56049005de1c464983bfd64182476bff4",
+      "evidence": "Compared the differentiable learning loop to section 2, each model-family inductive bias to section 4's table, and the train–validation–test–deployment discipline to section 5.",
+      "facts": "The gradient is correctly described as the direction of steepest local increase and the update steps against it; the family summaries and held-out-data roles remain consistent with the source.",
+      "uncertainty": "The corrected caption now preserves the source's warning that stochasticity or an oversized step may raise loss on one update, and deployment shift is shown as beyond what a same-distribution test can guarantee.",
+      "must_fix": "none; the prior monotonic-loss overstatement has been corrected."
+    },
+    "deep-learning": {
+      "verdict": "PASS",
+      "visual_sha256": "dd47f9b0a5da323d25d959283896589d814b65a4efdd03c1293e49a85dd78ac0",
+      "source_sha256": "5233b3b44fb3be68bb426f12c4645bc9015b18f92722974b247e3069ec2b8e51",
+      "evidence": "Reviewed the representation hierarchy against section 1, the four eras against section 6's table, and every Gopher/Chinchilla calculation against section 5.",
+      "facts": "The feature hierarchy follows the cited vision-network observation, the era axes match the room, and 280B×300B×6 and 70B×1.4T×6 yield the stated roughly 5.0×10^23 and 5.9×10^23 FLOP with a 20-token-per-parameter measured ratio.",
+      "uncertainty": "The era timeline is explicitly dated 25 August 2026, and the 20-token ratio is labeled a rule of thumb for the measured Chinchilla regime rather than a timeless law.",
+      "must_fix": "none; historical sequencing, arithmetic, and date scope pass."
+    },
+    "optimization": {
+      "verdict": "PASS",
+      "visual_sha256": "09a6e1de24ce83388e1b13d974814905c0757ebaf0d8ab8c26df5a459793927d",
+      "source_sha256": "3c9fd3cb0ba430516a30d620b85ed7189f92967cb4cc272b55bd7571a5186478",
+      "evidence": "Checked the three learning-rate regimes against section 2, optimizer dates and mechanisms against section 4, and the complete w/b convergence trace against section 5.",
+      "facts": "The optimizer lineage, Adam/AdamW distinction, and Muon matrix treatment follow the source; the line-fit values at the start, first two updates, step 100, and approximately step 1,000 match its worked calculation.",
+      "uncertainty": "Muon efficiency claims are not imported into the visual, and the loss-landscape metaphor is kept to the bounded step-size and convergence example rather than promoted into a universal geometry claim.",
+      "must_fix": "none; mechanisms, dates, and numerical convergence are supported."
+    },
+    "pretraining-post-training": {
+      "verdict": "PASS",
+      "visual_sha256": "308e3376895385b09b7db838c66191f4a9134f02bcdeb2ce7949700c0226e29e",
+      "source_sha256": "92bcfd7d2c0588c62b2cb6b139f00cf64c10b0459d97ff59ae6095fa4223b9d6",
+      "evidence": "Reviewed the successive weight-shaping stages against section 1, the Constitutional AI/DPO/RLVR/safety menu against section 5, and the GPT-2 versus instruct-model comparison against section 6.",
+      "facts": "The figures distinguish pretraining, instruction tuning, preference pressure, and verifiable-reward reasoning; the corrected menu identifies three methods and safety as a target pursued through overlapping machinery.",
+      "uncertainty": "The base/instruct comparison explicitly avoids inferring that every capability or refusal is unchanged underneath, and the room's caveat that post-training can add capability remains intact.",
+      "must_fix": "none; the prior method-versus-target category error is corrected."
+    },
+    "nvidia-and-the-chip": {
+      "verdict": "PASS",
+      "visual_sha256": "c2a0c82710a1ee82453b1165266470ce663798ad33a2753b2e91912935d1f410",
+      "source_sha256": "999329a0bf2a84eecf576b413643f3d97ed3827b46fb89fa0df188a51d1be25c",
+      "evidence": "Checked the CUDA ecosystem stack against section 2, the weights–HBM–bandwidth–compute supply chain against section 3, and the one-gigawatt conversion against section 5.",
+      "facts": "At PUE 1.25, roughly 800 MW reaches equipment; dividing by 130 kW gives about 6,100 NVL72 racks, approximately 440,000 GPUs, and about $18 billion at the stated soft $3 million rack estimate.",
+      "uncertainty": "The worked figure is dated 25 August 2026 and visibly labels its rack price and engineering inputs as soft order-of-magnitude assumptions, not a current list price or full bill of materials.",
+      "must_fix": "none; ecosystem structure and dated capacity arithmetic are properly bounded."
+    },
+    "chip-wars": {
+      "verdict": "PASS",
+      "visual_sha256": "0ef19f2e05f0fc6d06c93d50c2cb5f927051681967d4c448db306c9109852397",
+      "source_sha256": "632e454106b53974745ebeeeb9472ed0e0ba8a7a19a0df83d023d836e69ca48b",
+      "evidence": "Reviewed the TSMC/Samsung/Intel/ASML concentration map against section 1, the export-control chronology and responses against section 5, and the five-stop node-claim audit against section 7.",
+      "facts": "The corrected title names three manufacturers rather than three fabs, the production and licensing states match the dated room, and the verification chain distinguishes generation labels from measured geometry and announcements from shipped silicon.",
+      "uncertainty": "Both live geopolitical figures are dated 25 August 2026; reported yields, policy openings, and market structure remain time-sensitive evidence rather than timeless hierarchy.",
+      "must_fix": "none; the prior company-versus-fab wording and missing date scope are corrected."
+    },
+    "semiconductors": {
+      "verdict": "PASS",
+      "visual_sha256": "1ce830c3eb6a27d223296282f7ca1ff1094e8b14b8c77fcde8cf5ca49d86f083",
+      "source_sha256": "16d24f2236e77ad6328cb817ed111cd7b191d8606128e2bce90e6d177f251b4f",
+      "evidence": "Checked the phosphorus/boron/p–n sequence against section 2, the patterned-wafer cycle against section 4, and all five Moore-law arithmetic steps against section 5.",
+      "facts": "The carrier and depletion-region account follows the source, the corrected exposure step covers projected mask patterns and reflective EUV, and 104 billion divided by 2,300 produces about 45.2 million growth, 25.4 doublings, and 2.1 years per doubling.",
+      "uncertainty": "The Moore calculation is explicitly a two-point historical check rather than a physical law, and the node label is distinguished from a literal two-nanometer feature.",
+      "must_fix": "none; the previous transmissive-mask overgeneralization is corrected and the arithmetic passes."
+    },
+    "algorithms-new-vision": {
+      "verdict": "PASS",
+      "visual_sha256": "01a83f88323ebbcc01bc052123d82dada640f57ebd26bf7f5460f777ade32798",
+      "source_sha256": "d44b62aeca06ed754743c2f12e9a2b29a2133265a35e84cd33b9685ff3696eb2",
+      "evidence": "Reviewed the six classical strategy families against section 2, every Euclidean division and invariant against section 3, and the written-versus-learned comparison against section 4.",
+      "facts": "The gcd trace terminates at 21 with the stated divisibility check, and the contrast accurately distinguishes theorem-backed all-input correctness from dated test evidence and diffuse learned-system failure.",
+      "uncertainty": "The visual says learned behavior may be redirected by fine-tuning rather than guaranteeing transfer, and it does not erase the later room caveat that some learned weights contain legible algorithms.",
+      "must_fix": "none; proof, capability, and transfer claims retain their modal limits."
+    },
+    "sdk-api": {
+      "verdict": "PASS",
+      "visual_sha256": "b8d9e4a823dea27703cac3db1d0c4fae7905bef8f75473d4b56a234c2266a69f",
+      "source_sha256": "7b214325a96130f3a32d3bb3695c2811fcccf8b36511d837fecffd66c1370a00",
+      "evidence": "Checked the program–SDK–HTTP–contract layers against section 2, the four versioning strategies against section 4, and the address/status/limits/version/shape sequence against section 5's live GitHub example.",
+      "facts": "The SDK is correctly treated as installed client plumbing rather than the service contract, and the response visual preserves HTTP success/failure, rate-limit metadata, selected API version, and machine-readable body shape.",
+      "uncertainty": "The live API example avoids freezing a changing star count or remaining-request number; provider behavior may evolve, while the figure confines itself to the documented contract dimensions in the dated room.",
+      "must_fix": "none; the three interface visuals are distinct and source-supported."
+    }
+  }
+}

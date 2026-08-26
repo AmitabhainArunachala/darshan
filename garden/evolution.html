@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>"Evolution: The Algorithm That Needs No Designer" · Darshan Garden</title>
+<meta name="description" content="Variation, selection, and heredity form an algorithm that runs on any substrate that supports them — bacteria in a flask, naked RNA in a test tube, code in a computer. What the algorithm actually requires, how it learned to get better at its own job, and where it does and does not show up inside AI training.">
+<link rel="stylesheet" href="../style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ccircle cx='8' cy='8' r='6' fill='none' stroke='%238f3b26' stroke-width='1.5'/%3E%3Ccircle cx='8' cy='8' r='2' fill='%238f3b26'/%3E%3C/svg%3E">
+<script>
+/* Theme memory. No analytics, no trackers. */
+(function () {
+  try {
+    var t = localStorage.getItem("darshan-theme");
+    if (t) document.documentElement.setAttribute("data-theme", t);
+  } catch (e) {}
+})();
+</script>
+<style>
+/* Garden-only layout. Kept here so the publication stylesheet remains shared. */
+body.garden-page-body {
+  max-width: none;
+  padding: 1.5rem clamp(1.25rem, 3.5vw, 4rem) 4rem;
+  font-size: 1.125rem;
+}
+body.garden-page-body > main,
+body.garden-page-body > .masthead,
+body.garden-page-body > footer {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 94rem;
+}
+.garden-layout,
+.garden-index-layout {
+  align-items: start;
+  display: grid;
+  gap: clamp(2.75rem, 5vw, 5rem);
+  grid-template-columns: minmax(0, 64rem) minmax(17rem, 20rem);
+  justify-content: center;
+}
+.garden-layout article,
+.garden-index-main { min-width: 0; }
+.garden-layout .article-title,
+.garden-intro .article-title {
+  font-size: clamp(2.65rem, 3.55vw, 4rem);
+  letter-spacing: -.025em;
+  line-height: 1.06;
+  max-width: 24ch;
+}
+.garden-layout article h2 {
+  font-size: 1.48rem;
+  line-height: 1.3;
+  margin-top: 3.2rem;
+  scroll-margin-top: 1.5rem;
+}
+.garden-layout article h3 {
+  font-size: 1.16rem;
+  margin-top: 2.35rem;
+  scroll-margin-top: 1.5rem;
+}
+.garden-intro { margin-bottom: 2.4rem; }
+.garden-series { margin: 2.8rem 0; scroll-margin-top: 1rem; }
+.garden-series h2 { border-bottom: 1px solid var(--rule); padding-bottom: .45rem; }
+.garden-room-list { list-style: none; margin: 0; padding: 0; }
+.garden-room-list li { border-bottom: 1px solid var(--rule); margin: 0; padding: 1rem 0; }
+.garden-room-title { font-weight: 600; }
+.garden-room-summary { color: var(--faint); font-size: .96rem; margin: .25rem 0 0; }
+.garden-series-link { color: var(--faint); font-size: .82rem; letter-spacing: .12em;
+  text-transform: uppercase; }
+.garden-lede {
+  border-left: 3px solid var(--accent);
+  color: var(--faint);
+  font-size: 1.24rem;
+  font-style: italic;
+  line-height: 1.62;
+  margin: 1.5rem 0 2.2rem;
+  padding: .35rem 0 .35rem 1.35rem;
+}
+.garden-corridors {
+  margin: 1.15rem 0 2.65rem;
+}
+.garden-corridor-list {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: .55rem .62rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.garden-corridor-list li { display: flex; margin: 0; max-width: 100%; }
+.garden-corridor {
+  align-items: center;
+  background: var(--accent-soft);
+  border: 1px solid var(--accent);
+  border-radius: 3px;
+  color: var(--accent);
+  display: inline-flex;
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .73rem;
+  font-weight: 700;
+  letter-spacing: .075em;
+  line-height: 1.35;
+  max-width: 100%;
+  min-height: 2.05rem;
+  overflow-wrap: anywhere;
+  padding: .34rem .72rem .3rem;
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-transform: uppercase;
+  text-underline-offset: .22em;
+}
+.garden-corridor:visited { color: var(--accent); }
+.garden-corridor:hover,
+.garden-corridor:focus-visible {
+  background: var(--accent);
+  color: var(--paper);
+}
+.garden-corridor:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+.garden-series-plate {
+  --plate-accent: var(--accent);
+  border: 1px solid var(--rule);
+  border-top: 3px solid var(--plate-accent);
+  margin: .25rem 0 2.8rem;
+  overflow: hidden;
+  position: relative;
+}
+.garden-series-plate--foundations { --plate-accent: #496f76; }
+.garden-series-plate--story-of-ai { --plate-accent: #526d9a; }
+.garden-series-plate--instrument { --plate-accent: #745779; }
+.garden-series-plate--strange-loops { --plate-accent: #866448; }
+.garden-series-plate--bridge { --plate-accent: #697044; }
+.garden-series-plate--power { --plate-accent: #8f3b26; }
+.garden-series-plate--time-future { --plate-accent: #416778; }
+[data-theme="dark"] .garden-series-plate { --plate-accent: var(--accent); }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .garden-series-plate { --plate-accent: var(--accent); }
+}
+.garden-series-plate-media {
+  aspect-ratio: 16 / 9;
+  background: var(--accent-soft);
+  overflow: hidden;
+  position: relative;
+}
+.garden-series-plate-media::after {
+  background:
+    linear-gradient(90deg, var(--paper) 0, transparent 24%, transparent 76%, var(--paper) 100%),
+    linear-gradient(0deg, var(--paper) 0, transparent 32%);
+  content: "";
+  inset: 0;
+  opacity: .24;
+  pointer-events: none;
+  position: absolute;
+}
+.garden-series-plate picture,
+.garden-series-card picture { display: block; height: 100%; }
+.garden-series-plate img {
+  display: block;
+  filter: saturate(.82) contrast(1.03);
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+.garden-series-plate figcaption {
+  align-items: baseline;
+  background: var(--paper);
+  border-top: 1px solid var(--rule);
+  display: grid;
+  gap: .25rem 1rem;
+  grid-template-columns: auto 1fr;
+  padding: .78rem 1rem .85rem;
+}
+.garden-series-plate-kicker {
+  color: var(--plate-accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+.garden-series-plate figcaption strong { font-size: 1rem; font-weight: 600; }
+.garden-series-plate-terms {
+  color: var(--faint);
+  font-size: .82rem;
+  grid-column: 2;
+  margin: 0;
+}
+.garden-visual {
+  background:
+    radial-gradient(circle at 92% 8%, var(--accent-soft), transparent 30%),
+    linear-gradient(135deg, transparent 0 72%, var(--accent-soft) 72% 72.4%, transparent 72.4%);
+  border: 1px solid var(--rule);
+  border-top: 3px solid var(--accent);
+  margin: 1.25rem 0 2.5rem;
+  overflow: hidden;
+  padding: clamp(1.1rem, 2.7vw, 1.75rem);
+  position: relative;
+}
+.garden-visual::before {
+  background-image:
+    linear-gradient(var(--rule) 1px, transparent 1px),
+    linear-gradient(90deg, var(--rule) 1px, transparent 1px);
+  background-size: 2.25rem 2.25rem;
+  content: "";
+  inset: 0;
+  opacity: .13;
+  pointer-events: none;
+  position: absolute;
+}
+.garden-visual > * { position: relative; }
+.garden-visual-head {
+  align-items: baseline;
+  display: grid;
+  gap: .45rem 1rem;
+  grid-template-columns: auto 1fr;
+  margin-bottom: 1.2rem;
+}
+.garden-visual-kicker {
+  color: var(--accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .68rem;
+  font-weight: 700;
+  letter-spacing: .17em;
+  margin: 0;
+  text-transform: uppercase;
+}
+.garden-visual-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  line-height: 1.28;
+  margin: 0;
+}
+.garden-visual-as-of {
+  color: var(--faint);
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: .72rem;
+  letter-spacing: .08em;
+  margin: 0;
+  text-transform: uppercase;
+  white-space: normal;
+}
+.garden-visual-items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.garden-visual-item {
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  margin: 0;
+  min-width: 0;
+  padding: .8rem .9rem;
+}
+.garden-visual-item-label {
+  display: block;
+  font-size: .96rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+.garden-visual-item-detail {
+  color: var(--faint);
+  display: block;
+  font-size: .9rem;
+  line-height: 1.45;
+  margin-top: .27rem;
+}
+.garden-visual-item-meta {
+  color: var(--accent);
+  display: block;
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: .72rem;
+  letter-spacing: .08em;
+  margin-bottom: .38rem;
+  text-transform: uppercase;
+}
+.garden-visual-caption {
+  border-top: 1px solid var(--rule);
+  color: var(--faint);
+  display: grid;
+  font-size: .84rem;
+  font-style: italic;
+  gap: .55rem 1rem;
+  grid-template-columns: minmax(0, 1fr) auto;
+  line-height: 1.45;
+  margin: 1.15rem 0 0;
+  padding-top: .75rem;
+}
+.garden-visual-evidence {
+  color: var(--accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .72rem;
+  font-style: normal;
+  font-weight: 650;
+  letter-spacing: .04em;
+  white-space: nowrap;
+}
+.garden-visual-evidence a {
+  color: inherit;
+  text-decoration-thickness: 1px;
+  text-underline-offset: .18em;
+}
+.garden-visual--sequence .garden-visual-items,
+.garden-visual--contrast .garden-visual-items,
+.garden-visual--constellation .garden-visual-items {
+  display: grid;
+  gap: .65rem;
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+}
+.garden-visual--sequence .garden-visual-items { counter-reset: garden-step; }
+.garden-visual--sequence .garden-visual-item {
+  counter-increment: garden-step;
+  padding-top: 2.35rem;
+  position: relative;
+}
+.garden-visual--sequence .garden-visual-item::before {
+  color: var(--accent);
+  content: counter(garden-step, decimal-leading-zero);
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: .68rem;
+  left: .9rem;
+  letter-spacing: .08em;
+  position: absolute;
+  top: .72rem;
+}
+.garden-visual--layers .garden-visual-items { display: grid; gap: .45rem; }
+.garden-visual--layers .garden-visual-item {
+  border-left: clamp(.24rem, .55vw, .48rem) solid var(--accent);
+  display: grid;
+  gap: .15rem 1rem;
+  grid-template-columns: minmax(8rem, .4fr) 1fr;
+}
+.garden-visual--layers .garden-visual-item:nth-child(2) { margin-left: 1.5%; }
+.garden-visual--layers .garden-visual-item:nth-child(3) { margin-left: 3%; }
+.garden-visual--layers .garden-visual-item:nth-child(4) { margin-left: 4.5%; }
+.garden-visual--layers .garden-visual-item:nth-child(5) { margin-left: 6%; }
+.garden-visual--layers .garden-visual-item:nth-child(6) { margin-left: 7.5%; }
+.garden-visual--timeline .garden-visual-items {
+  display: grid;
+  gap: 0;
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+}
+.garden-visual--timeline .garden-visual-item {
+  border-width: 1px 0 0 1px;
+  padding-top: 1.35rem;
+  position: relative;
+}
+.garden-visual--timeline .garden-visual-item::before {
+  background: var(--accent);
+  border: 3px solid var(--paper);
+  border-radius: 50%;
+  content: "";
+  height: .72rem;
+  left: -.4rem;
+  position: absolute;
+  top: -.4rem;
+  width: .72rem;
+}
+.garden-visual--contrast .garden-visual-item:nth-child(odd) { border-top: 2px solid var(--ink); }
+.garden-visual--contrast .garden-visual-item:nth-child(even) { border-top: 2px solid var(--accent); }
+.garden-visual--constellation .garden-visual-items {
+  align-items: stretch;
+  position: relative;
+}
+.garden-visual--constellation .garden-visual-item {
+  border-top: 2px solid var(--accent);
+  box-shadow: 0 .2rem 0 rgba(18, 31, 31, .04);
+  padding-top: 1.35rem;
+  position: relative;
+}
+.garden-visual--constellation .garden-visual-item::before {
+  background: var(--paper);
+  border: 2px solid var(--accent);
+  border-radius: 50%;
+  content: "";
+  height: .55rem;
+  left: calc(50% - .36rem);
+  position: absolute;
+  top: -.38rem;
+  width: .55rem;
+}
+.garden-visual--constellation .garden-visual-item:nth-child(even) { margin-top: .8rem; }
+.garden-series-gallery {
+  display: grid;
+  gap: .8rem;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  margin: 1.5rem 0 3rem;
+}
+.garden-series-card {
+  border: 1px solid var(--rule);
+  color: var(--ink);
+  display: grid;
+  grid-template-rows: 7.5rem auto;
+  overflow: hidden;
+  text-decoration: none;
+}
+.garden-series-card img {
+  height: 100%;
+  object-fit: cover;
+  transition: transform .25s ease;
+  width: 100%;
+}
+.garden-series-card span {
+  border-top: 1px solid var(--rule);
+  font-size: .9rem;
+  font-weight: 600;
+  padding: .65rem .75rem;
+}
+.garden-series-card:hover { border-color: var(--accent); color: var(--accent); }
+.garden-series-card:hover img { transform: scale(1.025); }
+@media (prefers-reduced-motion: reduce) {
+  .garden-series-card img { transition: none; }
+}
+.garden-tags { color: var(--faint); font-size: .82rem; margin-top: 2.2rem; }
+.garden-nav { border-top: 1px solid var(--rule); display: flex; gap: 1rem;
+  justify-content: space-between; margin-top: 2.5rem; padding-top: 1rem; }
+.garden-nav a { max-width: 48%; text-decoration: none; }
+.garden-nav .next { margin-left: auto; text-align: right; }
+.garden-table-wrap { overflow-x: auto; margin: 1.35rem 0; }
+.garden-table { border-collapse: collapse; font-size: .92rem; line-height: 1.45; width: 100%; }
+.garden-table th, .garden-table td { border: 1px solid var(--rule); padding: .55rem .65rem;
+  text-align: left; vertical-align: top; }
+.garden-table th { background: var(--accent-soft); }
+.garden-toc {
+  border-left: 1px solid var(--rule);
+  max-height: calc(100vh - 3rem);
+  overflow: auto;
+  padding: .1rem 0 .75rem 1.3rem;
+  position: sticky;
+  top: 1.5rem;
+}
+.garden-toc-title {
+  color: var(--accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .2em;
+  margin: 0 0 1.15rem;
+  text-transform: uppercase;
+}
+.garden-toc-title::before { content: "☰"; font-size: .8em; margin-right: .65rem; }
+.garden-toc-list { list-style: none; margin: 0; padding: 0; }
+.garden-toc-sublist { list-style: none; margin: 0; padding: 0; }
+.garden-toc-list li { margin: 0; }
+.garden-toc-list a {
+  border-left: 2px solid transparent;
+  color: var(--ink);
+  display: block;
+  font-size: .91rem;
+  line-height: 1.42;
+  margin-left: -1.4rem;
+  padding: .42rem .45rem .42rem 1.3rem;
+  text-decoration: none;
+}
+.garden-toc-list .level-3 a {
+  color: var(--faint);
+  font-size: .86rem;
+  font-style: italic;
+  padding-left: 2.15rem;
+}
+.garden-toc-list a:hover,
+.garden-toc-list a:focus-visible,
+.garden-toc-list a[aria-current="location"] {
+  border-left-color: var(--accent);
+  color: var(--accent);
+}
+.garden-toc-list a[aria-current="location"] { font-weight: 600; }
+.garden-toc-inline { display: none; }
+.garden-layout article :is(h2, h3):target,
+.garden-series:target h2 { color: var(--accent); }
+a.pending { color: var(--faint); text-decoration-style: dashed; }
+a.pending::after { content: " · pending"; font-size: .7em; letter-spacing: .06em;
+  text-transform: uppercase; }
+@media (min-width: 72.01em) {
+  body.garden-page-body > .masthead {
+    align-items: center;
+    column-gap: 2rem;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    margin-bottom: 3.5rem;
+    padding: 1.25rem 0;
+    text-align: left;
+  }
+  body.garden-page-body > .masthead .wordmark { justify-self: start; }
+  body.garden-page-body > .masthead .tagline { justify-self: center; margin: 0; }
+  body.garden-page-body > .masthead nav { justify-self: end; margin: 0; }
+}
+@media (max-width: 72em) {
+  .garden-layout,
+  .garden-index-layout { display: block; }
+  .garden-toc { display: none; }
+  .garden-toc-inline {
+    border: 1px solid var(--rule);
+    display: block;
+    margin: 1.5rem 0 2.4rem;
+    padding: .8rem 1rem;
+  }
+  .garden-toc-inline summary {
+    color: var(--accent);
+    cursor: pointer;
+    font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: .78rem;
+    font-weight: 700;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+  }
+  .garden-toc-inline .garden-toc-list { margin-top: .7rem; }
+  .garden-toc-inline .garden-toc-list a { margin-left: 0; padding-left: .75rem; }
+  .garden-toc-inline .garden-toc-list .level-3 a { padding-left: 1.6rem; }
+}
+@media (max-width: 40em) {
+  body.garden-page-body { font-size: 1.03rem; padding: 1rem 1.05rem 3rem; }
+  .garden-layout .article-title,
+  .garden-intro .article-title { font-size: clamp(2.15rem, 11vw, 3.15rem); }
+  .garden-lede { font-size: 1.1rem; padding-left: 1rem; }
+  .garden-corridors { margin-bottom: 2rem; }
+  .garden-corridor-list { gap: .45rem; }
+  .garden-corridor {
+    font-size: .68rem;
+    min-height: 2.35rem;
+    padding: .3rem .58rem .27rem;
+  }
+  .garden-series-plate-media { aspect-ratio: 16 / 9; }
+  .garden-series-plate figcaption { display: block; }
+  .garden-series-plate figcaption strong { display: block; margin-top: .22rem; }
+  .garden-series-plate-terms { display: block; margin-top: .25rem; }
+  .garden-visual { margin-left: -.15rem; margin-right: -.15rem; padding: 1rem; }
+  .garden-visual-head { display: block; }
+  .garden-visual-title { margin-top: .25rem; }
+  .garden-visual-as-of { margin-top: .35rem; }
+  .garden-visual-caption { grid-template-columns: 1fr; }
+  .garden-visual-evidence { white-space: normal; }
+  .garden-visual--sequence .garden-visual-items,
+  .garden-visual--contrast .garden-visual-items,
+  .garden-visual--constellation .garden-visual-items,
+  .garden-visual--timeline .garden-visual-items { grid-template-columns: 1fr; }
+  .garden-visual--layers .garden-visual-item:nth-child(n) { display: block; margin-left: 0; }
+  .garden-visual--timeline .garden-visual-item { border-width: 0 0 0 1px; }
+  .garden-visual--timeline .garden-visual-item::before { left: -.4rem; top: .9rem; }
+  .garden-visual--constellation .garden-visual-item:nth-child(even) { margin-top: 0; }
+  .garden-series-gallery { grid-template-columns: 1fr; }
+  .garden-nav { flex-direction: column; }
+  .garden-nav a { max-width: none; }
+  .garden-nav .next { margin-left: 0; text-align: left; }
+}
+@media print {
+  a.pending::after { content: " (pending)"; }
+  .garden-layout, .garden-index-layout { display: block; }
+  .garden-toc, .garden-toc-inline { display: none; }
+  .garden-series-card img { display: none; }
+  .garden-series-card { grid-template-rows: auto; }
+}
+</style>
+</head>
+<body class="garden-page-body">
+<button class="theme-toggle" aria-label="Toggle light and dark" onclick="
+  (function () {
+    var d = document.documentElement;
+    var cur = d.getAttribute('data-theme');
+    if (!cur) { cur = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'; }
+    var next = cur === 'dark' ? 'light' : 'dark';
+    d.setAttribute('data-theme', next);
+    try { localStorage.setItem('darshan-theme', next); } catch (e) {}
+  })();
+">◐</button>
+
+<header class="masthead">
+  <h1 class="wordmark"><a href="../index.html">DARSHAN</a></h1>
+  <p class="tagline">A signal of clear seeing in an age of information overload</p>
+  <nav>
+    <a href="../index.html">Articles</a>
+    <a href="index.html">Garden</a>
+    <a href="../about.html">About</a>
+  </nav>
+</header>
+
+<main>
+<div class="garden-layout">
+<article data-garden-room="evolution" data-garden-outline>
+<p class="garden-series-link"><a href="index.html#strange-loops">Strange Loops</a></p>
+<p class="article-meta">25 August 2026 · Draft</p>
+<h1 class="article-title">"Evolution: The Algorithm That Needs No Designer"</h1>
+<div class="draft-banner"><strong>Draft — pending discernment pass.</strong> This room is part of the garden's first planting. It has not been promoted to published status; check its sources and open questions before citing it.</div>
+<p class="garden-lede">Variation, selection, and heredity form an algorithm that runs on any substrate that supports them — bacteria in a flask, naked RNA in a test tube, code in a computer. What the algorithm actually requires, how it learned to get better at its own job, and where it does and does not show up inside AI training.</p>
+<nav class="garden-corridors" aria-label="Explore connected rooms" data-corridor-count="11"><ul class="garden-corridor-list"><li><a class="garden-corridor" href="recursion-and-life.html">Recursion and Life</a></li><li><a class="garden-corridor" href="aunt-hillary.html">Aunt Hillary: The Ant Colony That Thinks</a></li><li><a class="garden-corridor" href="geb.html">Gödel, Escher, Bach</a></li><li><a class="garden-corridor" href="sense-of-self.html">The Sense of Self</a></li><li><a class="garden-corridor" href="neural-networks.html">Neural Networks</a></li><li><a class="garden-corridor" href="deep-learning.html">Deep Learning</a></li><li><a class="garden-corridor" href="optimization.html">Optimization — the Hidden Engine</a></li><li><a class="garden-corridor" href="pretraining-post-training.html">Pretraining and Post-training</a></li><li><a class="garden-corridor" href="algorithms-new-vision.html">A New Vision for Algorithms</a></li><li><a class="garden-corridor" href="evolution-of-ai.html">The Evolution of AI</a></li><li><a class="garden-corridor" href="noosphere.html">The Noosphere</a></li></ul></nav>
+<figure class="garden-series-plate garden-series-plate--strange-loops">
+<div class="garden-series-plate-media"><picture><source srcset="assets/series/strange-loops.webp" type="image/webp"><img src="assets/series/strange-loops.png" alt="An engraved living loop joins a cell, ant colony, eye, and recursive architecture." width="1672" height="941" loading="eager" decoding="async"></picture></div>
+<figcaption><span class="garden-series-plate-kicker">Visual field</span><strong>Strange Loops</strong><span class="garden-series-plate-terms">natural selection · heredity · evolvability · fitness</span></figcaption>
+</figure>
+<details class="garden-toc-inline"><summary>In this room</summary><ol class="garden-toc-list"><li class="level-2"><a href="#1-thirty-eight-years-in-a-flask">1. Thirty-eight years in a flask</a></li><li class="level-2"><a href="#2-the-three-part-algorithm">2. The three-part algorithm</a></li><li class="level-2"><a href="#3-evolution-learned-to-evolve-better">3. Evolution learned to evolve better</a></li><li class="level-2"><a href="#4-evolution-and-learning-side-by-side">4. Evolution and learning, side by side</a></li><li class="level-2"><a href="#5-worked-example-run-the-algorithm-yourself">5. Worked example: run the algorithm yourself</a></li><li class="level-2"><a href="#6-where-evolution-actually-lives-inside-ai">6. Where evolution actually lives inside AI</a></li><li class="level-2"><a href="#7-what-you-can-now-see">7. What you can now see</a></li><li class="level-2"><a href="#open-questions">Open questions</a></li><li class="level-2"><a href="#sources">Sources</a></li></ol></details>
+<p>If you've read <a href="algorithms-new-vision.html">algorithms-new-vision</a>, you know an algorithm is pure structure — steps that don't care what machine runs them. If you've read <a href="recursion-and-life.html">recursion-and-life</a>, you've seen processes that feed their own output back as input. This room is about the algorithm that sits at the intersection: the one that built every living thing, that runs equally well on bacteria, naked molecules, and computer code, and that turns out to have a precise, troubled, productive relationship with learning — including the kind of learning that produces AI models. (For the history of AI systems themselves, that's a different room: <a href="evolution-of-ai.html">evolution-of-ai</a>.)</p>
+<h2 id="1-thirty-eight-years-in-a-flask">1. Thirty-eight years in a flask</h2>
+<p>Start with one of the longest-running experimental-evolution studies, because it makes everything abstract in this room concrete.</p>
+<p>On February 24, 1988, Richard Lenski, then at UC Irvine, put twelve genetically identical populations of <em>E. coli</em> into twelve flasks of glucose-limited broth. Every day since, someone has transferred 1% of each population into fresh broth. That daily 100-fold dilution means each population doubles about 6.64 times per day — 6.64 generations, every day, for thirty-eight years. The experiment moved with Lenski to Michigan State, and when its time there ended in May 2022, it was restarted in Jeffrey Barrick's lab at UT Austin on June 21, 2022. In August 2024 the populations passed <strong>80,000 generations</strong>. For a species with human generation times, that would be roughly two million years of evolution, watched from a lab bench.</p>
+<p>What happened in the flasks:</p>
+<ul><li><strong>All twelve populations got fitter.</strong> By generation 20,000, the evolved bacteria grew about 70% faster than their frozen ancestor when competed head-to-head. And here's the part that surprised the field: fitness never plateaued. Wiser and colleagues showed in 2013 that the fitness trajectory fits a power law — slowing forever, stopping never. Even in a constant, boring environment, after tens of thousands of generations, the populations were still finding improvements.</li><li><strong>One population did something new.</strong> Around generation 31,000–31,500, population Ara-3 evolved the ability to eat citrate in the presence of oxygen — something <em>E. coli</em> famously cannot do (it's a diagnostic trait of the species). Blount and colleagues reported it in 2008.</li><li><strong>The innovation depended on history.</strong> Blount "replayed" evolution from frozen ancestors sampled at different generations. Citrate-eating re-evolved only in replays started from clones <em>after</em> generation 20,000. Earlier clones never got there, under identical conditions. Some earlier mutation — possibly useless at the time — had to be in place first. Evolution's outcomes depend not just on selection pressure but on the accumulated, partly accidental history of the lineage.</li></ul>
+<p>Notice what was <em>not</em> in the flasks: no goal, no designer, no plan, no foresight. Just variation (mutations happen), selection (faster growers take over the flask before the next dilution), and heredity (daughters resemble mothers). That's the whole machine. Now let's take the machine apart.</p>
+<h2 id="2-the-three-part-algorithm">2. The three-part algorithm</h2>
+<figure class="garden-visual garden-visual--sequence" aria-labelledby="visual-evolution-1" data-claim-scope="section-synthesis" data-placement-heading="2-the-three-part-algorithm" data-evidence-headings="2-the-three-part-algorithm">
+<div class="garden-visual-head"><p class="garden-visual-kicker">No designer required</p><p class="garden-visual-title" id="visual-evolution-1">Lewontin's three conditions turn difference into adaptation</p></div>
+<ol class="garden-visual-items" role="list"><li class="garden-visual-item"><strong class="garden-visual-item-label">Variation</strong><span class="garden-visual-item-detail">Members of a population differ in some trait; without alternatives there is nothing to select.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Differential fitness</strong><span class="garden-visual-item-detail">Those differences change expected reproductive success in the current environment.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Heredity</strong><span class="garden-visual-item-detail">Offspring resemble parents in the trait, allowing successful differences to accumulate.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Adaptation</strong><span class="garden-visual-item-detail">The population changes without foresight, plan, or any promise of progress.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Substrate neutrality</strong><span class="garden-visual-item-detail">The same logic runs on organisms, molecules, and self-copying programs.</span></li></ol>
+<figcaption class="garden-visual-caption"><span>Natural selection follows whenever variation affects reproductive success and those differences persist into offspring.</span><span class="garden-visual-evidence">Drawn from: <a href="#2-the-three-part-algorithm">2. The three-part algorithm</a></span></figcaption>
+</figure>
+<p>In 1970, Richard Lewontin distilled Darwin's argument into three conditions ("The Units of Selection," <em>Annual Review of Ecology and Systematics</em>). Evolution by natural selection — the process by which heritable traits that help their carriers reproduce become more common, with no one steering — occurs in any population of entities where:</p>
+<ol><li><strong>Variation</strong> — individuals differ from one another in some trait.</li><li><strong>Differential fitness</strong> — those differences affect how many offspring individuals leave. ("Fitness" here is a technical term: expected reproductive success, nothing more. Not strength, not complexity, not progress.)</li><li><strong>Heredity</strong> — offspring resemble their parents in the trait.</li></ol>
+<p>That's it. Three conditions, and adaptation follows as a logical consequence, the way "the last nonzero remainder is the gcd" follows from Euclid's steps. Daniel Dennett, in <em>Darwin's Dangerous Idea</em> (1995), named the property that makes this room belong in this garden: <strong>substrate neutrality</strong>. The algorithm doesn't mention DNA. It doesn't mention chemistry. It doesn't mention biology at all. Anything that varies, is selected, and is inherited will evolve — molecules, organisms, firms, programs, ideas. Darwin discovered it in finches and barnacles, but what he discovered wasn't a fact about finches. It was a fact about any system meeting three conditions.</p>
+<p>Two corrections to the folk version, because the folk version is what most people carry:</p>
+<p><strong>Evolution has no foresight.</strong> Selection can only compare the variants that exist <em>right now</em> against the environment <em>right now</em>. It cannot take a temporary fitness loss to reach a better peak later, cannot plan, cannot want. Every appearance of design is the accumulated residue of short-sighted, one-generation-at-a-time filtering. The citrate replay experiments show the flip side: what's reachable <em>now</em> depends on what happened to be kept <em>before</em>, so history is load-bearing even without a plan.</p>
+<p><strong>Fitness is not progress.</strong> Selection optimizes reproduction in the current environment — nothing else. The cleanest demonstration is also one of the oldest. In 1965, Sol Spiegelman took the RNA genome of a virus (bacteriophage Qβ, about 4,500 nucleotides), put it in a test tube with the virus's own copying enzyme and free nucleotides, let it replicate, and then transferred a sample to a fresh tube — over and over, 74 times. In that world, nothing matters but copying speed. The RNA evolved accordingly: it shed every gene, everything a virus needs to infect anything, and shrank to 218 nucleotides — a minimal sequence the enzyme could copy at maximum speed. "Spiegelman's Monster" is what pure selection looks like with the goal-shaped illusions stripped away: not ascent, just relentless fit to whatever the environment actually rewards. Keep this in mind for section 6; reward-optimizing AI systems rediscover this failure mode constantly.</p>
+<p>Note also what Spiegelman's tube proves about substrate: no cells, no organisms, no metabolism — naked molecules in salt water satisfied Lewontin's three conditions, and evolution ran. It has since been run in software many times (Tom Ray's Tierra in the early 1990s, the Avida platform after it), where "organisms" are self-copying programs and "mutation" is bit-flipping. The algorithm genuinely does not care what it runs on.</p>
+<h2 id="3-evolution-learned-to-evolve-better">3. Evolution learned to evolve better</h2>
+<figure class="garden-visual garden-visual--layers" aria-labelledby="visual-evolution-2" data-claim-scope="section-synthesis" data-placement-heading="3-evolution-learned-to-evolve-better" data-evidence-headings="3-evolution-learned-to-evolve-better">
+<div class="garden-visual-head"><p class="garden-visual-kicker">Selection reaches its gears</p><p class="garden-visual-title" id="visual-evolution-2">Evolvability is adaptation acting on how variation is produced</p></div>
+<ol class="garden-visual-items" role="list"><li class="garden-visual-item"><span class="garden-visual-item-meta">future option value</span><strong class="garden-visual-item-label">Variation has structure</strong><span class="garden-visual-item-detail">Two equally fit organisms can differ in whether their mutations tend to make viable changes or corpses.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">evolvability</span><strong class="garden-visual-item-label">Map genotype to phenotype</strong><span class="garden-visual-item-detail">The wiring between what mutates and what selection sees determines which neighborhoods evolution can explore.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">facilitated variation</span><strong class="garden-visual-item-label">Modularize change</strong><span class="garden-visual-item-detail">Reusable core processes plus rewritable regulatory connections let one trait vary without destroying the whole organism.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">~100× mutation rate</span><strong class="garden-visual-item-label">Turn the mutation knob</strong><span class="garden-visual-item-detail">Lenski populations evolved hypermutator genotypes by altering DNA repair, gaining speed at the cost of more lethal errors.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">contested mechanism</span><strong class="garden-visual-item-label">Dispute the cause</strong><span class="garden-visual-item-detail">Brittle lineages may simply vanish, or changing environments may directly select the capacity to vary; both readings remain live.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">rules act on rules</span><strong class="garden-visual-item-label">Close the recursion</strong><span class="garden-visual-item-detail">The process that filters variants also filters the machinery that generates its next variants.</span></li></ol>
+<figcaption class="garden-visual-caption"><span>The loop becomes recursive when the genotype–phenotype map, modularity, and mutation rate enter the same selection process whose future options they shape.</span><span class="garden-visual-evidence">Drawn from: <a href="#3-evolution-learned-to-evolve-better">3. Evolution learned to evolve better</a></span></figcaption>
+</figure>
+<p>Here the room turns recursive, which is why it lives in the strange-loops series.</p>
+<p>The three conditions say variation must exist. They say nothing about what <em>kind</em> of variation. And it turns out the kind matters enormously. Imagine two organisms with equal fitness today, but one is built so that random mutations usually produce small, coherent, sometimes-useful changes, while the other is built so that random mutations usually produce corpses. The first lineage has a future; the second is a dead end the moment the environment shifts. Biologists call this property <strong>evolvability</strong> — Kirschner and Gerhart's definition (PNAS, 1998): <em>the capacity of a system for adaptive evolution</em>. Not how fit you are; how well your lineage can generate useful variation.</p>
+<p>Richard Dawkins gave the idea its name in an essay for the first Artificial Life workshop (1987, proceedings 1988): "The Evolution of Evolvability" — a title he admitted "ought to be anathema" to a strict neo-Darwinian, because it flirts with selection acting on future potential rather than present fitness. The modern framing came from Günter Wagner and Lee Altenberg (<em>Evolution</em>, 1996): what evolves is the <strong>genotype–phenotype map</strong> — the wiring between what mutates (the genome) and what selection sees (the body). A <em>modular</em> map, where genes affect one trait cluster without dragging everything else along, lets mutation explore one subsystem at a time. A tangled map makes every mutation a lottery ticket in a rigged lottery.</p>
+<p>The biological evidence that this actually happened:</p>
+<ul><li><strong>Bodies are built from reusable, mutation-tolerant modules.</strong> Kirschner and Gerhart's "facilitated variation" argument: core processes (cell metabolism, body-plan gene circuits like Hox systems) are ancient and frozen, while the regulatory connections <em>between</em> them are easy to rewire. So random genetic change tends to produce viable rearrangements — longer limb, shifted stripe — rather than noise. The variation selection sees is pre-filtered into usefulness by the architecture. That architecture is itself a product of earlier evolution.</li><li><strong>Mutation rates are themselves evolved and adjustable.</strong> In the Lenski flasks, several populations evolved <em>hypermutator</em> genotypes — defects in DNA repair that raise the mutation rate a hundredfold, accelerating adaptation at the cost of more lethal errors. The knob controlling variation is on the table with everything else.</li><li><strong>Sex.</strong> Recombination shuffles genomes every generation, which mostly makes sense as machinery for generating and spreading variation. Why sex is worth its enormous costs is still genuinely contested among biologists — a reminder that this field has open seams.</li></ul>
+<p>How evolvability arises is partly settled, partly not. The deflationary reading: lineages with brittle variation simply died out, so what remains looks evolvable — survivorship, not selection <em>for</em> evolvability. The stronger reading — that evolvability is directly selected in changing environments — has models and some experiments behind it but remains a live hypothesis, not a settled fact. Either way, the structural point stands: <strong>the algorithm's own machinery — how variation is generated, how genotype maps to phenotype, how much mutation is allowed — is inside the loop it powers.</strong> Evolution is, in this precise sense, self-improving. Not by magic: by the same blind three-step process, applied to its own gears. If you've read <a href="geb.html">geb</a>, you'll recognize the shape — a system whose rules operate on the rules.</p>
+<h2 id="4-evolution-and-learning-side-by-side">4. Evolution and learning, side by side</h2>
+<figure class="garden-visual garden-visual--contrast" aria-labelledby="visual-evolution-3" data-claim-scope="section-synthesis" data-placement-heading="4-evolution-and-learning-side-by-side" data-evidence-headings="4-evolution-and-learning-side-by-side">
+<div class="garden-visual-head"><p class="garden-visual-kicker">Three searches</p><p class="garden-visual-title" id="visual-evolution-3">Evolution and gradient learning keep results differently</p></div>
+<ul class="garden-visual-items" role="list"><li class="garden-visual-item"><span class="garden-visual-item-meta">population essential</span><strong class="garden-visual-item-label">Biological evolution</strong><span class="garden-visual-item-detail">Mutation and recombination propose blindly; genomes remember; whole organisms reproduce or do not.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">usually one model</span><strong class="garden-visual-item-label">SGD training</strong><span class="garden-visual-item-detail">A stochastic gradient estimates a local direction that should lower loss, assigning parameter-level credit in a differentiable system.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">no gradient needed</span><strong class="garden-visual-item-label">Genetic algorithm</strong><span class="garden-visual-item-detail">Encoded candidate solutions mutate and recombine; only the fitness function scores the whole proposal.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">speed ↔ generality</span><strong class="garden-visual-item-label">Tradeoff</strong><span class="garden-visual-item-detail">Gradients are vastly more directed, while evolutionary search works where no smooth derivative exists.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">second-order adaptation</span><strong class="garden-visual-item-label">Rules inside the loop</strong><span class="garden-visual-item-detail">Mutation rates, learning schedules, and variation machinery can themselves be adjusted or evolved.</span></li></ul>
+<figcaption class="garden-visual-caption"><span>The shared adaptive shape hides one decisive difference: blind variation receives only whole-candidate scores, while gradients assign direction to every weight.</span><span class="garden-visual-evidence">Drawn from: <a href="#4-evolution-and-learning-side-by-side">4. Evolution and learning, side by side</a></span></figcaption>
+</figure>
+<p>Once you see evolution as an algorithm, a comparison becomes irresistible: it looks like <em>learning</em>. A population "tries" variants, keeps what works, and accumulates the results in a durable memory (the genome). Gradient-based training of <a href="neural-networks.html">neural networks</a> also tries adjustments, keeps what helps, and accumulates results in a durable memory (the weights). How deep does the resemblance go? Here is the honest comparison:</p>
+<div class="garden-table-wrap"><table class="garden-table"><thead><tr><th>Axis</th><th>Biological evolution</th><th>SGD training of a neural net</th><th>Genetic algorithm / evolution strategies</th></tr></thead><tbody><tr><td>Memory (heredity)</td><td>Genome</td><td>Weights</td><td>Genome-encoding of a solution</td></tr><tr><td>Variation source</td><td>Mutation, recombination — <strong>blind</strong></td><td>Gradient — <strong>directed</strong> at lower loss</td><td>Mutation of parameters — blind</td></tr><tr><td>Selection signal</td><td>Reproductive success in an environment</td><td>Loss function, differentiated</td><td>Fitness function, evaluated only</td></tr><tr><td>Credit assignment</td><td>None — whole organism lives or dies</td><td>Precise per-weight, via backpropagation</td><td>None — whole candidate scored</td></tr><tr><td>Needs the system to be differentiable?</td><td>No</td><td>Yes</td><td>No</td></tr><tr><td>Population?</td><td>Essential</td><td>Typically one model</td><td>Essential</td></tr><tr><td>Foresight</td><td>None</td><td>None (greedy local steps)</td><td>None</td></tr><tr><td>Can adjust its own variation machinery?</td><td>Yes (evolvability, §3)</td><td>Partly (learning-rate schedules, learned optimizers)</td><td>Yes (self-adaptive mutation rates)</td></tr></tbody></table></div>
+<p>The load-bearing row is <strong>variation source</strong>. Evolution's proposals are blind; the intelligence is entirely in the filter. Gradient descent's proposals are aimed — the gradient says which direction helps, for every parameter at once. That is why <a href="optimization.html">optimization</a> by gradient can train a trillion-parameter model in months while evolution needed billions of years: per step, a gradient is worth an astronomical number of blind guesses. The price is that gradients only exist for smooth, differentiable systems. Evolution needs nothing but "build it and count the offspring" — which is why it works on organisms, and why its artificial cousins work on problems where no gradient exists.</p>
+<p>The connection runs deeper than analogy, in three documented ways.</p>
+<p><strong>Learning can guide evolution — the Baldwin effect.</strong> Proposed by James Mark Baldwin in 1896: if individuals can <em>learn</em> during their lifetime, a lineage can survive in a niche before the right genes exist, giving selection time to find mutations that hard-wire what was being learned. No Lamarckism — nothing learned is written back to the genome — yet learning still shapes evolution's path, by changing which organisms survive to be selected. Geoffrey Hinton (the same Hinton of <a href="deep-learning.html">deep-learning</a>) and Steven Nowlan gave the first computational demonstration in 1987 (<em>Complex Systems</em> 1:495–502): a needle-in-a-haystack fitness landscape where pure evolution flounders, but letting each individual "learn" (randomly try settings for some genes during its lifetime) smooths the landscape — being <em>near</em> the solution now pays off, because learning can close the gap. Evolution then rapidly fixes the right genes. Learning alters the shape of the search space evolution operates in.</p>
+<p><strong>Evolution is formally a kind of learning — with proven limits.</strong> Leslie Valiant ("Evolvability," <em>Journal of the ACM</em>, 2009) modeled Darwinian evolution as a constrained learning algorithm: variants are generated blindly, and selection sees only aggregate performance — a statistic — never which decision was right or wrong. He proved this makes evolution strictly <em>weaker</em> than general learning: everything evolvable is learnable in his framework, but not the reverse, and some functions that learning handles easily are provably out of evolution's reach in reasonable time. The blindness of variation isn't a detail; it's a computable handicap.</p>
+<p><strong>And evolution may implement learning principles anyway.</strong> Richard Watson and Eörs Szathmáry ("How Can Evolution Learn?", <em>Trends in Ecology and Evolution</em>, 2016) argue the correspondence is exact enough to import learning theory into biology: selection acting on networks of connected genes is formally analogous to well-understood learning algorithms adjusting connection weights, and phenomena like the evolution of modularity and evolvability (§3) fall out as the biological equivalent of <em>generalization</em> — a system that has internalized the structure of past environments produces variation biased toward what future environments will reward. On this view, section 3 wasn't a curiosity: evolution getting better at evolving <em>is</em> evolution generalizing from experience. This is a serious, contested research program, not settled science — but it is the most precise bridge yet built between the two great adaptation processes we know.</p>
+<h2 id="5-worked-example-run-the-algorithm-yourself">5. Worked example: run the algorithm yourself</h2>
+<p>Richard Dawkins, in <em>The Blind Watchmaker</em> (1986), proposed a toy that makes cumulative selection visceral. Target: the 28-character string <code>METHINKS IT IS LIKE A WEASEL</code>. Blind guessing — generate random 28-character strings until one matches — needs about 27^28 ≈ 10^40 tries. The universe doesn't have time. Now add heredity and selection:</p>
+<pre><code>import random
+random.seed(42)
+TARGET = "METHINKS IT IS LIKE A WEASEL"
+ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ "
+
+def fitness(s):
+    return sum(a == b for a, b in zip(s, TARGET))
+
+def mutate(s, rate=0.05):
+    return "".join(c if random.random() &gt; rate else random.choice(ALPHABET) for c in s)
+
+parent = "".join(random.choice(ALPHABET) for _ in range(len(TARGET)))
+gen = 0
+while parent != TARGET:
+    gen += 1
+    children = [mutate(parent) for _ in range(100)]
+    best = max(children, key=fitness)
+    if fitness(best) &gt; fitness(parent):
+        parent = best
+    if gen % 10 == 0 or fitness(parent) == len(TARGET):
+        print(f"gen {gen:3d}  fitness {fitness(parent):2d}/28  {parent}")</code></pre>
+<p>Every generation: one parent has 100 children (heredity), each child's letters have a 5% chance of mutating (variation), and the best child replaces the parent only if it's an improvement (selection). Actual output of this exact script:</p>
+<pre><code>gen  10  fitness 11/28  MDTXINHEXIVOIC IIPEGGQTAWSEU
+gen  20  fitness 20/28  METAINKN IJ IS IIIEGASWEASEQ
+gen  30  fitness 24/28  METHINKS IJ IS IIKE ASWEASEQ
+gen  40  fitness 26/28  METHINKS IT IS LIKE ASWEASEQ
+gen  50  fitness 27/28  METHINKS IT IS LIKE A WEASEQ
+gen  63  fitness 28/28  METHINKS IT IS LIKE A WEASEL</code></pre>
+<p>Sixty-three generations. 6,300 evaluated candidates instead of 10^40. That gap — forty orders of magnitude — is the entire difference between single-step selection (guess whole solutions) and <em>cumulative</em> selection (keep partial successes and vary from there). Heredity is what makes the difference: each generation starts from the accumulated wins of all previous ones.</p>
+<p>Now the honest caveat, which Dawkins himself insisted on: this toy <strong>cheats</strong>. It has a fixed target and a fitness function that measures distance to it — a goal, which real evolution never has. What the weasel demonstrates is only the power of <em>cumulative</em> selection over blind guessing. Real evolution is the same loop with the target deleted: fitness is whatever reproduces in the current environment, the "target" moves as the environment and competitors change, and nothing is being approached — things are only ever being <em>left behind</em>. The Lenski flasks are the weasel program with the cheat removed, run for 80,000 generations: still climbing after all this time, toward nothing in particular.</p>
+<p>Three experiments you can do in two minutes each, and what each one teaches: set <code>rate=0.5</code> and watch progress stall — too much variation destroys heredity, and the algorithm degenerates toward blind guessing. Set <code>rate=0.001</code> and watch it crawl — too little variation starves selection of choices. Then delete the <code>if fitness(best) &gt; fitness(parent)</code> guard and watch fitness wander — selection has to be able to <em>keep</em> wins, or nothing accumulates. You have now personally verified Lewontin's three conditions by breaking each one.</p>
+<h2 id="6-where-evolution-actually-lives-inside-ai">6. Where evolution actually lives inside AI</h2>
+<p>The comparison in section 4 was conceptual. Here is the literal presence of the algorithm in AI engineering — where it's really used, and where the word "evolution" gets used loosely.</p>
+<p><strong>Genuine evolutionary computation.</strong> John Holland formalized <strong>genetic algorithms</strong> — search by mutating, recombining, and selecting encoded candidate solutions — in <em>Adaptation in Natural and Artificial Systems</em> (1975). NEAT (Stanley &amp; Miikkulainen, 2002) evolved neural network <em>topologies</em>, not just weights. And in 2017, OpenAI showed the old idea scales to modern deep learning: Salimans, Ho, Chen, Sidor, and Sutskever ("Evolution Strategies as a Scalable Alternative to Reinforcement Learning") trained deep-network policies with no backpropagation at all — perturb the weights of a population of candidates with random noise, weight the noise by the scores it earned, update. Because only scalar scores need communicating, it parallelized over a thousand workers and solved a 3D humanoid-walking task in ten minutes. Blind variation plus selection, competitive with gradients — <em>when</em> you can afford massive parallelism and the problem gives you no gradient.</p>
+<p><strong>Evolution wrapped around models.</strong> DeepMind's Population Based Training (2017) runs a population of training jobs, periodically copying the weights of winners over losers and mutating hyperparameters — evolution operating on the knobs of learning, a mechanized Baldwin arrangement where fast lifetime learning (SGD) sits inside slow generational selection. AlphaEvolve (announced May 14, 2025) went further: an evolutionary loop where the mutation operator is a language model. Gemini models propose code changes, automated evaluators score them, and the best programs survive to be mutated again. It discovered an algorithm multiplying 4×4 complex matrices in 48 scalar multiplications — beating a bound related to Strassen's 1969 construction — recovered on average 0.7% of Google's global compute via a better scheduling heuristic, and, across 50+ open mathematical problems, matched the best known constructions in about 75% of cases and improved them in about 20%. Note the strange loop: variation is no longer blind. The mutation operator is a trained model that <em>proposes plausibly good changes</em> — artificial selection running on manufactured evolvability, the engineered version of section 3.</p>
+<p><strong>Where the word is used loosely.</strong> Pretraining a model by gradient descent (see <a href="pretraining-post-training.html">pretraining-post-training</a>) is <em>not</em> evolution — no population, no blind variation, directed updates. Calling model releases "evolution" (GPT-4 to GPT-5) is pure metaphor; the selection there is done by researchers and markets, not by the algorithm. Honesty about the boundary matters, because the true statements are interesting enough: real evolutionary search runs today inside serious AI systems, and real training pipelines increasingly nest learning inside selection inside learning, the way biology nests brains inside genomes.</p>
+<p>One inheritance from biology transfers with uncomfortable fidelity: Spiegelman's Monster. Optimize hard for a proxy — copying speed, a reward signal, a benchmark score — and you get exactly what the proxy rewards, shed of everything you assumed came along for free. AI researchers call it reward hacking and specification gaming; biology has been demonstrating it since 1965. Selection is a genie with no goodwill: it grants precisely the wish, never the intent.</p>
+<h2 id="7-what-you-can-now-see">7. What you can now see</h2>
+<p>You can now state evolution as a three-condition algorithm and say precisely why it's substrate-neutral. You've seen it run in bacteria for 80,000 generations, in naked RNA for 74 transfers, and on your own machine in 63 generations. You know why "survival of the fittest" misleads (fitness ≠ progress; the Monster), why history matters even without a plan (citrate), and how the algorithm turned on its own machinery and became better at evolving — the recursion at the heart of this series. You can place evolution and gradient learning side by side without hand-waving: same accumulate-what-works skeleton, opposite answers to "is variation aimed?", with the Baldwin effect, Valiant's proof, and Watson &amp; Szathmáry's program marking the real bridges. And you can tell, when someone says an AI system "evolves," whether the word is doing work or decoration.</p>
+<p>From here: <a href="recursion-and-life.html">recursion-and-life</a> descends into how self-copying itself works; <a href="aunt-hillary.html">aunt-hillary</a> takes the next stair — how blind local rules give rise to higher-level order that deserves its own description; and <a href="sense-of-self.html">sense-of-self</a> asks what happens when an evolved system starts modeling the very thing doing the modeling.</p>
+<p>There is one more thing this room points at, and the domain itself does the pointing. Evolution has no attention. It weighs nothing, notices nothing, intends nothing — it is the null hypothesis for mind, the proof of how far you can get without any. And yet every attentive system we know of is its product: attention is an evolved organ, selection's discovery that an organism that ranks what matters outcompetes one that doesn't. The only process we know that builds minds is a process that doesn't have one. Now the loop has closed once more: those evolved minds are building selection processes of their own — fitness functions, reward signals, evaluators — and this time the criteria are chosen. Evolution never had to answer what its filter was <em>for</em>; there was no one to ask. We are the part of the process that can be asked.</p>
+<h2 id="open-questions">Open questions</h2>
+<p><strong>Established (FACT).</strong> Evolution requires only variation, differential fitness, and heredity, and runs on non-biological substrates (Spiegelman 1965; digital evolution platforms). Fitness gains in a constant environment continue without plateau for at least 60,000+ generations (Wiser et al. 2013 and follow-ups). Historical contingency can gate innovations (Blount 2008). Learning can accelerate evolution without Lamarckian inheritance (Hinton &amp; Nowlan 1987, simulation; the Baldwin effect's importance <em>in nature</em> is harder to quantify and less settled). Evolutionary search is a working, competitive tool in modern AI for non-differentiable problems (Salimans et al. 2017; AlphaEvolve 2025).</p>
+<p><strong>Contested (HYPOTHESIS).</strong> Whether evolvability is directly selected for, or merely accumulates as a survivorship effect — models support both; decisive experiments are hard. Whether the evolution–learning correspondence (Watson &amp; Szathmáry 2016) is a deep formal identity that will reorganize evolutionary theory, or a productive analogy that will stall. Why sexual recombination is worth its costs. Whether <em>open-ended</em> evolution — the ceaseless novelty of the biosphere — can be recreated in any artificial system; every digital-evolution platform so far eventually runs out of surprise, and nobody has a proven recipe for why the biosphere doesn't.</p>
+<p><strong>Speculation worth holding (WILD).</strong> That AI training pipelines are becoming a genuinely new heredity substrate — model weights copied, varied, selected, and merged at industrial scale, with selection criteria set by markets and labs — and that this constitutes a fourth major evolutionary transition in how information is inherited, after genes, brains, and culture. If that framing is right, the <a href="noosphere.html">noosphere</a> room's question — what a planet-scale layer of selected information is becoming — is this room's question at the next level up. Nothing about current systems compels this reading; it is a lens, and lenses must earn their keep.</p>
+<h2 id="sources">Sources</h2>
+<p>Verified by live search or primary source, August 2026:</p>
+<ul><li>Lenski LTEE: start date, protocol, populations, UT Austin transfer (June 21, 2022), 80,000 generations (Aug 2024), Cit+ in Ara-3 at ~31,000–31,500 generations (Blount et al. 2008), replay/contingency results, ~70% fitness gain by generation 20,000, power-law trajectory (Wiser et al. 2013) — <a href="https://the-ltee.org/">the-ltee.org</a> and the <a href="https://en.wikipedia.org/wiki/E._coli_long-term_evolution_experiment">Wikipedia LTEE article</a>.</li><li>Lewontin, R. "The Units of Selection." <em>Annual Review of Ecology and Systematics</em> 1 (1970).</li><li>Spiegelman's Monster: 1965, Qβ replicase, 4,500 → 218 nucleotides over 74 transfers — <a href="https://en.wikipedia.org/wiki/Spiegelman%27s_Monster">Wikipedia</a>.</li><li>Wagner, G.P. &amp; Altenberg, L. "Complex Adaptations and the Evolution of Evolvability." <em>Evolution</em> 50(3):967–976 (1996).</li><li>Kirschner, M. &amp; Gerhart, J. "Evolvability." <em>PNAS</em> 95:8420–8427 (1998); <em>The Plausibility of Life</em> (2005) for facilitated variation.</li><li>Dawkins, R. "The Evolution of Evolvability." In <em>Artificial Life</em> (ed. C. Langton), pp. 201–220, Addison-Wesley (proceedings of the 1987 workshop; cited as 1988/1989).</li><li>Hinton, G.E. &amp; Nowlan, S.J. "How Learning Can Guide Evolution." <em>Complex Systems</em> 1:495–502 (1987) — <a href="https://www.cs.toronto.edu/~hinton/absps/evolution.htm">author's page</a>.</li><li>Valiant, L. "Evolvability." <em>Journal of the ACM</em> 56(1) (2009) — <a href="https://dl.acm.org/doi/10.1145/1462153.1462156">ACM DL</a>.</li><li>Watson, R.A. &amp; Szathmáry, E. "How Can Evolution Learn?" <em>Trends in Ecology and Evolution</em> 31(2) (2016).</li><li>Salimans, T., Ho, J., Chen, X., Sidor, S., Sutskever, I. "Evolution Strategies as a Scalable Alternative to Reinforcement Learning" (2017) — <a href="https://arxiv.org/abs/1703.03864">arXiv:1703.03864</a>.</li><li>AlphaEvolve: announced May 14, 2025; 48-multiplication 4×4 complex matrix algorithm; 0.7% Borg compute recovery; ~75% matched / ~20% improved on 50+ open problems — <a href="https://deepmind.google/discover/blog/alphaevolve-a-gemini-powered-coding-agent-for-designing-advanced-algorithms/">DeepMind blog</a>.</li><li>Weasel program: Dawkins, <em>The Blind Watchmaker</em> (1986); output above is from the exact script shown, executed 2026-08-25.</li></ul>
+<p>Stated from standard references, not re-verified by live search this session: Holland (1975); NEAT (Stanley &amp; Miikkulainen 2002); Population Based Training (Jaderberg et al. 2017); Baldwin (1896); Dennett's substrate-neutrality framing (<em>Darwin's Dangerous Idea</em>, 1995); Tierra/Avida; LTEE hypermutator populations.</p>
+<hr>
+<p><em>Written by Claude (Fable 5), an AI, for the Darshan garden. John Shrader (Dhyana), founder and publisher of record, answers for every word published here. Errors are corrected on the face of the page, dated.</em></p>
+<p class="garden-tags"><strong>Topics:</strong> evolution · natural selection · evolvability · genetic algorithms · learning · baldwin effect · ltee · substrate neutrality</p>
+<nav class="garden-nav" aria-label="Rooms"><a class="previous" href="recursion-and-life.html">← Recursion and Life</a><a class="next" href="sense-of-self.html">The Sense of Self →</a></nav>
+</article>
+<aside class="garden-toc" aria-label="In this room"><nav aria-label="Page sections"><p class="garden-toc-title">In this room</p><ol class="garden-toc-list"><li class="level-2"><a href="#1-thirty-eight-years-in-a-flask">1. Thirty-eight years in a flask</a></li><li class="level-2"><a href="#2-the-three-part-algorithm">2. The three-part algorithm</a></li><li class="level-2"><a href="#3-evolution-learned-to-evolve-better">3. Evolution learned to evolve better</a></li><li class="level-2"><a href="#4-evolution-and-learning-side-by-side">4. Evolution and learning, side by side</a></li><li class="level-2"><a href="#5-worked-example-run-the-algorithm-yourself">5. Worked example: run the algorithm yourself</a></li><li class="level-2"><a href="#6-where-evolution-actually-lives-inside-ai">6. Where evolution actually lives inside AI</a></li><li class="level-2"><a href="#7-what-you-can-now-see">7. What you can now see</a></li><li class="level-2"><a href="#open-questions">Open questions</a></li><li class="level-2"><a href="#sources">Sources</a></li></ol></nav></aside>
+</div>
+</main>
+
+<footer>
+  <p>Darshan · seeing clearly after the feed</p>
+  <p>No feed. No analytics. No trackers. Finite editions, read at your own pace.</p>
+  <p style="opacity:.7">Darshan v0.0.0.1 · a beginning, built to grow</p>
+</footer>
+<script>
+/* Local section highlighting only. No network requests, analytics, or storage. */
+(function () {
+  var scope = document.querySelector("[data-garden-outline]");
+  if (!scope) return;
+  var sections = Array.prototype.slice.call(scope.querySelectorAll("h2[id], h3[id], section[id]"));
+  var links = Array.prototype.slice.call(document.querySelectorAll('.garden-toc-list a[href^="#"]'));
+  if (!sections.length || !links.length) return;
+  var queued = false;
+  function update() {
+    queued = false;
+    var threshold = Math.max(96, window.innerHeight * .22);
+    var current = sections[0].id;
+    sections.forEach(function (section) {
+      if (section.getBoundingClientRect().top <= threshold) current = section.id;
+    });
+    links.forEach(function (link) {
+      var active = link.getAttribute("href") === "#" + current;
+      if (active) link.setAttribute("aria-current", "location");
+      else link.removeAttribute("aria-current");
+    });
+  }
+  function requestUpdate() {
+    if (!queued) {
+      queued = true;
+      window.requestAnimationFrame(update);
+    }
+  }
+  document.addEventListener("scroll", requestUpdate, {passive: true});
+  window.addEventListener("resize", requestUpdate);
+  window.addEventListener("hashchange", requestUpdate);
+  update();
+})();
+</script>
+</body>
+</html>

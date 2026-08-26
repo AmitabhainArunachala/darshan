@@ -1,0 +1,349 @@
+{
+  "schema": "darshan.visual-series/v1",
+  "series": "power",
+  "art": {
+    "src": "assets/series/power.png",
+    "alt": "Etched wafer, map contours, network, and civic architecture",
+    "png_sha256": "d394d37ed2b3a5951f14793b5ef3df63481d809034a86b1b909d4a8ad8bc051a",
+    "webp_sha256": "06212bde1e61b2e7d21e7f34792dda85b3911bd29f54456053ca854fe7592b35",
+    "prompt": "Use case: stylized-concept\nAsset type: wide 16:9 editorial series plate for a long-form knowledge garden\nPrimary request: Create a sober visual tension among semiconductor fabrication, geopolitical terrain, computational networks, and institutional power: a partially seen etched silicon wafer transitions into map-like contour lines and a precise network board, while austere civic architecture rises as a layered structural silhouette—not triumphant, not dystopian.\nScene/backdrop: cream handmade paper field; wafer and microscopic circuitry across the lower-left, topographic and maritime contours crossing the center, restrained network nodes and colonnaded institutional architecture on the right.\nStyle/medium: tactile printmaking, woodcut and copperplate engraving, with translucent technical drafting layers; sophisticated investigative editorial illustration.\nComposition/framing: cinematic 16:9 horizontal plate, dense but legible layered depth, strong diagonal circulation, enough breathing room for website banner use; the systems interlock rather than becoming a collage of icons.\nLighting/mood: serious, analytic, watchful, morally unsettled; no melodrama.\nColor palette: warm cream paper, charcoal-black linework, oxide red used sparingly as tension, one restrained mineral-blue accent.\nMaterials/textures: subtle paper grain, etched copper lines, wafer iridescence translated into muted ink, translucent vellum overlays.\nConstraints: no flags, national emblems, politicians, company marks, recognizable logos, text, letters, numbers, signature, border, or watermark.\nAvoid: generic sci-fi command center, neon cyberpunk, glowing AI brain, military propaganda, literal chess pieces, stock-photo collage, photorealism."
+  },
+  "rooms": {
+    "governments-and-ai": {
+      "visuals": [
+        {
+          "after": "3-dual-use-stated-plainly",
+          "kind": "layers",
+          "kicker": "The old playbook",
+          "title": "Where a state can hold a dual-use system",
+          "caption": "AI policy follows a familiar sequence because the same capability can serve civilian or military tasks while frontier compute still depends on scarce physical inputs.",
+          "items": [
+            {"label": "One capability", "detail": "Protein, code, and vision models do not change identity when their tasking changes."},
+            {"label": "Control inputs", "detail": "States target advanced chips and manufacturing equipment because they remain physical and countable."},
+            {"label": "License exports", "detail": "Rules decide which products, destinations, users, and end uses require permission."},
+            {"label": "Watch users", "detail": "Procurement rules connect nominal capability to operational use, so states watch buyers as well as products."},
+            {"label": "Crypto Wars lesson", "detail": "Software escaped earlier controls, so current policy concentrates on hardware chokepoints."}
+          ]
+        },
+        {
+          "after": "6-worked-example-follow-one-chip-through-the-machine",
+          "kind": "timeline",
+          "kicker": "A chip becomes policy",
+          "title": "Nvidia's China line through six policy turns",
+          "caption": "One accelerator line moved from cutoff to workaround to ban to toll to blocked purchase while the policy boundary kept changing.",
+          "items": [
+            {"label": "Frontier cutoff", "detail": "US controls put Nvidia's H100 beyond the China threshold.", "meta": "Oct 2022"},
+            {"label": "Designed down", "detail": "Tightened rules catch A800 and H800, and Nvidia creates the H20 for the new line.", "meta": "2023"},
+            {"label": "Global tier plan", "detail": "The AI Diffusion Framework is published and then rescinded before enforcement.", "meta": "Jan–May 2025"},
+            {"label": "Line moves again", "detail": "H20 sales require licenses and Nvidia records a multibillion-dollar charge.", "meta": "Apr–May 2025"},
+            {"label": "Ban becomes toll", "detail": "Licenses return under an arrangement taking 15 percent of covered China revenue.", "meta": "Aug 2025"},
+            {"label": "Other end closes", "detail": "Beijing directs major firms to stop buying the chip anyway.", "meta": "Sep 2025"}
+          ]
+        },
+        {
+          "after": "5-the-2026-regulatory-reality-three-regimes-three-fears",
+          "kind": "contrast",
+          "kicker": "Rules reveal the holder",
+          "title": "Three regimes protect three different objects",
+          "as_of": "2026",
+          "caption": "Each government regulates AI where it touches an authority the state already treats as its own: strategic lead, citizen safety, or public discourse.",
+          "items": [
+            {"label": "United States", "detail": "Export controls guard the technological lead while federal and state actors contest domestic authority without a comprehensive federal AI law.", "meta": "fear: losing the race"},
+            {"label": "European Union", "detail": "The AI Act treats systems as product and rights risks, with high-risk duties phased into 2027 and 2028 under the 2026 amendment.", "meta": "fear: harm to citizens"},
+            {"label": "China", "detail": "Pre-release testing, training-data review, output labels, and content rules extend the state's existing control over publishing.", "meta": "fear: destabilizing content"},
+            {"label": "Shared pattern", "detail": "None governs AI in the abstract; each extends an older hold over trade, products, or speech into a new technical material.", "meta": "cross-regime inference"}
+          ]
+        }
+      ]
+    },
+    "palantir": {
+      "visuals": [
+        {
+          "after": "4-the-ontology-the-real-product",
+          "kind": "layers",
+          "kicker": "From rows to actions",
+          "title": "How an institution's world becomes operable",
+          "caption": "Palantir's ontology maps raw records into named things, relations, and permitted interventions that downstream tools can query and change.",
+          "items": [
+            {"label": "Object type", "detail": "A table becomes a class of things such as Aircraft, Patient, Shipment, or Person."},
+            {"label": "Object", "detail": "A row becomes one identified instance, such as a particular aircraft."},
+            {"label": "Property", "detail": "Columns become facts attached to the object, such as fuel level or diagnosis date."},
+            {"label": "Link type", "detail": "Joins become typed relations such as installed on, employed by, or resides at."},
+            {"label": "Action type", "detail": "The kinetic layer defines which changes the institution can make to those objects."}
+          ]
+        },
+        {
+          "after": "8-worked-example-follow-one-row",
+          "kind": "sequence",
+          "kicker": "Friction becomes capability",
+          "title": "One row through an institutional decision system",
+          "caption": "The same integration engine can coordinate care or enable enforcement because the ontology and action layer, not the pipeline shape, determine the outcome.",
+          "items": [
+            {"label": "Source row", "detail": "A DMV record begins as a name, address, plate, and photo answering one local question."},
+            {"label": "Integrate", "detail": "Data-sharing brings that row beside visa, tax, plate-reader, and tip-line records."},
+            {"label": "Map", "detail": "The row becomes a Person object with properties and links to vehicles, addresses, and reports."},
+            {"label": "Query", "detail": "An analyst or model can ask a cross-source question no original database could answer."},
+            {"label": "Act", "detail": "A kinetic action opens a case, assigns a team, reroutes a shipment, or coordinates a discharge."}
+          ]
+        },
+        {
+          "after": "7-the-surveillance-question-at-honest-weight",
+          "kind": "layers",
+          "kicker": "Friction was a safeguard",
+          "title": "What changes when practical obscurity disappears",
+          "caption": "Palantir can add formal controls while removing the accidental separation that once kept institutions from remembering and acting across every record at once.",
+          "items": [
+            {"label": "Scattered records", "detail": "Tax, medical, address, and border files once remained partly separate because cross-system integration was difficult.", "meta": "practical obscurity"},
+            {"label": "Interoperable world", "detail": "The ontology turns distributed records into linked objects that can answer questions no source database could answer alone.", "meta": "standing capability"},
+            {"label": "Formal safeguards", "detail": "Granular access controls, audit logs, and purpose restrictions can be stronger than those in legacy government systems.", "meta": "real but contingent"},
+            {"label": "Political hinge", "detail": "Once integration exists, protection depends on law and policy that can change with an election, order, or contract modification.", "meta": "governance risk"},
+            {"label": "Platform reuse", "detail": "A case-management relationship begun in 2014 could support ImmigrationOS through a 2025 modification without rebuilding the whole substrate.", "meta": "documented example"},
+            {"label": "Honest claim", "detail": "Public evidence shows a vendor enabling customers who surveil, not Palantir independently spying on citizens itself.", "meta": "evidence boundary"}
+          ]
+        }
+      ]
+    },
+    "china-usa-race": {
+      "visuals": [
+        {
+          "after": "2-compute-the-moat-that-holds",
+          "kind": "constellation",
+          "kicker": "The moat is a chain",
+          "title": "Advanced compute depends on an allied stack",
+          "as_of": "mid-2026",
+          "caption": "The present US lead is assembled across design, fabrication, lithography, memory, and export policy rather than residing in one company or one machine.",
+          "items": [
+            {"label": "Nvidia", "detail": "US-designed accelerators define the leading training and inference platform."},
+            {"label": "TSMC", "detail": "Taiwanese foundries manufacture the most advanced designs at commercial scale."},
+            {"label": "ASML", "detail": "Dutch EUV lithography remains the key tool China cannot buy for leading nodes."},
+            {"label": "HBM suppliers", "detail": "Korean and US high-bandwidth memory forms a separate and severe bottleneck."},
+            {"label": "Export policy", "detail": "Licensing keeps the components together as a moat, making the advantage policy-dependent."},
+            {"label": "Chinese adaptation", "detail": "Smuggling, older-node workarounds, efficiency, and Ascend development impose costs while building a rival ecosystem."}
+          ]
+        },
+        {
+          "after": "7-the-axes-side-by-side",
+          "kind": "contrast",
+          "kicker": "Score the axes",
+          "title": "Six races, not one",
+          "as_of": "mid-2026",
+          "caption": "A single winner disappears when frontier capability, industrial inputs, cost, diffusion, and human capacity are scored separately.",
+          "items": [
+            {"label": "Frontier models", "detail": "The United States leads by months, while top Chinese systems remain close enough to trade places near the frontier."},
+            {"label": "Compute and capital", "detail": "The US and its allies hold the decisive chip and hyperscaler-spending advantage."},
+            {"label": "Energy", "detail": "China has far greater and faster-growing generation, while US interconnection queues constrain new data centers."},
+            {"label": "Price and openness", "detail": "Chinese labs use cheap open-weight releases as a global distribution wedge against premium US APIs."},
+            {"label": "Talent", "detail": "The US retains the largest elite concentration, but return migration is strengthening Chinese labs."},
+            {"label": "Deployment", "detail": "China's industrial adoption is reported at roughly twice the comparable US rate."}
+          ]
+        },
+        {
+          "after": "3-money-and-energy-two-bottlenecks-mirrored",
+          "kind": "layers",
+          "kicker": "The bottleneck flips",
+          "title": "Capital favors America; electrons favor China",
+          "as_of": "mid-2026",
+          "caption": "The race is constrained by two different ceilings, and no honest forecast yet knows whether China's chips or America's power will bind first in the 2030s.",
+          "items": [
+            {"label": "US capital depth", "detail": "American private investment and hyperscaler spending exceed China's by an order of magnitude or more.", "meta": "structural US lead"},
+            {"label": "US electron queue", "detail": "A flat grid and multi-year interconnection delays now hold back planned data-center capacity.", "meta": "binding constraint"},
+            {"label": "China's generation", "detail": "China produces more than twice as much electricity and has expanded supply rapidly, much of it from wind, solar, and hydro.", "meta": "structural Chinese lead"},
+            {"label": "China's chip ceiling", "detail": "Export controls and a less mature domestic accelerator stack make advanced compute the mirrored constraint.", "meta": "binding constraint"},
+            {"label": "Crossing point", "detail": "The US still has the larger data-center footprint; which ceiling dominates the next decade remains unknown.", "meta": "open forecast"}
+          ]
+        }
+      ]
+    },
+    "taiwan": {
+      "visuals": [
+        {
+          "after": "3-why-one-company-changed-the-stakes",
+          "kind": "contrast",
+          "kicker": "Shield and dependency",
+          "title": "Why semiconductor centrality deters and endangers",
+          "caption": "TSMC's concentration raises the cost of conflict for every side without functioning as a treaty, force field, or guarantee of rational restraint.",
+          "items": [
+            {"label": "Mutual loss", "detail": "Disrupted production would immediately damage China, the United States, allies, and global customers."},
+            {"label": "Embedded capability", "detail": "Leading fabrication depends on people, process knowledge, suppliers, and international service access, not movable machines alone."},
+            {"label": "Stakeholder pressure", "detail": "Customers, supplier states, and financial markets all have reasons to preserve continuity."},
+            {"label": "Sovereignty outranks cost", "detail": "Political leaders may value legitimacy and territorial claims above economic damage."},
+            {"label": "Concentration cuts both ways", "detail": "The same centrality that deters coercion can make control of the island appear more valuable."},
+            {"label": "Production is fragile", "detail": "Shipping, energy, water, chemicals, parts, or staff movement can stop fabs without their destruction."}
+          ]
+        },
+        {
+          "after": "5-four-futures-people-confuse-with-one-another",
+          "kind": "layers",
+          "kicker": "Name the rung",
+          "title": "Four coercive futures are not one event",
+          "caption": "Clear classification depends on who leads, whether commerce still moves, how long denial persists, and whether forces enter and hold territory.",
+          "items": [
+            {"label": "Gray-zone pressure", "detail": "Patrols, cyber operations, economic restrictions, and information pressure remain episodic and below open war."},
+            {"label": "Quarantine", "detail": "Coast guard or customs authorities selectively demand inspections or permits under military backing."},
+            {"label": "Blockade", "detail": "Military force sustains denial of shipping or aviation until commercial access becomes unsafe or impossible."},
+            {"label": "Invasion", "detail": "Forces must cross, enter, hold, supply, and govern contested territory."}
+          ]
+        },
+        {
+          "after": "4-the-current-posture-dated",
+          "kind": "sequence",
+          "kicker": "Routine can hide a turn",
+          "title": "How gray-zone pressure compresses warning time",
+          "as_of": "2026-08-25",
+          "caption": "Repeated activity below open war can normalize proximity, disguise escalation, and force decisions before institutions know whether an exercise has become an operation.",
+          "items": [
+            {"label": "Sustain pressure", "detail": "Aircraft, ships, cyber operations, economic restrictions, legal claims, and information campaigns remain continuously present."},
+            {"label": "Normalize proximity", "detail": "Frequent patrols and exercises make extraordinary military presence begin to look routine."},
+            {"label": "Blur the surge", "detail": "A real mobilization becomes harder to distinguish from the recurring pattern that preceded it."},
+            {"label": "Shorten the decision", "detail": "Taipei and partners receive less time to verify intent, communicate, and choose a proportionate response."},
+            {"label": "Build coherence", "detail": "Taiwan's answer therefore includes civil defense, communications, energy, and public decision-making as well as weapons."}
+          ]
+        }
+      ]
+    },
+    "elon-musk": {
+      "visuals": [
+        {
+          "after": "7-a-worked-example-put-any-musk-claim-on-the-deployment-ladder",
+          "kind": "layers",
+          "kicker": "Recover the missing distance",
+          "title": "The five-rung deployment ladder",
+          "caption": "A compressed future becomes auditable when every capability is placed at the level of evidence it has actually reached.",
+          "items": [
+            {"label": "Deployed at scale", "detail": "Ordinary customers rely on the system in its intended environment."},
+            {"label": "Limited deployment", "detail": "Real users rely on it only under constrained locations, conditions, or numbers."},
+            {"label": "Prototype or trial", "detail": "Demonstrations or formal experiments work without showing broad reliability."},
+            {"label": "Funded program", "detail": "Money, staff, hardware, contracts, and milestones exist before the claimed capability does."},
+            {"label": "Stated aspiration", "detail": "The destination is public while the engineering path remains incomplete or speculative."}
+          ]
+        },
+        {
+          "after": "8-flywheel-or-empire",
+          "kind": "contrast",
+          "kicker": "Integration has two readings",
+          "title": "Flywheel speed versus empire risk",
+          "caption": "Shared control can reduce coordination costs across a technical stack while also concentrating correlated failure and weakening users' exit options.",
+          "items": [
+            {"label": "Power and storage", "detail": "Tesla batteries can support transport, grids, factories, and compute infrastructure."},
+            {"label": "Models and media", "detail": "xAI supplies models while X supplies distribution and a live, adversarial information stream."},
+            {"label": "Connectivity and launch", "detail": "Starlink and SpaceX join communications infrastructure to reusable orbital transport."},
+            {"label": "Human interface", "detail": "Neuralink begins with clinical restoration while proposing a much broader future channel."},
+            {"label": "Flywheel reading", "detail": "Capital, data, hardware, and engineering can cross boundaries with less negotiation."},
+            {"label": "Empire reading", "detail": "One leadership center can propagate a bad assumption across several indispensable layers at once."}
+          ]
+        },
+        {
+          "after": "2-the-verified-state-august-2026",
+          "kind": "constellation",
+          "kicker": "Read the portfolio by rung",
+          "title": "Four systems, four different distances from the promise",
+          "as_of": "August 2026",
+          "caption": "The portfolio is substantial when deployed proof, constrained experiments, and stated destinations remain visible at the same time.",
+          "items": [
+            {"label": "Tesla", "detail": "Vehicles, charging, and grid storage operate at scale; supervised FSD, limited Robotaxi, and Optimus sit on lower evidence rungs.", "meta": "deployed + limited + development"},
+            {"label": "SpaceX and Starlink", "detail": "Reusable launch and a global satellite network are deployed; Starship, lunar transport, and Mars settlement remain programs or destinations.", "meta": "deployed + test program + aspiration"},
+            {"label": "xAI and X", "detail": "Grok reaches users through products and X while the broader vertically integrated intelligence stack remains partly a future claim.", "meta": "deployed + expanding"},
+            {"label": "Neuralink", "detail": "Participants use implants in small early-feasibility studies; broad restoration and enhancement require years of clinical evidence.", "meta": "early clinical research"},
+            {"label": "Reading rule", "detail": "A working lower layer does not make every capability above it continuous, but a distant promise does not erase deployed proof.", "meta": "keep both"}
+          ]
+        }
+      ]
+    },
+    "blockchain": {
+      "visuals": [
+        {
+          "after": "2-the-machine-piece-by-piece",
+          "kind": "layers",
+          "kicker": "Trust relocates",
+          "title": "Six parts that make a public ledger cohere",
+          "caption": "A blockchain moves authority into signatures, shared validation, linked history, consensus, and incentives without making the surrounding world trustworthy.",
+          "items": [
+            {"label": "Transaction", "detail": "A user proposes a state change such as transfer, vote, token issue, or contract call."},
+            {"label": "Signature", "detail": "A signature proves control of a private key without proving identity, judgment, or informed consent."},
+            {"label": "Validation", "detail": "Every full node can independently check the protocol's rules."},
+            {"label": "Blocks and hashes", "detail": "Cryptographic references make changes to accepted history evident."},
+            {"label": "Consensus", "detail": "A rule selects proposers and determines which competing valid history wins."},
+            {"label": "Incentives", "detail": "Rewards and attack costs make extending the accepted history preferable to rewriting it."}
+          ]
+        },
+        {
+          "after": "9-a-worked-example-an-agent-buys-one-weather-report",
+          "kind": "sequence",
+          "kicker": "Payment is not truth",
+          "title": "An agent purchases one forecast under authority",
+          "caption": "The chain can prove authorization and settlement while leaving forecast quality, recovery, privacy, and liability to the larger system.",
+          "items": [
+            {"label": "Request", "detail": "The agent asks a high-resolution weather API for a report."},
+            {"label": "Price", "detail": "The server returns HTTP 402 with a two-cent stablecoin payment instruction.", "meta": "$0.02"},
+            {"label": "Mandate", "detail": "The agent checks the user's allowed vendor class, per-call ceiling, and daily budget."},
+            {"label": "Settle", "detail": "The wallet signs and a facilitator or server verifies the token transfer."},
+            {"label": "Deliver", "detail": "The agent retries with proof of payment and receives the forecast."},
+            {"label": "Audit", "detail": "A log records mandate, amount, recipient, transaction, and returned data, but not whether rain will fall."}
+          ]
+        },
+        {
+          "after": "10-should-this-use-a-blockchain",
+          "kind": "constellation",
+          "kicker": "Make decentralization earn itself",
+          "title": "Six questions before you add a chain",
+          "caption": "A blockchain is justified by a concrete authority problem, not by a general desire for shared records or technical novelty.",
+          "items": [
+            {"label": "Who writes?", "detail": "Do multiple writers truly need to coordinate without trusting one administrator?"},
+            {"label": "What must not move?", "detail": "Does preventing unilateral revision matter more than the speed, privacy, and cost you will give up?"},
+            {"label": "What limits identities?", "detail": "Name the scarce resource that prevents one actor from becoming many fake participants."},
+            {"label": "Where does truth enter?", "detail": "Identify each off-chain fact, its oracle, authority, failure mode, and appeal path."},
+            {"label": "Who can repair it?", "detail": "List upgrade keys, governance powers, and the recovery path for stolen keys or faulty programs."},
+            {"label": "Would less machinery work?", "detail": "If signatures and a conventional database satisfy the requirement, use the smaller system."}
+          ]
+        }
+      ]
+    },
+    "attention-economy": {
+      "visuals": [
+        {
+          "after": "3-follow-the-money-using-the-filings",
+          "kind": "contrast",
+          "kicker": "Objectives follow the payer",
+          "title": "Five ways to fund an information surface",
+          "caption": "Every business model creates a different first objective and a different route by which attention can be captured or governed.",
+          "items": [
+            {"label": "Search ads", "detail": "Advertisers pay to match an expressed query at a moment of visible intent."},
+            {"label": "Social-feed ads", "detail": "Advertisers pay for predicted relevance and discovery without a prior query."},
+            {"label": "Subscription", "detail": "The user pays, aligning customer and payer while creating retention and lock-in pressure."},
+            {"label": "Contextual ads", "detail": "Messages match the current page or topic with less dependence on behavioral profiling."},
+            {"label": "Public or cooperative", "detail": "Taxpayers, donors, or members fund a stated purpose that remains vulnerable to political or insider capture."}
+          ]
+        },
+        {
+          "after": "5-worked-example-trace-one-swipe",
+          "kind": "sequence",
+          "kicker": "One swipe, two loops",
+          "title": "How a feed turns prediction into inventory",
+          "caption": "A recommender ranks content to sustain a useful session while an advertising system prices selected opportunities inside that session.",
+          "items": [
+            {"label": "Candidate pool", "detail": "Eligible posts and videos survive policy, availability, and product checks."},
+            {"label": "Predictions", "detail": "Models estimate watch, share, rejection, satisfaction, and other measurable responses."},
+            {"label": "Weighted score", "detail": "Human-chosen objectives convert predictions, penalties, and diversity bonuses into one ranking value."},
+            {"label": "Ordered feed", "detail": "The highest-scoring available object becomes the next thing presented to attention."},
+            {"label": "Behavior update", "detail": "Watching, sharing, hiding, or leaving becomes evidence for later predictions even when motive is ambiguous."},
+            {"label": "Ad opportunity", "detail": "An auction prices a selected moment using bid, predicted outcome, context, quality, and policy constraints."}
+          ]
+        },
+        {
+          "after": "6-what-the-evidence-says-about-harm",
+          "kind": "layers",
+          "kicker": "Narrow the causal claim",
+          "title": "What four kinds of evidence can actually carry",
+          "caption": "The evidence supports specific design and use effects, not one population-wide verdict on social media as a single substance.",
+          "items": [
+            {"label": "Association", "detail": "Among children and adolescents, more than three hours a day was associated with roughly twice the risk of depression and anxiety symptoms; causality remained unresolved.", "meta": "US Surgeon General · 2023"},
+            {"label": "Population review", "detail": "The National Academies found credible paths to harm and benefit but insufficient evidence for one population-level causal conclusion.", "meta": "2024"},
+            {"label": "Platform deactivation", "detail": "A four-week Facebook experiment increased offline activity and well-being while reducing both polarization and factual news knowledge.", "meta": "randomized · 2018 election"},
+            {"label": "Notification rhythm", "detail": "Three daily batches improved several self-reported outcomes, while turning notifications off entirely increased anxiety and fear of missing out.", "meta": "field experiment · 2019"},
+            {"label": "Honest synthesis", "detail": "Effects vary with design, content, age, vulnerability, social setting, and the value displaced by the intervention.", "meta": "specific, not universal"}
+          ]
+        }
+      ]
+    }
+  }
+}

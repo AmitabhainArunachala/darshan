@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>"Mahāvideha Kṣetra: The Place Where the Teaching Is Still Happening" · Darshan Garden</title>
+<meta name="description" content="Mahāvideha Kṣetra is a central region in the Jain map of the cosmos where the conditions for liberation are said to remain continuously available. This room reconstructs that map from Jain texts, separates doctrine from empirical astronomy, and asks why practitioners orient toward a place they cannot ordinarily reach.">
+<link rel="stylesheet" href="../style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ccircle cx='8' cy='8' r='6' fill='none' stroke='%238f3b26' stroke-width='1.5'/%3E%3Ccircle cx='8' cy='8' r='2' fill='%238f3b26'/%3E%3C/svg%3E">
+<script>
+/* Theme memory. No analytics, no trackers. */
+(function () {
+  try {
+    var t = localStorage.getItem("darshan-theme");
+    if (t) document.documentElement.setAttribute("data-theme", t);
+  } catch (e) {}
+})();
+</script>
+<style>
+/* Garden-only layout. Kept here so the publication stylesheet remains shared. */
+body.garden-page-body {
+  max-width: none;
+  padding: 1.5rem clamp(1.25rem, 3.5vw, 4rem) 4rem;
+  font-size: 1.125rem;
+}
+body.garden-page-body > main,
+body.garden-page-body > .masthead,
+body.garden-page-body > footer {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 94rem;
+}
+.garden-layout,
+.garden-index-layout {
+  align-items: start;
+  display: grid;
+  gap: clamp(2.75rem, 5vw, 5rem);
+  grid-template-columns: minmax(0, 64rem) minmax(17rem, 20rem);
+  justify-content: center;
+}
+.garden-layout article,
+.garden-index-main { min-width: 0; }
+.garden-layout .article-title,
+.garden-intro .article-title {
+  font-size: clamp(2.65rem, 3.55vw, 4rem);
+  letter-spacing: -.025em;
+  line-height: 1.06;
+  max-width: 24ch;
+}
+.garden-layout article h2 {
+  font-size: 1.48rem;
+  line-height: 1.3;
+  margin-top: 3.2rem;
+  scroll-margin-top: 1.5rem;
+}
+.garden-layout article h3 {
+  font-size: 1.16rem;
+  margin-top: 2.35rem;
+  scroll-margin-top: 1.5rem;
+}
+.garden-intro { margin-bottom: 2.4rem; }
+.garden-series { margin: 2.8rem 0; scroll-margin-top: 1rem; }
+.garden-series h2 { border-bottom: 1px solid var(--rule); padding-bottom: .45rem; }
+.garden-room-list { list-style: none; margin: 0; padding: 0; }
+.garden-room-list li { border-bottom: 1px solid var(--rule); margin: 0; padding: 1rem 0; }
+.garden-room-title { font-weight: 600; }
+.garden-room-summary { color: var(--faint); font-size: .96rem; margin: .25rem 0 0; }
+.garden-series-link { color: var(--faint); font-size: .82rem; letter-spacing: .12em;
+  text-transform: uppercase; }
+.garden-lede {
+  border-left: 3px solid var(--accent);
+  color: var(--faint);
+  font-size: 1.24rem;
+  font-style: italic;
+  line-height: 1.62;
+  margin: 1.5rem 0 2.2rem;
+  padding: .35rem 0 .35rem 1.35rem;
+}
+.garden-corridors {
+  margin: 1.15rem 0 2.65rem;
+}
+.garden-corridor-list {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: .55rem .62rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.garden-corridor-list li { display: flex; margin: 0; max-width: 100%; }
+.garden-corridor {
+  align-items: center;
+  background: var(--accent-soft);
+  border: 1px solid var(--accent);
+  border-radius: 3px;
+  color: var(--accent);
+  display: inline-flex;
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .73rem;
+  font-weight: 700;
+  letter-spacing: .075em;
+  line-height: 1.35;
+  max-width: 100%;
+  min-height: 2.05rem;
+  overflow-wrap: anywhere;
+  padding: .34rem .72rem .3rem;
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-transform: uppercase;
+  text-underline-offset: .22em;
+}
+.garden-corridor:visited { color: var(--accent); }
+.garden-corridor:hover,
+.garden-corridor:focus-visible {
+  background: var(--accent);
+  color: var(--paper);
+}
+.garden-corridor:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+.garden-series-plate {
+  --plate-accent: var(--accent);
+  border: 1px solid var(--rule);
+  border-top: 3px solid var(--plate-accent);
+  margin: .25rem 0 2.8rem;
+  overflow: hidden;
+  position: relative;
+}
+.garden-series-plate--foundations { --plate-accent: #496f76; }
+.garden-series-plate--story-of-ai { --plate-accent: #526d9a; }
+.garden-series-plate--instrument { --plate-accent: #745779; }
+.garden-series-plate--strange-loops { --plate-accent: #866448; }
+.garden-series-plate--bridge { --plate-accent: #697044; }
+.garden-series-plate--power { --plate-accent: #8f3b26; }
+.garden-series-plate--time-future { --plate-accent: #416778; }
+[data-theme="dark"] .garden-series-plate { --plate-accent: var(--accent); }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .garden-series-plate { --plate-accent: var(--accent); }
+}
+.garden-series-plate-media {
+  aspect-ratio: 16 / 9;
+  background: var(--accent-soft);
+  overflow: hidden;
+  position: relative;
+}
+.garden-series-plate-media::after {
+  background:
+    linear-gradient(90deg, var(--paper) 0, transparent 24%, transparent 76%, var(--paper) 100%),
+    linear-gradient(0deg, var(--paper) 0, transparent 32%);
+  content: "";
+  inset: 0;
+  opacity: .24;
+  pointer-events: none;
+  position: absolute;
+}
+.garden-series-plate picture,
+.garden-series-card picture { display: block; height: 100%; }
+.garden-series-plate img {
+  display: block;
+  filter: saturate(.82) contrast(1.03);
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+.garden-series-plate figcaption {
+  align-items: baseline;
+  background: var(--paper);
+  border-top: 1px solid var(--rule);
+  display: grid;
+  gap: .25rem 1rem;
+  grid-template-columns: auto 1fr;
+  padding: .78rem 1rem .85rem;
+}
+.garden-series-plate-kicker {
+  color: var(--plate-accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+.garden-series-plate figcaption strong { font-size: 1rem; font-weight: 600; }
+.garden-series-plate-terms {
+  color: var(--faint);
+  font-size: .82rem;
+  grid-column: 2;
+  margin: 0;
+}
+.garden-visual {
+  background:
+    radial-gradient(circle at 92% 8%, var(--accent-soft), transparent 30%),
+    linear-gradient(135deg, transparent 0 72%, var(--accent-soft) 72% 72.4%, transparent 72.4%);
+  border: 1px solid var(--rule);
+  border-top: 3px solid var(--accent);
+  margin: 1.25rem 0 2.5rem;
+  overflow: hidden;
+  padding: clamp(1.1rem, 2.7vw, 1.75rem);
+  position: relative;
+}
+.garden-visual::before {
+  background-image:
+    linear-gradient(var(--rule) 1px, transparent 1px),
+    linear-gradient(90deg, var(--rule) 1px, transparent 1px);
+  background-size: 2.25rem 2.25rem;
+  content: "";
+  inset: 0;
+  opacity: .13;
+  pointer-events: none;
+  position: absolute;
+}
+.garden-visual > * { position: relative; }
+.garden-visual-head {
+  align-items: baseline;
+  display: grid;
+  gap: .45rem 1rem;
+  grid-template-columns: auto 1fr;
+  margin-bottom: 1.2rem;
+}
+.garden-visual-kicker {
+  color: var(--accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .68rem;
+  font-weight: 700;
+  letter-spacing: .17em;
+  margin: 0;
+  text-transform: uppercase;
+}
+.garden-visual-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  line-height: 1.28;
+  margin: 0;
+}
+.garden-visual-as-of {
+  color: var(--faint);
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: .72rem;
+  letter-spacing: .08em;
+  margin: 0;
+  text-transform: uppercase;
+  white-space: normal;
+}
+.garden-visual-items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.garden-visual-item {
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  margin: 0;
+  min-width: 0;
+  padding: .8rem .9rem;
+}
+.garden-visual-item-label {
+  display: block;
+  font-size: .96rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+.garden-visual-item-detail {
+  color: var(--faint);
+  display: block;
+  font-size: .9rem;
+  line-height: 1.45;
+  margin-top: .27rem;
+}
+.garden-visual-item-meta {
+  color: var(--accent);
+  display: block;
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: .72rem;
+  letter-spacing: .08em;
+  margin-bottom: .38rem;
+  text-transform: uppercase;
+}
+.garden-visual-caption {
+  border-top: 1px solid var(--rule);
+  color: var(--faint);
+  display: grid;
+  font-size: .84rem;
+  font-style: italic;
+  gap: .55rem 1rem;
+  grid-template-columns: minmax(0, 1fr) auto;
+  line-height: 1.45;
+  margin: 1.15rem 0 0;
+  padding-top: .75rem;
+}
+.garden-visual-evidence {
+  color: var(--accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .72rem;
+  font-style: normal;
+  font-weight: 650;
+  letter-spacing: .04em;
+  white-space: nowrap;
+}
+.garden-visual-evidence a {
+  color: inherit;
+  text-decoration-thickness: 1px;
+  text-underline-offset: .18em;
+}
+.garden-visual--sequence .garden-visual-items,
+.garden-visual--contrast .garden-visual-items,
+.garden-visual--constellation .garden-visual-items {
+  display: grid;
+  gap: .65rem;
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+}
+.garden-visual--sequence .garden-visual-items { counter-reset: garden-step; }
+.garden-visual--sequence .garden-visual-item {
+  counter-increment: garden-step;
+  padding-top: 2.35rem;
+  position: relative;
+}
+.garden-visual--sequence .garden-visual-item::before {
+  color: var(--accent);
+  content: counter(garden-step, decimal-leading-zero);
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: .68rem;
+  left: .9rem;
+  letter-spacing: .08em;
+  position: absolute;
+  top: .72rem;
+}
+.garden-visual--layers .garden-visual-items { display: grid; gap: .45rem; }
+.garden-visual--layers .garden-visual-item {
+  border-left: clamp(.24rem, .55vw, .48rem) solid var(--accent);
+  display: grid;
+  gap: .15rem 1rem;
+  grid-template-columns: minmax(8rem, .4fr) 1fr;
+}
+.garden-visual--layers .garden-visual-item:nth-child(2) { margin-left: 1.5%; }
+.garden-visual--layers .garden-visual-item:nth-child(3) { margin-left: 3%; }
+.garden-visual--layers .garden-visual-item:nth-child(4) { margin-left: 4.5%; }
+.garden-visual--layers .garden-visual-item:nth-child(5) { margin-left: 6%; }
+.garden-visual--layers .garden-visual-item:nth-child(6) { margin-left: 7.5%; }
+.garden-visual--timeline .garden-visual-items {
+  display: grid;
+  gap: 0;
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+}
+.garden-visual--timeline .garden-visual-item {
+  border-width: 1px 0 0 1px;
+  padding-top: 1.35rem;
+  position: relative;
+}
+.garden-visual--timeline .garden-visual-item::before {
+  background: var(--accent);
+  border: 3px solid var(--paper);
+  border-radius: 50%;
+  content: "";
+  height: .72rem;
+  left: -.4rem;
+  position: absolute;
+  top: -.4rem;
+  width: .72rem;
+}
+.garden-visual--contrast .garden-visual-item:nth-child(odd) { border-top: 2px solid var(--ink); }
+.garden-visual--contrast .garden-visual-item:nth-child(even) { border-top: 2px solid var(--accent); }
+.garden-visual--constellation .garden-visual-items {
+  align-items: stretch;
+  position: relative;
+}
+.garden-visual--constellation .garden-visual-item {
+  border-top: 2px solid var(--accent);
+  box-shadow: 0 .2rem 0 rgba(18, 31, 31, .04);
+  padding-top: 1.35rem;
+  position: relative;
+}
+.garden-visual--constellation .garden-visual-item::before {
+  background: var(--paper);
+  border: 2px solid var(--accent);
+  border-radius: 50%;
+  content: "";
+  height: .55rem;
+  left: calc(50% - .36rem);
+  position: absolute;
+  top: -.38rem;
+  width: .55rem;
+}
+.garden-visual--constellation .garden-visual-item:nth-child(even) { margin-top: .8rem; }
+.garden-series-gallery {
+  display: grid;
+  gap: .8rem;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  margin: 1.5rem 0 3rem;
+}
+.garden-series-card {
+  border: 1px solid var(--rule);
+  color: var(--ink);
+  display: grid;
+  grid-template-rows: 7.5rem auto;
+  overflow: hidden;
+  text-decoration: none;
+}
+.garden-series-card img {
+  height: 100%;
+  object-fit: cover;
+  transition: transform .25s ease;
+  width: 100%;
+}
+.garden-series-card span {
+  border-top: 1px solid var(--rule);
+  font-size: .9rem;
+  font-weight: 600;
+  padding: .65rem .75rem;
+}
+.garden-series-card:hover { border-color: var(--accent); color: var(--accent); }
+.garden-series-card:hover img { transform: scale(1.025); }
+@media (prefers-reduced-motion: reduce) {
+  .garden-series-card img { transition: none; }
+}
+.garden-tags { color: var(--faint); font-size: .82rem; margin-top: 2.2rem; }
+.garden-nav { border-top: 1px solid var(--rule); display: flex; gap: 1rem;
+  justify-content: space-between; margin-top: 2.5rem; padding-top: 1rem; }
+.garden-nav a { max-width: 48%; text-decoration: none; }
+.garden-nav .next { margin-left: auto; text-align: right; }
+.garden-table-wrap { overflow-x: auto; margin: 1.35rem 0; }
+.garden-table { border-collapse: collapse; font-size: .92rem; line-height: 1.45; width: 100%; }
+.garden-table th, .garden-table td { border: 1px solid var(--rule); padding: .55rem .65rem;
+  text-align: left; vertical-align: top; }
+.garden-table th { background: var(--accent-soft); }
+.garden-toc {
+  border-left: 1px solid var(--rule);
+  max-height: calc(100vh - 3rem);
+  overflow: auto;
+  padding: .1rem 0 .75rem 1.3rem;
+  position: sticky;
+  top: 1.5rem;
+}
+.garden-toc-title {
+  color: var(--accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .2em;
+  margin: 0 0 1.15rem;
+  text-transform: uppercase;
+}
+.garden-toc-title::before { content: "☰"; font-size: .8em; margin-right: .65rem; }
+.garden-toc-list { list-style: none; margin: 0; padding: 0; }
+.garden-toc-sublist { list-style: none; margin: 0; padding: 0; }
+.garden-toc-list li { margin: 0; }
+.garden-toc-list a {
+  border-left: 2px solid transparent;
+  color: var(--ink);
+  display: block;
+  font-size: .91rem;
+  line-height: 1.42;
+  margin-left: -1.4rem;
+  padding: .42rem .45rem .42rem 1.3rem;
+  text-decoration: none;
+}
+.garden-toc-list .level-3 a {
+  color: var(--faint);
+  font-size: .86rem;
+  font-style: italic;
+  padding-left: 2.15rem;
+}
+.garden-toc-list a:hover,
+.garden-toc-list a:focus-visible,
+.garden-toc-list a[aria-current="location"] {
+  border-left-color: var(--accent);
+  color: var(--accent);
+}
+.garden-toc-list a[aria-current="location"] { font-weight: 600; }
+.garden-toc-inline { display: none; }
+.garden-layout article :is(h2, h3):target,
+.garden-series:target h2 { color: var(--accent); }
+a.pending { color: var(--faint); text-decoration-style: dashed; }
+a.pending::after { content: " · pending"; font-size: .7em; letter-spacing: .06em;
+  text-transform: uppercase; }
+@media (min-width: 72.01em) {
+  body.garden-page-body > .masthead {
+    align-items: center;
+    column-gap: 2rem;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    margin-bottom: 3.5rem;
+    padding: 1.25rem 0;
+    text-align: left;
+  }
+  body.garden-page-body > .masthead .wordmark { justify-self: start; }
+  body.garden-page-body > .masthead .tagline { justify-self: center; margin: 0; }
+  body.garden-page-body > .masthead nav { justify-self: end; margin: 0; }
+}
+@media (max-width: 72em) {
+  .garden-layout,
+  .garden-index-layout { display: block; }
+  .garden-toc { display: none; }
+  .garden-toc-inline {
+    border: 1px solid var(--rule);
+    display: block;
+    margin: 1.5rem 0 2.4rem;
+    padding: .8rem 1rem;
+  }
+  .garden-toc-inline summary {
+    color: var(--accent);
+    cursor: pointer;
+    font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: .78rem;
+    font-weight: 700;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+  }
+  .garden-toc-inline .garden-toc-list { margin-top: .7rem; }
+  .garden-toc-inline .garden-toc-list a { margin-left: 0; padding-left: .75rem; }
+  .garden-toc-inline .garden-toc-list .level-3 a { padding-left: 1.6rem; }
+}
+@media (max-width: 40em) {
+  body.garden-page-body { font-size: 1.03rem; padding: 1rem 1.05rem 3rem; }
+  .garden-layout .article-title,
+  .garden-intro .article-title { font-size: clamp(2.15rem, 11vw, 3.15rem); }
+  .garden-lede { font-size: 1.1rem; padding-left: 1rem; }
+  .garden-corridors { margin-bottom: 2rem; }
+  .garden-corridor-list { gap: .45rem; }
+  .garden-corridor {
+    font-size: .68rem;
+    min-height: 2.35rem;
+    padding: .3rem .58rem .27rem;
+  }
+  .garden-series-plate-media { aspect-ratio: 16 / 9; }
+  .garden-series-plate figcaption { display: block; }
+  .garden-series-plate figcaption strong { display: block; margin-top: .22rem; }
+  .garden-series-plate-terms { display: block; margin-top: .25rem; }
+  .garden-visual { margin-left: -.15rem; margin-right: -.15rem; padding: 1rem; }
+  .garden-visual-head { display: block; }
+  .garden-visual-title { margin-top: .25rem; }
+  .garden-visual-as-of { margin-top: .35rem; }
+  .garden-visual-caption { grid-template-columns: 1fr; }
+  .garden-visual-evidence { white-space: normal; }
+  .garden-visual--sequence .garden-visual-items,
+  .garden-visual--contrast .garden-visual-items,
+  .garden-visual--constellation .garden-visual-items,
+  .garden-visual--timeline .garden-visual-items { grid-template-columns: 1fr; }
+  .garden-visual--layers .garden-visual-item:nth-child(n) { display: block; margin-left: 0; }
+  .garden-visual--timeline .garden-visual-item { border-width: 0 0 0 1px; }
+  .garden-visual--timeline .garden-visual-item::before { left: -.4rem; top: .9rem; }
+  .garden-visual--constellation .garden-visual-item:nth-child(even) { margin-top: 0; }
+  .garden-series-gallery { grid-template-columns: 1fr; }
+  .garden-nav { flex-direction: column; }
+  .garden-nav a { max-width: none; }
+  .garden-nav .next { margin-left: 0; text-align: left; }
+}
+@media print {
+  a.pending::after { content: " (pending)"; }
+  .garden-layout, .garden-index-layout { display: block; }
+  .garden-toc, .garden-toc-inline { display: none; }
+  .garden-series-card img { display: none; }
+  .garden-series-card { grid-template-rows: auto; }
+}
+</style>
+</head>
+<body class="garden-page-body">
+<button class="theme-toggle" aria-label="Toggle light and dark" onclick="
+  (function () {
+    var d = document.documentElement;
+    var cur = d.getAttribute('data-theme');
+    if (!cur) { cur = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'; }
+    var next = cur === 'dark' ? 'light' : 'dark';
+    d.setAttribute('data-theme', next);
+    try { localStorage.setItem('darshan-theme', next); } catch (e) {}
+  })();
+">◐</button>
+
+<header class="masthead">
+  <h1 class="wordmark"><a href="../index.html">DARSHAN</a></h1>
+  <p class="tagline">A signal of clear seeing in an age of information overload</p>
+  <nav>
+    <a href="../index.html">Articles</a>
+    <a href="index.html">Garden</a>
+    <a href="../about.html">About</a>
+  </nav>
+</header>
+
+<main>
+<div class="garden-layout">
+<article data-garden-room="mahavideha-kshetra" data-garden-outline>
+<p class="garden-series-link"><a href="index.html#bridge">The Bridge</a></p>
+<p class="article-meta">25 August 2026 · Draft</p>
+<h1 class="article-title">"Mahāvideha Kṣetra: The Place Where the Teaching Is Still Happening"</h1>
+<div class="draft-banner"><strong>Draft — pending discernment pass.</strong> This room is part of the garden's first planting. It has not been promoted to published status; check its sources and open questions before citing it.</div>
+<p class="garden-lede">Mahāvideha Kṣetra is a central region in the Jain map of the cosmos where the conditions for liberation are said to remain continuously available. This room reconstructs that map from Jain texts, separates doctrine from empirical astronomy, and asks why practitioners orient toward a place they cannot ordinarily reach.</p>
+<nav class="garden-corridors" aria-label="Explore connected rooms" data-corridor-count="6"><ul class="garden-corridor-list"><li><a class="garden-corridor" href="meaning-of-time.html">Time: Kala, Yugas, the Mayan Count, and the Meaning of Time</a></li><li><a class="garden-corridor" href="ontology.html">What Ontology Means</a></li><li><a class="garden-corridor" href="teleology.html">Teleology</a></li><li><a class="garden-corridor" href="ramana-and-the-traditions.html">Ramana Maharshi and the Inquiry Traditions</a></li><li><a class="garden-corridor" href="ai-and-the-traditions.html">How AI Relates to the Contemplative Traditions</a></li><li><a class="garden-corridor" href="the-ideal.html">The Power of the Ideal</a></li></ul></nav>
+<figure class="garden-series-plate garden-series-plate--bridge">
+<div class="garden-series-plate-media"><picture><source srcset="assets/series/bridge.webp" type="image/webp"><img src="assets/series/bridge.png" alt="Engraved mountain reflected into a geometric neural lattice" width="1672" height="941" loading="eager" decoding="async"></picture></div>
+<figcaption><span class="garden-series-plate-kicker">Visual field</span><strong>The Bridge</strong><span class="garden-series-plate-terms">mahāvideha kṣetra · karmabhūmi · bhogabhūmi · sīmandhara svāmī</span></figcaption>
+</figure>
+<details class="garden-toc-inline"><summary>In this room</summary><ol class="garden-toc-list"><li class="level-2"><a href="#1-start-with-the-map-and-mark-its-status">1. Start with the map, and mark its status</a></li><li class="level-2"><a href="#2-put-mah-videha-in-its-exact-place">2. Put Mahāvideha in its exact place</a></li><li class="level-2"><a href="#3-land-of-action-is-the-key">3. “Land of action” is the key</a></li><li class="level-2"><a href="#4-s-mandhara-sv-m-and-the-grammar-of-now">4. Sīmandhara Svāmī and the grammar of “now”</a></li><li class="level-2"><a href="#5-worked-walkthrough-rebuild-the-doctrinal-logic-yourself">5. Worked walkthrough: rebuild the doctrinal logic yourself</a></li><li class="level-2"><a href="#6-what-the-orientation-does-in-practice">6. What the orientation does in practice</a></li><li class="level-2"><a href="#7-the-strongest-reading-and-the-weakest-reading">7. The strongest reading and the weakest reading</a></li><li class="level-2"><a href="#8-what-you-can-now-see">8. What you can now see</a></li><li class="level-2"><a href="#9-open-questions">9. Open questions</a></li><li class="level-2"><a href="#sources">Sources</a></li></ol></details>
+<p>You are in the bridge series, where a tradition's own vocabulary has to be heard before it is compared with anything else. <a href="meaning-of-time.html">Meaning-of-time</a> gives you the Jain wheel of ascending and descending ages; this room places one region inside that wheel. Mahāvideha matters less as exotic geography than as a practical claim: even when the teaching has become remote here, Jain tradition says it remains fully alive somewhere.</p>
+<h2 id="1-start-with-the-map-and-mark-its-status">1. Start with the map, and mark its status</h2>
+<p>Take a circular sheet of paper. Draw a dot in the center. Around the dot, draw a disc; around the disc, alternating rings of water and land. You have made the basic plan of the Jain Middle World.</p>
+<p>In the tradition's terms, the whole ordered cosmos is <strong>loka</strong>, world-space. It is finite, uncreated, and without a first moment. There is no creator standing outside it. The lower world contains hells, the upper world contains heavens and the realm of liberated souls, and the very thin middle between them is <strong>madhyaloka</strong>, the Middle World. Human birth occurs only there. Jain paintings often show the three levels as a standing cosmic person: the Middle World is the narrow waist.</p>
+<p>Inside the Middle World, continents and oceans repeat as concentric rings. The central continent is <strong>Jambūdvīpa</strong>, the Rose-Apple Continent. Mount Meru stands at its center. Jambūdvīpa, the surrounding Salt Ocean, the next continent, another ocean, and the inner half of a third continent make the <strong>Aḍhāī-dvīpa</strong>, the Two-and-a-Half Continents where human beings can live.</p>
+<p>This is a religious cosmography: a tradition's ordered account of the universe. It is not the result of telescopic observation, satellite measurement, or modern geology. No empirical evidence places a disc-shaped Jambūdvīpa or Mount Meru in physical space as astronomy now maps it. Saying that plainly does not require you to mock the map or translate it into a secret version of modern physics. It asks you to hold two sentences at once:</p>
+<ol><li>Jain texts and communities have treated this as a real description of the cosmos, with sectarian differences in detail.</li><li>This room reports that doctrine. It does not assert the doctrine as scientific cosmology.</li></ol>
+<p>That distinction will remain in force all the way through. “The <em>Tattvārtha Sūtra</em> says” is a historical-textual claim. “Mahāvideha physically exists” is a metaphysical claim. They do not have the same evidence.</p>
+<h2 id="2-put-mah-videha-in-its-exact-place">2. Put Mahāvideha in its exact place</h2>
+<figure class="garden-visual garden-visual--layers" aria-labelledby="visual-mahavideha-kshetra-1" data-claim-scope="section-synthesis" data-placement-heading="2-put-mah-videha-in-its-exact-place" data-evidence-headings="2-put-mah-videha-in-its-exact-place">
+<div class="garden-visual-head"><p class="garden-visual-kicker">Read the doctrinal map</p><p class="garden-visual-title" id="visual-mahavideha-kshetra-1">Mahāvideha at the center of Middle World</p></div>
+<ol class="garden-visual-items" role="list"><li class="garden-visual-item"><strong class="garden-visual-item-label">Airāvata</strong><span class="garden-visual-item-detail">A northern land of action where conditions rise and fall through time cycles.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Northern enjoyment lands</strong><span class="garden-visual-item-detail">Hairaṇyavata and Ramyaka are classed as lands of enjoyment.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Mahāvideha</strong><span class="garden-visual-item-detail">Meru stands at the center with action provinces to east and west and enjoyment regions beside it.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Southern enjoyment lands</strong><span class="garden-visual-item-detail">Hari and Haimavata mirror the northern enjoyment regions.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Bharata</strong><span class="garden-visual-item-detail">The tradition places us in this southern land of action under changing temporal conditions.</span></li></ol>
+<figcaption class="garden-visual-caption"><span>The room's reduced map preserves the central relation among cyclical action lands, enjoyment regions, Meru, and Videha's action provinces.</span><span class="garden-visual-evidence">Drawn from: <a href="#2-put-mah-videha-in-its-exact-place">2. Put Mahāvideha in its exact place</a></span></figcaption>
+</figure>
+<p>The <em>Tattvārtha Sūtra</em>, a compact Sanskrit systematization accepted as authoritative in both major Jain traditions, gives the skeleton in chapter 3. Verse 3.10 lists seven regions of Jambūdvīpa from south to north:</p>
+<ol><li>Bharata</li><li>Haimavata</li><li>Hari</li><li>Videha</li><li>Ramyaka</li><li>Hairaṇyavata</li><li>Airāvata</li></ol>
+<p>Six east-west mountain chains separate them. Videha is the broad central band. Mount Meru stands within it, and the rivers Sītā and Sītodā run away from the center toward the east and west. Later descriptions often call it <strong>Mahāvideha</strong>, “Great Videha,” because of its scale and religious importance.</p>
+<p>The geometry repeats. Jain cosmography describes five Merus across the Two-and-a-Half Continents: one in Jambūdvīpa, two in Dhātakīkhaṇḍa, and two in the inhabitable half of Puṣkara. Each has a corresponding Bharata, Airāvata, and Videha arrangement. That is why sources sometimes speak of “the five Videhas.” It also clears up a common numerical tangle. A source discussing the Mahāvideha around the central Meru may count four presently teaching Tīrthaṅkaras. A devotional source counting all five repeated Mahāvidehas may say twenty. Four times five gives twenty; the apparent disagreement can be a change of scope.</p>
+<p>Within the central Mahāvideha, traditional diagrams lay out thirty-two provinces in mirrored groups, sixteen east of Meru and sixteen west. The precision is characteristic. Jain cosmology does not offer a misty “realm beyond.” It names mountains, rivers, directions, dimensions, lifetimes, and repeating units. Its visual grammar is balance, doubling, and recurrence.</p>
+<p>Here is the small part of the map you need:</p>
+<pre><code>NORTH
+Airāvata        — land of action; time rises and falls
+Hairaṇyavata    — land of enjoyment
+Ramyaka         — land of enjoyment
+──────── Nīla mountain chain ────────
+Mahāvideha      — Meru at center; lands of action around it
+                 west ← Sītodā | Meru | Sītā → east
+──────── Niṣadha mountain chain ─────
+Hari            — land of enjoyment
+Haimavata       — land of enjoyment
+Bharata         — land of action; our region in the map
+SOUTH</code></pre>
+<p>This sketch suppresses most of the canon's detail. It does show the load-bearing relation: Mahāvideha is not a planet orbiting another star. In the textual system it is the central region of a repeated Middle-World geography. Calling it “another planet,” as some modern summaries do, may make the teaching sound familiar, but it changes the map.</p>
+<h2 id="3-land-of-action-is-the-key">3. “Land of action” is the key</h2>
+<p>Verse 3.37 of the <em>Tattvārtha Sūtra</em> calls Bharata, Airāvata, and Videha <strong>karmabhūmi</strong>: lands of action or labor. The verse explicitly excludes Devakuru and Uttarakuru, the enjoyment regions beside Meru within the wider Videha geography. A karmabhūmi is a place where difficult moral action has full consequence. People work for food, organize societies, give, harm, restrain themselves, become mendicants, and accumulate the kinds of merit and demerit that can drive the soul far upward or downward. Most important, the path to liberation can be practiced there.</p>
+<p>The contrasting term is <strong>bhogabhūmi</strong>, a land of enjoyment. In those regions, traditional accounts say that wish-fulfilling trees provide what inhabitants need. Life may be long and pleasant, but precisely because struggle and renunciation are absent, decisive spiritual progress is not available in the same way.</p>
+<p>That reversal is easy to miss. On this map, comfort is not the highest good. A difficult place may be religiously superior because a difficult place lets choice have weight.</p>
+<div class="garden-table-wrap"><table class="garden-table"><thead><tr><th>Axis</th><th>Bharata, where the tradition places us</th><th>Mahāvideha's action regions</th><th>A bhogabhūmi such as Haimavata</th></tr></thead><tbody><tr><td>Basic type</td><td>Karmabhūmi, land of action</td><td>Karmabhūmi, land of action</td><td>Land of enjoyment</td></tr><tr><td>Time</td><td>Six conditions rise and fall through descending and ascending half-cycles</td><td>A stable condition comparable to the favorable fourth age</td><td>Fixed conditions specific to the region</td></tr><tr><td>Living Tīrthaṅkara now</td><td>None, according to the present fifth age</td><td>Yes, continuously, according to the tradition</td><td>No liberating teaching career</td></tr><tr><td>Work and moral difficulty</td><td>Present</td><td>Present</td><td>Needs supplied without ordinary labor</td></tr><tr><td>Liberation possible</td><td>In favorable ages; not under all present conditions</td><td>Continuously possible</td><td>Not possible directly from that mode of life</td></tr><tr><td>Practical lesson</td><td>Preserve a teaching received from the past</td><td>The path remains presently embodied somewhere</td><td>Pleasure alone does not free a soul</td></tr></tbody></table></div>
+<p>A <strong>Tīrthaṅkara</strong> is a “ford-maker”: an omniscient teacher who re-establishes a crossing through saṃsāra, the cycle of birth and death. In Bharata, the twenty-fourth and most recent Tīrthaṅkara was Mahāvīra. Jain cosmic time places the present Bharata in the fifth phase of a descending half-cycle, after the phase in which a Tīrthaṅkara can arise and liberation can be won here. Mahāvideha is described differently. Its conditions remain comparable to the fourth phase. Tīrthaṅkaras continue to be born and teach there.</p>
+<p>So Mahāvideha holds a very specific possibility open. The liberating teaching is not merely an archive left by dead founders. Somewhere in the tradition's present tense, a ford-maker is teaching face to face.</p>
+<h2 id="4-s-mandhara-sv-m-and-the-grammar-of-now">4. Sīmandhara Svāmī and the grammar of “now”</h2>
+<p>The best-known presently living Tīrthaṅkara of Mahāvideha is <strong>Sīmandhara Svāmī</strong>. Paul Dundas's scholarly survey of Jain cosmology records four Tīrthaṅkaras presently preaching in the central Videha and identifies Sīmandhara as a significant object of devotion in India. Later Jain narratives also say that the Digambara teacher Kundakunda traveled supernaturally to Sīmandhara's assembly, heard the doctrine there, and returned. That is hagiography—a sacred life-story—not independently verified travel history.</p>
+<p>You cannot ordinarily travel from Bharata to Mahāvideha in the traditional system. Dundas notes that a human here would have to be reborn there; exceptional transport belongs to sacred narrative. This matters because Mahāvideha is not offered as a hidden pilgrimage destination that an airline or spacecraft may eventually locate. Its bridge is karmic rebirth, not distance in kilometers.</p>
+<p>Modern Sīmandhara devotion varies. In mainstream Jain memory he may appear in hymns, ritual salutations, stories about Kundakunda, and hopes for a future birth near a living teacher. Some recent movements place him much closer to the center and promise unusually immediate access to his liberating role. Peter Flügel's study of the Akram Vijñān movement treats that modern development as an innovative devotional form, not simply the unchanged practice of all Jains. You should not infer from one movement's website that every Jain community relates to Sīmandhara in the same way.</p>
+<p>The safest grammar is therefore precise:</p>
+<ul><li>It is a fact that Jain texts and practitioners describe Sīmandhara as presently teaching in Mahāvideha.</li><li>It is a fact that devotion to him is historically documented, though its intensity and form differ.</li><li>It is a matter of Jain faith that he is literally alive there now.</li><li>It is not an established scientific fact that Mahāvideha or Sīmandhara has been physically located.</li></ul>
+<p>That four-line distinction lets you listen without either conversion-language or dismissal-language taking over.</p>
+<h2 id="5-worked-walkthrough-rebuild-the-doctrinal-logic-yourself">5. Worked walkthrough: rebuild the doctrinal logic yourself</h2>
+<figure class="garden-visual garden-visual--sequence" aria-labelledby="visual-mahavideha-kshetra-2" data-claim-scope="section-synthesis" data-placement-heading="5-worked-walkthrough-rebuild-the-doctrinal-logic-yourself" data-evidence-headings="5-worked-walkthrough-rebuild-the-doctrinal-logic-yourself">
+<div class="garden-visual-head"><p class="garden-visual-kicker">Premises carry the conclusion</p><p class="garden-visual-title" id="visual-mahavideha-kshetra-2">Why a living teaching remains possible there</p></div>
+<ol class="garden-visual-items" role="list"><li class="garden-visual-item"><strong class="garden-visual-item-label">Moral weight</strong><span class="garden-visual-item-detail">Human liberation requires a karmabhūmi where action and restraint have full consequence.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Local decline</strong><span class="garden-visual-item-detail">Bharata is such a land, but its present phase is religiously unfavorable.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Stable opportunity</strong><span class="garden-visual-item-detail">Videha contains action lands whose favorable religious conditions remain stable.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Living teachers</strong><span class="garden-visual-item-detail">The tradition describes Tīrthaṅkaras as continuing to arise and teach there.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Bounded inference</strong><span class="garden-visual-item-detail">The logic explains the doctrine's conclusion without independently proving its physical premises.</span></li></ol>
+<figcaption class="garden-visual-caption"><span>The conclusion follows inside the Jain doctrinal system through four explicit premises rather than through a claim of modern geography.</span><span class="garden-visual-evidence">Drawn from: <a href="#5-worked-walkthrough-rebuild-the-doctrinal-logic-yourself">5. Worked walkthrough: rebuild the doctrinal logic yourself</a></span></figcaption>
+</figure>
+<p>You can verify the room's central claim without memorizing the whole cosmology. Use four short passages and one blank page.</p>
+<p><strong>Step 1: establish the regions.</strong> Read <em>Tattvārtha Sūtra</em> 3.10. Write the seven names in a vertical column, Bharata at the bottom and Airāvata at the top. Circle Videha in the middle.</p>
+<p><strong>Step 2: establish the changing zones.</strong> Read 3.27. It says rise and decline through the six periods occur in Bharata and Airāvata. Draw a small wheel beside those two names. Do not draw it beside Videha. The point is not that Videha has no time at all; it is that its human condition does not swing through the same six-age extremes.</p>
+<p><strong>Step 3: establish the work zones.</strong> Read 3.37. Mark Bharata and Airāvata with <code>K</code>. Mark the action provinces east and west of Meru in Videha with <code>K</code>, but mark Devakuru and Uttarakuru beside Meru with <code>B</code>. The commentary explains <code>K</code> as karmabhūmi, a place of intense good and bad action, agriculture, giving, and religious opportunity. Mark the other named regions with <code>B</code> for bhogabhūmi.</p>
+<p>Your page should now look roughly like this:</p>
+<pre><code>Airāvata       K   ↻
+Hairaṇyavata   B
+Ramyaka        B
+Videha       K — B • Meru B — K
+Hari           B
+Haimavata      B
+Bharata        K   ↻   ← present human location in the doctrine</code></pre>
+<p><strong>Step 4: add the living teacher claim.</strong> Read Paul Dundas's “Jain Cosmology” entry, especially the paragraphs on the central Videha. Add <code>T</code> beside Videha for continuously appearing Tīrthaṅkaras. Add <code>S</code> for Sīmandhara.</p>
+<p><strong>Step 5: inspect an actual map.</strong> Open Jainpedia's “Jambū-dvīpa and Mount Meru” manuscript page or the Metropolitan Museum's Aḍhāīdvīpa map. Find the center before reading the labels. Notice that you are not looking at a modern navigational map. Repetition and symmetry tell you what matters: the order of moral possibilities, not a route for a caravan.</p>
+<p>Now read your marks as an argument:</p>
+<ol><li>Human liberation requires a land where action has full weight.</li><li>Bharata is such a land, but its conditions cycle and are presently unfavorable.</li><li>Videha contains such lands, while their favorable religious condition remains stable.</li><li>Therefore the living teaching can remain available in the cosmos even when it is unavailable here.</li></ol>
+<p>That conclusion follows inside the doctrinal system. The exercise does not prove the system from outside. It shows you exactly which premises carry the conclusion, so you can honor, question, or compare the teaching without blurring its logic.</p>
+<h2 id="6-what-the-orientation-does-in-practice">6. What the orientation does in practice</h2>
+<p>Why point your mind toward a place you cannot visit in this body? At least four practical functions are visible in the sources and practices.</p>
+<p>First, Mahāvideha keeps the teaching in the present tense. A scripture can feel like a message moving away from you through history. A living Tīrthaṅkara reverses that direction. The doctrine is being spoken now, even if not here. For a devotee, saluting Sīmandhara is an orientation toward a presently embodied ideal, not only remembrance of Mahāvīra.</p>
+<p>Second, it makes historical decline local rather than absolute. Bharata's fifth age is bad news about this region and time. It is not a claim that reality itself has exhausted its possibility of awakening. In that sense Mahāvideha prevents a doctrine of decline from becoming cosmic despair.</p>
+<p>Third, it gives conduct a destination. A practitioner may aspire to rebirth in Mahāvideha, close enough to hear a living Tīrthaṅkara. But the route is ethically demanding by definition. You do not reach a karmabhūmi by imagining coordinates. You shape a future birth through the qualities of action, restraint, non-attachment, right view, and the karmic consequences the tradition assigns to them. The “elsewhere” turns attention back toward conduct here.</p>
+<p>Fourth, the map teaches by being seen. Jainpedia documents cosmological study as part of monastic education and notes that visualization helps transmit the system. Painted Aḍhāīdvīpa maps, manuscript diagrams, temple models of Meru, and ritual spaces make an enormous doctrine graspable at a glance. The Metropolitan Museum describes its Aḍhāīdvīpa painting as a map of the only cosmic domain where human birth and enlightenment are possible. The image is therefore not mere decoration. It is a compressed lesson in the rarity and consequence of being human.</p>
+<p>These functions do not require every practitioner to interpret the image identically. A traditional believer may regard the geography as literal. A scholar may study how it developed from early canonical materials and neighboring Indian cosmographies. A modern Jain may accept scientific astronomy while continuing to study or venerate the traditional map for religious reasons. Smarthistory's scholarly introduction notes that this practical coexistence is common. Calling the map “only symbolic” would be as flattening as calling it modern science.</p>
+<h2 id="7-the-strongest-reading-and-the-weakest-reading">7. The strongest reading and the weakest reading</h2>
+<figure class="garden-visual garden-visual--contrast" aria-labelledby="visual-mahavideha-kshetra-3" data-claim-scope="section-synthesis" data-placement-heading="7-the-strongest-reading-and-the-weakest-reading" data-evidence-headings="7-the-strongest-reading-and-the-weakest-reading">
+<div class="garden-visual-head"><p class="garden-visual-kicker">Preserve the otherness</p><p class="garden-visual-title" id="visual-mahavideha-kshetra-3">Three readings, and what each one costs</p></div>
+<ul class="garden-visual-items" role="list"><li class="garden-visual-item"><span class="garden-visual-item-meta">weak reading</span><strong class="garden-visual-item-label">Escapist dismissal</strong><span class="garden-visual-item-detail">Treating Mahāvideha as a fantasy of a perfect elsewhere misses that it is a karmabhūmi of work, choice, and consequence.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">tradition's claim</span><strong class="garden-visual-item-label">Doctrinal reading</strong><span class="garden-visual-item-detail">The place retains provinces, living teachers, changing karmic stakes, and an exact position in Jain cosmography.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">philosophical reading</span><strong class="garden-visual-item-label">Practical translation</strong><span class="garden-visual-item-detail">The map can orient you toward fragile conditions for transformation and away from confusing comfort with progress.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">boundary</span><strong class="garden-visual-item-label">Translation limit</strong><span class="garden-visual-item-detail">Reducing the place to hope or a higher self discards the ontology before claiming to interpret it.</span></li></ul>
+<figcaption class="garden-visual-caption"><span>You can reject, accept, or translate the map, but an honest reading names which doctrinal commitments survive the move.</span><span class="garden-visual-evidence">Drawn from: <a href="#7-the-strongest-reading-and-the-weakest-reading">7. The strongest reading and the weakest reading</a></span></figcaption>
+</figure>
+<p>The weakest reading treats Mahāvideha as escapism: things are spiritually bad here, so imagine a perfect world elsewhere. It is possible to use any promised elsewhere that way. But it misses the peculiar choice of <strong>karmabhūmi</strong>. Mahāvideha is not paradise. People there labor, choose, bind karma, and require a teaching because liberation is not automatic. A world of effortless enjoyment is, in this system, less useful.</p>
+<p>The strongest reading does not depend on pretending the map has been seen by a telescope. It says: conditions for serious transformation are fragile; no historical community owns them permanently; comfort and progress are not the same; and an ideal matters by changing what you do where you stand. Those propositions survive as practical philosophy even for a reader who does not accept Jain cosmography literally.</p>
+<p>There is also a limit to that translation. If you reduce Mahāvideha to “hope” or “the higher self,” you remove its otherness, its teachers, its provinces, and its place in Jain karma theory. You have borrowed a word and discarded the doctrine. <a href="ontology.html">Ontology</a>—the question of what kinds of things a tradition says are real—does not permit that shortcut. Understand the place on its own terms before asking what it may mean for you.</p>
+<h2 id="8-what-you-can-now-see">8. What you can now see</h2>
+<p>You can now place Mahāvideha without calling it another planet. You can reconstruct why it is a land of action, why its stable religious time matters, why Sīmandhara is called a living Tīrthaṅkara, and why “twenty present Tīrthaṅkaras” and “four in Videha” can reflect different scopes rather than a simple contradiction. More important, you can state the epistemic boundary cleanly: the textual map, the history of devotion, and the physical existence claim are three different questions.</p>
+<p>From here, <a href="meaning-of-time.html">meaning-of-time</a> gives the full architecture of the ages. <a href="ramana-and-the-traditions.html">Ramana and the traditions</a> and <a href="ai-and-the-traditions.html">ai-and-the-traditions</a> test what happens when living instruction is separated from recorded language. <a href="teleology.html">Teleology</a> asks whether a path can have direction without the universe itself having a goal, while <a href="the-ideal.html">the-ideal</a> asks what an orienting perfection does to action before it is reached.</p>
+<h2 id="9-open-questions">9. Open questions</h2>
+<p><strong>What is established (FACT).</strong> Early and classical Jain sources contain a highly specified, non-creator cosmology. The <em>Tattvārtha Sūtra</em> lists Videha among Jambūdvīpa's seven regions, distinguishes the time cycles of Bharata and Airāvata, and classifies Videha's action provinces as karmabhūmi while excluding Devakuru and Uttarakuru. Later cosmological literature and art elaborate Mahāvideha into a central, symmetrical region. Scholarly and material evidence shows that cosmological diagrams have served educational, devotional, and ritual functions. Devotion to Sīmandhara as a presently living Tīrthaṅkara is documented, with substantial variation among Jain communities and movements.</p>
+<p><strong>What is contested or interpretive (HYPOTHESIS).</strong> Scholars reconstruct the age and development of individual cosmological elements from texts compiled and redacted across centuries; the tradition itself attributes the map to omniscient teaching rather than historical invention. The claim that Mahāvideha's main practical purpose is to keep liberation in the present tense is an interpretation supported by its use, not a verse from the canon. Modern Jains differ over how traditional cosmography and empirical science should be held together.</p>
+<p><strong>What is speculation or faith worth naming (WILD).</strong> That Mahāvideha exists as the texts describe, inaccessible to ordinary observation. That Sīmandhara is literally teaching there at this moment. That a future birth can place a present practitioner in his assembly. These may be central convictions within Jain faith, but this room has no independent evidence that promotes them into empirical fact.</p>
+<p>The last movement belongs to attention because the map itself directs it. Mahāvideha points far away, then quietly removes every ordinary means of going there. What remains within reach is the quality of the action being performed now. Whether you receive the geography literally, devotionally, or as disciplined religious imagination, its practical test is close at hand: after turning toward a living teacher elsewhere, what do you notice, restrain, and choose here?</p>
+<h2 id="sources">Sources</h2>
+<ul><li>Umāsvāti, <em>Tattvārtha Sūtra</em>, chapter 3, with Ācārya Pūjyapāda's <em>Sarvārthasiddhi</em>, English translation by Vijay K. Jain (2018). Key passages checked directly: <a href="https://www.wisdomlib.org/jainism/book/tattvartha-sutra-with-commentary/d/doc1084681.html">3.10, the seven regions</a>, <a href="https://www.wisdomlib.org/jainism/book/tattvartha-sutra-with-commentary/d/doc1084691.html">3.20, the paired rivers</a>, <a href="https://www.wisdomlib.org/jainism/book/tattvartha-sutra-with-commentary/d/doc1084692.html">3.21</a> and <a href="https://www.wisdomlib.org/jainism/book/tattvartha-sutra-with-commentary/d/doc1084693.html">3.22, their directions</a>, <a href="https://www.wisdomlib.org/jainism/book/tattvartha-sutra-with-commentary/d/doc1084698.html">3.27, rise and decline in Bharata and Airāvata</a>, <a href="https://www.wisdomlib.org/jainism/book/tattvartha-sutra-with-commentary/d/doc1084702.html">3.31, conditions in the Videhas</a>, and <a href="https://www.wisdomlib.org/jainism/book/tattvartha-sutra-with-commentary/d/doc1084708.html">3.37, lands of action</a>. The translation represents a Digambara commentary; the root text has authority across the major sectarian divide.</li><li>Paul Dundas, <a href="https://www.encyclopedia.com/environment/encyclopedias-almanacs-transcripts-and-maps/cosmology-jain-cosmology">“Cosmology: Jain Cosmology,”</a> <em>Encyclopedia of Religion</em> (2005). Used for the textual history, standardized Middle-World account, Mahāvideha's thirty-two divisions, continually appearing Tīrthaṅkaras, Sīmandhara, access by rebirth, and the Kundakunda hagiography. Dundas explicitly notes differences between Śvetāmbara and Digambara details.</li><li>Jainpedia, Institute of Jainology, <a href="https://jainpedia.org/article/themes/principles/jain-universe/the-three-worlds/">“The ‘Three Worlds’”</a>, <a href="https://jainpedia.org/article/themes/principles/jain-universe/mathematics-of-the-universe/">“Mathematics of the universe”</a>, and <a href="https://jainpedia.org/manuscript/jambu-dvipa-and-mount-meru/">“Jambū-dvīpa and Mount Meru”</a>. Used for the visual tradition, Aḍhāī-dvīpa structure, five Merus, thirty-two Mahāvideha provinces, repetition, and cosmology's role in education and practice.</li><li>Julia A. B. Hegewald, <a href="https://soas-repository.worktribe.com/output/451265/sacred-places-in-the-jaina-tradition-the-case-of-sammetasikhara">“Sacred Places in the Jaina Tradition: The Case of Sammetaśikhara,”</a> SOAS repository (2005). Used for the scholarly account of Jain sacred orientation extending from earthly pilgrimage to living Tīrthaṅkaras in Mahāvideha and liberated souls in Siddhaloka.</li><li>Peter Flügel, <a href="https://soas-repository.worktribe.com/output/451560">“Present Lord: Sīmandhara Svāmī and the Akram Vijñān Movement,”</a> in <em>Studies in Jaina History and Culture</em> (2006). Used only to distinguish a documented modern devotional movement from Jain practice in general.</li><li>Metropolitan Museum of Art, <a href="https://www.metmuseum.org/art/collection/search/711314">“Jain cosmological map of Aḍhāīdvīpa,”</a> object 2017.455; and Smarthistory, <a href="https://smarthistory.org/jain-cosmology/">“Jain cosmology,”</a> by Nalini Balbir and the Jainpedia project. Used for material evidence and the account of how contemporary practitioners may hold traditional cosmology alongside modern science.</li><li>Padmanabh S. Jaini, <a href="https://books.google.co.in/books?id=wE6v6ahxHi8C"><em>The Jaina Path of Purification</em></a> (University of California Press, 1979; Motilal Banarsidass reprint, 1998), consulted as a cross-sectarian scholarly orientation to Jain cosmology, karma, and liberation.</li></ul>
+<hr>
+<p><em>Written by Codex, an AI, for the Darshan garden, completing Claude Fable 5’s interrupted first planting. John Shrader (Dhyana), founder and publisher of record, answers for every word published here. Errors are corrected on the face of the page, dated.</em></p>
+<p class="garden-tags"><strong>Topics:</strong> jainism · cosmology · mahavideha · simandhara · tirthankara · karma · practice</p>
+<nav class="garden-nav" aria-label="Rooms"><a class="previous" href="teleology.html">← Teleology</a><a class="next" href="quantum-physics-and-ai.html">Quantum Physics and AI →</a></nav>
+</article>
+<aside class="garden-toc" aria-label="In this room"><nav aria-label="Page sections"><p class="garden-toc-title">In this room</p><ol class="garden-toc-list"><li class="level-2"><a href="#1-start-with-the-map-and-mark-its-status">1. Start with the map, and mark its status</a></li><li class="level-2"><a href="#2-put-mah-videha-in-its-exact-place">2. Put Mahāvideha in its exact place</a></li><li class="level-2"><a href="#3-land-of-action-is-the-key">3. “Land of action” is the key</a></li><li class="level-2"><a href="#4-s-mandhara-sv-m-and-the-grammar-of-now">4. Sīmandhara Svāmī and the grammar of “now”</a></li><li class="level-2"><a href="#5-worked-walkthrough-rebuild-the-doctrinal-logic-yourself">5. Worked walkthrough: rebuild the doctrinal logic yourself</a></li><li class="level-2"><a href="#6-what-the-orientation-does-in-practice">6. What the orientation does in practice</a></li><li class="level-2"><a href="#7-the-strongest-reading-and-the-weakest-reading">7. The strongest reading and the weakest reading</a></li><li class="level-2"><a href="#8-what-you-can-now-see">8. What you can now see</a></li><li class="level-2"><a href="#9-open-questions">9. Open questions</a></li><li class="level-2"><a href="#sources">Sources</a></li></ol></nav></aside>
+</div>
+</main>
+
+<footer>
+  <p>Darshan · seeing clearly after the feed</p>
+  <p>No feed. No analytics. No trackers. Finite editions, read at your own pace.</p>
+  <p style="opacity:.7">Darshan v0.0.0.1 · a beginning, built to grow</p>
+</footer>
+<script>
+/* Local section highlighting only. No network requests, analytics, or storage. */
+(function () {
+  var scope = document.querySelector("[data-garden-outline]");
+  if (!scope) return;
+  var sections = Array.prototype.slice.call(scope.querySelectorAll("h2[id], h3[id], section[id]"));
+  var links = Array.prototype.slice.call(document.querySelectorAll('.garden-toc-list a[href^="#"]'));
+  if (!sections.length || !links.length) return;
+  var queued = false;
+  function update() {
+    queued = false;
+    var threshold = Math.max(96, window.innerHeight * .22);
+    var current = sections[0].id;
+    sections.forEach(function (section) {
+      if (section.getBoundingClientRect().top <= threshold) current = section.id;
+    });
+    links.forEach(function (link) {
+      var active = link.getAttribute("href") === "#" + current;
+      if (active) link.setAttribute("aria-current", "location");
+      else link.removeAttribute("aria-current");
+    });
+  }
+  function requestUpdate() {
+    if (!queued) {
+      queued = true;
+      window.requestAnimationFrame(update);
+    }
+  }
+  document.addEventListener("scroll", requestUpdate, {passive: true});
+  window.addEventListener("resize", requestUpdate);
+  window.addEventListener("hashchange", requestUpdate);
+  update();
+})();
+</script>
+</body>
+</html>

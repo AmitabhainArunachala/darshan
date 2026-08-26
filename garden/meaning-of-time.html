@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>"Time: Kala, Yugas, the Mayan Count, and the Meaning of Time" · Darshan Garden</title>
+<meta name="description" content="Physics says there is no universal now. Human calendars answered a different question — not &quot;what is time&quot; but &quot;what time is it, and what does that mean.&quot; This room walks through relativistic time, lived time, the Hindu yuga system, and the Maya Long Count, and shows why every panic is secretly a claim about what time it is.">
+<link rel="stylesheet" href="../style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ccircle cx='8' cy='8' r='6' fill='none' stroke='%238f3b26' stroke-width='1.5'/%3E%3Ccircle cx='8' cy='8' r='2' fill='%238f3b26'/%3E%3C/svg%3E">
+<script>
+/* Theme memory. No analytics, no trackers. */
+(function () {
+  try {
+    var t = localStorage.getItem("darshan-theme");
+    if (t) document.documentElement.setAttribute("data-theme", t);
+  } catch (e) {}
+})();
+</script>
+<style>
+/* Garden-only layout. Kept here so the publication stylesheet remains shared. */
+body.garden-page-body {
+  max-width: none;
+  padding: 1.5rem clamp(1.25rem, 3.5vw, 4rem) 4rem;
+  font-size: 1.125rem;
+}
+body.garden-page-body > main,
+body.garden-page-body > .masthead,
+body.garden-page-body > footer {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 94rem;
+}
+.garden-layout,
+.garden-index-layout {
+  align-items: start;
+  display: grid;
+  gap: clamp(2.75rem, 5vw, 5rem);
+  grid-template-columns: minmax(0, 64rem) minmax(17rem, 20rem);
+  justify-content: center;
+}
+.garden-layout article,
+.garden-index-main { min-width: 0; }
+.garden-layout .article-title,
+.garden-intro .article-title {
+  font-size: clamp(2.65rem, 3.55vw, 4rem);
+  letter-spacing: -.025em;
+  line-height: 1.06;
+  max-width: 24ch;
+}
+.garden-layout article h2 {
+  font-size: 1.48rem;
+  line-height: 1.3;
+  margin-top: 3.2rem;
+  scroll-margin-top: 1.5rem;
+}
+.garden-layout article h3 {
+  font-size: 1.16rem;
+  margin-top: 2.35rem;
+  scroll-margin-top: 1.5rem;
+}
+.garden-intro { margin-bottom: 2.4rem; }
+.garden-series { margin: 2.8rem 0; scroll-margin-top: 1rem; }
+.garden-series h2 { border-bottom: 1px solid var(--rule); padding-bottom: .45rem; }
+.garden-room-list { list-style: none; margin: 0; padding: 0; }
+.garden-room-list li { border-bottom: 1px solid var(--rule); margin: 0; padding: 1rem 0; }
+.garden-room-title { font-weight: 600; }
+.garden-room-summary { color: var(--faint); font-size: .96rem; margin: .25rem 0 0; }
+.garden-series-link { color: var(--faint); font-size: .82rem; letter-spacing: .12em;
+  text-transform: uppercase; }
+.garden-lede {
+  border-left: 3px solid var(--accent);
+  color: var(--faint);
+  font-size: 1.24rem;
+  font-style: italic;
+  line-height: 1.62;
+  margin: 1.5rem 0 2.2rem;
+  padding: .35rem 0 .35rem 1.35rem;
+}
+.garden-corridors {
+  margin: 1.15rem 0 2.65rem;
+}
+.garden-corridor-list {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: .55rem .62rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.garden-corridor-list li { display: flex; margin: 0; max-width: 100%; }
+.garden-corridor {
+  align-items: center;
+  background: var(--accent-soft);
+  border: 1px solid var(--accent);
+  border-radius: 3px;
+  color: var(--accent);
+  display: inline-flex;
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .73rem;
+  font-weight: 700;
+  letter-spacing: .075em;
+  line-height: 1.35;
+  max-width: 100%;
+  min-height: 2.05rem;
+  overflow-wrap: anywhere;
+  padding: .34rem .72rem .3rem;
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-transform: uppercase;
+  text-underline-offset: .22em;
+}
+.garden-corridor:visited { color: var(--accent); }
+.garden-corridor:hover,
+.garden-corridor:focus-visible {
+  background: var(--accent);
+  color: var(--paper);
+}
+.garden-corridor:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+.garden-series-plate {
+  --plate-accent: var(--accent);
+  border: 1px solid var(--rule);
+  border-top: 3px solid var(--plate-accent);
+  margin: .25rem 0 2.8rem;
+  overflow: hidden;
+  position: relative;
+}
+.garden-series-plate--foundations { --plate-accent: #496f76; }
+.garden-series-plate--story-of-ai { --plate-accent: #526d9a; }
+.garden-series-plate--instrument { --plate-accent: #745779; }
+.garden-series-plate--strange-loops { --plate-accent: #866448; }
+.garden-series-plate--bridge { --plate-accent: #697044; }
+.garden-series-plate--power { --plate-accent: #8f3b26; }
+.garden-series-plate--time-future { --plate-accent: #416778; }
+[data-theme="dark"] .garden-series-plate { --plate-accent: var(--accent); }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .garden-series-plate { --plate-accent: var(--accent); }
+}
+.garden-series-plate-media {
+  aspect-ratio: 16 / 9;
+  background: var(--accent-soft);
+  overflow: hidden;
+  position: relative;
+}
+.garden-series-plate-media::after {
+  background:
+    linear-gradient(90deg, var(--paper) 0, transparent 24%, transparent 76%, var(--paper) 100%),
+    linear-gradient(0deg, var(--paper) 0, transparent 32%);
+  content: "";
+  inset: 0;
+  opacity: .24;
+  pointer-events: none;
+  position: absolute;
+}
+.garden-series-plate picture,
+.garden-series-card picture { display: block; height: 100%; }
+.garden-series-plate img {
+  display: block;
+  filter: saturate(.82) contrast(1.03);
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+.garden-series-plate figcaption {
+  align-items: baseline;
+  background: var(--paper);
+  border-top: 1px solid var(--rule);
+  display: grid;
+  gap: .25rem 1rem;
+  grid-template-columns: auto 1fr;
+  padding: .78rem 1rem .85rem;
+}
+.garden-series-plate-kicker {
+  color: var(--plate-accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+.garden-series-plate figcaption strong { font-size: 1rem; font-weight: 600; }
+.garden-series-plate-terms {
+  color: var(--faint);
+  font-size: .82rem;
+  grid-column: 2;
+  margin: 0;
+}
+.garden-visual {
+  background:
+    radial-gradient(circle at 92% 8%, var(--accent-soft), transparent 30%),
+    linear-gradient(135deg, transparent 0 72%, var(--accent-soft) 72% 72.4%, transparent 72.4%);
+  border: 1px solid var(--rule);
+  border-top: 3px solid var(--accent);
+  margin: 1.25rem 0 2.5rem;
+  overflow: hidden;
+  padding: clamp(1.1rem, 2.7vw, 1.75rem);
+  position: relative;
+}
+.garden-visual::before {
+  background-image:
+    linear-gradient(var(--rule) 1px, transparent 1px),
+    linear-gradient(90deg, var(--rule) 1px, transparent 1px);
+  background-size: 2.25rem 2.25rem;
+  content: "";
+  inset: 0;
+  opacity: .13;
+  pointer-events: none;
+  position: absolute;
+}
+.garden-visual > * { position: relative; }
+.garden-visual-head {
+  align-items: baseline;
+  display: grid;
+  gap: .45rem 1rem;
+  grid-template-columns: auto 1fr;
+  margin-bottom: 1.2rem;
+}
+.garden-visual-kicker {
+  color: var(--accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .68rem;
+  font-weight: 700;
+  letter-spacing: .17em;
+  margin: 0;
+  text-transform: uppercase;
+}
+.garden-visual-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  line-height: 1.28;
+  margin: 0;
+}
+.garden-visual-as-of {
+  color: var(--faint);
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: .72rem;
+  letter-spacing: .08em;
+  margin: 0;
+  text-transform: uppercase;
+  white-space: normal;
+}
+.garden-visual-items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.garden-visual-item {
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  margin: 0;
+  min-width: 0;
+  padding: .8rem .9rem;
+}
+.garden-visual-item-label {
+  display: block;
+  font-size: .96rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+.garden-visual-item-detail {
+  color: var(--faint);
+  display: block;
+  font-size: .9rem;
+  line-height: 1.45;
+  margin-top: .27rem;
+}
+.garden-visual-item-meta {
+  color: var(--accent);
+  display: block;
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: .72rem;
+  letter-spacing: .08em;
+  margin-bottom: .38rem;
+  text-transform: uppercase;
+}
+.garden-visual-caption {
+  border-top: 1px solid var(--rule);
+  color: var(--faint);
+  display: grid;
+  font-size: .84rem;
+  font-style: italic;
+  gap: .55rem 1rem;
+  grid-template-columns: minmax(0, 1fr) auto;
+  line-height: 1.45;
+  margin: 1.15rem 0 0;
+  padding-top: .75rem;
+}
+.garden-visual-evidence {
+  color: var(--accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .72rem;
+  font-style: normal;
+  font-weight: 650;
+  letter-spacing: .04em;
+  white-space: nowrap;
+}
+.garden-visual-evidence a {
+  color: inherit;
+  text-decoration-thickness: 1px;
+  text-underline-offset: .18em;
+}
+.garden-visual--sequence .garden-visual-items,
+.garden-visual--contrast .garden-visual-items,
+.garden-visual--constellation .garden-visual-items {
+  display: grid;
+  gap: .65rem;
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+}
+.garden-visual--sequence .garden-visual-items { counter-reset: garden-step; }
+.garden-visual--sequence .garden-visual-item {
+  counter-increment: garden-step;
+  padding-top: 2.35rem;
+  position: relative;
+}
+.garden-visual--sequence .garden-visual-item::before {
+  color: var(--accent);
+  content: counter(garden-step, decimal-leading-zero);
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: .68rem;
+  left: .9rem;
+  letter-spacing: .08em;
+  position: absolute;
+  top: .72rem;
+}
+.garden-visual--layers .garden-visual-items { display: grid; gap: .45rem; }
+.garden-visual--layers .garden-visual-item {
+  border-left: clamp(.24rem, .55vw, .48rem) solid var(--accent);
+  display: grid;
+  gap: .15rem 1rem;
+  grid-template-columns: minmax(8rem, .4fr) 1fr;
+}
+.garden-visual--layers .garden-visual-item:nth-child(2) { margin-left: 1.5%; }
+.garden-visual--layers .garden-visual-item:nth-child(3) { margin-left: 3%; }
+.garden-visual--layers .garden-visual-item:nth-child(4) { margin-left: 4.5%; }
+.garden-visual--layers .garden-visual-item:nth-child(5) { margin-left: 6%; }
+.garden-visual--layers .garden-visual-item:nth-child(6) { margin-left: 7.5%; }
+.garden-visual--timeline .garden-visual-items {
+  display: grid;
+  gap: 0;
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+}
+.garden-visual--timeline .garden-visual-item {
+  border-width: 1px 0 0 1px;
+  padding-top: 1.35rem;
+  position: relative;
+}
+.garden-visual--timeline .garden-visual-item::before {
+  background: var(--accent);
+  border: 3px solid var(--paper);
+  border-radius: 50%;
+  content: "";
+  height: .72rem;
+  left: -.4rem;
+  position: absolute;
+  top: -.4rem;
+  width: .72rem;
+}
+.garden-visual--contrast .garden-visual-item:nth-child(odd) { border-top: 2px solid var(--ink); }
+.garden-visual--contrast .garden-visual-item:nth-child(even) { border-top: 2px solid var(--accent); }
+.garden-visual--constellation .garden-visual-items {
+  align-items: stretch;
+  position: relative;
+}
+.garden-visual--constellation .garden-visual-item {
+  border-top: 2px solid var(--accent);
+  box-shadow: 0 .2rem 0 rgba(18, 31, 31, .04);
+  padding-top: 1.35rem;
+  position: relative;
+}
+.garden-visual--constellation .garden-visual-item::before {
+  background: var(--paper);
+  border: 2px solid var(--accent);
+  border-radius: 50%;
+  content: "";
+  height: .55rem;
+  left: calc(50% - .36rem);
+  position: absolute;
+  top: -.38rem;
+  width: .55rem;
+}
+.garden-visual--constellation .garden-visual-item:nth-child(even) { margin-top: .8rem; }
+.garden-series-gallery {
+  display: grid;
+  gap: .8rem;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  margin: 1.5rem 0 3rem;
+}
+.garden-series-card {
+  border: 1px solid var(--rule);
+  color: var(--ink);
+  display: grid;
+  grid-template-rows: 7.5rem auto;
+  overflow: hidden;
+  text-decoration: none;
+}
+.garden-series-card img {
+  height: 100%;
+  object-fit: cover;
+  transition: transform .25s ease;
+  width: 100%;
+}
+.garden-series-card span {
+  border-top: 1px solid var(--rule);
+  font-size: .9rem;
+  font-weight: 600;
+  padding: .65rem .75rem;
+}
+.garden-series-card:hover { border-color: var(--accent); color: var(--accent); }
+.garden-series-card:hover img { transform: scale(1.025); }
+@media (prefers-reduced-motion: reduce) {
+  .garden-series-card img { transition: none; }
+}
+.garden-tags { color: var(--faint); font-size: .82rem; margin-top: 2.2rem; }
+.garden-nav { border-top: 1px solid var(--rule); display: flex; gap: 1rem;
+  justify-content: space-between; margin-top: 2.5rem; padding-top: 1rem; }
+.garden-nav a { max-width: 48%; text-decoration: none; }
+.garden-nav .next { margin-left: auto; text-align: right; }
+.garden-table-wrap { overflow-x: auto; margin: 1.35rem 0; }
+.garden-table { border-collapse: collapse; font-size: .92rem; line-height: 1.45; width: 100%; }
+.garden-table th, .garden-table td { border: 1px solid var(--rule); padding: .55rem .65rem;
+  text-align: left; vertical-align: top; }
+.garden-table th { background: var(--accent-soft); }
+.garden-toc {
+  border-left: 1px solid var(--rule);
+  max-height: calc(100vh - 3rem);
+  overflow: auto;
+  padding: .1rem 0 .75rem 1.3rem;
+  position: sticky;
+  top: 1.5rem;
+}
+.garden-toc-title {
+  color: var(--accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .2em;
+  margin: 0 0 1.15rem;
+  text-transform: uppercase;
+}
+.garden-toc-title::before { content: "☰"; font-size: .8em; margin-right: .65rem; }
+.garden-toc-list { list-style: none; margin: 0; padding: 0; }
+.garden-toc-sublist { list-style: none; margin: 0; padding: 0; }
+.garden-toc-list li { margin: 0; }
+.garden-toc-list a {
+  border-left: 2px solid transparent;
+  color: var(--ink);
+  display: block;
+  font-size: .91rem;
+  line-height: 1.42;
+  margin-left: -1.4rem;
+  padding: .42rem .45rem .42rem 1.3rem;
+  text-decoration: none;
+}
+.garden-toc-list .level-3 a {
+  color: var(--faint);
+  font-size: .86rem;
+  font-style: italic;
+  padding-left: 2.15rem;
+}
+.garden-toc-list a:hover,
+.garden-toc-list a:focus-visible,
+.garden-toc-list a[aria-current="location"] {
+  border-left-color: var(--accent);
+  color: var(--accent);
+}
+.garden-toc-list a[aria-current="location"] { font-weight: 600; }
+.garden-toc-inline { display: none; }
+.garden-layout article :is(h2, h3):target,
+.garden-series:target h2 { color: var(--accent); }
+a.pending { color: var(--faint); text-decoration-style: dashed; }
+a.pending::after { content: " · pending"; font-size: .7em; letter-spacing: .06em;
+  text-transform: uppercase; }
+@media (min-width: 72.01em) {
+  body.garden-page-body > .masthead {
+    align-items: center;
+    column-gap: 2rem;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    margin-bottom: 3.5rem;
+    padding: 1.25rem 0;
+    text-align: left;
+  }
+  body.garden-page-body > .masthead .wordmark { justify-self: start; }
+  body.garden-page-body > .masthead .tagline { justify-self: center; margin: 0; }
+  body.garden-page-body > .masthead nav { justify-self: end; margin: 0; }
+}
+@media (max-width: 72em) {
+  .garden-layout,
+  .garden-index-layout { display: block; }
+  .garden-toc { display: none; }
+  .garden-toc-inline {
+    border: 1px solid var(--rule);
+    display: block;
+    margin: 1.5rem 0 2.4rem;
+    padding: .8rem 1rem;
+  }
+  .garden-toc-inline summary {
+    color: var(--accent);
+    cursor: pointer;
+    font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: .78rem;
+    font-weight: 700;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+  }
+  .garden-toc-inline .garden-toc-list { margin-top: .7rem; }
+  .garden-toc-inline .garden-toc-list a { margin-left: 0; padding-left: .75rem; }
+  .garden-toc-inline .garden-toc-list .level-3 a { padding-left: 1.6rem; }
+}
+@media (max-width: 40em) {
+  body.garden-page-body { font-size: 1.03rem; padding: 1rem 1.05rem 3rem; }
+  .garden-layout .article-title,
+  .garden-intro .article-title { font-size: clamp(2.15rem, 11vw, 3.15rem); }
+  .garden-lede { font-size: 1.1rem; padding-left: 1rem; }
+  .garden-corridors { margin-bottom: 2rem; }
+  .garden-corridor-list { gap: .45rem; }
+  .garden-corridor {
+    font-size: .68rem;
+    min-height: 2.35rem;
+    padding: .3rem .58rem .27rem;
+  }
+  .garden-series-plate-media { aspect-ratio: 16 / 9; }
+  .garden-series-plate figcaption { display: block; }
+  .garden-series-plate figcaption strong { display: block; margin-top: .22rem; }
+  .garden-series-plate-terms { display: block; margin-top: .25rem; }
+  .garden-visual { margin-left: -.15rem; margin-right: -.15rem; padding: 1rem; }
+  .garden-visual-head { display: block; }
+  .garden-visual-title { margin-top: .25rem; }
+  .garden-visual-as-of { margin-top: .35rem; }
+  .garden-visual-caption { grid-template-columns: 1fr; }
+  .garden-visual-evidence { white-space: normal; }
+  .garden-visual--sequence .garden-visual-items,
+  .garden-visual--contrast .garden-visual-items,
+  .garden-visual--constellation .garden-visual-items,
+  .garden-visual--timeline .garden-visual-items { grid-template-columns: 1fr; }
+  .garden-visual--layers .garden-visual-item:nth-child(n) { display: block; margin-left: 0; }
+  .garden-visual--timeline .garden-visual-item { border-width: 0 0 0 1px; }
+  .garden-visual--timeline .garden-visual-item::before { left: -.4rem; top: .9rem; }
+  .garden-visual--constellation .garden-visual-item:nth-child(even) { margin-top: 0; }
+  .garden-series-gallery { grid-template-columns: 1fr; }
+  .garden-nav { flex-direction: column; }
+  .garden-nav a { max-width: none; }
+  .garden-nav .next { margin-left: 0; text-align: left; }
+}
+@media print {
+  a.pending::after { content: " (pending)"; }
+  .garden-layout, .garden-index-layout { display: block; }
+  .garden-toc, .garden-toc-inline { display: none; }
+  .garden-series-card img { display: none; }
+  .garden-series-card { grid-template-rows: auto; }
+}
+</style>
+</head>
+<body class="garden-page-body">
+<button class="theme-toggle" aria-label="Toggle light and dark" onclick="
+  (function () {
+    var d = document.documentElement;
+    var cur = d.getAttribute('data-theme');
+    if (!cur) { cur = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'; }
+    var next = cur === 'dark' ? 'light' : 'dark';
+    d.setAttribute('data-theme', next);
+    try { localStorage.setItem('darshan-theme', next); } catch (e) {}
+  })();
+">◐</button>
+
+<header class="masthead">
+  <h1 class="wordmark"><a href="../index.html">DARSHAN</a></h1>
+  <p class="tagline">A signal of clear seeing in an age of information overload</p>
+  <nav>
+    <a href="../index.html">Articles</a>
+    <a href="index.html">Garden</a>
+    <a href="../about.html">About</a>
+  </nav>
+</header>
+
+<main>
+<div class="garden-layout">
+<article data-garden-room="meaning-of-time" data-garden-outline>
+<p class="garden-series-link"><a href="index.html#time-future">Time and the Future</a></p>
+<p class="article-meta">25 August 2026 · Draft</p>
+<h1 class="article-title">"Time: Kala, Yugas, the Mayan Count, and the Meaning of Time"</h1>
+<div class="draft-banner"><strong>Draft — pending discernment pass.</strong> This room is part of the garden's first planting. It has not been promoted to published status; check its sources and open questions before citing it.</div>
+<p class="garden-lede">Physics says there is no universal now. Human calendars answered a different question — not "what is time" but "what time is it, and what does that mean." This room walks through relativistic time, lived time, the Hindu yuga system, and the Maya Long Count, and shows why every panic is secretly a claim about what time it is.</p>
+<nav class="garden-corridors" aria-label="Explore connected rooms" data-corridor-count="9"><ul class="garden-corridor-list"><li><a class="garden-corridor" href="futurism.html">Futurism Without Prophecy</a></li><li><a class="garden-corridor" href="forecasting.html">Forecasting the Future</a></li><li><a class="garden-corridor" href="the-future.html">The Future</a></li><li><a class="garden-corridor" href="teleology.html">Teleology</a></li><li><a class="garden-corridor" href="attention-economy.html">The Attention Economy</a></li><li><a class="garden-corridor" href="sense-of-self.html">The Sense of Self</a></li><li><a class="garden-corridor" href="what-ai-can-bring.html">What AI Can Bring Humanity</a></li><li><a class="garden-corridor" href="ramana-and-the-traditions.html">Ramana Maharshi and the Inquiry Traditions</a></li><li><a class="garden-corridor" href="trends-gap.html">The Trends Gap: When the Curve Is Not the World</a></li></ul></nav>
+<figure class="garden-series-plate garden-series-plate--time-future">
+<div class="garden-series-plate-media"><picture><source srcset="assets/series/time-future.webp" type="image/webp"><img src="assets/series/time-future.png" alt="Nested engraved time rings opening into several branching forecast paths" width="1672" height="941" loading="eager" decoding="async"></picture></div>
+<figcaption><span class="garden-series-plate-kicker">Visual field</span><strong>Time and the Future</strong><span class="garden-series-plate-terms">kala · yuga · mahayuga · kalpa</span></figcaption>
+</figure>
+<details class="garden-toc-inline"><summary>In this room</summary><ol class="garden-toc-list"><li class="level-2"><a href="#1-three-clocks-that-disagree">1. Three clocks that disagree</a></li><li class="level-2"><a href="#2-kala-time-as-the-thing-that-cooks-you">2. Kala: time as the thing that cooks you</a></li><li class="level-2"><a href="#3-the-long-count-time-as-pure-arithmetic">3. The Long Count: time as pure arithmetic</a></li><li class="level-2"><a href="#4-three-geometries-of-time-side-by-side">4. Three geometries of time, side by side</a></li><li class="level-2"><a href="#5-worked-example-check-the-2012-date-yourself">5. Worked example: check the 2012 date yourself</a></li><li class="level-2"><a href="#6-every-panic-is-secretly-a-claim-about-what-time-it-is">6. Every panic is secretly a claim about what time it is</a></li><li class="level-2"><a href="#7-what-you-can-now-see">7. What you can now see</a></li><li class="level-2"><a href="#open-questions">Open questions</a></li><li class="level-2"><a href="#sources">Sources</a></li></ol></details>
+<p>This is the first room of the time-future wing. Everything else in this wing — <a href="futurism.html">futurism</a>, <a href="forecasting.html">forecasting</a>, <a href="the-future.html">the future</a> — depends on a prior question this room tries to answer honestly: what is time, and what have humans meant when they claimed to know what time it is? Get this room wrong and every prediction downstream inherits the error.</p>
+<h2 id="1-three-clocks-that-disagree">1. Three clocks that disagree</h2>
+<figure class="garden-visual garden-visual--contrast" aria-labelledby="visual-meaning-of-time-1" data-claim-scope="section-synthesis" data-placement-heading="1-three-clocks-that-disagree" data-evidence-headings="1-three-clocks-that-disagree">
+<div class="garden-visual-head"><p class="garden-visual-kicker">Three clocks</p><p class="garden-visual-title" id="visual-meaning-of-time-1">Time does not tell one story</p></div>
+<ul class="garden-visual-items" role="list"><li class="garden-visual-item"><strong class="garden-visual-item-label">Relativistic</strong><span class="garden-visual-item-detail">Clock rate depends on gravity and motion, and simultaneity has no universal frame.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Entropic</strong><span class="garden-visual-item-detail">Macroscopic systems overwhelmingly move toward more probable, disordered configurations.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Attentional</strong><span class="garden-visual-item-detail">Felt duration thickens or collapses with what attention and memory register.</span></li></ul>
+<figcaption class="garden-visual-caption"><span>Physical rate, macroscopic direction, and lived duration are distinct clocks that do not reduce cleanly to one another.</span><span class="garden-visual-evidence">Drawn from: <a href="#1-three-clocks-that-disagree">1. Three clocks that disagree</a></span></figcaption>
+</figure>
+<p>Start with a real experiment. In February 2022, a team at JILA in Boulder, Colorado — Bothwell and colleagues, publishing in <em>Nature</em> — measured time running at different rates across a single cloud of strontium atoms about one millimeter tall. The top of the cloud aged faster than the bottom. The difference was a fractional frequency shift on the order of 10⁻¹⁹ — Einstein's gravitational time dilation, resolved across a millimeter. Twelve years earlier, Chou and colleagues at NIST had already shown the same effect over a height difference of less than a meter, using optical clocks (<em>Science</em>, 2010).</p>
+<p>This is not a curiosity. Your phone's GPS only works because the satellite clocks are permanently corrected for relativity; without the correction, positions would drift by kilometers within a day.</p>
+<p>So the first clock is the physicist's clock, and it tells you something uncomfortable: there is no single, universal time flowing at the same rate everywhere. Time runs at different speeds depending on where you stand and how fast you move. Relativity goes further: there is no physically privileged "now" shared across the universe. Two events that are simultaneous for you are not simultaneous for an observer moving past you, and neither of you is wrong. Physicists call the picture this suggests the <strong>block universe</strong> — the idea that past, present, and future all exist as a four-dimensional whole, and the "flow" of time is something observers experience rather than something the universe does. Whether the block picture is <em>true</em> is contested, and this room will keep it labeled as contested. But the relativity of simultaneity itself is measured fact.</p>
+<p>The second clock is thermodynamic. Almost every fundamental equation of physics works the same forwards and backwards; the one thing that reliably distinguishes past from future at the macroscopic scale is entropy — disorder increases. A dropped glass shatters; shards never leap back into a glass. This one-way street is called the <strong>arrow of time</strong>, and the standard account, going back to Ludwig Boltzmann, is that it is statistical: there are astronomically more disordered configurations than ordered ones, so systems drift toward disorder. Weak interactions do exhibit fundamental T violation, so entropy is not the only time-asymmetry in every physical law; it is the robust statistical arrow of everyday macroscopic physics. Carlo Rovelli's <em>The Order of Time</em> (Italian 2017, English 2018) presses this to its edge: the flow of time, he argues, emerges from our blurred, macroscopic view of the world — from what we cannot see, not from what is fundamentally there. That is a serious physicist's hypothesis, not settled physics, and it should be held that way.</p>
+<p>The third clock is the one you actually live by, and it is the strangest of the three. It is the clock of felt duration — the hour that vanishes in absorbing work, the minute that stretches in fear. Psychologists distinguish <em>prospective</em> timing (tracking duration while it happens) from <em>retrospective</em> timing (judging afterwards how long something took), and the two systems disagree systematically: a boring interval feels long while you are in it and short in memory, because memory estimates duration by how much noteworthy material got stored. The general shape of the finding is robust; the mechanisms are still argued over. What matters for this room is the direction of the dependency: lived time is a function of attention. Where attention is dense, time thickens. Where attention is absent, time collapses. Hold that; it comes back at the end.</p>
+<p>Three clocks: relativistic time, entropic time, attentional time. They do not reduce to each other cleanly. Every calendar humans ever built was an attempt to lay a meaningful grid over this three-way disagreement.</p>
+<h2 id="2-kala-time-as-the-thing-that-cooks-you">2. Kala: time as the thing that cooks you</h2>
+<p>The Sanskrit word <strong>kala</strong> means time — and also death, and also the dark one who devours. In the Mahabharata, when Krishna reveals his universal form, he announces himself with the line Oppenheimer later made famous, and the word he uses is <em>kala</em>: "I am time, destroyer of worlds." In the Indian frame, time is not a neutral coordinate. It is an agent. It ripens things — the same verb is used for cooking. Fruit ripens, karma ripens, ages ripen and rot.</p>
+<p>This framing produced the most audacious timescale humans built before modern cosmology: the <strong>yuga</strong> system. A yuga is a world-age, and the classical scheme — attested in the Manusmriti (1.81–86), the Mahabharata (Shanti Parva), the Surya Siddhanta, and the Puranas — nests four of them in a strict 4:3:2:1 ratio:</p>
+<ul><li><strong>Satya (Krita) Yuga</strong> — 1,728,000 years. The age of truth; the cosmic order at full strength.</li><li><strong>Treta Yuga</strong> — 1,296,000 years. Virtue stands on three legs of four.</li><li><strong>Dvapara Yuga</strong> — 864,000 years. Two legs.</li><li><strong>Kali Yuga</strong> — 432,000 years. One leg. The degenerate age: short lives, weak memory, religion for sale.</li></ul>
+<p>The four together make a <strong>mahayuga</strong> of 4,320,000 years. A thousand mahayugas make a <strong>kalpa</strong> — a single day of Brahma — 4.32 billion years, which happens to land eerily near the actual age of the Earth (about 4.54 billion years). That is a coincidence worth noticing and not worth building on; the tradition arrived at its numbers through numerology on the sacred number 432 and divine-year multipliers of 360, not through geology.</p>
+<p>Two features of this system matter for the meaning of time.</p>
+<p>First, it is <em>cyclical and directional at once</em>. Within a mahayuga, time runs downhill — each age is shorter, darker, faster than the last. But the wheel turns: after every Kali Yuga, a new Satya Yuga dawns. Decline is real and also not final. This is a different geometry from both the Christian line (creation → judgment, once) and the modern progress line (worse → better, indefinitely). If you want the room on where directional time comes from and what it commits you to, that is <a href="teleology.html">teleology</a>.</p>
+<p>Second, it comes with a timestamp. Tradition — via the Surya Siddhanta's calculations — dates the start of the current Kali Yuga to midnight between February 17 and 18, 3102 BCE, pegged to a conjunction at Krishna's death. That puts us a little over 5,100 years into a 432,000-year age. Sit with the arithmetic: on the classical account, the degenerate age is barely one percent elapsed. Anyone telling you the yugas predict an imminent golden dawn is not reading the classical numbers.</p>
+<p>Which is exactly why the numbers got revised. In 1894, Swami Sri Yukteswar Giri — the guru of Yogananda, who wrote <em>Autobiography of a Yogi</em> — published <em>The Holy Science</em>, arguing the Puranic figures were a medieval miscalculation. His scheme compresses the full cycle to 24,000 years, tied to the precession of the equinoxes, running in a descending arc and an ascending arc of 12,000 years each. On his chronology we are not in Kali Yuga at all: an ascending Dwapara Yuga began around 1699 CE, and things are slowly improving toward a Treta age around 4099 CE. Notice what happened there. Same tradition, same vocabulary, and the revision flips the meaning of the present moment from "deep in the dark age" to "early in the recovery." Nothing about the world changed. The claim about <em>what time it is</em> changed, and the mood changed with it. File that; it is the room's central mechanism.</p>
+<h2 id="3-the-long-count-time-as-pure-arithmetic">3. The Long Count: time as pure arithmetic</h2>
+<p>Half a world away, the Maya built something structurally different: not a cosmology of quality, but a place-value number system for days — the <strong>Long Count</strong>. Its units:</p>
+<ul><li>1 <strong>kʼin</strong> = 1 day</li><li>1 <strong>winal</strong> = 20 kʼin = 20 days</li><li>1 <strong>tun</strong> = 18 winal = 360 days</li><li>1 <strong>kʼatun</strong> = 20 tun = 7,200 days</li><li>1 <strong>baktun</strong> = 20 kʼatun = 144,000 days</li></ul>
+<p>A Long Count date is just these units read like an odometer: 9.12.11.5.18 means 9 baktuns, 12 katuns, 11 tuns, 5 winals, 18 days since the base date. The base date — written 13.0.0.0.0, the mythological creation — corresponds to August 11, 3114 BCE in the proleptic Gregorian calendar, under the standard Goodman–Martínez–Thompson correlation (Julian day number 584,283). Note the near-coincidence with the Kali Yuga epoch of 3102 BCE: two civilizations that never met both anchored their eras to the thirty-second century BCE, for entirely unrelated internal reasons. Coincidences like this are magnets for crankery; the honest reading is that both cultures back-calculated a mythic zero point, and the fourth millennium BCE is simply where the arithmetic put it.</p>
+<p>On December 21, 2012, the count completed its 13th baktun and rolled over. You may remember what the modern world did with that date: apocalypse documentaries, a disaster movie, survival bunkers. Here is what the Maya themselves left us about it: two inscriptions. Tortuguero Monument 6 and La Corona Hieroglyphic Stairway 2 mention the 13-baktun completion — as a calendar station, a big round number, roughly the way we treat a millennium. No catastrophe, no world's end. Mayanist scholars were unanimous, and blunt: the 2012 apocalypse was, in one curator's words, "a complete fabrication and a chance for a lot of people to cash in."</p>
+<p>The cleanest disproof is in the Maya's own math. At Palenque, the inscriptions of Pakal's Temple of the Inscriptions project forward to October 21, 4772 CE — an 80th calendar-round anniversary of the king's accession, calculated with distance numbers, more than 2,700 years past 2012. The scribes who supposedly predicted the end of the world in 2012 were scheduling commemorations for the forty-eighth century. The calendar had a rollover; the culture had no doomsday. The doomsday was imported — mostly from twentieth-century Western writers grafting millenarian expectations onto Maya arithmetic. The panic said nothing about Maya time and everything about the people panicking.</p>
+<h2 id="4-three-geometries-of-time-side-by-side">4. Three geometries of time, side by side</h2>
+<figure class="garden-visual garden-visual--constellation" aria-labelledby="visual-meaning-of-time-2" data-claim-scope="section-synthesis" data-placement-heading="4-three-geometries-of-time-side-by-side" data-evidence-headings="4-three-geometries-of-time-side-by-side">
+<div class="garden-visual-head"><p class="garden-visual-kicker">Three geometries, three jobs</p><p class="garden-visual-title" id="visual-meaning-of-time-2">A clock can measure duration or locate meaning</p></div>
+<ul class="garden-visual-items" role="list"><li class="garden-visual-item"><strong class="garden-visual-item-label">Physical time</strong><span class="garden-visual-item-detail">Relativity supplies no global now, while entropy supplies a statistical arrow; the purpose is measurement and prediction.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Yuga cycles</strong><span class="garden-visual-item-detail">Nested ages locate the present inside a moral and spiritual gradient, with the quality of an age doing the interpretive work.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Long Count</strong><span class="garden-visual-item-detail">An odometer-like day count anchors history and ritual to a fixed era, and its rollovers do not end the count.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Audit question</strong><span class="garden-visual-item-detail">Ask whether a dated-looking statement is chronometric evidence or a meaning claim wearing the grammar of a measurement.</span></li></ul>
+<figcaption class="garden-visual-caption"><span>These systems disagree because they were built to answer different questions, not because they are rival versions of one calendar.</span><span class="garden-visual-evidence">Drawn from: <a href="#4-three-geometries-of-time-side-by-side">4. Three geometries of time, side by side</a></span></figcaption>
+</figure>
+<div class="garden-table-wrap"><table class="garden-table"><thead><tr><th></th><th>Physics (relativistic + entropic)</th><th>Yuga system</th><th>Maya Long Count</th></tr></thead><tbody><tr><td><strong>Shape</strong></td><td>Four-dimensional; no global now; one statistical arrow</td><td>Nested cycles with internal decline (wheel of wheels)</td><td>Linear day-count with odometer rollovers</td></tr><tr><td><strong>Base unit</strong></td><td>The second (defined by a cesium transition)</td><td>The divine year (360 human years)</td><td>The day</td></tr><tr><td><strong>Largest named span</strong></td><td>Age of universe, ~13.8 billion years (measured)</td><td>Kalpa: 4.32 billion years (one day of Brahma)</td><td>Higher-order cycles above the baktun (piktun and beyond, rarely used)</td></tr><tr><td><strong>Where "now" sits</strong></td><td>Nowhere special; "now" is observer-relative</td><td>~5,100 years into Kali Yuga (classical) or ascending Dwapara (Yukteswar)</td><td>13.0.0.0.0 rolled over in 2012; the count continues</td></tr><tr><td><strong>What the system is for</strong></td><td>Prediction and measurement</td><td>Locating the present in a moral-spiritual gradient</td><td>Anchoring royal history and ritual to a fixed era</td></tr><tr><td><strong>Quality of time</strong></td><td>None; instants are interchangeable</td><td>Central; each age has a moral texture</td><td>Mixed; day-signs carry augural meaning, the count itself is neutral</td></tr><tr><td><strong>Failure mode</strong></td><td>Mistaking the metric for the meaning</td><td>Declinism; reading the present as fated decay</td><td>Rollover panic imported by outsiders</td></tr></tbody></table></div>
+<p>The table's punchline: only physics refuses to say what time <em>means</em> — and only physics gets the durations right. The calendars got the durations wrong or unfalsifiable, and were never really about duration. They are instruments for answering a question physics does not ask: <em>what kind of moment is this, and how should someone alive in it act?</em></p>
+<h2 id="5-worked-example-check-the-2012-date-yourself">5. Worked example: check the 2012 date yourself</h2>
+<figure class="garden-visual garden-visual--sequence" aria-labelledby="visual-meaning-of-time-3" data-claim-scope="section-synthesis" data-placement-heading="5-worked-example-check-the-2012-date-yourself" data-evidence-headings="5-worked-example-check-the-2012-date-yourself">
+<div class="garden-visual-head"><p class="garden-visual-kicker">Calendar audit</p><p class="garden-visual-title" id="visual-meaning-of-time-3">Two routes to December 21, 2012</p></div>
+<ol class="garden-visual-items" role="list"><li class="garden-visual-item"><strong class="garden-visual-item-label">Count</strong><span class="garden-visual-item-detail">Thirteen baktuns at 144,000 days each equal 1,872,000 days.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Approximate</strong><span class="garden-visual-item-detail">Dividing by 365.2425 gives about 5,125.26 mean Gregorian years.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Walk</strong><span class="garden-visual-item-detail">Adding that span to August 11, 3114 BCE, with no year zero, reaches December 21, 2012.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Cross-check</strong><span class="garden-visual-item-detail">JDN 584,283 plus 1,872,000 equals JDN 2,456,283, the same date.</span></li></ol>
+<figcaption class="garden-visual-caption"><span>The Long Count conversion closes through ordinary arithmetic and an independent Julian-day check.</span><span class="garden-visual-evidence">Drawn from: <a href="#5-worked-example-check-the-2012-date-yourself">5. Worked example: check the 2012 date yourself</a></span></figcaption>
+</figure>
+<p>Don't take the Long Count on authority. The arithmetic is short enough to verify at a desk.</p>
+<p>The claim: 13.0.0.0.0 (August 11, 3114 BCE) plus 13 baktuns lands on December 21, 2012.</p>
+<p><strong>Step 1.</strong> Thirteen baktuns in days:</p>
+<pre><code>13 × 144,000 = 1,872,000 days</code></pre>
+<p><strong>Step 2.</strong> Convert to years using the mean Gregorian year (365.2425 days):</p>
+<pre><code>1,872,000 ÷ 365.2425 ≈ 5,125.26 years</code></pre>
+<p><strong>Step 3.</strong> Walk the calendar. From August 11, 3114 BCE, adding 5,125 years — remembering there is no year zero, so 3114 BCE + 5,125 years lands in 2012 CE (−3113 + 5,125 = 2012 astronomically) — brings you to August 2012; the remaining ~0.36 year (about 132 days) carries you from August 11 to December 21, 2012.</p>
+<p><strong>Step 4.</strong> Cross-check with Julian day numbers, which is how scholars actually do it. The GMT correlation sets 13.0.0.0.0 at JDN 584,283. Add 1,872,000: JDN 2,456,283. Any astronomical converter (the US Naval Observatory publishes one) turns JDN 2,456,283 into December 21, 2012. Two independent routes, same date.</p>
+<p>Now run the same audit on the yuga math and watch it behave differently:</p>
+<pre><code>Kali Yuga: 432,000 years
+Elapsed since 3102 BCE (as of 2026 CE): 3101 + 2026 = 5,127 years
+Fraction elapsed: 5,127 ÷ 432,000 ≈ 1.19%
+Remaining: ~426,873 years</code></pre>
+<p>The Long Count check <em>closes</em> — arithmetic in, verified date out. The yuga check doesn't close and can't: there is no observation that could confirm or refute a 432,000-year age; the number's provenance is sacred numerology (4:3:2:1 on a base of 432,000, itself 1,200 divine years of 360). This is the practical difference between a chronometric claim and a meaning claim wearing chronometric clothes. Learning to feel that difference in your hands is worth more than any single fact in this room, and it is the core skill of <a href="forecasting.html">forecasting</a>.</p>
+<h2 id="6-every-panic-is-secretly-a-claim-about-what-time-it-is">6. Every panic is secretly a claim about what time it is</h2>
+<p>Now the pattern this room exists to teach.</p>
+<p>Take any collective panic or euphoria and strip away the content. Underneath, you will find a timestamp claim — an assertion about where the present sits on some master timeline:</p>
+<ul><li><strong>2012:</strong> "The count runs out <em>now</em>." False on its face — the Maya count doesn't run out, it rolls over — but the panic needed the timestamp, so the timestamp was fabricated.</li><li><strong>Kali Yuga declinism:</strong> "We live in the degenerate age; decay is fated." A mood presented as a date. Yukteswar's 1894 revision shows how load-bearing the timestamp is: move the marker, and the same tradition yields optimism instead.</li><li><strong>Millenarianism in general:</strong> from medieval year-1000 anxieties to Millerite predictions in the 1840s, the structure repeats — a community decides it is <em>late</em>, very late, on a cosmic clock, and behavior reorganizes around the lateness.</li><li><strong>The Doomsday Clock:</strong> the Bulletin of the Atomic Scientists made the mechanism explicit in June 1947 by building a rhetorical instrument that <em>only</em> makes timestamp claims. It started at seven minutes to midnight. On January 27, 2026, it was set to 85 seconds to midnight — the closest in its history — citing the Ukraine war, the U.S. and Israeli strikes on Iran, India–Pakistan border clashes, and the expiration of the New START treaty on February 5, 2026. Whatever you think of the epistemics, notice the form: the entire argument is compressed into a claim about what time it is.</li><li><strong>AI discourse:</strong> listen to any argument about advanced AI and you will hear the same form. "We are early." "We are out of time." "Timelines are short." The substantive disagreements — about capabilities, alignment, governance — get compressed into positions on a countdown, and the countdown then does the arguing. The rooms on <a href="the-future.html">the future</a> and <a href="what-ai-can-bring.html">what AI can bring</a> try to decompress that; the room on the <a href="attention-economy.html">attention economy</a> covers why urgency-claims outcompete calibrated ones in any feed optimized for engagement.</li></ul>
+<p>There is also a deliberate counter-move, worth knowing because it proves the mechanism runs both ways. The Long Now Foundation — the clock project Danny Hillis conceived in 1989 — is building a mechanical clock designed to run for 10,000 years, inside a mountain in the Sierra Diablo range near Van Horn, Texas, funded by Jeff Bezos at $42 million. A prototype first ticked on December 31, 1999, and stands in the Science Museum, London. The foundation writes years with five digits — 02026 — a typographical assertion that we are <em>early</em>, that the present is the ancient past of a long civilization. You can argue with the claim. But it is the same move as the Doomsday Clock in reverse: engineer an artifact whose only function is to change your sense of what time it is, and let behavior follow.</p>
+<p>So here is the tool this room hands you. When a panic or a euphoria arrives — in a headline, a forecast, a sermon, a pitch deck — extract the timestamp claim and audit it like the Long Count arithmetic in section 5. Whose timeline is this? What is its zero point, and how was that chosen? Is the claim chronometric (checkable, like JDN 2,456,283) or a meaning claim in chronometric clothes (like 432,000 years)? Was the marker ever moved before, and by whom, and what changed when it moved? None of this tells you whether the underlying concern is valid — the Doomsday Clock may well be pointing at something real. It tells you where the argument actually lives, which is the precondition for judging it. That skill transfers directly to <a href="futurism.html">futurism</a> and to the <a href="trends-gap.html">trends gap</a>.</p>
+<h2 id="7-what-you-can-now-see">7. What you can now see</h2>
+<p>You came in with one clock. You leave with three — relativistic, entropic, attentional — and the knowledge that they do not agree. You can now place the two greatest pre-modern time systems accurately: the yuga scheme as a moral geometry of cyclic-but-directional time, over 5,100 years into its classical Kali age with 98.8% remaining, revised in 1894 into an optimistic 24,000-year precessional cycle; the Maya Long Count as pure day-arithmetic whose 2012 "apocalypse" was a modern fabrication refuted by the Maya's own inscriptions scheduling events in 4772 CE. You can verify a Long Count date with a four-line calculation, and you can tell the difference between a duration claim that closes under audit and a meaning claim that cannot. And you have the extraction tool: every panic is secretly a claim about what time it is — find the timestamp, find its provenance, and you have found the argument.</p>
+<p>Where the wing goes from here: <a href="forecasting.html">forecasting</a> takes the audit skill and formalizes it — calibration, base rates, what actually makes predictions good. <a href="futurism.html">Futurism</a> is the history of professional timestamp-claiming. <a href="the-future.html">The future</a> is where this garden makes its own claims and tries to keep them honest.</p>
+<p>One more thing before you go. Physics, pressed hard, cannot find the <em>now</em> — relativity relativizes it, and in some serious approaches to quantum gravity, time drops out of the fundamental equations entirely, which is Rovelli's territory. Yet the now is the one thing no experience is ever without. What supplies the felt now? This garden's speculative wager is attention. Duration thickens where attention is dense; perhaps the present is not found in the physics but constituted wherever something attends. A calendar, seen this way, is crystallized collective attention — a civilization's decision about which moments count, hardened into stone stairways and bronze gears. That makes "what time is it?" a question about minds before it is a question about clocks; the room on the <a href="sense-of-self.html">sense of self</a> picks up what attending is, and <a href="ramana-and-the-traditions.html">Ramana and the traditions</a> records what the contemplative lineages — including the one that named time <em>kala</em>, the devourer — claimed to find when attention turned around to look at the thing that keeps asking.</p>
+<h2 id="open-questions">Open questions</h2>
+<p><strong>Established (FACT):</strong> Time dilation is measured, down to millimeter height differences (JILA 2022) and sub-meter differences (NIST 2010); GPS depends on relativistic corrections. There is no observer-independent universal "now"; simultaneity is relative. The thermodynamic arrow — entropy increase — is the only robust time-asymmetry in macroscopic physics. The classical yuga durations (1,728,000 / 1,296,000 / 864,000 / 432,000 years, mahayuga 4.32 million, kalpa 4.32 billion) and the Kali Yuga epoch of 3102 BCE are what the Sanskrit sources say. The Long Count units, the 3114 BCE base date under the GMT correlation, the December 21, 2012 rollover, and the absence of any Maya doomsday prophecy are settled Mayanist scholarship.</p>
+<p><strong>Contested (HYPOTHESIS):</strong> Whether the block universe is the right ontology — whether the future "already exists" — is a live dispute among physicists and philosophers (eternalism vs. presentism vs. growing-block); relativity motivates but does not strictly force eternalism. Whether time is fundamental at all, or emerges thermodynamically from a deeper timeless physics, as Rovelli and others argue, is open research, not consensus. Exactly how attention and memory produce felt duration — the mechanism, not the correlation — is unsettled cognitive science.</p>
+<p><strong>Speculation worth holding (WILD):</strong> That the felt present is <em>constituted by</em> attention — that "now" is what attending is like from the inside, and would be absent from a universe with no attenders — is a philosophical wager this garden takes seriously without pretending it is demonstrated. And the oldest wild claim in this room belongs to the traditions themselves: that time, kala, is not ultimately real — that what attention finds when it turns fully around is something time happens <em>in</em>. No measurement bears on that today. It is recorded here as what the lineages claim, at exactly that weight.</p>
+<h2 id="sources">Sources</h2>
+<ul><li>Bothwell, T., et al., "Resolving the gravitational redshift across a millimetre-scale atomic sample," <em>Nature</em> 602 (Feb 16, 2022) — millimeter-scale time dilation, shift ~10⁻¹⁹; confirmed via NIST's announcement (nist.gov, Feb 2022).</li><li>Chou, C. W., Hume, D. B., Rosenband, T., Wineland, D. J., "Optical Clocks and Relativity," <em>Science</em> 329:1630–1633 (2010) — sub-meter time dilation.</li><li>Carlo Rovelli, <em>L'ordine del tempo</em> (2017); English <em>The Order of Time</em> (Penguin, 2018).</li><li>Yuga durations, ratios, and the 3102 BCE Kali epoch: Manusmriti 1.81–86; Mahabharata, Shanti Parva; Surya Siddhanta ch. 1; Bhagavata Purana 3.11.18–20 and 12.4.2 (verified against the Wikipedia "Yuga cycle" synthesis of these sources, 2026-08-25).</li><li>Sri Yukteswar Giri, <em>The Holy Science</em> (<em>Kaivalya Darsanam</em>, 1894) — 24,000-year precessional yuga cycle; ascending Dwapara from ~1699 CE.</li><li>Long Count units, GMT correlation (JDN 584,283), base date August 11, 3114 BCE, 2012 rollover, Tortuguero Monument 6, La Corona Hieroglyphic Stairway 2, Palenque projection to October 21, 4772 CE: verified against the Wikipedia "Mesoamerican Long Count calendar" article and its cited Mayanist scholarship (2026-08-25).</li><li>Doomsday Clock: founded June 1947 at seven minutes to midnight; set to 85 seconds on January 27, 2026 — Bulletin of the Atomic Scientists (verified 2026-08-25).</li><li>Clock of the Long Now: Danny Hillis (conceived 1989); Sierra Diablo site near Van Horn, Texas; $42M from Jeff Bezos; prototype first ticked December 31, 1999, Science Museum, London (verified 2026-08-25).</li><li>Prospective vs. retrospective duration judgment: standard cognitive-psychology literature (e.g., work in the tradition of Zakay &amp; Block). Stated here at textbook level; no specific effect sizes claimed.</li><li>Age of Earth (~4.54 billion years) and universe (~13.8 billion years): standard geochronology and cosmology values, stated for comparison only.</li></ul>
+<p><em>Written by Claude (Fable 5), an AI, for the Darshan garden. John Shrader (Dhyana), founder and publisher of record, answers for every word published here. Errors are corrected on the face of the page, dated.</em></p>
+<p class="garden-tags"><strong>Topics:</strong> time · kala · yuga · long count · maya · calendars · entropy · relativity · forecasting</p>
+<nav class="garden-nav" aria-label="Rooms"><a class="next" href="futurism.html">Futurism Without Prophecy →</a></nav>
+</article>
+<aside class="garden-toc" aria-label="In this room"><nav aria-label="Page sections"><p class="garden-toc-title">In this room</p><ol class="garden-toc-list"><li class="level-2"><a href="#1-three-clocks-that-disagree">1. Three clocks that disagree</a></li><li class="level-2"><a href="#2-kala-time-as-the-thing-that-cooks-you">2. Kala: time as the thing that cooks you</a></li><li class="level-2"><a href="#3-the-long-count-time-as-pure-arithmetic">3. The Long Count: time as pure arithmetic</a></li><li class="level-2"><a href="#4-three-geometries-of-time-side-by-side">4. Three geometries of time, side by side</a></li><li class="level-2"><a href="#5-worked-example-check-the-2012-date-yourself">5. Worked example: check the 2012 date yourself</a></li><li class="level-2"><a href="#6-every-panic-is-secretly-a-claim-about-what-time-it-is">6. Every panic is secretly a claim about what time it is</a></li><li class="level-2"><a href="#7-what-you-can-now-see">7. What you can now see</a></li><li class="level-2"><a href="#open-questions">Open questions</a></li><li class="level-2"><a href="#sources">Sources</a></li></ol></nav></aside>
+</div>
+</main>
+
+<footer>
+  <p>Darshan · seeing clearly after the feed</p>
+  <p>No feed. No analytics. No trackers. Finite editions, read at your own pace.</p>
+  <p style="opacity:.7">Darshan v0.0.0.1 · a beginning, built to grow</p>
+</footer>
+<script>
+/* Local section highlighting only. No network requests, analytics, or storage. */
+(function () {
+  var scope = document.querySelector("[data-garden-outline]");
+  if (!scope) return;
+  var sections = Array.prototype.slice.call(scope.querySelectorAll("h2[id], h3[id], section[id]"));
+  var links = Array.prototype.slice.call(document.querySelectorAll('.garden-toc-list a[href^="#"]'));
+  if (!sections.length || !links.length) return;
+  var queued = false;
+  function update() {
+    queued = false;
+    var threshold = Math.max(96, window.innerHeight * .22);
+    var current = sections[0].id;
+    sections.forEach(function (section) {
+      if (section.getBoundingClientRect().top <= threshold) current = section.id;
+    });
+    links.forEach(function (link) {
+      var active = link.getAttribute("href") === "#" + current;
+      if (active) link.setAttribute("aria-current", "location");
+      else link.removeAttribute("aria-current");
+    });
+  }
+  function requestUpdate() {
+    if (!queued) {
+      queued = true;
+      window.requestAnimationFrame(update);
+    }
+  }
+  document.addEventListener("scroll", requestUpdate, {passive: true});
+  window.addEventListener("resize", requestUpdate);
+  window.addEventListener("hashchange", requestUpdate);
+  update();
+})();
+</script>
+</body>
+</html>

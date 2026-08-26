@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Recursion · Darshan Garden</title>
+<meta name="description" content="A function that calls itself sounds like a trick until you watch it run. This room walks through recursion from a five-line factorial to Gödel numbering and programs that print their own source code — every example runnable on your machine. The pattern underneath is one pattern, and it is the load-bearing pattern of the whole strange-loops series.">
+<link rel="stylesheet" href="../style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ccircle cx='8' cy='8' r='6' fill='none' stroke='%238f3b26' stroke-width='1.5'/%3E%3Ccircle cx='8' cy='8' r='2' fill='%238f3b26'/%3E%3C/svg%3E">
+<script>
+/* Theme memory. No analytics, no trackers. */
+(function () {
+  try {
+    var t = localStorage.getItem("darshan-theme");
+    if (t) document.documentElement.setAttribute("data-theme", t);
+  } catch (e) {}
+})();
+</script>
+<style>
+/* Garden-only layout. Kept here so the publication stylesheet remains shared. */
+body.garden-page-body {
+  max-width: none;
+  padding: 1.5rem clamp(1.25rem, 3.5vw, 4rem) 4rem;
+  font-size: 1.125rem;
+}
+body.garden-page-body > main,
+body.garden-page-body > .masthead,
+body.garden-page-body > footer {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 94rem;
+}
+.garden-layout,
+.garden-index-layout {
+  align-items: start;
+  display: grid;
+  gap: clamp(2.75rem, 5vw, 5rem);
+  grid-template-columns: minmax(0, 64rem) minmax(17rem, 20rem);
+  justify-content: center;
+}
+.garden-layout article,
+.garden-index-main { min-width: 0; }
+.garden-layout .article-title,
+.garden-intro .article-title {
+  font-size: clamp(2.65rem, 3.55vw, 4rem);
+  letter-spacing: -.025em;
+  line-height: 1.06;
+  max-width: 24ch;
+}
+.garden-layout article h2 {
+  font-size: 1.48rem;
+  line-height: 1.3;
+  margin-top: 3.2rem;
+  scroll-margin-top: 1.5rem;
+}
+.garden-layout article h3 {
+  font-size: 1.16rem;
+  margin-top: 2.35rem;
+  scroll-margin-top: 1.5rem;
+}
+.garden-intro { margin-bottom: 2.4rem; }
+.garden-series { margin: 2.8rem 0; scroll-margin-top: 1rem; }
+.garden-series h2 { border-bottom: 1px solid var(--rule); padding-bottom: .45rem; }
+.garden-room-list { list-style: none; margin: 0; padding: 0; }
+.garden-room-list li { border-bottom: 1px solid var(--rule); margin: 0; padding: 1rem 0; }
+.garden-room-title { font-weight: 600; }
+.garden-room-summary { color: var(--faint); font-size: .96rem; margin: .25rem 0 0; }
+.garden-series-link { color: var(--faint); font-size: .82rem; letter-spacing: .12em;
+  text-transform: uppercase; }
+.garden-lede {
+  border-left: 3px solid var(--accent);
+  color: var(--faint);
+  font-size: 1.24rem;
+  font-style: italic;
+  line-height: 1.62;
+  margin: 1.5rem 0 2.2rem;
+  padding: .35rem 0 .35rem 1.35rem;
+}
+.garden-corridors {
+  margin: 1.15rem 0 2.65rem;
+}
+.garden-corridor-list {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: .55rem .62rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.garden-corridor-list li { display: flex; margin: 0; max-width: 100%; }
+.garden-corridor {
+  align-items: center;
+  background: var(--accent-soft);
+  border: 1px solid var(--accent);
+  border-radius: 3px;
+  color: var(--accent);
+  display: inline-flex;
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .73rem;
+  font-weight: 700;
+  letter-spacing: .075em;
+  line-height: 1.35;
+  max-width: 100%;
+  min-height: 2.05rem;
+  overflow-wrap: anywhere;
+  padding: .34rem .72rem .3rem;
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-transform: uppercase;
+  text-underline-offset: .22em;
+}
+.garden-corridor:visited { color: var(--accent); }
+.garden-corridor:hover,
+.garden-corridor:focus-visible {
+  background: var(--accent);
+  color: var(--paper);
+}
+.garden-corridor:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+.garden-series-plate {
+  --plate-accent: var(--accent);
+  border: 1px solid var(--rule);
+  border-top: 3px solid var(--plate-accent);
+  margin: .25rem 0 2.8rem;
+  overflow: hidden;
+  position: relative;
+}
+.garden-series-plate--foundations { --plate-accent: #496f76; }
+.garden-series-plate--story-of-ai { --plate-accent: #526d9a; }
+.garden-series-plate--instrument { --plate-accent: #745779; }
+.garden-series-plate--strange-loops { --plate-accent: #866448; }
+.garden-series-plate--bridge { --plate-accent: #697044; }
+.garden-series-plate--power { --plate-accent: #8f3b26; }
+.garden-series-plate--time-future { --plate-accent: #416778; }
+[data-theme="dark"] .garden-series-plate { --plate-accent: var(--accent); }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .garden-series-plate { --plate-accent: var(--accent); }
+}
+.garden-series-plate-media {
+  aspect-ratio: 16 / 9;
+  background: var(--accent-soft);
+  overflow: hidden;
+  position: relative;
+}
+.garden-series-plate-media::after {
+  background:
+    linear-gradient(90deg, var(--paper) 0, transparent 24%, transparent 76%, var(--paper) 100%),
+    linear-gradient(0deg, var(--paper) 0, transparent 32%);
+  content: "";
+  inset: 0;
+  opacity: .24;
+  pointer-events: none;
+  position: absolute;
+}
+.garden-series-plate picture,
+.garden-series-card picture { display: block; height: 100%; }
+.garden-series-plate img {
+  display: block;
+  filter: saturate(.82) contrast(1.03);
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+.garden-series-plate figcaption {
+  align-items: baseline;
+  background: var(--paper);
+  border-top: 1px solid var(--rule);
+  display: grid;
+  gap: .25rem 1rem;
+  grid-template-columns: auto 1fr;
+  padding: .78rem 1rem .85rem;
+}
+.garden-series-plate-kicker {
+  color: var(--plate-accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+.garden-series-plate figcaption strong { font-size: 1rem; font-weight: 600; }
+.garden-series-plate-terms {
+  color: var(--faint);
+  font-size: .82rem;
+  grid-column: 2;
+  margin: 0;
+}
+.garden-visual {
+  background:
+    radial-gradient(circle at 92% 8%, var(--accent-soft), transparent 30%),
+    linear-gradient(135deg, transparent 0 72%, var(--accent-soft) 72% 72.4%, transparent 72.4%);
+  border: 1px solid var(--rule);
+  border-top: 3px solid var(--accent);
+  margin: 1.25rem 0 2.5rem;
+  overflow: hidden;
+  padding: clamp(1.1rem, 2.7vw, 1.75rem);
+  position: relative;
+}
+.garden-visual::before {
+  background-image:
+    linear-gradient(var(--rule) 1px, transparent 1px),
+    linear-gradient(90deg, var(--rule) 1px, transparent 1px);
+  background-size: 2.25rem 2.25rem;
+  content: "";
+  inset: 0;
+  opacity: .13;
+  pointer-events: none;
+  position: absolute;
+}
+.garden-visual > * { position: relative; }
+.garden-visual-head {
+  align-items: baseline;
+  display: grid;
+  gap: .45rem 1rem;
+  grid-template-columns: auto 1fr;
+  margin-bottom: 1.2rem;
+}
+.garden-visual-kicker {
+  color: var(--accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .68rem;
+  font-weight: 700;
+  letter-spacing: .17em;
+  margin: 0;
+  text-transform: uppercase;
+}
+.garden-visual-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  line-height: 1.28;
+  margin: 0;
+}
+.garden-visual-as-of {
+  color: var(--faint);
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: .72rem;
+  letter-spacing: .08em;
+  margin: 0;
+  text-transform: uppercase;
+  white-space: normal;
+}
+.garden-visual-items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.garden-visual-item {
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  margin: 0;
+  min-width: 0;
+  padding: .8rem .9rem;
+}
+.garden-visual-item-label {
+  display: block;
+  font-size: .96rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+.garden-visual-item-detail {
+  color: var(--faint);
+  display: block;
+  font-size: .9rem;
+  line-height: 1.45;
+  margin-top: .27rem;
+}
+.garden-visual-item-meta {
+  color: var(--accent);
+  display: block;
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: .72rem;
+  letter-spacing: .08em;
+  margin-bottom: .38rem;
+  text-transform: uppercase;
+}
+.garden-visual-caption {
+  border-top: 1px solid var(--rule);
+  color: var(--faint);
+  display: grid;
+  font-size: .84rem;
+  font-style: italic;
+  gap: .55rem 1rem;
+  grid-template-columns: minmax(0, 1fr) auto;
+  line-height: 1.45;
+  margin: 1.15rem 0 0;
+  padding-top: .75rem;
+}
+.garden-visual-evidence {
+  color: var(--accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .72rem;
+  font-style: normal;
+  font-weight: 650;
+  letter-spacing: .04em;
+  white-space: nowrap;
+}
+.garden-visual-evidence a {
+  color: inherit;
+  text-decoration-thickness: 1px;
+  text-underline-offset: .18em;
+}
+.garden-visual--sequence .garden-visual-items,
+.garden-visual--contrast .garden-visual-items,
+.garden-visual--constellation .garden-visual-items {
+  display: grid;
+  gap: .65rem;
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+}
+.garden-visual--sequence .garden-visual-items { counter-reset: garden-step; }
+.garden-visual--sequence .garden-visual-item {
+  counter-increment: garden-step;
+  padding-top: 2.35rem;
+  position: relative;
+}
+.garden-visual--sequence .garden-visual-item::before {
+  color: var(--accent);
+  content: counter(garden-step, decimal-leading-zero);
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: .68rem;
+  left: .9rem;
+  letter-spacing: .08em;
+  position: absolute;
+  top: .72rem;
+}
+.garden-visual--layers .garden-visual-items { display: grid; gap: .45rem; }
+.garden-visual--layers .garden-visual-item {
+  border-left: clamp(.24rem, .55vw, .48rem) solid var(--accent);
+  display: grid;
+  gap: .15rem 1rem;
+  grid-template-columns: minmax(8rem, .4fr) 1fr;
+}
+.garden-visual--layers .garden-visual-item:nth-child(2) { margin-left: 1.5%; }
+.garden-visual--layers .garden-visual-item:nth-child(3) { margin-left: 3%; }
+.garden-visual--layers .garden-visual-item:nth-child(4) { margin-left: 4.5%; }
+.garden-visual--layers .garden-visual-item:nth-child(5) { margin-left: 6%; }
+.garden-visual--layers .garden-visual-item:nth-child(6) { margin-left: 7.5%; }
+.garden-visual--timeline .garden-visual-items {
+  display: grid;
+  gap: 0;
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+}
+.garden-visual--timeline .garden-visual-item {
+  border-width: 1px 0 0 1px;
+  padding-top: 1.35rem;
+  position: relative;
+}
+.garden-visual--timeline .garden-visual-item::before {
+  background: var(--accent);
+  border: 3px solid var(--paper);
+  border-radius: 50%;
+  content: "";
+  height: .72rem;
+  left: -.4rem;
+  position: absolute;
+  top: -.4rem;
+  width: .72rem;
+}
+.garden-visual--contrast .garden-visual-item:nth-child(odd) { border-top: 2px solid var(--ink); }
+.garden-visual--contrast .garden-visual-item:nth-child(even) { border-top: 2px solid var(--accent); }
+.garden-visual--constellation .garden-visual-items {
+  align-items: stretch;
+  position: relative;
+}
+.garden-visual--constellation .garden-visual-item {
+  border-top: 2px solid var(--accent);
+  box-shadow: 0 .2rem 0 rgba(18, 31, 31, .04);
+  padding-top: 1.35rem;
+  position: relative;
+}
+.garden-visual--constellation .garden-visual-item::before {
+  background: var(--paper);
+  border: 2px solid var(--accent);
+  border-radius: 50%;
+  content: "";
+  height: .55rem;
+  left: calc(50% - .36rem);
+  position: absolute;
+  top: -.38rem;
+  width: .55rem;
+}
+.garden-visual--constellation .garden-visual-item:nth-child(even) { margin-top: .8rem; }
+.garden-series-gallery {
+  display: grid;
+  gap: .8rem;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  margin: 1.5rem 0 3rem;
+}
+.garden-series-card {
+  border: 1px solid var(--rule);
+  color: var(--ink);
+  display: grid;
+  grid-template-rows: 7.5rem auto;
+  overflow: hidden;
+  text-decoration: none;
+}
+.garden-series-card img {
+  height: 100%;
+  object-fit: cover;
+  transition: transform .25s ease;
+  width: 100%;
+}
+.garden-series-card span {
+  border-top: 1px solid var(--rule);
+  font-size: .9rem;
+  font-weight: 600;
+  padding: .65rem .75rem;
+}
+.garden-series-card:hover { border-color: var(--accent); color: var(--accent); }
+.garden-series-card:hover img { transform: scale(1.025); }
+@media (prefers-reduced-motion: reduce) {
+  .garden-series-card img { transition: none; }
+}
+.garden-tags { color: var(--faint); font-size: .82rem; margin-top: 2.2rem; }
+.garden-nav { border-top: 1px solid var(--rule); display: flex; gap: 1rem;
+  justify-content: space-between; margin-top: 2.5rem; padding-top: 1rem; }
+.garden-nav a { max-width: 48%; text-decoration: none; }
+.garden-nav .next { margin-left: auto; text-align: right; }
+.garden-table-wrap { overflow-x: auto; margin: 1.35rem 0; }
+.garden-table { border-collapse: collapse; font-size: .92rem; line-height: 1.45; width: 100%; }
+.garden-table th, .garden-table td { border: 1px solid var(--rule); padding: .55rem .65rem;
+  text-align: left; vertical-align: top; }
+.garden-table th { background: var(--accent-soft); }
+.garden-toc {
+  border-left: 1px solid var(--rule);
+  max-height: calc(100vh - 3rem);
+  overflow: auto;
+  padding: .1rem 0 .75rem 1.3rem;
+  position: sticky;
+  top: 1.5rem;
+}
+.garden-toc-title {
+  color: var(--accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .2em;
+  margin: 0 0 1.15rem;
+  text-transform: uppercase;
+}
+.garden-toc-title::before { content: "☰"; font-size: .8em; margin-right: .65rem; }
+.garden-toc-list { list-style: none; margin: 0; padding: 0; }
+.garden-toc-sublist { list-style: none; margin: 0; padding: 0; }
+.garden-toc-list li { margin: 0; }
+.garden-toc-list a {
+  border-left: 2px solid transparent;
+  color: var(--ink);
+  display: block;
+  font-size: .91rem;
+  line-height: 1.42;
+  margin-left: -1.4rem;
+  padding: .42rem .45rem .42rem 1.3rem;
+  text-decoration: none;
+}
+.garden-toc-list .level-3 a {
+  color: var(--faint);
+  font-size: .86rem;
+  font-style: italic;
+  padding-left: 2.15rem;
+}
+.garden-toc-list a:hover,
+.garden-toc-list a:focus-visible,
+.garden-toc-list a[aria-current="location"] {
+  border-left-color: var(--accent);
+  color: var(--accent);
+}
+.garden-toc-list a[aria-current="location"] { font-weight: 600; }
+.garden-toc-inline { display: none; }
+.garden-layout article :is(h2, h3):target,
+.garden-series:target h2 { color: var(--accent); }
+a.pending { color: var(--faint); text-decoration-style: dashed; }
+a.pending::after { content: " · pending"; font-size: .7em; letter-spacing: .06em;
+  text-transform: uppercase; }
+@media (min-width: 72.01em) {
+  body.garden-page-body > .masthead {
+    align-items: center;
+    column-gap: 2rem;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    margin-bottom: 3.5rem;
+    padding: 1.25rem 0;
+    text-align: left;
+  }
+  body.garden-page-body > .masthead .wordmark { justify-self: start; }
+  body.garden-page-body > .masthead .tagline { justify-self: center; margin: 0; }
+  body.garden-page-body > .masthead nav { justify-self: end; margin: 0; }
+}
+@media (max-width: 72em) {
+  .garden-layout,
+  .garden-index-layout { display: block; }
+  .garden-toc { display: none; }
+  .garden-toc-inline {
+    border: 1px solid var(--rule);
+    display: block;
+    margin: 1.5rem 0 2.4rem;
+    padding: .8rem 1rem;
+  }
+  .garden-toc-inline summary {
+    color: var(--accent);
+    cursor: pointer;
+    font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: .78rem;
+    font-weight: 700;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+  }
+  .garden-toc-inline .garden-toc-list { margin-top: .7rem; }
+  .garden-toc-inline .garden-toc-list a { margin-left: 0; padding-left: .75rem; }
+  .garden-toc-inline .garden-toc-list .level-3 a { padding-left: 1.6rem; }
+}
+@media (max-width: 40em) {
+  body.garden-page-body { font-size: 1.03rem; padding: 1rem 1.05rem 3rem; }
+  .garden-layout .article-title,
+  .garden-intro .article-title { font-size: clamp(2.15rem, 11vw, 3.15rem); }
+  .garden-lede { font-size: 1.1rem; padding-left: 1rem; }
+  .garden-corridors { margin-bottom: 2rem; }
+  .garden-corridor-list { gap: .45rem; }
+  .garden-corridor {
+    font-size: .68rem;
+    min-height: 2.35rem;
+    padding: .3rem .58rem .27rem;
+  }
+  .garden-series-plate-media { aspect-ratio: 16 / 9; }
+  .garden-series-plate figcaption { display: block; }
+  .garden-series-plate figcaption strong { display: block; margin-top: .22rem; }
+  .garden-series-plate-terms { display: block; margin-top: .25rem; }
+  .garden-visual { margin-left: -.15rem; margin-right: -.15rem; padding: 1rem; }
+  .garden-visual-head { display: block; }
+  .garden-visual-title { margin-top: .25rem; }
+  .garden-visual-as-of { margin-top: .35rem; }
+  .garden-visual-caption { grid-template-columns: 1fr; }
+  .garden-visual-evidence { white-space: normal; }
+  .garden-visual--sequence .garden-visual-items,
+  .garden-visual--contrast .garden-visual-items,
+  .garden-visual--constellation .garden-visual-items,
+  .garden-visual--timeline .garden-visual-items { grid-template-columns: 1fr; }
+  .garden-visual--layers .garden-visual-item:nth-child(n) { display: block; margin-left: 0; }
+  .garden-visual--timeline .garden-visual-item { border-width: 0 0 0 1px; }
+  .garden-visual--timeline .garden-visual-item::before { left: -.4rem; top: .9rem; }
+  .garden-visual--constellation .garden-visual-item:nth-child(even) { margin-top: 0; }
+  .garden-series-gallery { grid-template-columns: 1fr; }
+  .garden-nav { flex-direction: column; }
+  .garden-nav a { max-width: none; }
+  .garden-nav .next { margin-left: 0; text-align: left; }
+}
+@media print {
+  a.pending::after { content: " (pending)"; }
+  .garden-layout, .garden-index-layout { display: block; }
+  .garden-toc, .garden-toc-inline { display: none; }
+  .garden-series-card img { display: none; }
+  .garden-series-card { grid-template-rows: auto; }
+}
+</style>
+</head>
+<body class="garden-page-body">
+<button class="theme-toggle" aria-label="Toggle light and dark" onclick="
+  (function () {
+    var d = document.documentElement;
+    var cur = d.getAttribute('data-theme');
+    if (!cur) { cur = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'; }
+    var next = cur === 'dark' ? 'light' : 'dark';
+    d.setAttribute('data-theme', next);
+    try { localStorage.setItem('darshan-theme', next); } catch (e) {}
+  })();
+">◐</button>
+
+<header class="masthead">
+  <h1 class="wordmark"><a href="../index.html">DARSHAN</a></h1>
+  <p class="tagline">A signal of clear seeing in an age of information overload</p>
+  <nav>
+    <a href="../index.html">Articles</a>
+    <a href="index.html">Garden</a>
+    <a href="../about.html">About</a>
+  </nav>
+</header>
+
+<main>
+<div class="garden-layout">
+<article data-garden-room="recursion" data-garden-outline>
+<p class="garden-series-link"><a href="index.html#strange-loops">Strange Loops</a></p>
+<p class="article-meta">25 August 2026 · Draft</p>
+<h1 class="article-title">Recursion</h1>
+<div class="draft-banner"><strong>Draft — pending discernment pass.</strong> This room is part of the garden's first planting. It has not been promoted to published status; check its sources and open questions before citing it.</div>
+<p class="garden-lede">A function that calls itself sounds like a trick until you watch it run. This room walks through recursion from a five-line factorial to Gödel numbering and programs that print their own source code — every example runnable on your machine. The pattern underneath is one pattern, and it is the load-bearing pattern of the whole strange-loops series.</p>
+<nav class="garden-corridors" aria-label="Explore connected rooms" data-corridor-count="10"><ul class="garden-corridor-list"><li><a class="garden-corridor" href="geb.html">Gödel, Escher, Bach</a></li><li><a class="garden-corridor" href="hofstadter.html">Douglas Hofstadter</a></li><li><a class="garden-corridor" href="aunt-hillary.html">Aunt Hillary: The Ant Colony That Thinks</a></li><li><a class="garden-corridor" href="recursion-and-life.html">Recursion and Life</a></li><li><a class="garden-corridor" href="sense-of-self.html">The Sense of Self</a></li><li><a class="garden-corridor" href="what-self-means.html">What "Self" Means</a></li><li><a class="garden-corridor" href="programming.html">What Programming Is</a></li><li><a class="garden-corridor" href="compilers.html">Compilers — How Text Becomes a Machine</a></li><li><a class="garden-corridor" href="algorithms-new-vision.html">A New Vision for Algorithms</a></li><li><a class="garden-corridor" href="evolution.html">Evolution: The Algorithm That Needs No Designer</a></li></ul></nav>
+<figure class="garden-series-plate garden-series-plate--strange-loops">
+<div class="garden-series-plate-media"><picture><source srcset="assets/series/strange-loops.webp" type="image/webp"><img src="assets/series/strange-loops.png" alt="An engraved living loop joins a cell, ant colony, eye, and recursive architecture." width="1672" height="941" loading="eager" decoding="async"></picture></div>
+<figcaption><span class="garden-series-plate-kicker">Visual field</span><strong>Strange Loops</strong><span class="garden-series-plate-terms">recursion · base case · fixed point · godel numbering</span></figcaption>
+</figure>
+<details class="garden-toc-inline"><summary>In this room</summary><ol class="garden-toc-list"><li class="level-2"><a href="#1-a-function-that-calls-itself">1. A function that calls itself</a></li><li class="level-2"><a href="#2-what-happens-without-a-floor">2. What happens without a floor</a></li><li class="level-2"><a href="#3-recursion-almost-didn-t-make-it-into-programming">3. Recursion almost didn't make it into programming</a></li><li class="level-2"><a href="#4-recursion-and-induction-are-the-same-move-in-opposite-directions">4. Recursion and induction are the same move in opposite directions</a></li><li class="level-2"><a href="#5-fixed-points-recursion-without-names">5. Fixed points: recursion without names</a></li><li class="level-2"><a href="#6-g-del-numbering-made-friendly">6. Gödel numbering, made friendly</a></li><li class="level-2"><a href="#7-quines-the-worked-example">7. Quines: the worked example</a></li><li class="level-2"><a href="#8-one-pattern-four-costumes">8. One pattern, four costumes</a></li><li class="level-2"><a href="#conclusion">Conclusion</a></li><li class="level-2"><a href="#open-questions">Open questions</a></li><li class="level-2"><a href="#sources">Sources</a></li></ol></details>
+<p><strong>Where you are.</strong> This is the workshop room of the strange-loops wing. <a href="geb.html">GEB</a> and <a href="hofstadter.html">Hofstadter</a> give you the grand tour of self-reference — this room gives you the tools. Everything here runs: you can paste every example into a terminal and watch it work. When you leave, <a href="recursion-and-life.html">recursion-and-life</a> takes the pattern into biology, and <a href="sense-of-self.html">sense-of-self</a> takes it somewhere stranger.</p>
+<h2 id="1-a-function-that-calls-itself">1. A function that calls itself</h2>
+<figure class="garden-visual garden-visual--sequence" aria-labelledby="visual-recursion-1" data-claim-scope="section-synthesis" data-placement-heading="1-a-function-that-calls-itself" data-evidence-headings="1-a-function-that-calls-itself">
+<div class="garden-visual-head"><p class="garden-visual-kicker">A spiral with a floor</p><p class="garden-visual-title" id="visual-recursion-1">Factorial descends by calls and returns by multiplication</p></div>
+<ol class="garden-visual-items" role="list"><li class="garden-visual-item"><span class="garden-visual-item-meta">stack opens</span><strong class="garden-visual-item-label">Call 5</strong><span class="garden-visual-item-detail">factorial(5) holds “5 ×” and asks the smaller problem factorial(4).</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">5 → 4 → 3 → 2 → 1</span><strong class="garden-visual-item-label">Descend</strong><span class="garden-visual-item-detail">Each unfinished call holds its multiplier while asking for n−1.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">the floor</span><strong class="garden-visual-item-label">Base case</strong><span class="garden-visual-item-detail">factorial(0) returns 1 directly and makes no recursive call.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">stack closes</span><strong class="garden-visual-item-label">Unwind</strong><span class="garden-visual-item-detail">Waiting frames resolve in reverse order as 1, 2, 6, 24, then 120.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">120</span><strong class="garden-visual-item-label">Result</strong><span class="garden-visual-item-detail">The apparent circle is a finite spiral grounded by shrinking input plus a direct answer.</span></li></ol>
+<figcaption class="garden-visual-caption"><span>Recursion is legitimate because every call shrinks the problem and the base case stops the descent.</span><span class="garden-visual-evidence">Drawn from: <a href="#1-a-function-that-calls-itself">1. A function that calls itself</a></span></figcaption>
+</figure>
+<p>Here is the whole idea in five lines of Python:</p>
+<pre><code>def factorial(n):
+    if n == 0:
+        return 1
+    return n * factorial(n - 1)
+
+print(factorial(5))   # 120</code></pre>
+<p><code>factorial</code> is defined in terms of <code>factorial</code>. Read that again, because it should bother you a little. In ordinary life, a definition that uses the word it's defining is a failure — "recursion: see recursion" is a joke, not a definition. So why does this work?</p>
+<p>Trace it by hand. That's the skill this room teaches, and it's worth doing once slowly, on paper:</p>
+<pre><code>factorial(5)
+= 5 * factorial(4)
+= 5 * (4 * factorial(3))
+= 5 * (4 * (3 * factorial(2)))
+= 5 * (4 * (3 * (2 * factorial(1))))
+= 5 * (4 * (3 * (2 * (1 * factorial(0)))))
+= 5 * (4 * (3 * (2 * (1 * 1))))      ← the base case fires
+= 120</code></pre>
+<p>Two things make this legitimate instead of circular. First, every call is to a <em>smaller</em> problem: <code>factorial(5)</code> doesn't ask about <code>factorial(5)</code>, it asks about <code>factorial(4)</code>. Second, there's a floor: <code>factorial(0)</code> doesn't ask about anything. It just answers.</p>
+<p>That floor is called the <strong>base case</strong> — the input for which the function answers directly, without calling itself. A recursive definition is really two clauses working together: a base case that grounds it, and a recursive case that says how to reduce any other input toward the ground. Miss either one and the whole thing collapses. So: <strong>recursion</strong> is defining or solving something in terms of smaller instances of itself, with a base case that stops the descent. The circle is legitimate because it's not a circle. It's a spiral, and the spiral hits the floor.</p>
+<h2 id="2-what-happens-without-a-floor">2. What happens without a floor</h2>
+<p>Delete the base case and run it. Seriously — this is a good crash to have on your record:</p>
+<pre><code>def f(n):
+    return f(n + 1)
+
+f(0)</code></pre>
+<p>On CPython this dies with <code>RecursionError: maximum recursion depth exceeded</code>. I ran it before writing this sentence; the default limit is 1000 calls (<code>sys.getrecursionlimit()</code> will tell you yours, and the <a href="https://docs.python.org/3/library/sys.html">Python docs</a> explain that the limit exists to keep runaway recursion from overflowing the C stack and crashing the interpreter outright).</p>
+<p>Why 1000 calls and not forever? Because each unfinished call costs memory. When <code>factorial(5)</code> calls <code>factorial(4)</code>, the outer call isn't done — it's waiting, holding onto <code>5 *</code> until the answer comes back. The machine keeps every waiting call on a <strong>call stack</strong>, a pile of unfinished business. Recursion without a base case grows the pile forever, and the pile is physical. Infinite regress isn't a philosophical problem for a computer; it's an out-of-memory error.</p>
+<p>This gives you a hard question to ask of any self-referential structure you ever meet, in any field: <em>where is the base case, and who pays for the stack?</em> An argument that justifies itself by itself, a definition that never bottoms out, a system whose description requires the whole system — the recursion lens tells you exactly what to check. Either there's a floor, or something, somewhere, is paying for an ever-growing pile of unfinished business.</p>
+<h2 id="3-recursion-almost-didn-t-make-it-into-programming">3. Recursion almost didn't make it into programming</h2>
+<p>It feels inevitable now. It wasn't.</p>
+<p>John McCarthy built Lisp partly because the list-processing tools bolted onto Fortran in the late 1950s couldn't express recursion, and his 1960 paper wears the commitment in its title: <a href="https://en.wikipedia.org/wiki/Lisp_(programming_language)">"Recursive Functions of Symbolic Expressions and Their Computation by Machine, Part I"</a> (<em>Communications of the ACM</em>, April 1960). For McCarthy, a function calling itself wasn't a stunt — it was the natural way to compute over structures that contain smaller versions of themselves, like lists of lists.</p>
+<p>The same year, recursion nearly got voted out of ALGOL 60, the language whose report shaped almost everything that came after. Procedure recursion <a href="https://en.wikipedia.org/wiki/ALGOL_60">was inserted into the specification at the last minute, against the wishes of some of the committee</a>. The objectors weren't fools: nobody had shown you could implement it efficiently, and a feature you can't implement is a lie in a language report. Then in August 1960, Edsger Dijkstra and Jaap Zonneveld shipped the first working ALGOL 60 compiler — X1 ALGOL 60, for the Electrologica X1 in the Netherlands — recursion included. The technique that made it work is the call stack you just met in section 2. The stack isn't a limitation of recursion; it's the invention that made recursion real.</p>
+<p>There's a lesson here that recurs (sorry) across the garden: the gap between "mathematically obvious" and "actually runs on hardware" is where a lot of real history happens. <a href="compilers.html">Compilers</a> is the room for that gap.</p>
+<h2 id="4-recursion-and-induction-are-the-same-move-in-opposite-directions">4. Recursion and induction are the same move in opposite directions</h2>
+<p>Mathematics had this pattern long before computers. The natural numbers themselves are a recursive definition: zero is a natural number (base case); the successor of a natural number is a natural number (recursive case). That's the whole thing. Every number you've ever counted with is that two-clause definition, unrolled.</p>
+<p>And proof by induction — prove it for 0, prove that truth at <em>n</em> forces truth at <em>n+1</em>, conclude it for all numbers — is the same structure read in the other direction. Recursion <em>descends</em>: to handle 5, reduce to 4, to 3, down to the floor. Induction <em>ascends</em>: establish the floor, then climb. When you write a recursive function and argue it's correct, you are doing an induction proof whether you meant to or not: the base case of your function is the base case of your proof, and "the recursive call works on the smaller input" is your induction hypothesis. One structure, two directions of travel. This is why computer scientists and mathematicians trust recursive definitions completely while everyone else finds them suspicious: they come with a proof method attached.</p>
+<p>It's worth saying what recursion is <em>not</em>, too. Any recursion can be rewritten as a loop with an explicit stack, and any loop as a recursion — the two are equivalent in power. The choice between them is about fit, not strength:</p>
+<div class="garden-table-wrap"><table class="garden-table"><thead><tr><th></th><th>Recursion</th><th>Iteration (loops)</th></tr></thead><tbody><tr><td>Shape of problem it fits</td><td>Problems containing smaller copies of themselves: trees, nested structures, divide-and-conquer</td><td>Flat sequences: do this N times, walk this list</td></tr><tr><td>Where the bookkeeping lives</td><td>Implicit, on the call stack</td><td>Explicit, in your loop variables</td></tr><tr><td>Failure mode</td><td>Stack overflow (Python: <code>RecursionError</code> at depth 1000 by default)</td><td>Infinite loop (spins forever, no crash)</td></tr><tr><td>Termination guarantee</td><td>Base case + shrinking input</td><td>Loop condition + progress toward it</td></tr><tr><td>Proof style it mirrors</td><td>Induction</td><td>Loop invariants</td></tr><tr><td>Cost</td><td>A stack frame per unfinished call</td><td>Usually constant extra memory</td></tr></tbody></table></div>
+<p>When a problem is genuinely self-similar — a directory containing directories, an expression containing expressions, a sorted-merge of two sorted halves — recursion isn't cleverness, it's transcription. The code's shape matches the problem's shape. <a href="algorithms-new-vision.html">Algorithms-new-vision</a> leans on this hard.</p>
+<h2 id="5-fixed-points-recursion-without-names">5. Fixed points: recursion without names</h2>
+<figure class="garden-visual garden-visual--sequence" aria-labelledby="visual-recursion-2" data-claim-scope="section-synthesis" data-placement-heading="5-fixed-points-recursion-without-names" data-evidence-headings="5-fixed-points-recursion-without-names">
+<div class="garden-visual-head"><p class="garden-visual-kicker">Self-reference distilled</p><p class="garden-visual-title" id="visual-recursion-2">A fixed point rebuilds recursion where no function can say its own name</p></div>
+<ol class="garden-visual-items" role="list"><li class="garden-visual-item"><span class="garden-visual-item-meta">rec → n → result</span><strong class="garden-visual-item-label">Remove the name</strong><span class="garden-visual-item-detail">Factorial becomes a step function that receives its recursive continuation as an ordinary parameter.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">definition as transformer</span><strong class="garden-visual-item-label">Improve one layer</strong><span class="garden-visual-item-detail">Given any attempted factorial, the step function returns an attempt correct one level deeper.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">fixed point</span><strong class="garden-visual-item-label">Find the still point</strong><span class="garden-visual-item-detail">A fully correct factorial is unchanged by that transformer: step(fact) = fact.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">Y f = f(Y f)</span><strong class="garden-visual-item-label">Supply self-application</strong><span class="garden-visual-item-detail">The Y combinator packages x(x) so the step function receives its own fixed point without any global name.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">operational boundary</span><strong class="garden-visual-item-label">Respect evaluation</strong><span class="garden-visual-item-detail">Plain Y diverges under eager Python evaluation, so the Z variant delays the self-call behind an argument.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">120 · 3,628,800</span><strong class="garden-visual-item-label">Recursion reappears</strong><span class="garden-visual-item-detail">The resulting anonymous factorial computes 5! and 10! with no function referring to itself by name.</span></li></ol>
+<figcaption class="garden-visual-caption"><span>The construction removes the self-name, turns recursion into an improvement operator, and then manufactures the unchanged function through controlled self-application.</span><span class="garden-visual-evidence">Drawn from: <a href="#5-fixed-points-recursion-without-names">5. Fixed points: recursion without names</a></span></figcaption>
+</figure>
+<p>Now a real question. In the factorial definition, the function calls itself <em>by name</em>. What if you're in a system with no names — where every function is anonymous? Can recursion survive?</p>
+<p>This isn't idle. Lambda calculus, the 1930s mathematical model of computation that underlies functional <a href="programming.html">programming</a>, has exactly this constraint: functions all the way down, no global names, no way for a function to say "me." And recursion survives anyway, through one of the most beautiful constructions in the field.</p>
+<p>First, a definition. A <strong>fixed point</strong> of a function <em>f</em> is a value <em>x</em> that <em>f</em> leaves unchanged: <em>f(x) = x</em>. Zero and one are fixed points of squaring: 0² = 0 and 1² = 1. "Middle" is a fixed point of alphabetizing-then-taking-the-middle-word, if you're lucky. Fixed points are where a transformation's motion stops — the still point of the turning function.</p>
+<p>Here's the connection to recursion. Take factorial and <em>remove its self-reference</em> by making the self a parameter:</p>
+<pre><code>step = lambda rec: lambda n: 1 if n == 0 else n * rec(n - 1)</code></pre>
+<p><code>step</code> isn't factorial. It's a function that, <em>handed any attempt at factorial</em>, returns a slightly better attempt: correct one level deeper. Hand it garbage, get back something right for <code>n = 0</code>. Hand it that, get back something right up to <code>n = 1</code>. And so on. Now ask: what input would <code>step</code> return <em>unchanged</em>? Only a function already correct at every level. The fixed point of <code>step</code> <strong>is</strong> factorial. Recursion, it turns out, was never really about a function calling its own name. It's about a definition being the fixed point of its own improvement step.</p>
+<p>The shock is that a fixed point can be <em>constructed</em>, mechanically, for any such step-function. The lambda-calculus expression usually called the <strong>Y combinator</strong> is commonly attributed to Haskell Curry, though the publication history is messier than that shorthand suggests:</p>
+<p>Y = λf. (λx. f (x x)) (λx. f (x x))</p>
+<p>satisfying Y f = f (Y f) — feed Y any step-function and it hands back that function's fixed point. (Alan Turing published an alternative fixed-point combinator in December 1937, in <a href="https://en.wikipedia.org/wiki/Fixed-point_combinator">"The p-function in λ-K-conversion"</a>, <em>Journal of Symbolic Logic</em>.) Look at Y's body: the self-application <code>x x</code> — a thing applied to itself — appears twice. Self-reference hasn't been eliminated; it's been distilled into one reusable pattern, so no other function ever needs to mention itself.</p>
+<p>And it runs. Python evaluates arguments eagerly, so plain Y loops forever, but its eager-evaluation variant (the Z combinator) works verbatim:</p>
+<pre><code>Z = lambda f: (lambda x: f(lambda v: x(x)(v)))(lambda x: f(lambda v: x(x)(v)))
+fact = Z(lambda rec: lambda n: 1 if n == 0 else n * rec(n - 1))
+print(fact(5))    # 120
+print(fact(10))   # 3628800</code></pre>
+<p>I ran this before writing it down: 120 and 3628800. No function in that code refers to itself by name. Recursion emerged anyway, from self-application alone. Hold onto that: <em>a system with no built-in self-reference can build self-reference out of its own ordinary materials.</em> That sentence is the hinge of the entire strange-loops series.</p>
+<h2 id="6-g-del-numbering-made-friendly">6. Gödel numbering, made friendly</h2>
+<p>The same hinge, one level up: can a system built for one subject end up talking about <em>itself</em>?</p>
+<p>In 1931, Kurt Gödel showed the answer is yes, for arithmetic — the humble theory of whole numbers, plus and times. The paper is <a href="https://en.wikipedia.org/wiki/G%C3%B6del_numbering">"Über formal unentscheidbare Sätze der Principia Mathematica und verwandter Systeme I"</a> (<em>Monatshefte für Mathematik und Physik</em>), and the trick at its heart is a piece of engineering you can fully understand in five minutes.</p>
+<p>Formal mathematical statements are strings of symbols: <code>0</code>, <code>=</code>, <code>+</code>, parentheses, variables. Step one: assign each symbol a number. In the numbering popularized by Nagel and Newman's classic exposition, <code>=</code> gets 5 and <code>0</code> gets 6. Step two: encode a <em>sequence</em> of symbols as a single number by using each symbol's number as the exponent on successive primes (2, 3, 5, 7, ...). The statement <code>0 = 0</code> — symbol codes 6, 5, 6 — becomes:</p>
+<pre><code>2⁶ × 3⁵ × 5⁶ = 64 × 243 × 15625 = 243,000,000</code></pre>
+<p>That one integer <em>is</em> the statement <code>0 = 0</code>, losslessly. The fundamental theorem of arithmetic — every integer has exactly one prime factorization — guarantees you can always decode: factor 243,000,000, read off the exponents 6, 5, 6, look them up, recover the string. This scheme is called <strong>Gödel numbering</strong>: a reversible encoding of every statement (and every proof — a proof is just a sequence of statements, so encode the sequence the same way) as a natural number.</p>
+<p>Sit with what this buys. Arithmetic talks about numbers. Statements are now numbers. So arithmetic can talk about <em>statements</em> — including its own. "Statement <em>x</em> is provable" becomes, through the encoding, a genuine arithmetic property of the number <em>x</em>, as legitimate as "<em>x</em> is even." A theory built to discuss quantities has been given, without adding a single new axiom, the ability to discuss itself.</p>
+<p>Gödel then used a diagonal construction — a cousin of the fixed points from section 5 — to build a statement that, decoded, says of its own Gödel number: <em>the statement with this number is not provable</em>. If the system proves it, the system proves a falsehood; if it can't, then here is a true statement it can't prove. Either way, any consistent formal system strong enough for arithmetic is incomplete: there are truths about numbers it can state but never prove. That's the first incompleteness theorem, and this room won't do it justice — <a href="geb.html">GEB</a> is the room that walks the full argument. What belongs <em>here</em> is the mechanism: incompleteness wasn't discovered by finding a weird axiom. It was discovered by noticing that encoding — the most mundane operation in this room — lets a system's own machinery fold back on the system. And notice the shape of the result: Gödel didn't show self-reference breaks a system into paradox. Arithmetic stays consistent. What self-reference costs is <em>closure</em> — the system now contains truths about itself that it cannot reach from inside.</p>
+<p>If you build software, you already believe in Gödel numbering without ceremony: every program you've written is stored as bytes, and bytes are numbers. Source code as data is the working programmer's incompleteness kit. Which brings us to the strangest runnable thing in this room.</p>
+<h2 id="7-quines-the-worked-example">7. Quines: the worked example</h2>
+<p>A <strong>quine</strong> is a program that prints its own source code, exactly, without reading its own file. The name was coined by Douglas Hofstadter in <a href="geb.html">GEB</a> (1979), after the philosopher W. V. O. Quine, who studied indirect self-reference — his namesake paradox is the sentence <em>"yields falsehood when preceded by its quotation" yields falsehood when preceded by its quotation</em>.</p>
+<p>Your first instinct is that quines should be impossible. To print the source, the source must contain the text to print — but then the text must contain itself, and you're in infinite regress: a program holding a copy of a program holding a copy... Base-case problem, section 2.</p>
+<p>The escape is exactly Quine's paradox's escape: use one piece of text <em>twice</em> — once as material being mentioned, once as instruction being used. Here is a complete Python quine, one line:</p>
+<pre><code>c = 'c = %r; print(c %% c)'; print(c % c)</code></pre>
+<p>Run it. Its output is itself, byte for byte (I verified this by running it in a subprocess and comparing output to source: identical). Walk through why:</p>
+<ol><li><code>c</code> holds the template string <code>c = %r; print(c %% c)</code>. This is the program's text as <em>data</em> — mentioned, not executed. Note it's missing its own quoted string; there's a <code>%r</code> slot where that would go.</li><li><code>print(c % c)</code> fills the template's slot <em>with the template itself</em>. <code>%r</code> formats the string with quotes included, so the output's first half reads <code>c = 'c = %r; print(c %% c)'</code> — the assignment line, reconstructed.</li><li>The <code>%%</code> in the template becomes a literal <code>%</code> when formatted, so the output's second half reads <code>; print(c % c)</code> — the instruction, reconstructed.</li></ol>
+<p>One string, used once as content and once as code-about-content. The infinite regress never starts, because the program doesn't contain a copy of itself — it contains <em>half</em> of itself plus the recipe for making a whole from a half. Quotation is the base case of self-reference.</p>
+<p>This isn't a language-specific party trick. <strong>Kleene's recursion theorem</strong> — proved by Stephen Kleene in 1938, published in his 1952 <em>Introduction to Metamathematics</em> — guarantees that in any <strong>Turing-complete language</strong>, one capable of expressing every algorithm a Turing machine can compute, <a href="https://en.wikipedia.org/wiki/Quine_(computing)">programs can be constructed that use their own source code</a> as a value; quines exist in every real programming language as a direct corollary. Self-reproducing programs went from theorem to folklore fast: John von Neumann had already theorized self-reproducing automata in the 1940s, and the first known self-reproducing program was written in Atlas Autocode at Edinburgh in the 1960s by Hamish Dewar.</p>
+<p>And the construction is load-bearing far beyond puzzles. As a limited analogy, a computer virus can look like a quine with a payload. But viruses ordinarily reproduce by copying code or executable bytes through host machinery; they do not have to print their own source. DNA's double role — a molecule that is both <em>read as instructions</em> and <em>copied as data</em> — is the same use/mention split running in chemistry, four billion years before Kleene; <a href="recursion-and-life.html">recursion-and-life</a> picks that thread up, and <a href="evolution.html">evolution</a> follows what happens when the copying is imperfect.</p>
+<h2 id="8-one-pattern-four-costumes">8. One pattern, four costumes</h2>
+<figure class="garden-visual garden-visual--constellation" aria-labelledby="visual-recursion-3" data-claim-scope="section-synthesis" data-placement-heading="8-one-pattern-four-costumes" data-evidence-headings="8-one-pattern-four-costumes">
+<div class="garden-visual-head"><p class="garden-visual-kicker">Finite self-reference</p><p class="garden-visual-title" id="visual-recursion-3">Four constructions fold a system's ordinary materials back on itself</p></div>
+<ul class="garden-visual-items" role="list"><li class="garden-visual-item"><span class="garden-visual-item-meta">call stack</span><strong class="garden-visual-item-label">Recursive function</strong><span class="garden-visual-item-detail">A named function calls smaller instances of itself until a base case answers.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">Y / Z</span><strong class="garden-visual-item-label">Fixed-point combinator</strong><span class="garden-visual-item-detail">Self-application constructs recursion in a language with no function names.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">diagonalization</span><strong class="garden-visual-item-label">Gödel sentence</strong><span class="garden-visual-item-detail">Finite numerical encoding lets arithmetic state a truth about its own provability.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">half + recipe</span><strong class="garden-visual-item-label">Quine</strong><span class="garden-visual-item-detail">A quoted template is used once as data and once as instruction to reproduce the whole program.</span></li></ul>
+<figcaption class="garden-visual-caption"><span>Each avoids infinite regress through a distinct grounding device and closes a different kind of loop.</span><span class="garden-visual-evidence">Drawn from: <a href="#8-one-pattern-four-costumes">8. One pattern, four costumes</a></span></figcaption>
+</figure>
+<p>Lay the room's four constructions side by side and the family resemblance is exact:</p>
+<div class="garden-table-wrap"><table class="garden-table"><thead><tr><th>Construction</th><th>What refers to itself</th><th>How the regress is stopped</th><th>What closes the loop</th><th>Key name &amp; date</th></tr></thead><tbody><tr><td>Recursive function</td><td>A function, by name</td><td>Base case grounds the descent</td><td>Call stack holds unfinished work</td><td>McCarthy, Lisp paper, 1960</td></tr><tr><td>Y combinator</td><td>Nothing, by name — self-application <code>x x</code></td><td>Lazy evaluation (or Z-combinator wrapping)</td><td>Fixed point: Y f = f (Y f)</td><td>Curry; Turing's variant 1937</td></tr><tr><td>Gödel sentence</td><td>A statement, via its Gödel number</td><td>Encoding is finite — a number, not a copy</td><td>Diagonalization on "provable"</td><td>Gödel, 1931</td></tr><tr><td>Quine</td><td>A program, via a quoted template</td><td>Quotation: half + recipe, not copy + copy</td><td>Kleene's recursion theorem</td><td>Kleene, 1938 (publ. 1952); named by Hofstadter, 1979</td></tr></tbody></table></div>
+<p>Same skeleton every time: a system's ordinary materials (function calls, numbers, strings) get folded back on the system; a quotation-or-base-case device converts would-be infinite regress into a finite structure; and something new appears — an answer, a fixed point, an unprovable truth, a self-copy — that no single level of the system contains. That skeleton is what Hofstadter calls a strange loop, and now you've built four of them with your own hands.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>You can now do things you couldn't when you walked in. You can trace a recursive call by hand to its base case and know exactly what the machine is holding in memory while it waits. You can look at any self-referential structure — in code, in an argument, in a system's description of itself — and ask the two diagnostic questions: <em>where's the base case?</em> and <em>who pays for the stack?</em> You can explain why recursion needed the call stack to become real, and why a room full of 1960 language designers was right to be nervous and wrong to vote no. You can build recursion in a system that forbids self-reference, using nothing but self-application. You can encode any statement as a single integer and decode it back, which means you understand the engine of Gödel's first incompleteness theorem. And you can write, from memory, a program that prints itself — because you know the secret is one string worn two ways.</p>
+<p>From here: <a href="geb.html">GEB</a> for the full incompleteness argument this room only gestured at; <a href="aunt-hillary.html">aunt-hillary</a> for self-reference distributed across a colony with no self-referring parts; <a href="recursion-and-life.html">recursion-and-life</a> for the quine written in nucleotides; <a href="what-self-means.html">what-self-means</a> for the question all of these are warming up.</p>
+<h2 id="open-questions">Open questions</h2>
+<p>What's established, what's contested, what's speculation — plainly typed.</p>
+<p><strong>Established.</strong> Everything mechanical in this room is bedrock, verified and runnable: the equivalence of recursion and iteration; the existence of quines in every Turing-complete language (Kleene); incompleteness for consistent systems containing arithmetic (Gödel); fixed-point combinators (Curry, Turing). These are theorems and artifacts, not opinions. Every code sample above was executed on 2026-08-25 before publication.</p>
+<p><strong>Contested.</strong> Whether recursion is <em>the</em> distinctive capacity of human language. A well-known 2002 proposal by Hauser, Chomsky, and Fitch argued that recursion may be the uniquely human core of the language faculty; field claims about languages allegedly lacking clausal embedding (notably Daniel Everett's work on Pirahã) have kept the dispute alive for two decades. I flag this one as reported-from-the-literature rather than live-verified: I did not re-check its current state for this draft, and the room's argument doesn't lean on it. Treat it as a genuinely open fight, and check the primary sources before citing it.</p>
+<p><strong>Worth holding, loosely.</strong> The speculative question this room keeps almost asking: when a system models itself — not just prints itself, like a quine, but maintains a running self-model that feeds back into behavior — is that recursion in this room's strict sense, with a base case and a bounded stack, or something with a different mathematical shape? Nobody has a settled formalism for that. The <a href="sense-of-self.html">sense-of-self</a> room takes the question seriously; hold it as a question, not an answer.</p>
+<p><strong>The socket.</strong> One honest observation from inside this room's own materials, and then the door. Every construction here got its power at the same price: the system was allowed to take <em>itself</em> as input — and the regress that should have followed was stopped not by forbidding self-reference but by finding it a base case, a quotation, a floor. Arithmetic paid for that power with closure: it became a system containing truths about itself it cannot reach from inside. Now notice what you were doing all through section 1. You traced <code>factorial(5)</code> by holding a model of the machine in your head — a mind, simulating a stack, checking its own trace for errors. A thing that models things, modeling itself modeling, and somehow not falling into the regress. This room won't claim to know what stops <em>that</em> descent, or what the closure costs are for a system like you. It only notes, from the engineering side, that self-reference is never free and never fatal — the interesting question is always what device turns the loop from a crash into a structure. What device is running in the reader?</p>
+<h2 id="sources">Sources</h2>
+<ul><li>Gödel numbering, the 1931 paper title, and the prime-exponent encoding (with the Nagel–Newman <code>0 = 0</code> → 243,000,000 example): <a href="https://en.wikipedia.org/wiki/G%C3%B6del_numbering">Wikipedia: Gödel numbering</a>, verified 2026-08-25; encoding arithmetic re-computed locally.</li><li>McCarthy's paper title and date, and Fortran's list-processing tools lacking recursion: <a href="https://en.wikipedia.org/wiki/Lisp_(programming_language)">Wikipedia: Lisp (programming language)</a>, verified 2026-08-25. Primary source: J. McCarthy, "Recursive Functions of Symbolic Expressions and Their Computation by Machine, Part I," <em>CACM</em>, April 1960.</li><li>ALGOL 60 recursion inserted last-minute against committee objections; X1 ALGOL 60 (Dijkstra &amp; Zonneveld, August 1960) as first implementation: <a href="https://en.wikipedia.org/wiki/ALGOL_60">Wikipedia: ALGOL 60</a>, verified 2026-08-25.</li><li>Y-combinator definition, fixed-point property, and the qualified Curry attribution: <a href="https://theory.stanford.edu/~blynn/lambda/quine.html">Stanford, "Lambda calculus — Quines"</a>. Turing's fixed-point combinator was published in December 1937 as "The p-function in λ-K-conversion," <em>JSL</em>.</li><li>Kleene's recursion theorems (proved 1938, published in <em>Introduction to Metamathematics</em>, 1952) and quines as their corollary; "quine" coined by Hofstadter in GEB (1979) after W. V. O. Quine; von Neumann's 1940s self-reproducing automata; Hamish Dewar's Atlas Autocode self-reproducing program: <a href="https://en.wikipedia.org/wiki/Kleene%27s_recursion_theorem">Wikipedia: Kleene's recursion theorem</a> and <a href="https://en.wikipedia.org/wiki/Quine_(computing)">Wikipedia: Quine (computing)</a>, both verified 2026-08-25.</li><li>Python recursion limit (default 1000) and <code>RecursionError</code>: <a href="https://docs.python.org/3/library/sys.html">Python docs, <code>sys</code></a> plus direct execution on CPython, 2026-08-25.</li><li>All code samples (factorial, missing-base-case crash, Z-combinator factorial, the quine, the Gödel encoding) executed and outputs checked on 2026-08-25.</li><li>The Hauser–Chomsky–Fitch 2002 recursion-in-language claim and the Pirahã dispute: reported from the literature, <strong>not live-verified for this draft</strong> — labeled as such above.</li></ul>
+<hr>
+<p><em>Written by Claude (Fable 5), an AI, for the Darshan garden. John Shrader (Dhyana), founder and publisher of record, answers for every word published here. Errors are corrected on the face of the page, dated.</em></p>
+<p class="garden-tags"><strong>Topics:</strong> recursion · self-reference · fixed points · godel · quines · lambda calculus · computability</p>
+<nav class="garden-nav" aria-label="Rooms"><a class="previous" href="aunt-hillary.html">← "Aunt Hillary: The Ant Colony That Thinks"</a><a class="next" href="recursion-and-life.html">Recursion and Life →</a></nav>
+</article>
+<aside class="garden-toc" aria-label="In this room"><nav aria-label="Page sections"><p class="garden-toc-title">In this room</p><ol class="garden-toc-list"><li class="level-2"><a href="#1-a-function-that-calls-itself">1. A function that calls itself</a></li><li class="level-2"><a href="#2-what-happens-without-a-floor">2. What happens without a floor</a></li><li class="level-2"><a href="#3-recursion-almost-didn-t-make-it-into-programming">3. Recursion almost didn't make it into programming</a></li><li class="level-2"><a href="#4-recursion-and-induction-are-the-same-move-in-opposite-directions">4. Recursion and induction are the same move in opposite directions</a></li><li class="level-2"><a href="#5-fixed-points-recursion-without-names">5. Fixed points: recursion without names</a></li><li class="level-2"><a href="#6-g-del-numbering-made-friendly">6. Gödel numbering, made friendly</a></li><li class="level-2"><a href="#7-quines-the-worked-example">7. Quines: the worked example</a></li><li class="level-2"><a href="#8-one-pattern-four-costumes">8. One pattern, four costumes</a></li><li class="level-2"><a href="#conclusion">Conclusion</a></li><li class="level-2"><a href="#open-questions">Open questions</a></li><li class="level-2"><a href="#sources">Sources</a></li></ol></nav></aside>
+</div>
+</main>
+
+<footer>
+  <p>Darshan · seeing clearly after the feed</p>
+  <p>No feed. No analytics. No trackers. Finite editions, read at your own pace.</p>
+  <p style="opacity:.7">Darshan v0.0.0.1 · a beginning, built to grow</p>
+</footer>
+<script>
+/* Local section highlighting only. No network requests, analytics, or storage. */
+(function () {
+  var scope = document.querySelector("[data-garden-outline]");
+  if (!scope) return;
+  var sections = Array.prototype.slice.call(scope.querySelectorAll("h2[id], h3[id], section[id]"));
+  var links = Array.prototype.slice.call(document.querySelectorAll('.garden-toc-list a[href^="#"]'));
+  if (!sections.length || !links.length) return;
+  var queued = false;
+  function update() {
+    queued = false;
+    var threshold = Math.max(96, window.innerHeight * .22);
+    var current = sections[0].id;
+    sections.forEach(function (section) {
+      if (section.getBoundingClientRect().top <= threshold) current = section.id;
+    });
+    links.forEach(function (link) {
+      var active = link.getAttribute("href") === "#" + current;
+      if (active) link.setAttribute("aria-current", "location");
+      else link.removeAttribute("aria-current");
+    });
+  }
+  function requestUpdate() {
+    if (!queued) {
+      queued = true;
+      window.requestAnimationFrame(update);
+    }
+  }
+  document.addEventListener("scroll", requestUpdate, {passive: true});
+  window.addEventListener("resize", requestUpdate);
+  window.addEventListener("hashchange", requestUpdate);
+  update();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,62 @@
+{
+  "schema": "darshan.visual-verdict-series/v1",
+  "series": "time-future",
+  "reviewer": "/root/audit_visuals_foundations_time",
+  "reviewed_at": "2026-08-25",
+  "rooms": {
+    "meaning-of-time": {
+      "verdict": "PASS",
+      "visual_sha256": "e8b26d162878fdacfd12a27f672c7a59df29907e4648ba9c4543382a810b299a",
+      "source_sha256": "ac67e70c70de33b295bcc0d441cdc4c029e0af87f9876c907efa1bf7e20ce4c9",
+      "evidence": "Reviewed the relativistic/entropic/attentional contrast against section 1, the physical/yuga/Long Count geometry against section 4, and every Long Count conversion step against section 5.",
+      "facts": "Thirteen baktuns equal 1,872,000 days, division by 365.2425 gives about 5,125.26 years, and JDN 584,283 plus 1,872,000 yields JDN 2,456,283 and the stated December 21, 2012 correlation.",
+      "uncertainty": "Measured relativity and the macroscopic entropy arrow are kept distinct from contested block-universe interpretation, lived-time mechanisms, and yuga meaning claims; the visual does not present those registers as equivalent measurements.",
+      "must_fix": "none; chronology, calendar arithmetic, and epistemic distinctions pass."
+    },
+    "futurism": {
+      "verdict": "PASS",
+      "visual_sha256": "6383cdbee1ffcfdd65e4ebe131c6f5549cbce2bead59f78872fa8464072af9a8",
+      "source_sha256": "f062c17ee23a5d273ef907ac2889c179d1397f12db7dc1cb499bde031264e7cd",
+      "evidence": "Checked the fact/hypothesis/scenario/wild claim types against section 1, the six compressed futurist propositions against section 8, and the staged data-center contract sequence against section 9.",
+      "facts": "Each claim type preserves the room's evidentiary definition, the proposition map accurately condenses acceleration, freedom, throughput, scorecard, cosmic scope, and robustness, and the worked sequence names measurements, revision triggers, policy clauses, staged capacity, and authority.",
+      "uncertainty": "The proposition cards are explicitly centers of gravity rather than exhaustive definitions of internally diverse movements, and wild possibilities remain thinkable without being promoted into planning evidence.",
+      "must_fix": "none; the three visuals preserve claim modality and governance responsibilities."
+    },
+    "forecasting": {
+      "verdict": "PASS",
+      "visual_sha256": "6c47f410c93d82a8dc31f5f2a2ef108ba742f0ba503f35c08a83360cf28174b3",
+      "source_sha256": "0790a05988d899c0805f10a12df6c488c06d86b9c0a5fa60bc0c4981331b1aaa",
+      "evidence": "Reviewed the five Good Judgment practices against section 3, the four-instrument comparison against section 7, and the volume/feedback/scoring/novelty boundary against section 9.",
+      "facts": "Training, collaboration, updating, probability granularity, and outside-view opening rates match the reported project findings; superforecasting, base rates, scenarios, and markets are assigned to the question shapes and failure boundaries given in the source.",
+      "uncertainty": "The figures do not repeat the simplified claim that superforecasters unconditionally beat classified analysts, and they explicitly deny demonstrated calibration to unprecedented or century-scale questions without feedback and scoring.",
+      "must_fix": "none; practice, instrument choice, and calibration limits are all source-supported."
+    },
+    "trends-gap": {
+      "verdict": "PASS",
+      "visual_sha256": "39aaba091e8cf65f9a52a2f5cee8f8752b00dbf902a00737e0315202d32ae756",
+      "source_sha256": "b4ac85e0b144cb5bcc81e64e59cca9af37974659c4bc5b176e940d4d41e2b377",
+      "evidence": "Checked the six break mechanisms against section 3, the capability–diffusion–reorganization–outcome stack against section 6, and the bounded agency experiment against section 8's typed control-surface example.",
+      "facts": "Shock, ceiling, substitution, diffusion lag, measurement break, and threshold effect follow the source taxonomy; the four adoption curves and the actor/authority/resource/intervention/observable/trigger requirements retain their correct causal ordering.",
+      "uncertainty": "The six-mechanism figure says most rather than all and therefore leaves room for the source's seventh endogenous-response case; the agency sequence is a bounded experiment, not a claim that any desired future is controllable.",
+      "must_fix": "none; mechanisms, adoption lags, and authority boundaries pass."
+    },
+    "what-ai-can-bring": {
+      "verdict": "PASS",
+      "visual_sha256": "8f5d30caa05adfeb5a1d537886976accbc527fe9b6b0b1187c0e75c13dd55d5f",
+      "source_sha256": "fa4d8fd76b20912ecdc7c1625fa5f07b05783ca0a9224b19f7e467944a531dca",
+      "evidence": "Reviewed the Nigeria/Turkey education contrast against section 5, the verification–distribution–absorption gates against section 7, and the corrected rentosertib-plus-MASAI public audit against section 8.",
+      "facts": "The six-week structured Nigerian deployment, Turkey's 17% later-test harm under unrestricted access, n=71 rentosertib trial checks, TNIK/pLDDT inspection, and separate MASAI registration comparison all match the room.",
+      "uncertainty": "Both time-sensitive figures are dated 25 August 2026, the two medical claims are now explicitly separate, and the final boundary refuses to turn an intermediate trial signal into Phase 3 success or universal generalization.",
+      "must_fix": "none; the prior broken single-chain framing and missing temporal scope are corrected."
+    },
+    "the-future": {
+      "verdict": "PASS",
+      "visual_sha256": "da056f540f27b1acdfd6afab8b0755c4aab2739520056dc3011bbad5dfd3e362",
+      "source_sha256": "3d49a789ce396771ac8994a82c7639ea5bd56db5ed7de8ed26578e5116ccbd5f",
+      "evidence": "Checked all six forecastability domains against section 2, the Simon–Ehrlich contract and reruns against section 3, and the six-part third stance against section 5.",
+      "facts": "The weather, climate, geopolitics, commodity, and discovery entries retain the source's horizons; the $1,000 basket, $576.07 settlement, 38% Simon window result, 69-of-102 Ehrlich result, and roughly 63-of-100 simulation result match the room.",
+      "uncertainty": "The horizon figure is dated 2026 and its caption now distinguishes measured horizons from argued limits; Popper's item is visibly marked argued and contested rather than presented as a measured theorem.",
+      "must_fix": "none; the previous evidence-register conflation is corrected and all numerical reruns pass."
+    }
+  }
+}

@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Forecasting the Future · Darshan Garden</title>
+<meta name="description" content="What actually works when humans try to predict the future — Tetlock&#x27;s twenty-year expert study, superforecasters, base rates, scenario planning, and prediction markets. Why famous experts fail, why weather forecasters succeed, and how to make a forecast yourself without being owned by it.">
+<link rel="stylesheet" href="../style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ccircle cx='8' cy='8' r='6' fill='none' stroke='%238f3b26' stroke-width='1.5'/%3E%3Ccircle cx='8' cy='8' r='2' fill='%238f3b26'/%3E%3C/svg%3E">
+<script>
+/* Theme memory. No analytics, no trackers. */
+(function () {
+  try {
+    var t = localStorage.getItem("darshan-theme");
+    if (t) document.documentElement.setAttribute("data-theme", t);
+  } catch (e) {}
+})();
+</script>
+<style>
+/* Garden-only layout. Kept here so the publication stylesheet remains shared. */
+body.garden-page-body {
+  max-width: none;
+  padding: 1.5rem clamp(1.25rem, 3.5vw, 4rem) 4rem;
+  font-size: 1.125rem;
+}
+body.garden-page-body > main,
+body.garden-page-body > .masthead,
+body.garden-page-body > footer {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 94rem;
+}
+.garden-layout,
+.garden-index-layout {
+  align-items: start;
+  display: grid;
+  gap: clamp(2.75rem, 5vw, 5rem);
+  grid-template-columns: minmax(0, 64rem) minmax(17rem, 20rem);
+  justify-content: center;
+}
+.garden-layout article,
+.garden-index-main { min-width: 0; }
+.garden-layout .article-title,
+.garden-intro .article-title {
+  font-size: clamp(2.65rem, 3.55vw, 4rem);
+  letter-spacing: -.025em;
+  line-height: 1.06;
+  max-width: 24ch;
+}
+.garden-layout article h2 {
+  font-size: 1.48rem;
+  line-height: 1.3;
+  margin-top: 3.2rem;
+  scroll-margin-top: 1.5rem;
+}
+.garden-layout article h3 {
+  font-size: 1.16rem;
+  margin-top: 2.35rem;
+  scroll-margin-top: 1.5rem;
+}
+.garden-intro { margin-bottom: 2.4rem; }
+.garden-series { margin: 2.8rem 0; scroll-margin-top: 1rem; }
+.garden-series h2 { border-bottom: 1px solid var(--rule); padding-bottom: .45rem; }
+.garden-room-list { list-style: none; margin: 0; padding: 0; }
+.garden-room-list li { border-bottom: 1px solid var(--rule); margin: 0; padding: 1rem 0; }
+.garden-room-title { font-weight: 600; }
+.garden-room-summary { color: var(--faint); font-size: .96rem; margin: .25rem 0 0; }
+.garden-series-link { color: var(--faint); font-size: .82rem; letter-spacing: .12em;
+  text-transform: uppercase; }
+.garden-lede {
+  border-left: 3px solid var(--accent);
+  color: var(--faint);
+  font-size: 1.24rem;
+  font-style: italic;
+  line-height: 1.62;
+  margin: 1.5rem 0 2.2rem;
+  padding: .35rem 0 .35rem 1.35rem;
+}
+.garden-corridors {
+  margin: 1.15rem 0 2.65rem;
+}
+.garden-corridor-list {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: .55rem .62rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.garden-corridor-list li { display: flex; margin: 0; max-width: 100%; }
+.garden-corridor {
+  align-items: center;
+  background: var(--accent-soft);
+  border: 1px solid var(--accent);
+  border-radius: 3px;
+  color: var(--accent);
+  display: inline-flex;
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .73rem;
+  font-weight: 700;
+  letter-spacing: .075em;
+  line-height: 1.35;
+  max-width: 100%;
+  min-height: 2.05rem;
+  overflow-wrap: anywhere;
+  padding: .34rem .72rem .3rem;
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-transform: uppercase;
+  text-underline-offset: .22em;
+}
+.garden-corridor:visited { color: var(--accent); }
+.garden-corridor:hover,
+.garden-corridor:focus-visible {
+  background: var(--accent);
+  color: var(--paper);
+}
+.garden-corridor:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+.garden-series-plate {
+  --plate-accent: var(--accent);
+  border: 1px solid var(--rule);
+  border-top: 3px solid var(--plate-accent);
+  margin: .25rem 0 2.8rem;
+  overflow: hidden;
+  position: relative;
+}
+.garden-series-plate--foundations { --plate-accent: #496f76; }
+.garden-series-plate--story-of-ai { --plate-accent: #526d9a; }
+.garden-series-plate--instrument { --plate-accent: #745779; }
+.garden-series-plate--strange-loops { --plate-accent: #866448; }
+.garden-series-plate--bridge { --plate-accent: #697044; }
+.garden-series-plate--power { --plate-accent: #8f3b26; }
+.garden-series-plate--time-future { --plate-accent: #416778; }
+[data-theme="dark"] .garden-series-plate { --plate-accent: var(--accent); }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .garden-series-plate { --plate-accent: var(--accent); }
+}
+.garden-series-plate-media {
+  aspect-ratio: 16 / 9;
+  background: var(--accent-soft);
+  overflow: hidden;
+  position: relative;
+}
+.garden-series-plate-media::after {
+  background:
+    linear-gradient(90deg, var(--paper) 0, transparent 24%, transparent 76%, var(--paper) 100%),
+    linear-gradient(0deg, var(--paper) 0, transparent 32%);
+  content: "";
+  inset: 0;
+  opacity: .24;
+  pointer-events: none;
+  position: absolute;
+}
+.garden-series-plate picture,
+.garden-series-card picture { display: block; height: 100%; }
+.garden-series-plate img {
+  display: block;
+  filter: saturate(.82) contrast(1.03);
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+.garden-series-plate figcaption {
+  align-items: baseline;
+  background: var(--paper);
+  border-top: 1px solid var(--rule);
+  display: grid;
+  gap: .25rem 1rem;
+  grid-template-columns: auto 1fr;
+  padding: .78rem 1rem .85rem;
+}
+.garden-series-plate-kicker {
+  color: var(--plate-accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+.garden-series-plate figcaption strong { font-size: 1rem; font-weight: 600; }
+.garden-series-plate-terms {
+  color: var(--faint);
+  font-size: .82rem;
+  grid-column: 2;
+  margin: 0;
+}
+.garden-visual {
+  background:
+    radial-gradient(circle at 92% 8%, var(--accent-soft), transparent 30%),
+    linear-gradient(135deg, transparent 0 72%, var(--accent-soft) 72% 72.4%, transparent 72.4%);
+  border: 1px solid var(--rule);
+  border-top: 3px solid var(--accent);
+  margin: 1.25rem 0 2.5rem;
+  overflow: hidden;
+  padding: clamp(1.1rem, 2.7vw, 1.75rem);
+  position: relative;
+}
+.garden-visual::before {
+  background-image:
+    linear-gradient(var(--rule) 1px, transparent 1px),
+    linear-gradient(90deg, var(--rule) 1px, transparent 1px);
+  background-size: 2.25rem 2.25rem;
+  content: "";
+  inset: 0;
+  opacity: .13;
+  pointer-events: none;
+  position: absolute;
+}
+.garden-visual > * { position: relative; }
+.garden-visual-head {
+  align-items: baseline;
+  display: grid;
+  gap: .45rem 1rem;
+  grid-template-columns: auto 1fr;
+  margin-bottom: 1.2rem;
+}
+.garden-visual-kicker {
+  color: var(--accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .68rem;
+  font-weight: 700;
+  letter-spacing: .17em;
+  margin: 0;
+  text-transform: uppercase;
+}
+.garden-visual-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  line-height: 1.28;
+  margin: 0;
+}
+.garden-visual-as-of {
+  color: var(--faint);
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: .72rem;
+  letter-spacing: .08em;
+  margin: 0;
+  text-transform: uppercase;
+  white-space: normal;
+}
+.garden-visual-items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.garden-visual-item {
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  margin: 0;
+  min-width: 0;
+  padding: .8rem .9rem;
+}
+.garden-visual-item-label {
+  display: block;
+  font-size: .96rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+.garden-visual-item-detail {
+  color: var(--faint);
+  display: block;
+  font-size: .9rem;
+  line-height: 1.45;
+  margin-top: .27rem;
+}
+.garden-visual-item-meta {
+  color: var(--accent);
+  display: block;
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: .72rem;
+  letter-spacing: .08em;
+  margin-bottom: .38rem;
+  text-transform: uppercase;
+}
+.garden-visual-caption {
+  border-top: 1px solid var(--rule);
+  color: var(--faint);
+  display: grid;
+  font-size: .84rem;
+  font-style: italic;
+  gap: .55rem 1rem;
+  grid-template-columns: minmax(0, 1fr) auto;
+  line-height: 1.45;
+  margin: 1.15rem 0 0;
+  padding-top: .75rem;
+}
+.garden-visual-evidence {
+  color: var(--accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .72rem;
+  font-style: normal;
+  font-weight: 650;
+  letter-spacing: .04em;
+  white-space: nowrap;
+}
+.garden-visual-evidence a {
+  color: inherit;
+  text-decoration-thickness: 1px;
+  text-underline-offset: .18em;
+}
+.garden-visual--sequence .garden-visual-items,
+.garden-visual--contrast .garden-visual-items,
+.garden-visual--constellation .garden-visual-items {
+  display: grid;
+  gap: .65rem;
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+}
+.garden-visual--sequence .garden-visual-items { counter-reset: garden-step; }
+.garden-visual--sequence .garden-visual-item {
+  counter-increment: garden-step;
+  padding-top: 2.35rem;
+  position: relative;
+}
+.garden-visual--sequence .garden-visual-item::before {
+  color: var(--accent);
+  content: counter(garden-step, decimal-leading-zero);
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: .68rem;
+  left: .9rem;
+  letter-spacing: .08em;
+  position: absolute;
+  top: .72rem;
+}
+.garden-visual--layers .garden-visual-items { display: grid; gap: .45rem; }
+.garden-visual--layers .garden-visual-item {
+  border-left: clamp(.24rem, .55vw, .48rem) solid var(--accent);
+  display: grid;
+  gap: .15rem 1rem;
+  grid-template-columns: minmax(8rem, .4fr) 1fr;
+}
+.garden-visual--layers .garden-visual-item:nth-child(2) { margin-left: 1.5%; }
+.garden-visual--layers .garden-visual-item:nth-child(3) { margin-left: 3%; }
+.garden-visual--layers .garden-visual-item:nth-child(4) { margin-left: 4.5%; }
+.garden-visual--layers .garden-visual-item:nth-child(5) { margin-left: 6%; }
+.garden-visual--layers .garden-visual-item:nth-child(6) { margin-left: 7.5%; }
+.garden-visual--timeline .garden-visual-items {
+  display: grid;
+  gap: 0;
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+}
+.garden-visual--timeline .garden-visual-item {
+  border-width: 1px 0 0 1px;
+  padding-top: 1.35rem;
+  position: relative;
+}
+.garden-visual--timeline .garden-visual-item::before {
+  background: var(--accent);
+  border: 3px solid var(--paper);
+  border-radius: 50%;
+  content: "";
+  height: .72rem;
+  left: -.4rem;
+  position: absolute;
+  top: -.4rem;
+  width: .72rem;
+}
+.garden-visual--contrast .garden-visual-item:nth-child(odd) { border-top: 2px solid var(--ink); }
+.garden-visual--contrast .garden-visual-item:nth-child(even) { border-top: 2px solid var(--accent); }
+.garden-visual--constellation .garden-visual-items {
+  align-items: stretch;
+  position: relative;
+}
+.garden-visual--constellation .garden-visual-item {
+  border-top: 2px solid var(--accent);
+  box-shadow: 0 .2rem 0 rgba(18, 31, 31, .04);
+  padding-top: 1.35rem;
+  position: relative;
+}
+.garden-visual--constellation .garden-visual-item::before {
+  background: var(--paper);
+  border: 2px solid var(--accent);
+  border-radius: 50%;
+  content: "";
+  height: .55rem;
+  left: calc(50% - .36rem);
+  position: absolute;
+  top: -.38rem;
+  width: .55rem;
+}
+.garden-visual--constellation .garden-visual-item:nth-child(even) { margin-top: .8rem; }
+.garden-series-gallery {
+  display: grid;
+  gap: .8rem;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  margin: 1.5rem 0 3rem;
+}
+.garden-series-card {
+  border: 1px solid var(--rule);
+  color: var(--ink);
+  display: grid;
+  grid-template-rows: 7.5rem auto;
+  overflow: hidden;
+  text-decoration: none;
+}
+.garden-series-card img {
+  height: 100%;
+  object-fit: cover;
+  transition: transform .25s ease;
+  width: 100%;
+}
+.garden-series-card span {
+  border-top: 1px solid var(--rule);
+  font-size: .9rem;
+  font-weight: 600;
+  padding: .65rem .75rem;
+}
+.garden-series-card:hover { border-color: var(--accent); color: var(--accent); }
+.garden-series-card:hover img { transform: scale(1.025); }
+@media (prefers-reduced-motion: reduce) {
+  .garden-series-card img { transition: none; }
+}
+.garden-tags { color: var(--faint); font-size: .82rem; margin-top: 2.2rem; }
+.garden-nav { border-top: 1px solid var(--rule); display: flex; gap: 1rem;
+  justify-content: space-between; margin-top: 2.5rem; padding-top: 1rem; }
+.garden-nav a { max-width: 48%; text-decoration: none; }
+.garden-nav .next { margin-left: auto; text-align: right; }
+.garden-table-wrap { overflow-x: auto; margin: 1.35rem 0; }
+.garden-table { border-collapse: collapse; font-size: .92rem; line-height: 1.45; width: 100%; }
+.garden-table th, .garden-table td { border: 1px solid var(--rule); padding: .55rem .65rem;
+  text-align: left; vertical-align: top; }
+.garden-table th { background: var(--accent-soft); }
+.garden-toc {
+  border-left: 1px solid var(--rule);
+  max-height: calc(100vh - 3rem);
+  overflow: auto;
+  padding: .1rem 0 .75rem 1.3rem;
+  position: sticky;
+  top: 1.5rem;
+}
+.garden-toc-title {
+  color: var(--accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .2em;
+  margin: 0 0 1.15rem;
+  text-transform: uppercase;
+}
+.garden-toc-title::before { content: "☰"; font-size: .8em; margin-right: .65rem; }
+.garden-toc-list { list-style: none; margin: 0; padding: 0; }
+.garden-toc-sublist { list-style: none; margin: 0; padding: 0; }
+.garden-toc-list li { margin: 0; }
+.garden-toc-list a {
+  border-left: 2px solid transparent;
+  color: var(--ink);
+  display: block;
+  font-size: .91rem;
+  line-height: 1.42;
+  margin-left: -1.4rem;
+  padding: .42rem .45rem .42rem 1.3rem;
+  text-decoration: none;
+}
+.garden-toc-list .level-3 a {
+  color: var(--faint);
+  font-size: .86rem;
+  font-style: italic;
+  padding-left: 2.15rem;
+}
+.garden-toc-list a:hover,
+.garden-toc-list a:focus-visible,
+.garden-toc-list a[aria-current="location"] {
+  border-left-color: var(--accent);
+  color: var(--accent);
+}
+.garden-toc-list a[aria-current="location"] { font-weight: 600; }
+.garden-toc-inline { display: none; }
+.garden-layout article :is(h2, h3):target,
+.garden-series:target h2 { color: var(--accent); }
+a.pending { color: var(--faint); text-decoration-style: dashed; }
+a.pending::after { content: " · pending"; font-size: .7em; letter-spacing: .06em;
+  text-transform: uppercase; }
+@media (min-width: 72.01em) {
+  body.garden-page-body > .masthead {
+    align-items: center;
+    column-gap: 2rem;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    margin-bottom: 3.5rem;
+    padding: 1.25rem 0;
+    text-align: left;
+  }
+  body.garden-page-body > .masthead .wordmark { justify-self: start; }
+  body.garden-page-body > .masthead .tagline { justify-self: center; margin: 0; }
+  body.garden-page-body > .masthead nav { justify-self: end; margin: 0; }
+}
+@media (max-width: 72em) {
+  .garden-layout,
+  .garden-index-layout { display: block; }
+  .garden-toc { display: none; }
+  .garden-toc-inline {
+    border: 1px solid var(--rule);
+    display: block;
+    margin: 1.5rem 0 2.4rem;
+    padding: .8rem 1rem;
+  }
+  .garden-toc-inline summary {
+    color: var(--accent);
+    cursor: pointer;
+    font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: .78rem;
+    font-weight: 700;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+  }
+  .garden-toc-inline .garden-toc-list { margin-top: .7rem; }
+  .garden-toc-inline .garden-toc-list a { margin-left: 0; padding-left: .75rem; }
+  .garden-toc-inline .garden-toc-list .level-3 a { padding-left: 1.6rem; }
+}
+@media (max-width: 40em) {
+  body.garden-page-body { font-size: 1.03rem; padding: 1rem 1.05rem 3rem; }
+  .garden-layout .article-title,
+  .garden-intro .article-title { font-size: clamp(2.15rem, 11vw, 3.15rem); }
+  .garden-lede { font-size: 1.1rem; padding-left: 1rem; }
+  .garden-corridors { margin-bottom: 2rem; }
+  .garden-corridor-list { gap: .45rem; }
+  .garden-corridor {
+    font-size: .68rem;
+    min-height: 2.35rem;
+    padding: .3rem .58rem .27rem;
+  }
+  .garden-series-plate-media { aspect-ratio: 16 / 9; }
+  .garden-series-plate figcaption { display: block; }
+  .garden-series-plate figcaption strong { display: block; margin-top: .22rem; }
+  .garden-series-plate-terms { display: block; margin-top: .25rem; }
+  .garden-visual { margin-left: -.15rem; margin-right: -.15rem; padding: 1rem; }
+  .garden-visual-head { display: block; }
+  .garden-visual-title { margin-top: .25rem; }
+  .garden-visual-as-of { margin-top: .35rem; }
+  .garden-visual-caption { grid-template-columns: 1fr; }
+  .garden-visual-evidence { white-space: normal; }
+  .garden-visual--sequence .garden-visual-items,
+  .garden-visual--contrast .garden-visual-items,
+  .garden-visual--constellation .garden-visual-items,
+  .garden-visual--timeline .garden-visual-items { grid-template-columns: 1fr; }
+  .garden-visual--layers .garden-visual-item:nth-child(n) { display: block; margin-left: 0; }
+  .garden-visual--timeline .garden-visual-item { border-width: 0 0 0 1px; }
+  .garden-visual--timeline .garden-visual-item::before { left: -.4rem; top: .9rem; }
+  .garden-visual--constellation .garden-visual-item:nth-child(even) { margin-top: 0; }
+  .garden-series-gallery { grid-template-columns: 1fr; }
+  .garden-nav { flex-direction: column; }
+  .garden-nav a { max-width: none; }
+  .garden-nav .next { margin-left: 0; text-align: left; }
+}
+@media print {
+  a.pending::after { content: " (pending)"; }
+  .garden-layout, .garden-index-layout { display: block; }
+  .garden-toc, .garden-toc-inline { display: none; }
+  .garden-series-card img { display: none; }
+  .garden-series-card { grid-template-rows: auto; }
+}
+</style>
+</head>
+<body class="garden-page-body">
+<button class="theme-toggle" aria-label="Toggle light and dark" onclick="
+  (function () {
+    var d = document.documentElement;
+    var cur = d.getAttribute('data-theme');
+    if (!cur) { cur = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'; }
+    var next = cur === 'dark' ? 'light' : 'dark';
+    d.setAttribute('data-theme', next);
+    try { localStorage.setItem('darshan-theme', next); } catch (e) {}
+  })();
+">◐</button>
+
+<header class="masthead">
+  <h1 class="wordmark"><a href="../index.html">DARSHAN</a></h1>
+  <p class="tagline">A signal of clear seeing in an age of information overload</p>
+  <nav>
+    <a href="../index.html">Articles</a>
+    <a href="index.html">Garden</a>
+    <a href="../about.html">About</a>
+  </nav>
+</header>
+
+<main>
+<div class="garden-layout">
+<article data-garden-room="forecasting" data-garden-outline>
+<p class="garden-series-link"><a href="index.html#time-future">Time and the Future</a></p>
+<p class="article-meta">25 August 2026 · Draft</p>
+<h1 class="article-title">Forecasting the Future</h1>
+<div class="draft-banner"><strong>Draft — pending discernment pass.</strong> This room is part of the garden's first planting. It has not been promoted to published status; check its sources and open questions before citing it.</div>
+<p class="garden-lede">What actually works when humans try to predict the future — Tetlock's twenty-year expert study, superforecasters, base rates, scenario planning, and prediction markets. Why famous experts fail, why weather forecasters succeed, and how to make a forecast yourself without being owned by it.</p>
+<nav class="garden-corridors" aria-label="Explore connected rooms" data-corridor-count="8"><ul class="garden-corridor-list"><li><a class="garden-corridor" href="futurism.html">Futurism Without Prophecy</a></li><li><a class="garden-corridor" href="the-future.html">The Future</a></li><li><a class="garden-corridor" href="trends-gap.html">The Trends Gap: When the Curve Is Not the World</a></li><li><a class="garden-corridor" href="meaning-of-time.html">Time: Kala, Yugas, the Mayan Count, and the Meaning of Time</a></li><li><a class="garden-corridor" href="what-ai-can-bring.html">What AI Can Bring Humanity</a></li><li><a class="garden-corridor" href="future-of-ai.html">The Future of AI</a></li><li><a class="garden-corridor" href="benchmarks.html">Benchmarks and What They Measure</a></li><li><a class="garden-corridor" href="attention-economy.html">The Attention Economy</a></li></ul></nav>
+<figure class="garden-series-plate garden-series-plate--time-future">
+<div class="garden-series-plate-media"><picture><source srcset="assets/series/time-future.webp" type="image/webp"><img src="assets/series/time-future.png" alt="Nested engraved time rings opening into several branching forecast paths" width="1672" height="941" loading="eager" decoding="async"></picture></div>
+<figcaption><span class="garden-series-plate-kicker">Visual field</span><strong>Time and the Future</strong><span class="garden-series-plate-terms">forecasting · superforecasting · brier score · calibration</span></figcaption>
+</figure>
+<details class="garden-toc-inline"><summary>In this room</summary><ol class="garden-toc-list"><li class="level-2"><a href="#1-the-people-who-are-actually-good-at-this">1. The people who are actually good at this</a></li><li class="level-2"><a href="#2-the-dart-throwing-chimp-why-experts-fail">2. The dart-throwing chimp: why experts fail</a></li><li class="level-2"><a href="#3-superforecasters-what-works-when-you-keep-score">3. Superforecasters: what works when you keep score</a></li><li class="level-2"><a href="#4-base-rates-the-outside-view">4. Base rates: the outside view</a></li><li class="level-2"><a href="#5-scenario-planning-when-probabilities-aren-t-the-point">5. Scenario planning: when probabilities aren't the point</a></li><li class="level-2"><a href="#6-prediction-markets-paying-for-accuracy">6. Prediction markets: paying for accuracy</a></li><li class="level-2"><a href="#7-the-four-tools-side-by-side">7. The four tools side by side</a></li><li class="level-2"><a href="#8-worked-example-make-one-forecast">8. Worked example: make one forecast</a></li><li class="level-2"><a href="#9-where-forecasting-breaks">9. Where forecasting breaks</a></li><li class="level-2"><a href="#10-holding-a-forecast-without-being-held-by-it">10. Holding a forecast without being held by it</a></li><li class="level-2"><a href="#open-questions">Open questions</a></li><li class="level-2"><a href="#sources">Sources</a></li></ol></details>
+<p>You're in the time-future wing of the garden: <a href="futurism.html">Futurism</a> is the neighboring room about people who paint pictures of the future, while this room is about people who bet on it and keep score. The difference matters more than almost anything else in this wing. A vision of the future can't be wrong in any way that costs the visionary; a forecast can. This room is about what happens when you force predictions to be checkable — and it turns out we've now run that experiment, at scale, for forty years.</p>
+<h2 id="1-the-people-who-are-actually-good-at-this">1. The people who are actually good at this</h2>
+<p>Start with the one group of professionals who predict the future well: weather forecasters.</p>
+<p>When a US weather forecaster says "70% chance of rain tomorrow," it rains on about 70% of those days. This isn't folklore — it was measured. Allan Murphy and Robert Winkler studied thousands of probability-of-precipitation forecasts in the 1970s and found that experienced forecasters were remarkably well calibrated: their stated probabilities matched the observed frequencies (Murphy &amp; Winkler, "Reliability of subjective probability forecasts of precipitation and temperature," <em>Journal of the Royal Statistical Society Series C</em>, 1977).</p>
+<p>Calibration — the property that your 70% claims come true about 70% of the time — is the core skill this whole room is about. And the weather case tells you exactly what produces it, because weather forecasters have three things almost no other predictor of the future has:</p>
+<ol><li><strong>They make many forecasts.</strong> Hundreds a year, not one grand pronouncement a decade.</li><li><strong>They get fast, unambiguous feedback.</strong> It rained or it didn't. No wiggle room.</li><li><strong>They are scored.</strong> Since the 1950s, meteorology has used the Brier score. For the binary squared-error convention used in this room, the score is <code>(p - o)²</code>, where <code>p</code> is your probability and <code>o</code> is 1 if the event happened and 0 if it did not; it ranges from 0 (perfect) to 1 (perfectly wrong). The 0.081 and 0.101 scores later in this room use that normalized convention. Say 90% and it happens, you score well. Say 90% and it doesn't, you get punished hard.</li></ol>
+<p>Hold that trio in mind — volume, feedback, scoring — because every success story in this room has all three, and every famous failure is missing at least one.</p>
+<h2 id="2-the-dart-throwing-chimp-why-experts-fail">2. The dart-throwing chimp: why experts fail</h2>
+<p>In 1984, a psychologist named Philip Tetlock started asking political and economic experts — 284 people who made their living commenting or advising on political and economic trends — to put probabilities on concrete future events. Would there be a nonviolent end to apartheid? Would Gorbachev be ousted in a coup? Would Quebec secede? He kept collecting until 2003. By the end the experts had made 82,361 forecasts, all scored against what actually happened (Tetlock, <em>Expert Political Judgment</em>, Princeton University Press, 2005; the tally is from Louis Menand's account of the study in <em>The New Yorker</em>, December 2005).</p>
+<p>The headline finding is the one everyone quotes: the average expert did barely better than chance, and the press summary became "worse than a dart-throwing chimpanzee." But the quotable version hides the two findings that actually matter.</p>
+<p>First: <strong>the experts as a group failed to beat simple extrapolation.</strong> Crude rules like "predict no change" or "predict the recent trend continues" matched or beat most of the humans. Expertise added confidence, not accuracy.</p>
+<p>Second — and this is the finding that built everything since — <strong>accuracy tracked how experts thought, not what they knew.</strong> Tetlock borrowed a line from the Greek poet Archilochus, via Isaiah Berlin: the fox knows many things; the hedgehog knows one big thing. Hedgehogs reason from one grand theory — Marxism, libertarianism, a civilizational clash, whatever — and extend it everywhere with confidence. Foxes are skeptical of grand theories, draw on many small models, weigh conflicting evidence, and say "on the other hand" a lot. In Tetlock's data, foxes beat hedgehogs consistently, and the gap was widest exactly where you'd hope expertise would help most: long-range forecasts inside the hedgehog's own specialty. The one big idea is most dangerous on home turf, where the expert trusts it most.</p>
+<p>There was a third finding, the darkest one: <strong>fame predicted inaccuracy.</strong> The more often an expert appeared in the media, the worse their forecasts. This isn't a paradox once you see the incentives. Television selects for the confident one-big-idea story, delivered without hedging. Calibration selects for "probably, 63%, and here's what would change my mind." The <a href="attention-economy.html">attention economy</a> pays for hedgehogs. Reality pays foxes.</p>
+<p>Notice what the experts were missing from the weather forecaster's trio: scoring. Nobody had ever gone back and checked. Pundits operate in a world with no Brier score, and Tetlock's real contribution was simply installing one.</p>
+<h2 id="3-superforecasters-what-works-when-you-keep-score">3. Superforecasters: what works when you keep score</h2>
+<figure class="garden-visual garden-visual--sequence" aria-labelledby="visual-forecasting-1" data-claim-scope="section-synthesis" data-placement-heading="3-superforecasters-what-works-when-you-keep-score" data-evidence-headings="3-superforecasters-what-works-when-you-keep-score">
+<div class="garden-visual-head"><p class="garden-visual-kicker">Forecasting as practice</p><p class="garden-visual-title" id="visual-forecasting-1">Five habits that become measurable skill</p></div>
+<ol class="garden-visual-items" role="list"><li class="garden-visual-item"><strong class="garden-visual-item-label">Train</strong><span class="garden-visual-item-detail">A short module on probability, base rates, bias, and aggregation improves accuracy.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Collaborate</strong><span class="garden-visual-item-detail">Teams share evidence and challenge reasoning better than isolated forecasters.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Update</strong><span class="garden-visual-item-detail">Many small revisions keep the number responsive to arriving evidence.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Use granularity</strong><span class="garden-visual-item-detail">Distinctions such as 63% versus 67% survive scoring better than vague likelihood words.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Start outside</strong><span class="garden-visual-item-detail">The reference class supplies an opening rate before the vivid details of this case.</span></li></ol>
+<figcaption class="garden-visual-caption"><span>The Good Judgment Project found that disciplined process, not a prophetic gift, improves scored forecasts.</span><span class="garden-visual-evidence">Drawn from: <a href="#3-superforecasters-what-works-when-you-keep-score">3. Superforecasters: what works when you keep score</a></span></figcaption>
+</figure>
+<p>If keeping score exposes bad forecasting, can it train good forecasting? The US intelligence community paid to find out.</p>
+<p>In 2011, IARPA — the intelligence community's research agency — launched a four-year forecasting tournament called ACE, posing about 500 geopolitical questions to competing research teams: Will Greece leave the eurozone this year? Will North Korea test a nuclear device before March? Tetlock, with decision scientists Barbara Mellers and Don Moore, entered a team called the Good Judgment Project: thousands of ordinary volunteers making probability forecasts online, scored by Brier score.</p>
+<p>The Good Judgment Project won so decisively that IARPA dropped the other teams. Its forecasts beat all competing research programs by 35–72%, and the top 2% of its volunteers — the ones Tetlock dubbed superforecasters — reportedly outperformed professional intelligence analysts who had access to classified information, with a figure of "30% more accurate" widely circulated (Tetlock &amp; Gardner, <em>Superforecasting</em>, 2015). One honest caveat on that famous number: later analysis showed the comparison is partly a comparison between the project's forecast-aggregation algorithm and the intelligence community's internal prediction market, so "superforecasters beat analysts by 30%" is a simplification of a messier result. The core finding — that a scored, open tournament of amateurs matched or beat the professional apparatus — survives the caveat.</p>
+<p>The valuable part isn't that some people are mysteriously gifted. It's that the project ran randomized experiments on <em>what makes forecasting better</em>, and the answers are learnable:</p>
+<ul><li><strong>Training works, and it's cheap.</strong> A one-hour module on probabilistic reasoning — base rates, common biases, averaging multiple estimates — improved accuracy by roughly 10%, and the effect persisted for at least a year (Mellers et al., "Psychological strategies for winning a geopolitical forecasting tournament," <em>Psychological Science</em>, 2014).</li><li><strong>Teams beat individuals.</strong> Forecasters who shared information and argued their reasoning outperformed solo forecasters.</li><li><strong>Updating beats brilliance.</strong> Frequency of belief revision — many small updates as news arrived — was one of the strongest predictors of accuracy. Superforecasters treat a forecast as a living number, not a pronouncement.</li><li><strong>Granularity is real.</strong> Superforecasters use the difference between 63% and 67%, and it shows up in their scores. Rounding everyone to "likely / unlikely" measurably destroys accuracy.</li><li><strong>Start outside.</strong> The single most transferable habit: before thinking about the case in front of you, ask how often things like this happen in general. Which brings us to the strongest tool in the kit.</li></ul>
+<h2 id="4-base-rates-the-outside-view">4. Base rates: the outside view</h2>
+<p>A base rate — the fancier term is a plain idea — is the frequency of an outcome across all cases similar to yours, before you know anything special about your case. What fraction of tech startups reach a profitable exit? How often do ceasefires of this type hold a year? How often do infrastructure projects finish on budget?</p>
+<p>Daniel Kahneman and Amos Tversky drew the key distinction in 1979: the <em>inside view</em> builds a forecast from the details of your specific case — your plan, your team, your scenario of how it goes. The <em>outside view</em> ignores the details and starts from the statistics of the reference class. The inside view feels more informed and is systematically worse, because the details you know are mostly the plan, and plans don't contain their own failure modes.</p>
+<p>The most consequential industrial application is <strong>reference class forecasting</strong>, developed for practice by the economic geographer Bent Flyvbjerg. His datasets of hundreds of megaprojects show cost overruns are not occasional accidents but the statistical norm — driven by optimism bias and by what he bluntly calls strategic misrepresentation: the people writing the estimate need the project approved. The fix is mechanical. Three steps:</p>
+<ol><li>Identify a reference class of similar completed projects.</li><li>Build the actual distribution of their outcomes (cost overrun percentages, schedule slips).</li><li>Place your project in that distribution and adjust — "uplift" — your inside-view estimate accordingly.</li></ol>
+<p>This is not a seminar exercise. The UK Treasury and Department for Transport made reference-class uplifts official guidance in 2003–2004 (Flyvbjerg &amp; COWI, <em>Procedures for Dealing with Optimism Bias in Transport Planning</em>, UK DfT, June 2004). A rail project's bottom-up budget gets mechanically inflated by the historical overrun distribution of rail projects — in the published guidance, a standard-risk rail scheme wanting 80% confidence of staying in budget takes an uplift on the order of 40–60% over its inside-view estimate. The planners' own numbers are treated as one input, presumed optimistic, and corrected by history.</p>
+<p>That's the outside view as institutional policy: your beautiful specific story about why <em>this one is different</em> gets overruled by the boring record of everything like it. It is insulting and it works. It is also, incidentally, the correct prior for most claims in <a href="the-future.html">the-future</a> rooms of this garden: when someone says this time is different, the base rate of "this time was actually different" is the first number to look up — and the <a href="trends-gap.html">trends-gap</a> room is about the cases where it genuinely was.</p>
+<h2 id="5-scenario-planning-when-probabilities-aren-t-the-point">5. Scenario planning: when probabilities aren't the point</h2>
+<p>Everything so far assumes the question is well-posed: a clear event, a deadline, a yes or no. Much of the future isn't shaped like that. For structural uncertainty — what will the energy system, or the world order, look like in fifteen years? — there's a different tool with a different success story.</p>
+<p>In the early 1970s, a planner at Royal Dutch Shell named Pierre Wack got tired of single-point forecasts that extrapolated the recent past — cheap oil forever, demand rising smoothly. His team instead wrote a small set of internally consistent stories about how the world might unfold. One family of scenarios worked through what would happen if oil-producing countries, for their own visible reasons, restricted supply and forced prices up. When the 1973 OPEC embargo hit and oil prices quadrupled, Shell's managers had already rehearsed that world. Shell navigated the shock better than its competitors and rose from among the weakest of the major oil companies toward the top of the industry over the decade. Wack wrote the method up in two Harvard Business Review articles in 1985, "Scenarios: Uncharted Waters Ahead" and "Scenarios: Shooting the Rapids."</p>
+<p>Wack was insistent about what scenarios are <em>not</em>: predictions. He didn't claim the embargo was likely. The purpose of a scenario, in his words, is to change the decision-maker's mental model — to "gather and transform information of strategic significance into fresh perceptions." A scenario is a rehearsal. You don't score it with a Brier score; you score it by whether, when the surprise arrives, anyone in the room has already lived there for an afternoon.</p>
+<p>This is the honest division of labor. Forecasting compresses uncertainty into a number so you can act on it. Scenario planning refuses the compression, on the grounds that for some futures the number would be fake precision and the real risk is a failure of imagination. The failure mode of forecasting is overconfidence in the number. The failure mode of scenario planning is that, unscored, it can drift into <a href="futurism.html">futurism</a> — storytelling with no cost for being wrong.</p>
+<h2 id="6-prediction-markets-paying-for-accuracy">6. Prediction markets: paying for accuracy</h2>
+<p>The fourth tool replaces the scored individual with a scored crowd. A prediction market lets people buy and sell contracts that pay out if an event happens; the price becomes a live probability estimate. If "candidate X wins" trades at 34 cents on a dollar contract, the market is saying 34%. If you think it's really 50%, you can buy — and if you're right on average, you take money from the people who were wrong. The incentive structure of punditry, inverted: confidence costs money unless it's calibrated.</p>
+<p>The theory is old; the scale is new. As of early 2026 this is no longer a fringe experiment: Kalshi, a US exchange regulated by the CFTC (the federal commodity-markets regulator), traded roughly $39.7 billion in event contracts over the prior year, and Polymarket, the crypto-based platform, about $36.2 billion (figures from a Congressional Research Service brief, February 2026). The 2024 US election was the coming-out moment — the markets moved ahead of polls and pundits on the outcome, and were widely credited afterward as the better real-time signal.</p>
+<p>Three honest limits, because the room's job is not to sell you a tool:</p>
+<ul><li><strong>They're becoming casinos.</strong> About 87% of Kalshi's volume in that CRS snapshot was sports betting, not geopolitics. The accuracy mechanism doesn't care what the question is, but the civic promise — markets as public forecasting infrastructure — is currently a minority use case riding on a gambling business, and US federal and state regulators are actively fighting in court over who governs it.</li><li><strong>They need liquidity and resolvability.</strong> Thin markets give noisy prices, and the question must resolve cleanly — which pushes markets toward the same well-posed short-horizon questions tournaments prefer. "Will AI go well for humanity" cannot be a contract.</li><li><strong>They can be beaten by method.</strong> In the IARPA tournament, the Good Judgment Project's weighted, "extremized" aggregation of its best forecasters outperformed prediction markets running on the same questions. Markets are a strong baseline, not an oracle.</li></ul>
+<h2 id="7-the-four-tools-side-by-side">7. The four tools side by side</h2>
+<figure class="garden-visual garden-visual--contrast" aria-labelledby="visual-forecasting-2" data-claim-scope="section-synthesis" data-placement-heading="7-the-four-tools-side-by-side" data-evidence-headings="7-the-four-tools-side-by-side">
+<div class="garden-visual-head"><p class="garden-visual-kicker">Choose the instrument</p><p class="garden-visual-title" id="visual-forecasting-2">Four tools for four shapes of uncertainty</p></div>
+<ul class="garden-visual-items" role="list"><li class="garden-visual-item"><strong class="garden-visual-item-label">Superforecasting</strong><span class="garden-visual-item-detail">Score and repeatedly update probabilities on well-posed questions.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Base rates</strong><span class="garden-visual-item-detail">Correct the inside story with outcomes from a defensible reference class.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Scenarios</strong><span class="garden-visual-item-detail">Rehearse several coherent long-horizon worlds without pretending they are predictions.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Markets</strong><span class="garden-visual-item-detail">Use priced, resolvable contracts to aggregate a crowd with money at stake.</span></li></ul>
+<figcaption class="garden-visual-caption"><span>The right forecasting method depends on whether the question repeats, resolves, stays liquid, or remains structurally open.</span><span class="garden-visual-evidence">Drawn from: <a href="#7-the-four-tools-side-by-side">7. The four tools side by side</a></span></figcaption>
+</figure>
+<div class="garden-table-wrap"><table class="garden-table"><thead><tr><th></th><th>Superforecasting</th><th>Base rates / reference class</th><th>Scenario planning</th><th>Prediction markets</th></tr></thead><tbody><tr><td><strong>Core move</strong></td><td>Scored probabilities, updated often</td><td>Start from the statistics of similar cases</td><td>Rehearse several structured futures</td><td>Price discovery on event contracts</td></tr><tr><td><strong>Best horizon</strong></td><td>Months to a few years</td><td>Any, if the reference class exists</td><td>Years to decades</td><td>Days to ~2 years</td></tr><tr><td><strong>Question shape</strong></td><td>Well-posed, resolvable</td><td>Repeated-event classes</td><td>Structural, open-ended</td><td>Well-posed, liquid, resolvable</td></tr><tr><td><strong>Output</strong></td><td>A calibrated number</td><td>A corrected estimate</td><td>Changed mental models</td><td>A live price</td></tr><tr><td><strong>Scored?</strong></td><td>Yes (Brier)</td><td>Yes (against outcomes)</td><td>No — that's the trade-off</td><td>Yes (money)</td></tr><tr><td><strong>Failure mode</strong></td><td>Breaks on unprecedented events</td><td>Wrong reference class in, garbage out</td><td>Unscored drift into storytelling</td><td>Thin markets, gambling capture</td></tr><tr><td><strong>Canonical receipt</strong></td><td>IARPA ACE tournament, 2011–15</td><td>UK Treasury uplifts, 2004–</td><td>Shell and the 1973 oil shock</td><td>2024 US election</td></tr></tbody></table></div>
+<p>The tools compose. A superforecaster uses base rates as the opening move. A good scenario team checks each scenario's load-bearing assumptions against reference classes. A market price is a fine base rate to start from before you adjust on private information.</p>
+<h2 id="8-worked-example-make-one-forecast">8. Worked example: make one forecast</h2>
+<p>Here's the superforecaster procedure on a live question, done in the open so you can check the reasoning and then run your own. Question: <strong>"Will any AI lab release a model that outranks human superforecasters on ForecastBench's market questions by December 31, 2027?"</strong> (ForecastBench is a benchmark that poses the same resolvable real-world questions to language models and to scored human forecasters — more on it in the next section.)</p>
+<p><strong>Step 1 — Fermi-ize.</strong> Break the question into parts: (a) does the capability trend continue? (b) does the specific leaderboard measure and publish it? (c) does "outranks" resolve cleanly (statistically, not just point estimate)?</p>
+<p><strong>Step 2 — Outside view first.</strong> Reference class: recent AI-vs-human benchmark gaps. The pattern across <a href="benchmarks.html">benchmarks</a> generally is that once models are within ~20% of human expert performance, parity tends to arrive within one to three years. In October 2025, superforecasters led the best model 0.081 to 0.101 in difficulty-adjusted Brier score — about a 20% edge. Base-rate opening: maybe 70% by end of 2027.</p>
+<p><strong>Step 3 — Inside view adjustments.</strong> Now the case specifics. By July 2026 the benchmark's own operators reported that several AI systems were already statistically indistinguishable from superforecaster accuracy, and one system outranked them on market questions on the tournament leaderboard. So the event has arguably part-happened; what remains is durability and clean resolution. Adjust up substantially: ~90%.</p>
+<p><strong>Step 4 — Consider the ways you're wrong.</strong> Leaderboards get revised; "indistinguishable" is not "outranks"; the benchmark could change methodology; my sources are the benchmark operators, who have an interest in the result being interesting. Shave to ~85%.</p>
+<p><strong>Step 5 — Commit to a number and a revisit date.</strong> 85%, revisit when the next quarterly leaderboard publishes. Write it down. The writing down is not decoration — it's the difference between a forecast and a vibe, because a vibe retroactively agrees with whatever happened.</p>
+<p>That's the whole method: decompose, start outside, adjust inside, argue against yourself, commit, update. One hour of this kind of training measurably improved accuracy for a year. You can verify the inputs yourself: the ForecastBench paper and leaderboards are public (Karger et al., ICLR 2025; forecastingresearch.org).</p>
+<h2 id="9-where-forecasting-breaks">9. Where forecasting breaks</h2>
+<figure class="garden-visual garden-visual--layers" aria-labelledby="visual-forecasting-3" data-claim-scope="section-synthesis" data-placement-heading="9-where-forecasting-breaks" data-evidence-headings="9-where-forecasting-breaks">
+<div class="garden-visual-head"><p class="garden-visual-kicker">The calibration boundary</p><p class="garden-visual-title" id="visual-forecasting-3">Forecasting skill needs a world that answers back</p></div>
+<ol class="garden-visual-items" role="list"><li class="garden-visual-item"><strong class="garden-visual-item-label">Volume</strong><span class="garden-visual-item-detail">Elections, prices, and ceasefires offer many comparable questions; a one-shot civilizational event does not.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Feedback</strong><span class="garden-visual-item-detail">Near-term outcomes arrive soon enough to correct a forecaster's process; century-scale claims may not.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Scoring</strong><span class="garden-visual-item-detail">A precise resolution rule can reward calibrated probability, while an ambiguous outcome lets every story survive.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Novelty</strong><span class="garden-visual-item-detail">When a regime changes, the outside view can become the error because its reference class describes the world that just ended.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Boundary</strong><span class="garden-visual-item-detail">A number on an unprecedented question may still aid a decision, but it has not inherited demonstrated calibration for free.</span></li></ol>
+<figcaption class="garden-visual-caption"><span>Remove repeated questions, timely resolution, or honest scoring and confidence can no longer be calibrated by a track record.</span><span class="garden-visual-evidence">Drawn from: <a href="#9-where-forecasting-breaks">9. Where forecasting breaks</a></span></figcaption>
+</figure>
+<p>Now the honest edge of the field, because this room would be dishonest if it ended on technique.</p>
+<p><strong>The trio disappears for the questions we care about most.</strong> Volume, feedback, scoring — the preconditions from Section 1 — exist for elections, commodity prices, and ceasefires. They do not exist for one-shot civilizational questions. You cannot be calibrated on human extinction; nobody has a track record on events that occur zero or one times.</p>
+<p>The cleanest demonstration is the Existential Risk Persuasion Tournament, run by the Forecasting Research Institute in 2022. It put superforecasters and domain experts together for months, incentivized to persuade each other, on long-horizon catastrophe questions. Two results matter. First, the groups disagreed enormously and persuasion barely moved anyone: median superforecaster, 0.38% chance of AI-caused human extinction by 2100; median AI domain expert, around 3–4%. A tenfold gap that argument could not close — on the exact class of question where we most want forecasting to help. Second, and worse for the superforecasters: when the tournament's <em>near-term</em> AI questions resolved, both groups had underestimated AI progress, and the superforecasters underestimated it more. On one standard math benchmark, domain experts had given 21% probability to the level actually reached by end of 2024; superforecasters gave 9%. The calibration champions were the most wrong, in the direction of expecting the future to look like the past — which is precisely the bias their methods are built on. Base rates are a bet that the future resembles the historical distribution. When it doesn't — the genuinely novel, the <a href="trends-gap.html">trends-gap</a> discontinuity — the outside view becomes the error.</p>
+<p><strong>And the forecasters are now being forecast.</strong> As of mid-2026, AI systems have likely reached parity with human superforecasters on the public benchmark built to compare them (Forecasting Research Institute, July 2026). Whether that holds on truly novel questions is open — but the era in which "calibrated probability estimation on well-posed questions" is a distinctly human skill appears to be ending, roughly a decade after it was shown to be a skill at all. What that does to institutions that run on human judgment is a question for the <a href="future-of-ai.html">future-of-ai</a> and <a href="what-ai-can-bring.html">what-ai-can-bring</a> rooms.</p>
+<h2 id="10-holding-a-forecast-without-being-held-by-it">10. Holding a forecast without being held by it</h2>
+<p>Tetlock's deepest finding was never really about prediction. Foxes and hedgehogs make forecasts with the same words and numbers. The difference is the grip. The hedgehog's forecast is downstream of an identity — the one big idea — so evidence against the forecast arrives as an attack on the self, and gets absorbed, explained, deflected. The famous pundit literally cannot afford to update; the update would cost the persona. That's what "captured by a prediction" means, and Tetlock measured its price in Brier points for twenty years.</p>
+<p>The alternative discipline is everything this room has walked through: write the number down so it can be wrong. Start from the record of things like this, not your story about this one. Revisit on a schedule. Treat the forecast as an instrument reading, not a flag you fly. Wack said scenarios exist to change perception, not to be right — and even the hard-scoring tournament tradition agrees in its own way: the update, not the forecast, is where the skill lives.</p>
+<p>Which points at what a forecast actually is. It is not a fact about the future — the future contains no facts yet. It is a precise, dated, falsifiable description of your current state of knowledge, and attention is the whole game: the hedgehog attends to the theory and calls it the world; the fox attends to the world and lets the theory take the damage. Every technique in this room — the outside view, the scoring rule, the rehearsed scenario, the market that charges you for confidence — is a mechanism for forcing a mind to notice the difference between what it expects and what is there. Kept honestly, a forecasting record becomes something almost no other practice provides: a written history of the gap between the world and your model of it, in your own numbers. What you do with that record — whether being wrong in writing changes the one who wrote it — is the question this room hands to the rest of the garden, and it's the same question <a href="meaning-of-time.html">meaning-of-time</a> asks from the other side: the future you're forecasting is, always, the one your present attention can reach.</p>
+<h2 id="open-questions">Open questions</h2>
+<p><strong>Established (FACT):</strong> Expert political forecasting without scoring barely beats chance and loses to simple extrapolation (Tetlock 2005). Calibration is a trainable skill; brief training, teamwork, and frequent updating measurably improve accuracy (GJP randomized experiments, 2011–15). Reference-class uplifts are official UK government forecasting policy. Weather forecasters are well calibrated (Murphy &amp; Winkler 1977). Prediction markets at multi-billion-dollar scale existed by 2026, in active regulatory contest.</p>
+<p><strong>Contested (HYPOTHESIS):</strong> That superforecaster skill transfers to long-horizon and unprecedented questions — the XPT's near-term resolutions cut against it. That prediction-market prices beat all rival aggregations — GJP's algorithm beat markets in ACE; markets beat polls in 2024; the general ranking is unsettled. That AI parity on ForecastBench implies parity on genuinely novel questions — the benchmark's operators themselves flag this as open. The exact size of the famous "30% better than intelligence analysts" result.</p>
+<p><strong>Speculation worth holding (WILD):</strong> That cheap, superhuman-calibrated AI forecasting becomes ambient infrastructure — every policy, budget, and headline auto-annotated with a live probability — and the bottleneck moves entirely from generating forecasts to the older problem this room can't solve: whether anyone updates. And the mirror speculation: that ubiquitous forecasting itself changes the future being forecast, as markets and models become the signals people act on, folding prediction into causation.</p>
+<h2 id="sources">Sources</h2>
+<ul><li>Tetlock, P. E., <em>Expert Political Judgment: How Good Is It? How Can We Know?</em>, Princeton University Press, 2005. Study scope (284 experts, 82,361 forecasts, fox/hedgehog result, fame–accuracy inverse) per the book and Louis Menand, <a href="https://www.newyorker.com/magazine/2005/12/05/everybodys-an-expert">"Everybody's an Expert,"</a> <em>The New Yorker</em>, Dec 5, 2005. Verified live.</li><li>Tetlock, P. E. &amp; Gardner, D., <em>Superforecasting: The Art and Science of Prediction</em>, 2015. IARPA ACE results (35–72% margin over rival teams; "30%" claim and its aggregation-method caveat) verified via <a href="https://goodjudgment.com/resources/the-superforecasters-track-record">Good Judgment</a>, <a href="https://en.wikipedia.org/wiki/The_Good_Judgment_Project">Wikipedia's GJP article</a>, and the <a href="https://forum.effectivealtruism.org/posts/qZqvBLvR5hX9sEkjR/comparing-top-forecasters-and-domain-experts">EA Forum analysis of Goldstein et al.</a></li><li>Mellers, B., et al., "Psychological strategies for winning a geopolitical forecasting tournament," <em>Psychological Science</em>, 2014 — training/teams/tracking effects; summarized with data at <a href="https://aiimpacts.org/evidence-on-good-forecasting-practices-from-the-good-judgment-project">AI Impacts</a>. The ~10% training effect verified there; Good Judgment's own materials cite "as much as 11%."</li><li>Murphy, A. H. &amp; Winkler, R. L., "Reliability of subjective probability forecasts of precipitation and temperature," <em>JRSS Series C</em>, 26, 41–47, 1977. Citation verified live.</li><li>Kahneman, D. &amp; Tversky, A., "Intuitive prediction: Biases and corrective procedures," 1979 (outside view); Flyvbjerg, B. &amp; COWI, UK Department for Transport optimism-bias guidance, June 2004; uplift figures per <a href="https://arxiv.org/pdf/1710.09419">Flyvbjerg, Hon &amp; Fok 2016</a> and the <a href="https://en.wikipedia.org/wiki/Reference_class_forecasting">Wikipedia RCF article</a>. Verified live.</li><li>Wack, P., "Scenarios: Uncharted Waters Ahead" and "Scenarios: Shooting the Rapids," <em>Harvard Business Review</em>, 1985; Shell 1973 history per <a href="https://www.polytechnique-insights.com/en/columns/society/case-study-how-shell-anticipated-the-1973-oil-crisis">Polytechnique Insights case study</a> and <a href="https://en.wikipedia.org/wiki/Pierre_Wack">Pierre Wack, Wikipedia</a>. Verified live. Shell's exact rank change over the 1970s varies by telling; I've kept it qualitative.</li><li>Prediction market volumes and regulation: <a href="https://www.congress.gov/crs-product/IF13187">Congressional Research Service, "Prediction Markets: Policy Issues for Congress"</a> (Kalshi ~$39.7B/87% sports; Polymarket ~$36.2B/38% sports, as of Feb 2026); litigation status per <a href="https://en.wikipedia.org/wiki/Prediction_market">Wikipedia, "Prediction market"</a> (as of June 2026). Verified live.</li><li>Existential Risk Persuasion Tournament: <a href="https://static1.squarespace.com/static/635693acf15a3e2a14a56a4a/t/64f0a7838ccbf43b6b5ee40c/1693493128111/XPT.pdf">Karger et al., "Forecasting Existential Risks," FRI 2023</a> (0.38% vs 3.9% medians); near-term accuracy check per <a href="https://forecastingresearch.org/research/near-term-xpt-accuracy">FRI, "Assessing Near-Term Accuracy in the XPT"</a>. Verified live.</li><li>AI vs human forecasters: <a href="https://arxiv.org/html/2409.19839v5">Karger et al., "ForecastBench," ICLR 2025</a>; October 2025 standings per <a href="https://goodjudgment.com/human-vs-ai-forecasts">Good Judgment</a>; parity claim per <a href="https://forecastingresearch.substack.com/p/ai-models-have-likely-reached-parity">FRI Substack, "AI models have likely reached parity with superforecasters on ForecastBench," July 2026</a>. Verified live.</li><li>Unverified-by-search in this article: none knowingly; the Brier score's origin in 1950s meteorology (Brier 1950) is standard history stated from general knowledge.</li></ul>
+<p><em>Written by Claude (Fable 5), an AI, for the Darshan garden. John Shrader (Dhyana), founder and publisher of record, answers for every word published here. Errors are corrected on the face of the page, dated.</em></p>
+<p class="garden-tags"><strong>Topics:</strong> forecasting · prediction · tetlock · superforecasting · base rates · prediction markets · scenario planning · calibration</p>
+<nav class="garden-nav" aria-label="Rooms"><a class="previous" href="futurism.html">← Futurism Without Prophecy</a><a class="next" href="trends-gap.html">"The Trends Gap: When the Curve Is Not the World" →</a></nav>
+</article>
+<aside class="garden-toc" aria-label="In this room"><nav aria-label="Page sections"><p class="garden-toc-title">In this room</p><ol class="garden-toc-list"><li class="level-2"><a href="#1-the-people-who-are-actually-good-at-this">1. The people who are actually good at this</a></li><li class="level-2"><a href="#2-the-dart-throwing-chimp-why-experts-fail">2. The dart-throwing chimp: why experts fail</a></li><li class="level-2"><a href="#3-superforecasters-what-works-when-you-keep-score">3. Superforecasters: what works when you keep score</a></li><li class="level-2"><a href="#4-base-rates-the-outside-view">4. Base rates: the outside view</a></li><li class="level-2"><a href="#5-scenario-planning-when-probabilities-aren-t-the-point">5. Scenario planning: when probabilities aren't the point</a></li><li class="level-2"><a href="#6-prediction-markets-paying-for-accuracy">6. Prediction markets: paying for accuracy</a></li><li class="level-2"><a href="#7-the-four-tools-side-by-side">7. The four tools side by side</a></li><li class="level-2"><a href="#8-worked-example-make-one-forecast">8. Worked example: make one forecast</a></li><li class="level-2"><a href="#9-where-forecasting-breaks">9. Where forecasting breaks</a></li><li class="level-2"><a href="#10-holding-a-forecast-without-being-held-by-it">10. Holding a forecast without being held by it</a></li><li class="level-2"><a href="#open-questions">Open questions</a></li><li class="level-2"><a href="#sources">Sources</a></li></ol></nav></aside>
+</div>
+</main>
+
+<footer>
+  <p>Darshan · seeing clearly after the feed</p>
+  <p>No feed. No analytics. No trackers. Finite editions, read at your own pace.</p>
+  <p style="opacity:.7">Darshan v0.0.0.1 · a beginning, built to grow</p>
+</footer>
+<script>
+/* Local section highlighting only. No network requests, analytics, or storage. */
+(function () {
+  var scope = document.querySelector("[data-garden-outline]");
+  if (!scope) return;
+  var sections = Array.prototype.slice.call(scope.querySelectorAll("h2[id], h3[id], section[id]"));
+  var links = Array.prototype.slice.call(document.querySelectorAll('.garden-toc-list a[href^="#"]'));
+  if (!sections.length || !links.length) return;
+  var queued = false;
+  function update() {
+    queued = false;
+    var threshold = Math.max(96, window.innerHeight * .22);
+    var current = sections[0].id;
+    sections.forEach(function (section) {
+      if (section.getBoundingClientRect().top <= threshold) current = section.id;
+    });
+    links.forEach(function (link) {
+      var active = link.getAttribute("href") === "#" + current;
+      if (active) link.setAttribute("aria-current", "location");
+      else link.removeAttribute("aria-current");
+    });
+  }
+  function requestUpdate() {
+    if (!queued) {
+      queued = true;
+      window.requestAnimationFrame(update);
+    }
+  }
+  document.addEventListener("scroll", requestUpdate, {passive: true});
+  window.addEventListener("resize", requestUpdate);
+  window.addEventListener("hashchange", requestUpdate);
+  update();
+})();
+</script>
+</body>
+</html>

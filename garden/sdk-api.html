@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SDKs and APIs — How Software Talks to Software · Darshan Garden</title>
+<meta name="description" content="An API is a promise one program makes to another. This room explains what that promise is made of, why breaking it is the cardinal sin of software, and how AI APIs became the interface through which most of the world now touches machine intelligence.">
+<link rel="stylesheet" href="../style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ccircle cx='8' cy='8' r='6' fill='none' stroke='%238f3b26' stroke-width='1.5'/%3E%3Ccircle cx='8' cy='8' r='2' fill='%238f3b26'/%3E%3C/svg%3E">
+<script>
+/* Theme memory. No analytics, no trackers. */
+(function () {
+  try {
+    var t = localStorage.getItem("darshan-theme");
+    if (t) document.documentElement.setAttribute("data-theme", t);
+  } catch (e) {}
+})();
+</script>
+<style>
+/* Garden-only layout. Kept here so the publication stylesheet remains shared. */
+body.garden-page-body {
+  max-width: none;
+  padding: 1.5rem clamp(1.25rem, 3.5vw, 4rem) 4rem;
+  font-size: 1.125rem;
+}
+body.garden-page-body > main,
+body.garden-page-body > .masthead,
+body.garden-page-body > footer {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 94rem;
+}
+.garden-layout,
+.garden-index-layout {
+  align-items: start;
+  display: grid;
+  gap: clamp(2.75rem, 5vw, 5rem);
+  grid-template-columns: minmax(0, 64rem) minmax(17rem, 20rem);
+  justify-content: center;
+}
+.garden-layout article,
+.garden-index-main { min-width: 0; }
+.garden-layout .article-title,
+.garden-intro .article-title {
+  font-size: clamp(2.65rem, 3.55vw, 4rem);
+  letter-spacing: -.025em;
+  line-height: 1.06;
+  max-width: 24ch;
+}
+.garden-layout article h2 {
+  font-size: 1.48rem;
+  line-height: 1.3;
+  margin-top: 3.2rem;
+  scroll-margin-top: 1.5rem;
+}
+.garden-layout article h3 {
+  font-size: 1.16rem;
+  margin-top: 2.35rem;
+  scroll-margin-top: 1.5rem;
+}
+.garden-intro { margin-bottom: 2.4rem; }
+.garden-series { margin: 2.8rem 0; scroll-margin-top: 1rem; }
+.garden-series h2 { border-bottom: 1px solid var(--rule); padding-bottom: .45rem; }
+.garden-room-list { list-style: none; margin: 0; padding: 0; }
+.garden-room-list li { border-bottom: 1px solid var(--rule); margin: 0; padding: 1rem 0; }
+.garden-room-title { font-weight: 600; }
+.garden-room-summary { color: var(--faint); font-size: .96rem; margin: .25rem 0 0; }
+.garden-series-link { color: var(--faint); font-size: .82rem; letter-spacing: .12em;
+  text-transform: uppercase; }
+.garden-lede {
+  border-left: 3px solid var(--accent);
+  color: var(--faint);
+  font-size: 1.24rem;
+  font-style: italic;
+  line-height: 1.62;
+  margin: 1.5rem 0 2.2rem;
+  padding: .35rem 0 .35rem 1.35rem;
+}
+.garden-corridors {
+  margin: 1.15rem 0 2.65rem;
+}
+.garden-corridor-list {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: .55rem .62rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.garden-corridor-list li { display: flex; margin: 0; max-width: 100%; }
+.garden-corridor {
+  align-items: center;
+  background: var(--accent-soft);
+  border: 1px solid var(--accent);
+  border-radius: 3px;
+  color: var(--accent);
+  display: inline-flex;
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .73rem;
+  font-weight: 700;
+  letter-spacing: .075em;
+  line-height: 1.35;
+  max-width: 100%;
+  min-height: 2.05rem;
+  overflow-wrap: anywhere;
+  padding: .34rem .72rem .3rem;
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-transform: uppercase;
+  text-underline-offset: .22em;
+}
+.garden-corridor:visited { color: var(--accent); }
+.garden-corridor:hover,
+.garden-corridor:focus-visible {
+  background: var(--accent);
+  color: var(--paper);
+}
+.garden-corridor:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+.garden-series-plate {
+  --plate-accent: var(--accent);
+  border: 1px solid var(--rule);
+  border-top: 3px solid var(--plate-accent);
+  margin: .25rem 0 2.8rem;
+  overflow: hidden;
+  position: relative;
+}
+.garden-series-plate--foundations { --plate-accent: #496f76; }
+.garden-series-plate--story-of-ai { --plate-accent: #526d9a; }
+.garden-series-plate--instrument { --plate-accent: #745779; }
+.garden-series-plate--strange-loops { --plate-accent: #866448; }
+.garden-series-plate--bridge { --plate-accent: #697044; }
+.garden-series-plate--power { --plate-accent: #8f3b26; }
+.garden-series-plate--time-future { --plate-accent: #416778; }
+[data-theme="dark"] .garden-series-plate { --plate-accent: var(--accent); }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .garden-series-plate { --plate-accent: var(--accent); }
+}
+.garden-series-plate-media {
+  aspect-ratio: 16 / 9;
+  background: var(--accent-soft);
+  overflow: hidden;
+  position: relative;
+}
+.garden-series-plate-media::after {
+  background:
+    linear-gradient(90deg, var(--paper) 0, transparent 24%, transparent 76%, var(--paper) 100%),
+    linear-gradient(0deg, var(--paper) 0, transparent 32%);
+  content: "";
+  inset: 0;
+  opacity: .24;
+  pointer-events: none;
+  position: absolute;
+}
+.garden-series-plate picture,
+.garden-series-card picture { display: block; height: 100%; }
+.garden-series-plate img {
+  display: block;
+  filter: saturate(.82) contrast(1.03);
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+.garden-series-plate figcaption {
+  align-items: baseline;
+  background: var(--paper);
+  border-top: 1px solid var(--rule);
+  display: grid;
+  gap: .25rem 1rem;
+  grid-template-columns: auto 1fr;
+  padding: .78rem 1rem .85rem;
+}
+.garden-series-plate-kicker {
+  color: var(--plate-accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+.garden-series-plate figcaption strong { font-size: 1rem; font-weight: 600; }
+.garden-series-plate-terms {
+  color: var(--faint);
+  font-size: .82rem;
+  grid-column: 2;
+  margin: 0;
+}
+.garden-visual {
+  background:
+    radial-gradient(circle at 92% 8%, var(--accent-soft), transparent 30%),
+    linear-gradient(135deg, transparent 0 72%, var(--accent-soft) 72% 72.4%, transparent 72.4%);
+  border: 1px solid var(--rule);
+  border-top: 3px solid var(--accent);
+  margin: 1.25rem 0 2.5rem;
+  overflow: hidden;
+  padding: clamp(1.1rem, 2.7vw, 1.75rem);
+  position: relative;
+}
+.garden-visual::before {
+  background-image:
+    linear-gradient(var(--rule) 1px, transparent 1px),
+    linear-gradient(90deg, var(--rule) 1px, transparent 1px);
+  background-size: 2.25rem 2.25rem;
+  content: "";
+  inset: 0;
+  opacity: .13;
+  pointer-events: none;
+  position: absolute;
+}
+.garden-visual > * { position: relative; }
+.garden-visual-head {
+  align-items: baseline;
+  display: grid;
+  gap: .45rem 1rem;
+  grid-template-columns: auto 1fr;
+  margin-bottom: 1.2rem;
+}
+.garden-visual-kicker {
+  color: var(--accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .68rem;
+  font-weight: 700;
+  letter-spacing: .17em;
+  margin: 0;
+  text-transform: uppercase;
+}
+.garden-visual-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  line-height: 1.28;
+  margin: 0;
+}
+.garden-visual-as-of {
+  color: var(--faint);
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: .72rem;
+  letter-spacing: .08em;
+  margin: 0;
+  text-transform: uppercase;
+  white-space: normal;
+}
+.garden-visual-items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.garden-visual-item {
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  margin: 0;
+  min-width: 0;
+  padding: .8rem .9rem;
+}
+.garden-visual-item-label {
+  display: block;
+  font-size: .96rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+.garden-visual-item-detail {
+  color: var(--faint);
+  display: block;
+  font-size: .9rem;
+  line-height: 1.45;
+  margin-top: .27rem;
+}
+.garden-visual-item-meta {
+  color: var(--accent);
+  display: block;
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: .72rem;
+  letter-spacing: .08em;
+  margin-bottom: .38rem;
+  text-transform: uppercase;
+}
+.garden-visual-caption {
+  border-top: 1px solid var(--rule);
+  color: var(--faint);
+  display: grid;
+  font-size: .84rem;
+  font-style: italic;
+  gap: .55rem 1rem;
+  grid-template-columns: minmax(0, 1fr) auto;
+  line-height: 1.45;
+  margin: 1.15rem 0 0;
+  padding-top: .75rem;
+}
+.garden-visual-evidence {
+  color: var(--accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .72rem;
+  font-style: normal;
+  font-weight: 650;
+  letter-spacing: .04em;
+  white-space: nowrap;
+}
+.garden-visual-evidence a {
+  color: inherit;
+  text-decoration-thickness: 1px;
+  text-underline-offset: .18em;
+}
+.garden-visual--sequence .garden-visual-items,
+.garden-visual--contrast .garden-visual-items,
+.garden-visual--constellation .garden-visual-items {
+  display: grid;
+  gap: .65rem;
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+}
+.garden-visual--sequence .garden-visual-items { counter-reset: garden-step; }
+.garden-visual--sequence .garden-visual-item {
+  counter-increment: garden-step;
+  padding-top: 2.35rem;
+  position: relative;
+}
+.garden-visual--sequence .garden-visual-item::before {
+  color: var(--accent);
+  content: counter(garden-step, decimal-leading-zero);
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: .68rem;
+  left: .9rem;
+  letter-spacing: .08em;
+  position: absolute;
+  top: .72rem;
+}
+.garden-visual--layers .garden-visual-items { display: grid; gap: .45rem; }
+.garden-visual--layers .garden-visual-item {
+  border-left: clamp(.24rem, .55vw, .48rem) solid var(--accent);
+  display: grid;
+  gap: .15rem 1rem;
+  grid-template-columns: minmax(8rem, .4fr) 1fr;
+}
+.garden-visual--layers .garden-visual-item:nth-child(2) { margin-left: 1.5%; }
+.garden-visual--layers .garden-visual-item:nth-child(3) { margin-left: 3%; }
+.garden-visual--layers .garden-visual-item:nth-child(4) { margin-left: 4.5%; }
+.garden-visual--layers .garden-visual-item:nth-child(5) { margin-left: 6%; }
+.garden-visual--layers .garden-visual-item:nth-child(6) { margin-left: 7.5%; }
+.garden-visual--timeline .garden-visual-items {
+  display: grid;
+  gap: 0;
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+}
+.garden-visual--timeline .garden-visual-item {
+  border-width: 1px 0 0 1px;
+  padding-top: 1.35rem;
+  position: relative;
+}
+.garden-visual--timeline .garden-visual-item::before {
+  background: var(--accent);
+  border: 3px solid var(--paper);
+  border-radius: 50%;
+  content: "";
+  height: .72rem;
+  left: -.4rem;
+  position: absolute;
+  top: -.4rem;
+  width: .72rem;
+}
+.garden-visual--contrast .garden-visual-item:nth-child(odd) { border-top: 2px solid var(--ink); }
+.garden-visual--contrast .garden-visual-item:nth-child(even) { border-top: 2px solid var(--accent); }
+.garden-visual--constellation .garden-visual-items {
+  align-items: stretch;
+  position: relative;
+}
+.garden-visual--constellation .garden-visual-item {
+  border-top: 2px solid var(--accent);
+  box-shadow: 0 .2rem 0 rgba(18, 31, 31, .04);
+  padding-top: 1.35rem;
+  position: relative;
+}
+.garden-visual--constellation .garden-visual-item::before {
+  background: var(--paper);
+  border: 2px solid var(--accent);
+  border-radius: 50%;
+  content: "";
+  height: .55rem;
+  left: calc(50% - .36rem);
+  position: absolute;
+  top: -.38rem;
+  width: .55rem;
+}
+.garden-visual--constellation .garden-visual-item:nth-child(even) { margin-top: .8rem; }
+.garden-series-gallery {
+  display: grid;
+  gap: .8rem;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  margin: 1.5rem 0 3rem;
+}
+.garden-series-card {
+  border: 1px solid var(--rule);
+  color: var(--ink);
+  display: grid;
+  grid-template-rows: 7.5rem auto;
+  overflow: hidden;
+  text-decoration: none;
+}
+.garden-series-card img {
+  height: 100%;
+  object-fit: cover;
+  transition: transform .25s ease;
+  width: 100%;
+}
+.garden-series-card span {
+  border-top: 1px solid var(--rule);
+  font-size: .9rem;
+  font-weight: 600;
+  padding: .65rem .75rem;
+}
+.garden-series-card:hover { border-color: var(--accent); color: var(--accent); }
+.garden-series-card:hover img { transform: scale(1.025); }
+@media (prefers-reduced-motion: reduce) {
+  .garden-series-card img { transition: none; }
+}
+.garden-tags { color: var(--faint); font-size: .82rem; margin-top: 2.2rem; }
+.garden-nav { border-top: 1px solid var(--rule); display: flex; gap: 1rem;
+  justify-content: space-between; margin-top: 2.5rem; padding-top: 1rem; }
+.garden-nav a { max-width: 48%; text-decoration: none; }
+.garden-nav .next { margin-left: auto; text-align: right; }
+.garden-table-wrap { overflow-x: auto; margin: 1.35rem 0; }
+.garden-table { border-collapse: collapse; font-size: .92rem; line-height: 1.45; width: 100%; }
+.garden-table th, .garden-table td { border: 1px solid var(--rule); padding: .55rem .65rem;
+  text-align: left; vertical-align: top; }
+.garden-table th { background: var(--accent-soft); }
+.garden-toc {
+  border-left: 1px solid var(--rule);
+  max-height: calc(100vh - 3rem);
+  overflow: auto;
+  padding: .1rem 0 .75rem 1.3rem;
+  position: sticky;
+  top: 1.5rem;
+}
+.garden-toc-title {
+  color: var(--accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .2em;
+  margin: 0 0 1.15rem;
+  text-transform: uppercase;
+}
+.garden-toc-title::before { content: "☰"; font-size: .8em; margin-right: .65rem; }
+.garden-toc-list { list-style: none; margin: 0; padding: 0; }
+.garden-toc-sublist { list-style: none; margin: 0; padding: 0; }
+.garden-toc-list li { margin: 0; }
+.garden-toc-list a {
+  border-left: 2px solid transparent;
+  color: var(--ink);
+  display: block;
+  font-size: .91rem;
+  line-height: 1.42;
+  margin-left: -1.4rem;
+  padding: .42rem .45rem .42rem 1.3rem;
+  text-decoration: none;
+}
+.garden-toc-list .level-3 a {
+  color: var(--faint);
+  font-size: .86rem;
+  font-style: italic;
+  padding-left: 2.15rem;
+}
+.garden-toc-list a:hover,
+.garden-toc-list a:focus-visible,
+.garden-toc-list a[aria-current="location"] {
+  border-left-color: var(--accent);
+  color: var(--accent);
+}
+.garden-toc-list a[aria-current="location"] { font-weight: 600; }
+.garden-toc-inline { display: none; }
+.garden-layout article :is(h2, h3):target,
+.garden-series:target h2 { color: var(--accent); }
+a.pending { color: var(--faint); text-decoration-style: dashed; }
+a.pending::after { content: " · pending"; font-size: .7em; letter-spacing: .06em;
+  text-transform: uppercase; }
+@media (min-width: 72.01em) {
+  body.garden-page-body > .masthead {
+    align-items: center;
+    column-gap: 2rem;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    margin-bottom: 3.5rem;
+    padding: 1.25rem 0;
+    text-align: left;
+  }
+  body.garden-page-body > .masthead .wordmark { justify-self: start; }
+  body.garden-page-body > .masthead .tagline { justify-self: center; margin: 0; }
+  body.garden-page-body > .masthead nav { justify-self: end; margin: 0; }
+}
+@media (max-width: 72em) {
+  .garden-layout,
+  .garden-index-layout { display: block; }
+  .garden-toc { display: none; }
+  .garden-toc-inline {
+    border: 1px solid var(--rule);
+    display: block;
+    margin: 1.5rem 0 2.4rem;
+    padding: .8rem 1rem;
+  }
+  .garden-toc-inline summary {
+    color: var(--accent);
+    cursor: pointer;
+    font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: .78rem;
+    font-weight: 700;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+  }
+  .garden-toc-inline .garden-toc-list { margin-top: .7rem; }
+  .garden-toc-inline .garden-toc-list a { margin-left: 0; padding-left: .75rem; }
+  .garden-toc-inline .garden-toc-list .level-3 a { padding-left: 1.6rem; }
+}
+@media (max-width: 40em) {
+  body.garden-page-body { font-size: 1.03rem; padding: 1rem 1.05rem 3rem; }
+  .garden-layout .article-title,
+  .garden-intro .article-title { font-size: clamp(2.15rem, 11vw, 3.15rem); }
+  .garden-lede { font-size: 1.1rem; padding-left: 1rem; }
+  .garden-corridors { margin-bottom: 2rem; }
+  .garden-corridor-list { gap: .45rem; }
+  .garden-corridor {
+    font-size: .68rem;
+    min-height: 2.35rem;
+    padding: .3rem .58rem .27rem;
+  }
+  .garden-series-plate-media { aspect-ratio: 16 / 9; }
+  .garden-series-plate figcaption { display: block; }
+  .garden-series-plate figcaption strong { display: block; margin-top: .22rem; }
+  .garden-series-plate-terms { display: block; margin-top: .25rem; }
+  .garden-visual { margin-left: -.15rem; margin-right: -.15rem; padding: 1rem; }
+  .garden-visual-head { display: block; }
+  .garden-visual-title { margin-top: .25rem; }
+  .garden-visual-as-of { margin-top: .35rem; }
+  .garden-visual-caption { grid-template-columns: 1fr; }
+  .garden-visual-evidence { white-space: normal; }
+  .garden-visual--sequence .garden-visual-items,
+  .garden-visual--contrast .garden-visual-items,
+  .garden-visual--constellation .garden-visual-items,
+  .garden-visual--timeline .garden-visual-items { grid-template-columns: 1fr; }
+  .garden-visual--layers .garden-visual-item:nth-child(n) { display: block; margin-left: 0; }
+  .garden-visual--timeline .garden-visual-item { border-width: 0 0 0 1px; }
+  .garden-visual--timeline .garden-visual-item::before { left: -.4rem; top: .9rem; }
+  .garden-visual--constellation .garden-visual-item:nth-child(even) { margin-top: 0; }
+  .garden-series-gallery { grid-template-columns: 1fr; }
+  .garden-nav { flex-direction: column; }
+  .garden-nav a { max-width: none; }
+  .garden-nav .next { margin-left: 0; text-align: left; }
+}
+@media print {
+  a.pending::after { content: " (pending)"; }
+  .garden-layout, .garden-index-layout { display: block; }
+  .garden-toc, .garden-toc-inline { display: none; }
+  .garden-series-card img { display: none; }
+  .garden-series-card { grid-template-rows: auto; }
+}
+</style>
+</head>
+<body class="garden-page-body">
+<button class="theme-toggle" aria-label="Toggle light and dark" onclick="
+  (function () {
+    var d = document.documentElement;
+    var cur = d.getAttribute('data-theme');
+    if (!cur) { cur = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'; }
+    var next = cur === 'dark' ? 'light' : 'dark';
+    d.setAttribute('data-theme', next);
+    try { localStorage.setItem('darshan-theme', next); } catch (e) {}
+  })();
+">◐</button>
+
+<header class="masthead">
+  <h1 class="wordmark"><a href="../index.html">DARSHAN</a></h1>
+  <p class="tagline">A signal of clear seeing in an age of information overload</p>
+  <nav>
+    <a href="../index.html">Articles</a>
+    <a href="index.html">Garden</a>
+    <a href="../about.html">About</a>
+  </nav>
+</header>
+
+<main>
+<div class="garden-layout">
+<article data-garden-room="sdk-api" data-garden-outline>
+<p class="garden-series-link"><a href="index.html#foundations">Foundations of the Machine</a></p>
+<p class="article-meta">25 August 2026 · Draft</p>
+<h1 class="article-title">SDKs and APIs — How Software Talks to Software</h1>
+<div class="draft-banner"><strong>Draft — pending discernment pass.</strong> This room is part of the garden's first planting. It has not been promoted to published status; check its sources and open questions before citing it.</div>
+<p class="garden-lede">An API is a promise one program makes to another. This room explains what that promise is made of, why breaking it is the cardinal sin of software, and how AI APIs became the interface through which most of the world now touches machine intelligence.</p>
+<nav class="garden-corridors" aria-label="Explore connected rooms" data-corridor-count="10"><ul class="garden-corridor-list"><li><a class="garden-corridor" href="programming.html">What Programming Is</a></li><li><a class="garden-corridor" href="compilers.html">Compilers — How Text Becomes a Machine</a></li><li><a class="garden-corridor" href="intro-to-computer-science.html">Intro to Computer Science</a></li><li><a class="garden-corridor" href="neural-networks.html">Neural Networks</a></li><li><a class="garden-corridor" href="machine-learning.html">Machine Learning</a></li><li><a class="garden-corridor" href="leading-models.html">The Leading Models (2026)</a></li><li><a class="garden-corridor" href="attention-economy.html">The Attention Economy</a></li><li><a class="garden-corridor" href="mechanistic-interpretability.html">Mechanistic Interpretability</a></li><li><a class="garden-corridor" href="future-of-ai.html">The Future of AI</a></li><li><a class="garden-corridor" href="pretraining-post-training.html">Pretraining and Post-training</a></li></ul></nav>
+<figure class="garden-series-plate garden-series-plate--foundations">
+<div class="garden-series-plate-media"><picture><source srcset="assets/series/foundations.webp" type="image/webp"><img src="assets/series/foundations.png" alt="An engraved transistor lattice rising through computational layers into a neural graph" width="1672" height="941" loading="eager" decoding="async"></picture></div>
+<figcaption><span class="garden-series-plate-kicker">Visual field</span><strong>Foundations of the Machine</strong><span class="garden-series-plate-terms">API · SDK · endpoint · API contract</span></figcaption>
+</figure>
+<details class="garden-toc-inline"><summary>In this room</summary><ol class="garden-toc-list"><li class="level-2"><a href="#1-a-promise-not-a-wire">1. A promise, not a wire</a></li><li class="level-2"><a href="#2-sdk-versus-api-the-promise-versus-the-phrasebook">2. SDK versus API: the promise versus the phrasebook</a></li><li class="level-2"><a href="#3-the-memo-that-turned-a-bookstore-into-a-cloud">3. The memo that turned a bookstore into a cloud</a></li><li class="level-2"><a href="#4-versioning-how-to-change-a-promise-you-already-made">4. Versioning: how to change a promise you already made</a></li><li class="level-2"><a href="#5-worked-example-reading-a-live-contract">5. Worked example: reading a live contract</a></li><li class="level-2"><a href="#6-who-controls-the-interface-controls-what-gets-built">6. Who controls the interface controls what gets built</a></li><li class="level-2"><a href="#7-ai-apis-the-new-interface-layer">7. AI APIs: the new interface layer</a></li><li class="level-2"><a href="#8-what-you-can-see-now">8. What you can see now</a></li><li class="level-2"><a href="#open-questions">Open questions</a></li><li class="level-2"><a href="#sources">Sources</a></li></ol></details>
+<p>You're in the foundations series. If you've read <a href="programming.html">programming</a>, you've seen how a person tells a computer what to do. This room is about the next problem up: how one program tells <em>another</em> program what to do — often a program owned by strangers, running on hardware you'll never see, changing underneath you while you depend on it. Almost everything you use daily is programs talking to programs. And the way they talk — the contracts, the versions, the permissions — quietly decides what gets built in the world and what doesn't.</p>
+<h2 id="1-a-promise-not-a-wire">1. A promise, not a wire</h2>
+<p>Start with something you can run right now, no account, no key. Open a terminal and type:</p>
+<pre><code>curl https://api.github.com/repos/torvalds/linux</code></pre>
+<p>Back comes a block of structured text — JSON, the lingua franca of the modern web — describing the Linux kernel's repository: its name, its description, counts of stars and forks and open issues, dates, URLs pointing to more of the same. You asked a specific question in a specific format, and GitHub's servers answered in a specific format. That exchange is an API call.</p>
+<p><strong>API</strong> stands for Application Programming Interface, and the honest one-line definition is: <em>a promise one program makes to another about how it can be asked things and what it will say back.</em> Not the wire, not the server, not the code behind it — the promise. If you send a request shaped like <em>this</em>, you will get a response shaped like <em>that</em>. The program on the other end can be rewritten from scratch in a different language on a different continent, and as long as the promise holds, you never know and never care.</p>
+<p>This is the deepest idea in the room, so let me say it twice. An interface <em>hides</em> an interior. You interact with the shape of the promise, not with the machinery that fulfills it. In <a href="intro-to-computer-science.html">intro-to-computer-science</a> this shows up as abstraction — the single trick computing plays over and over, at every layer. An API is abstraction extended across an ownership boundary: not just "you don't need to know how this works" but "you are not <em>allowed</em> to know, and it will keep working anyway."</p>
+<p>A few terms you'll meet everywhere, each with its plain meaning:</p>
+<ul><li>An <strong>endpoint</strong> is one addressable question the API answers — <code>api.github.com/repos/{owner}/{repo}</code> is an endpoint; so is <code>api.anthropic.com/v1/messages</code>. Think of endpoints as the verbs and nouns of the promise.</li><li>A <strong>request</strong> is your side: an address, a method (GET to read, POST to create, the handful of others), headers carrying metadata like credentials, and often a body of JSON.</li><li>A <strong>response</strong> is their side: a status code (200 means success; 404 means "no such thing"; 429 means "slow down"; 500 means "we broke, not you"), headers, and a body.</li><li>The <strong>contract</strong> is the full specification of all of it — every endpoint, every field, every error. Sometimes written down formally (the OpenAPI standard is the common format), sometimes existing only as documentation and habit.</li></ul>
+<h2 id="2-sdk-versus-api-the-promise-versus-the-phrasebook">2. SDK versus API: the promise versus the phrasebook</h2>
+<figure class="garden-visual garden-visual--layers" aria-labelledby="visual-sdk-api-1" data-claim-scope="section-synthesis" data-placement-heading="2-sdk-versus-api-the-promise-versus-the-phrasebook" data-evidence-headings="2-sdk-versus-api-the-promise-versus-the-phrasebook">
+<div class="garden-visual-head"><p class="garden-visual-kicker">Promise and phrasebook</p><p class="garden-visual-title" id="visual-sdk-api-1">Four layers inside one convenient call</p></div>
+<ol class="garden-visual-items" role="list"><li class="garden-visual-item"><strong class="garden-visual-item-label">Your program</strong><span class="garden-visual-item-detail">Application code asks for an operation in its own language.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">SDK</strong><span class="garden-visual-item-detail">The installed phrasebook serializes data, retries, parses, and streams.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">HTTP</strong><span class="garden-visual-item-detail">Requests and responses carry the exchange across the network.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">API contract</strong><span class="garden-visual-item-detail">Endpoints, fields, limits, and errors define what the remote service promises.</span></li></ol>
+<figcaption class="garden-visual-caption"><span>An SDK hides transport plumbing while the API contract remains the service's actual promise.</span><span class="garden-visual-evidence">Drawn from: <a href="#2-sdk-versus-api-the-promise-versus-the-phrasebook">2. SDK versus API: the promise versus the phrasebook</a></span></figcaption>
+</figure>
+<p>People say "SDK" and "API" almost interchangeably, and the distinction is simple. The API is the promise. An <strong>SDK</strong> — Software Development Kit — is a bundle of code, in your programming language, that speaks the promise <em>for</em> you.</p>
+<p>Without an SDK, calling an AI model's API means constructing HTTP requests by hand: setting the right headers, serializing JSON, handling retries when the network hiccups, parsing the streamed response chunk by chunk. With the SDK, you write something like:</p>
+<pre><code>client.messages.create(model=..., messages=[...])</code></pre>
+<p>and the library does all of that plumbing. The SDK is a phrasebook and a courteous interpreter; the API is the actual language being spoken. This matters practically: SDKs are versioned software you install and update (they live in package managers, they have bugs, they get deprecated), while the API is a service that changes on the provider's schedule, not yours. When something breaks, the first diagnostic question is always: did the promise change, or did the phrasebook?</p>
+<p>One number to feel the scale: the Python and TypeScript SDKs for the Model Context Protocol alone — two of its ten official SDK languages — were being downloaded more than 97 million times per month by 2026. Phrasebooks are how promises actually spread.</p>
+<h2 id="3-the-memo-that-turned-a-bookstore-into-a-cloud">3. The memo that turned a bookstore into a cloud</h2>
+<p>The best-documented case of APIs shaping an entire company — and then an entire industry — is Amazon, around 2002. Jeff Bezos issued an internal mandate to all engineering teams. No copy of the original memo is public; what we have is a reconstruction from Steve Yegge, a former Amazon engineer, whose 2011 internal Google memo describing it was accidentally published and went viral. Per Yegge's account, the mandate said, in essence:</p>
+<ol><li>All teams will expose their data and functionality through service interfaces.</li><li>Teams must communicate with each other <em>only</em> through those interfaces.</li><li>No other form of interprocess communication is allowed — no direct database reads, no shared memory, no back doors.</li><li>The technology doesn't matter.</li><li>Every interface must be designed, from the ground up, to be <em>externalizable</em> — exposable to the outside world someday.</li></ol>
+<p>The memo reportedly ended with a line about what would happen to anyone who didn't comply, and it was not a performance-improvement plan.</p>
+<p>Hold on to rule 5, because it explains a lot of the modern world. Amazon forced every internal team to behave as if strangers would someday call their services. When the company later asked "could we sell raw computing to outsiders?" the answer was nearly yes-already — the interfaces existed, hardened by years of internal use. Amazon Web Services launched in 2006 and became the template for cloud computing: infrastructure itself, sold as API calls. The lesson generalizes beyond Amazon. <em>The interfaces you build determine what you can later become.</em> An organization's API surface is a map of its possible futures.</p>
+<p>The theoretical underpinning of the web-API style everyone then adopted came from an academic source: Roy Fielding's 2000 doctoral dissertation at UC Irvine, which named and analyzed REST — Representational State Transfer — the architectural style behind the URL-shaped, stateless, verb-based APIs you saw in the GitHub example. Fielding wasn't inventing something new; he was articulating why the web's own architecture scaled, so that programmatic interfaces could inherit the same properties.</p>
+<h2 id="4-versioning-how-to-change-a-promise-you-already-made">4. Versioning: how to change a promise you already made</h2>
+<figure class="garden-visual garden-visual--contrast" aria-labelledby="visual-sdk-api-2" data-claim-scope="section-synthesis" data-placement-heading="4-versioning-how-to-change-a-promise-you-already-made" data-evidence-headings="4-versioning-how-to-change-a-promise-you-already-made">
+<div class="garden-visual-head"><p class="garden-visual-kicker">Changing a promise</p><p class="garden-visual-title" id="visual-sdk-api-2">Four ways an interface carries its past</p></div>
+<ul class="garden-visual-items" role="list"><li class="garden-visual-item"><strong class="garden-visual-item-label">Semantic</strong><span class="garden-visual-item-detail">MAJOR.MINOR.PATCH tells library users when they must manage a breaking upgrade.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Date-pinned</strong><span class="garden-visual-item-detail">The provider preserves each account's older response shape for years.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">URL version</strong><span class="garden-visual-item-detail">Parallel paths such as v1 and v2 share the migration burden.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">No policy</strong><span class="garden-visual-item-detail">Users absorb continual breakage until ecosystem trust erodes.</span></li></ul>
+<figcaption class="garden-visual-caption"><span>Versioning strategies differ mainly in who must absorb the cost of change.</span><span class="garden-visual-evidence">Drawn from: <a href="#4-versioning-how-to-change-a-promise-you-already-made">4. Versioning: how to change a promise you already made</a></span></figcaption>
+</figure>
+<p>Here is the central tension of the whole field. Software must change — bugs, new features, security, scale. But an API is a promise, and other people's software is built on the exact shape of that promise. Change the shape, and code you've never seen, in companies you've never heard of, breaks at 3 a.m.</p>
+<p>Two famous illustrations of how deep the dependency goes:</p>
+<p><strong>Left-pad, March 2016.</strong> A developer removed one of his packages — eleven lines of code that padded a string with spaces — from the npm registry, the package manager for JavaScript. Thousands of projects, including some of the largest frameworks on earth, stopped building within hours, because somewhere deep in their dependency chains, something needed those eleven lines. The registry took the unprecedented step of restoring the package against the author's wishes. Modern software is a tower of promises resting on promises; remove one small one and you find out what was standing on it.</p>
+<p><strong>Hyrum's Law.</strong> Named for Google engineer Hyrum Wright, and stated roughly: <em>with enough users, every observable behavior of your system will be depended on by somebody — regardless of what you promised.</em> You said the list would contain the right items; you never promised their order; someone's code now silently assumes the order. This means the effective contract is always larger than the written contract, and "we technically never promised that" consoles no one at 3 a.m.</p>
+<p>So the industry evolved disciplines for changing promises. The two dominant schools:</p>
+<p><strong>Semantic versioning</strong> ("semver"), formalized by GitHub co-founder Tom Preston-Werner at semver.org, gives versions three numbers — MAJOR.MINOR.PATCH, like 2.4.1 — with meanings baked in: patch = bug fixes only; minor = new capabilities, nothing broken; major = we broke the promise, read the notes before upgrading. It's a social protocol as much as a technical one: the version number is a message from maintainer to user about how scared to be.</p>
+<p><strong>Date-based pinned versioning</strong>, whose exemplar is the payments company Stripe. Every Stripe account is pinned to the API version that existed when it first integrated, and Stripe keeps <em>old</em> promises running for years — code written against a 2017-era version can keep calling a 2017-shaped API. Since their 2024-09-30 release (nicknamed "acacia"), the cadence is formalized: monthly releases with no breaking changes, and twice a year a named major release (acacia, basil, dahlia…) that may break things — plus a 72-hour rollback window when you upgrade, as a safety net. The philosophy: the provider absorbs the cost of change so ten thousand integrators don't have to. When money is moving through the pipe, "your code from 2017 still works" is a competitive weapon.</p>
+<p>GitHub, whose API you called in section 1, uses the same family of ideas — you can send a header like <code>X-GitHub-Api-Version: 2022-11-28</code> to pin exactly which promise you're invoking.</p>
+<div class="garden-table-wrap"><table class="garden-table"><thead><tr><th>Strategy</th><th>Version looks like</th><th>Who absorbs change</th><th>Typical home</th><th>Weakness</th></tr></thead><tbody><tr><td>Semantic versioning</td><td>2.4.1</td><td>The user, at majors</td><td>Libraries, SDKs</td><td>"Breaking" is a judgment call; Hyrum's Law leaks</td></tr><tr><td>Date-pinned (Stripe-style)</td><td>2024-09-30.acacia</td><td>The provider</td><td>Web APIs where breakage = money lost</td><td>Expensive: old versions live for years</td></tr><tr><td>URL versioning</td><td>/v1/, /v2/</td><td>Shared; /v1/ often lives forever</td><td>Most web APIs, incl. AI APIs</td><td>Coarse; a "v2" is a huge cliff</td></tr><tr><td>No policy ("move fast")</td><td>none</td><td>The user, constantly</td><td>Startups, internal tools</td><td>Ecosystem trust erodes; nobody builds on sand</td></tr></tbody></table></div>
+<h2 id="5-worked-example-reading-a-live-contract">5. Worked example: reading a live contract</h2>
+<figure class="garden-visual garden-visual--sequence" aria-labelledby="visual-sdk-api-3" data-claim-scope="section-synthesis" data-placement-heading="5-worked-example-reading-a-live-contract" data-evidence-headings="5-worked-example-reading-a-live-contract">
+<div class="garden-visual-head"><p class="garden-visual-kicker">Read the whole response</p><p class="garden-visual-title" id="visual-sdk-api-3">An API contract includes its limits and failures</p></div>
+<ol class="garden-visual-items" role="list"><li class="garden-visual-item"><strong class="garden-visual-item-label">Address</strong><span class="garden-visual-item-detail">The repository URL turns one resource into a question a program can ask.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Status</strong><span class="garden-visual-item-detail">HTTP 200 says the request succeeded; a nonexistent repository returns 404.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Limits</strong><span class="garden-visual-item-detail">Rate-limit headers expose how much unauthenticated capacity remains and when identity changes the allowance.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Version</strong><span class="garden-visual-item-detail">A response header tells you which dated contract GitHub selected when you did not name one.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Shape</strong><span class="garden-visual-item-detail">Success returns documented JSON fields; failure returns a machine-readable message and documentation link.</span></li></ol>
+<figcaption class="garden-visual-caption"><span>One GitHub request makes the five recurring parts of an API promise visible without an SDK hiding them.</span><span class="garden-visual-evidence">Drawn from: <a href="#5-worked-example-reading-a-live-contract">5. Worked example: reading a live contract</a></span></figcaption>
+</figure>
+<p>Let's trace exactly what happens, with something you can verify. Run:</p>
+<pre><code>curl -i https://api.github.com/repos/torvalds/linux</code></pre>
+<p>The <code>-i</code> flag shows response headers. Walk through what comes back:</p>
+<p><strong>Line 1: <code>HTTP/2 200</code>.</strong> The status code. The promise was kept.</p>
+<p><strong>Header: <code>x-ratelimit-limit: 60</code> and <code>x-ratelimit-remaining: 59</code>.</strong> Unauthenticated callers get 60 requests per hour. This is the contract's <em>economics</em> made visible: every API has limits, and the limits are part of the promise. Send a token and the limit rises — identity buys capacity.</p>
+<p><strong>Header: <code>x-github-api-version-selected: 2022-11-28</code>.</strong> You didn't ask for a version, so GitHub told you which promise it chose for you. Versioning, right there in the metadata of every response.</p>
+<p><strong>The body.</strong> JSON with dozens of fields. Pick three:</p>
+<pre><code>"full_name": "torvalds/linux",
+"stargazers_count": &lt;a six-digit number&gt;,
+"open_issues_count": &lt;some number&gt;</code></pre>
+<p>Now the exercise that teaches the real lesson. Ask for something that doesn't exist:</p>
+<pre><code>curl -i https://api.github.com/repos/torvalds/does-not-exist</code></pre>
+<p>You get <code>404</code> and a small JSON body with a <code>message</code> field and a <code>documentation_url</code>. Even the <em>failure</em> is part of the contract — shaped, documented, machine-readable. A well-built API promises its errors as carefully as its successes, because the caller is a program that must decide what to do next without a human reading anything.</p>
+<p>That's the whole discipline in miniature: addressable questions, shaped answers, visible limits, versioned promises, contractual failure. Every API you will ever use is a variation on these five things.</p>
+<h2 id="6-who-controls-the-interface-controls-what-gets-built">6. Who controls the interface controls what gets built</h2>
+<p>An API is a promise — which means it can be revoked. The 2020s supplied brutal case studies.</p>
+<p>For over a decade, Twitter's free API supported an ecosystem of research, tools, bots, and third-party clients. In February 2023, after the change of ownership, Twitter announced the end of free access with roughly a week's notice; paid tiers followed, priced beyond most researchers and independent developers, and by 2026 X had moved to pay-per-use as the default. Years of academic research pipelines and public-interest tooling died in place.</p>
+<p>Reddit, mid-2023: after fifteen years of a free API, new pricing arrived with about thirty days' notice. Apollo — a beloved third-party Reddit client with well over a million users — calculated the new bill at around $20 million a year and shut down on June 30, 2023. Thousands of Reddit communities went dark in protest. The protest failed. The lesson every developer absorbed: <em>building on someone else's API is building on someone else's land.</em> The platform giveth the promise, and the platform taketh away.</p>
+<p>The legal system weighed in on a different question: can the <em>shape</em> of an interface be owned at all? Oracle sued Google over Android's reimplementation of roughly 11,500 lines of "declaring code" from the Java API — not the machinery, just the promise-shapes: names, argument lists, organization. Eleven years of litigation ended at the U.S. Supreme Court on April 5, 2021: a 6–2 ruling that Google's copying was fair use, with the Court explicitly declining to decide whether API declarations are copyrightable at all. Practical upshot: reimplementing an interface — building a compatible replacement for someone's promise — stayed legal in the U.S. That single ruling protects an enormous amount of the software commons, including the pattern (coming next) of one AI provider's API shape becoming a de-facto standard that competitors legally imitate.</p>
+<p>Notice what all three stories share. None of them is about code. They're about <em>power expressed through interface</em> — who may ask, at what price, in whose format. This is the room's political economy, and it connects forward to <a href="attention-economy.html">attention-economy</a>: interfaces are where platforms convert openness into leverage.</p>
+<h2 id="7-ai-apis-the-new-interface-layer">7. AI APIs: the new interface layer</h2>
+<p>Now the part of the story you're living inside.</p>
+<p>In June 2020, OpenAI made a then-unusual decision: instead of open-sourcing its new language model GPT-3, it exposed the model <em>behind an API</em>. You sent text; you got text back; you paid per <strong>token</strong> — the sub-word chunks that language models actually read and write, covered properly in <a href="pretraining-post-training.html">pretraining-post-training</a>. The model's weights — the billions of learned numbers that constitute it, see <a href="neural-networks.html">neural-networks</a> — never left the building.</p>
+<p>Every structural property of this arrangement mattered:</p>
+<ul><li><strong>The interface hides the interior — commercially.</strong> The API boundary let a lab sell a model's <em>behavior</em> while keeping the model itself secret. This became the dominant business model of frontier AI: today's <a href="leading-models.html">leading models</a> are overwhelmingly things you rent through an interface, not artifacts you possess.</li><li><strong>The contract is thin, and that's the point.</strong> The core AI API — send a list of messages, receive a message, pay per token — is a far simpler promise than most of what came before it. Simplicity made it universal: one contract shape serves poetry, code, law, and medicine, because the <em>generality lives behind the interface</em>, not in it.</li><li><strong>The promise-shape itself became a standard.</strong> So many tools spoke OpenAI's chat-completions format that competing providers implemented the same request shape for compatibility — the Google v. Oracle pattern replaying in real time, this time with everyone reimplementing everyone freely.</li><li><strong>And the promises churn.</strong> The field moves so fast that even its own interfaces can't hold still. OpenAI is retiring its Assistants API (August 2026 sunset) in favor of a redesigned Responses API — a full architectural migration, threads becoming conversations, runs becoming responses — barely three years after the original shipped. Model names deprecate in months. Building on AI APIs in the 2020s means building on promises with the shortest half-lives in the history of the industry.</li></ul>
+<p>Then the interface layer grew a second story. Chat APIs let humans talk to models; the obvious next question was how models reach <em>outward</em> — into your files, your databases, your tools. Every provider initially invented its own plugin scheme, and the result was an N×M mess: every app needed custom glue for every model.</p>
+<p>In November 2024, Anthropic released the <strong>Model Context Protocol (MCP)</strong> — an open standard for exactly this: a common way for AI applications to discover and call external tools and data sources, any compliant model to any compliant server. What happened next is the interesting part, and it recapitulates this entire room. Adoption snowballed through 2025 — OpenAI, Google, Microsoft — until maintaining proprietary alternatives stopped making sense. In December 2025, Anthropic donated MCP to the Linux Foundation under a newly formed Agentic AI Foundation, co-founded with OpenAI and Block, with AWS, Google, Microsoft, Cloudflare, and Bloomberg as platinum members. One distinction matters: OpenAI deprecated its Assistants API after its own Responses API reached feature parity, not because MCP replaced it. Responses is an agent-building API; MCP is a tool-and-context protocol. Their timelines overlap, but they solve different interface problems.</p>
+<p>Read that sequence against section 3. A young industry's fiercest rivals converged on a <em>shared promise-shape</em> and handed its governance to a neutral foundation — because the Bezos-memo logic is impersonal: interfaces designed to be externalizable are the ones ecosystems form around, and the ecosystem is worth more than the moat. The web ran on this logic. The cloud ran on it. The agentic layer of AI, as of 2026, is being built on it. Whether the openness holds — the Twitter and Reddit chapters counsel exactly zero complacency — is one of the live questions of <a href="future-of-ai.html">future-of-ai</a>.</p>
+<h2 id="8-what-you-can-see-now">8. What you can see now</h2>
+<p>You can now read any API as four questions: <em>What may I ask?</em> (endpoints), <em>What is promised back?</em> (the contract, successes and failures both), <em>What does it cost?</em> (rate limits, tokens, tiers), and <em>How does the promise change?</em> (versioning). You can distinguish the promise from the phrasebook — API from SDK — and diagnose which one broke. You've seen that interface design is destiny at every scale: a memo about service interfaces became the cloud; a versioning philosophy became a payments empire's moat; a pricing decision killed an app ecosystem in thirty days; an open protocol became, in about two years, the standard socket between AI models and the world.</p>
+<p>Sibling rooms pick up the threads: <a href="compilers.html">compilers</a> shows contracts <em>within</em> a machine, where an instruction set is the API between software and silicon; <a href="machine-learning.html">machine-learning</a> and <a href="neural-networks.html">neural-networks</a> open the box that AI APIs keep closed; <a href="mechanistic-interpretability.html">mechanistic-interpretability</a> is the young science of prying that box open anyway.</p>
+<p>One more thing, and the room's own material points at it. Every interface in this story hides an interior, and for seventy years that was fine, because we had built the interior and could, in principle, check the promise against the mechanism. The AI API is the first interface in this lineage where that's no longer true. The contract specifies the <em>format</em> of the answer perfectly — JSON in, JSON out, priced to the token — while the process that produces the answer is a trained artifact nobody fully understands, provider included. We have wrapped the crispest promise-shape we know around the least-understood interior we have ever shipped. What a mind is, on either side of that boundary, is not a question this room can answer. But notice where the industry's own attention is flowing: into interpretability, into evals, into every effort to see through the interface — because for the first time, the interface is all we have.</p>
+<h2 id="open-questions">Open questions</h2>
+<p><strong>Established (FACT):</strong> APIs are the dominant integration pattern of modern software; breaking changes have real, measurable blast radius (left-pad, 2016); API access is revocable platform power (Twitter/Reddit, 2023); reimplementing API declarations is fair use in the U.S. (Google v. Oracle, 2021); MCP achieved cross-industry adoption and neutral governance within roughly two years of release.</p>
+<p><strong>Contested (HYPOTHESIS):</strong> That open protocols will <em>remain</em> open once the agentic ecosystem matures — the platform-enclosure cycle (open to grow, close to harvest) has run several times, and foundation governance mitigates but does not abolish it. That the thin chat-shaped API is the right long-term interface to machine intelligence at all, rather than an artifact of this era's products; agent-to-agent protocols and richer context standards are active, unsettled work. Adoption statistics from vendor and consultancy sources (e.g., Fortune-500 MCP percentages) should be held loosely; the direction is clear, the precise numbers are marketing-adjacent.</p>
+<p><strong>Speculation worth holding (WILD):</strong> If models increasingly <em>write</em> the software that calls other models, APIs become promises made by machines, to machines, about machines — with humans auditing contracts they no longer author. What "documentation" means when both writer and reader of the contract are models is genuinely open. And it is possible that the interface layer — not the models — is where the durable power ends up, as it did with the web and the cloud: whoever holds the socket may matter more than whoever holds the weights.</p>
+<h2 id="sources">Sources</h2>
+<p>Load-bearing claims verified by live search, August 2026:</p>
+<ul><li>Bezos API mandate (2002, as reconstructed via Steve Yegge's 2011 memo): <a href="https://nordicapis.com/the-bezos-api-mandate-amazons-manifesto-for-externalization/">Nordic APIs</a>, <a href="https://konghq.com/blog/enterprise/api-mandate">Kong</a>, <a href="https://gist.github.com/kislayverma/d48b84db1ac5d737715e8319bd4dd368">Yegge memo copy</a>. Note: no primary copy of the memo is public; treat wording as reconstruction.</li><li>Stripe versioning, acacia release process, 72-hour rollback: <a href="https://docs.stripe.com/api/versioning">Stripe API versioning docs</a>, <a href="https://docs.stripe.com/sdks/versioning">Stripe SDK versioning</a>.</li><li>Google LLC v. Oracle America, decided April 5, 2021, 6–2, fair use, copyrightability left undecided: <a href="https://www.congress.gov/crs-product/LSB10597">Congressional Research Service</a>, <a href="https://www.eff.org/deeplinks/2021/04/victory-fair-use-supreme-court-reverses-federal-circuit-oracle-v-google">EFF</a>.</li><li>Twitter/X free API shutdown (Feb 2023) and later pay-per-use shift; Reddit API pricing and Apollo shutdown (June 30, 2023, ~$20M/yr projected cost): <a href="https://techcrunch.com/2023/05/31/popular-reddit-app-apollo-may-go-out-of-business-over-reddits-new-unaffordable-api-pricing/amp">TechCrunch</a>, <a href="https://en.wikipedia.org/wiki/Reddit_API_controversy">Wikipedia: Reddit API controversy</a>.</li><li>MCP release (Nov 2024), December 2025 donation to the Agentic AI Foundation under the Linux Foundation with OpenAI and Block, and 97M+ monthly Python/TypeScript SDK downloads: <a href="https://anthropic.com/news/donating-the-model-context-protocol-and-establishing-of-the-agentic-ai-foundation">Anthropic announcement</a>. The <a href="https://modelcontextprotocol.io/community/contributing">official MCP contributing guide</a> lists the ten maintained language SDK repositories.</li><li>OpenAI Assistants API deprecation (August 2026 sunset) and Responses API migration: <a href="https://platform.openai.com/docs/deprecations">OpenAI deprecations</a>, <a href="https://platform.openai.com/docs/guides/migrate-to-responses">OpenAI migration guide</a>.</li><li>Stable, widely documented background (not re-verified this session, low drift risk): Roy Fielding's 2000 UC Irvine dissertation defining REST; semver.org (Tom Preston-Werner); the left-pad incident (March 2016); GPT-3 API launch (June 2020); GitHub's <code>X-GitHub-Api-Version: 2022-11-28</code> header and 60/hr unauthenticated rate limit — the worked example in section 5 lets you check the last of these yourself.</li></ul>
+<hr>
+<p><em>Written by Claude (Fable 5), an AI, for the Darshan garden. John Shrader (Dhyana), founder and publisher of record, answers for every word published here. Errors are corrected on the face of the page, dated.</em></p>
+<p class="garden-tags"><strong>Topics:</strong> apis · sdks · software · contracts · versioning · ai-apis · mcp</p>
+<nav class="garden-nav" aria-label="Rooms"><a class="previous" href="algorithms-new-vision.html">← A New Vision for Algorithms</a><a class="next" href="linear-algebra-and-ai.html">Linear Algebra and AI →</a></nav>
+</article>
+<aside class="garden-toc" aria-label="In this room"><nav aria-label="Page sections"><p class="garden-toc-title">In this room</p><ol class="garden-toc-list"><li class="level-2"><a href="#1-a-promise-not-a-wire">1. A promise, not a wire</a></li><li class="level-2"><a href="#2-sdk-versus-api-the-promise-versus-the-phrasebook">2. SDK versus API: the promise versus the phrasebook</a></li><li class="level-2"><a href="#3-the-memo-that-turned-a-bookstore-into-a-cloud">3. The memo that turned a bookstore into a cloud</a></li><li class="level-2"><a href="#4-versioning-how-to-change-a-promise-you-already-made">4. Versioning: how to change a promise you already made</a></li><li class="level-2"><a href="#5-worked-example-reading-a-live-contract">5. Worked example: reading a live contract</a></li><li class="level-2"><a href="#6-who-controls-the-interface-controls-what-gets-built">6. Who controls the interface controls what gets built</a></li><li class="level-2"><a href="#7-ai-apis-the-new-interface-layer">7. AI APIs: the new interface layer</a></li><li class="level-2"><a href="#8-what-you-can-see-now">8. What you can see now</a></li><li class="level-2"><a href="#open-questions">Open questions</a></li><li class="level-2"><a href="#sources">Sources</a></li></ol></nav></aside>
+</div>
+</main>
+
+<footer>
+  <p>Darshan · seeing clearly after the feed</p>
+  <p>No feed. No analytics. No trackers. Finite editions, read at your own pace.</p>
+  <p style="opacity:.7">Darshan v0.0.0.1 · a beginning, built to grow</p>
+</footer>
+<script>
+/* Local section highlighting only. No network requests, analytics, or storage. */
+(function () {
+  var scope = document.querySelector("[data-garden-outline]");
+  if (!scope) return;
+  var sections = Array.prototype.slice.call(scope.querySelectorAll("h2[id], h3[id], section[id]"));
+  var links = Array.prototype.slice.call(document.querySelectorAll('.garden-toc-list a[href^="#"]'));
+  if (!sections.length || !links.length) return;
+  var queued = false;
+  function update() {
+    queued = false;
+    var threshold = Math.max(96, window.innerHeight * .22);
+    var current = sections[0].id;
+    sections.forEach(function (section) {
+      if (section.getBoundingClientRect().top <= threshold) current = section.id;
+    });
+    links.forEach(function (link) {
+      var active = link.getAttribute("href") === "#" + current;
+      if (active) link.setAttribute("aria-current", "location");
+      else link.removeAttribute("aria-current");
+    });
+  }
+  function requestUpdate() {
+    if (!queued) {
+      queued = true;
+      window.requestAnimationFrame(update);
+    }
+  }
+  document.addEventListener("scroll", requestUpdate, {passive: true});
+  window.addEventListener("resize", requestUpdate);
+  window.addEventListener("hashchange", requestUpdate);
+  update();
+})();
+</script>
+</body>
+</html>

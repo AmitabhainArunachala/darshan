@@ -1,0 +1,154 @@
+{
+  "schema": "darshan.garden.recovery-receipt/v1",
+  "date": "2026-08-25",
+  "status": "complete",
+  "authority": {
+    "claude_session_id": "f6c57918-20e2-49df-a16c-bff74a0a229b",
+    "claude_session_slug": "pure-strolling-fox",
+    "transcript_path": "/Users/dhyana/.claude/projects/-Users-dhyana/f6c57918-20e2-49df-a16c-bff74a0a229b.jsonl",
+    "master_prompt_path": "/Users/dhyana/.dharma/agents/darshan_fable/GARDEN_MASTER_PROMPT_2026-08-25.md",
+    "workflow_manifest_path": "/Users/dhyana/.claude/projects/-Users-dhyana/f6c57918-20e2-49df-a16c-bff74a0a229b/workflows/wf_f4fe7021-ac0.json",
+    "workflow_script_path": "/Users/dhyana/.claude/projects/-Users-dhyana-darshan-site/f6c57918-20e2-49df-a16c-bff74a0a229b/workflows/scripts/garden-first-planting-wf_f4fe7021-ac0.js"
+  },
+  "interrupted_state": {
+    "observed_room_sources": 48,
+    "observed_verdicts": 22,
+    "renderer_present": false,
+    "missing_slugs": [
+      "mahavideha-kshetra",
+      "taiwan",
+      "elon-musk",
+      "blockchain",
+      "attention-economy",
+      "futurism",
+      "trends-gap"
+    ],
+    "renderer_agent_failures": 2,
+    "renderer_failure_cause": "Claude auto-mode classifier temporarily unavailable",
+    "workflow_self_report": {
+      "run_id": "wf_f4fe7021-ac0",
+      "status": "completed",
+      "planted": 44,
+      "of": 55,
+      "agents": 99,
+      "duration_ms": 1459652,
+      "tokens": 6043051,
+      "tool_calls": 1476
+    }
+  },
+  "completed_state": {
+    "canonical_rooms": 55,
+    "room_sources": 55,
+    "independent_verdicts": 55,
+    "verdict_pass": 55,
+    "verdict_fix": 0,
+    "verdict_missing": 0,
+    "verdict_invalid": 0,
+    "directed_room_corridors": 546,
+    "generated_garden_pages": 56,
+    "parse_failures": 0,
+    "pending_links": 0,
+    "skipped_sources": 0,
+    "teaching_visuals": 165,
+    "teaching_visual_items": 823,
+    "unique_series_artworks": 7,
+    "series_artwork_placements": 62,
+    "total_visual_placements": 227,
+    "visual_specs": 7,
+    "visual_verdict_pass": 55,
+    "visual_verdict_fix": 0,
+    "visual_verdict_missing": 0,
+    "visual_verdict_invalid": 0,
+    "visual_claim_scopes": {
+      "section-synthesis": 164,
+      "room-synthesis": 1
+    },
+    "png_master_bytes": 22851354,
+    "optimized_webp_bytes": 2607780,
+    "source_status": "draft",
+    "publication_promoted": false,
+    "claude_attributed_rooms": 48,
+    "codex_authored_rooms": 7,
+    "commit_created": false,
+    "push_performed": false
+  },
+  "verification": [
+    {
+      "command": "python3 scripts/check_garden.py",
+      "result": "55/55 sources; 546 corridors; room verdicts PASS=55 FIX=0 missing=0 invalid=0; visual verdicts PASS=55 FIX=0 missing=0 invalid=0; 0 errors; 0 warnings"
+    },
+    {
+      "command": "python3 scripts/build_garden.py --strict",
+      "result": "56 pages; 0 parse failures; 55 sources; 0 pending links; 0 skipped sources; 0 visual errors"
+    },
+    {
+      "command": "python3 scripts/build.py",
+      "result": "6 legacy publication pages; 12 articles; 0 parse failures"
+    },
+    {
+      "command": "python3 -m py_compile scripts/build_garden.py scripts/check_garden.py",
+      "result": "pass"
+    },
+    {
+      "command": "ruff check scripts/build_garden.py scripts/check_garden.py",
+      "result": "pass"
+    },
+    {
+      "command": "git diff --check",
+      "result": "pass"
+    },
+    {
+      "command": "python3 -m http.server 8899 --bind 127.0.0.1; curl generated index and room",
+      "result": "garden/index.html HTTP 200 (52324 bytes); garden/intro-to-computer-science.html HTTP 200 (57280 bytes); garden/assets/series/foundations.webp HTTP 200 (238542 bytes); server left running for publisher preview"
+    },
+    {
+      "check": "generated layout and navigation parity",
+      "result": "pass: all 55 rooms have a wide garden frame, desktop sticky rail, mobile disclosure, unique H2/H3 IDs, semantically nested H3 links, and exactly two navigation targets per heading; the index rail matches all 7 series; parity now fails the renderer build if it drifts"
+    },
+    {
+      "check": "generated corridor-chip navigation",
+      "result": "pass: 546 distinct live room hyperlinks across 55 rooms, 3–17 per room, in declared terms_linked order; 289 cross series; every chip sits directly below its lede and the renderer independently fails on source-order drift, duplicates, count drift, or missing target pages"
+    },
+    {
+      "check": "visual catalog and evidence structure",
+      "result": "pass: 165 room-specific teaching panels across all 55 rooms; 823 labeled items; five semantic grammars; 164 section-synthesis scopes and 1 room-synthesis scope; every visual exposes its claim scope, placement heading, evidence headings, and live evidence links"
+    },
+    {
+      "check": "series artwork and optimized image delivery",
+      "result": "pass: 7 original 1672x941 PNG masters and 7 same-size WebP derivatives; 62 artwork placements; picture elements provide WebP with PNG fallback; all manifest-bound SHA-256 digests, decoded dimensions, PNG headers, WebP RIFF/chunk structures, paths, and alt-text contracts validate; a truncated-WebP fixture is rejected"
+    },
+    {
+      "check": "independent visual review",
+      "result": "pass: 55/55 room visual entries independently reviewed and SHA-bound to both the exact canonical visual JSON and exact room-source bytes; PASS=55 FIX=0 missing=0 invalid=0"
+    },
+    {
+      "check": "deterministic strict rebuild",
+      "result": "pass: two consecutive strict builds produced the identical generated-garden aggregate SHA-256 112bf240b73d436e460ed1e9730e301e47b38ffba8ee7c42a359f752dc92cea7"
+    },
+    {
+      "check": "independent adversarial renderer audit",
+      "result": "pass: parser, escaping, digest binding, missing/unreadable sources, link parity, pending navigation, stale pruning, authorship partition, verdict accounting, and control-byte fixtures"
+    },
+    {
+      "check": "visual browser pass",
+      "result": "pass: local room rendered in installed Chrome at 1728x1100 with the intended wide editorial frame, approximately 1000px reading column, sticky right rail, active-section treatment, and reference-scale title; responsive navigation was also verified structurally"
+    }
+  ],
+  "digests": {
+    "algorithm": "sha256",
+    "master_prompt": "21475c19fbed132a0ab12999967ec9dc10fea16a6e2b395fbbdecb1861e11e88",
+    "renderer": "4a6d7726f78e0acd882460bae9e0a9668bc1ea963e998c0a993c8b15f64fa0ed",
+    "checker": "ee60edbb6cecffad421acd87c1d1547f70c08ab1a0638f4f043212e0363a4834",
+    "garden_index": "4b1d6c1eb925f245d7af3ef6249785882aafd4b8ae046a522a7e825f1a0b1344",
+    "room_source_set": "f5c97d9ea66977770dd45b07bc88309ffc99a88bc23e90163d46096a7e1f921d",
+    "verdict_set": "669deab5846d6ee05da2563f98eae07c45db63c8e5db2f858318de403977c5d2",
+    "generated_garden_set": "112bf240b73d436e460ed1e9730e301e47b38ffba8ee7c42a359f752dc92cea7",
+    "visual_spec_set": "6fe78b7b370ba5ebacc9dae00170d2c893748f0dffdb79767bfd76dafd3ac4a7",
+    "visual_verdict_set": "df106a9f563c69da8c5679d304e2e8b7410c9dc2a15d41127239b467664be3ea",
+    "visual_asset_set": "5c4efa0a7b8ddd5f19c6cf8ed8a4228813b5c371ab9ed8d410a7a9a47640c472",
+    "set_digest_definition": "SHA-256 of the byte stream emitted by shasum -a 256 over the shell-sorted matching relative paths"
+  },
+  "deferred": {
+    "anchor_revoice": "Not part of this recovery. The Claude thread explicitly left it awaiting the publisher's verdict on the across-the-table sample beginning: I write one word at a time. That isn't a metaphor."
+  }
+}

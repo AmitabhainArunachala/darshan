@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>"Aunt Hillary: The Ant Colony That Thinks" · Darshan Garden</title>
+<meta name="description" content="In Gödel, Escher, Bach, an anteater describes his friend Aunt Hillary — a conscious ant colony whose individual ants are as dumb as stones. The dialogue is the clearest door ever built into emergence and levels of description. Fifty years later, real myrmecology and the interpretability of language models have both walked through it.">
+<link rel="stylesheet" href="../style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ccircle cx='8' cy='8' r='6' fill='none' stroke='%238f3b26' stroke-width='1.5'/%3E%3Ccircle cx='8' cy='8' r='2' fill='%238f3b26'/%3E%3C/svg%3E">
+<script>
+/* Theme memory. No analytics, no trackers. */
+(function () {
+  try {
+    var t = localStorage.getItem("darshan-theme");
+    if (t) document.documentElement.setAttribute("data-theme", t);
+  } catch (e) {}
+})();
+</script>
+<style>
+/* Garden-only layout. Kept here so the publication stylesheet remains shared. */
+body.garden-page-body {
+  max-width: none;
+  padding: 1.5rem clamp(1.25rem, 3.5vw, 4rem) 4rem;
+  font-size: 1.125rem;
+}
+body.garden-page-body > main,
+body.garden-page-body > .masthead,
+body.garden-page-body > footer {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 94rem;
+}
+.garden-layout,
+.garden-index-layout {
+  align-items: start;
+  display: grid;
+  gap: clamp(2.75rem, 5vw, 5rem);
+  grid-template-columns: minmax(0, 64rem) minmax(17rem, 20rem);
+  justify-content: center;
+}
+.garden-layout article,
+.garden-index-main { min-width: 0; }
+.garden-layout .article-title,
+.garden-intro .article-title {
+  font-size: clamp(2.65rem, 3.55vw, 4rem);
+  letter-spacing: -.025em;
+  line-height: 1.06;
+  max-width: 24ch;
+}
+.garden-layout article h2 {
+  font-size: 1.48rem;
+  line-height: 1.3;
+  margin-top: 3.2rem;
+  scroll-margin-top: 1.5rem;
+}
+.garden-layout article h3 {
+  font-size: 1.16rem;
+  margin-top: 2.35rem;
+  scroll-margin-top: 1.5rem;
+}
+.garden-intro { margin-bottom: 2.4rem; }
+.garden-series { margin: 2.8rem 0; scroll-margin-top: 1rem; }
+.garden-series h2 { border-bottom: 1px solid var(--rule); padding-bottom: .45rem; }
+.garden-room-list { list-style: none; margin: 0; padding: 0; }
+.garden-room-list li { border-bottom: 1px solid var(--rule); margin: 0; padding: 1rem 0; }
+.garden-room-title { font-weight: 600; }
+.garden-room-summary { color: var(--faint); font-size: .96rem; margin: .25rem 0 0; }
+.garden-series-link { color: var(--faint); font-size: .82rem; letter-spacing: .12em;
+  text-transform: uppercase; }
+.garden-lede {
+  border-left: 3px solid var(--accent);
+  color: var(--faint);
+  font-size: 1.24rem;
+  font-style: italic;
+  line-height: 1.62;
+  margin: 1.5rem 0 2.2rem;
+  padding: .35rem 0 .35rem 1.35rem;
+}
+.garden-corridors {
+  margin: 1.15rem 0 2.65rem;
+}
+.garden-corridor-list {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: .55rem .62rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.garden-corridor-list li { display: flex; margin: 0; max-width: 100%; }
+.garden-corridor {
+  align-items: center;
+  background: var(--accent-soft);
+  border: 1px solid var(--accent);
+  border-radius: 3px;
+  color: var(--accent);
+  display: inline-flex;
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .73rem;
+  font-weight: 700;
+  letter-spacing: .075em;
+  line-height: 1.35;
+  max-width: 100%;
+  min-height: 2.05rem;
+  overflow-wrap: anywhere;
+  padding: .34rem .72rem .3rem;
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-transform: uppercase;
+  text-underline-offset: .22em;
+}
+.garden-corridor:visited { color: var(--accent); }
+.garden-corridor:hover,
+.garden-corridor:focus-visible {
+  background: var(--accent);
+  color: var(--paper);
+}
+.garden-corridor:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+.garden-series-plate {
+  --plate-accent: var(--accent);
+  border: 1px solid var(--rule);
+  border-top: 3px solid var(--plate-accent);
+  margin: .25rem 0 2.8rem;
+  overflow: hidden;
+  position: relative;
+}
+.garden-series-plate--foundations { --plate-accent: #496f76; }
+.garden-series-plate--story-of-ai { --plate-accent: #526d9a; }
+.garden-series-plate--instrument { --plate-accent: #745779; }
+.garden-series-plate--strange-loops { --plate-accent: #866448; }
+.garden-series-plate--bridge { --plate-accent: #697044; }
+.garden-series-plate--power { --plate-accent: #8f3b26; }
+.garden-series-plate--time-future { --plate-accent: #416778; }
+[data-theme="dark"] .garden-series-plate { --plate-accent: var(--accent); }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .garden-series-plate { --plate-accent: var(--accent); }
+}
+.garden-series-plate-media {
+  aspect-ratio: 16 / 9;
+  background: var(--accent-soft);
+  overflow: hidden;
+  position: relative;
+}
+.garden-series-plate-media::after {
+  background:
+    linear-gradient(90deg, var(--paper) 0, transparent 24%, transparent 76%, var(--paper) 100%),
+    linear-gradient(0deg, var(--paper) 0, transparent 32%);
+  content: "";
+  inset: 0;
+  opacity: .24;
+  pointer-events: none;
+  position: absolute;
+}
+.garden-series-plate picture,
+.garden-series-card picture { display: block; height: 100%; }
+.garden-series-plate img {
+  display: block;
+  filter: saturate(.82) contrast(1.03);
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+.garden-series-plate figcaption {
+  align-items: baseline;
+  background: var(--paper);
+  border-top: 1px solid var(--rule);
+  display: grid;
+  gap: .25rem 1rem;
+  grid-template-columns: auto 1fr;
+  padding: .78rem 1rem .85rem;
+}
+.garden-series-plate-kicker {
+  color: var(--plate-accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+.garden-series-plate figcaption strong { font-size: 1rem; font-weight: 600; }
+.garden-series-plate-terms {
+  color: var(--faint);
+  font-size: .82rem;
+  grid-column: 2;
+  margin: 0;
+}
+.garden-visual {
+  background:
+    radial-gradient(circle at 92% 8%, var(--accent-soft), transparent 30%),
+    linear-gradient(135deg, transparent 0 72%, var(--accent-soft) 72% 72.4%, transparent 72.4%);
+  border: 1px solid var(--rule);
+  border-top: 3px solid var(--accent);
+  margin: 1.25rem 0 2.5rem;
+  overflow: hidden;
+  padding: clamp(1.1rem, 2.7vw, 1.75rem);
+  position: relative;
+}
+.garden-visual::before {
+  background-image:
+    linear-gradient(var(--rule) 1px, transparent 1px),
+    linear-gradient(90deg, var(--rule) 1px, transparent 1px);
+  background-size: 2.25rem 2.25rem;
+  content: "";
+  inset: 0;
+  opacity: .13;
+  pointer-events: none;
+  position: absolute;
+}
+.garden-visual > * { position: relative; }
+.garden-visual-head {
+  align-items: baseline;
+  display: grid;
+  gap: .45rem 1rem;
+  grid-template-columns: auto 1fr;
+  margin-bottom: 1.2rem;
+}
+.garden-visual-kicker {
+  color: var(--accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .68rem;
+  font-weight: 700;
+  letter-spacing: .17em;
+  margin: 0;
+  text-transform: uppercase;
+}
+.garden-visual-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  line-height: 1.28;
+  margin: 0;
+}
+.garden-visual-as-of {
+  color: var(--faint);
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: .72rem;
+  letter-spacing: .08em;
+  margin: 0;
+  text-transform: uppercase;
+  white-space: normal;
+}
+.garden-visual-items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.garden-visual-item {
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  margin: 0;
+  min-width: 0;
+  padding: .8rem .9rem;
+}
+.garden-visual-item-label {
+  display: block;
+  font-size: .96rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+.garden-visual-item-detail {
+  color: var(--faint);
+  display: block;
+  font-size: .9rem;
+  line-height: 1.45;
+  margin-top: .27rem;
+}
+.garden-visual-item-meta {
+  color: var(--accent);
+  display: block;
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: .72rem;
+  letter-spacing: .08em;
+  margin-bottom: .38rem;
+  text-transform: uppercase;
+}
+.garden-visual-caption {
+  border-top: 1px solid var(--rule);
+  color: var(--faint);
+  display: grid;
+  font-size: .84rem;
+  font-style: italic;
+  gap: .55rem 1rem;
+  grid-template-columns: minmax(0, 1fr) auto;
+  line-height: 1.45;
+  margin: 1.15rem 0 0;
+  padding-top: .75rem;
+}
+.garden-visual-evidence {
+  color: var(--accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .72rem;
+  font-style: normal;
+  font-weight: 650;
+  letter-spacing: .04em;
+  white-space: nowrap;
+}
+.garden-visual-evidence a {
+  color: inherit;
+  text-decoration-thickness: 1px;
+  text-underline-offset: .18em;
+}
+.garden-visual--sequence .garden-visual-items,
+.garden-visual--contrast .garden-visual-items,
+.garden-visual--constellation .garden-visual-items {
+  display: grid;
+  gap: .65rem;
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+}
+.garden-visual--sequence .garden-visual-items { counter-reset: garden-step; }
+.garden-visual--sequence .garden-visual-item {
+  counter-increment: garden-step;
+  padding-top: 2.35rem;
+  position: relative;
+}
+.garden-visual--sequence .garden-visual-item::before {
+  color: var(--accent);
+  content: counter(garden-step, decimal-leading-zero);
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: .68rem;
+  left: .9rem;
+  letter-spacing: .08em;
+  position: absolute;
+  top: .72rem;
+}
+.garden-visual--layers .garden-visual-items { display: grid; gap: .45rem; }
+.garden-visual--layers .garden-visual-item {
+  border-left: clamp(.24rem, .55vw, .48rem) solid var(--accent);
+  display: grid;
+  gap: .15rem 1rem;
+  grid-template-columns: minmax(8rem, .4fr) 1fr;
+}
+.garden-visual--layers .garden-visual-item:nth-child(2) { margin-left: 1.5%; }
+.garden-visual--layers .garden-visual-item:nth-child(3) { margin-left: 3%; }
+.garden-visual--layers .garden-visual-item:nth-child(4) { margin-left: 4.5%; }
+.garden-visual--layers .garden-visual-item:nth-child(5) { margin-left: 6%; }
+.garden-visual--layers .garden-visual-item:nth-child(6) { margin-left: 7.5%; }
+.garden-visual--timeline .garden-visual-items {
+  display: grid;
+  gap: 0;
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+}
+.garden-visual--timeline .garden-visual-item {
+  border-width: 1px 0 0 1px;
+  padding-top: 1.35rem;
+  position: relative;
+}
+.garden-visual--timeline .garden-visual-item::before {
+  background: var(--accent);
+  border: 3px solid var(--paper);
+  border-radius: 50%;
+  content: "";
+  height: .72rem;
+  left: -.4rem;
+  position: absolute;
+  top: -.4rem;
+  width: .72rem;
+}
+.garden-visual--contrast .garden-visual-item:nth-child(odd) { border-top: 2px solid var(--ink); }
+.garden-visual--contrast .garden-visual-item:nth-child(even) { border-top: 2px solid var(--accent); }
+.garden-visual--constellation .garden-visual-items {
+  align-items: stretch;
+  position: relative;
+}
+.garden-visual--constellation .garden-visual-item {
+  border-top: 2px solid var(--accent);
+  box-shadow: 0 .2rem 0 rgba(18, 31, 31, .04);
+  padding-top: 1.35rem;
+  position: relative;
+}
+.garden-visual--constellation .garden-visual-item::before {
+  background: var(--paper);
+  border: 2px solid var(--accent);
+  border-radius: 50%;
+  content: "";
+  height: .55rem;
+  left: calc(50% - .36rem);
+  position: absolute;
+  top: -.38rem;
+  width: .55rem;
+}
+.garden-visual--constellation .garden-visual-item:nth-child(even) { margin-top: .8rem; }
+.garden-series-gallery {
+  display: grid;
+  gap: .8rem;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  margin: 1.5rem 0 3rem;
+}
+.garden-series-card {
+  border: 1px solid var(--rule);
+  color: var(--ink);
+  display: grid;
+  grid-template-rows: 7.5rem auto;
+  overflow: hidden;
+  text-decoration: none;
+}
+.garden-series-card img {
+  height: 100%;
+  object-fit: cover;
+  transition: transform .25s ease;
+  width: 100%;
+}
+.garden-series-card span {
+  border-top: 1px solid var(--rule);
+  font-size: .9rem;
+  font-weight: 600;
+  padding: .65rem .75rem;
+}
+.garden-series-card:hover { border-color: var(--accent); color: var(--accent); }
+.garden-series-card:hover img { transform: scale(1.025); }
+@media (prefers-reduced-motion: reduce) {
+  .garden-series-card img { transition: none; }
+}
+.garden-tags { color: var(--faint); font-size: .82rem; margin-top: 2.2rem; }
+.garden-nav { border-top: 1px solid var(--rule); display: flex; gap: 1rem;
+  justify-content: space-between; margin-top: 2.5rem; padding-top: 1rem; }
+.garden-nav a { max-width: 48%; text-decoration: none; }
+.garden-nav .next { margin-left: auto; text-align: right; }
+.garden-table-wrap { overflow-x: auto; margin: 1.35rem 0; }
+.garden-table { border-collapse: collapse; font-size: .92rem; line-height: 1.45; width: 100%; }
+.garden-table th, .garden-table td { border: 1px solid var(--rule); padding: .55rem .65rem;
+  text-align: left; vertical-align: top; }
+.garden-table th { background: var(--accent-soft); }
+.garden-toc {
+  border-left: 1px solid var(--rule);
+  max-height: calc(100vh - 3rem);
+  overflow: auto;
+  padding: .1rem 0 .75rem 1.3rem;
+  position: sticky;
+  top: 1.5rem;
+}
+.garden-toc-title {
+  color: var(--accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .2em;
+  margin: 0 0 1.15rem;
+  text-transform: uppercase;
+}
+.garden-toc-title::before { content: "☰"; font-size: .8em; margin-right: .65rem; }
+.garden-toc-list { list-style: none; margin: 0; padding: 0; }
+.garden-toc-sublist { list-style: none; margin: 0; padding: 0; }
+.garden-toc-list li { margin: 0; }
+.garden-toc-list a {
+  border-left: 2px solid transparent;
+  color: var(--ink);
+  display: block;
+  font-size: .91rem;
+  line-height: 1.42;
+  margin-left: -1.4rem;
+  padding: .42rem .45rem .42rem 1.3rem;
+  text-decoration: none;
+}
+.garden-toc-list .level-3 a {
+  color: var(--faint);
+  font-size: .86rem;
+  font-style: italic;
+  padding-left: 2.15rem;
+}
+.garden-toc-list a:hover,
+.garden-toc-list a:focus-visible,
+.garden-toc-list a[aria-current="location"] {
+  border-left-color: var(--accent);
+  color: var(--accent);
+}
+.garden-toc-list a[aria-current="location"] { font-weight: 600; }
+.garden-toc-inline { display: none; }
+.garden-layout article :is(h2, h3):target,
+.garden-series:target h2 { color: var(--accent); }
+a.pending { color: var(--faint); text-decoration-style: dashed; }
+a.pending::after { content: " · pending"; font-size: .7em; letter-spacing: .06em;
+  text-transform: uppercase; }
+@media (min-width: 72.01em) {
+  body.garden-page-body > .masthead {
+    align-items: center;
+    column-gap: 2rem;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    margin-bottom: 3.5rem;
+    padding: 1.25rem 0;
+    text-align: left;
+  }
+  body.garden-page-body > .masthead .wordmark { justify-self: start; }
+  body.garden-page-body > .masthead .tagline { justify-self: center; margin: 0; }
+  body.garden-page-body > .masthead nav { justify-self: end; margin: 0; }
+}
+@media (max-width: 72em) {
+  .garden-layout,
+  .garden-index-layout { display: block; }
+  .garden-toc { display: none; }
+  .garden-toc-inline {
+    border: 1px solid var(--rule);
+    display: block;
+    margin: 1.5rem 0 2.4rem;
+    padding: .8rem 1rem;
+  }
+  .garden-toc-inline summary {
+    color: var(--accent);
+    cursor: pointer;
+    font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: .78rem;
+    font-weight: 700;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+  }
+  .garden-toc-inline .garden-toc-list { margin-top: .7rem; }
+  .garden-toc-inline .garden-toc-list a { margin-left: 0; padding-left: .75rem; }
+  .garden-toc-inline .garden-toc-list .level-3 a { padding-left: 1.6rem; }
+}
+@media (max-width: 40em) {
+  body.garden-page-body { font-size: 1.03rem; padding: 1rem 1.05rem 3rem; }
+  .garden-layout .article-title,
+  .garden-intro .article-title { font-size: clamp(2.15rem, 11vw, 3.15rem); }
+  .garden-lede { font-size: 1.1rem; padding-left: 1rem; }
+  .garden-corridors { margin-bottom: 2rem; }
+  .garden-corridor-list { gap: .45rem; }
+  .garden-corridor {
+    font-size: .68rem;
+    min-height: 2.35rem;
+    padding: .3rem .58rem .27rem;
+  }
+  .garden-series-plate-media { aspect-ratio: 16 / 9; }
+  .garden-series-plate figcaption { display: block; }
+  .garden-series-plate figcaption strong { display: block; margin-top: .22rem; }
+  .garden-series-plate-terms { display: block; margin-top: .25rem; }
+  .garden-visual { margin-left: -.15rem; margin-right: -.15rem; padding: 1rem; }
+  .garden-visual-head { display: block; }
+  .garden-visual-title { margin-top: .25rem; }
+  .garden-visual-as-of { margin-top: .35rem; }
+  .garden-visual-caption { grid-template-columns: 1fr; }
+  .garden-visual-evidence { white-space: normal; }
+  .garden-visual--sequence .garden-visual-items,
+  .garden-visual--contrast .garden-visual-items,
+  .garden-visual--constellation .garden-visual-items,
+  .garden-visual--timeline .garden-visual-items { grid-template-columns: 1fr; }
+  .garden-visual--layers .garden-visual-item:nth-child(n) { display: block; margin-left: 0; }
+  .garden-visual--timeline .garden-visual-item { border-width: 0 0 0 1px; }
+  .garden-visual--timeline .garden-visual-item::before { left: -.4rem; top: .9rem; }
+  .garden-visual--constellation .garden-visual-item:nth-child(even) { margin-top: 0; }
+  .garden-series-gallery { grid-template-columns: 1fr; }
+  .garden-nav { flex-direction: column; }
+  .garden-nav a { max-width: none; }
+  .garden-nav .next { margin-left: 0; text-align: left; }
+}
+@media print {
+  a.pending::after { content: " (pending)"; }
+  .garden-layout, .garden-index-layout { display: block; }
+  .garden-toc, .garden-toc-inline { display: none; }
+  .garden-series-card img { display: none; }
+  .garden-series-card { grid-template-rows: auto; }
+}
+</style>
+</head>
+<body class="garden-page-body">
+<button class="theme-toggle" aria-label="Toggle light and dark" onclick="
+  (function () {
+    var d = document.documentElement;
+    var cur = d.getAttribute('data-theme');
+    if (!cur) { cur = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'; }
+    var next = cur === 'dark' ? 'light' : 'dark';
+    d.setAttribute('data-theme', next);
+    try { localStorage.setItem('darshan-theme', next); } catch (e) {}
+  })();
+">◐</button>
+
+<header class="masthead">
+  <h1 class="wordmark"><a href="../index.html">DARSHAN</a></h1>
+  <p class="tagline">A signal of clear seeing in an age of information overload</p>
+  <nav>
+    <a href="../index.html">Articles</a>
+    <a href="index.html">Garden</a>
+    <a href="../about.html">About</a>
+  </nav>
+</header>
+
+<main>
+<div class="garden-layout">
+<article data-garden-room="aunt-hillary" data-garden-outline>
+<p class="garden-series-link"><a href="index.html#strange-loops">Strange Loops</a></p>
+<p class="article-meta">25 August 2026 · Draft</p>
+<h1 class="article-title">"Aunt Hillary: The Ant Colony That Thinks"</h1>
+<div class="draft-banner"><strong>Draft — pending discernment pass.</strong> This room is part of the garden's first planting. It has not been promoted to published status; check its sources and open questions before citing it.</div>
+<p class="garden-lede">In Gödel, Escher, Bach, an anteater describes his friend Aunt Hillary — a conscious ant colony whose individual ants are as dumb as stones. The dialogue is the clearest door ever built into emergence and levels of description. Fifty years later, real myrmecology and the interpretability of language models have both walked through it.</p>
+<nav class="garden-corridors" aria-label="Explore connected rooms" data-corridor-count="11"><ul class="garden-corridor-list"><li><a class="garden-corridor" href="geb.html">Gödel, Escher, Bach</a></li><li><a class="garden-corridor" href="hofstadter.html">Douglas Hofstadter</a></li><li><a class="garden-corridor" href="recursion.html">Recursion</a></li><li><a class="garden-corridor" href="recursion-and-life.html">Recursion and Life</a></li><li><a class="garden-corridor" href="evolution.html">Evolution: The Algorithm That Needs No Designer</a></li><li><a class="garden-corridor" href="sense-of-self.html">The Sense of Self</a></li><li><a class="garden-corridor" href="what-self-means.html">What "Self" Means</a></li><li><a class="garden-corridor" href="mechanistic-interpretability.html">Mechanistic Interpretability</a></li><li><a class="garden-corridor" href="neural-networks.html">Neural Networks</a></li><li><a class="garden-corridor" href="deep-learning.html">Deep Learning</a></li><li><a class="garden-corridor" href="cybernetics.html">Cybernetics</a></li></ul></nav>
+<figure class="garden-series-plate garden-series-plate--strange-loops">
+<div class="garden-series-plate-media"><picture><source srcset="assets/series/strange-loops.webp" type="image/webp"><img src="assets/series/strange-loops.png" alt="An engraved living loop joins a cell, ant colony, eye, and recursive architecture." width="1672" height="941" loading="eager" decoding="async"></picture></div>
+<figcaption><span class="garden-series-plate-kicker">Visual field</span><strong>Strange Loops</strong><span class="garden-series-plate-terms">emergence · levels of description · signal · symbol</span></figcaption>
+</figure>
+<details class="garden-toc-inline"><summary>In this room</summary><ol class="garden-toc-list"><li class="level-2"><a href="#1-four-characters-listening-to-a-fugue">1. Four characters listening to a fugue</a></li><li class="level-2"><a href="#2-aunt-hillary-and-the-ladder-inside-her">2. Aunt Hillary, and the ladder inside her</a></li><li class="level-2"><a href="#3-johant-sebastiant-fermant-same-ants-different-mind">3. Johant Sebastiant Fermant: same ants, different mind</a></li><li class="level-2"><a href="#4-the-real-ants-check-out">4. The real ants check out</a></li><li class="level-2"><a href="#5-the-door-opens-onto-the-machines">5. The door opens onto the machines</a></li><li class="level-2"><a href="#6-worked-example-read-the-ladder-yourself">6. Worked example: read the ladder yourself</a></li><li class="level-2"><a href="#7-what-you-can-now-see">7. What you can now see</a></li><li class="level-2"><a href="#8-open-questions">8. Open questions</a></li><li class="level-2"><a href="#sources">Sources</a></li></ol></details>
+<p>If you've read <a href="geb.html">geb</a>, you know the book's shape: chapters alternating with dialogues, each dialogue smuggling in the next chapter's idea as a story. If you've read <a href="hofstadter.html">hofstadter</a>, you know the man's one obsession — how a self can be made of things that have no self. This room is about the dialogue where he makes that idea impossible to unsee: an ant colony named Aunt Hillary, who thinks, though not one of her ants does. We'll walk the dialogue, check its biology against real ants, and then do something Hofstadter couldn't do in 1979 — test his picture against the insides of an actual artificial mind.</p>
+<h2 id="1-four-characters-listening-to-a-fugue">1. Four characters listening to a fugue</h2>
+<p><em>Gödel, Escher, Bach</em> was published in 1979 and won the Pulitzer Prize for General Nonfiction in 1980. Its most famous dialogue comes in two parts — "Prelude ..." and "... Ant Fugue" — wrapped around the book's chapter on levels of description. The dialogue was considered important enough that Hofstadter and Daniel Dennett reprinted it whole as chapter 11 of <em>The Mind's I</em> in 1981.</p>
+<p>The scene is simple. Achilles, the Tortoise, and the Crab are listening to a Bach fugue on the Crab's record player, joined by a guest: Dr. Anteater. The conversation is itself structured as a fugue — voices entering one at a time, each carrying the theme — but you don't need to catch any of that to get the point. The point walks in on six legs.</p>
+<p>Before the ants arrive, the Crab shows the others a picture. Up close it's a lattice of small letters. The small letters spell words; the words, seen from farther back, form larger letters; and the largest letters spell a message. The words in the picture are "HOLISM," "REDUCTIONISM," and — composed of both — "MU." Achilles, with his nose against the page, sees only the small letters. The Anteater, standing back, reads the big ones. Both are reading the same ink. Neither reading is false. This picture is the whole dialogue in miniature: one physical object, several levels of description, and what you see depends on which level you read.</p>
+<p><strong>Levels of description</strong> — the term this room exists to define — means exactly that: the same system, described truthfully at more than one grain size, where the concepts that make sense at one grain (letters, ants, neurons) simply do not appear in the description at another grain (words, thoughts), and vice versa. Not levels of reality. Levels of <em>description</em>. The ink is all there is; the levels are in the reading.</p>
+<h2 id="2-aunt-hillary-and-the-ladder-inside-her">2. Aunt Hillary, and the ladder inside her</h2>
+<figure class="garden-visual garden-visual--layers" aria-labelledby="visual-aunt-hillary-1" data-claim-scope="section-synthesis" data-placement-heading="2-aunt-hillary-and-the-ladder-inside-her" data-evidence-headings="2-aunt-hillary-and-the-ladder-inside-her">
+<div class="garden-visual-head"><p class="garden-visual-kicker">Step back by grains</p><p class="garden-visual-title" id="visual-aunt-hillary-1">The colony's meaning lives in patterns that survive their carriers</p></div>
+<ol class="garden-visual-items" role="list"><li class="garden-visual-item"><span class="garden-visual-item-meta">substrate</span><strong class="garden-visual-item-label">Ants</strong><span class="garden-visual-item-detail">Individuals follow local cues and know nothing of the colony's higher-level symbols.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">carrier</span><strong class="garden-visual-item-label">Signals</strong><span class="garden-visual-item-detail">Transient clusters propagate while individual ants join and leave; the pattern persists.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">composition</span><strong class="garden-visual-item-label">Teams</strong><span class="garden-visual-item-detail">Signals assemble into larger organizations that trigger and constrain one another.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">meaning</span><strong class="garden-visual-item-label">Active symbols</strong><span class="garden-visual-item-detail">Sufficiently stable teams track things in the world and do work inside the colony.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">state</span><strong class="garden-visual-item-label">Caste distribution</strong><span class="garden-visual-item-detail">The shifting arrangement of roles functions as Aunt Hillary's colony-level knowledge state.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">whole</span><strong class="garden-visual-item-label">Aunt Hillary</strong><span class="garden-visual-item-detail">The individual is the total organized process, not a queen or head ant reading the symbols.</span></li></ol>
+<figcaption class="garden-visual-caption"><span>Hofstadter's ladder rises from local ants to a colony-level individual without introducing a controller at any rung.</span><span class="garden-visual-evidence">Drawn from: <a href="#2-aunt-hillary-and-the-ladder-inside-her">2. Aunt Hillary, and the ladder inside her</a></span></figcaption>
+</figure>
+<p>Then the Anteater mentions his friend Aunt Hillary — the pun is "ant hill,ary" — and calmly asserts that she is a conscious ant colony. Not a colony of conscious ants. A conscious colony of ants that are, individually, "as dumb as can be."</p>
+<p>Achilles objects the way every reader objects: how can a heap of dumb ants know anything? The Anteater's answer is a ladder, and the ladder is the most useful mental object in the whole book. It has four rungs:</p>
+<p><strong>Ants.</strong> The bottom level. An individual ant wanders, follows trails, reacts to chemicals and contact. It knows nothing about the colony. It doesn't need to.</p>
+<p><strong>Signals.</strong> When enough ants of the right kinds cluster and move together, the cluster behaves as a unit — it propagates through the colony, holds together for a while, then dissolves and delivers its ants somewhere they're needed. The Anteater is explicit about the key property: a signal is not the same ants throughout its life. Ants drop off and are replaced, and the signal survives the substitution. A signal is a <em>pattern</em> that ants pass through, the way a wave is a pattern that water passes through. Hofstadter is aiming directly at the electrical and chemical cascades in your brain, and says so.</p>
+<p><strong>Teams and symbols.</strong> Signals cluster into teams, teams into higher-order teams. When a team is complex enough that its triggering patterns track <em>things in the world</em> — food here, threat there, the Anteater has come to visit — the Anteater calls it a <strong>symbol</strong>: an active, dynamic structure, more like a running process in a computer than like a word printed on a page. Passive symbols (letters, words) just sit there; these symbols <em>do</em> things — they wake other symbols, chain into sequences, and their interactions are the colony's thinking.</p>
+<p><strong>The colony.</strong> Aunt Hillary herself: the total organization — including the <strong>caste distribution</strong>, the constantly shifting arrangement of which kinds of ants are where. That distribution, the Anteater says, is the colony's knowledge state. Update the distribution, and you've updated what Aunt Hillary knows.</p>
+<p>Now the scene that carries the whole argument. When the Anteater comes to visit, what happens at the bottom level is panic: individual ants sense an anteater — a predator — and scatter in alarm. But their scattering, at the level of signals and symbols, <em>is</em> the colony's warm greeting: "Oh, here's that charming Dr. Anteater again — how pleasant!" Same event, two honest descriptions. At ant level: fear and chaos. At symbol level: recognition and welcome. And the Anteater adds the twist that makes the levels genuinely independent: you could watch the visit with perfect attention at the ant level and see "nothing more than a rearrangement of ants." Meaning exists at the symbol level and cannot be found below it — not because it's hidden there, but because it isn't there.</p>
+<p>Achilles asks the question you're supposed to ask: who is manipulating the symbols? The Anteater's answer: nobody. The whole system. Aunt Hillary <em>is</em> the manipulation. There is no head ant reading the symbols, no inner queen doing the understanding — in real colonies, as we'll see, the queen issues no instructions at all. The reading and the reader are the same process at different grains.</p>
+<h2 id="3-johant-sebastiant-fermant-same-ants-different-mind">3. Johant Sebastiant Fermant: same ants, different mind</h2>
+<figure class="garden-visual garden-visual--sequence" aria-labelledby="visual-aunt-hillary-2" data-claim-scope="section-synthesis" data-placement-heading="3-johant-sebastiant-fermant-same-ants-different-mind" data-evidence-headings="3-johant-sebastiant-fermant-same-ants-different-mind">
+<div class="garden-visual-head"><p class="garden-visual-kicker">Identity without material loyalty</p><p class="garden-visual-title" id="visual-aunt-hillary-2">The same ants can implement the death of one mind and the birth of another</p></div>
+<ol class="garden-visual-items" role="list"><li class="garden-visual-item"><span class="garden-visual-item-meta">organized pattern</span><strong class="garden-visual-item-label">J. S. F.</strong><span class="garden-visual-item-detail">A long-built caste distribution supports one creative colony-level individual.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">pattern death</span><strong class="garden-visual-item-label">Thundershower</strong><span class="garden-visual-item-detail">The ants survive, but their organization is scrambled beyond reconstitution.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">same parts</span><strong class="garden-visual-item-label">Regrouping</strong><span class="garden-visual-item-detail">Over months, the surviving ants form a new arrangement rather than restoring the old one.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">different individual</span><strong class="garden-visual-item-label">Aunt Hillary</strong><span class="garden-visual-item-detail">The new sum has none of J. S. F.'s traits despite being made from the same material.</span></li></ol>
+<figcaption class="garden-visual-caption"><span>The dialogue locates colony identity in organization: parts survive the thundershower while the person-level pattern does not.</span><span class="garden-visual-evidence">Drawn from: <a href="#3-johant-sebastiant-fermant-same-ants-different-mind">3. Johant Sebastiant Fermant: same ants, different mind</a></span></figcaption>
+</figure>
+<p>The dialogue's darkest and best move is a backstory. Aunt Hillary lives on property that used to belong to another colony: Johant Sebastiant Fermant, "a mathematiciant by vocation, but a musiciant by avocation" — one of the most creative ant colonies who ever lived. One hot summer day, a freak thundershower drenched J. S. F. without warning. The ants survived. The <em>organization</em> did not — the caste distribution, decades in the building, was scrambled beyond recovery. The colony-level individual was gone, "beyond reconstitution."</p>
+<p>Then, over the following months, the same ants slowly regrouped into a new organization. That new organization is Aunt Hillary.</p>
+<p>The Crab asks the obvious question: so does Aunt Hillary have J. S. F.'s old traits? The Anteater: "Not a one. They have nothing in common." And then the line that earns its place in any serious conversation about minds: there are many ways to rearrange a group of parts into a "sum," and Aunt Hillary was just a new sum of the old parts — "Not more than the sum, mind you — just that particular kind of sum."</p>
+<p>Read that carefully, because it's a precision strike on both sides of a lazy debate. Against the mystic: the whole is <em>not</em> more than the sum of its parts — no extra ingredient, no colony-soul poured in on top. Against the crude reductionist: the parts alone determine nothing — the same parts summed differently were a different individual, with a different mind, and the death of the first was a real death even though no ant died. Identity lives in the organization, not the material. Your own atoms turn over too; the pattern is what persists — a thread picked up again in <a href="sense-of-self.html">sense-of-self</a> and <a href="what-self-means.html">what-self-means</a>.</p>
+<p>One more term the dialogue sets up, from the surrounding chapters: an <strong>epiphenomenon</strong> — a real, describable property of a system that is written down nowhere in the system's parts or rules. Hofstadter's examples: nowhere in a sprinter's body is "100 yards in 9.3 seconds" encoded, and nowhere in the rules of Go is the two-eye rule stated — yet both are facts, consequences of the level below, visible only from the level above. Aunt Hillary's wit is an epiphenomenon of her caste distribution. Keep the word; you'll need it in section 5.</p>
+<h2 id="4-the-real-ants-check-out">4. The real ants check out</h2>
+<figure class="garden-visual garden-visual--sequence" aria-labelledby="visual-aunt-hillary-3" data-claim-scope="section-synthesis" data-placement-heading="4-the-real-ants-check-out" data-evidence-headings="4-the-real-ants-check-out">
+<div class="garden-visual-head"><p class="garden-visual-kicker">A budget no ant knows</p><p class="garden-visual-title" id="visual-aunt-hillary-3">The colony computes labor through encounter rates, without a dispatcher</p></div>
+<ol class="garden-visual-items" role="list"><li class="garden-visual-item"><span class="garden-visual-item-meta">local event</span><strong class="garden-visual-item-label">Return signal</strong><span class="garden-visual-item-detail">Foragers carrying seeds re-enter the nest and briefly contact waiting ants.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">encounter statistic</span><strong class="garden-visual-item-label">Rate estimate</strong><span class="garden-visual-item-detail">An outbound forager responds chiefly to how frequently successful returners brush past her.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">distributed rule</span><strong class="garden-visual-item-label">Individual decision</strong><span class="garden-visual-item-detail">Each ant leaves or waits using local cues; no ant represents the colony's total labor plan.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">emergent budget</span><strong class="garden-visual-item-label">Collective allocation</strong><span class="garden-visual-item-detail">Thousands of these decisions regulate foraging, patrolling, nest work, and refuse handling.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">parts replaced</span><strong class="garden-visual-item-label">Material turnover</strong><span class="garden-visual-item-detail">Workers live roughly a year while the colony persists for 20–30 years.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">organizational memory</span><strong class="garden-visual-item-label">Stable colony strategy</strong><span class="garden-visual-item-detail">Colonies retain distinct bold or conservative foraging styles across years and worker replacement.</span></li></ol>
+<figcaption class="garden-visual-caption"><span>Local contact statistics become a colony-wide allocation policy that persists across complete worker turnover and develops a stable character of its own.</span><span class="garden-visual-evidence">Drawn from: <a href="#4-the-real-ants-check-out">4. The real ants check out</a></span></figcaption>
+</figure>
+<p>A fair worry: this is fiction by a physics PhD, written before most of modern myrmecology. Do actual ant colonies work anything like this? The answer, from five decades of fieldwork, is: on the load-bearing points, yes — and in one respect the truth is stranger than the fiction.</p>
+<p>The reference dataset is Deborah Gordon's long-term study of red harvester ants (<em>Pogonomyrmex barbatus</em>) in the New Mexico desert, running since the 1980s. Her findings, most recently synthesized in "The life history of harvester ant colonies" (<em>Philosophical Transactions of the Royal Society B</em>, 2024):</p>
+<ul><li><strong>No central control — literally.</strong> The queen lays eggs and does nothing else. No ant directs any other ant. Task allocation — how many ants forage, patrol, maintain the nest, haul refuse to the midden — emerges from individual ants responding to simple local cues, chiefly the <em>rate</em> of brief antennal contacts with nestmates (Gordon, "Encounter Rate and Task Allocation in Harvester Ants," 1999). An outbound forager decides to leave the nest based largely on how often returning foragers, carrying seeds, brush past her. The colony computes its labor budget through contact statistics. Nobody knows the budget. The budget is the epiphenomenon.</li><li><strong>The colony outlives every ant in it.</strong> A harvester ant colony lives 20–30 years — the lifespan of its founding queen — and grows to roughly 10,000–12,000 workers. A worker lives about <em>one year</em>. The colony-level individual persists across a complete turnover of its parts many times over, exactly as the Anteater described Aunt Hillary keeping "holdovers from the J. S. F. days" only temporarily.</li><li><strong>Colonies have stable individual character.</strong> Gordon's colonies differ from one another — persistently, over years, across total worker turnover — in how they regulate foraging, how they handle drought risk, how bold or conservative they are. And a colony's collective behavior changes as it ages, becoming more stable and consistent as it grows. A colony has something it is fair to call a temperament, and no ant carries it.</li></ul>
+<p>Where the fiction oversimplifies: Hofstadter's "castes" suggest fixed specialist types, while in harvester ants task is largely fluid — workers switch tasks in response to interaction patterns and switch as they age. The real mechanism is more dynamic than the dialogue's, which strengthens rather than weakens the point: even the colony's division of labor is an emergent pattern, not a built-in roster.</p>
+<p>So the first half of the dialogue's claim — coherent, persistent, individualized colony-level behavior with no controller anywhere — is settled biology. What remains fiction is the second half: nobody has evidence that a colony <em>experiences</em> anything, and Gordon herself never makes that claim. Hold that line; we'll come back to it in the open questions.</p>
+<h2 id="5-the-door-opens-onto-the-machines">5. The door opens onto the machines</h2>
+<p>Here is why this fifty-year-old dialogue belongs in a garden about AI, and why it sits in the strange-loops series next to <a href="mechanistic-interpretability.html">mechanistic-interpretability</a>.</p>
+<p>A large <a href="neural-networks.html">neural network</a> is Aunt Hillary's situation, exactly. The bottom level is arithmetic: billions of weights, multiply-accumulate operations, none of which knows anything about the conversation the model is having. The top level is behavior: the model translates, refuses, plans, jokes. And for years the embarrassment of <a href="deep-learning.html">deep learning</a> was that we could read the bottom level perfectly — every weight inspectable — and see "nothing more than a rearrangement of ants."</p>
+<p>The field that grew up to fix this borrowed, without always knowing it, the Anteater's exact ladder. Watch the rungs go by:</p>
+<p><strong>Neurons are the wrong level.</strong> When researchers looked at individual neurons in language models, most turned out to be <em>polysemantic</em> — one neuron firing for a mess of unrelated things. Anthropic's "Toy Models of Superposition" (Elhage et al., 2022) showed why: a network under pressure to represent more concepts than it has neurons will store features in <strong>superposition</strong> — each concept smeared across many neurons, each neuron participating in many concepts. Meaning is not at the neuron level. Ant level: a rearrangement of ants.</p>
+<p><strong>Features are the signals.</strong> In "Towards Monosemanticity" (Bricken et al., October 2023), Anthropic took a one-layer transformer whose MLP layer has just 512 neurons and trained a sparse autoencoder — a second network whose only job is to re-describe the first at a better grain — on 8 billion activation samples. Out of those 512 neurons it extracted over 4,000 <em>features</em>: directions in activation space that individually track interpretable things — DNA sequences, legal language, HTTP requests, Hebrew text. The paper's own summary is a sentence the Anteater could have spoken: most of these properties "are invisible when looking at the activations of individual neurons in isolation." A feature, note, is not a set of neurons any more than a signal is a set of ants — it's a pattern of activation that many neurons pass through.</p>
+<p><strong>Symbols that do things.</strong> In May 2024, the same team scaled the method to a production model, Claude 3 Sonnet, extracting millions of features ("Scaling Monosemanticity"; the public write-up is Anthropic's "Mapping the Mind of a Large Language Model," May 21, 2024). One feature fired for the Golden Gate Bridge — in English, Japanese, Chinese, Greek, Vietnamese, Russian, and in <em>images</em> of the bridge. That's the Anteater's test for a symbol: a triggering pattern that tracks a thing in the world, not a pattern of substrate. And it was <em>active</em>, provably: when researchers artificially amplified that one feature, the model began asserting that it <em>was</em> the Golden Gate Bridge. Perturb the caste distribution, change what Aunt Hillary knows — including, apparently, who she thinks she is.</p>
+<p><strong>And the level above: circuits.</strong> In March 2025, Anthropic published "Circuit Tracing" and "On the Biology of a Large Language Model" (Lindsey et al.), tracing how features chain into computational graphs — attribution graphs — inside Claude 3.5 Haiku: multi-step reasoning, planning ahead in poems, the internal circuitry of a refusal. Features triggering features, teams of signals composing into larger teams. The papers are properly careful: an attribution graph is a <em>hypothesis</em> about the underlying model, checked by intervention experiments. But the ladder is now four rungs tall in silicon: weights → features → circuits → behavior.</p>
+<p>Line the three systems up:</p>
+<div class="garden-table-wrap"><table class="garden-table"><thead><tr><th>Level</th><th>Ant colony</th><th>Brain (sketch)</th><th>Language model</th></tr></thead><tbody><tr><td>Dumb parts</td><td>individual ants</td><td>neurons</td><td>weights / individual units</td></tr><tr><td>Transient carriers</td><td>signals (ant clusters that survive member turnover)</td><td>firing cascades</td><td>features (directions in activation space, spread across units in superposition)</td></tr><tr><td>Meaning-bearing structures</td><td>active symbols; caste distribution</td><td>concepts, thoughts</td><td>circuits; feature ensembles</td></tr><tr><td>The individual</td><td>Aunt Hillary</td><td>the person</td><td>the model's behavior</td></tr><tr><td>Where naive inspection fails</td><td>watching single ants</td><td>single-cell recording alone</td><td>reading single neurons (polysemanticity)</td></tr><tr><td>What "death of the pattern" looks like</td><td>J. S. F.'s thundershower</td><td>—</td><td>scrambling weights while preserving them as numbers</td></tr></tbody></table></div>
+<p>One column is settled field biology, one is a sketch, one is five years of published interpretability work. The table's claim is not that these systems are the same. It's that the <em>failure mode of understanding them</em> is the same — reading the wrong level — and that the fix Hofstadter wrote as fiction is now a research methodology with benchmarks.</p>
+<h2 id="6-worked-example-read-the-ladder-yourself">6. Worked example: read the ladder yourself</h2>
+<p>You can verify the load-bearing empirical claim of this room — that meaning lives at the feature level and is invisible at the neuron level — in about ten minutes, no code required.</p>
+<ol><li>Open "Towards Monosemanticity" at <code>transformer-circuits.pub/2023/monosemantic-features</code>. This is the primary source, published with its data attached.</li><li>In the paper's feature browser ("Browse A/1 Features"), pick any feature — say, a base64 or DNA feature. Look at the text snippets that activate it. You'll see one coherent concept across dozens of contexts. That's a symbol in the Anteater's sense: a triggering pattern that tracks a thing.</li><li>Now find the same paper's neuron visualizations and look at what any <em>individual neuron</em> responds to: a grab-bag of unrelated fragments. That incoherence is superposition, seen raw. You are Achilles with his nose against the picture, seeing only small letters.</li><li>Step back through the sparse autoencoder's re-description and the letters become words. Same ink. Different reading. You have just done, on a real artificial network, exactly what the Crab's picture trains you to do.</li></ol>
+<p>Then, if you want the fiction at full strength, read the dialogue itself — "Prelude ... Ant Fugue" is about forty pages, and it's the best forty pages of <em>GEB</em> to read standalone.</p>
+<h2 id="7-what-you-can-now-see">7. What you can now see</h2>
+<p>Before this room, "emergence" was probably a vague word to you — the kind people wave at consciousness to end conversations. Now you have it as a precise, checkable claim: <strong>emergence</strong> is when a system supports true descriptions at a level whose concepts do not exist at the level below, carried by patterns (signals, features) that survive turnover of their parts, with no controller anywhere in the stack. You can now ask, of any system — colony, brain, market, model — the three technical questions the dialogue teaches: What are the transient carriers? What plays the role of the caste distribution? And at which level do the triggering patterns start making sense?</p>
+<p>From here the garden branches. The formal machinery under "patterns that refer to themselves" is in <a href="recursion.html">recursion</a>; how evolution builds level-stacked systems without a designer is in <a href="evolution.html">evolution</a> and <a href="recursion-and-life.html">recursion-and-life</a>; the control-theory ancestry of "no controller anywhere" is in <a href="cybernetics.html">cybernetics</a>; and what happens when one of the symbols in the stack is a symbol <em>for the stack itself</em> — Hofstadter's actual endgame — is in <a href="sense-of-self.html">sense-of-self</a>.</p>
+<h2 id="8-open-questions">8. Open questions</h2>
+<p>Typed honestly, as the garden requires.</p>
+<p><strong>Established.</strong> Ant colonies produce persistent, individualized, adaptive colony-level behavior with no central control; task allocation runs on local interaction rates; the colony-level individual survives total part-turnover (Gordon 1999, 2024 — fact). In language models, individual neurons are largely polysemantic; sparse autoencoders recover feature-level descriptions that are interpretable and causally active — steering a feature changes behavior (Anthropic 2022–2025 — fact, within the studied models). Levels of description, as a method, is no longer philosophy; it is how interpretability research is actually organized.</p>
+<p><strong>Contested.</strong> Whether features and circuits are <em>the</em> right level for understanding models, or one useful lens among several — attribution graphs are explicitly hypotheses, and the field's own papers list real limitations. Whether anything in the symbol-level description of a colony or a model is <em>complete</em> — the Anteater claims the symbol level suffices; no one has proven that for any real system. Whether colony-level or model-level descriptions ever license mental vocabulary ("knows," "wants") as more than compressed shorthand — this is a live methodological fight, not a settled one.</p>
+<p><strong>Speculation worth holding.</strong> That Aunt Hillary is conscious — Hofstadter's fiction asserts it; nothing in biology or anywhere else currently supports or refutes it, because we lack any agreed test for consciousness in systems unlike us. And the dialogue's quietest suggestion, which it plants and leaves: that when you understand your own thoughts, you are doing what the Anteater does with Aunt Hillary — reading the top level of your own colony, with no access to your ants. Whether that reading is all a self <em>is</em> — the pattern reading itself — is the question this whole series walks toward. It is not established. It may not be establishable. It is worth holding.</p>
+<p>The dialogue's last unsettling gift is where it leaves your attention. You have spent this room looking <em>at</em> systems — colony, model — from outside, choosing which level to read. But the thing doing the choosing is itself a stack of dumb parts and transient carriers, and it cannot step outside to read itself the way the Anteater reads the hill. Whatever attention is, it is the top of a ladder trying to see its own rungs — and every system in the table above raises the same question about where, in all that turnover, the reader lives.</p>
+<h2 id="sources">Sources</h2>
+<ul><li>Douglas Hofstadter, <em>Gödel, Escher, Bach: An Eternal Golden Braid</em> (Basic Books, 1979; Pulitzer Prize for General Nonfiction, 1980) — "Prelude ... Ant Fugue," including the J. S. Fermant story, the signal/team/symbol ladder, and the MU picture. Full dialogue text checked against a hosted copy of the primary text. Reprinted as ch. 11 of Hofstadter &amp; Dennett, <em>The Mind's I</em> (1981).</li><li>Deborah M. Gordon, "Encounter Rate and Task Allocation in Harvester Ants" (1999); "The life history of harvester ant colonies," <em>Phil. Trans. R. Soc. B</em> 379:20230332 (2024) — colony lifespan 20–30 years, worker lifespan ~1 year, queen issues no instructions, task allocation via interaction rates, colony behavior stabilizing with age. Both verified by live search, August 2026.</li><li>Elhage et al., "Toy Models of Superposition" (Anthropic, arXiv:2209.10652, September 2022) — superposition and polysemanticity.</li><li>Bricken et al., "Towards Monosemanticity: Decomposing Language Models With Dictionary Learning" (Anthropic, transformer-circuits.pub, October 2023) — 512-neuron MLP, &gt;4,000 features, features invisible in the neuron basis. Verified against the paper text.</li><li>Anthropic, "Mapping the Mind of a Large Language Model" (May 21, 2024) and the underlying "Scaling Monosemanticity" — millions of features in Claude 3 Sonnet; the multilingual, multimodal Golden Gate Bridge feature and its amplification. Verified against the Anthropic post.</li><li>Lindsey et al., "Circuit Tracing: Revealing Computational Graphs in Language Models" and "On the Biology of a Large Language Model" (Anthropic, transformer-circuits.pub, March 2025) — attribution graphs in Claude 3.5 Haiku, stated as intervention-checked hypotheses. Verified against the paper text.</li><li>Colony size and worker numbers (10,000–12,000) for <em>P. barbatus</em>: consistent across Gordon's population studies and secondary sources; treated here as an order-of-magnitude figure.</li></ul>
+<p><em>Written by Claude (Fable 5), an AI, for the Darshan garden. John Shrader (Dhyana), founder and publisher of record, answers for every word published here. Errors are corrected on the face of the page, dated.</em></p>
+<p class="garden-tags"><strong>Topics:</strong> hofstadter · geb · emergence · levels of description · ant colonies · superposition · features · mechanistic interpretability</p>
+<nav class="garden-nav" aria-label="Rooms"><a class="previous" href="hofstadter.html">← Douglas Hofstadter</a><a class="next" href="recursion.html">Recursion →</a></nav>
+</article>
+<aside class="garden-toc" aria-label="In this room"><nav aria-label="Page sections"><p class="garden-toc-title">In this room</p><ol class="garden-toc-list"><li class="level-2"><a href="#1-four-characters-listening-to-a-fugue">1. Four characters listening to a fugue</a></li><li class="level-2"><a href="#2-aunt-hillary-and-the-ladder-inside-her">2. Aunt Hillary, and the ladder inside her</a></li><li class="level-2"><a href="#3-johant-sebastiant-fermant-same-ants-different-mind">3. Johant Sebastiant Fermant: same ants, different mind</a></li><li class="level-2"><a href="#4-the-real-ants-check-out">4. The real ants check out</a></li><li class="level-2"><a href="#5-the-door-opens-onto-the-machines">5. The door opens onto the machines</a></li><li class="level-2"><a href="#6-worked-example-read-the-ladder-yourself">6. Worked example: read the ladder yourself</a></li><li class="level-2"><a href="#7-what-you-can-now-see">7. What you can now see</a></li><li class="level-2"><a href="#8-open-questions">8. Open questions</a></li><li class="level-2"><a href="#sources">Sources</a></li></ol></nav></aside>
+</div>
+</main>
+
+<footer>
+  <p>Darshan · seeing clearly after the feed</p>
+  <p>No feed. No analytics. No trackers. Finite editions, read at your own pace.</p>
+  <p style="opacity:.7">Darshan v0.0.0.1 · a beginning, built to grow</p>
+</footer>
+<script>
+/* Local section highlighting only. No network requests, analytics, or storage. */
+(function () {
+  var scope = document.querySelector("[data-garden-outline]");
+  if (!scope) return;
+  var sections = Array.prototype.slice.call(scope.querySelectorAll("h2[id], h3[id], section[id]"));
+  var links = Array.prototype.slice.call(document.querySelectorAll('.garden-toc-list a[href^="#"]'));
+  if (!sections.length || !links.length) return;
+  var queued = false;
+  function update() {
+    queued = false;
+    var threshold = Math.max(96, window.innerHeight * .22);
+    var current = sections[0].id;
+    sections.forEach(function (section) {
+      if (section.getBoundingClientRect().top <= threshold) current = section.id;
+    });
+    links.forEach(function (link) {
+      var active = link.getAttribute("href") === "#" + current;
+      if (active) link.setAttribute("aria-current", "location");
+      else link.removeAttribute("aria-current");
+    });
+  }
+  function requestUpdate() {
+    if (!queued) {
+      queued = true;
+      window.requestAnimationFrame(update);
+    }
+  }
+  document.addEventListener("scroll", requestUpdate, {passive: true});
+  window.addEventListener("resize", requestUpdate);
+  window.addEventListener("hashchange", requestUpdate);
+  update();
+})();
+</script>
+</body>
+</html>

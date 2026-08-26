@@ -1,0 +1,9 @@
+{
+  "slug": "recursion",
+  "verdict": "PASS",
+  "contract": "The room satisfies the nine-key frontmatter, four-sentence orientation, numbered sections, comparison-table, runnable worked-example, conclusion, typed-open-question, source, disclosure, corridor, and earned-socket requirements. The repairs correct the fixed-point example, qualify the Y-combinator attribution, define Turing-complete at first use, scope the malware analogy, remove the false Morris priority claim, and delete the unsupported theorem superlative.",
+  "facts": "The computational examples were independently rerun: the Z-combinator factorial returns 120 and 3,628,800, the quine prints its exact source, and the prime-exponent arithmetic yields 243,000,000. Python's official documentation supports the recursion-limit explanation, and local CPython reports 1000. McCarthy's author-hosted 1960 paper supports the historical recursion account. Turing's original fixed-point paper and archive metadata support the published Theta construction and the attribution caveat; the room no longer states that Curry simply discovered Y. The repaired squaring example correctly identifies 0 and 1 as the fixed points of x squared.",
+  "voice": "The fixed-point construction, factorial trace, Goedel-numbering passage, quine, and final stack movement were read aloud. Each abstraction receives an ordinary-language on-ramp and something the reader can calculate or execute. The repaired virus paragraph is memorable without pretending a loose structural analogy is a universal malware fact.",
+  "must_fix": "None.",
+  "source_sha256": "5d2f4216b1d751bd648c48681cc66c1048878fc2b9627bb30702ce7a27c3ebe7"
+}

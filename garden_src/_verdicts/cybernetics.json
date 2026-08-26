@@ -1,0 +1,9 @@
+{
+  "slug": "cybernetics",
+  "verdict": "PASS",
+  "contract": "The room satisfies the master contract with all nine frontmatter keys, a four-sentence orientation, numbered descriptive sections, a genuine comparison table, a paper-and-pencil requisite-variety exercise, conclusion, typed open questions, sources, disclosure, valid corridors, and a socket earned from the good-regulator argument. The opening is now within the required limit, and both body and source ledger give the Dartmouth proposal's primary-document date.",
+  "facts": "Fresh primary checks support the historical and mathematical spine. McCarthy's Stanford-hosted proposal is dated August 31, 1955 and contains the '2 month, 10 man study' language; the repaired room matches it. Rosenblueth, Wiener, and Bigelow's original 1943 paper supports the purpose/feedback taxonomy. Conant and Ashby's 1970 abstract supports the good-regulator result under its formal assumptions, and the room explicitly distinguishes that theorem from its broader slogan. Wiener's 1960 Science paper supports the quoted warning about making a machine's purpose match the purpose actually desired.",
+  "voice": "The Macy history, feedback explanation, good-regulator passage, worked exercise, and alignment exit were read aloud. The density is carried by examples and short definitions rather than compressed jargon. The room speaks directly to one reader and marks theorem assumptions before drawing the modern analogy.",
+  "must_fix": "None.",
+  "source_sha256": "89c34d42f127ad7a202f6deb77049aec0683a399f653e33238f6f3ab8f3a7e9b"
+}

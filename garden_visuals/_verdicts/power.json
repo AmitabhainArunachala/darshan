@@ -1,0 +1,71 @@
+{
+  "schema": "darshan.visual-verdict-series/v1",
+  "series": "power",
+  "reviewer": "/root/verify_visuals_bridge_power",
+  "reviewed_at": "2026-08-25",
+  "rooms": {
+    "governments-and-ai": {
+      "verdict": "PASS",
+      "visual_sha256": "fcfb20ae5feab4d911814f83df150bb60907641c6ec23032e3bbadb54ae738af",
+      "source_sha256": "50972b3590d91aafa086d050f1b4b18193dd23cdf8fffd59ac3c69e18f57001e",
+      "evidence": "Checked the dual-use control stack against section 3, every H20 policy turn against section 6, and the dated US/EU/China regulatory comparison against section 5.",
+      "facts": "The figures accurately separate capability from tasking, track H100 cutoff through A800/H800 and H20 redesign, rescinded diffusion rules, licensing charges, the 15% revenue arrangement, and Beijing's purchase stop, and date the three domestic regimes to 2026.",
+      "uncertainty": "Physical controls can bind without establishing that they achieve strategic goals. Regulatory authority and product thresholds remain changeable, and the cross-regime claim is an inference about older state holds on trade, product safety, or discourse rather than a universal theory of government.",
+      "must_fix": "none — the moving policy comparison is dated and the timeline distinguishes public events from strategic interpretation."
+    },
+    "palantir": {
+      "verdict": "PASS",
+      "visual_sha256": "db2ffc238037a51a289088601fbb518ee7a9181c6952c644ee195664feda1882",
+      "source_sha256": "ad21d492bb162a966bddadf223f95d0f66718f40ad07bae5ebdd4f228a137389",
+      "evidence": "Checked the ontology primitives against section 4, the row-to-action pipeline against section 8, and the practical-obscurity risk stack against section 7.",
+      "facts": "Object types, objects, properties, link types, and action types match Palantir's documented mapping grammar. The worked flow preserves source integration, ontology mapping, cross-source query, and kinetic action, including the identical-engine contrast between enforcement and care.",
+      "uncertainty": "Granular controls and audit logs can be real safeguards while remaining contingent on law and policy. Public evidence supports a vendor enabling institutions that surveil, not a claim that Palantir independently spies on citizens, and interoperability itself changes the practical civil-liberty boundary.",
+      "must_fix": "none — capability, formal safeguards, documented platform reuse, and the evidence boundary are all explicit."
+    },
+    "china-usa-race": {
+      "verdict": "PASS",
+      "visual_sha256": "5beac88b419725c01de9b27d969ef89fcff863ab85e72902abd88c6dbbf04e34",
+      "source_sha256": "eb74602b24b1a5ecb6cc2f8169aec546573e87738225bb5c43dcf59f4f683061",
+      "evidence": "Checked the allied compute chain against section 2, all six competitive axes against section 7, and the capital/electron bottleneck stack against section 3. All three moving scorecards are dated mid-2026.",
+      "facts": "Nvidia, TSMC, ASML, HBM suppliers, licensing, and Chinese adaptation reproduce the room's moat structure. The axes distinguish frontier models, compute and capital, energy, price and openness, talent, and deployment, while the bottleneck panel preserves the order-of-magnitude capital lead and more-than-double generation claim.",
+      "uncertainty": "The compute advantage is policy-dependent, the industrial-deployment comparison is reported rather than universal, and return migration is directional evidence rather than a completed transfer of leadership. Which ceiling binds first in the 2030s remains an open forecast.",
+      "must_fix": "none — the previous five-versus-six title mismatch was corrected and every perishable comparison is dated."
+    },
+    "taiwan": {
+      "verdict": "PASS",
+      "visual_sha256": "7c28db869198c16de1cc0a05b261f330f3de0ddbd054754917ba7125819ce63f",
+      "source_sha256": "511d5e3112f39f8d25c2b63e1ef62b2b268af2a89c2d71a5ea6089a6b4f6a7da",
+      "evidence": "Checked the silicon-shield contrast against section 3, the four coercive futures against section 5, and the warning-time sequence against the posture dated 2026-08-25 in section 4.",
+      "facts": "The panels preserve mutual economic loss, embedded process knowledge, stakeholder incentives, sovereignty risk, two-sided concentration, and non-destructive fab stoppage. Gray-zone pressure, quarantine, blockade, and invasion remain distinct by lead agency, commercial access, sustained denial, and territorial control.",
+      "uncertainty": "The silicon shield is a hypothesis rather than a treaty or guarantee of rational restraint. Public evidence cannot supply precise scenario probabilities, repeated operations can blur warning without proving an attack is imminent, and institutional resilience extends beyond weapons.",
+      "must_fix": "none — the current posture is dated, coercion rungs are not collapsed, and deterrence remains contingent."
+    },
+    "elon-musk": {
+      "verdict": "PASS",
+      "visual_sha256": "792a1f58cded42d307bc35d9921777d1607dbef277a2ac4b566ac16a165b8909",
+      "source_sha256": "6160ec2f83397e8ef25b799bdb5de6cecb91058400adae1c756059d2d1a52e81",
+      "evidence": "Checked the five-rung deployment ladder against section 7, the flywheel/empire contrast against section 8, and the four-system portfolio against the August 2026 scorecard in section 2.",
+      "facts": "The figures separate deployed scale, limited deployment, prototype or trial, funded program, and stated aspiration. Tesla, SpaceX/Starlink, xAI/X, and Neuralink retain their source-supported evidence rungs, while integration benefits and correlated control risks are presented side by side.",
+      "uncertainty": "A deployed lower layer does not validate every promised layer above it, and a distant destination does not erase working infrastructure. The integrated Musk-system reading is an inference across legally and operationally distinct organizations, and current trial or program status may change after August 2026.",
+      "must_fix": "none — the portfolio is dated and proof, constrained use, program, and aspiration remain separated."
+    },
+    "blockchain": {
+      "verdict": "PASS",
+      "visual_sha256": "0ed4b2a7d1946353640946a29bc4f71a6d747fa16902bd215dacecceef0a59fb",
+      "source_sha256": "2c0d7be379480f4a0304865d6bc0ab522a75ebf7ba8a691bbf858917d808e79e",
+      "evidence": "Checked the six ledger components against section 2, the two-cent weather purchase against section 9, and the decentralization checklist against section 10.",
+      "facts": "The machine panel accurately assigns proposals to transactions, key-control proof to signatures, independent rules to validation, tamper evidence to hash links, history choice to consensus, and attack cost to incentives. The agent-payment flow preserves mandate, settlement, delivery, and audit boundaries.",
+      "uncertainty": "Authorization and settlement do not establish identity, informed consent, forecast truth, provider quality, privacy, recovery, or liability. Off-chain facts require named oracles and appeal paths, and a conventional signed database remains preferable when no concrete authority problem earns public consensus overhead.",
+      "must_fix": "none — the earlier private-key wording now states exactly what a signature proves, and payment is not conflated with truth."
+    },
+    "attention-economy": {
+      "verdict": "PASS",
+      "visual_sha256": "d40e036643f56f1781b9f97ba87f9912a162675fd1bdf894917b4ce2fd2128f5",
+      "source_sha256": "9287bcb92c4f0c984b4ff91cef125fb05b34a58f08a6d55f4fa2c5912354c845",
+      "evidence": "Checked the five funding models against section 3, the content-and-ad ranking loops against section 5, and all four empirical evidence rows against section 6.",
+      "facts": "Search, social-feed, subscription, contextual, and public/cooperative funding retain distinct payers and pressures. The swipe sequence correctly separates candidate filtering, predictions, policy weights, ordering, ambiguous behavioral feedback, and an ad auction; the evidence panel preserves both measured benefits and costs.",
+      "uncertainty": "The Surgeon General association is now scoped to children and adolescents above three hours per day and does not establish causality. The National Academies did not support one population-wide verdict, and deactivation or notification experiments establish effects for their samples, designs, and periods rather than social media as a single substance.",
+      "must_fix": "none — the earlier population overgeneralization was corrected and every empirical row retains its causal weight."
+    }
+  }
+}

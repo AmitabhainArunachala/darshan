@@ -1,0 +1,9 @@
+{
+  "slug": "linear-algebra-and-ai",
+  "verdict": "PASS",
+  "contract": "All nine frontmatter keys are present. The current 3,603-word room now has a four-sentence orientation, seven numbered descriptive sections, a genuine architecture table, a hand-worked and executable attention example, conclusion, typed FACT/HYPOTHESIS/WILD questions, primary sources, disclosure, declared slug.html corridors, and a mathematically earned attention socket. A fresh full reread on 2026-08-25 found no new defect after the opener repair.",
+  "facts": "No factual repair was required in the prior verdict, and the current room preserves its appropriate scopes. GPT-2's published dimensions support the architecture table; Vaswani et al. support scaled dot-product attention and 64-dimensional heads in the original transformer; Anthropic's work supports QK/OV factorization and toy-model superposition. The worked arithmetic recomputes correctly, and the room still labels the linear-representation hypothesis as contested rather than established.",
+  "voice": "The linear-plus-nonlinearity explanation, QK/OV passage, hand calculation, and softmax-budget exit were reread aloud. They remain clear and speakable. Combining the opener into four sentences improves its cadence without sacrificing the promised reader outcome.",
+  "must_fix": "none. The five-sentence orientation has been compressed to four, and no factual, voice, disclosure, link, or socket repair remains.",
+  "source_sha256": "146e7ed1c3084f52164171795a71332b4bf4c41840433562b11d80437dc8fad2"
+}

@@ -1,0 +1,9 @@
+{
+  "slug": "chip-wars",
+  "verdict": "PASS",
+  "contract": "Frontmatter, room architecture, comparison table, worked example, typed FACT/HYPOTHESIS/WILD ledger, sources, disclosure footer, and cross-room corridors are present. The prose remains within the 2,500–4,500-word contract. The repaired final movement now distinguishes AI from the wider leading-edge market and attention from the rest of accelerator computation while still opening naturally from the room's own material.",
+  "facts": "Three fresh load-bearing checks were run against primary sources on 2026-08-25 and the complete repaired source was reread. TSMC's official Arizona page confirms $265 billion of announced Arizona investment and the July 2026 expansion. ASML's Q1 2026 investor-call transcript confirms that the High-NA platform had processed more than 500,000 wafers and achieved more than 80% availability. TSMC's official 7nm page confirms original N7 volume production in 2018 and N7+ as its first commercially available EUV process in 2019. Section 3 now states the N7 and SMIC DUV exceptions explicitly and scopes EUV to many later leading-edge processes, resolving the earlier contradiction.",
+  "voice": "The three densest passages—the N2 manufacturing paragraph, High-NA status list, and export-control chronology—remain readable aloud and sound like a technically fluent person explaining the field across a table. The revised closing paragraph is direct, qualified, and domain-earned rather than preached.",
+  "must_fix": "none; the false EUV universal and the AI/attention absolutes in the socket-exit were corrected, with primary TSMC evidence added to Sources",
+  "source_sha256": "632e454106b53974745ebeeeb9472ed0e0ba8a7a19a0df83d023d836e69ca48b"
+}

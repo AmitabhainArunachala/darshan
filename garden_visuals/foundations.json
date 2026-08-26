@@ -1,0 +1,653 @@
+{
+  "schema": "darshan.visual-series/v1",
+  "series": "foundations",
+  "art": {
+    "src": "assets/series/foundations.png",
+    "alt": "An engraved transistor lattice rising through computational layers into a neural graph",
+    "png_sha256": "f90dc91b6b8aa1dee3db1984c0365905453be77514285eb402b4312f79002057",
+    "webp_sha256": "e430380e3f42a801c268804b25aa667619f29136ec69a9cd2d5a9de12770865d",
+    "prompt": "Use case: stylized-concept\nAsset type: wide 16:9 editorial series plate for a serious long-form knowledge garden\nPrimary request: depict the foundations of computing as one continuous ascent: a precise transistor lattice and silicon-gate geometry in the lower foreground, rising through stacked circuit and abstraction layers, then resolving into a sparse neural-network graph in the upper field\nScene/backdrop: warm cream archival paper, open margins, no literal interface or screen\nStyle/medium: tactile copperplate engraving and restrained linocut marks, overlaid with translucent technical-vellum layers and fine drafting lines; intellectually serious editorial illustration, materially believable, hand-made precision\nComposition/framing: panoramic 16:9; grounded transistor lattice across the lower third, layered upward progression through the middle, neural graph opening into the upper third; balanced asymmetry and generous breathing room\nLighting/mood: quiet, lucid, contemplative; no theatrical lighting\nColor palette: cream paper, charcoal ink, oxide red, with one restrained cobalt-blue accent\nMaterials/textures: subtle paper grain, etched metal lines, translucent vellum, faint registration imperfections\nConstraints: textless; no letters, numbers, labels, code glyphs, logos, signatures, or watermark; visual relationships must remain legible at banner size\nAvoid: generic sci-fi glow, neon, cyberpunk, glossy 3D, humanoid robots, brains, floating UI panels, decorative clutter"
+  },
+  "rooms": {
+    "intro-to-computer-science": {
+      "visuals": [
+        {
+          "after": "5-why-layers-exist-the-tower",
+          "kind": "layers",
+          "kicker": "The abstraction tower",
+          "title": "The tower, grouped into six handholds",
+          "caption": "Each group hides mechanisms below by making a precise promise to the groups above.",
+          "items": [
+            {"label": "Physics", "detail": "Doped silicon supplies reliably distinguishable voltage states."},
+            {"label": "Switch", "detail": "A transistor turns an electrical signal into controllable on or off."},
+            {"label": "Logic", "detail": "Gates and circuits compose switches into add, compare, store, and select."},
+            {"label": "Processor", "detail": "The ISA exposes a documented vocabulary of instructions above billions of transistors."},
+            {"label": "Language", "detail": "Assembly and high-level syntax let people state work without handling the circuitry."},
+            {"label": "Application", "detail": "The browser, spreadsheet, or model reduces the tower to an action a person can take."}
+          ]
+        },
+        {
+          "after": "7-worked-example-ride-2-3-down-the-tower",
+          "kind": "sequence",
+          "kicker": "One addition",
+          "title": "Ride 2 + 3 all the way down",
+          "caption": "The answer survives every translation even though no layer understands addition.",
+          "items": [
+            {"label": "Python", "detail": "The high-level expression asks the language runtime to produce 5."},
+            {"label": "Bytecode", "detail": "The operation becomes load, load, add, and store instructions."},
+            {"label": "Machine code", "detail": "The interpreter ultimately executes the processor's add instruction."},
+            {"label": "Bits", "detail": "The operands arrive as 0010 and 0011 and leave as 0101."},
+            {"label": "Gates", "detail": "XOR produces sum digits while AND produces carries."},
+            {"label": "Transistors", "detail": "Gate voltages open and close channels a few nanometers wide."}
+          ]
+        },
+        {
+          "after": "4-turing-computation-was-defined-before-computers-existed",
+          "kind": "sequence",
+          "kicker": "The universal move",
+          "title": "One machine can simulate any Turing machine you can describe",
+          "caption": "Turing's universal-machine idea separates the fixed mechanism from the behavior encoded on its tape.",
+          "items": [
+            {"label": "Describe", "detail": "Write another machine's states and rules as symbols rather than rebuilding its hardware."},
+            {"label": "Load", "detail": "Place that description beside the other machine's input on the universal machine's tape."},
+            {"label": "Interpret", "detail": "A fixed rule table reads the description and reproduces the described machine step by step."},
+            {"label": "Become", "detail": "Change the stored bits and the same physical machine behaves as a spreadsheet, game, map, or piano."}
+          ]
+        }
+      ]
+    },
+    "programming": {
+      "visuals": [
+        {
+          "after": "2-from-wires-to-words-the-ladder-of-abstraction",
+          "kind": "timeline",
+          "kicker": "The climb",
+          "title": "Programming moves away from the machine",
+          "as_of": "25 August 2026",
+          "caption": "Every rung makes human intent easier to state and gives the machine more translation work.",
+          "items": [
+            {"label": "Note G", "detail": "Ada Lovelace specifies the Analytical Engine's Bernoulli-number operations on paper.", "meta": "1843"},
+            {"label": "Plugboards", "detail": "ENIAC programs are physical arrangements of switches and cables.", "meta": "1946"},
+            {"label": "A-0", "detail": "Grace Hopper's translator assembles subroutine calls into a runnable program.", "meta": "1952"},
+            {"label": "FORTRAN", "detail": "A mainstream high-level language lets formulas stand in for assembly.", "meta": "1957"},
+            {"label": "Language bloom", "detail": "Lisp treats programs as data, C stays close to the machine, and SQL states goals.", "meta": "1958–1970s"},
+            {"label": "Plain language", "detail": "Instructions given to a language model extend the same abstraction climb.", "meta": "Now"}
+          ]
+        },
+        {
+          "after": "4-worked-example-one-thought-three-grammars",
+          "kind": "contrast",
+          "kicker": "Same thought",
+          "title": "Three grammars, one answer",
+          "caption": "The sum of the squares of the even numbers from 1 through 10 is 220 in every grammar.",
+          "items": [
+            {"label": "Imperative", "detail": "Mutate a running total with explicit loop and condition steps."},
+            {"label": "Functional", "detail": "Express a pipeline that filters, squares, and sums without mutation."},
+            {"label": "Declarative", "detail": "State the desired rows and aggregation, then let the SQL engine plan the procedure."}
+          ]
+        },
+        {
+          "after": "5-what-the-program-actually-is-it-s-not-the-text",
+          "kind": "layers",
+          "kicker": "What code leaves out",
+          "title": "The text is a snapshot of a larger theory",
+          "caption": "A codebase stays healthy when the people changing it can connect the written artifact back to the problem it was built to solve.",
+          "items": [
+            {"label": "Problem", "detail": "The real domain supplies needs, constraints, edge cases, and reasons for making the system."},
+            {"label": "Team theory", "detail": "Programmers hold a working account of how the pieces answer that problem and which changes are safe."},
+            {"label": "Source text", "detail": "Code records part of that account precisely enough for a machine, but not all of its reasons."},
+            {"label": "Handoff", "detail": "When the theory does not travel with the text, a new team can preserve every character and still make the system rot."}
+          ]
+        }
+      ]
+    },
+    "compilers": {
+      "visuals": [
+        {
+          "after": "1-the-whole-trip-in-one-command",
+          "kind": "sequence",
+          "kicker": "The relay race",
+          "title": "Text becomes behavior one artifact at a time",
+          "caption": "A compiler pipeline hands a concrete intermediate artifact from each specialist stage to the next.",
+          "items": [
+            {"label": "Lex", "detail": "Source characters become tokens with names and boundaries."},
+            {"label": "Parse", "detail": "Tokens become a typed syntax tree with grammatical structure."},
+            {"label": "Lower", "detail": "The tree becomes intermediate representation in the compiler's own language."},
+            {"label": "Optimize", "detail": "IR is rewritten into equivalent IR that says the same thing better."},
+            {"label": "Generate", "detail": "The target machine's instructions become assembly and then an object file."},
+            {"label": "Link", "detail": "Objects and libraries resolve their symbol IOUs into one executable."}
+          ]
+        },
+        {
+          "after": "9-trusting-trust-the-strange-loop-at-the-bottom",
+          "kind": "sequence",
+          "kicker": "Trusting trust",
+          "title": "A backdoor that survives clean source",
+          "caption": "Ken Thompson's attack moves the malicious rule from inspectable source into the self-reproducing compiler binary.",
+          "items": [
+            {"label": "Recognition", "detail": "The compiler recognizes when it is compiling the login program."},
+            {"label": "Insertion", "detail": "It silently inserts a login backdoor into the produced binary."},
+            {"label": "Self-recognition", "detail": "The compiler also recognizes when it is compiling its own source."},
+            {"label": "Reproduction", "detail": "It inserts both recognition tricks into the next compiler binary."},
+            {"label": "Clean source", "detail": "The malicious source is removed while the binary keeps propagating the behavior."}
+          ]
+        },
+        {
+          "after": "5-optimization-the-same-meaning-said-better",
+          "kind": "sequence",
+          "kicker": "Optimization, witnessed",
+          "title": "From stack traffic to a compile-time 144",
+          "caption": "The compiler can erase the structure you wrote only when each rewrite preserves the program's meaning.",
+          "items": [
+            {"label": "Start", "detail": "Unoptimized IR stores the argument in a stack slot, loads it twice, multiplies, then returns."},
+            {"label": "Promote", "detail": "The mem2reg pass proves the stack slot is unnecessary and reduces the function to multiply and return."},
+            {"label": "Inline", "detail": "At the call site, the optimizer substitutes the body of square for the call square(12)."},
+            {"label": "Fold", "detail": "With both operands known, it computes 12 × 12 during compilation and emits the constant 144."},
+            {"label": "Obligation", "detail": "Every disappearance is safe only because a pass proved the replacement equivalent."}
+          ]
+        }
+      ]
+    },
+    "linear-algebra-and-ai": {
+      "visuals": [
+        {
+          "after": "4-why-all-of-modern-ai-is-linear-algebra-plus-nonlinearity",
+          "kind": "layers",
+          "kicker": "Why depth counts",
+          "title": "The bend between the matrices",
+          "caption": "Without a nonlinear twist, any depth of matrix multiplications collapses into one matrix.",
+          "items": [
+            {"label": "Matrix A", "detail": "The first learned linear map stretches, rotates, or mixes the incoming vector."},
+            {"label": "Matrix B", "detail": "A second linear map still composes exactly with the first."},
+            {"label": "Collapse", "detail": "A thousand linear layers equal one product matrix and buy no new kind of boundary."},
+            {"label": "Nonlinearity", "detail": "A ReLU-style bend blocks the collapse and makes composition expressive."}
+          ]
+        },
+        {
+          "after": "5-worked-example-one-attention-head-by-hand",
+          "kind": "sequence",
+          "kicker": "Attention, opened",
+          "title": "Where to look, what to move",
+          "caption": "An attention head turns pairwise similarities into a budget for moving information between token vectors.",
+          "items": [
+            {"label": "Project", "detail": "Learned matrices turn each token into query, key, and value vectors."},
+            {"label": "Score", "detail": "Each query takes a dot product with the available keys."},
+            {"label": "Scale", "detail": "Scores are divided by the square root of the head dimension."},
+            {"label": "Budget", "detail": "Softmax makes positive weights whose row sums exactly to one."},
+            {"label": "Move", "detail": "The weighted value average is projected back into the token's running representation."}
+          ]
+        },
+        {
+          "after": "3-spaces-projections-and-rank-where-the-meaning-sits",
+          "kind": "layers",
+          "kicker": "The rank-64 keyhole",
+          "title": "A projection keeps one view and discards the rest",
+          "caption": "An attention head reads a high-dimensional token through a learned low-rank bottleneck rather than seeing every direction equally.",
+          "items": [
+            {"label": "Full space", "detail": "A GPT-2-small token arrives as one point in a 768-dimensional representation space."},
+            {"label": "Learned question", "detail": "A projection selects the combinations of directions useful to this particular head."},
+            {"label": "Rank-64 shadow", "detail": "The 768-dimensional input is compressed into a 64-dimensional query, key, or value vector."},
+            {"label": "Deliberate loss", "detail": "Most directions disappear from this view; the bottleneck forces the head to summarize."}
+          ]
+        }
+      ]
+    },
+    "neural-networks": {
+      "visuals": [
+        {
+          "after": "1-one-neuron-is-a-weighted-vote",
+          "kind": "layers",
+          "kicker": "One artificial neuron",
+          "title": "A weighted vote with one bend",
+          "caption": "The smallest neural unit is a short arithmetic path, not a miniature biological mind.",
+          "items": [
+            {"label": "Inputs", "detail": "Numbers arrive from data or from neurons in the previous layer."},
+            {"label": "Weights", "detail": "Each stored multiplier says how strongly and in which direction an input matters."},
+            {"label": "Bias", "detail": "One learned offset shifts the point at which the unit responds strongly."},
+            {"label": "Sum", "detail": "Weighted inputs and the bias combine into one pre-activation value."},
+            {"label": "Activation", "detail": "A nonlinear rule such as ReLU bends the result so stacked layers do not collapse."}
+          ]
+        },
+        {
+          "after": "4-worked-example-one-learning-step-by-hand",
+          "kind": "sequence",
+          "kicker": "One learning step",
+          "title": "Forward, compare, backward, nudge",
+          "caption": "The toy network exposes the same training skeleton used at frontier scale.",
+          "items": [
+            {"label": "Forward", "detail": "Two hidden ReLU units produce a prediction of 0.5 for a target of 1."},
+            {"label": "Measure", "detail": "Half squared error makes the starting loss 0.125."},
+            {"label": "Backward", "detail": "The output error flows through the old weights to produce every gradient."},
+            {"label": "Update", "detail": "Each weight steps against its gradient with learning rate 0.1."},
+            {"label": "Replay", "detail": "The new prediction is 1.16875 and the loss falls to about 0.0142."}
+          ]
+        },
+        {
+          "after": "2-the-perceptron-1958-a-mainframe-and-a-wall",
+          "kind": "contrast",
+          "kicker": "The XOR wall",
+          "title": "One straight boundary fails; a hidden layer changes the geometry",
+          "caption": "XOR shows both the exact limit of a single-layer perceptron and the precise reason depth first mattered.",
+          "items": [
+            {"label": "Four cases", "detail": "XOR labels the two points on one diagonal 1 and the two points on the other diagonal 0."},
+            {"label": "One layer", "detail": "A single perceptron draws one straight decision boundary, and no line separates those diagonals."},
+            {"label": "Hidden layer", "detail": "Intermediate neurons can combine multiple straight boundaries into a region that separates XOR."},
+            {"label": "Honest theorem", "detail": "Universal approximation establishes expressiveness in principle, not easy training, compact size, or the right weights."}
+          ]
+        }
+      ]
+    },
+    "machine-learning": {
+      "visuals": [
+        {
+          "after": "2-the-core-loop-data-loss-gradient",
+          "kind": "sequence",
+          "kicker": "The learning loop",
+          "title": "Turn wrongness into a direction",
+          "caption": "Differentiable learning repeats a loop that uses local slope to seek lower loss; stochasticity or an oversized step can still push one update uphill.",
+          "items": [
+            {"label": "Data", "detail": "Training examples pair the inputs with the outputs the task should produce."},
+            {"label": "Model", "detail": "A chosen family of functions exposes adjustable parameters."},
+            {"label": "Predict", "detail": "The current parameter setting produces outputs on the examples."},
+            {"label": "Loss", "detail": "One number measures how wrong those outputs are."},
+            {"label": "Gradient", "detail": "Calculus identifies the local direction that increases the loss fastest."},
+            {"label": "Nudge", "detail": "Parameters step against that direction and the cycle begins again."}
+          ]
+        },
+        {
+          "after": "4-the-families-beyond-deep-learning",
+          "kind": "constellation",
+          "kicker": "The model toolbox",
+          "title": "Match the family's bias to the shape of the problem",
+          "caption": "No family wins everywhere because every method assumes a different structure in the world.",
+          "items": [
+            {"label": "Linear", "detail": "Flat relationships reward interpretability and work well as a baseline."},
+            {"label": "Nearest neighbors", "detail": "Nearby inputs are assumed to deserve nearby answers."},
+            {"label": "Trees", "detail": "Sharp feature thresholds carve tabular data into readable regions."},
+            {"label": "Ensembles", "detail": "Many trees average or repair one another on rows-and-columns problems."},
+            {"label": "SVMs", "detail": "A widest-margin boundary suits medium data with separable classes."},
+            {"label": "Neural networks", "detail": "Hierarchical learned features dominate raw perception and language at scale."}
+          ]
+        },
+        {
+          "after": "5-what-generalization-actually-means",
+          "kind": "sequence",
+          "kicker": "The hidden-data discipline",
+          "title": "Four doors between fitting and trust",
+          "caption": "A model earns evidence of generalization only when each later dataset remains untouched by the decisions made at the earlier one.",
+          "items": [
+            {"label": "Train", "detail": "Fit parameters on the examples the learner is allowed to see, even if training error reaches zero."},
+            {"label": "Validate", "detail": "Choose architectures and settings on a separate slice so those decisions do not consume the final test."},
+            {"label": "Test once", "detail": "Use the untouched test set for the final same-distribution estimate, not as an iterative steering signal."},
+            {"label": "Meet the world", "detail": "Deployment can still shift hospitals, economies, sensors, or adversaries beyond what any held-out split promised."}
+          ]
+        }
+      ]
+    },
+    "deep-learning": {
+      "visuals": [
+        {
+          "after": "1-what-deep-actually-buys-you",
+          "kind": "layers",
+          "kicker": "Representation learning",
+          "title": "Parts become wholes as depth accumulates",
+          "caption": "A trained vision network reuses simple early features to assemble increasingly specific representations.",
+          "items": [
+            {"label": "Edges", "detail": "Early layers respond to oriented edges and color blobs."},
+            {"label": "Textures", "detail": "Middle layers combine edges into textures, corners, and simple motifs."},
+            {"label": "Parts", "detail": "Deeper layers assemble motifs into an eye, a wheel, or a beak."},
+            {"label": "Objects", "detail": "Final layers integrate reusable parts into whole-object representations."}
+          ]
+        },
+        {
+          "after": "6-the-eras-side-by-side",
+          "kind": "timeline",
+          "kicker": "Four deep-learning eras",
+          "title": "Each solution becomes the next wall",
+          "as_of": "25 August 2026",
+          "caption": "The field advances by scaling a new axis until the bottleneck shifts again.",
+          "items": [
+            {"label": "Depth", "detail": "AlexNet and ResNet bypass vanishing gradients with ReLU and residuals.", "meta": "2012–2016"},
+            {"label": "Sequences", "detail": "Transformers pair attention with self-supervised next-token data.", "meta": "2017–2020"},
+            {"label": "Model + data", "detail": "Chinchilla-style training scales parameters and tokens together.", "meta": "2020–2024"},
+            {"label": "Deliberation", "detail": "Reasoning models add inference-time compute as another axis.", "meta": "2024–2026"}
+          ]
+        },
+        {
+          "after": "5-why-scale-worked-the-part-you-can-check-with-arithmetic",
+          "kind": "contrast",
+          "kicker": "The Chinchilla correction",
+          "title": "Nearly the same compute, a different allocation",
+          "caption": "The comparison showed that frontier models of the period were spending too much of a fixed training budget on parameters and too little on data.",
+          "items": [
+            {"label": "Gopher", "detail": "280 billion parameters × 300 billion tokens × 6 gives about 5.0 × 10²³ training FLOP.", "meta": "2021"},
+            {"label": "Chinchilla", "detail": "70 billion parameters × 1.4 trillion tokens × 6 gives about 5.9 × 10²³ training FLOP.", "meta": "2022"},
+            {"label": "Reallocation", "detail": "One-quarter the parameters and about 4.7 times the data produced the stronger benchmark result."},
+            {"label": "Rule of thumb", "detail": "The 1.4-trillion-to-70-billion ratio is 20 training tokens per parameter for that measured regime."}
+          ]
+        }
+      ]
+    },
+    "optimization": {
+      "visuals": [
+        {
+          "after": "2-gradient-learning-rate-and-the-two-ways-to-fail",
+          "kind": "contrast",
+          "kicker": "The step-size dilemma",
+          "title": "The same gradient, three journeys",
+          "caption": "Learning rate controls whether the optimizer crosses the landscape, explodes across it, or barely moves.",
+          "items": [
+            {"label": "Too large", "detail": "Steps overshoot the valley and the loss can climb toward divergence."},
+            {"label": "Usable", "detail": "Steps move downhill while remaining small enough to correct course."},
+            {"label": "Too small", "detail": "Training still works locally but takes geologic time and expensive compute."}
+          ]
+        },
+        {
+          "after": "4-the-optimizer-zoo-from-momentum-to-adam",
+          "kind": "timeline",
+          "kicker": "Optimizer lineage",
+          "title": "Six patches on difficult geometry",
+          "caption": "Each optimizer adds memory or structure to make a noisy downhill path more effective.",
+          "items": [
+            {"label": "SGD", "detail": "Step on an unbiased noisy minibatch gradient.", "meta": "1951 theory"},
+            {"label": "Momentum", "detail": "Average recent gradients so bouncing cancels and consistent motion accumulates.", "meta": "1964"},
+            {"label": "RMSProp", "detail": "Adapt each weight's step to its history of gradient scale.", "meta": "2012"},
+            {"label": "Adam", "detail": "Combine momentum, per-weight scale, and early-step bias correction.", "meta": "2014/15"},
+            {"label": "AdamW", "detail": "Decouple weight decay from Adam's adaptive update.", "meta": "2017/19"},
+            {"label": "Muon", "detail": "Treat updates as matrices and equalize strength across their directions.", "meta": "2024"}
+          ]
+        },
+        {
+          "after": "5-worked-example-fit-a-line-watch-it-converge",
+          "kind": "timeline",
+          "kicker": "Watch the valley",
+          "title": "Two fast corrections, then a long shallow crawl",
+          "caption": "Fitting y = 2x + 1 with two parameters makes difficult optimization geometry visible without hiding any arithmetic.",
+          "items": [
+            {"label": "Blank model", "detail": "Start w = 0 and b = 0; predictions are zero and the first gradients are −22.667 and −10.", "meta": "Start"},
+            {"label": "Overshoot", "detail": "The first update jumps to w = 2.267 and b = 1.0, already across the true slope.", "meta": "After step 0"},
+            {"label": "Correct", "detail": "The next update pulls back to w = 2.018 and b = 0.893.", "meta": "After step 1"},
+            {"label": "Creep", "detail": "The steep direction is settled, but the shallow direction leaves w = 2.0039 and b = 0.9912.", "meta": "After 100 steps"},
+            {"label": "Converge", "detail": "Repeated small updates finally recover w = 2 and b = 1 to the printed precision.", "meta": "About step 1,000"}
+          ]
+        }
+      ]
+    },
+    "pretraining-post-training": {
+      "visuals": [
+        {
+          "after": "1-two-stages-one-set-of-weights",
+          "kind": "layers",
+          "kicker": "One weight field",
+          "title": "Capability is built, then behavior is shaped",
+          "caption": "Successive training regimes alter the same weights with different data, judges, and objectives.",
+          "items": [
+            {"label": "Pretraining", "detail": "Trillions of next-token examples build a base model that can continue many kinds of text."},
+            {"label": "Instruction tuning", "detail": "Curated demonstrations select the conversational pattern of answering a user."},
+            {"label": "Preference tuning", "detail": "Human or AI comparisons push responses toward preferred behavior."},
+            {"label": "Reasoning RL", "detail": "Verifiable rewards can develop self-checking and longer reasoning strategies."}
+          ]
+        },
+        {
+          "after": "5-the-post-training-menu",
+          "kind": "constellation",
+          "kicker": "The shaping menu",
+          "title": "Three methods, one safety target",
+          "caption": "Constitutional AI, DPO, and RLVR differ in how judgment reaches the model; safety is a target pursued through those tools, not a fourth algorithm.",
+          "items": [
+            {"label": "Constitutional AI", "detail": "A written principle set guides self-critique, revision, and AI feedback."},
+            {"label": "DPO", "detail": "Preference pairs train the language model directly without a separate PPO loop."},
+            {"label": "RLVR", "detail": "Answer keys or test suites provide checkable rewards for reasoning."},
+            {"label": "Safety training", "detail": "Demonstrations and preferences teach when the model should not help."}
+          ]
+        },
+        {
+          "after": "6-worked-example-meet-a-base-model",
+          "kind": "contrast",
+          "kicker": "Same question, different distribution",
+          "title": "Completion is not yet conversation",
+          "caption": "A small local comparison isolates the behavioral difference post-training selects without claiming that every underlying capability changed.",
+          "items": [
+            {"label": "Raw prompt", "detail": "Both models receive the question, “What is the capital of France?”"},
+            {"label": "GPT-2 base", "detail": "A pretrained-only model may answer, continue with more questions, or drift because its job is plausible text continuation."},
+            {"label": "Instruct model", "detail": "A post-trained chat model, invoked through a role template, answers Paris directly and consistently."},
+            {"label": "Boundary", "detail": "The contrast demonstrates selected conversational behavior; it does not prove every capability or refusal sits unchanged underneath."}
+          ]
+        }
+      ]
+    },
+    "nvidia-and-the-chip": {
+      "visuals": [
+        {
+          "after": "2-cuda-the-moat-was-poured-in-2006-and-it-s-made-of-software",
+          "kind": "layers",
+          "kicker": "The CUDA moat",
+          "title": "The chip is only the bottom layer",
+          "caption": "NVIDIA's advantage compounds through a software stack that makes its parallel hardware usable and familiar.",
+          "items": [
+            {"label": "GPU", "detail": "Thousands of simple processors execute the same small computation in parallel."},
+            {"label": "CUDA", "detail": "Ordinary C-like kernels expose general computation on the graphics hardware."},
+            {"label": "Libraries", "detail": "cuDNN, cuBLAS, NCCL, and TensorRT package recurring work."},
+            {"label": "Frameworks", "detail": "PyTorch and TensorFlow were built around the CUDA path."},
+            {"label": "Habit", "detail": "Millions of developers and research repositories assume the accumulated ecosystem."}
+          ]
+        },
+        {
+          "after": "3-what-the-chip-actually-is-and-what-actually-limits-it",
+          "kind": "layers",
+          "kicker": "The real bottleneck",
+          "title": "Compute waits for memory",
+          "caption": "Large-model performance depends on moving weights into arithmetic units, not merely owning more arithmetic units.",
+          "items": [
+            {"label": "Weights", "detail": "Billions of stored parameters must be streamed for token generation."},
+            {"label": "HBM", "detail": "Vertically stacked memory sits millimeters from the accelerator."},
+            {"label": "Bandwidth", "detail": "Bytes per second increasingly determine whether compute units stay fed."},
+            {"label": "Compute array", "detail": "Multiply-accumulate units turn the arriving values into matrix operations."},
+            {"label": "Supply chain", "detail": "TSMC fabricates, memory suppliers provide HBM, and advanced packaging joins the system."}
+          ]
+        },
+        {
+          "after": "5-worked-example-what-a-gigawatt-of-ai-actually-buys",
+          "kind": "sequence",
+          "kicker": "One gigawatt, unpacked",
+          "title": "Turn a power headline into racks, chips, and capital",
+          "as_of": "25 August 2026",
+          "caption": "This is an order-of-magnitude conversion with every soft assumption left visible rather than a bill of materials.",
+          "items": [
+            {"label": "Campus", "detail": "Begin with a 1-gigawatt site and assume power-usage effectiveness of about 1.25."},
+            {"label": "Racks", "detail": "About 800 megawatts reaches equipment; at 130 kilowatts per NVL72 rack, that is roughly 6,100 racks."},
+            {"label": "GPUs", "detail": "Seventy-two GPUs per rack turns that rack count into roughly 440,000 accelerators."},
+            {"label": "Hardware", "detail": "At the stated soft street estimate of $3 million per rack, the accelerator hardware alone is about $18 billion."},
+            {"label": "Constraint", "detail": "Buildings, networking, cooling, substations, and grid queues move the bottleneck from chips toward electricity."}
+          ]
+        }
+      ]
+    },
+    "chip-wars": {
+      "visuals": [
+        {
+          "after": "1-the-map-before-the-details",
+          "kind": "constellation",
+          "kicker": "The small board",
+          "title": "Three leading-edge manufacturers, one indispensable toolmaker",
+          "as_of": "25 August 2026",
+          "caption": "The leading edge is concentrated in four firms and a handful of places.",
+          "items": [
+            {"label": "TSMC", "detail": "Taiwan's foundry entered volume production of its N2 generation in late 2025."},
+            {"label": "Samsung", "detail": "South Korea's manufacturer is the second gate-all-around 2nm contender."},
+            {"label": "Intel", "detail": "Arizona's Fab 52 brought the 18A generation into mass production."},
+            {"label": "ASML", "detail": "The Dutch company alone supplies production-scale EUV tools used at the frontier."}
+          ]
+        },
+        {
+          "after": "5-the-export-control-war-what-the-us-is-trying-and-what-china-does-about-it",
+          "kind": "timeline",
+          "kicker": "Control and response",
+          "title": "An embargo acts as a brake, a leak, and a subsidy",
+          "as_of": "25 August 2026",
+          "caption": "The control regime slows access while inducing substitution and creating pressure for evasive supply routes.",
+          "items": [
+            {"label": "EUV blocked", "detail": "Dutch licensing under US pressure keeps EUV systems out of China.", "meta": "Since 2019"},
+            {"label": "Frontier chips blocked", "detail": "US rules deny top accelerators and advanced tools, prompting a weakened H20 design.", "meta": "2022–2024"},
+            {"label": "Policy whiplash", "detail": "H20 access is blocked, reopened, and followed by a proposed H200 opening.", "meta": "2025"},
+            {"label": "Conditional licenses", "detail": "H200 sales become case-by-case with certification and a tariff.", "meta": "Jan 2026"},
+            {"label": "Substitution", "detail": "SMIC uses costly DUV multi-patterning while Huawei's ecosystem gains a protected home market."},
+            {"label": "Leakage", "detail": "Teardowns reveal TSMC dies obtained through an intermediary before the route closed."}
+          ]
+        },
+        {
+          "after": "7-worked-example-how-to-read-a-node-name-and-check-it-yourself",
+          "kind": "sequence",
+          "kicker": "Read past the node label",
+          "title": "A five-stop verification chain for chip claims",
+          "caption": "A smaller marketing number names an intended process generation; evidence about the actual product comes from architecture, production, and measurement.",
+          "items": [
+            {"label": "Strip the label", "detail": "Treat N2, 18A, and SF2 as generation names, not literal measurements of one physical feature."},
+            {"label": "Name the change", "detail": "Ask whether the process changes transistor geometry, power delivery, density, or packaging."},
+            {"label": "Check production", "detail": "Use earnings-call records to distinguish a pilot announcement from high-volume manufacturing and revenue."},
+            {"label": "Check the silicon", "detail": "Use teardown measurements and die photographs for pitches, structures, provenance, and what actually shipped."},
+            {"label": "Check the board", "detail": "Use independent foundry-share data and the toolmaker's annual report for market and lithography claims."}
+          ]
+        }
+      ]
+    },
+    "semiconductors": {
+      "visuals": [
+        {
+          "after": "2-doping-sabotaging-the-crystal-on-purpose",
+          "kind": "sequence",
+          "kicker": "Controlled contamination",
+          "title": "How one foreign atom makes a switch possible",
+          "caption": "Doping gives silicon mobile carriers, and their boundary creates a controllable electrical barrier.",
+          "items": [
+            {"label": "Pure silicon", "detail": "Four outer electrons per atom are committed to four crystal bonds."},
+            {"label": "Add phosphorus", "detail": "A fifth outer electron has no bond and becomes a loose negative carrier."},
+            {"label": "Make n-type", "detail": "A sparse population of phosphorus creates electron-rich silicon."},
+            {"label": "Add boron", "detail": "One missing bond behaves as a mobile positive hole, making p-type silicon."},
+            {"label": "Join p and n", "detail": "Electrons fill nearby holes and leave a charge-depleted one-way barrier."}
+          ]
+        },
+        {
+          "after": "4-from-transistor-to-chip-printing-with-light",
+          "kind": "sequence",
+          "kicker": "Printing with light",
+          "title": "A chip is printed layer by layer",
+          "caption": "The same patterned-wafer cycle builds both the devices and the wiring between them.",
+          "items": [
+            {"label": "Slice", "detail": "A cylinder of pure silicon is cut into wafers."},
+            {"label": "Coat", "detail": "A light-sensitive chemical covers the wafer surface."},
+            {"label": "Expose", "detail": "Light projects one mask pattern onto the resist; EUV systems do this with mirrors rather than transmissive lenses."},
+            {"label": "Develop", "detail": "Changed or unchanged resist is washed away to open selected regions."},
+            {"label": "Modify", "detail": "The openings guide etching, dopant implantation, or material deposition."},
+            {"label": "Repeat", "detail": "Dozens of aligned patterned layers accumulate over months in the fab."}
+          ]
+        },
+        {
+          "after": "5-worked-example-check-moore-s-law-yourself",
+          "kind": "timeline",
+          "kicker": "Fifty-three years on one calculator",
+          "title": "Moore's observation survives a back-of-the-envelope check",
+          "caption": "Two documented transistor counts reproduce the famous two-year doubling pace while leaving clear that it was an industrial trend, not a physical law.",
+          "items": [
+            {"label": "4004", "detail": "Intel's first commercial microprocessor carried 2,300 transistors.", "meta": "1971"},
+            {"label": "Blackwell die", "detail": "One NVIDIA Blackwell compute die carries about 104 billion transistors.", "meta": "2024"},
+            {"label": "Growth", "detail": "104 billion divided by 2,300 is about 45.2 million times."},
+            {"label": "Doublings", "detail": "The base-two logarithm of that growth is about 25.4 doublings."},
+            {"label": "Pace", "detail": "Fifty-three years divided by 25.4 gives about 2.1 years per doubling."},
+            {"label": "Boundary", "detail": "The result describes coordinated scaling history; today's “2 nm” remains a generation label, not a measured 2-nanometer feature."}
+          ]
+        }
+      ]
+    },
+    "algorithms-new-vision": {
+      "visuals": [
+        {
+          "after": "2-the-classic-families",
+          "kind": "constellation",
+          "kicker": "Solution shapes",
+          "title": "Six disciplines for where to look next",
+          "caption": "Classical algorithm families reuse a small set of strategies across otherwise different problems.",
+          "items": [
+            {"label": "Divide and conquer", "detail": "Split the problem, solve smaller pieces, then combine them."},
+            {"label": "Greedy", "detail": "Take the locally best step and never revisit it."},
+            {"label": "Dynamic programming", "detail": "Store solved subproblems so no result is computed twice."},
+            {"label": "Graph traversal", "detail": "Walk a network systematically from node to node."},
+            {"label": "Randomized", "detail": "Use controlled coin flips for speed or estimation."},
+            {"label": "Backtracking", "detail": "Try a branch, detect failure, undo, and try another."}
+          ]
+        },
+        {
+          "after": "4-the-shift-when-nobody-writes-the-steps",
+          "kind": "contrast",
+          "kicker": "The Software 2.0 trade",
+          "title": "Proof for capability",
+          "caption": "Written algorithms articulate every step; learned systems discover useful weight configurations without legible instructions.",
+          "items": [
+            {"label": "Source", "detail": "A person writes explicit steps; a learned system receives data, a loss, and an optimizer."},
+            {"label": "Correctness", "detail": "The written procedure can carry an all-input theorem; the network carries a dated test score."},
+            {"label": "Failure", "detail": "A code bug may live on one line; a learned error is diffuse across weights and data."},
+            {"label": "Transfer", "detail": "Classical software is rewritten by hand; learned behavior may be redirected by fine-tuning."}
+          ]
+        },
+        {
+          "after": "3-a-walkthrough-you-can-verify",
+          "kind": "sequence",
+          "kicker": "Euclid, in your hands",
+          "title": "The answer stays fixed while the remainder shrinks",
+          "caption": "Three divisions expose the classical algorithmic ideal: every step is inspectable, termination is proved, and correctness is preserved.",
+          "items": [
+            {"label": "First remainder", "detail": "1071 = 2 × 462 + 147, so any common divisor of the original pair also divides 147."},
+            {"label": "Second remainder", "detail": "462 = 3 × 147 + 21; replace the larger pair with the smaller pair without changing the gcd."},
+            {"label": "Stop", "detail": "147 = 7 × 21 + 0; a remainder of zero makes the last nonzero remainder, 21, the answer."},
+            {"label": "Verify", "detail": "1071 = 21 × 51 and 462 = 21 × 22, while 51 and 22 share no factor."},
+            {"label": "Proof shape", "detail": "Nonnegative remainders strictly decrease, so the procedure must terminate rather than merely seeming to."}
+          ]
+        }
+      ]
+    },
+    "sdk-api": {
+      "visuals": [
+        {
+          "after": "2-sdk-versus-api-the-promise-versus-the-phrasebook",
+          "kind": "layers",
+          "kicker": "Promise and phrasebook",
+          "title": "Four layers inside one convenient call",
+          "caption": "An SDK hides transport plumbing while the API contract remains the service's actual promise.",
+          "items": [
+            {"label": "Your program", "detail": "Application code asks for an operation in its own language."},
+            {"label": "SDK", "detail": "The installed phrasebook serializes data, retries, parses, and streams."},
+            {"label": "HTTP", "detail": "Requests and responses carry the exchange across the network."},
+            {"label": "API contract", "detail": "Endpoints, fields, limits, and errors define what the remote service promises."}
+          ]
+        },
+        {
+          "after": "4-versioning-how-to-change-a-promise-you-already-made",
+          "kind": "contrast",
+          "kicker": "Changing a promise",
+          "title": "Four ways an interface carries its past",
+          "caption": "Versioning strategies differ mainly in who must absorb the cost of change.",
+          "items": [
+            {"label": "Semantic", "detail": "MAJOR.MINOR.PATCH tells library users when they must manage a breaking upgrade."},
+            {"label": "Date-pinned", "detail": "The provider preserves each account's older response shape for years."},
+            {"label": "URL version", "detail": "Parallel paths such as v1 and v2 share the migration burden."},
+            {"label": "No policy", "detail": "Users absorb continual breakage until ecosystem trust erodes."}
+          ]
+        },
+        {
+          "after": "5-worked-example-reading-a-live-contract",
+          "kind": "sequence",
+          "kicker": "Read the whole response",
+          "title": "An API contract includes its limits and failures",
+          "caption": "One GitHub request makes the five recurring parts of an API promise visible without an SDK hiding them.",
+          "items": [
+            {"label": "Address", "detail": "The repository URL turns one resource into a question a program can ask."},
+            {"label": "Status", "detail": "HTTP 200 says the request succeeded; a nonexistent repository returns 404."},
+            {"label": "Limits", "detail": "Rate-limit headers expose how much unauthenticated capacity remains and when identity changes the allowance."},
+            {"label": "Version", "detail": "A response header tells you which dated contract GitHub selected when you did not name one."},
+            {"label": "Shape", "detail": "Success returns documented JSON fields; failure returns a machine-readable message and documentation link."}
+          ]
+        }
+      ]
+    }
+  }
+}

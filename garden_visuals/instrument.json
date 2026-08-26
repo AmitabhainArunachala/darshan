@@ -1,0 +1,106 @@
+{
+  "schema": "darshan.visual-series/v1",
+  "series": "instrument",
+  "art": {
+    "src": "assets/series/instrument.png",
+    "alt": "An engraved neural network cutaway reveals sparse activation paths under scientific probes.",
+    "png_sha256": "ee99237c0d2c8c4ecb7c6bf78bba0ceee0dd2594335dd7523f55ee5547aafef5",
+    "webp_sha256": "a8e0622ab32b2c978540aea704af48e88d34158caa1169f9d0731b431eea48c8",
+    "prompt": "Use case: stylized-concept\nAsset type: wide 16:9 editorial series plate for a serious long-form knowledge garden\nPrimary request: a cutaway view through a deep neural network as an interpretability instrument: layered computational planes recede across the page while only a few sparse activation paths illuminate in oxide red; delicate probe needles, feature lenses, attribution traces, and small circuit motifs reveal different scales from individual units to distributed features to connected circuits. It should feel like opening a precision scientific instrument whose internal causal pathways remain only partly visible.\nScene/backdrop: warm cream rag paper with faint laboratory-grid and translucent vellum overlays\nSubject: abstract neural network cutaway, sparse activation paths, probes and circuit motifs; no brain silhouette and no anthropomorphic machine\nStyle/medium: original tactile printmaking, copperplate engraving, technical cutaway drawing and translucent scientific drafting layers, serious literary-scientific editorial illustration\nComposition/framing: cinematic wide 16:9; left-to-right depth through network layers with a clear sparse path weaving across them; dense center, quieter margins; coherent single plate\nLighting/mood: forensic, patient, exacting, intellectually luminous without spectacle\nColor palette: cream paper, charcoal black, oxide red, with one restrained teal-blue accent\nMaterials/textures: paper grain, etched hatching, dry ink, translucent tracing paper, fine instrument metal and glass\nConstraints: textless; no letters, numbers, captions, logos, interface UI, or watermark; visual hierarchy must distinguish neuron/feature/circuit scales without labels\nAvoid: generic sci-fi, neon, glowing holograms, humanoid robots, brain icons, stock circuit-board imagery, glossy 3D rendering, named-artist imitation"
+  },
+  "rooms": {
+    "mechanistic-interpretability": {
+      "visuals": [
+        {
+          "after": "2-the-ladder-of-objects-neurons-features-circuits",
+          "kind": "layers",
+          "kicker": "Choose the right grain",
+          "title": "Why one neuron is usually the wrong grain",
+          "caption": "Mechanistic interpretability moves from often-polysemantic neurons to distributed features and then to circuits whose causal role can be tested.",
+          "items": [
+            {"label": "Neuron", "detail": "One activation value often responds to several unrelated concepts at once.", "meta": "polysemantic"},
+            {"label": "Feature", "detail": "A direction across many activations can track one concept hidden by superposition.", "meta": "representation"},
+            {"label": "Circuit", "detail": "Connected features form an algorithm whose causal role can be tested by intervention.", "meta": "computation"}
+          ]
+        },
+        {
+          "after": "6-attribution-graphs-the-current-instrument-and-a-walkthrough",
+          "kind": "sequence",
+          "kicker": "Trace, then intervene",
+          "title": "The hidden intermediate in Dallas → Austin",
+          "caption": "An attribution graph earns mechanistic status by exposing Texas as an intermediate feature and changing the answer when that feature is replaced.",
+          "items": [
+            {"label": "Prompt feature", "detail": "“Dallas” activates an internal representation tied to the city named in the question.", "meta": "observed input"},
+            {"label": "Latent bridge", "detail": "The graph reveals “Texas,” a concept absent from the prompt but causally active inside the model.", "meta": "intermediate"},
+            {"label": "Capital relation", "detail": "Texas combines with the capital relation to promote “Austin” at the output.", "meta": "answer path"},
+            {"label": "Counterfactual patch", "detail": "Replacing Texas with California changes the answer to Sacramento.", "meta": "causal test"},
+            {"label": "Second patch", "detail": "Replacing it with Byzantium changes the answer to Constantinople.", "meta": "replicated structure"}
+          ]
+        },
+        {
+          "after": "4-sparse-autoencoders-the-boom-and-the-correction",
+          "kind": "sequence",
+          "kicker": "A microscope corrects itself",
+          "title": "Sparse autoencoders survived by shrinking their claim",
+          "as_of": "25 August 2026",
+          "caption": "In two years, the field moved from a hoped-for true dictionary of model concepts to a bounded discovery instrument with seed dependence and downstream limits attached.",
+          "items": [
+            {"label": "Untangle superposition", "detail": "An SAE rewrites dense activity as a sparse combination of many learned directions.", "meta": "2023 promise"},
+            {"label": "Scale the dictionary", "detail": "Gemma Scope and frontier-model work learn millions of features across layers, some of them human-recognizable.", "meta": "2024 boom"},
+            {"label": "Test downstream use", "detail": "On DeepMind's harmful-intent task, a simple dense probe beats SAE-based probes, including out of distribution.", "meta": "bounded negative result"},
+            {"label": "Repeat the lens", "detail": "Changing random seeds yields materially different decompositions; one studied setting shares only about 30% of features.", "meta": "instrument instability"},
+            {"label": "Separate discovery from control", "detail": "If you know the concept, start with a probe; if you do not, use the SAE to surface candidates you might not have named.", "meta": "revised role"},
+            {"label": "Keep the uncertainty", "detail": "Interpretable, steerable features are real, while their status as the model's native units remains unsettled.", "meta": "2026 boundary"}
+          ]
+        }
+      ]
+    },
+    "top-papers-mi": {
+      "visuals": [
+        {
+          "after": "8-the-arc-and-where-it-points",
+          "kind": "timeline",
+          "kicker": "Five years inward",
+          "title": "The interpretability instrument moved from vision units to measured self-report",
+          "caption": "The twenty-paper arc widens its object of study while every new instrument also reveals a new limitation.",
+          "items": [
+            {"label": "Learning to see", "detail": "Curve detectors, logit lenses, and transformer components establish that internal structure can be read.", "meta": "2020–2021"},
+            {"label": "Behavior to mechanism", "detail": "Induction heads, fact editing, superposition, and task circuits make intervention central.", "meta": "2022"},
+            {"label": "Worlds and algorithms", "detail": "Othello state, grokking, automated discovery, and function vectors expose richer computations.", "meta": "2023"},
+            {"label": "Dictionary wave", "detail": "Sparse methods learn millions of features in frontier systems; only a subset are recognizably conceptual.", "meta": "2024"},
+            {"label": "Biology and self-report", "detail": "Attribution graphs trace planning and unfaithful reasoning; concept injection probes introspection.", "meta": "2025"}
+          ]
+        },
+        {
+          "after": "7-worked-example-find-an-induction-head-yourself",
+          "kind": "sequence",
+          "kicker": "A circuit on your laptop",
+          "title": "How the repeated-token probe locates an induction head",
+          "caption": "A synthetic repeated sequence creates a precise attention signature you can score and then test by ablation.",
+          "items": [
+            {"label": "Build the repeat", "detail": "Sample 25 random tokens and concatenate the same 25-token sequence a second time.", "meta": "50 tokens"},
+            {"label": "Read attention", "detail": "For every GPT-2 small layer and head, inspect the cached attention pattern.", "meta": "12 × 12 heads"},
+            {"label": "Score the stripe", "detail": "Measure attention from each second-pass position back by an offset of 24.", "meta": "copy-completion signature"},
+            {"label": "Name candidates", "detail": "Heads with a mean score above 0.4 become candidates; published demos often flag layers 5–7.", "meta": "threshold"},
+            {"label": "Test causality", "detail": "Zero-ablate the high-scoring heads and check whether the repeated-sequence loss advantage shrinks.", "meta": "mechanism test"}
+          ]
+        },
+        {
+          "after": "5-era-four-the-dictionary-wave-2024",
+          "kind": "layers",
+          "kicker": "A dictionary meets geometry",
+          "title": "The 2024 wave scaled sparse features—and exposed what one-dimensional entries miss",
+          "caption": "The year's papers move from feature-level causal graphs to frontier-scale dictionaries, then force the unit of interpretation open again with dark matter, proxy metrics, and circular representations.",
+          "items": [
+            {"label": "Trace with features", "detail": "Sparse Feature Circuits replaces opaque heads with SAE features and lets a human remove a gender shortcut from a classifier.", "meta": "Marks et al. · Mar 2024"},
+            {"label": "Scale to a frontier model", "detail": "Millions of Claude 3 Sonnet features include a multilingual, multimodal Golden Gate Bridge direction that causally steers behavior.", "meta": "May 2024"},
+            {"label": "Industrialize the dictionary", "detail": "TopK methods support a 16-million-latent SAE trained on GPT-4 activations over 40 billion tokens.", "meta": "June 2024"},
+            {"label": "Carry the missing mass", "detail": "Reconstruction and explainability scores are proxies, and large portions of the representation remain dark matter.", "meta": "coverage limit"},
+            {"label": "Break the straight line", "detail": "Days and months occupy irreducibly two-dimensional circles that the model uses for modular date arithmetic.", "meta": "geometry beyond directions"},
+            {"label": "Reopen the object", "detail": "A useful dictionary decomposes activity, but decomposition alone does not prove that its entries are the model's true computational atoms.", "meta": "live question"}
+          ]
+        }
+      ]
+    }
+  }
+}

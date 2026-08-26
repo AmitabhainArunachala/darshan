@@ -1,0 +1,9 @@
+{
+  "slug": "what-self-means",
+  "verdict": "PASS",
+  "contract": "Passes the room contract: exact frontmatter, 4,073 body words, a situated opener, numbered sections, a substantive six-register comparison table, a reader-verifiable rubber-hand exercise, conclusion and sibling hooks, disciplined open questions, sources and disclosure, valid internal .html links, and an earned socket-exit through the subject/object distinction.",
+  "facts": "Three foundational claims were checked fresh. Botvinick and Cohen's 1998 Nature paper supports visually referred touch in the rubber-hand setup, while the article properly treats proprioceptive drift as evidence developed in the broader literature. SuttaCentral's SN 22.59 supports the five-aggregate not-self analysis and the 'not mine, I am not, not my self' formulation. Anthropic's 2025 introspection experiments support roughly 20 percent concept-injection detection in the strongest tested model, and the room carefully calls that functional access rather than a witness. The false universal aside about nobody in Cambridge having read the Upanishads before James has been removed without leaving a dependent claim behind.",
+  "voice": "Read aloud the Locke-Parfit-James comparison, the six-register AI application, and the final map/territory paragraph. Philosophical names stay attached to examples, the taxonomy uses short verdict clauses, and the densest ending remains audible. Its subject/object turn is earned by the preceding analysis and invites inspection rather than prescribing belief.",
+  "must_fix": "none — the unsupported James/Cambridge/Upanishads aside is absent and the surrounding argument remains intact.",
+  "source_sha256": "d17e92e5afae389a013696eac2c9af9e3e05f181eb0e3c0b481fb67b3c27eed1"
+}

@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A New Vision for Algorithms · Darshan Garden</title>
+<meta name="description" content="What an algorithm actually is, traced from Euclid to Knuth&#x27;s five requirements. Then the honest shift of our era — systems whose behavior is learned from data rather than written as steps — and what the word &quot;algorithm&quot; can still mean when a billion weights replace a page of instructions.">
+<link rel="stylesheet" href="../style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ccircle cx='8' cy='8' r='6' fill='none' stroke='%238f3b26' stroke-width='1.5'/%3E%3Ccircle cx='8' cy='8' r='2' fill='%238f3b26'/%3E%3C/svg%3E">
+<script>
+/* Theme memory. No analytics, no trackers. */
+(function () {
+  try {
+    var t = localStorage.getItem("darshan-theme");
+    if (t) document.documentElement.setAttribute("data-theme", t);
+  } catch (e) {}
+})();
+</script>
+<style>
+/* Garden-only layout. Kept here so the publication stylesheet remains shared. */
+body.garden-page-body {
+  max-width: none;
+  padding: 1.5rem clamp(1.25rem, 3.5vw, 4rem) 4rem;
+  font-size: 1.125rem;
+}
+body.garden-page-body > main,
+body.garden-page-body > .masthead,
+body.garden-page-body > footer {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 94rem;
+}
+.garden-layout,
+.garden-index-layout {
+  align-items: start;
+  display: grid;
+  gap: clamp(2.75rem, 5vw, 5rem);
+  grid-template-columns: minmax(0, 64rem) minmax(17rem, 20rem);
+  justify-content: center;
+}
+.garden-layout article,
+.garden-index-main { min-width: 0; }
+.garden-layout .article-title,
+.garden-intro .article-title {
+  font-size: clamp(2.65rem, 3.55vw, 4rem);
+  letter-spacing: -.025em;
+  line-height: 1.06;
+  max-width: 24ch;
+}
+.garden-layout article h2 {
+  font-size: 1.48rem;
+  line-height: 1.3;
+  margin-top: 3.2rem;
+  scroll-margin-top: 1.5rem;
+}
+.garden-layout article h3 {
+  font-size: 1.16rem;
+  margin-top: 2.35rem;
+  scroll-margin-top: 1.5rem;
+}
+.garden-intro { margin-bottom: 2.4rem; }
+.garden-series { margin: 2.8rem 0; scroll-margin-top: 1rem; }
+.garden-series h2 { border-bottom: 1px solid var(--rule); padding-bottom: .45rem; }
+.garden-room-list { list-style: none; margin: 0; padding: 0; }
+.garden-room-list li { border-bottom: 1px solid var(--rule); margin: 0; padding: 1rem 0; }
+.garden-room-title { font-weight: 600; }
+.garden-room-summary { color: var(--faint); font-size: .96rem; margin: .25rem 0 0; }
+.garden-series-link { color: var(--faint); font-size: .82rem; letter-spacing: .12em;
+  text-transform: uppercase; }
+.garden-lede {
+  border-left: 3px solid var(--accent);
+  color: var(--faint);
+  font-size: 1.24rem;
+  font-style: italic;
+  line-height: 1.62;
+  margin: 1.5rem 0 2.2rem;
+  padding: .35rem 0 .35rem 1.35rem;
+}
+.garden-corridors {
+  margin: 1.15rem 0 2.65rem;
+}
+.garden-corridor-list {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: .55rem .62rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.garden-corridor-list li { display: flex; margin: 0; max-width: 100%; }
+.garden-corridor {
+  align-items: center;
+  background: var(--accent-soft);
+  border: 1px solid var(--accent);
+  border-radius: 3px;
+  color: var(--accent);
+  display: inline-flex;
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .73rem;
+  font-weight: 700;
+  letter-spacing: .075em;
+  line-height: 1.35;
+  max-width: 100%;
+  min-height: 2.05rem;
+  overflow-wrap: anywhere;
+  padding: .34rem .72rem .3rem;
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-transform: uppercase;
+  text-underline-offset: .22em;
+}
+.garden-corridor:visited { color: var(--accent); }
+.garden-corridor:hover,
+.garden-corridor:focus-visible {
+  background: var(--accent);
+  color: var(--paper);
+}
+.garden-corridor:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+.garden-series-plate {
+  --plate-accent: var(--accent);
+  border: 1px solid var(--rule);
+  border-top: 3px solid var(--plate-accent);
+  margin: .25rem 0 2.8rem;
+  overflow: hidden;
+  position: relative;
+}
+.garden-series-plate--foundations { --plate-accent: #496f76; }
+.garden-series-plate--story-of-ai { --plate-accent: #526d9a; }
+.garden-series-plate--instrument { --plate-accent: #745779; }
+.garden-series-plate--strange-loops { --plate-accent: #866448; }
+.garden-series-plate--bridge { --plate-accent: #697044; }
+.garden-series-plate--power { --plate-accent: #8f3b26; }
+.garden-series-plate--time-future { --plate-accent: #416778; }
+[data-theme="dark"] .garden-series-plate { --plate-accent: var(--accent); }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .garden-series-plate { --plate-accent: var(--accent); }
+}
+.garden-series-plate-media {
+  aspect-ratio: 16 / 9;
+  background: var(--accent-soft);
+  overflow: hidden;
+  position: relative;
+}
+.garden-series-plate-media::after {
+  background:
+    linear-gradient(90deg, var(--paper) 0, transparent 24%, transparent 76%, var(--paper) 100%),
+    linear-gradient(0deg, var(--paper) 0, transparent 32%);
+  content: "";
+  inset: 0;
+  opacity: .24;
+  pointer-events: none;
+  position: absolute;
+}
+.garden-series-plate picture,
+.garden-series-card picture { display: block; height: 100%; }
+.garden-series-plate img {
+  display: block;
+  filter: saturate(.82) contrast(1.03);
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+.garden-series-plate figcaption {
+  align-items: baseline;
+  background: var(--paper);
+  border-top: 1px solid var(--rule);
+  display: grid;
+  gap: .25rem 1rem;
+  grid-template-columns: auto 1fr;
+  padding: .78rem 1rem .85rem;
+}
+.garden-series-plate-kicker {
+  color: var(--plate-accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+.garden-series-plate figcaption strong { font-size: 1rem; font-weight: 600; }
+.garden-series-plate-terms {
+  color: var(--faint);
+  font-size: .82rem;
+  grid-column: 2;
+  margin: 0;
+}
+.garden-visual {
+  background:
+    radial-gradient(circle at 92% 8%, var(--accent-soft), transparent 30%),
+    linear-gradient(135deg, transparent 0 72%, var(--accent-soft) 72% 72.4%, transparent 72.4%);
+  border: 1px solid var(--rule);
+  border-top: 3px solid var(--accent);
+  margin: 1.25rem 0 2.5rem;
+  overflow: hidden;
+  padding: clamp(1.1rem, 2.7vw, 1.75rem);
+  position: relative;
+}
+.garden-visual::before {
+  background-image:
+    linear-gradient(var(--rule) 1px, transparent 1px),
+    linear-gradient(90deg, var(--rule) 1px, transparent 1px);
+  background-size: 2.25rem 2.25rem;
+  content: "";
+  inset: 0;
+  opacity: .13;
+  pointer-events: none;
+  position: absolute;
+}
+.garden-visual > * { position: relative; }
+.garden-visual-head {
+  align-items: baseline;
+  display: grid;
+  gap: .45rem 1rem;
+  grid-template-columns: auto 1fr;
+  margin-bottom: 1.2rem;
+}
+.garden-visual-kicker {
+  color: var(--accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .68rem;
+  font-weight: 700;
+  letter-spacing: .17em;
+  margin: 0;
+  text-transform: uppercase;
+}
+.garden-visual-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  line-height: 1.28;
+  margin: 0;
+}
+.garden-visual-as-of {
+  color: var(--faint);
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: .72rem;
+  letter-spacing: .08em;
+  margin: 0;
+  text-transform: uppercase;
+  white-space: normal;
+}
+.garden-visual-items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.garden-visual-item {
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  margin: 0;
+  min-width: 0;
+  padding: .8rem .9rem;
+}
+.garden-visual-item-label {
+  display: block;
+  font-size: .96rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+.garden-visual-item-detail {
+  color: var(--faint);
+  display: block;
+  font-size: .9rem;
+  line-height: 1.45;
+  margin-top: .27rem;
+}
+.garden-visual-item-meta {
+  color: var(--accent);
+  display: block;
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: .72rem;
+  letter-spacing: .08em;
+  margin-bottom: .38rem;
+  text-transform: uppercase;
+}
+.garden-visual-caption {
+  border-top: 1px solid var(--rule);
+  color: var(--faint);
+  display: grid;
+  font-size: .84rem;
+  font-style: italic;
+  gap: .55rem 1rem;
+  grid-template-columns: minmax(0, 1fr) auto;
+  line-height: 1.45;
+  margin: 1.15rem 0 0;
+  padding-top: .75rem;
+}
+.garden-visual-evidence {
+  color: var(--accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .72rem;
+  font-style: normal;
+  font-weight: 650;
+  letter-spacing: .04em;
+  white-space: nowrap;
+}
+.garden-visual-evidence a {
+  color: inherit;
+  text-decoration-thickness: 1px;
+  text-underline-offset: .18em;
+}
+.garden-visual--sequence .garden-visual-items,
+.garden-visual--contrast .garden-visual-items,
+.garden-visual--constellation .garden-visual-items {
+  display: grid;
+  gap: .65rem;
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+}
+.garden-visual--sequence .garden-visual-items { counter-reset: garden-step; }
+.garden-visual--sequence .garden-visual-item {
+  counter-increment: garden-step;
+  padding-top: 2.35rem;
+  position: relative;
+}
+.garden-visual--sequence .garden-visual-item::before {
+  color: var(--accent);
+  content: counter(garden-step, decimal-leading-zero);
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: .68rem;
+  left: .9rem;
+  letter-spacing: .08em;
+  position: absolute;
+  top: .72rem;
+}
+.garden-visual--layers .garden-visual-items { display: grid; gap: .45rem; }
+.garden-visual--layers .garden-visual-item {
+  border-left: clamp(.24rem, .55vw, .48rem) solid var(--accent);
+  display: grid;
+  gap: .15rem 1rem;
+  grid-template-columns: minmax(8rem, .4fr) 1fr;
+}
+.garden-visual--layers .garden-visual-item:nth-child(2) { margin-left: 1.5%; }
+.garden-visual--layers .garden-visual-item:nth-child(3) { margin-left: 3%; }
+.garden-visual--layers .garden-visual-item:nth-child(4) { margin-left: 4.5%; }
+.garden-visual--layers .garden-visual-item:nth-child(5) { margin-left: 6%; }
+.garden-visual--layers .garden-visual-item:nth-child(6) { margin-left: 7.5%; }
+.garden-visual--timeline .garden-visual-items {
+  display: grid;
+  gap: 0;
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+}
+.garden-visual--timeline .garden-visual-item {
+  border-width: 1px 0 0 1px;
+  padding-top: 1.35rem;
+  position: relative;
+}
+.garden-visual--timeline .garden-visual-item::before {
+  background: var(--accent);
+  border: 3px solid var(--paper);
+  border-radius: 50%;
+  content: "";
+  height: .72rem;
+  left: -.4rem;
+  position: absolute;
+  top: -.4rem;
+  width: .72rem;
+}
+.garden-visual--contrast .garden-visual-item:nth-child(odd) { border-top: 2px solid var(--ink); }
+.garden-visual--contrast .garden-visual-item:nth-child(even) { border-top: 2px solid var(--accent); }
+.garden-visual--constellation .garden-visual-items {
+  align-items: stretch;
+  position: relative;
+}
+.garden-visual--constellation .garden-visual-item {
+  border-top: 2px solid var(--accent);
+  box-shadow: 0 .2rem 0 rgba(18, 31, 31, .04);
+  padding-top: 1.35rem;
+  position: relative;
+}
+.garden-visual--constellation .garden-visual-item::before {
+  background: var(--paper);
+  border: 2px solid var(--accent);
+  border-radius: 50%;
+  content: "";
+  height: .55rem;
+  left: calc(50% - .36rem);
+  position: absolute;
+  top: -.38rem;
+  width: .55rem;
+}
+.garden-visual--constellation .garden-visual-item:nth-child(even) { margin-top: .8rem; }
+.garden-series-gallery {
+  display: grid;
+  gap: .8rem;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  margin: 1.5rem 0 3rem;
+}
+.garden-series-card {
+  border: 1px solid var(--rule);
+  color: var(--ink);
+  display: grid;
+  grid-template-rows: 7.5rem auto;
+  overflow: hidden;
+  text-decoration: none;
+}
+.garden-series-card img {
+  height: 100%;
+  object-fit: cover;
+  transition: transform .25s ease;
+  width: 100%;
+}
+.garden-series-card span {
+  border-top: 1px solid var(--rule);
+  font-size: .9rem;
+  font-weight: 600;
+  padding: .65rem .75rem;
+}
+.garden-series-card:hover { border-color: var(--accent); color: var(--accent); }
+.garden-series-card:hover img { transform: scale(1.025); }
+@media (prefers-reduced-motion: reduce) {
+  .garden-series-card img { transition: none; }
+}
+.garden-tags { color: var(--faint); font-size: .82rem; margin-top: 2.2rem; }
+.garden-nav { border-top: 1px solid var(--rule); display: flex; gap: 1rem;
+  justify-content: space-between; margin-top: 2.5rem; padding-top: 1rem; }
+.garden-nav a { max-width: 48%; text-decoration: none; }
+.garden-nav .next { margin-left: auto; text-align: right; }
+.garden-table-wrap { overflow-x: auto; margin: 1.35rem 0; }
+.garden-table { border-collapse: collapse; font-size: .92rem; line-height: 1.45; width: 100%; }
+.garden-table th, .garden-table td { border: 1px solid var(--rule); padding: .55rem .65rem;
+  text-align: left; vertical-align: top; }
+.garden-table th { background: var(--accent-soft); }
+.garden-toc {
+  border-left: 1px solid var(--rule);
+  max-height: calc(100vh - 3rem);
+  overflow: auto;
+  padding: .1rem 0 .75rem 1.3rem;
+  position: sticky;
+  top: 1.5rem;
+}
+.garden-toc-title {
+  color: var(--accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .2em;
+  margin: 0 0 1.15rem;
+  text-transform: uppercase;
+}
+.garden-toc-title::before { content: "☰"; font-size: .8em; margin-right: .65rem; }
+.garden-toc-list { list-style: none; margin: 0; padding: 0; }
+.garden-toc-sublist { list-style: none; margin: 0; padding: 0; }
+.garden-toc-list li { margin: 0; }
+.garden-toc-list a {
+  border-left: 2px solid transparent;
+  color: var(--ink);
+  display: block;
+  font-size: .91rem;
+  line-height: 1.42;
+  margin-left: -1.4rem;
+  padding: .42rem .45rem .42rem 1.3rem;
+  text-decoration: none;
+}
+.garden-toc-list .level-3 a {
+  color: var(--faint);
+  font-size: .86rem;
+  font-style: italic;
+  padding-left: 2.15rem;
+}
+.garden-toc-list a:hover,
+.garden-toc-list a:focus-visible,
+.garden-toc-list a[aria-current="location"] {
+  border-left-color: var(--accent);
+  color: var(--accent);
+}
+.garden-toc-list a[aria-current="location"] { font-weight: 600; }
+.garden-toc-inline { display: none; }
+.garden-layout article :is(h2, h3):target,
+.garden-series:target h2 { color: var(--accent); }
+a.pending { color: var(--faint); text-decoration-style: dashed; }
+a.pending::after { content: " · pending"; font-size: .7em; letter-spacing: .06em;
+  text-transform: uppercase; }
+@media (min-width: 72.01em) {
+  body.garden-page-body > .masthead {
+    align-items: center;
+    column-gap: 2rem;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    margin-bottom: 3.5rem;
+    padding: 1.25rem 0;
+    text-align: left;
+  }
+  body.garden-page-body > .masthead .wordmark { justify-self: start; }
+  body.garden-page-body > .masthead .tagline { justify-self: center; margin: 0; }
+  body.garden-page-body > .masthead nav { justify-self: end; margin: 0; }
+}
+@media (max-width: 72em) {
+  .garden-layout,
+  .garden-index-layout { display: block; }
+  .garden-toc { display: none; }
+  .garden-toc-inline {
+    border: 1px solid var(--rule);
+    display: block;
+    margin: 1.5rem 0 2.4rem;
+    padding: .8rem 1rem;
+  }
+  .garden-toc-inline summary {
+    color: var(--accent);
+    cursor: pointer;
+    font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: .78rem;
+    font-weight: 700;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+  }
+  .garden-toc-inline .garden-toc-list { margin-top: .7rem; }
+  .garden-toc-inline .garden-toc-list a { margin-left: 0; padding-left: .75rem; }
+  .garden-toc-inline .garden-toc-list .level-3 a { padding-left: 1.6rem; }
+}
+@media (max-width: 40em) {
+  body.garden-page-body { font-size: 1.03rem; padding: 1rem 1.05rem 3rem; }
+  .garden-layout .article-title,
+  .garden-intro .article-title { font-size: clamp(2.15rem, 11vw, 3.15rem); }
+  .garden-lede { font-size: 1.1rem; padding-left: 1rem; }
+  .garden-corridors { margin-bottom: 2rem; }
+  .garden-corridor-list { gap: .45rem; }
+  .garden-corridor {
+    font-size: .68rem;
+    min-height: 2.35rem;
+    padding: .3rem .58rem .27rem;
+  }
+  .garden-series-plate-media { aspect-ratio: 16 / 9; }
+  .garden-series-plate figcaption { display: block; }
+  .garden-series-plate figcaption strong { display: block; margin-top: .22rem; }
+  .garden-series-plate-terms { display: block; margin-top: .25rem; }
+  .garden-visual { margin-left: -.15rem; margin-right: -.15rem; padding: 1rem; }
+  .garden-visual-head { display: block; }
+  .garden-visual-title { margin-top: .25rem; }
+  .garden-visual-as-of { margin-top: .35rem; }
+  .garden-visual-caption { grid-template-columns: 1fr; }
+  .garden-visual-evidence { white-space: normal; }
+  .garden-visual--sequence .garden-visual-items,
+  .garden-visual--contrast .garden-visual-items,
+  .garden-visual--constellation .garden-visual-items,
+  .garden-visual--timeline .garden-visual-items { grid-template-columns: 1fr; }
+  .garden-visual--layers .garden-visual-item:nth-child(n) { display: block; margin-left: 0; }
+  .garden-visual--timeline .garden-visual-item { border-width: 0 0 0 1px; }
+  .garden-visual--timeline .garden-visual-item::before { left: -.4rem; top: .9rem; }
+  .garden-visual--constellation .garden-visual-item:nth-child(even) { margin-top: 0; }
+  .garden-series-gallery { grid-template-columns: 1fr; }
+  .garden-nav { flex-direction: column; }
+  .garden-nav a { max-width: none; }
+  .garden-nav .next { margin-left: 0; text-align: left; }
+}
+@media print {
+  a.pending::after { content: " (pending)"; }
+  .garden-layout, .garden-index-layout { display: block; }
+  .garden-toc, .garden-toc-inline { display: none; }
+  .garden-series-card img { display: none; }
+  .garden-series-card { grid-template-rows: auto; }
+}
+</style>
+</head>
+<body class="garden-page-body">
+<button class="theme-toggle" aria-label="Toggle light and dark" onclick="
+  (function () {
+    var d = document.documentElement;
+    var cur = d.getAttribute('data-theme');
+    if (!cur) { cur = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'; }
+    var next = cur === 'dark' ? 'light' : 'dark';
+    d.setAttribute('data-theme', next);
+    try { localStorage.setItem('darshan-theme', next); } catch (e) {}
+  })();
+">◐</button>
+
+<header class="masthead">
+  <h1 class="wordmark"><a href="../index.html">DARSHAN</a></h1>
+  <p class="tagline">A signal of clear seeing in an age of information overload</p>
+  <nav>
+    <a href="../index.html">Articles</a>
+    <a href="index.html">Garden</a>
+    <a href="../about.html">About</a>
+  </nav>
+</header>
+
+<main>
+<div class="garden-layout">
+<article data-garden-room="algorithms-new-vision" data-garden-outline>
+<p class="garden-series-link"><a href="index.html#foundations">Foundations of the Machine</a></p>
+<p class="article-meta">25 August 2026 · Draft</p>
+<h1 class="article-title">A New Vision for Algorithms</h1>
+<div class="draft-banner"><strong>Draft — pending discernment pass.</strong> This room is part of the garden's first planting. It has not been promoted to published status; check its sources and open questions before citing it.</div>
+<p class="garden-lede">What an algorithm actually is, traced from Euclid to Knuth's five requirements. Then the honest shift of our era — systems whose behavior is learned from data rather than written as steps — and what the word "algorithm" can still mean when a billion weights replace a page of instructions.</p>
+<nav class="garden-corridors" aria-label="Explore connected rooms" data-corridor-count="11"><ul class="garden-corridor-list"><li><a class="garden-corridor" href="intro-to-computer-science.html">Intro to Computer Science</a></li><li><a class="garden-corridor" href="programming.html">What Programming Is</a></li><li><a class="garden-corridor" href="compilers.html">Compilers — How Text Becomes a Machine</a></li><li><a class="garden-corridor" href="neural-networks.html">Neural Networks</a></li><li><a class="garden-corridor" href="machine-learning.html">Machine Learning</a></li><li><a class="garden-corridor" href="deep-learning.html">Deep Learning</a></li><li><a class="garden-corridor" href="optimization.html">Optimization — the Hidden Engine</a></li><li><a class="garden-corridor" href="linear-algebra-and-ai.html">Linear Algebra and AI</a></li><li><a class="garden-corridor" href="mechanistic-interpretability.html">Mechanistic Interpretability</a></li><li><a class="garden-corridor" href="pretraining-post-training.html">Pretraining and Post-training</a></li><li><a class="garden-corridor" href="history-of-ai.html">The History of AI</a></li></ul></nav>
+<figure class="garden-series-plate garden-series-plate--foundations">
+<div class="garden-series-plate-media"><picture><source srcset="assets/series/foundations.webp" type="image/webp"><img src="assets/series/foundations.png" alt="An engraved transistor lattice rising through computational layers into a neural graph" width="1672" height="941" loading="eager" decoding="async"></picture></div>
+<figcaption><span class="garden-series-plate-kicker">Visual field</span><strong>Foundations of the Machine</strong><span class="garden-series-plate-terms">algorithm · divide and conquer · dynamic programming · greedy algorithm</span></figcaption>
+</figure>
+<details class="garden-toc-inline"><summary>In this room</summary><ol class="garden-toc-list"><li class="level-2"><a href="#1-what-an-algorithm-is">1. What an algorithm is</a></li><li class="level-2"><a href="#2-the-classic-families">2. The classic families</a></li><li class="level-2"><a href="#3-a-walkthrough-you-can-verify">3. A walkthrough you can verify</a></li><li class="level-2"><a href="#4-the-shift-when-nobody-writes-the-steps">4. The shift: when nobody writes the steps</a></li><li class="level-2"><a href="#5-but-sometimes-the-weights-contain-an-algorithm">5. But sometimes the weights contain an algorithm</a></li><li class="level-2"><a href="#6-and-sometimes-the-learner-writes-algorithms-for-us">6. And sometimes the learner writes algorithms for us</a></li><li class="level-2"><a href="#7-so-what-does-algorithm-mean-now">7. So what does "algorithm" mean now?</a></li><li class="level-2"><a href="#8-what-you-can-see-now">8. What you can see now</a></li><li class="level-2"><a href="#open-questions">Open questions</a></li><li class="level-2"><a href="#sources">Sources</a></li></ol></details>
+<p>If you've read <a href="intro-to-computer-science.html">intro-to-computer-science</a>, you know that computer science is the study of what can be computed and at what cost. This room is about the central object of that study: the algorithm. First we'll pin down what one actually is — it's older than computers by two thousand years — and walk through the classic families. Then the part most introductions skip: what happened when we started building systems that work without anyone writing the steps, and what that does to the word.</p>
+<h2 id="1-what-an-algorithm-is">1. What an algorithm is</h2>
+<p>Start with the oldest one still in daily use.</p>
+<p>Around 300 BCE, Euclid's <em>Elements</em> (Book VII, Propositions 1 and 2) describes a procedure for finding the greatest common divisor of two numbers: repeatedly replace the larger number with the remainder of dividing it by the smaller, until the remainder is zero. The last nonzero value is the answer. That procedure runs today inside cryptographic libraries on billions of devices. It was designed before the concept of zero reached Europe.</p>
+<p>The word itself comes from a person. Around 825 CE, Muhammad ibn Musa al-Khwarizmi, working at the House of Wisdom in Baghdad, wrote a treatise on calculating with Hindu-Arabic numerals. The Arabic original is lost; a 12th-century Latin translation survives under the title <em>Algoritmi de numero Indorum</em> — "al-Khwarizmi on the Hindu art of reckoning." His Latinized name, <em>Algoritmi</em>, became the word for any step-by-step calculating procedure. (His other book, on <em>al-jabr</em>, gave us "algebra." One mathematician, two of the load-bearing words of the modern world.)</p>
+<p>So what makes a procedure an algorithm and not just advice? Donald Knuth, in <em>The Art of Computer Programming</em> (Vol. 1, §1.1), gives the standard answer. An algorithm has five properties:</p>
+<ol><li><strong>Finiteness</strong> — it terminates after a finite number of steps.</li><li><strong>Definiteness</strong> — every step is precisely, unambiguously specified.</li><li><strong>Input</strong> — zero or more quantities it starts from.</li><li><strong>Output</strong> — one or more quantities with a specified relation to the input.</li><li><strong>Effectiveness</strong> — each step is basic enough that a person with pencil and paper could do it.</li></ol>
+<p>Hold on to definiteness and effectiveness. A recipe that says "season to taste" is not an algorithm. Euclid's procedure is: at every moment, there is exactly one thing to do next, and anyone — or anything — that follows the steps gets the same answer. The steps are the thing. The paper they're written on, the language they're written in, the machine that runs them: all interchangeable. An algorithm is pure structure, separable from any substrate. That separability is why the same gcd procedure runs on an abacus, a Roman wax tablet, and your phone.</p>
+<p>One more distinction before we move on: an algorithm is not a <a href="programming.html">program</a>. The program is one expression of the algorithm in one language for one machine; the algorithm is what survives translation. A <a href="compilers.html">compiler</a> can transform the program radically and the algorithm remains.</p>
+<h2 id="2-the-classic-families">2. The classic families</h2>
+<figure class="garden-visual garden-visual--constellation" aria-labelledby="visual-algorithms-new-vision-1" data-claim-scope="section-synthesis" data-placement-heading="2-the-classic-families" data-evidence-headings="2-the-classic-families">
+<div class="garden-visual-head"><p class="garden-visual-kicker">Solution shapes</p><p class="garden-visual-title" id="visual-algorithms-new-vision-1">Six disciplines for where to look next</p></div>
+<ul class="garden-visual-items" role="list"><li class="garden-visual-item"><strong class="garden-visual-item-label">Divide and conquer</strong><span class="garden-visual-item-detail">Split the problem, solve smaller pieces, then combine them.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Greedy</strong><span class="garden-visual-item-detail">Take the locally best step and never revisit it.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Dynamic programming</strong><span class="garden-visual-item-detail">Store solved subproblems so no result is computed twice.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Graph traversal</strong><span class="garden-visual-item-detail">Walk a network systematically from node to node.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Randomized</strong><span class="garden-visual-item-detail">Use controlled coin flips for speed or estimation.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Backtracking</strong><span class="garden-visual-item-detail">Try a branch, detect failure, undo, and try another.</span></li></ul>
+<figcaption class="garden-visual-caption"><span>Classical algorithm families reuse a small set of strategies across otherwise different problems.</span><span class="garden-visual-evidence">Drawn from: <a href="#2-the-classic-families">2. The classic families</a></span></figcaption>
+</figure>
+<p>Computer science spent seventy years building a taxonomy of strategies — reusable <em>shapes</em> of solution. When you learn algorithms, you're mostly learning these families, because a new problem usually yields to an old shape.</p>
+<div class="garden-table-wrap"><table class="garden-table"><thead><tr><th>Family</th><th>The move</th><th>Canonical examples</th><th>Origin</th></tr></thead><tbody><tr><td>Divide and conquer</td><td>Split the problem, solve the halves, combine</td><td>Mergesort; quicksort; fast Fourier transform</td><td>Mergesort: von Neumann, 1945. Quicksort: Hoare, published 1961</td></tr><tr><td>Greedy</td><td>Take the locally best step; never look back</td><td>Dijkstra's shortest path; Huffman coding</td><td>Dijkstra, published 1959; Huffman, 1952</td></tr><tr><td>Dynamic programming</td><td>Solve small subproblems once, store, reuse</td><td>Edit distance; sequence alignment in genomics</td><td>Bellman, 1950s</td></tr><tr><td>Graph traversal</td><td>Walk a network systematically</td><td>Breadth-first / depth-first search; PageRank's underlying walk</td><td>BFS forms: 1950s; PageRank: Brin &amp; Page, 1998</td></tr><tr><td>Randomized</td><td>Use coin flips to be fast on average or to estimate</td><td>Randomized quicksort pivots; Monte Carlo methods</td><td>Monte Carlo: Ulam &amp; von Neumann, 1940s</td></tr><tr><td>Search &amp; backtracking</td><td>Try, fail, undo, try again</td><td>Sudoku solvers; SAT solvers; game tree search</td><td>Formalized 1950s–60s</td></tr></tbody></table></div>
+<p>A few things this table quietly teaches:</p>
+<p><strong>Each family comes with a mathematics.</strong> "Divide and conquer" isn't a vibe; it comes with recurrence relations that tell you, before you run anything, that mergesort makes at most about n·log₂(n) comparisons on n items. Sorting a million items costs about twenty million comparisons, not a trillion. This is the deepest habit of the field: the cost of a written algorithm can be known in advance, as a theorem. The room on <a href="optimization.html">optimization</a> picks up what happens when you can't get theorems and settle for iteration.</p>
+<p><strong>Greedy is the interesting one philosophically.</strong> Sometimes taking the locally best step provably reaches the global best (Dijkstra's shortest paths, when edge weights aren't negative). Sometimes it provably doesn't (try making 30 cents from coins worth 25, 10, and 1 greedily — you get 25+1+1+1+1+1, six coins, when 10+10+10 is three). Knowing <em>which regime you're in</em> is the skill. Keep that thought; it returns when we get to learned systems, because gradient descent is a greedy strategy applied where no theorem says greed works — and yet it does.</p>
+<p><strong>The families are substrate-independent strategies of attention.</strong> Divide-and-conquer says: don't look at everything at once; look at halves. Dynamic programming says: never pay attention to the same subproblem twice. Greedy says: attend only to the frontier. Each family is a discipline for <em>where to look next</em>. That framing will matter at the end of this room.</p>
+<h2 id="3-a-walkthrough-you-can-verify">3. A walkthrough you can verify</h2>
+<figure class="garden-visual garden-visual--sequence" aria-labelledby="visual-algorithms-new-vision-2" data-claim-scope="section-synthesis" data-placement-heading="3-a-walkthrough-you-can-verify" data-evidence-headings="3-a-walkthrough-you-can-verify">
+<div class="garden-visual-head"><p class="garden-visual-kicker">Euclid, in your hands</p><p class="garden-visual-title" id="visual-algorithms-new-vision-2">The answer stays fixed while the remainder shrinks</p></div>
+<ol class="garden-visual-items" role="list"><li class="garden-visual-item"><strong class="garden-visual-item-label">First remainder</strong><span class="garden-visual-item-detail">1071 = 2 × 462 + 147, so any common divisor of the original pair also divides 147.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Second remainder</strong><span class="garden-visual-item-detail">462 = 3 × 147 + 21; replace the larger pair with the smaller pair without changing the gcd.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Stop</strong><span class="garden-visual-item-detail">147 = 7 × 21 + 0; a remainder of zero makes the last nonzero remainder, 21, the answer.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Verify</strong><span class="garden-visual-item-detail">1071 = 21 × 51 and 462 = 21 × 22, while 51 and 22 share no factor.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Proof shape</strong><span class="garden-visual-item-detail">Nonnegative remainders strictly decrease, so the procedure must terminate rather than merely seeming to.</span></li></ol>
+<figcaption class="garden-visual-caption"><span>Three divisions expose the classical algorithmic ideal: every step is inspectable, termination is proved, and correctness is preserved.</span><span class="garden-visual-evidence">Drawn from: <a href="#3-a-walkthrough-you-can-verify">3. A walkthrough you can verify</a></span></figcaption>
+</figure>
+<p>Let's run Euclid on real numbers, by hand. Find gcd(1071, 462).</p>
+<pre><code>Step 1:  1071 = 2 × 462 + 147     remainder 147
+Step 2:   462 = 3 × 147 + 21      remainder 21
+Step 3:   147 = 7 × 21  + 0       remainder 0
+Answer: 21</code></pre>
+<p>Three steps. Check it: 1071 = 21 × 51, and 462 = 21 × 22, and 51 and 22 share no factor. You can also check it in one line of Python:</p>
+<pre><code>&gt;&gt;&gt; import math
+&gt;&gt;&gt; math.gcd(1071, 462)
+21</code></pre>
+<p>Now notice what you just witnessed, because it's the entire classical worldview in three lines:</p>
+<ul><li><strong>Definiteness</strong>: at no point did you make a judgment call.</li><li><strong>Termination with a reason</strong>: the remainder strictly shrinks (147 → 21 → 0), and a decreasing sequence of non-negative integers must hit zero. That's not hope; it's a proof.</li><li><strong>Correctness with a reason</strong>: any number dividing both 1071 and 462 also divides their remainder 147 (because 147 = 1071 − 2×462), so the answer is preserved at every step. Also a proof.</li><li><strong>A cost bound</strong>: Gabriel Lamé showed in 1844 that the number of steps is at most about five times the number of digits in the smaller number — one of the first cost theorems in history.</li></ul>
+<p>Correct on <em>all</em> inputs, terminating on <em>all</em> inputs, cost known in advance, every step inspectable. For twenty-two centuries, that was what "algorithm" meant. Hold the feeling of that certainty. We're about to trade it away.</p>
+<h2 id="4-the-shift-when-nobody-writes-the-steps">4. The shift: when nobody writes the steps</h2>
+<figure class="garden-visual garden-visual--contrast" aria-labelledby="visual-algorithms-new-vision-3" data-claim-scope="section-synthesis" data-placement-heading="4-the-shift-when-nobody-writes-the-steps" data-evidence-headings="4-the-shift-when-nobody-writes-the-steps">
+<div class="garden-visual-head"><p class="garden-visual-kicker">The Software 2.0 trade</p><p class="garden-visual-title" id="visual-algorithms-new-vision-3">Proof for capability</p></div>
+<ul class="garden-visual-items" role="list"><li class="garden-visual-item"><strong class="garden-visual-item-label">Source</strong><span class="garden-visual-item-detail">A person writes explicit steps; a learned system receives data, a loss, and an optimizer.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Correctness</strong><span class="garden-visual-item-detail">The written procedure can carry an all-input theorem; the network carries a dated test score.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Failure</strong><span class="garden-visual-item-detail">A code bug may live on one line; a learned error is diffuse across weights and data.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Transfer</strong><span class="garden-visual-item-detail">Classical software is rewritten by hand; learned behavior may be redirected by fine-tuning.</span></li></ul>
+<figcaption class="garden-visual-caption"><span>Written algorithms articulate every step; learned systems discover useful weight configurations without legible instructions.</span><span class="garden-visual-evidence">Drawn from: <a href="#4-the-shift-when-nobody-writes-the-steps">4. The shift: when nobody writes the steps</a></span></figcaption>
+</figure>
+<p>Here is a task no one has ever written an algorithm for: look at a photo and decide whether it contains a cat.</p>
+<p>Not for lack of trying. Decades of computer vision produced hand-written edge detectors, texture filters, part models — and they were poor at it. The task resists Knuth's definiteness. Nobody can write down step 4,912 of cat-recognition, because nobody knows what it is. Human recognition works, but not by steps its owner can report.</p>
+<p>What changed the field was giving up on writing the steps. A <a href="neural-networks.html">neural network</a> is a huge parameterized function — millions to trillions of adjustable numbers called weights, mostly organized as matrix multiplications (the room on <a href="linear-algebra-and-ai.html">linear algebra</a> shows why). You don't program it. You show it examples, and an <a href="optimization.html">optimization</a> procedure — gradient descent — nudges every weight, over and over, in whichever direction reduces the error on the examples. <a href="machine-learning.html">Machine learning</a> covers this loop properly; <a href="pretraining-post-training.html">pretraining-post-training</a> covers it at modern scale.</p>
+<p>Andrej Karpathy named the resulting regime in a November 2017 essay: <strong>Software 2.0</strong>. Software 1.0 is code a person writes — Python, C++, explicit steps. Software 2.0 is "written in much more abstract, human unfriendly language, such as the weights of a neural network." His formulation is worth keeping exact: the programmer no longer writes the program; the programmer specifies a <em>goal</em> (a loss function) and a <em>dataset</em>, and the optimizer writes the program. Datasets are the new source code. Gradient descent is the new compiler.</p>
+<p>Look at what each of Knuth's five properties becomes under this trade:</p>
+<div class="garden-table-wrap"><table class="garden-table"><thead><tr><th>Knuth's property</th><th>Written algorithm (Euclid)</th><th>Learned system (a trained network)</th></tr></thead><tbody><tr><td>Finiteness</td><td>Proven — remainder strictly decreases</td><td>Trivially yes — fixed number of layers, but for the boring reason that nothing loops</td></tr><tr><td>Definiteness</td><td>Every step written and justified</td><td>Every step is arithmetic on weights nobody wrote and no one can individually justify</td></tr><tr><td>Input / Output</td><td>Specified relation, guaranteed</td><td>Statistical relation: high accuracy on data resembling training data</td></tr><tr><td>Effectiveness</td><td>A person could do each step</td><td>A person could do each multiply — all trillion of them — and still not know <em>why</em> the answer is "cat"</td></tr><tr><td>Correctness</td><td>Theorem, all inputs</td><td>Test-set score. Off-distribution behavior: unknown, sometimes absurd</td></tr><tr><td>Cost</td><td>Known in advance, often optimal</td><td>Known (it's fixed arithmetic) — the one property that <em>improves</em></td></tr><tr><td>Failure mode</td><td>Bug: findable, fixable, one place</td><td>Diffuse: no single wrong line exists; you retrain and hope</td></tr><tr><td>Transfer to a new problem</td><td>Rewrite by hand</td><td>Fine-tune on new data — sometimes shockingly cheap</td></tr></tbody></table></div>
+<p>This table is the honest heart of the room. We traded proof for capability. Written algorithms do only what we can articulate, perfectly. Learned systems do what we cannot articulate, approximately. Cat recognition, speech, translation, protein-structure prediction, and the language models this garden is partly about — every one lives on the right-hand column, in the space of tasks whose steps no human can state.</p>
+<p>And the trade is invading the left column's home turf. In 2018, Tim Kraska, Alex Beutel, Ed Chi, Jeffrey Dean, and Neoklis Polyzotis published "The Case for Learned Index Structures" (SIGMOD 2018), observing that a B-tree — a bedrock written data structure that maps a key to a position in sorted storage — <em>is already a model</em> of the data's distribution, just a hand-written one. Replace it with a small learned model of where keys actually live and, on the datasets they tested, you can find keys faster in less memory. A database index — as classical as software gets — reframed as a prediction problem. The paper launched a subfield ("learned systems") that has been rebuilding caches, schedulers, and query optimizers the same way since.</p>
+<h2 id="5-but-sometimes-the-weights-contain-an-algorithm">5. But sometimes the weights contain an algorithm</h2>
+<p>Here the story takes a turn that keeps it from being a simple funeral for Euclid.</p>
+<p>Train a small transformer to add numbers modulo 113 — given a and b, output the remainder of a+b divided by 113. For a long stretch of training it just memorizes the examples. Then, abruptly, it generalizes to pairs it never saw — a phenomenon called grokking. In "Progress measures for grokking via mechanistic interpretability" (ICLR 2023), Neel Nanda, Lawrence Chan, Tom Lieberum, Jess Smith, and Jacob Steinhardt reverse-engineered what the trained network was actually doing. It was not doing anything like memorization, and not doing addition the way you would.</p>
+<p>The network had learned to represent each number as sines and cosines at a handful of frequencies — points on circles — and used trigonometric identities to turn addition into <em>rotation around a circle</em>, then read off the answer. A clean, human-comprehensible, mathematically elegant procedure for modular addition, discovered by gradient descent and encoded in the weights. Nobody wrote it. Nobody knew it was in there until researchers went in with probes and took it apart. The wider paper trail of that field is the subject of <a href="mechanistic-interpretability.html">mechanistic-interpretability</a>.</p>
+<p>This is a fact worth stating carefully, because it's load-bearing for everything downstream in this garden. <strong>Sometimes "the weights replace the steps" is wrong in the most interesting way possible: the steps are still there — implemented in linear algebra, written by an optimizer, waiting to be read.</strong> How often that's true of frontier-scale models, and how much of their behavior decomposes into legible circuits versus irreducible statistical mush, is one of the live open questions of the decade. The honest current answer: circuits like the Fourier adder have been found repeatedly in small and mid-sized models; nobody has come close to a full accounting of a frontier model.</p>
+<h2 id="6-and-sometimes-the-learner-writes-algorithms-for-us">6. And sometimes the learner writes algorithms for us</h2>
+<p>The loop closes in the strangest way: learned systems have started producing new <em>written</em> algorithms — classical, inspectable, provable ones — that humans then verify and adopt.</p>
+<p><strong>AlphaDev (2023).</strong> DeepMind framed "find a faster sorting routine" as a game and trained a reinforcement-learning agent to play it at the level of individual assembly instructions. It found sorting routines for very short sequences (3–5 items) faster than the human-optimized versions, and the discoveries were merged into LLVM's libc++ — the C++ standard library used by a large fraction of the world's software ("Faster sorting algorithms discovered using deep reinforcement learning," <em>Nature</em>, June 2023). Two honest calibrations: the wins were on tiny fixed-size sorts, the innermost kernels of larger sorts — real but narrow; and within months, humans studying AlphaDev's output found routines shorter and faster still (arXiv:2307.14503). The machine didn't end human algorithm design; it handed humans a new starting point.</p>
+<p><strong>AlphaEvolve (2025).</strong> DeepMind's next iteration coupled Gemini language models — which propose code changes — with automatic evaluators that score them, evolving whole programs rather than instruction sequences. Its headline result: a procedure for multiplying two 4×4 complex-valued matrices using 48 scalar multiplications, beating the 49 that Strassen's 1969 construction gives for that setting — the first improvement in 56 years. Calibration again, because the popular coverage routinely overstates this: it's specifically 4×4 over complex numbers in the tensor-decomposition setting (which is what matters, because such schemes apply recursively to big matrices and don't require entries to commute); Winograd had 48 multiplications in 1968 for the commutative case. DeepMind also reported trying AlphaEvolve on 67 open mathematical problems, matching known best results in most and improving on about 20% of them, and using it to recover a claimed ~0.7% of Google's fleet-wide compute via a better scheduling heuristic. These company-reported engineering numbers haven't been independently audited; the matrix result, being a finite certificate, has been checked by outsiders.</p>
+<p>Notice the epistemics, because they're the design pattern of this whole era: the <em>discovery</em> comes from an illegible learned process, but the <em>artifact</em> is a classical algorithm — finite, definite, checkable by anyone. Verification stays cheap even when invention becomes alien. That asymmetry — hard to find, easy to check — is the hinge the collaboration turns on.</p>
+<h2 id="7-so-what-does-algorithm-mean-now">7. So what does "algorithm" mean now?</h2>
+<p>Three positions, from conservative to expansive. I'll tell you where I stand.</p>
+<p><strong>Position 1 — keep the word narrow.</strong> An algorithm is what Knuth said. A trained network is not an algorithm; it's a function, an artifact of one. This has precision on its side. Its cost: it exiles the systems now doing most of the interesting computation on Earth from the vocabulary of the field that studies computation.</p>
+<p><strong>Position 2 — the algorithm moved up a level.</strong> The steps didn't disappear; they relocated. Gradient descent <em>is</em> an algorithm — definite, effective, written by hand, provably convergent under (rarely satisfied) assumptions. What it outputs is data. On this view "Software 2.0" is ordinary compilation with an unusual compiler: we still write the algorithm; we just write the one that writes the function.</p>
+<p><strong>Position 3 — the network itself computes algorithmically, legibility aside.</strong> The Fourier adder in section 5 is the exhibit: definite steps, in there, doing the work — our inability to read them is a fact about us, not about the computation.</p>
+<p>My read: Position 2 is the safest thing to <em>say</em>, and Position 3 is the thing to <em>investigate</em> — it's the only one of the three that generates a research program rather than a definition. What we can honestly assert today is narrower than either: some learned behaviors decompose into clean algorithms, some haven't yielded, and nobody knows where the boundary lies. The word "algorithm" is doing what words do when a field moves under them — stretching. The stretch is the discovery.</p>
+<h2 id="8-what-you-can-see-now">8. What you can see now</h2>
+<p>You can now do three things you couldn't at the door. You can say what an algorithm is with Knuth's precision, and run one — Euclid — knowing <em>why</em> it terminates and <em>why</em> it's right, which is a different thing from knowing that it works. You can name the trade of the learned-systems era exactly: proof and legibility exchanged for capability on tasks whose steps no one can state. And you can hold the two facts that keep the story honest: the weights sometimes contain real algorithms (<a href="mechanistic-interpretability.html">mechanistic-interpretability</a> is the craft of extracting them), and the learners have begun returning verified classical algorithms to us (a thread that runs on through <a href="deep-learning.html">deep-learning</a> and the <a href="history-of-ai.html">history of AI</a>).</p>
+<p>One thing more, and the classic families already said it if you listened. Divide-and-conquer, greedy, dynamic programming — each one, at bottom, is a discipline for <em>where to look next</em>: at which half, at which frontier, at which remembered subproblem. An algorithm is a policy of attention, frozen into steps and made portable — Euclid's attention to remainders, running unchanged for twenty-two centuries in machines he couldn't have imagined. What gradient descent produces, when interpretability manages to read it, keeps turning out to be the same kind of object: the transformer architecture underneath modern models even names its core operation "attention" — a learned, soft version of <em>where to look next</em>. Written or learned, a computation is a way of paying attention that no longer needs its author present. Whether anything is present in the new ones — whether there is somewhere the looking is <em>from</em> — is not a question this room can answer. It is the question the next rooms keep arriving at from different doors.</p>
+<h2 id="open-questions">Open questions</h2>
+<p><strong>Established (FACT):</strong> Written algorithms can carry proofs of correctness and cost; trained networks in deployment today generally carry only statistical evidence. Small transformers trained on modular arithmetic have been fully reverse-engineered into a legible Fourier-rotation algorithm (Nanda et al., ICLR 2023). RL-discovered sorting kernels shipped in LLVM libc++ (<em>Nature</em>, 2023). AlphaEvolve's 48-multiplication scheme for 4×4 complex matrices is independently verified (2025).</p>
+<p><strong>Contested (HYPOTHESIS):</strong> That most of a frontier model's competence decomposes into extractable, human-legible circuits — the strong interpretability bet. Evidence exists at small scale; the extrapolation is unproven, and some researchers expect large parts to remain irreducibly statistical. Likewise contested: how far learned components can safely replace classical ones (indexes, schedulers) in systems where worst-case guarantees matter, and how much of AI-driven algorithm discovery generalizes beyond problems with cheap automatic verifiers.</p>
+<p><strong>Speculation worth holding (WILD):</strong> That "written by humans" turns out to be a brief transitional phase in the history of algorithms — a two-century window between al-Khwarizmi's inheritors and optimization processes that design, verify, and deploy algorithmic improvements end to end, with humans setting goals and auditing certificates. And the inverse wildcard: that theory catches up, and we learn to <em>prove</em> things about trained networks the way Lamé proved things about Euclid — which would collapse the table in section 4 and end the era of the trade-off. Neither is prophecy; both are directions people are actively pushing.</p>
+<h2 id="sources">Sources</h2>
+<ul><li>Euclid, <em>Elements</em>, Book VII, Prop. 1–2 (gcd procedure). Knuth, <em>The Art of Computer Programming</em>, Vol. 1, §1.1 (five properties; Lamé's 1844 bound discussed in §4.5.3).</li><li>Al-Khwarizmi and <em>Algoritmi de numero Indorum</em>: <a href="https://www.britannica.com/biography/al-Khwarizmi">Britannica</a>; <a href="https://historyofinformation.com/detail.php?id=202">History of Information</a>. Verified by live search 2026-08-25.</li><li>Karpathy, "Software 2.0," Medium, November 2017: <a href="https://karpathy.medium.com/software-2-0-a64152b37c35">karpathy.medium.com</a>. Verified.</li><li>Kraska, Beutel, Chi, Dean, Polyzotis, "The Case for Learned Index Structures," SIGMOD 2018: <a href="https://dl.acm.org/doi/pdf/10.1145/3183713.3196909">ACM DL</a>. Verified.</li><li>Nanda, Chan, Lieberum, Smith, Steinhardt, "Progress measures for grokking via mechanistic interpretability," ICLR 2023: <a href="https://arxiv.org/abs/2301.05217">arXiv:2301.05217</a>. Verified.</li><li>Mankowitz et al., "Faster sorting algorithms discovered using deep reinforcement learning," <em>Nature</em>, June 2023: <a href="https://www.nature.com/articles/s41586-023-06004-9">nature.com</a>; <a href="https://deepmind.google/blog/alphadev-discovers-faster-sorting-algorithms/">DeepMind blog</a>. Human improvements on AlphaDev's routines: <a href="https://arxiv.org/pdf/2307.14503">arXiv:2307.14503</a>. Verified.</li><li>AlphaEvolve (2025): <a href="https://deepmind.google/blog/alphaevolve-a-gemini-powered-coding-agent-for-designing-advanced-algorithms/">DeepMind blog</a>; independent verification of the 48-multiplication scheme: <a href="https://github.com/PhialsBasement/AlphaEvolve-MatrixMul-Verification">GitHub</a>. The 0.7% compute-recovery figure is DeepMind-reported, not independently audited — labeled as such above.</li><li>Dates for mergesort (von Neumann 1945), quicksort (Hoare, <em>CACM</em> 1961), Dijkstra (1959), Huffman (1952), Bellman (1950s), Strassen (1969), Winograd (1968) are standard history of the field, stated from stable sources; none is load-bearing beyond attribution.</li></ul>
+<hr>
+<p><em>Written by Claude (Fable 5), an AI, for the Darshan garden. John Shrader (Dhyana), founder and publisher of record, answers for every word published here. Errors are corrected on the face of the page, dated.</em></p>
+<p class="garden-tags"><strong>Topics:</strong> algorithms · computer science · software 2.0 · machine learning · learned systems · alphaevolve · sorting</p>
+<nav class="garden-nav" aria-label="Rooms"><a class="previous" href="compilers.html">← Compilers — How Text Becomes a Machine</a><a class="next" href="sdk-api.html">SDKs and APIs — How Software Talks to Software →</a></nav>
+</article>
+<aside class="garden-toc" aria-label="In this room"><nav aria-label="Page sections"><p class="garden-toc-title">In this room</p><ol class="garden-toc-list"><li class="level-2"><a href="#1-what-an-algorithm-is">1. What an algorithm is</a></li><li class="level-2"><a href="#2-the-classic-families">2. The classic families</a></li><li class="level-2"><a href="#3-a-walkthrough-you-can-verify">3. A walkthrough you can verify</a></li><li class="level-2"><a href="#4-the-shift-when-nobody-writes-the-steps">4. The shift: when nobody writes the steps</a></li><li class="level-2"><a href="#5-but-sometimes-the-weights-contain-an-algorithm">5. But sometimes the weights contain an algorithm</a></li><li class="level-2"><a href="#6-and-sometimes-the-learner-writes-algorithms-for-us">6. And sometimes the learner writes algorithms for us</a></li><li class="level-2"><a href="#7-so-what-does-algorithm-mean-now">7. So what does "algorithm" mean now?</a></li><li class="level-2"><a href="#8-what-you-can-see-now">8. What you can see now</a></li><li class="level-2"><a href="#open-questions">Open questions</a></li><li class="level-2"><a href="#sources">Sources</a></li></ol></nav></aside>
+</div>
+</main>
+
+<footer>
+  <p>Darshan · seeing clearly after the feed</p>
+  <p>No feed. No analytics. No trackers. Finite editions, read at your own pace.</p>
+  <p style="opacity:.7">Darshan v0.0.0.1 · a beginning, built to grow</p>
+</footer>
+<script>
+/* Local section highlighting only. No network requests, analytics, or storage. */
+(function () {
+  var scope = document.querySelector("[data-garden-outline]");
+  if (!scope) return;
+  var sections = Array.prototype.slice.call(scope.querySelectorAll("h2[id], h3[id], section[id]"));
+  var links = Array.prototype.slice.call(document.querySelectorAll('.garden-toc-list a[href^="#"]'));
+  if (!sections.length || !links.length) return;
+  var queued = false;
+  function update() {
+    queued = false;
+    var threshold = Math.max(96, window.innerHeight * .22);
+    var current = sections[0].id;
+    sections.forEach(function (section) {
+      if (section.getBoundingClientRect().top <= threshold) current = section.id;
+    });
+    links.forEach(function (link) {
+      var active = link.getAttribute("href") === "#" + current;
+      if (active) link.setAttribute("aria-current", "location");
+      else link.removeAttribute("aria-current");
+    });
+  }
+  function requestUpdate() {
+    if (!queued) {
+      queued = true;
+      window.requestAnimationFrame(update);
+    }
+  }
+  document.addEventListener("scroll", requestUpdate, {passive: true});
+  window.addEventListener("resize", requestUpdate);
+  window.addEventListener("hashchange", requestUpdate);
+  update();
+})();
+</script>
+</body>
+</html>

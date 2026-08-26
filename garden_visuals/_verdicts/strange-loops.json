@@ -1,0 +1,80 @@
+{
+  "schema": "darshan.visual-verdict-series/v1",
+  "series": "strange-loops",
+  "reviewer": "/root/audit_visuals_story_loops",
+  "reviewed_at": "2026-08-25",
+  "rooms": {
+    "geb": {
+      "verdict": "PASS",
+      "visual_sha256": "9d6db4708e5a120cc48434a2539cd877b31451e83d2f323be35d1b3f0a9fc3f9",
+      "source_sha256": "8007b8baa2b9883db04e0d015e8128cfb26191965f10452aae4c1c2adbf72849",
+      "evidence": "Checked the MIU invariant against section 3, the Gödel/Escher/Bach constellation against section 5, and Hofstadter's self-loop argument against section 6. The MIU panel is correctly typed as a sequence, and the self panel carries an explicit theory boundary.",
+      "facts": "The I-count proof preserves all four MIU rules and the 1↔2 versus 0 remainder argument; Bach's canon returns to its starting key after six repetitions; and the self-model panel distinguishes local substrate, active symbols, world model, self-symbol, and causal feedback.",
+      "uncertainty": "Gödel's formal construction does not prove Hofstadter's computational-symbol account of brains or that a strange loop exhausts self-experience. The caption and final card now mark those extensions as contested theory rather than theorem.",
+      "must_fix": "none — the prior implication that only the final identity claim was hypothetical has been corrected."
+    },
+    "hofstadter": {
+      "verdict": "PASS",
+      "visual_sha256": "6bde0968931f98a89236bccdad2c8d8ba07a4e2f093dd53a61186fb5a35831a3",
+      "source_sha256": "a2ff8d237028b7623eb26e2e498bc5d81e9a8f039fb8e23a16a12a0a0a5914b8",
+      "evidence": "Checked the dated scorecard against section 8, the Golden Gate false-premise probe against section 5, and the 2023 belief update against section 6. Each visual preserves the room's split between capability, meaning, authenticity, and consciousness.",
+      "facts": "The timeline keeps the butterfly, chess, Eliza-effect, GPT-3-probe, and later-update episodes distinct. The probe records confabulation versus premise rejection, and the 2023 sequence follows Hofstadter's stated chain from symbol meaning toward thinking while retaining his criticism of GPT-4's stylistic imitation.",
+      "uncertainty": "One false-premise prompt cannot discriminate a world-model from learned trick-question rejection. Hofstadter's inference from meaning to thinking and possible consciousness is his theory-led update, while the endpoint remains expressly unknown.",
+      "must_fix": "none — the panels state the probe's discriminative limit and do not equate capability shock with sentience or authentic voice."
+    },
+    "aunt-hillary": {
+      "verdict": "PASS",
+      "visual_sha256": "c756b99730c215403d981339eb3c5c8c66f2781fabf4e7fa29ab02e674bf0af3",
+      "source_sha256": "afaac1101283b55c4087e21d146ecec396a95b42347d8ebb2f2fc1f9f2050ce4",
+      "evidence": "Checked Hofstadter's ant-to-colony ladder against section 2, the J.S.F.-to-Aunt-Hillary identity sequence against section 3, and the real-harvester-ant allocation sequence against section 4. The former cross-section lifespan card was removed from the fictional sequence.",
+      "facts": "The first two panels accurately describe Hofstadter's dialogue as a levels-of-description argument. The biology panel matches encounter-rate task allocation, lack of a dispatcher, roughly one-year workers, 20–30-year colonies, and persistent colony-level foraging strategies across worker turnover.",
+      "uncertainty": "Stable collective behavior is not evidence that a real colony is conscious, and harvester-ant task roles are more fluid than Hofstadter's fictional caste picture. The visual labels the observed persistence as stable strategy rather than literal subjective memory.",
+      "must_fix": "none — fictional consciousness and settled colony biology remain clearly separated."
+    },
+    "recursion": {
+      "verdict": "PASS",
+      "visual_sha256": "0ada13c0f11f7099e815081aa62a101f1e8a5c222bde55f568c25055d3fbe2cd",
+      "source_sha256": "5d2f4216b1d751bd648c48681cc66c1048878fc2b9627bb30702ce7a27c3ebe7",
+      "evidence": "Checked factorial's call/unwind trace against section 1, the four-construction comparison against section 8, and the fixed-point construction against section 5. The numeric results and operational distinctions match the source examples.",
+      "facts": "factorial(5) descends to the zero base case and unwinds to 120; the anonymous fixed-point construction separates the step transformer from its fixed point; and the visual correctly says plain Y diverges under eager Python evaluation while the delayed Z variant computes 5! and 10!.",
+      "uncertainty": "The four costumes share a structural analogy but close different formal loops. Statements about Gödelian truth depend on the formal assumptions explained in the room, and fixed-point combinator behavior depends on evaluation strategy.",
+      "must_fix": "none — the panels retain the base-case, finite-encoding, quotation, and eager-evaluation boundaries that prevent a loose ‘recursion is magic’ reading."
+    },
+    "recursion-and-life": {
+      "verdict": "PASS",
+      "visual_sha256": "4f3adba87cac7c79b9242d6a777c1b9d1c0459ac4bde8523d39fc302a880e41e",
+      "source_sha256": "c8f1efe293af9cc51dee4aeaadcd3f76e878916d6896177b47be64568be2eabd",
+      "evidence": "Checked the molecular loop against section 2, the quine/constructor/monster/flame/cell comparison against section 4, and von Neumann's copy-versus-interpret architecture against section 1. Every card has a direct source statement or table cell.",
+      "facts": "The panel correctly assigns DNA copying and transcription to protein polymerases, translation catalysis to ribosomal RNA, and code enforcement to aminoacyl-tRNA-synthetase activities. The comparison preserves interpreter, prefabricated-part, boundary, metabolism, and evolution differences, while the constructor sequence separates interpreted construction from blind tape copying.",
+      "uncertainty": "The cell instantiates the copy/interpret logic without making DNA a literal part-by-part blueprint or a cell materially self-sufficient. The source also notes indirect amino-acid charging pathways and that modern cellular machinery cannot cold-boot from naked DNA.",
+      "must_fix": "none — exact logical homologies and loose machine metaphors remain visibly separated."
+    },
+    "evolution": {
+      "verdict": "PASS",
+      "visual_sha256": "d9dd321549b431bcfde51afb5acfda36072aa63eda276a1cadccd5a58f077114",
+      "source_sha256": "f13e5b591ba69a834cc4fa5adc3eb96f5614c23c41eb886d921f159ab731639e",
+      "evidence": "Checked Lewontin's three conditions against section 2, the evolution/SGD/genetic-algorithm comparison against section 4, and evolvability's recursive machinery against section 3. The gradient card incorporates the audit's local-stochastic precision repair.",
+      "facts": "Variation, differential reproductive success, and heredity are preserved without foresight or progress language. The comparison distinguishes blind whole-candidate selection from parameter-level gradient credit, and the evolvability panel includes genotype–phenotype mapping, modularity, Lenski hypermutators, and the approximately 100× mutation-rate example.",
+      "uncertainty": "A stochastic gradient is a local estimate that should lower loss, not a guarantee that every update does. Whether evolvability is directly selected or largely a survivorship consequence remains a live mechanism dispute and is labeled as such.",
+      "must_fix": "none — the prior absolute claim that a gradient points every weight toward lower loss was corrected."
+    },
+    "sense-of-self": {
+      "verdict": "PASS",
+      "visual_sha256": "9424e706e6c28cd51ed648530512c6e9ae2a6308dcd7b25a116c61fd57847826",
+      "source_sha256": "4321e80edfcd54455ba56b9da28cc0076b1f033dd6748818dca3a534d61b3a8e",
+      "evidence": "Checked the typed room-synthesis panel against its exact declared sections 2–5 (rubber hand, split-brain narrator, developmental self-recognition, and DMN/depersonalization), the three-vantage comparison against section 7, and the rubber-hand procedure against section 2. All evidence-section IDs resolve and the synthesis declares room rather than section scope.",
+      "facts": "The panels preserve common-not-universal rubber-hand uptake, proprioceptive drift, skin-conductance threat response, split-brain confabulation, second-year mirror development, DMN modulation, and intact reality testing in depersonalization. Neuroscience, psychology, and contemplative records retain their distinct methods and blind spots.",
+      "uncertainty": "DMN activity is a correlate rather than the self, the cited psychedelic precision-imaging work has a small sample, reports and behavior do not settle phenomenology, and contemplative evidence lacks standardized external controls. The visual uses ‘observations’ rather than calling every line an experiment.",
+      "must_fix": "none — the cross-section evidence is now explicitly typed as room-synthesis and linked to all four supporting sections."
+    },
+    "what-self-means": {
+      "verdict": "PASS",
+      "visual_sha256": "8787eae87b750b085939ddf3d9802359fcec3b9063889ea15e60542c478bd523",
+      "source_sha256": "d17e92e5afae389a013696eac2c9af9e3e05f181eb0e3c0b481fb67b3c27eed1",
+      "evidence": "Checked the five-register taxonomy against section 4, the LLM register-by-register comparison against section 6, and the Buddhism/Advaita witness disagreement against section 3. The AI panel is dated 25 August 2026 and preserves the source's row-by-row claim grammar.",
+      "facts": "Body, memory, narrative, witness, and process remain separate evidential targets. The LLM panel distinguishes no standard body ownership, stateless base calls, fluent but weakly warranted narrative, limited functional self-access without phenomenology, and transient network activity; the traditions panel locates the precise disagreement at the witness rather than pooling them as simply nondual.",
+      "uncertainty": "The witness remains unresolved in both science and philosophy, concept-injection detection is limited and unreliable, products can add external memory or embodiment, and neither generated self-description nor functional self-access proves an experiencing subject.",
+      "must_fix": "none — ‘neural activity’ was replaced with network activations and self-description is correctly conditional rather than always on."
+    }
+  }
+}

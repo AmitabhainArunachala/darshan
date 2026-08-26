@@ -1,0 +1,9 @@
+{
+  "slug": "semiconductors",
+  "verdict": "PASS",
+  "contract": "Required frontmatter, numbered sections, two comparison tables, a reproducible Moore's-law calculation, conclusion, typed FACT/HYPOTHESIS/WILD ledger, Sources, disclosure, and cross-room links are present; body prose remains within 2,500–4,500 words. The repaired Sources now give live primary links for TSMC N2, SIA industry figures, and Google/Nature Willow. The final movement explicitly distinguishes physical switching, model attention, and possible mindedness rather than forcing an equivalence.",
+  "facts": "Three fresh primary-source checks were completed on 2026-08-25 and the complete repair was reread. TSMC's official annual report confirms N2 entered high-volume manufacturing in Q4 2025 and its materials support the stated performance/power range. Google's Willow announcement supports 105 qubits and below-threshold error correction across 3x3, 5x5, and 7x7 codes. SIA's July 27, 2026 report supports $795.6 billion in 2025 sales and a WSTS projection of $1.5 trillion for 2026, with a broad driver set; the room now uses those current values and scope. Superconducting zero resistance is accurately framed as the ideal state with experiments imposing measurement bounds.",
+  "voice": "The EUV/ASML, N2 status, and superconducting-logic paragraphs pass the read-aloud test despite dense specifications. The revised ending is direct and epistemically careful: it names different levels and ends at the boundary of what substrate physics can tell you.",
+  "must_fix": "none; SIA figures and driver scope, live primary links, zero-resistance language, and the socket-exit were corrected",
+  "source_sha256": "16d24f2236e77ad6328cb817ed111cd7b191d8606128e2bce90e6d177f251b4f"
+}

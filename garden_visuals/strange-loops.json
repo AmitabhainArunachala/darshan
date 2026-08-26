@@ -1,0 +1,396 @@
+{
+  "schema": "darshan.visual-series/v1",
+  "series": "strange-loops",
+  "art": {
+    "src": "assets/series/strange-loops.png",
+    "alt": "An engraved living loop joins a cell, ant colony, eye, and recursive architecture.",
+    "png_sha256": "a362adaeaeb5d1fe68937d36ab95a5e09a003cd8367f06449569a09320bbfaef",
+    "webp_sha256": "531abdec369e08c13fe556f0c2504cb8b410221aa3ae6b31a23bbbacdc295577",
+    "prompt": "Use case: stylized-concept\nAsset type: wide 16:9 editorial series plate for a serious long-form knowledge garden\nPrimary request: portray self-reference as a recursive world that folds back through its own levels: an impossible but structurally coherent engraved architecture grows from a biological cell and branching organism, passes through an ant colony whose collective trails form a larger pattern, bends through a reflective eye, and returns as a staircase/loop that appears to inspect and construct itself. The loop must feel emergent across scales rather than like a puzzle illustration.\nScene/backdrop: warm cream rag paper, expansive horizontal field with translucent geometric construction layers\nSubject: recursive architectural and biological forms, ant colony, eye, self-observing loop and level-crossing paths, integrated into one continuous ecology\nStyle/medium: original tactile printmaking, copperplate engraving and natural-history plate combined with translucent technical drafting layers; serious literary-scientific editorial illustration; do not copy or evoke any named artist's recognizable composition\nComposition/framing: cinematic wide 16:9; a sweeping loop carries the eye from cell to colony to eye to self-building architecture and back; richly layered center with breathing room at edges\nLighting/mood: contemplative, uncanny but grounded, precise, alive, quietly profound\nColor palette: cream paper, charcoal black, oxide red, with one restrained moss-green accent\nMaterials/textures: paper grain, etched hatching, dry ink, translucent vellum, botanical and architectural linework\nConstraints: textless; no letters, numbers, captions, logos, watermark, portraits, or recognizable copyrighted composition; ants should read as a collective pattern, not monsters\nAvoid: generic sci-fi, neon, psychedelic kaleidoscopes, glowing portals, humanoid robots, fantasy spectacle, glossy 3D rendering, named-artist imitation"
+  },
+  "rooms": {
+    "geb": {
+      "visuals": [
+        {
+          "after": "3-jumping-out-proving-what-the-machine-can-t-say",
+          "kind": "sequence",
+          "kicker": "The invariant above",
+          "title": "Why no legal MIU move can reach MU",
+          "caption": "Inside the system you can only derive strings; one level up, the count of I symbols proves the destination unreachable.",
+          "items": [
+            {"label": "Start", "detail": "MI contains one I, so its I-count is not divisible by three.", "meta": "remainder 1"},
+            {"label": "Add or delete U", "detail": "Rules 1 and 4 change no I symbols and preserve the remainder.", "meta": "unchanged"},
+            {"label": "Double the tail", "detail": "Rule 2 swaps remainders 1 and 2 but can never produce remainder 0.", "meta": "1 ↔ 2"},
+            {"label": "Replace III", "detail": "Rule 3 subtracts exactly three I symbols, preserving divisibility by three.", "meta": "−3"},
+            {"label": "Target", "detail": "MU contains zero I symbols, and zero is divisible by three.", "meta": "remainder 0"},
+            {"label": "Jump out", "detail": "The invariant proves a truth about every possible derivation that no single derivation can display.", "meta": "MU unreachable"}
+          ]
+        },
+        {
+          "after": "5-escher-and-bach-the-same-shape-in-ink-and-sound",
+          "kind": "constellation",
+          "kicker": "One shape, three senses",
+          "title": "A hierarchy climbs until its top returns as its bottom",
+          "caption": "Logic, image, and music each make locally lawful movement close into a globally self-referential loop.",
+          "items": [
+            {"label": "Gödel", "detail": "Arithmetic encodes claims about its own proofs and constructs a sentence asserting its unprovability.", "meta": "symbols ↔ metasyntax"},
+            {"label": "Escher", "detail": "Hands draw one another and stairways climb through local steps into impossible global closure.", "meta": "artist ↔ artwork"},
+            {"label": "Bach", "detail": "A canon rises through keys and returns to its starting key after six repetitions.", "meta": "ascending ↔ circular"},
+            {"label": "Strange loop", "detail": "Movement through a hierarchy unexpectedly returns to the level where it began.", "meta": "tangled hierarchy"}
+          ]
+        },
+        {
+          "after": "6-the-claim-a-self-is-a-strange-loop",
+          "kind": "layers",
+          "kicker": "From firing to I",
+          "title": "Hofstadter's self-model climbs levels, then enters its own causal story",
+          "caption": "The argument moves from physical events to world-tracking symbols and a self-model; from the symbol-processing premise onward, this is Hofstadter's contested theory, not Gödel's theorem.",
+          "items": [
+            {"label": "Local substrate", "detail": "Neurons integrate inputs and fire without any unit understanding the thought the whole system supports.", "meta": "mechanical level"},
+            {"label": "Active symbols", "detail": "Stable, re-evocable patterns track things in the world and interact as meaningful representations.", "meta": "symbol level"},
+            {"label": "World model", "detail": "Structure-preserving relations among symbols let internal dynamics mirror relations outside the organism.", "meta": "meaning as mapping"},
+            {"label": "Self-symbol", "detail": "Because the organism matters to prediction, the model grows a compressed symbol for its body, history, and dispositions.", "meta": "model of the modeler"},
+            {"label": "Causal return", "detail": "Beliefs about the self alter behavior, and the self-model then updates on behavior it helped cause.", "meta": "loop closes"},
+            {"label": "Claim boundary", "detail": "Hofstadter argues that the loop explains self-reference; whether the computational-symbol account is right, or whether it explains experience, remains contested.", "meta": "hypothesis, not Gödel's theorem"}
+          ]
+        }
+      ]
+    },
+    "hofstadter": {
+      "visuals": [
+        {
+          "after": "8-the-scorecard",
+          "kind": "timeline",
+          "kicker": "Two ledgers",
+          "title": "Hofstadter's structural insights aged differently from his capability ceilings",
+          "caption": "Across fifty years, the record separates durable ideas about minds from shorter-range forecasts repeatedly overtaken by scale.",
+          "items": [
+            {"label": "Butterfly", "detail": "A predicted fractal electron spectrum is experimentally observed decades later.", "meta": "1975 → 2013"},
+            {"label": "Strange-loop self", "detail": "Self-modeling and levels of description become live vocabularies for modern research.", "meta": "1979"},
+            {"label": "Chess ceiling", "detail": "The claim that championship chess required general intelligence falls to Deep Blue.", "meta": "1979 → 1997"},
+            {"label": "Fluency warning", "detail": "The Eliza effect and fluency-versus-understanding distinction become central hazards.", "meta": "1995–2018"},
+            {"label": "Probe defeated", "detail": "GPT-3's false-premise failure is corrected by post-trained models within months.", "meta": "2022"},
+            {"label": "Update without surrender", "detail": "Capability shock remains while chatbot-sentience claims still receive an Eliza-effect warning.", "meta": "2023–2025"}
+          ]
+        },
+        {
+          "after": "5-worked-example-run-hofstadter-s-probe",
+          "kind": "contrast",
+          "kicker": "One question across eras",
+          "title": "The Golden Gate probe changed its answer before it settled its meaning",
+          "caption": "Premise rejection is a real capability gain, but this single probe cannot distinguish a world-model from a learned rejection pattern.",
+          "items": [
+            {"label": "GPT-3", "detail": "Asked when the bridge was transported across Egypt, the model confidently invents October 2016.", "meta": "2022-era base model"},
+            {"label": "Post-trained model", "detail": "A current model rejects the false premise and says the bridge was never moved to Egypt.", "meta": "late 2022 onward"},
+            {"label": "Capability reading", "detail": "Premise-checking improved, so the specific measured failure was genuinely repaired.", "meta": "supported"},
+            {"label": "Pattern reading", "detail": "Training may have taught the form of rejecting trick questions without deeper understanding.", "meta": "also compatible"},
+            {"label": "Method", "detail": "Date the probe, preserve its failure signature, and state what it cannot discriminate.", "meta": "epistemic discipline"}
+          ]
+        },
+        {
+          "after": "6-the-collapse-2023",
+          "kind": "sequence",
+          "kicker": "A theory meets its case",
+          "title": "His own account of meaning forced the update he least wanted",
+          "caption": "Hofstadter's 2023 reversal follows a chain inside his lifelong theory while stopping short of a settled claim about machine consciousness or authentic voice.",
+          "items": [
+            {"label": "Old criterion", "detail": "Meaning appears when symbols are used coherently inside a rich system, not when a separate essence is added.", "meta": "GEB's commitment"},
+            {"label": "New observation", "detail": "Large models began using symbols at a scale and fluency his earlier capability picture had not allowed.", "meta": "2023 shock"},
+            {"label": "Meaning conceded", "detail": "Rather than move the criterion, he began assigning meaning to at least some of the systems' symbol use.", "meta": "explicit update"},
+            {"label": "Inference continues", "detail": "In his chain, meaning supports ideas, and ideas support something that deserves to be called thinking.", "meta": "theory applied"},
+            {"label": "Endpoint withheld", "detail": "How far thinking carries toward any degree of consciousness remains an unknown slope, not a measured conclusion.", "meta": "live uncertainty"},
+            {"label": "Critique retained", "detail": "That same summer he still found GPT-4's imitation of his voice generic, unauthentic, and empty.", "meta": "capability ≠ authenticity"}
+          ]
+        }
+      ]
+    },
+    "aunt-hillary": {
+      "visuals": [
+        {
+          "after": "2-aunt-hillary-and-the-ladder-inside-her",
+          "kind": "layers",
+          "kicker": "Step back by grains",
+          "title": "The colony's meaning lives in patterns that survive their carriers",
+          "caption": "Hofstadter's ladder rises from local ants to a colony-level individual without introducing a controller at any rung.",
+          "items": [
+            {"label": "Ants", "detail": "Individuals follow local cues and know nothing of the colony's higher-level symbols.", "meta": "substrate"},
+            {"label": "Signals", "detail": "Transient clusters propagate while individual ants join and leave; the pattern persists.", "meta": "carrier"},
+            {"label": "Teams", "detail": "Signals assemble into larger organizations that trigger and constrain one another.", "meta": "composition"},
+            {"label": "Active symbols", "detail": "Sufficiently stable teams track things in the world and do work inside the colony.", "meta": "meaning"},
+            {"label": "Caste distribution", "detail": "The shifting arrangement of roles functions as Aunt Hillary's colony-level knowledge state.", "meta": "state"},
+            {"label": "Aunt Hillary", "detail": "The individual is the total organized process, not a queen or head ant reading the symbols.", "meta": "whole"}
+          ]
+        },
+        {
+          "after": "3-johant-sebastiant-fermant-same-ants-different-mind",
+          "kind": "sequence",
+          "kicker": "Identity without material loyalty",
+          "title": "The same ants can implement the death of one mind and the birth of another",
+          "caption": "The dialogue locates colony identity in organization: parts survive the thundershower while the person-level pattern does not.",
+          "items": [
+            {"label": "J. S. F.", "detail": "A long-built caste distribution supports one creative colony-level individual.", "meta": "organized pattern"},
+            {"label": "Thundershower", "detail": "The ants survive, but their organization is scrambled beyond reconstitution.", "meta": "pattern death"},
+            {"label": "Regrouping", "detail": "Over months, the surviving ants form a new arrangement rather than restoring the old one.", "meta": "same parts"},
+            {"label": "Aunt Hillary", "detail": "The new sum has none of J. S. F.'s traits despite being made from the same material.", "meta": "different individual"}
+          ]
+        },
+        {
+          "after": "4-the-real-ants-check-out",
+          "kind": "sequence",
+          "kicker": "A budget no ant knows",
+          "title": "The colony computes labor through encounter rates, without a dispatcher",
+          "caption": "Local contact statistics become a colony-wide allocation policy that persists across complete worker turnover and develops a stable character of its own.",
+          "items": [
+            {"label": "Return signal", "detail": "Foragers carrying seeds re-enter the nest and briefly contact waiting ants.", "meta": "local event"},
+            {"label": "Rate estimate", "detail": "An outbound forager responds chiefly to how frequently successful returners brush past her.", "meta": "encounter statistic"},
+            {"label": "Individual decision", "detail": "Each ant leaves or waits using local cues; no ant represents the colony's total labor plan.", "meta": "distributed rule"},
+            {"label": "Collective allocation", "detail": "Thousands of these decisions regulate foraging, patrolling, nest work, and refuse handling.", "meta": "emergent budget"},
+            {"label": "Material turnover", "detail": "Workers live roughly a year while the colony persists for 20–30 years.", "meta": "parts replaced"},
+            {"label": "Stable colony strategy", "detail": "Colonies retain distinct bold or conservative foraging styles across years and worker replacement.", "meta": "organizational memory"}
+          ]
+        }
+      ]
+    },
+    "recursion": {
+      "visuals": [
+        {
+          "after": "1-a-function-that-calls-itself",
+          "kind": "sequence",
+          "kicker": "A spiral with a floor",
+          "title": "Factorial descends by calls and returns by multiplication",
+          "caption": "Recursion is legitimate because every call shrinks the problem and the base case stops the descent.",
+          "items": [
+            {"label": "Call 5", "detail": "factorial(5) holds “5 ×” and asks the smaller problem factorial(4).", "meta": "stack opens"},
+            {"label": "Descend", "detail": "Each unfinished call holds its multiplier while asking for n−1.", "meta": "5 → 4 → 3 → 2 → 1"},
+            {"label": "Base case", "detail": "factorial(0) returns 1 directly and makes no recursive call.", "meta": "the floor"},
+            {"label": "Unwind", "detail": "Waiting frames resolve in reverse order as 1, 2, 6, 24, then 120.", "meta": "stack closes"},
+            {"label": "Result", "detail": "The apparent circle is a finite spiral grounded by shrinking input plus a direct answer.", "meta": "120"}
+          ]
+        },
+        {
+          "after": "8-one-pattern-four-costumes",
+          "kind": "constellation",
+          "kicker": "Finite self-reference",
+          "title": "Four constructions fold a system's ordinary materials back on itself",
+          "caption": "Each avoids infinite regress through a distinct grounding device and closes a different kind of loop.",
+          "items": [
+            {"label": "Recursive function", "detail": "A named function calls smaller instances of itself until a base case answers.", "meta": "call stack"},
+            {"label": "Fixed-point combinator", "detail": "Self-application constructs recursion in a language with no function names.", "meta": "Y / Z"},
+            {"label": "Gödel sentence", "detail": "Finite numerical encoding lets arithmetic state a truth about its own provability.", "meta": "diagonalization"},
+            {"label": "Quine", "detail": "A quoted template is used once as data and once as instruction to reproduce the whole program.", "meta": "half + recipe"}
+          ]
+        },
+        {
+          "after": "5-fixed-points-recursion-without-names",
+          "kind": "sequence",
+          "kicker": "Self-reference distilled",
+          "title": "A fixed point rebuilds recursion where no function can say its own name",
+          "caption": "The construction removes the self-name, turns recursion into an improvement operator, and then manufactures the unchanged function through controlled self-application.",
+          "items": [
+            {"label": "Remove the name", "detail": "Factorial becomes a step function that receives its recursive continuation as an ordinary parameter.", "meta": "rec → n → result"},
+            {"label": "Improve one layer", "detail": "Given any attempted factorial, the step function returns an attempt correct one level deeper.", "meta": "definition as transformer"},
+            {"label": "Find the still point", "detail": "A fully correct factorial is unchanged by that transformer: step(fact) = fact.", "meta": "fixed point"},
+            {"label": "Supply self-application", "detail": "The Y combinator packages x(x) so the step function receives its own fixed point without any global name.", "meta": "Y f = f(Y f)"},
+            {"label": "Respect evaluation", "detail": "Plain Y diverges under eager Python evaluation, so the Z variant delays the self-call behind an argument.", "meta": "operational boundary"},
+            {"label": "Recursion reappears", "detail": "The resulting anonymous factorial computes 5! and 10! with no function referring to itself by name.", "meta": "120 · 3,628,800"}
+          ]
+        }
+      ]
+    },
+    "recursion-and-life": {
+      "visuals": [
+        {
+          "after": "2-the-loop-itself-every-arrow-in-the-cycle-is-drawn-by-the-thing-at-the-end-of-it",
+          "kind": "sequence",
+          "kicker": "The arrows make the arrows",
+          "title": "Cellular information flow closes through the machinery it produces",
+          "caption": "DNA is not a self-starting tape: copying, transcription, translation, and code enforcement are performed by products already inside the loop.",
+          "items": [
+            {"label": "Copy DNA", "detail": "DNA → DNA is performed by DNA polymerase, itself a protein produced through gene expression.", "meta": "replication"},
+            {"label": "Transcribe", "detail": "DNA → RNA is performed by RNA polymerase, another protein made by the system.", "meta": "expression"},
+            {"label": "Translate", "detail": "RNA → protein runs through the ribosome, whose catalytic heart is RNA.", "meta": "ribozyme core"},
+            {"label": "Enforce the code", "detail": "Aminoacyl-tRNA synthetase activities attach amino acids to matching adapters.", "meta": "mapping machinery"},
+            {"label": "Inherit the running state", "detail": "A genome becomes meaningful only inside already functioning ribosomes, polymerases, membranes, and metabolism.", "meta": "no cold boot"}
+          ]
+        },
+        {
+          "after": "4-where-the-metaphor-is-exact-where-it-is-loose",
+          "kind": "contrast",
+          "kicker": "Partial shadows of life",
+          "title": "Reproduction, construction, boundary, and evolution do not always travel together",
+          "caption": "The comparison becomes precise when each candidate is scored by which arcs of the living loop it actually closes.",
+          "items": [
+            {"label": "Quine", "detail": "Carries a description and uses it as data and instruction, but receives its interpreter from outside.", "meta": "no parts or boundary"},
+            {"label": "Universal constructor", "detail": "Copies and interprets a tape but assembles prefabricated parts in a supplied grid.", "meta": "evolution possible in principle"},
+            {"label": "Spiegelman's Monster", "detail": "A description is copied but never interpreted, so selection strips away everything except replication speed.", "meta": "evolves downhill"},
+            {"label": "Candle flame", "detail": "A reaction sustains itself and a loose boundary, but carries no heritable description.", "meta": "no open-ended evolution"},
+            {"label": "Free-living cell", "detail": "Copy, interpretation, substantial part-making, membrane production, and heritable variation close together.", "meta": "full loop"}
+          ]
+        },
+        {
+          "after": "1-the-problem-was-solved-on-paper-before-it-was-found-in-the-cell",
+          "kind": "sequence",
+          "kicker": "One tape, two uses",
+          "title": "Von Neumann ends the blueprint regress by separating interpretation from copying",
+          "caption": "A finite description never has to describe itself: one machine reads it to construct a body, another duplicates it unread, and the controller joins both products into an offspring.",
+          "items": [
+            {"label": "Finite tape", "detail": "The description specifies the machine body but contains no nested description of its own description.", "meta": "regress avoided"},
+            {"label": "Interpret", "detail": "A universal constructor reads the tape as instructions and assembles the offspring's body.", "meta": "description → machinery"},
+            {"label": "Copy unread", "detail": "A separate copier duplicates the same tape character by character without interpreting its contents.", "meta": "description → description"},
+            {"label": "Switch modes", "detail": "A controller sequences construction and copying so neither operation has to perform the other's job.", "meta": "coordination"},
+            {"label": "Attach the cargo", "detail": "The copied tape is placed into the constructed body, yielding a machine equipped to repeat the cycle.", "meta": "offspring"},
+            {"label": "Biology instantiates it", "detail": "Cells split the same roles between DNA replication and DNA expression through RNA and protein.", "meta": "predicted 1948–49 · DNA structure 1953"}
+          ]
+        }
+      ]
+    },
+    "evolution": {
+      "visuals": [
+        {
+          "after": "2-the-three-part-algorithm",
+          "kind": "sequence",
+          "kicker": "No designer required",
+          "title": "Lewontin's three conditions turn difference into adaptation",
+          "caption": "Natural selection follows whenever variation affects reproductive success and those differences persist into offspring.",
+          "items": [
+            {"label": "Variation", "detail": "Members of a population differ in some trait; without alternatives there is nothing to select."},
+            {"label": "Differential fitness", "detail": "Those differences change expected reproductive success in the current environment."},
+            {"label": "Heredity", "detail": "Offspring resemble parents in the trait, allowing successful differences to accumulate."},
+            {"label": "Adaptation", "detail": "The population changes without foresight, plan, or any promise of progress."},
+            {"label": "Substrate neutrality", "detail": "The same logic runs on organisms, molecules, and self-copying programs."}
+          ]
+        },
+        {
+          "after": "4-evolution-and-learning-side-by-side",
+          "kind": "contrast",
+          "kicker": "Three searches",
+          "title": "Evolution and gradient learning keep results differently",
+          "caption": "The shared adaptive shape hides one decisive difference: blind variation receives only whole-candidate scores, while gradients assign direction to every weight.",
+          "items": [
+            {"label": "Biological evolution", "detail": "Mutation and recombination propose blindly; genomes remember; whole organisms reproduce or do not.", "meta": "population essential"},
+            {"label": "SGD training", "detail": "A stochastic gradient estimates a local direction that should lower loss, assigning parameter-level credit in a differentiable system.", "meta": "usually one model"},
+            {"label": "Genetic algorithm", "detail": "Encoded candidate solutions mutate and recombine; only the fitness function scores the whole proposal.", "meta": "no gradient needed"},
+            {"label": "Tradeoff", "detail": "Gradients are vastly more directed, while evolutionary search works where no smooth derivative exists.", "meta": "speed ↔ generality"},
+            {"label": "Rules inside the loop", "detail": "Mutation rates, learning schedules, and variation machinery can themselves be adjusted or evolved.", "meta": "second-order adaptation"}
+          ]
+        },
+        {
+          "after": "3-evolution-learned-to-evolve-better",
+          "kind": "layers",
+          "kicker": "Selection reaches its gears",
+          "title": "Evolvability is adaptation acting on how variation is produced",
+          "caption": "The loop becomes recursive when the genotype–phenotype map, modularity, and mutation rate enter the same selection process whose future options they shape.",
+          "items": [
+            {"label": "Variation has structure", "detail": "Two equally fit organisms can differ in whether their mutations tend to make viable changes or corpses.", "meta": "future option value"},
+            {"label": "Map genotype to phenotype", "detail": "The wiring between what mutates and what selection sees determines which neighborhoods evolution can explore.", "meta": "evolvability"},
+            {"label": "Modularize change", "detail": "Reusable core processes plus rewritable regulatory connections let one trait vary without destroying the whole organism.", "meta": "facilitated variation"},
+            {"label": "Turn the mutation knob", "detail": "Lenski populations evolved hypermutator genotypes by altering DNA repair, gaining speed at the cost of more lethal errors.", "meta": "~100× mutation rate"},
+            {"label": "Dispute the cause", "detail": "Brittle lineages may simply vanish, or changing environments may directly select the capacity to vary; both readings remain live.", "meta": "contested mechanism"},
+            {"label": "Close the recursion", "detail": "The process that filters variants also filters the machinery that generates its next variants.", "meta": "rules act on rules"}
+          ]
+        }
+      ]
+    },
+    "sense-of-self": {
+      "visuals": [
+        {
+          "after": "5-the-volume-knob-a-network-you-can-turn-down",
+          "kind": "layers",
+          "kicker": "A construction with seams",
+          "title": "Different observations loosen different components of the felt I",
+          "claim_scope": "room-synthesis",
+          "evidence_sections": [
+            "2-ownership-is-negotiable-the-rubber-hand",
+            "3-the-narrator-confabulates-split-brains",
+            "4-the-self-has-a-build-date",
+            "5-the-volume-knob-a-network-you-can-turn-down"
+          ],
+          "caption": "Body ownership, narrative authorship, recognizable self-concept, and self-referential activity can each be perturbed without erasing experience altogether.",
+          "items": [
+            {"label": "Ownership", "detail": "Synchronous stroking can relocate felt touch and threat response to a rubber hand in minutes.", "meta": "minimal self"},
+            {"label": "Narrator", "detail": "A split-brain interpreter invents a fluent reason for an action whose real cause it cannot access.", "meta": "narrative self"},
+            {"label": "Recognition", "detail": "Mirror self-recognition assembles through the second year rather than arriving fully formed.", "meta": "~20–24 months"},
+            {"label": "Default network", "detail": "Meditation and psilocybin reduce or disrupt DMN activity alongside quieter self-reference or loosened boundaries.", "meta": "neural correlate"},
+            {"label": "Mineness", "detail": "Depersonalization can leave perception and reality-testing intact while felt ownership drains away.", "meta": "dissociation"}
+          ]
+        },
+        {
+          "after": "7-three-vantage-points-one-target",
+          "kind": "contrast",
+          "kicker": "One target, three instruments",
+          "title": "No vantage point sees the whole construction alone",
+          "caption": "Neuroscience, psychology, and contemplative practice approach the felt I with complementary methods and complementary blind spots.",
+          "items": [
+            {"label": "Neuroscience", "detail": "Perturbs and measures body models and self-referential networks, but correlations do not explain why anything is felt.", "meta": "illusions · imaging · molecules"},
+            {"label": "Psychology", "detail": "Tracks development, confabulation, and disorder, but remains dependent on report and behavior.", "meta": "mirror · split brain · dissociation"},
+            {"label": "Contemplative record", "detail": "Turns sustained attention on the I-sense across millennia, but lacks standardized external controls.", "meta": "first-person protocol"},
+            {"label": "Shared target", "detail": "All three treat the ordinary sense of self as something that can be inspected rather than assumed.", "meta": "construction evidence"}
+          ]
+        },
+        {
+          "after": "2-ownership-is-negotiable-the-rubber-hand",
+          "kind": "sequence",
+          "kicker": "Mineness as inference",
+          "title": "Correlated senses can move ownership onto an object you know is rubber",
+          "caption": "The illusion exposes a subpersonal inference pipeline: synchrony binds sight and touch, recalibrates felt location, and recruits the body's threat response on behalf of the false hand.",
+          "items": [
+            {"label": "Split sight from flesh", "detail": "Hide the real left hand and place an anatomically plausible rubber hand where a hand could be.", "meta": "rigged scene"},
+            {"label": "Synchronize evidence", "detail": "Stroke visible rubber and hidden skin at the same location, rhythm, and moment.", "meta": "causal input"},
+            {"label": "Bind the signals", "detail": "The brain treats matching vision and touch as evidence that both events belong to one body part.", "meta": "multisensory inference"},
+            {"label": "Relocate touch", "detail": "Within roughly two minutes, many participants feel touch at the rubber hand and report ownership.", "meta": "common, not universal"},
+            {"label": "Measure the drift", "detail": "Blind pointing shifts toward the fake hand, giving the altered body estimate a behavioral measure.", "meta": "proprioceptive drift"},
+            {"label": "Threat the model", "detail": "Menacing the rubber hand can trigger skin conductance, showing the autonomic system has adopted the inferred limb.", "meta": "physiological check"}
+          ]
+        }
+      ]
+    },
+    "what-self-means": {
+      "visuals": [
+        {
+          "after": "4-the-two-taxonomies-side-by-side",
+          "kind": "constellation",
+          "kicker": "One word, five referents",
+          "title": "The self separates into registers with different evidence",
+          "caption": "Questions about whether a self exists or persists cannot be answered until the register under discussion is named.",
+          "items": [
+            {"label": "Body", "detail": "The located organism and immediate ownership model can be reassigned by multisensory evidence.", "meta": "ecological / minimal"},
+            {"label": "Memory", "detail": "Psychological continuity can be devastated while skill, recognition, and momentary selfhood survive.", "meta": "extended"},
+            {"label": "Narrative", "detail": "A useful autobiographical character can confabulate and may not organize every person's experience.", "meta": "conceptual"},
+            {"label": "Witness", "detail": "Advaita treats the seer as fundamental; Buddhism denies a standing watcher; science lacks a settled program.", "meta": "live dispute"},
+            {"label": "Process", "detail": "A self-model or controlled hallucination persists as activity while its contents and substance change.", "meta": "flux"}
+          ]
+        },
+        {
+          "after": "6-why-ai-forces-precision",
+          "kind": "contrast",
+          "kicker": "The registers come apart",
+          "title": "An LLM gives five different answers to “does it have a self?”",
+          "as_of": "25 August 2026",
+          "caption": "Artificial systems make pooled self-talk untenable because the five registers no longer arrive together by construction.",
+          "items": [
+            {"label": "Body", "detail": "No biological ecological self or sensor-defined body ownership is present in a standard model instance.", "meta": "no"},
+            {"label": "Memory", "detail": "A base API call is stateless; context is temporary and product memory is an external addition.", "meta": "absent by default"},
+            {"label": "Narrative", "detail": "Fluent self-description is easy to generate but weak evidence because it is learned from human text.", "meta": "strong form, weak warrant"},
+            {"label": "Witness", "detail": "Limited concept-injection detection shows functional self-access, not evidence of an experiencing subject.", "meta": "unknown"},
+            {"label": "Process", "detail": "A model is unambiguously a changing pattern of network activations; when it self-describes, that description is transient computation, not a stored subject.", "meta": "yes"}
+          ]
+        },
+        {
+          "after": "3-what-the-traditions-found-and-where-they-disagree-with-each-other",
+          "kind": "contrast",
+          "kicker": "Same subtraction, opposite remainder",
+          "title": "Buddhism and Advaita agree on what is not self, then divide at the witness",
+          "caption": "Both traditions inspect body, thought, memory, and story as objects or processes; their disagreement is whether anything stands as the seer after those candidates are removed.",
+          "items": [
+            {"label": "Shared elimination", "detail": "Whatever changes, can be observed, or resists control cannot serve as an unchanging owner.", "meta": "common method"},
+            {"label": "Buddhist remainder", "detail": "Form, feeling, perception, formations, and consciousness remain processes with no standing watcher over them.", "meta": "anattā"},
+            {"label": "Advaita remainder", "detail": "Whatever can be seen is not the seer, so the irreducible witness is treated as the sole true self.", "meta": "sākṣī / ātman"},
+            {"label": "James's bridge", "detail": "The Me is knowable content; the I is the knower that cannot be caught as one more object.", "meta": "I / Me · 1890"},
+            {"label": "Science's open square", "detail": "Cognitive science has strong programs for self-contents but no accepted program that settles whether a witness remains.", "meta": "unresolved"},
+            {"label": "Do not pool the answers", "detail": "Calling both positions simply nondual erases the precise point where their ontologies oppose each other.", "meta": "taxonomy before synthesis"}
+          ]
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "slug": "sense-of-self",
+  "verdict": "PASS",
+  "contract": "The latest room satisfies the full contract: valid metadata and links, numbered arc, comparison table, two reproducible exercises with controls and limitations, conclusion, typed epistemic ledger, live primary-source links, disclosed AI authorship, and an earned recursive socket-exit. Its 4,244 prose words are within range. The contemplative material is explicitly separated from controlled experimental evidence.",
+  "facts": "Fresh checks confirmed the rubber-hand primary report (https://doi.org/10.1038/35784), Brewer et al.'s relative DMN-hub deactivation in the tested meditations (https://doi.org/10.1073/pnas.1112029108), and Siegel et al.'s seven-person precision-imaging study with psilocybin-related desynchronization strongest in the DMN (https://www.nature.com/articles/s41586-024-07624-5). Hunter et al. supports the now-scoped 1.2-1.7% one-month UK estimates and 2.4% current Canadian estimate (https://pubmed.ncbi.nlm.nih.gov/15022041/). The introspection exercise now allows multiple outcomes and explicitly says one run reveals neither what most people find nor which interpretation is right; contemplative continuity is no longer called experimental replication.",
+  "voice": "Cadence-read the densest passages on the self-layer taxonomy, DMN evidence, and construction-versus-experience boundary. The prose remains vivid without hiding sample sizes or inferential limits. The final attention movement is earned by the room's own experimental and contemplative instruments.",
+  "must_fix": "none — all sources are live, prevalence is properly scoped, and the unsupported introspective-majority and replication language has been removed.",
+  "source_sha256": "4321e80edfcd54455ba56b9da28cc0076b1f033dd6748818dca3a534d61b3a8e"
+}

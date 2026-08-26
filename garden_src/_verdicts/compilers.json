@@ -1,0 +1,9 @@
+{
+  "slug": "compilers",
+  "verdict": "PASS",
+  "contract": "All exact frontmatter fields, the short orientation, ten numbered sections, two comparison tables, extensive reproducible compiler walkthrough, conclusion, typed FACT/HYPOTHESIS/WILD-equivalent ledger, Sources, disclosure, and a domain-earned socket-exit are present. Body prose is within 2,500–4,500 words. Current frontmatter includes optimization, so every declared/body term link now reconciles.",
+  "facts": "Three fresh primary-source checks were completed on 2026-08-25. GCC's official release page and mailing list confirm GCC 16.2 on August 7, 2026. LLVM's official releases show the current 22.1 patch line. ACM's official Turing materials confirm Frances Allen as the 2006 laureate and first woman to receive the award. The published Thompson lecture supports the trust-chain argument, and the room's command walkthrough is reproducible and internally consistent.",
+  "voice": "Read-aloud test on the 3 densest paragraphs (SSA para in section 4, Frances Allen para in section 5, final exit para): all pass as sayable across a table. 'That sounds like a bureaucratic restriction; it's actually the key that unlocks optimization' - sayable. 'That's the M+N design paying rent' - exactly the target register. The one borderline sentence is in The Exit: 'A compiler is a working existence proof that meaning can survive total re-representation - that what a program is lives in none of its particular forms.' It is polished-aphoristic and flirts with essay-voice, but a person could say it and it is earned by the mov-#0x90 evidence directly above it - not a violation. Socket-exit is shown, not preached; no human-confessional I; AI-authorship consistent with the FIRST LAW.",
+  "must_fix": "none; current frontmatter already includes the optimization body link",
+  "source_sha256": "806b86ddaef3e747bddc7cbd59375083e3265c92f4bb7a1a9f98e28a73f28abd"
+}

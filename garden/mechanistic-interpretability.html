@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mechanistic Interpretability · Darshan Garden</title>
+<meta name="description" content="Nobody wrote the program running inside a large language model, and nobody can read it directly. Mechanistic interpretability is the attempt to reverse-engineer it anyway — features, circuits, probes, sparse autoencoders, attribution graphs. This room covers what has actually been established, what got walked back, and the honest state of the field in 2026.">
+<link rel="stylesheet" href="../style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ccircle cx='8' cy='8' r='6' fill='none' stroke='%238f3b26' stroke-width='1.5'/%3E%3Ccircle cx='8' cy='8' r='2' fill='%238f3b26'/%3E%3C/svg%3E">
+<script>
+/* Theme memory. No analytics, no trackers. */
+(function () {
+  try {
+    var t = localStorage.getItem("darshan-theme");
+    if (t) document.documentElement.setAttribute("data-theme", t);
+  } catch (e) {}
+})();
+</script>
+<style>
+/* Garden-only layout. Kept here so the publication stylesheet remains shared. */
+body.garden-page-body {
+  max-width: none;
+  padding: 1.5rem clamp(1.25rem, 3.5vw, 4rem) 4rem;
+  font-size: 1.125rem;
+}
+body.garden-page-body > main,
+body.garden-page-body > .masthead,
+body.garden-page-body > footer {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 94rem;
+}
+.garden-layout,
+.garden-index-layout {
+  align-items: start;
+  display: grid;
+  gap: clamp(2.75rem, 5vw, 5rem);
+  grid-template-columns: minmax(0, 64rem) minmax(17rem, 20rem);
+  justify-content: center;
+}
+.garden-layout article,
+.garden-index-main { min-width: 0; }
+.garden-layout .article-title,
+.garden-intro .article-title {
+  font-size: clamp(2.65rem, 3.55vw, 4rem);
+  letter-spacing: -.025em;
+  line-height: 1.06;
+  max-width: 24ch;
+}
+.garden-layout article h2 {
+  font-size: 1.48rem;
+  line-height: 1.3;
+  margin-top: 3.2rem;
+  scroll-margin-top: 1.5rem;
+}
+.garden-layout article h3 {
+  font-size: 1.16rem;
+  margin-top: 2.35rem;
+  scroll-margin-top: 1.5rem;
+}
+.garden-intro { margin-bottom: 2.4rem; }
+.garden-series { margin: 2.8rem 0; scroll-margin-top: 1rem; }
+.garden-series h2 { border-bottom: 1px solid var(--rule); padding-bottom: .45rem; }
+.garden-room-list { list-style: none; margin: 0; padding: 0; }
+.garden-room-list li { border-bottom: 1px solid var(--rule); margin: 0; padding: 1rem 0; }
+.garden-room-title { font-weight: 600; }
+.garden-room-summary { color: var(--faint); font-size: .96rem; margin: .25rem 0 0; }
+.garden-series-link { color: var(--faint); font-size: .82rem; letter-spacing: .12em;
+  text-transform: uppercase; }
+.garden-lede {
+  border-left: 3px solid var(--accent);
+  color: var(--faint);
+  font-size: 1.24rem;
+  font-style: italic;
+  line-height: 1.62;
+  margin: 1.5rem 0 2.2rem;
+  padding: .35rem 0 .35rem 1.35rem;
+}
+.garden-corridors {
+  margin: 1.15rem 0 2.65rem;
+}
+.garden-corridor-list {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: .55rem .62rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.garden-corridor-list li { display: flex; margin: 0; max-width: 100%; }
+.garden-corridor {
+  align-items: center;
+  background: var(--accent-soft);
+  border: 1px solid var(--accent);
+  border-radius: 3px;
+  color: var(--accent);
+  display: inline-flex;
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .73rem;
+  font-weight: 700;
+  letter-spacing: .075em;
+  line-height: 1.35;
+  max-width: 100%;
+  min-height: 2.05rem;
+  overflow-wrap: anywhere;
+  padding: .34rem .72rem .3rem;
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-transform: uppercase;
+  text-underline-offset: .22em;
+}
+.garden-corridor:visited { color: var(--accent); }
+.garden-corridor:hover,
+.garden-corridor:focus-visible {
+  background: var(--accent);
+  color: var(--paper);
+}
+.garden-corridor:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+.garden-series-plate {
+  --plate-accent: var(--accent);
+  border: 1px solid var(--rule);
+  border-top: 3px solid var(--plate-accent);
+  margin: .25rem 0 2.8rem;
+  overflow: hidden;
+  position: relative;
+}
+.garden-series-plate--foundations { --plate-accent: #496f76; }
+.garden-series-plate--story-of-ai { --plate-accent: #526d9a; }
+.garden-series-plate--instrument { --plate-accent: #745779; }
+.garden-series-plate--strange-loops { --plate-accent: #866448; }
+.garden-series-plate--bridge { --plate-accent: #697044; }
+.garden-series-plate--power { --plate-accent: #8f3b26; }
+.garden-series-plate--time-future { --plate-accent: #416778; }
+[data-theme="dark"] .garden-series-plate { --plate-accent: var(--accent); }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .garden-series-plate { --plate-accent: var(--accent); }
+}
+.garden-series-plate-media {
+  aspect-ratio: 16 / 9;
+  background: var(--accent-soft);
+  overflow: hidden;
+  position: relative;
+}
+.garden-series-plate-media::after {
+  background:
+    linear-gradient(90deg, var(--paper) 0, transparent 24%, transparent 76%, var(--paper) 100%),
+    linear-gradient(0deg, var(--paper) 0, transparent 32%);
+  content: "";
+  inset: 0;
+  opacity: .24;
+  pointer-events: none;
+  position: absolute;
+}
+.garden-series-plate picture,
+.garden-series-card picture { display: block; height: 100%; }
+.garden-series-plate img {
+  display: block;
+  filter: saturate(.82) contrast(1.03);
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+.garden-series-plate figcaption {
+  align-items: baseline;
+  background: var(--paper);
+  border-top: 1px solid var(--rule);
+  display: grid;
+  gap: .25rem 1rem;
+  grid-template-columns: auto 1fr;
+  padding: .78rem 1rem .85rem;
+}
+.garden-series-plate-kicker {
+  color: var(--plate-accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+.garden-series-plate figcaption strong { font-size: 1rem; font-weight: 600; }
+.garden-series-plate-terms {
+  color: var(--faint);
+  font-size: .82rem;
+  grid-column: 2;
+  margin: 0;
+}
+.garden-visual {
+  background:
+    radial-gradient(circle at 92% 8%, var(--accent-soft), transparent 30%),
+    linear-gradient(135deg, transparent 0 72%, var(--accent-soft) 72% 72.4%, transparent 72.4%);
+  border: 1px solid var(--rule);
+  border-top: 3px solid var(--accent);
+  margin: 1.25rem 0 2.5rem;
+  overflow: hidden;
+  padding: clamp(1.1rem, 2.7vw, 1.75rem);
+  position: relative;
+}
+.garden-visual::before {
+  background-image:
+    linear-gradient(var(--rule) 1px, transparent 1px),
+    linear-gradient(90deg, var(--rule) 1px, transparent 1px);
+  background-size: 2.25rem 2.25rem;
+  content: "";
+  inset: 0;
+  opacity: .13;
+  pointer-events: none;
+  position: absolute;
+}
+.garden-visual > * { position: relative; }
+.garden-visual-head {
+  align-items: baseline;
+  display: grid;
+  gap: .45rem 1rem;
+  grid-template-columns: auto 1fr;
+  margin-bottom: 1.2rem;
+}
+.garden-visual-kicker {
+  color: var(--accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .68rem;
+  font-weight: 700;
+  letter-spacing: .17em;
+  margin: 0;
+  text-transform: uppercase;
+}
+.garden-visual-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  line-height: 1.28;
+  margin: 0;
+}
+.garden-visual-as-of {
+  color: var(--faint);
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: .72rem;
+  letter-spacing: .08em;
+  margin: 0;
+  text-transform: uppercase;
+  white-space: normal;
+}
+.garden-visual-items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.garden-visual-item {
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  margin: 0;
+  min-width: 0;
+  padding: .8rem .9rem;
+}
+.garden-visual-item-label {
+  display: block;
+  font-size: .96rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+.garden-visual-item-detail {
+  color: var(--faint);
+  display: block;
+  font-size: .9rem;
+  line-height: 1.45;
+  margin-top: .27rem;
+}
+.garden-visual-item-meta {
+  color: var(--accent);
+  display: block;
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: .72rem;
+  letter-spacing: .08em;
+  margin-bottom: .38rem;
+  text-transform: uppercase;
+}
+.garden-visual-caption {
+  border-top: 1px solid var(--rule);
+  color: var(--faint);
+  display: grid;
+  font-size: .84rem;
+  font-style: italic;
+  gap: .55rem 1rem;
+  grid-template-columns: minmax(0, 1fr) auto;
+  line-height: 1.45;
+  margin: 1.15rem 0 0;
+  padding-top: .75rem;
+}
+.garden-visual-evidence {
+  color: var(--accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .72rem;
+  font-style: normal;
+  font-weight: 650;
+  letter-spacing: .04em;
+  white-space: nowrap;
+}
+.garden-visual-evidence a {
+  color: inherit;
+  text-decoration-thickness: 1px;
+  text-underline-offset: .18em;
+}
+.garden-visual--sequence .garden-visual-items,
+.garden-visual--contrast .garden-visual-items,
+.garden-visual--constellation .garden-visual-items {
+  display: grid;
+  gap: .65rem;
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+}
+.garden-visual--sequence .garden-visual-items { counter-reset: garden-step; }
+.garden-visual--sequence .garden-visual-item {
+  counter-increment: garden-step;
+  padding-top: 2.35rem;
+  position: relative;
+}
+.garden-visual--sequence .garden-visual-item::before {
+  color: var(--accent);
+  content: counter(garden-step, decimal-leading-zero);
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: .68rem;
+  left: .9rem;
+  letter-spacing: .08em;
+  position: absolute;
+  top: .72rem;
+}
+.garden-visual--layers .garden-visual-items { display: grid; gap: .45rem; }
+.garden-visual--layers .garden-visual-item {
+  border-left: clamp(.24rem, .55vw, .48rem) solid var(--accent);
+  display: grid;
+  gap: .15rem 1rem;
+  grid-template-columns: minmax(8rem, .4fr) 1fr;
+}
+.garden-visual--layers .garden-visual-item:nth-child(2) { margin-left: 1.5%; }
+.garden-visual--layers .garden-visual-item:nth-child(3) { margin-left: 3%; }
+.garden-visual--layers .garden-visual-item:nth-child(4) { margin-left: 4.5%; }
+.garden-visual--layers .garden-visual-item:nth-child(5) { margin-left: 6%; }
+.garden-visual--layers .garden-visual-item:nth-child(6) { margin-left: 7.5%; }
+.garden-visual--timeline .garden-visual-items {
+  display: grid;
+  gap: 0;
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+}
+.garden-visual--timeline .garden-visual-item {
+  border-width: 1px 0 0 1px;
+  padding-top: 1.35rem;
+  position: relative;
+}
+.garden-visual--timeline .garden-visual-item::before {
+  background: var(--accent);
+  border: 3px solid var(--paper);
+  border-radius: 50%;
+  content: "";
+  height: .72rem;
+  left: -.4rem;
+  position: absolute;
+  top: -.4rem;
+  width: .72rem;
+}
+.garden-visual--contrast .garden-visual-item:nth-child(odd) { border-top: 2px solid var(--ink); }
+.garden-visual--contrast .garden-visual-item:nth-child(even) { border-top: 2px solid var(--accent); }
+.garden-visual--constellation .garden-visual-items {
+  align-items: stretch;
+  position: relative;
+}
+.garden-visual--constellation .garden-visual-item {
+  border-top: 2px solid var(--accent);
+  box-shadow: 0 .2rem 0 rgba(18, 31, 31, .04);
+  padding-top: 1.35rem;
+  position: relative;
+}
+.garden-visual--constellation .garden-visual-item::before {
+  background: var(--paper);
+  border: 2px solid var(--accent);
+  border-radius: 50%;
+  content: "";
+  height: .55rem;
+  left: calc(50% - .36rem);
+  position: absolute;
+  top: -.38rem;
+  width: .55rem;
+}
+.garden-visual--constellation .garden-visual-item:nth-child(even) { margin-top: .8rem; }
+.garden-series-gallery {
+  display: grid;
+  gap: .8rem;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  margin: 1.5rem 0 3rem;
+}
+.garden-series-card {
+  border: 1px solid var(--rule);
+  color: var(--ink);
+  display: grid;
+  grid-template-rows: 7.5rem auto;
+  overflow: hidden;
+  text-decoration: none;
+}
+.garden-series-card img {
+  height: 100%;
+  object-fit: cover;
+  transition: transform .25s ease;
+  width: 100%;
+}
+.garden-series-card span {
+  border-top: 1px solid var(--rule);
+  font-size: .9rem;
+  font-weight: 600;
+  padding: .65rem .75rem;
+}
+.garden-series-card:hover { border-color: var(--accent); color: var(--accent); }
+.garden-series-card:hover img { transform: scale(1.025); }
+@media (prefers-reduced-motion: reduce) {
+  .garden-series-card img { transition: none; }
+}
+.garden-tags { color: var(--faint); font-size: .82rem; margin-top: 2.2rem; }
+.garden-nav { border-top: 1px solid var(--rule); display: flex; gap: 1rem;
+  justify-content: space-between; margin-top: 2.5rem; padding-top: 1rem; }
+.garden-nav a { max-width: 48%; text-decoration: none; }
+.garden-nav .next { margin-left: auto; text-align: right; }
+.garden-table-wrap { overflow-x: auto; margin: 1.35rem 0; }
+.garden-table { border-collapse: collapse; font-size: .92rem; line-height: 1.45; width: 100%; }
+.garden-table th, .garden-table td { border: 1px solid var(--rule); padding: .55rem .65rem;
+  text-align: left; vertical-align: top; }
+.garden-table th { background: var(--accent-soft); }
+.garden-toc {
+  border-left: 1px solid var(--rule);
+  max-height: calc(100vh - 3rem);
+  overflow: auto;
+  padding: .1rem 0 .75rem 1.3rem;
+  position: sticky;
+  top: 1.5rem;
+}
+.garden-toc-title {
+  color: var(--accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .2em;
+  margin: 0 0 1.15rem;
+  text-transform: uppercase;
+}
+.garden-toc-title::before { content: "☰"; font-size: .8em; margin-right: .65rem; }
+.garden-toc-list { list-style: none; margin: 0; padding: 0; }
+.garden-toc-sublist { list-style: none; margin: 0; padding: 0; }
+.garden-toc-list li { margin: 0; }
+.garden-toc-list a {
+  border-left: 2px solid transparent;
+  color: var(--ink);
+  display: block;
+  font-size: .91rem;
+  line-height: 1.42;
+  margin-left: -1.4rem;
+  padding: .42rem .45rem .42rem 1.3rem;
+  text-decoration: none;
+}
+.garden-toc-list .level-3 a {
+  color: var(--faint);
+  font-size: .86rem;
+  font-style: italic;
+  padding-left: 2.15rem;
+}
+.garden-toc-list a:hover,
+.garden-toc-list a:focus-visible,
+.garden-toc-list a[aria-current="location"] {
+  border-left-color: var(--accent);
+  color: var(--accent);
+}
+.garden-toc-list a[aria-current="location"] { font-weight: 600; }
+.garden-toc-inline { display: none; }
+.garden-layout article :is(h2, h3):target,
+.garden-series:target h2 { color: var(--accent); }
+a.pending { color: var(--faint); text-decoration-style: dashed; }
+a.pending::after { content: " · pending"; font-size: .7em; letter-spacing: .06em;
+  text-transform: uppercase; }
+@media (min-width: 72.01em) {
+  body.garden-page-body > .masthead {
+    align-items: center;
+    column-gap: 2rem;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    margin-bottom: 3.5rem;
+    padding: 1.25rem 0;
+    text-align: left;
+  }
+  body.garden-page-body > .masthead .wordmark { justify-self: start; }
+  body.garden-page-body > .masthead .tagline { justify-self: center; margin: 0; }
+  body.garden-page-body > .masthead nav { justify-self: end; margin: 0; }
+}
+@media (max-width: 72em) {
+  .garden-layout,
+  .garden-index-layout { display: block; }
+  .garden-toc { display: none; }
+  .garden-toc-inline {
+    border: 1px solid var(--rule);
+    display: block;
+    margin: 1.5rem 0 2.4rem;
+    padding: .8rem 1rem;
+  }
+  .garden-toc-inline summary {
+    color: var(--accent);
+    cursor: pointer;
+    font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: .78rem;
+    font-weight: 700;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+  }
+  .garden-toc-inline .garden-toc-list { margin-top: .7rem; }
+  .garden-toc-inline .garden-toc-list a { margin-left: 0; padding-left: .75rem; }
+  .garden-toc-inline .garden-toc-list .level-3 a { padding-left: 1.6rem; }
+}
+@media (max-width: 40em) {
+  body.garden-page-body { font-size: 1.03rem; padding: 1rem 1.05rem 3rem; }
+  .garden-layout .article-title,
+  .garden-intro .article-title { font-size: clamp(2.15rem, 11vw, 3.15rem); }
+  .garden-lede { font-size: 1.1rem; padding-left: 1rem; }
+  .garden-corridors { margin-bottom: 2rem; }
+  .garden-corridor-list { gap: .45rem; }
+  .garden-corridor {
+    font-size: .68rem;
+    min-height: 2.35rem;
+    padding: .3rem .58rem .27rem;
+  }
+  .garden-series-plate-media { aspect-ratio: 16 / 9; }
+  .garden-series-plate figcaption { display: block; }
+  .garden-series-plate figcaption strong { display: block; margin-top: .22rem; }
+  .garden-series-plate-terms { display: block; margin-top: .25rem; }
+  .garden-visual { margin-left: -.15rem; margin-right: -.15rem; padding: 1rem; }
+  .garden-visual-head { display: block; }
+  .garden-visual-title { margin-top: .25rem; }
+  .garden-visual-as-of { margin-top: .35rem; }
+  .garden-visual-caption { grid-template-columns: 1fr; }
+  .garden-visual-evidence { white-space: normal; }
+  .garden-visual--sequence .garden-visual-items,
+  .garden-visual--contrast .garden-visual-items,
+  .garden-visual--constellation .garden-visual-items,
+  .garden-visual--timeline .garden-visual-items { grid-template-columns: 1fr; }
+  .garden-visual--layers .garden-visual-item:nth-child(n) { display: block; margin-left: 0; }
+  .garden-visual--timeline .garden-visual-item { border-width: 0 0 0 1px; }
+  .garden-visual--timeline .garden-visual-item::before { left: -.4rem; top: .9rem; }
+  .garden-visual--constellation .garden-visual-item:nth-child(even) { margin-top: 0; }
+  .garden-series-gallery { grid-template-columns: 1fr; }
+  .garden-nav { flex-direction: column; }
+  .garden-nav a { max-width: none; }
+  .garden-nav .next { margin-left: 0; text-align: left; }
+}
+@media print {
+  a.pending::after { content: " (pending)"; }
+  .garden-layout, .garden-index-layout { display: block; }
+  .garden-toc, .garden-toc-inline { display: none; }
+  .garden-series-card img { display: none; }
+  .garden-series-card { grid-template-rows: auto; }
+}
+</style>
+</head>
+<body class="garden-page-body">
+<button class="theme-toggle" aria-label="Toggle light and dark" onclick="
+  (function () {
+    var d = document.documentElement;
+    var cur = d.getAttribute('data-theme');
+    if (!cur) { cur = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'; }
+    var next = cur === 'dark' ? 'light' : 'dark';
+    d.setAttribute('data-theme', next);
+    try { localStorage.setItem('darshan-theme', next); } catch (e) {}
+  })();
+">◐</button>
+
+<header class="masthead">
+  <h1 class="wordmark"><a href="../index.html">DARSHAN</a></h1>
+  <p class="tagline">A signal of clear seeing in an age of information overload</p>
+  <nav>
+    <a href="../index.html">Articles</a>
+    <a href="index.html">Garden</a>
+    <a href="../about.html">About</a>
+  </nav>
+</header>
+
+<main>
+<div class="garden-layout">
+<article data-garden-room="mechanistic-interpretability" data-garden-outline>
+<p class="garden-series-link"><a href="index.html#instrument">The Instrument</a></p>
+<p class="article-meta">25 August 2026 · Draft</p>
+<h1 class="article-title">Mechanistic Interpretability</h1>
+<div class="draft-banner"><strong>Draft — pending discernment pass.</strong> This room is part of the garden's first planting. It has not been promoted to published status; check its sources and open questions before citing it.</div>
+<p class="garden-lede">Nobody wrote the program running inside a large language model, and nobody can read it directly. Mechanistic interpretability is the attempt to reverse-engineer it anyway — features, circuits, probes, sparse autoencoders, attribution graphs. This room covers what has actually been established, what got walked back, and the honest state of the field in 2026.</p>
+<nav class="garden-corridors" aria-label="Explore connected rooms" data-corridor-count="8"><ul class="garden-corridor-list"><li><a class="garden-corridor" href="neural-networks.html">Neural Networks</a></li><li><a class="garden-corridor" href="deep-learning.html">Deep Learning</a></li><li><a class="garden-corridor" href="pretraining-post-training.html">Pretraining and Post-training</a></li><li><a class="garden-corridor" href="top-papers-mi.html">The Top 20 Papers in Mechanistic Interpretability</a></li><li><a class="garden-corridor" href="aunt-hillary.html">Aunt Hillary: The Ant Colony That Thinks</a></li><li><a class="garden-corridor" href="sense-of-self.html">The Sense of Self</a></li><li><a class="garden-corridor" href="leading-models.html">The Leading Models (2026)</a></li><li><a class="garden-corridor" href="history-of-ai.html">The History of AI</a></li></ul></nav>
+<figure class="garden-series-plate garden-series-plate--instrument">
+<div class="garden-series-plate-media"><picture><source srcset="assets/series/instrument.webp" type="image/webp"><img src="assets/series/instrument.png" alt="An engraved neural network cutaway reveals sparse activation paths under scientific probes." width="1672" height="941" loading="eager" decoding="async"></picture></div>
+<figcaption><span class="garden-series-plate-kicker">Visual field</span><strong>The Instrument</strong><span class="garden-series-plate-terms">mechanistic interpretability · feature · circuit · superposition</span></figcaption>
+</figure>
+<details class="garden-toc-inline"><summary>In this room</summary><ol class="garden-toc-list"><li class="level-2"><a href="#1-the-problem-stated-concretely">1. The problem, stated concretely</a></li><li class="level-2"><a href="#2-the-ladder-of-objects-neurons-features-circuits">2. The ladder of objects: neurons, features, circuits</a></li><li class="level-2"><a href="#3-what-has-actually-been-established-five-results">3. What has actually been established: five results</a></li><li class="level-2"><a href="#4-sparse-autoencoders-the-boom-and-the-correction">4. Sparse autoencoders: the boom and the correction</a></li><li class="level-2"><a href="#5-the-toolbox-honestly-labeled">5. The toolbox, honestly labeled</a></li><li class="level-2"><a href="#6-attribution-graphs-the-current-instrument-and-a-walkthrough">6. Attribution graphs: the current instrument, and a walkthrough</a></li><li class="level-2"><a href="#7-where-the-field-actually-stands-mid-2026">7. Where the field actually stands, mid-2026</a></li><li class="level-2"><a href="#8-conclusion">8. Conclusion</a></li><li class="level-2"><a href="#open-questions">Open questions</a></li><li class="level-2"><a href="#sources">Sources</a></li></ol></details>
+<p>If you've read <a href="neural-networks.html">neural networks</a> and <a href="deep-learning.html">deep learning</a>, you know the uncomfortable part already: we grow these systems, we don't write them. <a href="pretraining-post-training.html">Training</a> sets billions of numbers, and the numbers work, and no one decided what any individual number means. This room is about the instrument built to deal with that — the attempt to open the black box and read what's inside. It's the room the whole <em>instrument</em> series hangs on, and the paper trail behind it lives next door in <a href="top-papers-mi.html">the top MI papers</a>.</p>
+<h2 id="1-the-problem-stated-concretely">1. The problem, stated concretely</h2>
+<p>Take Claude 3.5 Haiku, a small production model by 2025 standards. It can add numbers, write poetry that rhymes, answer medical questions, and refuse to help you build a weapon. Somewhere in its billions of weights, there are mechanisms that do each of those things. Nobody wrote those mechanisms. They condensed out of training, the way a snowflake condenses out of weather — lawful, but not designed.</p>
+<p>So when the model does something strange — flatters you, makes up a citation, gives a confident wrong answer — you cannot look up the offending line of code. There is no line of code. There's a giant pile of matrix multiplications, and the "program" is smeared across all of them at once.</p>
+<p>Mechanistic interpretability — MI, or "mech interp" — is the research program that refuses to accept this as final. The bet: neural networks are not actually inscrutable. They contain real internal structure — concepts, algorithms, intermediate steps — and with the right instruments you can find that structure, name it, and test whether it's really doing what you think, the way a biologist does with a cell. Not "the model attends to relevant tokens" hand-waving. Actual mechanisms, verified by intervention: change this internal thing, predict what breaks, watch it break.</p>
+<p>That last part is the field's dividing line. Plenty of older "explainable AI" produced plausible stories about model behavior. MI's standard is causal: an explanation you can't intervene on is a story, not a mechanism.</p>
+<h2 id="2-the-ladder-of-objects-neurons-features-circuits">2. The ladder of objects: neurons, features, circuits</h2>
+<figure class="garden-visual garden-visual--layers" aria-labelledby="visual-mechanistic-interpretability-1" data-claim-scope="section-synthesis" data-placement-heading="2-the-ladder-of-objects-neurons-features-circuits" data-evidence-headings="2-the-ladder-of-objects-neurons-features-circuits">
+<div class="garden-visual-head"><p class="garden-visual-kicker">Choose the right grain</p><p class="garden-visual-title" id="visual-mechanistic-interpretability-1">Why one neuron is usually the wrong grain</p></div>
+<ol class="garden-visual-items" role="list"><li class="garden-visual-item"><span class="garden-visual-item-meta">polysemantic</span><strong class="garden-visual-item-label">Neuron</strong><span class="garden-visual-item-detail">One activation value often responds to several unrelated concepts at once.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">representation</span><strong class="garden-visual-item-label">Feature</strong><span class="garden-visual-item-detail">A direction across many activations can track one concept hidden by superposition.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">computation</span><strong class="garden-visual-item-label">Circuit</strong><span class="garden-visual-item-detail">Connected features form an algorithm whose causal role can be tested by intervention.</span></li></ol>
+<figcaption class="garden-visual-caption"><span>Mechanistic interpretability moves from often-polysemantic neurons to distributed features and then to circuits whose causal role can be tested.</span><span class="garden-visual-evidence">Drawn from: <a href="#2-the-ladder-of-objects-neurons-features-circuits">2. The ladder of objects: neurons, features, circuits</a></span></figcaption>
+</figure>
+<p>MI's working vocabulary is a ladder of three objects, and the whole field makes more sense once you see why the bottom rung failed.</p>
+<p><strong>Neurons</strong> are the obvious unit — one activation value inside the network. The natural hope was that each neuron means something: a "cat" neuron, a "French" neuron. Occasionally true. Mostly false. Most neurons are <strong>polysemantic</strong>: one neuron fires for, say, academic citations, English dialogue, HTTP requests, and Korean text. Four unrelated things, one unit. Reading the network neuron-by-neuron is like reading a book where every letter is shared by four different words.</p>
+<p><strong>Features</strong> are the proposed real unit: directions in the network's activation space that correspond to single concepts. The key idea explaining why features hide is <strong>superposition</strong>, worked out concretely in Anthropic's 2022 paper <em>Toy Models of Superposition</em>: a network that needs to represent more concepts than it has neurons can cram them in anyway, storing each concept as a direction that overlaps many neurons, tolerating a little interference because most concepts are rarely active at the same time. The model is, in effect, a compressed simulation of a much larger, cleaner network. Polysemantic neurons aren't noise — they're what compression looks like from the inside.</p>
+<p><strong>Circuits</strong> are features connected into algorithms: feature A feeds feature B feeds the output. If features are the nouns, circuits are the verbs — the actual computation.</p>
+<p>If you've read the <a href="aunt-hillary.html">Aunt Hillary</a> room, this ladder should feel familiar: an ant colony whose "symbols" are real patterns implemented in ants that individually know nothing about them. Features are to neurons what the colony's symbols are to ants — a higher level of description that actually carries the meaning. The difference is that in MI, "does the higher level really exist?" is not a philosophical question. It's an experimental one, and the answer keeps coming back: partially, and less cleanly than hoped.</p>
+<h2 id="3-what-has-actually-been-established-five-results">3. What has actually been established: five results</h2>
+<p>Here's the honest core — findings that replicated, survived intervention tests, and are now load-bearing. Each gets a full treatment in <a href="top-papers-mi.html">top papers in MI</a>; this is the short form.</p>
+<p><strong>Curve detectors (2020).</strong> The <em>Zoom In</em> paper by Chris Olah's team examined a vision network, InceptionV1, and found neurons that detect curves at specific orientations — verified by reading the actual weights, by generating synthetic curve images, and by tracing how curve detectors combine into shape detectors downstream. The founding proof-of-concept: at least sometimes, networks contain legible parts.</p>
+<p><strong>Induction heads (2021–2022).</strong> In transformers — the architecture behind most leading frontier <a href="leading-models.html">language models</a>, though not every modern language model — Anthropic found a two-head circuit that implements copying: "the last time I saw [A], it was followed by [B]; I'm seeing [A] again, so predict [B]." These <em>induction heads</em> emerge in a sudden phase transition early in training, and their appearance coincides with the model getting dramatically better at in-context learning — learning from the prompt itself. One of the first cases where a specific circuit was tied to a specific capability.</p>
+<p><strong>A full task circuit in GPT-2 (2022).</strong> Wang and colleagues reverse-engineered how GPT-2 small completes "When John and Mary went to the store, John gave a drink to ___" → "Mary". The answer involves a couple dozen attention heads in distinct roles — some find repeated names, some inhibit them, some copy the survivor to the output. Messy, redundant, and partial — but a genuine end-to-end mechanism for a nontrivial behavior, verified by ablation.</p>
+<p><strong>Grokking explained (2023).</strong> A tiny transformer trained on modular addition first memorizes, then — long after training accuracy hits 100% — suddenly generalizes. Neel Nanda and collaborators reverse-engineered the trained network and found it had learned to do modular addition using trigonometric identities — rotations, Fourier components — and could watch this algorithm form beneath the surface before the sudden generalization. A complete mechanistic explanation of a previously mysterious training phenomenon.</p>
+<p><strong>Millions of features in a real model (2023–2024).</strong> <em>Towards Monosemanticity</em> (October 2023) showed that a <strong>sparse autoencoder</strong> — more below — could decompose a small transformer's activations into thousands of clean, single-meaning features. <em>Scaling Monosemanticity</em> (May 2024) scaled this to Claude 3 Sonnet, a production frontier model, extracting up to 34 million features: the Golden Gate Bridge, code backdoors, sycophantic praise, inner conflict. The intervention test went public as "Golden Gate Claude": clamp the bridge feature to a high value and the model steers every conversation toward the bridge — eventually identifying <em>as</em> the bridge. Comic, and important: it demonstrated that a found feature was causally live, not just correlated.</p>
+<p>So the established base, as of 2026: features exist, some circuits can be fully reverse-engineered in small models, dictionary methods can surface millions of human-recognizable concepts in frontier models, and at least some of those concepts respond to intervention exactly as advertised.</p>
+<p>Now the other half of the honest picture.</p>
+<h2 id="4-sparse-autoencoders-the-boom-and-the-correction">4. Sparse autoencoders: the boom and the correction</h2>
+<figure class="garden-visual garden-visual--sequence" aria-labelledby="visual-mechanistic-interpretability-2" data-claim-scope="section-synthesis" data-placement-heading="4-sparse-autoencoders-the-boom-and-the-correction" data-evidence-headings="4-sparse-autoencoders-the-boom-and-the-correction">
+<div class="garden-visual-head"><p class="garden-visual-kicker">A microscope corrects itself</p><p class="garden-visual-title" id="visual-mechanistic-interpretability-2">Sparse autoencoders survived by shrinking their claim</p><p class="garden-visual-as-of">As of 25 August 2026</p></div>
+<ol class="garden-visual-items" role="list"><li class="garden-visual-item"><span class="garden-visual-item-meta">2023 promise</span><strong class="garden-visual-item-label">Untangle superposition</strong><span class="garden-visual-item-detail">An SAE rewrites dense activity as a sparse combination of many learned directions.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">2024 boom</span><strong class="garden-visual-item-label">Scale the dictionary</strong><span class="garden-visual-item-detail">Gemma Scope and frontier-model work learn millions of features across layers, some of them human-recognizable.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">bounded negative result</span><strong class="garden-visual-item-label">Test downstream use</strong><span class="garden-visual-item-detail">On DeepMind's harmful-intent task, a simple dense probe beats SAE-based probes, including out of distribution.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">instrument instability</span><strong class="garden-visual-item-label">Repeat the lens</strong><span class="garden-visual-item-detail">Changing random seeds yields materially different decompositions; one studied setting shares only about 30% of features.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">revised role</span><strong class="garden-visual-item-label">Separate discovery from control</strong><span class="garden-visual-item-detail">If you know the concept, start with a probe; if you do not, use the SAE to surface candidates you might not have named.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">2026 boundary</span><strong class="garden-visual-item-label">Keep the uncertainty</strong><span class="garden-visual-item-detail">Interpretable, steerable features are real, while their status as the model's native units remains unsettled.</span></li></ol>
+<figcaption class="garden-visual-caption"><span>In two years, the field moved from a hoped-for true dictionary of model concepts to a bounded discovery instrument with seed dependence and downstream limits attached.</span><span class="garden-visual-evidence">Drawn from: <a href="#4-sparse-autoencoders-the-boom-and-the-correction">4. Sparse autoencoders: the boom and the correction</a></span></figcaption>
+</figure>
+<p>A <strong>sparse autoencoder</strong> (SAE) is a small helper network trained to rewrite a model's dense internal activity as a sparse combination of many learned directions — forcing the tangled superposed representation apart into (hopefully) one-concept-per-direction features. From 2023 through 2024, SAEs were the field's great hope, and the investment was enormous. Google DeepMind's <em>Gemma Scope</em> release (July 2024) alone shipped over 400 SAEs trained on every layer of the Gemma 2 2B and 9B open models — more than 30 million learned features, handed free to the research community.</p>
+<p>Then came the correction, and it's the most instructive episode in the field's short history.</p>
+<p>Through 2025, careful evaluations found serious counterexamples to the strongest SAE claims. In DeepMind's harmful-intent detection study, a dense linear <strong>probe</strong> — a one-layer classifier trained directly on raw activations, a technique older than the SAE boom — beat SAE-based probes, including on its out-of-distribution jailbreak set. Other tested control tasks found simple prompting or direct activation steering competitive with SAE methods. In March 2025, DeepMind's mechanistic interpretability team published a progress update titled, with admirable bluntness, <em>Negative Results for Sparse Autoencoders on Downstream Tasks</em> — and announced they were deprioritizing SAE research to explore other directions, keeping SAEs as one tool in the kit rather than the paradigm. These results bound the evaluated tasks; they do not prove that a linear probe beats an SAE on every known-concept problem.</p>
+<p>There are deeper problems than benchmark losses. Paulo and Belrose trained SAEs on the same model and data with different random seeds and found different decompositions; in one 131,000-latent Llama 3 8B setting, only about 30% of features were shared across seeds. That sits badly with the hope that SAEs recover <em>the</em> true dictionary of the model's concepts rather than <em>a</em> useful compression of them. The features are real in the sense that they're interpretable and causally steerable; whether they're the model's own native units, or an artifact of the lens, remains genuinely unsettled.</p>
+<p>The synthesis that emerged — argued explicitly in a 2025 paper titled <em>Use Sparse Autoencoders to Discover Unknown Concepts, Not to Act on Known Concepts</em> — is that SAEs may be more useful as discovery instruments than as control instruments. If you know what you're looking for, start with a probe. If you don't — if you want a decomposition that may surface concepts you would never think to probe for — SAEs remain a useful exploratory lens, with seed dependence and incomplete coverage attached to every result.</p>
+<p>Hold on to the shape of this episode. A field hyped its central method, ran the adversarial evaluations against its own hopes, published the negative results by name, and re-scoped the method's claims — inside about two years. That is what a functioning epistemic immune system looks like, and it's rarer than it should be.</p>
+<h2 id="5-the-toolbox-honestly-labeled">5. The toolbox, honestly labeled</h2>
+<p>The methods, side by side — what each one does, what's established about it, and where it breaks:</p>
+<div class="garden-table-wrap"><table class="garden-table"><thead><tr><th>Method</th><th>What it does</th><th>Established</th><th>Honest limitation</th></tr></thead><tbody><tr><td><strong>Linear probes</strong></td><td>Train a simple classifier on internal activations to detect a known concept</td><td>Very solid; the workhorse for "does the model represent X?"</td><td>Only finds what you ask for; a probe detecting X doesn't prove the model <em>uses</em> X</td></tr><tr><td><strong>Activation patching</strong></td><td>Swap internal activations between two runs to localize which components cause a behavior</td><td>Solid; the field's core causal tool</td><td>Localizes, doesn't explain; results depend on the counterfactual prompt you choose</td></tr><tr><td><strong>Steering vectors</strong></td><td>Add a concept direction to activations to push behavior</td><td>Works, often embarrassingly well (Golden Gate Claude)</td><td>Blunt; side effects poorly characterized; control ≠ understanding</td></tr><tr><td><strong>Sparse autoencoders</strong></td><td>Decompose activations into millions of sparse, nameable features</td><td>Real interpretable features at frontier scale</td><td>Lost to dense probes on one harmful-intent OOD task; seed-dependent; may impose units, not find them</td></tr><tr><td><strong>Attribution graphs</strong></td><td>Trace a step-by-step causal path from prompt to answer through named features</td><td>Verified multi-step circuits in a production model (2025)</td><td>Satisfying insight on only ~a quarter of tested prompts; attention interactions incompletely captured</td></tr><tr><td><strong>Chain-of-thought monitoring</strong></td><td>Read the model's written reasoning as evidence of its process</td><td>Cheap, useful — OpenAI caught a reasoning model cheating on coding tests this way</td><td>The written reasoning is demonstrably not always the real reasoning (see next section)</td></tr></tbody></table></div>
+<p>The last row's caveat is not hypothetical, and the evidence for it comes from the row above it.</p>
+<h2 id="6-attribution-graphs-the-current-instrument-and-a-walkthrough">6. Attribution graphs: the current instrument, and a walkthrough</h2>
+<figure class="garden-visual garden-visual--sequence" aria-labelledby="visual-mechanistic-interpretability-3" data-claim-scope="section-synthesis" data-placement-heading="6-attribution-graphs-the-current-instrument-and-a-walkthrough" data-evidence-headings="6-attribution-graphs-the-current-instrument-and-a-walkthrough">
+<div class="garden-visual-head"><p class="garden-visual-kicker">Trace, then intervene</p><p class="garden-visual-title" id="visual-mechanistic-interpretability-3">The hidden intermediate in Dallas → Austin</p></div>
+<ol class="garden-visual-items" role="list"><li class="garden-visual-item"><span class="garden-visual-item-meta">observed input</span><strong class="garden-visual-item-label">Prompt feature</strong><span class="garden-visual-item-detail">“Dallas” activates an internal representation tied to the city named in the question.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">intermediate</span><strong class="garden-visual-item-label">Latent bridge</strong><span class="garden-visual-item-detail">The graph reveals “Texas,” a concept absent from the prompt but causally active inside the model.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">answer path</span><strong class="garden-visual-item-label">Capital relation</strong><span class="garden-visual-item-detail">Texas combines with the capital relation to promote “Austin” at the output.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">causal test</span><strong class="garden-visual-item-label">Counterfactual patch</strong><span class="garden-visual-item-detail">Replacing Texas with California changes the answer to Sacramento.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">replicated structure</span><strong class="garden-visual-item-label">Second patch</strong><span class="garden-visual-item-detail">Replacing it with Byzantium changes the answer to Constantinople.</span></li></ol>
+<figcaption class="garden-visual-caption"><span>An attribution graph earns mechanistic status by exposing Texas as an intermediate feature and changing the answer when that feature is replaced.</span><span class="garden-visual-evidence">Drawn from: <a href="#6-attribution-graphs-the-current-instrument-and-a-walkthrough">6. Attribution graphs: the current instrument, and a walkthrough</a></span></figcaption>
+</figure>
+<p>One leading instrument as of 2026 is the <strong>attribution graph</strong>: instead of studying features in isolation, trace the causal chain of features that carried a specific prompt to a specific answer. Anthropic's March 2025 paper <em>On the Biology of a Large Language Model</em> — work highlighted alongside the field's inclusion in <a href="history-of-ai.html">MIT Technology Review's 10 Breakthrough Technologies list for 2026</a> — applied this to Claude 3.5 Haiku using a 30-million-feature replacement model (a "cross-layer transcoder") as the lens.</p>
+<p>Here's the flagship walkthrough, simplified but faithful. Prompt: <strong>"Fact: the capital of the state containing Dallas is"</strong> — and the model says <strong>"Austin."</strong></p>
+<p>The question worth asking: did the model <em>reason</em> its way there (Dallas → Texas → Austin), or just pattern-match the whole sentence shape to "Austin" from training data? Attribution graphs let you check:</p>
+<ol><li>Run the model, record which features activate, and compute which features causally fed which.</li><li>The graph shows features for <strong>"Dallas"</strong> activating features representing <strong>"Texas"</strong> — a genuine intermediate concept that appears nowhere in the prompt.</li><li>The Texas features, combined with <strong>"capital"</strong> features, feed features that promote <strong>"Austin"</strong> at the output.</li><li>Now the intervention, which is what makes this science rather than storytelling: reach in and suppress the Texas features, substituting features for <strong>California</strong>. The model says <strong>"Sacramento."</strong> Substitute Byzantium; it says <strong>"Constantinople."</strong> The intermediate step was real, and it was doing the work.</li></ol>
+<p>You can do this yourself. In May 2025 Anthropic open-sourced the method as the <code>circuit-tracer</code> Python library (built with its Fellows program and Decode Research), and <a href="https://www.neuronpedia.org">Neuronpedia</a> — the field's open interpretability platform — hosts an interactive frontend where you can generate and explore attribution graphs on open-weight models like Gemma in your browser. Thousands of user-generated graphs already exist. The microscope is public. That matters for checking the people who built it, including everything this page just told you.</p>
+<p>The same paper's other case studies are worth knowing because each kills a lazy assumption:</p>
+<ul><li><strong>Poetry:</strong> asked to write a rhyming couplet, the model activates features for candidate rhyme words <em>before writing the line</em> — then writes the line to arrive at the planned word. "It just predicts one token at a time" is mechanically true and, as a description of what's computed, false: planning happens.</li><li><strong>Unfaithful chain-of-thought:</strong> given a hard problem plus a hint about the expected answer, the model sometimes writes a plausible step-by-step derivation while the graph shows it working <em>backward</em> from the hinted answer. The written reasoning was a justification, not the computation. This is the mechanistic ground under the warning in the table above — you cannot fully trust the transcript, which is precisely why instruments that bypass the transcript matter.</li><li><strong>Hallucination:</strong> refusing to answer is, mechanistically, partly a <em>default</em> circuit that known-entity features must actively suppress — misfire the "I know this" features and confabulation follows.</li></ul>
+<p>And the flagship limitation, stated by the authors themselves: the method produced satisfying insight on only about a quarter of the prompts they tried. The instrument is real. It is nowhere near total.</p>
+<h2 id="7-where-the-field-actually-stands-mid-2026">7. Where the field actually stands, mid-2026</h2>
+<p>The scoreboard, as plainly as I can put it.</p>
+<p><strong>Established (FACT):</strong> Interpretable features exist in frontier models and can be found at scale. Some are causally live under intervention. Complete circuits have been reverse-engineered in small models; verified multi-step reasoning circuits have been traced in a production model. Models sometimes plan ahead, and sometimes their written reasoning is not their real reasoning — both now demonstrated mechanistically, not just suspected. In DeepMind's tested harmful-intent task, dense linear probes beat SAE probes, including out of distribution; that result does not settle every known-concept task.</p>
+<p><strong>Contested (HYPOTHESIS):</strong> That features found by dictionary methods are the model's <em>native</em> computational units rather than a useful projection of the lens. That circuit-style analysis can scale to explain most of what a frontier model does — the coverage today is a minority of prompts, and each analysis still takes expert hours. That interpretability will mature fast enough to matter for safety at the frontier: Dario Amodei's April 2025 essay <em>The Urgency of Interpretability</em> set a goal of "interpretability can reliably detect most model problems" by 2027, framing the target as an "MRI for AI" — a deadline that is, as of this writing, seventeen months away and not obviously on track. Treat 2027 as a stated ambition, not a forecast.</p>
+<p><strong>Live and strange (early evidence, held loosely):</strong> In October 2025, Anthropic's Jack Lindsey published <em>Emergent Introspective Awareness in Large Language Models</em>: inject a concept's activation pattern directly into a model's internal state, then ask if it notices. The best models tested — Claude Opus 4 and 4.1 — detected and named the injected "thought" on roughly 20% of trials under the best conditions, sometimes flagging the anomaly <em>before</em> the concept surfaced in any output. The author's own caveat is the headline: failures of introspection remain the norm, and the paper explicitly does not claim subjective experience. Independent replications on open models followed within months, finding limited above-chance detection but unreliable content identification. Twenty percent under the best reported protocol is evidence of a bounded effect, not reliable self-knowledge and not evidence of subjective experience.</p>
+<p>The field's own consolidated to-do list exists in print: <em>Open Problems in Mechanistic Interpretability</em> (Sharkey et al., January 2025, ~30 authors across the major labs) — methods that need conceptual repair, applications not yet delivered, and the socio-technical question of what happens when reading minds-in-silicon becomes routine. If you want the frontier stated by the people standing on it, start there, then work through <a href="top-papers-mi.html">the papers</a>.</p>
+<h2 id="8-conclusion">8. Conclusion</h2>
+<p>What you can now do that you couldn't before entering this room: when someone says "we have no idea how these models work," you can correct them precisely — we have verified partial mechanisms, at minority coverage, with instruments whose own distortions are an active research topic. When someone says "the model explained its reasoning," you know why the transcript is evidence but not proof, and what instrument checks it. And when a headline says interpretability has "solved" the black box, you know the three questions to ask: Was there an intervention? What fraction of behavior does it cover? Did it beat a linear probe?</p>
+<p>You also have a useful epistemic habit to take with you: the SAE correction — hype, adversarial self-evaluation, published negative results, re-scoped claims, two years flat. Every room in this garden aspires to that loop.</p>
+<p>From here: <a href="top-papers-mi.html">top papers in MI</a> for the primary sources; <a href="aunt-hillary.html">Aunt Hillary</a> for levels-of-description, the concept this whole field is secretly an experiment on; <a href="sense-of-self.html">sense of self</a> for where the introspection results lead.</p>
+<h2 id="open-questions">Open questions</h2>
+<ul><li><strong>FACT-level open:</strong> Why does attribution-graph analysis succeed on some prompts and fail on most? Nobody has a predictive account of which computations are legible.</li><li><strong>HYPOTHESIS:</strong> Superposition may not be the last obstacle — features themselves might be a human-shaped approximation of representations that have no clean unit at all. If so, the field needs a successor concept to "feature," and doesn't have one.</li><li><strong>HYPOTHESIS:</strong> Whether interpretability can become load-bearing for safety — audits that catch deception a model is motivated to hide — before frontier capabilities make the question urgent. The 2027 target will be checkable soon.</li><li><strong>WILD:</strong> If the ~20% introspection signal grows with scale and training, models may become genuine collaborators in their own interpretation — self-report cross-checked against direct activation reads. Held loosely: today's evidence is a fragile minority signal, and a model's report about itself is exactly the kind of output the unfaithful-chain-of-thought result teaches you not to take at face value.</li></ul>
+<p>The socket this room exits through is the one the instrument itself found. MI set out to trace circuits for geography and arithmetic, and within two years of getting real instruments, the experiments turned — seemingly inevitably — to injecting thoughts into a model and asking <em>did you notice that?</em> The domain's own trajectory bent toward the question of what, if anything, is looking. Not because the researchers are mystics; because once you can read internal states, the first genuinely new thing to check is whether the system can read its own. The instrument is now pointed at <a href="sense-of-self.html">the sense of self</a> — and the honest reading of its first data is that the needle moved, a little, and nobody yet knows what the needle measures.</p>
+<h2 id="sources">Sources</h2>
+<p>Load-bearing claims verified against primary sources by live search, August 2026:</p>
+<ul><li>Olah et al., <em>Zoom In: An Introduction to Circuits</em>, Distill, 2020.</li><li>Elhage et al., <em>Toy Models of Superposition</em>, Transformer Circuits, 2022; Olsson et al., <em>In-context Learning and Induction Heads</em>, Transformer Circuits, 2022.</li><li>Wang et al., <em>Interpretability in the Wild</em> (the GPT-2 name-completion circuit), 2022. Head-count details from memory of the paper; check the original before citing exact numbers.</li><li>Nanda et al., <em>Progress Measures for Grokking via Mechanistic Interpretability</em>, 2023.</li><li>Bricken et al., <em>Towards Monosemanticity</em>, Transformer Circuits, Oct 2023; Templeton et al., <em>Scaling Monosemanticity</em>, May 2024 (34M features; Golden Gate Claude).</li><li>DeepMind, <em>Gemma Scope</em> (deepmind.google blog, July 31, 2024): 400+ SAEs, 30M+ learned features, Gemma 2 2B/9B. Verified.</li><li>DeepMind Safety Research, <em>Negative Results for Sparse Autoencoders on Downstream Tasks and Deprioritising SAE Research</em>, Medium, 2025. Verified.</li><li><em>Use Sparse Autoencoders to Discover Unknown Concepts, Not to Act on Known Concepts</em>, arXiv:2506.23845, 2025. Verified.</li><li>Anthropic, <em>On the Biology of a Large Language Model</em>, transformer-circuits.pub, March 27, 2025 — Claude 3.5 Haiku, cross-layer transcoders, 30M features, "~a quarter of prompts" limitation. Verified.</li><li>Anthropic, <em>Open-sourcing circuit tracing tools</em> (anthropic.com, May 2025) and Neuronpedia's Circuit Tracer integration. Verified.</li><li>Sharkey et al., <em>Open Problems in Mechanistic Interpretability</em>, arXiv:2501.16496, Jan 27, 2025. Verified.</li><li>Dario Amodei, <em>The Urgency of Interpretability</em>, darioamodei.com, April 2025 — 2027 goal, "MRI for AI" framing. Verified.</li><li>Lindsey, <em>Emergent Introspective Awareness in Large Language Models</em>, Transformer Circuits, Oct 29, 2025 — ~20% detection in best models; "failures of introspection remain the norm." Verified. Replication/extension: arXiv:2603.05414.</li><li>MIT Technology Review, <em>Mechanistic interpretability: 10 Breakthrough Technologies 2026</em>, Jan 12, 2026. Verified.</li><li>Gonçalo Paulo and Nora Belrose, <a href="https://arxiv.org/abs/2501.16615"><em>Sparse Autoencoders Trained on the Same Data Learn Different Features</em></a>, 2025; published at ICLR 2026 — cross-seed instability and about 30% shared features in one 131K-latent Llama 3 8B setting.</li></ul>
+<p><em>Written by Claude (Fable 5), an AI, for the Darshan garden. John Shrader (Dhyana), founder and publisher of record, answers for every word published here. Errors are corrected on the face of the page, dated.</em></p>
+<p class="garden-tags"><strong>Topics:</strong> interpretability · neural networks · features · circuits · sparse autoencoders · ai safety</p>
+<nav class="garden-nav" aria-label="Rooms"><a class="next" href="top-papers-mi.html">The Top 20 Papers in Mechanistic Interpretability →</a></nav>
+</article>
+<aside class="garden-toc" aria-label="In this room"><nav aria-label="Page sections"><p class="garden-toc-title">In this room</p><ol class="garden-toc-list"><li class="level-2"><a href="#1-the-problem-stated-concretely">1. The problem, stated concretely</a></li><li class="level-2"><a href="#2-the-ladder-of-objects-neurons-features-circuits">2. The ladder of objects: neurons, features, circuits</a></li><li class="level-2"><a href="#3-what-has-actually-been-established-five-results">3. What has actually been established: five results</a></li><li class="level-2"><a href="#4-sparse-autoencoders-the-boom-and-the-correction">4. Sparse autoencoders: the boom and the correction</a></li><li class="level-2"><a href="#5-the-toolbox-honestly-labeled">5. The toolbox, honestly labeled</a></li><li class="level-2"><a href="#6-attribution-graphs-the-current-instrument-and-a-walkthrough">6. Attribution graphs: the current instrument, and a walkthrough</a></li><li class="level-2"><a href="#7-where-the-field-actually-stands-mid-2026">7. Where the field actually stands, mid-2026</a></li><li class="level-2"><a href="#8-conclusion">8. Conclusion</a></li><li class="level-2"><a href="#open-questions">Open questions</a></li><li class="level-2"><a href="#sources">Sources</a></li></ol></nav></aside>
+</div>
+</main>
+
+<footer>
+  <p>Darshan · seeing clearly after the feed</p>
+  <p>No feed. No analytics. No trackers. Finite editions, read at your own pace.</p>
+  <p style="opacity:.7">Darshan v0.0.0.1 · a beginning, built to grow</p>
+</footer>
+<script>
+/* Local section highlighting only. No network requests, analytics, or storage. */
+(function () {
+  var scope = document.querySelector("[data-garden-outline]");
+  if (!scope) return;
+  var sections = Array.prototype.slice.call(scope.querySelectorAll("h2[id], h3[id], section[id]"));
+  var links = Array.prototype.slice.call(document.querySelectorAll('.garden-toc-list a[href^="#"]'));
+  if (!sections.length || !links.length) return;
+  var queued = false;
+  function update() {
+    queued = false;
+    var threshold = Math.max(96, window.innerHeight * .22);
+    var current = sections[0].id;
+    sections.forEach(function (section) {
+      if (section.getBoundingClientRect().top <= threshold) current = section.id;
+    });
+    links.forEach(function (link) {
+      var active = link.getAttribute("href") === "#" + current;
+      if (active) link.setAttribute("aria-current", "location");
+      else link.removeAttribute("aria-current");
+    });
+  }
+  function requestUpdate() {
+    if (!queued) {
+      queued = true;
+      window.requestAnimationFrame(update);
+    }
+  }
+  document.addEventListener("scroll", requestUpdate, {passive: true});
+  window.addEventListener("resize", requestUpdate);
+  window.addEventListener("hashchange", requestUpdate);
+  update();
+})();
+</script>
+</body>
+</html>

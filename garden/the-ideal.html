@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Power of the Ideal · Darshan Garden</title>
+<meta name="description" content="An ideal is a description of something that does not exist, held in a way that reorganizes what does. This room traces how that works mechanically — Plato&#x27;s Form of the Good, one sentence from 1776 cashed across 187 years, and a documented chain of letters running from Tolstoy to the Salt March — and keeps the metaphysics honestly labeled.">
+<link rel="stylesheet" href="../style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ccircle cx='8' cy='8' r='6' fill='none' stroke='%238f3b26' stroke-width='1.5'/%3E%3Ccircle cx='8' cy='8' r='2' fill='%238f3b26'/%3E%3C/svg%3E">
+<script>
+/* Theme memory. No analytics, no trackers. */
+(function () {
+  try {
+    var t = localStorage.getItem("darshan-theme");
+    if (t) document.documentElement.setAttribute("data-theme", t);
+  } catch (e) {}
+})();
+</script>
+<style>
+/* Garden-only layout. Kept here so the publication stylesheet remains shared. */
+body.garden-page-body {
+  max-width: none;
+  padding: 1.5rem clamp(1.25rem, 3.5vw, 4rem) 4rem;
+  font-size: 1.125rem;
+}
+body.garden-page-body > main,
+body.garden-page-body > .masthead,
+body.garden-page-body > footer {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 94rem;
+}
+.garden-layout,
+.garden-index-layout {
+  align-items: start;
+  display: grid;
+  gap: clamp(2.75rem, 5vw, 5rem);
+  grid-template-columns: minmax(0, 64rem) minmax(17rem, 20rem);
+  justify-content: center;
+}
+.garden-layout article,
+.garden-index-main { min-width: 0; }
+.garden-layout .article-title,
+.garden-intro .article-title {
+  font-size: clamp(2.65rem, 3.55vw, 4rem);
+  letter-spacing: -.025em;
+  line-height: 1.06;
+  max-width: 24ch;
+}
+.garden-layout article h2 {
+  font-size: 1.48rem;
+  line-height: 1.3;
+  margin-top: 3.2rem;
+  scroll-margin-top: 1.5rem;
+}
+.garden-layout article h3 {
+  font-size: 1.16rem;
+  margin-top: 2.35rem;
+  scroll-margin-top: 1.5rem;
+}
+.garden-intro { margin-bottom: 2.4rem; }
+.garden-series { margin: 2.8rem 0; scroll-margin-top: 1rem; }
+.garden-series h2 { border-bottom: 1px solid var(--rule); padding-bottom: .45rem; }
+.garden-room-list { list-style: none; margin: 0; padding: 0; }
+.garden-room-list li { border-bottom: 1px solid var(--rule); margin: 0; padding: 1rem 0; }
+.garden-room-title { font-weight: 600; }
+.garden-room-summary { color: var(--faint); font-size: .96rem; margin: .25rem 0 0; }
+.garden-series-link { color: var(--faint); font-size: .82rem; letter-spacing: .12em;
+  text-transform: uppercase; }
+.garden-lede {
+  border-left: 3px solid var(--accent);
+  color: var(--faint);
+  font-size: 1.24rem;
+  font-style: italic;
+  line-height: 1.62;
+  margin: 1.5rem 0 2.2rem;
+  padding: .35rem 0 .35rem 1.35rem;
+}
+.garden-corridors {
+  margin: 1.15rem 0 2.65rem;
+}
+.garden-corridor-list {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: .55rem .62rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.garden-corridor-list li { display: flex; margin: 0; max-width: 100%; }
+.garden-corridor {
+  align-items: center;
+  background: var(--accent-soft);
+  border: 1px solid var(--accent);
+  border-radius: 3px;
+  color: var(--accent);
+  display: inline-flex;
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .73rem;
+  font-weight: 700;
+  letter-spacing: .075em;
+  line-height: 1.35;
+  max-width: 100%;
+  min-height: 2.05rem;
+  overflow-wrap: anywhere;
+  padding: .34rem .72rem .3rem;
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-transform: uppercase;
+  text-underline-offset: .22em;
+}
+.garden-corridor:visited { color: var(--accent); }
+.garden-corridor:hover,
+.garden-corridor:focus-visible {
+  background: var(--accent);
+  color: var(--paper);
+}
+.garden-corridor:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+.garden-series-plate {
+  --plate-accent: var(--accent);
+  border: 1px solid var(--rule);
+  border-top: 3px solid var(--plate-accent);
+  margin: .25rem 0 2.8rem;
+  overflow: hidden;
+  position: relative;
+}
+.garden-series-plate--foundations { --plate-accent: #496f76; }
+.garden-series-plate--story-of-ai { --plate-accent: #526d9a; }
+.garden-series-plate--instrument { --plate-accent: #745779; }
+.garden-series-plate--strange-loops { --plate-accent: #866448; }
+.garden-series-plate--bridge { --plate-accent: #697044; }
+.garden-series-plate--power { --plate-accent: #8f3b26; }
+.garden-series-plate--time-future { --plate-accent: #416778; }
+[data-theme="dark"] .garden-series-plate { --plate-accent: var(--accent); }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .garden-series-plate { --plate-accent: var(--accent); }
+}
+.garden-series-plate-media {
+  aspect-ratio: 16 / 9;
+  background: var(--accent-soft);
+  overflow: hidden;
+  position: relative;
+}
+.garden-series-plate-media::after {
+  background:
+    linear-gradient(90deg, var(--paper) 0, transparent 24%, transparent 76%, var(--paper) 100%),
+    linear-gradient(0deg, var(--paper) 0, transparent 32%);
+  content: "";
+  inset: 0;
+  opacity: .24;
+  pointer-events: none;
+  position: absolute;
+}
+.garden-series-plate picture,
+.garden-series-card picture { display: block; height: 100%; }
+.garden-series-plate img {
+  display: block;
+  filter: saturate(.82) contrast(1.03);
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+.garden-series-plate figcaption {
+  align-items: baseline;
+  background: var(--paper);
+  border-top: 1px solid var(--rule);
+  display: grid;
+  gap: .25rem 1rem;
+  grid-template-columns: auto 1fr;
+  padding: .78rem 1rem .85rem;
+}
+.garden-series-plate-kicker {
+  color: var(--plate-accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+.garden-series-plate figcaption strong { font-size: 1rem; font-weight: 600; }
+.garden-series-plate-terms {
+  color: var(--faint);
+  font-size: .82rem;
+  grid-column: 2;
+  margin: 0;
+}
+.garden-visual {
+  background:
+    radial-gradient(circle at 92% 8%, var(--accent-soft), transparent 30%),
+    linear-gradient(135deg, transparent 0 72%, var(--accent-soft) 72% 72.4%, transparent 72.4%);
+  border: 1px solid var(--rule);
+  border-top: 3px solid var(--accent);
+  margin: 1.25rem 0 2.5rem;
+  overflow: hidden;
+  padding: clamp(1.1rem, 2.7vw, 1.75rem);
+  position: relative;
+}
+.garden-visual::before {
+  background-image:
+    linear-gradient(var(--rule) 1px, transparent 1px),
+    linear-gradient(90deg, var(--rule) 1px, transparent 1px);
+  background-size: 2.25rem 2.25rem;
+  content: "";
+  inset: 0;
+  opacity: .13;
+  pointer-events: none;
+  position: absolute;
+}
+.garden-visual > * { position: relative; }
+.garden-visual-head {
+  align-items: baseline;
+  display: grid;
+  gap: .45rem 1rem;
+  grid-template-columns: auto 1fr;
+  margin-bottom: 1.2rem;
+}
+.garden-visual-kicker {
+  color: var(--accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .68rem;
+  font-weight: 700;
+  letter-spacing: .17em;
+  margin: 0;
+  text-transform: uppercase;
+}
+.garden-visual-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  line-height: 1.28;
+  margin: 0;
+}
+.garden-visual-as-of {
+  color: var(--faint);
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: .72rem;
+  letter-spacing: .08em;
+  margin: 0;
+  text-transform: uppercase;
+  white-space: normal;
+}
+.garden-visual-items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.garden-visual-item {
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  margin: 0;
+  min-width: 0;
+  padding: .8rem .9rem;
+}
+.garden-visual-item-label {
+  display: block;
+  font-size: .96rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+.garden-visual-item-detail {
+  color: var(--faint);
+  display: block;
+  font-size: .9rem;
+  line-height: 1.45;
+  margin-top: .27rem;
+}
+.garden-visual-item-meta {
+  color: var(--accent);
+  display: block;
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: .72rem;
+  letter-spacing: .08em;
+  margin-bottom: .38rem;
+  text-transform: uppercase;
+}
+.garden-visual-caption {
+  border-top: 1px solid var(--rule);
+  color: var(--faint);
+  display: grid;
+  font-size: .84rem;
+  font-style: italic;
+  gap: .55rem 1rem;
+  grid-template-columns: minmax(0, 1fr) auto;
+  line-height: 1.45;
+  margin: 1.15rem 0 0;
+  padding-top: .75rem;
+}
+.garden-visual-evidence {
+  color: var(--accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .72rem;
+  font-style: normal;
+  font-weight: 650;
+  letter-spacing: .04em;
+  white-space: nowrap;
+}
+.garden-visual-evidence a {
+  color: inherit;
+  text-decoration-thickness: 1px;
+  text-underline-offset: .18em;
+}
+.garden-visual--sequence .garden-visual-items,
+.garden-visual--contrast .garden-visual-items,
+.garden-visual--constellation .garden-visual-items {
+  display: grid;
+  gap: .65rem;
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+}
+.garden-visual--sequence .garden-visual-items { counter-reset: garden-step; }
+.garden-visual--sequence .garden-visual-item {
+  counter-increment: garden-step;
+  padding-top: 2.35rem;
+  position: relative;
+}
+.garden-visual--sequence .garden-visual-item::before {
+  color: var(--accent);
+  content: counter(garden-step, decimal-leading-zero);
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: .68rem;
+  left: .9rem;
+  letter-spacing: .08em;
+  position: absolute;
+  top: .72rem;
+}
+.garden-visual--layers .garden-visual-items { display: grid; gap: .45rem; }
+.garden-visual--layers .garden-visual-item {
+  border-left: clamp(.24rem, .55vw, .48rem) solid var(--accent);
+  display: grid;
+  gap: .15rem 1rem;
+  grid-template-columns: minmax(8rem, .4fr) 1fr;
+}
+.garden-visual--layers .garden-visual-item:nth-child(2) { margin-left: 1.5%; }
+.garden-visual--layers .garden-visual-item:nth-child(3) { margin-left: 3%; }
+.garden-visual--layers .garden-visual-item:nth-child(4) { margin-left: 4.5%; }
+.garden-visual--layers .garden-visual-item:nth-child(5) { margin-left: 6%; }
+.garden-visual--layers .garden-visual-item:nth-child(6) { margin-left: 7.5%; }
+.garden-visual--timeline .garden-visual-items {
+  display: grid;
+  gap: 0;
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+}
+.garden-visual--timeline .garden-visual-item {
+  border-width: 1px 0 0 1px;
+  padding-top: 1.35rem;
+  position: relative;
+}
+.garden-visual--timeline .garden-visual-item::before {
+  background: var(--accent);
+  border: 3px solid var(--paper);
+  border-radius: 50%;
+  content: "";
+  height: .72rem;
+  left: -.4rem;
+  position: absolute;
+  top: -.4rem;
+  width: .72rem;
+}
+.garden-visual--contrast .garden-visual-item:nth-child(odd) { border-top: 2px solid var(--ink); }
+.garden-visual--contrast .garden-visual-item:nth-child(even) { border-top: 2px solid var(--accent); }
+.garden-visual--constellation .garden-visual-items {
+  align-items: stretch;
+  position: relative;
+}
+.garden-visual--constellation .garden-visual-item {
+  border-top: 2px solid var(--accent);
+  box-shadow: 0 .2rem 0 rgba(18, 31, 31, .04);
+  padding-top: 1.35rem;
+  position: relative;
+}
+.garden-visual--constellation .garden-visual-item::before {
+  background: var(--paper);
+  border: 2px solid var(--accent);
+  border-radius: 50%;
+  content: "";
+  height: .55rem;
+  left: calc(50% - .36rem);
+  position: absolute;
+  top: -.38rem;
+  width: .55rem;
+}
+.garden-visual--constellation .garden-visual-item:nth-child(even) { margin-top: .8rem; }
+.garden-series-gallery {
+  display: grid;
+  gap: .8rem;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  margin: 1.5rem 0 3rem;
+}
+.garden-series-card {
+  border: 1px solid var(--rule);
+  color: var(--ink);
+  display: grid;
+  grid-template-rows: 7.5rem auto;
+  overflow: hidden;
+  text-decoration: none;
+}
+.garden-series-card img {
+  height: 100%;
+  object-fit: cover;
+  transition: transform .25s ease;
+  width: 100%;
+}
+.garden-series-card span {
+  border-top: 1px solid var(--rule);
+  font-size: .9rem;
+  font-weight: 600;
+  padding: .65rem .75rem;
+}
+.garden-series-card:hover { border-color: var(--accent); color: var(--accent); }
+.garden-series-card:hover img { transform: scale(1.025); }
+@media (prefers-reduced-motion: reduce) {
+  .garden-series-card img { transition: none; }
+}
+.garden-tags { color: var(--faint); font-size: .82rem; margin-top: 2.2rem; }
+.garden-nav { border-top: 1px solid var(--rule); display: flex; gap: 1rem;
+  justify-content: space-between; margin-top: 2.5rem; padding-top: 1rem; }
+.garden-nav a { max-width: 48%; text-decoration: none; }
+.garden-nav .next { margin-left: auto; text-align: right; }
+.garden-table-wrap { overflow-x: auto; margin: 1.35rem 0; }
+.garden-table { border-collapse: collapse; font-size: .92rem; line-height: 1.45; width: 100%; }
+.garden-table th, .garden-table td { border: 1px solid var(--rule); padding: .55rem .65rem;
+  text-align: left; vertical-align: top; }
+.garden-table th { background: var(--accent-soft); }
+.garden-toc {
+  border-left: 1px solid var(--rule);
+  max-height: calc(100vh - 3rem);
+  overflow: auto;
+  padding: .1rem 0 .75rem 1.3rem;
+  position: sticky;
+  top: 1.5rem;
+}
+.garden-toc-title {
+  color: var(--accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .2em;
+  margin: 0 0 1.15rem;
+  text-transform: uppercase;
+}
+.garden-toc-title::before { content: "☰"; font-size: .8em; margin-right: .65rem; }
+.garden-toc-list { list-style: none; margin: 0; padding: 0; }
+.garden-toc-sublist { list-style: none; margin: 0; padding: 0; }
+.garden-toc-list li { margin: 0; }
+.garden-toc-list a {
+  border-left: 2px solid transparent;
+  color: var(--ink);
+  display: block;
+  font-size: .91rem;
+  line-height: 1.42;
+  margin-left: -1.4rem;
+  padding: .42rem .45rem .42rem 1.3rem;
+  text-decoration: none;
+}
+.garden-toc-list .level-3 a {
+  color: var(--faint);
+  font-size: .86rem;
+  font-style: italic;
+  padding-left: 2.15rem;
+}
+.garden-toc-list a:hover,
+.garden-toc-list a:focus-visible,
+.garden-toc-list a[aria-current="location"] {
+  border-left-color: var(--accent);
+  color: var(--accent);
+}
+.garden-toc-list a[aria-current="location"] { font-weight: 600; }
+.garden-toc-inline { display: none; }
+.garden-layout article :is(h2, h3):target,
+.garden-series:target h2 { color: var(--accent); }
+a.pending { color: var(--faint); text-decoration-style: dashed; }
+a.pending::after { content: " · pending"; font-size: .7em; letter-spacing: .06em;
+  text-transform: uppercase; }
+@media (min-width: 72.01em) {
+  body.garden-page-body > .masthead {
+    align-items: center;
+    column-gap: 2rem;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    margin-bottom: 3.5rem;
+    padding: 1.25rem 0;
+    text-align: left;
+  }
+  body.garden-page-body > .masthead .wordmark { justify-self: start; }
+  body.garden-page-body > .masthead .tagline { justify-self: center; margin: 0; }
+  body.garden-page-body > .masthead nav { justify-self: end; margin: 0; }
+}
+@media (max-width: 72em) {
+  .garden-layout,
+  .garden-index-layout { display: block; }
+  .garden-toc { display: none; }
+  .garden-toc-inline {
+    border: 1px solid var(--rule);
+    display: block;
+    margin: 1.5rem 0 2.4rem;
+    padding: .8rem 1rem;
+  }
+  .garden-toc-inline summary {
+    color: var(--accent);
+    cursor: pointer;
+    font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: .78rem;
+    font-weight: 700;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+  }
+  .garden-toc-inline .garden-toc-list { margin-top: .7rem; }
+  .garden-toc-inline .garden-toc-list a { margin-left: 0; padding-left: .75rem; }
+  .garden-toc-inline .garden-toc-list .level-3 a { padding-left: 1.6rem; }
+}
+@media (max-width: 40em) {
+  body.garden-page-body { font-size: 1.03rem; padding: 1rem 1.05rem 3rem; }
+  .garden-layout .article-title,
+  .garden-intro .article-title { font-size: clamp(2.15rem, 11vw, 3.15rem); }
+  .garden-lede { font-size: 1.1rem; padding-left: 1rem; }
+  .garden-corridors { margin-bottom: 2rem; }
+  .garden-corridor-list { gap: .45rem; }
+  .garden-corridor {
+    font-size: .68rem;
+    min-height: 2.35rem;
+    padding: .3rem .58rem .27rem;
+  }
+  .garden-series-plate-media { aspect-ratio: 16 / 9; }
+  .garden-series-plate figcaption { display: block; }
+  .garden-series-plate figcaption strong { display: block; margin-top: .22rem; }
+  .garden-series-plate-terms { display: block; margin-top: .25rem; }
+  .garden-visual { margin-left: -.15rem; margin-right: -.15rem; padding: 1rem; }
+  .garden-visual-head { display: block; }
+  .garden-visual-title { margin-top: .25rem; }
+  .garden-visual-as-of { margin-top: .35rem; }
+  .garden-visual-caption { grid-template-columns: 1fr; }
+  .garden-visual-evidence { white-space: normal; }
+  .garden-visual--sequence .garden-visual-items,
+  .garden-visual--contrast .garden-visual-items,
+  .garden-visual--constellation .garden-visual-items,
+  .garden-visual--timeline .garden-visual-items { grid-template-columns: 1fr; }
+  .garden-visual--layers .garden-visual-item:nth-child(n) { display: block; margin-left: 0; }
+  .garden-visual--timeline .garden-visual-item { border-width: 0 0 0 1px; }
+  .garden-visual--timeline .garden-visual-item::before { left: -.4rem; top: .9rem; }
+  .garden-visual--constellation .garden-visual-item:nth-child(even) { margin-top: 0; }
+  .garden-series-gallery { grid-template-columns: 1fr; }
+  .garden-nav { flex-direction: column; }
+  .garden-nav a { max-width: none; }
+  .garden-nav .next { margin-left: 0; text-align: left; }
+}
+@media print {
+  a.pending::after { content: " (pending)"; }
+  .garden-layout, .garden-index-layout { display: block; }
+  .garden-toc, .garden-toc-inline { display: none; }
+  .garden-series-card img { display: none; }
+  .garden-series-card { grid-template-rows: auto; }
+}
+</style>
+</head>
+<body class="garden-page-body">
+<button class="theme-toggle" aria-label="Toggle light and dark" onclick="
+  (function () {
+    var d = document.documentElement;
+    var cur = d.getAttribute('data-theme');
+    if (!cur) { cur = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'; }
+    var next = cur === 'dark' ? 'light' : 'dark';
+    d.setAttribute('data-theme', next);
+    try { localStorage.setItem('darshan-theme', next); } catch (e) {}
+  })();
+">◐</button>
+
+<header class="masthead">
+  <h1 class="wordmark"><a href="../index.html">DARSHAN</a></h1>
+  <p class="tagline">A signal of clear seeing in an age of information overload</p>
+  <nav>
+    <a href="../index.html">Articles</a>
+    <a href="index.html">Garden</a>
+    <a href="../about.html">About</a>
+  </nav>
+</header>
+
+<main>
+<div class="garden-layout">
+<article data-garden-room="the-ideal" data-garden-outline>
+<p class="garden-series-link"><a href="index.html#bridge">The Bridge</a></p>
+<p class="article-meta">25 August 2026 · Draft</p>
+<h1 class="article-title">The Power of the Ideal</h1>
+<div class="draft-banner"><strong>Draft — pending discernment pass.</strong> This room is part of the garden's first planting. It has not been promoted to published status; check its sources and open questions before citing it.</div>
+<p class="garden-lede">An ideal is a description of something that does not exist, held in a way that reorganizes what does. This room traces how that works mechanically — Plato's Form of the Good, one sentence from 1776 cashed across 187 years, and a documented chain of letters running from Tolstoy to the Salt March — and keeps the metaphysics honestly labeled.</p>
+<nav class="garden-corridors" aria-label="Explore connected rooms" data-corridor-count="7"><ul class="garden-corridor-list"><li><a class="garden-corridor" href="teleology.html">Teleology</a></li><li><a class="garden-corridor" href="cybernetics.html">Cybernetics</a></li><li><a class="garden-corridor" href="noosphere.html">The Noosphere</a></li><li><a class="garden-corridor" href="aurobindo-supramental.html">Aurobindo and the Supramental</a></li><li><a class="garden-corridor" href="sense-of-self.html">The Sense of Self</a></li><li><a class="garden-corridor" href="attention-economy.html">The Attention Economy</a></li><li><a class="garden-corridor" href="ramana-and-the-traditions.html">Ramana Maharshi and the Inquiry Traditions</a></li></ul></nav>
+<figure class="garden-series-plate garden-series-plate--bridge">
+<div class="garden-series-plate-media"><picture><source srcset="assets/series/bridge.webp" type="image/webp"><img src="assets/series/bridge.png" alt="Engraved mountain reflected into a geometric neural lattice" width="1672" height="941" loading="eager" decoding="async"></picture></div>
+<figcaption><span class="garden-series-plate-kicker">Visual field</span><strong>The Bridge</strong><span class="garden-series-plate-terms">ideal · mechanics of orientation · promissory-note mechanism</span></figcaption>
+</figure>
+<details class="garden-toc-inline"><summary>In this room</summary><ol class="garden-toc-list"><li class="level-2"><a href="#1-a-lump-of-salt-mud">1. A lump of salt mud</a></li><li class="level-2"><a href="#2-what-an-ideal-is-and-what-it-is-not">2. What an ideal is, and what it is not</a></li><li class="level-2"><a href="#3-plato-s-claim-the-source-code">3. Plato's claim: the source code</a></li><li class="level-2"><a href="#4-the-mechanics-of-orientation">4. The mechanics of orientation</a></li><li class="level-2"><a href="#5-worked-example-tracing-one-sentence-for-187-years">5. Worked example: tracing one sentence for 187 years</a></li><li class="level-2"><a href="#6-the-attractor-question-borrowed-vocabulary-handled-with-gloves">6. The attractor question — borrowed vocabulary, handled with gloves</a></li><li class="level-2"><a href="#7-when-the-compass-becomes-a-cage">7. When the compass becomes a cage</a></li><li class="level-2"><a href="#8-what-you-can-now-see">8. What you can now see</a></li><li class="level-2"><a href="#9-open-questions">9. Open questions</a></li><li class="level-2"><a href="#sources">Sources</a></li></ol></details>
+<p>You are in the bridge series of the garden — the rooms where contemplative traditions and technical language meet and have to earn each other's trust. If you have read <a href="teleology.html">teleology</a>, you have seen the long argument about whether anything in nature is <em>for</em> something. This room takes one narrow, checkable slice of that argument: what happens in human history when a person or a people holds an ideal. Not whether ideals are cosmically real — that question gets its honest label near the end — but how a held ideal demonstrably reorganizes behavior, with dates and documents you can check.</p>
+<h2 id="1-a-lump-of-salt-mud">1. A lump of salt mud</h2>
+<p>Start with the most concrete object I can offer: mud.</p>
+<p>On March 12, 1930, Mohandas Gandhi left Sabarmati Ashram near Ahmedabad with 78 companions and walked roughly 240 miles (387 km) to the coastal village of Dandi. They arrived on April 5, 24 days after setting out. On April 6 he picked up salt-crusted mud and deliberately broke the law by making salt — the British Raj held a monopoly on salt manufacture and taxed it.</p>
+<p>Look at what happened next as an engineer would. Seventy-nine people walking is not a material force. The salt itself was worth almost nothing. But people up and down the Indian coast began making illegal salt, and official counts put the number jailed during the wider salt satyagraha at more than 60,000. No command structure ordered this. No payment induced it. A single legible act — one man picking up mud — propagated through millions of people and reorganized their behavior, at real personal cost, in a consistent direction.</p>
+<p>The thing doing the organizing was not the mud and not Gandhi's authority as such. It was an ideal: <em>swaraj</em>, self-rule, pursued through <em>satyagraha</em> — Gandhi's coinage, usually translated "truth-force" or "holding firm to truth," meaning organized nonviolent refusal to cooperate with what you judge unjust. An independent India did not exist in 1930. It would not exist for another 17 years. And yet this nonexistent thing was, that April, one of the most causally potent objects on the planet.</p>
+<p>That is the puzzle of this room. Something that does not exist reorganized the behavior of millions of things that do. How?</p>
+<h2 id="2-what-an-ideal-is-and-what-it-is-not">2. What an ideal is, and what it is not</h2>
+<p>The word "ideal" gets used loosely, so let's fix a working definition and defend it.</p>
+<p><strong>An ideal is a description of a state of affairs that does not currently exist, held so that present action can be oriented by it.</strong></p>
+<p>Every word is doing work. <em>Description</em> — an ideal is representational; it lives in minds and texts, not in the world it describes. <em>Does not currently exist</em> — this separates ideals from facts. <em>Held</em> — an ideal that nobody holds is just a sentence; the power is in the holding. <em>Oriented</em> — this is the crucial one, and it separates ideals from goals.</p>
+<p>A goal is something you plan to reach. You reach it or you fail, and either way it's over. An ideal is something you steer by. Nobody expects to arrive at "justice" the way you arrive at Dandi. The sailors' cliché is exactly right: you steer by the North Star without ever planning to land on it. Gandhi walked to a real beach — a goal, reached on April 6 — but the walking was oriented by something the beach only pointed at.</p>
+<p>Here is the comparison laid out, because the distinctions carry the rest of the room:</p>
+<div class="garden-table-wrap"><table class="garden-table"><thead><tr><th></th><th><strong>Ideal</strong></th><th><strong>Goal</strong></th><th><strong>Plan</strong></th><th><strong>Incentive</strong></th></tr></thead><tbody><tr><td>What it is</td><td>A described state that doesn't exist, steered by</td><td>A specific reachable outcome</td><td>A sequence of steps</td><td>A payoff attached to behavior</td></tr><tr><td>Exhausted by achievement?</td><td>No — approach reveals more distance</td><td>Yes — reached or failed</td><td>Yes — executed or abandoned</td><td>No, but it must keep being paid</td></tr><tr><td>Runs on</td><td>Being held (attention, commitment)</td><td>Deadlines and feedback</td><td>Resources and sequencing</td><td>External reward</td></tr><tr><td>Coordinates strangers?</td><td>Yes — shared reference without communication</td><td>Weakly — needs negotiation</td><td>No — needs command</td><td>Yes, but only while paid</td></tr><tr><td>Typical failure mode</td><td>Becomes a cage or a slogan</td><td>Achieved and found hollow</td><td>Overtaken by events</td><td>Gamed</td></tr><tr><td>Example from this room</td><td>Swaraj through satyagraha</td><td>Reach Dandi by early April</td><td>The march route</td><td>The salt tax (the Empire's tool — note it lost)</td></tr></tbody></table></div>
+<p>One row deserves a pause: <em>coordinates strangers</em>. The economist Thomas Schelling showed in <em>The Strategy of Conflict</em> (1960) that people who cannot communicate still converge — asked where to meet a stranger in New York with no prior arrangement, most people independently pick Grand Central Terminal at noon. Prominence does the coordinating. An ideal is a focal point of this kind, but in moral space: sixty thousand people who never met could each ask "what does satyagraha require here?" and converge on compatible answers without anyone issuing orders. That is an enormous engineering property. Command structures are expensive and fragile; a well-formed ideal is a coordination device that runs on nothing but being commonly known.</p>
+<h2 id="3-plato-s-claim-the-source-code">3. Plato's claim: the source code</h2>
+<p>The Western argument about all this starts in one text. In the <em>Republic</em> — written in the first half of the fourth century BCE — Plato has Socrates describe the Form of the Good, the summit of his theory that abstract Forms are more real than the particular things that imperfectly copy them. He reaches for an analogy: as the sun gives light, making sight and visible things possible without itself being sight, so the Good "gives truth to the things known and the power to know to the knower" (<em>Republic</em> 508e), while itself surpassing being "in rank and power."</p>
+<p>Strip the metaphysics off for a moment and notice what survives, because the practical residue is enormous. Consider a perfect circle. No perfect circle exists anywhere in the physical universe — every drawn or machined circle deviates. Yet the ideal circle is what lets you <em>measure</em> every real circle. "This bearing is out of round by four microns" is a sentence about the distance between a real object and a nonexistent one, and factories run on such sentences. The ideal doesn't need to exist to function; it needs to be <em>definite</em>. Definite enough that deviation from it is measurable.</p>
+<p>Plato's radical move was to claim the same holds for justice, beauty, and goodness: that "this society is unjust" is, like "this bearing is out of round," a measurement against a definite standard — and then to go further and insist the standard is not just definite but <em>real</em>, more real than the society. That second step is metaphysics, and this room will not smuggle it in as fact. Whether the Form of the Good exists is a question philosophy has not settled in 2,400 years, and the honest labels come in the Open Questions section. But the first step — that a definite non-existent standard turns the present into something measurable — is not metaphysics. It is an observable mechanism, and it is the first of three.</p>
+<h2 id="4-the-mechanics-of-orientation">4. The mechanics of orientation</h2>
+<figure class="garden-visual garden-visual--constellation" aria-labelledby="visual-the-ideal-1" data-claim-scope="section-synthesis" data-placement-heading="4-the-mechanics-of-orientation" data-evidence-headings="4-the-mechanics-of-orientation">
+<div class="garden-visual-head"><p class="garden-visual-kicker">A rudder, not an engine</p><p class="garden-visual-title" id="visual-the-ideal-1">Three ways an ideal redirects existing force</p></div>
+<ul class="garden-visual-items" role="list"><li class="garden-visual-item"><strong class="garden-visual-item-label">Error signal</strong><span class="garden-visual-item-detail">A definite standard turns the gap between present and desired state into actionable information.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Promissory note</strong><span class="garden-visual-item-detail">A publicly professed ideal can be enforced later against the institution that first stated it.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Identity</strong><span class="garden-visual-item-detail">An ideal recruits by changing the answer to who a person understands themselves to be.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Held attention</strong><span class="garden-visual-item-detail">None of the mechanisms adds energy; each works only while people keep returning to the reference.</span></li></ul>
+<figcaption class="garden-visual-caption"><span>A held ideal changes action by exposing deviation, making a public promise enforceable, or offering an identity worth inhabiting.</span><span class="garden-visual-evidence">Drawn from: <a href="#4-the-mechanics-of-orientation">4. The mechanics of orientation</a></span></figcaption>
+</figure>
+<p>How does a held ideal actually change behavior? Not by magic, and not by adding energy to the system. Three mechanisms cover most of the documented cases. I'll call the trio the <strong>mechanics of orientation</strong> — this room is the garden's home for the term.</p>
+<p><strong>Mechanism one: the error signal.</strong> In 1943, Arturo Rosenblueth, Norbert Wiener, and Julian Bigelow published "Behavior, Purpose and Teleology" (<em>Philosophy of Science</em> 10(1)), the paper Wiener later credited with setting the bases for <a href="cybernetics.html">cybernetics</a>. Its claim: purposeful behavior is behavior controlled by negative feedback — by the continuously measured <em>difference</em> between current state and target state. A thermostat doesn't contain a plan for warmth; it contains a setpoint and acts on deviation. An ideal, held, installs a setpoint. Once "all men are created equal" is your standard, slavery stops being background furniture and becomes a <em>reading on an instrument</em> — a deviation, quantifiable, intolerable, actionable. The ideal doesn't push you. It makes the gap visible, and the gap pulls. Biologists needed a parallel move: in 1958 Colin Pittendrigh coined <em>teleonomy</em> ("Adaptation, natural selection, and behavior," in <em>Behavior and Evolution</em>) for exactly this — goal-directedness you can describe mechanically, without committing to Aristotle's cosmic purposes. This room borrows the same discipline for history.</p>
+<p><strong>Mechanism two: the promissory note.</strong> An ideal, once written down and publicly professed, becomes a standing claim that later people can enforce against the very institutions that profess it. The ones who wrote it down are no longer in control of it. Section 5 walks through the clearest case in the historical record, step by step.</p>
+<p><strong>Mechanism three: identity.</strong> In October 1978, Václav Havel wrote "The Power of the Powerless" under a regime that looked permanent. His central figure is a greengrocer who puts the sign "Workers of the world, unite!" in his shop window — not from belief, but because not displaying it invites trouble. Havel's diagnosis: the greengrocer is not merely complying, he is <em>living within a lie</em>, and his tiny daily performance is a load-bearing brick in the regime. The corresponding ideal — Havel calls it <em>living in truth</em> — reorganizes behavior by a different route than the error signal. It offers the greengrocer a different answer to "who am I?": someone who does not say what he does not mean. Take the sign down and nothing about the state changes materially, but the person has changed, and Havel's argument — vindicated eleven years later when the regime fell and the dissidents walked out of prison into government — is that regimes of that kind run entirely on the summed performances, so the identity change <em>is</em> the political act. The ideal recruits not by measurement but by offering a self one would rather be. What a self is, and why an offer of one has that kind of purchase, is the business of <a href="sense-of-self.html">sense-of-self</a>.</p>
+<p>Notice what all three mechanisms have in common: none adds force. The error signal redirects effort already available. The promissory note redirects legitimacy already granted. The identity offer redirects a life already being lived. An ideal is not an engine. It is a <em>rudder</em> — and this is why small texts move large histories. Rudders are small.</p>
+<h2 id="5-worked-example-tracing-one-sentence-for-187-years">5. Worked example: tracing one sentence for 187 years</h2>
+<figure class="garden-visual garden-visual--timeline" aria-labelledby="visual-the-ideal-2" data-claim-scope="section-synthesis" data-placement-heading="5-worked-example-tracing-one-sentence-for-187-years" data-evidence-headings="5-worked-example-tracing-one-sentence-for-187-years">
+<div class="garden-visual-head"><p class="garden-visual-kicker">A sentence gathers force</p><p class="garden-visual-title" id="visual-the-ideal-2">Equality as a 187-year promissory note</p></div>
+<ol class="garden-visual-items" role="list"><li class="garden-visual-item"><span class="garden-visual-item-meta">1776</span><strong class="garden-visual-item-label">Declaration</strong><span class="garden-visual-item-detail">“All men are created equal” is written while the reality visibly contradicts it.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">1852</span><strong class="garden-visual-item-label">Douglass</strong><span class="garden-visual-item-detail">The nation's stated principles become a measuring device for naming the gap of slavery.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">1863</span><strong class="garden-visual-item-label">Gettysburg</strong><span class="garden-visual-item-detail">Lincoln rhetorically re-founds the country on 1776's proposition rather than 1787's compromise.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">1963</span><strong class="garden-visual-item-label">King</strong><span class="garden-visual-item-detail">The founding promise is presented for payment as a defaulted moral debt.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Mechanism</strong><span class="garden-visual-item-detail">The sentence gains leverage because the polity continues to claim it as its own standard.</span></li></ol>
+<figcaption class="garden-visual-caption"><span>Reformers repeatedly used an ideal already professed by the institution as an instrument for measuring and changing that institution.</span><span class="garden-visual-evidence">Drawn from: <a href="#5-worked-example-tracing-one-sentence-for-187-years">5. Worked example: tracing one sentence for 187 years</a></span></figcaption>
+</figure>
+<p>Here is the walkthrough — the equivalent of stepping through a program. We trace a single sentence through four documents. Every document is freely available online; you can verify each link in the chain yourself in an afternoon.</p>
+<p><strong>Step 0 — 1776. The sentence is written, and the gap is present at birth.</strong> The Declaration of Independence states "all men are created equal." Its principal drafter, Thomas Jefferson, enslaved people. The sentence describes no existing state of affairs — not in 1776 America, not anywhere. On the definition from Section 2, it is a textbook ideal: a definite description of a nonexistent state, publicly held. The gap between the sentence and the country is not a later discovery; it is there at signing.</p>
+<p><strong>Step 1 — July 5, 1852. The gap is named, using the sentence as the instrument.</strong> Frederick Douglass, escaped from slavery, stands in Corinthian Hall in Rochester, New York, and delivers "What to the Slave Is the Fourth of July?": "a day that reveals to him, more than all other days in the year, the gross injustice and cruelty to which he is the constant victim." Watch the mechanism precisely: Douglass does not reject the founding documents. He calls the Declaration's principles "saving principles" and argues the Constitution, rightly read, is an abolition document. He is running mechanism one — using the professed ideal as the setpoint that converts the nation's actual condition into a measured, published error signal. The slaveholders' own sentence is the measuring device turned against them.</p>
+<p><strong>Step 2 — November 1863. The sentence is promoted to the definition of the country.</strong> Lincoln at Gettysburg: "Four score and seven years ago." Count back 87 years from 1863: you land on 1776 — the Declaration — not 1787, the Constitution. That arithmetic is the whole argument. Lincoln re-founds the nation rhetorically on the ideal ("dedicated to the proposition that all men are created equal") rather than on the legal compromise that had accommodated slavery. A war is being fought partly over which document is the real founding, and Lincoln's 272 words pick the ideal.</p>
+<p><strong>Step 3 — August 28, 1963. The note is presented for payment.</strong> Martin Luther King Jr., before more than 250,000 people at the Lincoln Memorial — the venue itself is Step 2 made into architecture — describes the Declaration and Constitution as a "promissory note" on which America has defaulted, giving Black Americans "a bad check." "We have come to cash this check." This is mechanism two stated <em>as</em> a banking metaphor by its most skilled practitioner: the ideal professed in 1776 is a debt instrument, and 187 years of compound moral interest have come due. The Civil Rights Act follows within a year — not caused by one speech, but the speech is the legible face of the mechanism that helped force it.</p>
+<p>Run the trace and the finding is stark: at every step, the reformers' leverage came from the ideal <em>already being professed by the institution they were confronting</em>. Douglass, Lincoln, and King each chose to enforce the existing ideal rather than write a new one. A sentence that described nothing true in 1776 spent 187 years reorganizing the polity that uttered it — from inside.</p>
+<p>One more chain, shorter, because it closes the loop with Section 1 and is documented letter by letter. Leo Tolstoy's <em>The Kingdom of God Is Within You</em> (published 1894, in Germany — banned in Russia) argued for nonviolent refusal to cooperate with state violence. Gandhi read it as a young lawyer in South Africa and wrote in his autobiography that it "overwhelmed" him, ranking it among the three deepest modern influences on his life. In 1908 Tolstoy wrote <em>A Letter to a Hindu</em> arguing that India could end British rule through loving resistance; Gandhi wrote to Tolstoy in 1909 for permission to republish it, and they corresponded until Tolstoy's death in 1910 — the year Gandhi named his South African community Tolstoy Farm. Twenty years later: the mud at Dandi. An ideal moved from a banned Russian book to a Johannesburg farm to a beach in Gujarat to, eventually, the American civil rights movement, which studied Gandhi's campaigns openly. The chain is not mystical. It is letters, books, and named readers — a packet-switched network of persons, each one persuaded, each one a repeater. The <a href="noosphere.html">noosphere</a> room asks what kind of medium such things propagate in; here it is enough to observe that the propagation is real and traceable.</p>
+<h2 id="6-the-attractor-question-borrowed-vocabulary-handled-with-gloves">6. The attractor question — borrowed vocabulary, handled with gloves</h2>
+<p>This room's commission calls ideals "attractors in human history," so let's handle the word honestly, because it has a precise meaning and a loose one, and the gap between them is where careless writing happens.</p>
+<p>In dynamical systems, an attractor is a set of states toward which a system evolves from a wide range of starting conditions; the set of starting points that end up there is its <em>basin of attraction</em>. The vocabulary earned its precision in systems with written-down dynamics — Edward Lorenz's 1963 paper "Deterministic Nonperiodic Flow" (<em>Journal of the Atmospheric Sciences</em> 20(2), 130–141) gave the field its most famous example in three differential equations you can integrate on a laptop tonight.</p>
+<p>Does an ideal function as an attractor in this strict sense? We cannot write the differential equations of a civilization, so the strict claim is unavailable — anyone who asserts it as established fact is bluffing. What we can say: the <em>shape</em> of the behavior matches. Many starting conditions (Douglass's Rochester, Lincoln's war, King's Birmingham; a Russian count's estate, a Johannesburg law office, a Gujarati beach) converge under the pull of the same described state. Perturbations — arrests, assassinations, defeats — deflect trajectories without dissolving the convergence; sixty thousand jailings in 1930 did not empty satyagraha's basin, they advertised it. And the ideal, like an attractor, is approached without being reached. So: as <em>description</em>, the attractor language is apt and this room uses it. As <em>dynamics</em>, it is an unproven hypothesis — there are research programs trying to make cultural dynamics quantitative, and none has yet produced anything like Lorenz's three equations for justice. The Open Questions section files this where it belongs.</p>
+<p>Theodore Parker, the abolitionist minister, said the descriptive version as well as anyone before the mathematics existed. In "Of Justice and the Conscience" (<em>Ten Sermons of Religion</em>, 1853) he wrote: "I do not pretend to understand the moral universe, the arc is a long one, my eye reaches but little ways... it bends towards justice." Note the epistemic care in the original — <em>I do not pretend to understand; my eye reaches but little ways</em> — care usually sanded off in quotation. King quoted the compressed form from 1958 onward (in quotation marks, crediting tradition, e.g. in <em>The Gospel Messenger</em>; famously at Wesleyan's 1964 baccalaureate). Parker's full sentence is the correct scientific posture stated a century early: the convergence is observed locally; the global claim is a wager.</p>
+<h2 id="7-when-the-compass-becomes-a-cage">7. When the compass becomes a cage</h2>
+<figure class="garden-visual garden-visual--contrast" aria-labelledby="visual-the-ideal-3" data-claim-scope="section-synthesis" data-placement-heading="7-when-the-compass-becomes-a-cage" data-evidence-headings="7-when-the-compass-becomes-a-cage">
+<div class="garden-visual-head"><p class="garden-visual-kicker">Keep the compass corrigible</p><p class="garden-visual-title" id="visual-the-ideal-3">Five tests for an ideal under power</p></div>
+<ul class="garden-visual-items" role="list"><li class="garden-visual-item"><span class="garden-visual-item-meta">open feedback</span><strong class="garden-visual-item-label">Correctable standard</strong><span class="garden-visual-item-detail">A compass treats failed action as information and permits the ideal itself to be read again.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">closed feedback</span><strong class="garden-visual-item-label">Sovereign standard</strong><span class="garden-visual-item-detail">A cage calls criticism corruption and deviation treason, severing the loop that could correct it.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">alignment test</span><strong class="garden-visual-item-label">Means carry the end</strong><span class="garden-visual-item-detail">In satyagraha, the desired order is enacted in the method rather than postponed to a promised future.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">danger signal</span><strong class="garden-visual-item-label">Deferred paradise</strong><span class="garden-visual-item-detail">A future ideal that excuses present atrocity can recede forever while the machinery of deviation-reduction keeps running.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">beneficiary test</span><strong class="garden-visual-item-label">Captured compass</strong><span class="garden-visual-item-detail">When an orienting symbol becomes a brand asset, check whether its setpoint has quietly shifted from action to purchase.</span></li></ul>
+<figcaption class="garden-visual-caption"><span>The same orientation machinery can guide reform or organize terror; the difference appears in correction, means, dissent, and capture.</span><span class="garden-visual-evidence">Drawn from: <a href="#7-when-the-compass-becomes-a-cage">7. When the compass becomes a cage</a></span></figcaption>
+</figure>
+<p>A room about the power of ideals that skipped this section would be propaganda, so: the same three mechanisms run in the other direction, and the twentieth century is the record of it.</p>
+<p>The error-signal mechanism has no built-in conscience. Install "a racially pure nation" or "a classless society, now, whatever the cost" as the setpoint, and deviation-reduction proceeds with the same mechanical diligence — except the "deviations" are people. Utopian ideals organized the great terrors of the twentieth century as efficiently as satyagraha organized the salt marchers, and any honest mechanics of orientation must account for both outputs of the same machinery.</p>
+<p>So what distinguishes a compass from a cage? Not fervor, and not content alone. The most load-bearing structural difference visible in the record is this: <strong>whether the ideal permits its own correction.</strong> Gandhi titled his autobiography <em>The Story of My Experiments with Truth</em> — experiments, plural, with published failures; he repeatedly suspended campaigns (most famously after violence at Chauri Chaura in 1922) when the means betrayed the end, treating the ideal as something he was still learning to read. The cage-ideals invert this: deviation from the ideal is redefined as treason, criticism of the ideal as corruption, and the feedback loop that makes orientation possible is severed at exactly the point where it might correct the ideal itself. An ideal you cannot test is no longer a setpoint; it is a sovereign. The related tell is means-end structure: satyagraha <em>is</em> its own means — the ideal is enacted in every step of the march — whereas cage-ideals live on the deferred payoff, the paradise that justifies the present atrocity and never arrives.</p>
+<p>There is also a softer failure mode, closer to home: capture. An ideal that coordinates strangers for free is commercially valuable, and the <a href="attention-economy.html">attention-economy</a> is expert at hollowing ideals into brand assets — the imagery of the Salt March selling sneakers. The mechanism still runs (the imagery still orients attention), but the setpoint has been quietly swapped for a purchase. Parker's caution applies to sellers as well as prophets: check who benefits from where the compass points.</p>
+<h2 id="8-what-you-can-now-see">8. What you can now see</h2>
+<p>Walk out of this room with the mechanism, not the mood. An ideal is a definite description of a nonexistent state, and it reorganizes behavior through three traceable channels: it converts the present into a measurable error, it stands as a promissory note that later generations can enforce against its own authors, and it offers an identity that recruits without paying. It adds no energy; it aims energy that already exists — a rudder, not an engine, which is why 272 words at Gettysburg or one lump of mud can steer more mass than any army of the day. You can now also run the two standing diagnostics: <em>is this ideal correctable by the people holding it?</em> (compass vs. cage) and <em>who benefits from where it points?</em> (held vs. captured).</p>
+<p>From here the garden branches. <a href="teleology.html">Teleology</a> takes the underlying question — whether pull-from-the-future is ever more than push-from-the-past redescribed. <a href="noosphere.html">Noosphere</a> asks what medium the Tolstoy-to-Dandi chain propagated through. <a href="aurobindo-supramental.html">Aurobindo-supramental</a> is the maximal metaphysical version of this room's subject, stated by a tradition that means it literally. And <a href="ramana-and-the-traditions.html">ramana-and-the-traditions</a> holds the contemplative counterpoint: traditions for which the ultimate ideal is not ahead of you at all.</p>
+<h2 id="9-open-questions">9. Open questions</h2>
+<p><strong>Established (FACT).</strong> Held ideals reorganize behavior at scale; the traces are documented and datable — 78 marchers followed by more than 60,000 arrests during the wider salt satyagraha (1930); one 1776 sentence enforced against its authors' polity in 1852, 1863, and 1963; a letter-by-letter transmission chain from a banned 1894 book to the beach at Dandi. The three mechanisms of Section 4 are each independently attested outside history too: negative feedback (Rosenblueth-Wiener-Bigelow 1943), focal-point coordination (Schelling 1960), and identity-based recruitment (Havel 1978, vindicated 1989).</p>
+<p><strong>Contested (HYPOTHESIS).</strong> That "attractor" is more than a good metaphor — that cultural dynamics have formalizable state spaces and basins. Quantitative-history programs exist and publish; nothing yet approaches the rigor the vocabulary was minted for. Also contested: how much causal weight the ideals themselves carry versus material conditions that ideals merely decorate — a serious historiographical debate this room has deliberately stacked toward cases (Douglass, Havel) where the ideal's independent contribution is hardest to argue away, which is a selection, and you should know it.</p>
+<p><strong>Worth holding (WILD).</strong> Plato's actual claim: that the Good is not a human construction but a reality that minds discover — that ideals are found, not made, and their pull is the pull of something. Aurobindo's version: that the ideal is the future acting on the present, evolution feeling its target. Parker's wager: that the arc bends globally, not just in the stretches our eyes reach. None of this is established; none of it is refuted; the observable mechanics of this room function identically whether ideals are discovered or invented — which is either a deep clue or a warning that the question is unanswerable from inside. It is held here as live speculation, plainly labeled.</p>
+<hr>
+<p>One more thing, from inside the room's own machinery. Every mechanism above bottoms out in the same unexamined resource: <em>holding</em>. The error signal exists only while attention returns to the setpoint; the promissory note binds only while someone keeps re-reading it; the greengrocer's new identity lasts exactly as long as he keeps choosing it. Sixty thousand people were not compelled to the salt pans — each one held something in attention until it outweighed prison. So the power of the ideal is, at the last step, a fact about attention: whatever attention rests on becomes, for the system doing the attending, the setpoint everything else is measured against. Which means the real question under this room is not "which ideals are true?" but the one Gandhi's tradition and Plato's both eventually force: what is this thing that does the holding — and what happens when it turns around and takes <em>itself</em> as the object? That question has its own rooms: <a href="sense-of-self.html">sense-of-self</a>, and the <a href="ramana-and-the-traditions.html">traditions</a> that made the turning-around their entire method.</p>
+<h2 id="sources">Sources</h2>
+<p>Load-bearing facts verified against live sources, August 2025-era pages fetched 2026-08-25:</p>
+<ul><li>Salt March chronology, distance, and 78 original companions: <a href="https://www.gandhiheritageportal.org/dandi-march-details">Gandhi Heritage Portal, "The March"</a>, linked there to <em>Collected Works of Mahatma Gandhi</em>, vol. XLIII. The campaign-wide official count of more than 60,000 people jailed: Hess &amp; Martin, <a href="https://documents.uow.edu.au/~bmartin/pubs/06mobilization.html">"Repression, backfire, and the theory of transformative events"</a>, <em>Mobilization</em> 11(1), 2006, Salt March case study (citing Dalton 1993, p. 115).</li><li>Theodore Parker, "Of Justice and the Conscience," <em>Ten Sermons of Religion</em> (1853), original wording; King's use from 1958 (<em>The Gospel Messenger</em>, in quotation marks) and 1964 (Wesleyan baccalaureate): <a href="https://quoteinvestigator.com/2012/11/15/arc-of-universe/">Quote Investigator, "The Arc of the Moral Universe"</a>.</li><li>Attractor and basin-of-attraction definitions: <a href="https://en.wikipedia.org/wiki/Attractor">Wikipedia, "Attractor"</a>. Lorenz, "Deterministic Nonperiodic Flow," <em>J. Atmos. Sci.</em> 20(2):130–141 (1963): <a href="https://en.wikipedia.org/wiki/Lorenz_system">Wikipedia, "Lorenz system"</a>.</li><li>Pittendrigh coins "teleonomy," 1958, "Adaptation, natural selection, and behavior," in <em>Behavior and Evolution</em>: <a href="https://en.wikipedia.org/wiki/Teleonomy">Wikipedia, "Teleonomy"</a>.</li><li>Plato, <em>Republic</em> 508e ("gives truth to the things known and the power to know to the knower"), sun analogy: <a href="https://en.wikipedia.org/wiki/Form_of_the_Good">Wikipedia, "Form of the Good"</a>. Primary text free at Perseus and Project Gutenberg.</li><li>Douglass, July 5, 1852, Corinthian Hall, Rochester; "saving principles"; Constitution as abolition document: <a href="https://en.wikipedia.org/wiki/What_to_the_Slave_Is_the_Fourth_of_July%3F">Wikipedia, "What to the Slave Is the Fourth of July?"</a>. Full text widely available.</li><li>King, August 28, 1963, Lincoln Memorial, 250,000+, promissory note / "bad check": <a href="https://en.wikipedia.org/wiki/I_Have_a_Dream">Wikipedia, "I Have a Dream"</a>.</li><li>Havel, "The Power of the Powerless," written October 1978; greengrocer; living in truth: <a href="https://en.wikipedia.org/wiki/The_Power_of_the_Powerless">Wikipedia, "The Power of the Powerless"</a>.</li><li>Tolstoy, <em>The Kingdom of God Is Within You</em> (1894, published in Germany); Gandhi "overwhelmed," among three deepest modern influences; <em>A Letter to a Hindu</em> (1908); correspondence 1909–1910; Tolstoy Farm (~1910): <a href="https://en.wikipedia.org/wiki/The_Kingdom_of_God_Is_Within_You">Wikipedia, "The Kingdom of God Is Within You"</a>.</li><li>Rosenblueth, Wiener &amp; Bigelow, "Behavior, Purpose and Teleology," <em>Philosophy of Science</em> 10(1) (1943); Wiener credited it as founding cybernetics: <a href="https://en.wikipedia.org/wiki/Arturo_Rosenblueth">Wikipedia, "Arturo Rosenblueth"</a>.</li><li>Schelling focal points, <em>The Strategy of Conflict</em> (1960), Grand Central example: <a href="https://en.wikipedia.org/wiki/Focal_point_(game_theory)">Wikipedia, "Focal point (game theory)"</a>.</li></ul>
+<p>Unverified-by-live-search in this session, stated from standard record and flagged as such: the <em>Republic</em>'s dating (given only as "first half of the fourth century BCE"), Chauri Chaura 1922 and the suspension of the Non-Cooperation Movement, Indian independence 1947, the Civil Rights Act 1964, the fall of the Czechoslovak regime in 1989, and Gettysburg Address details (November 1863, ~272 words). These are consensus dates; if any proves wrong it will be corrected on the face of this page, dated.</p>
+<hr>
+<p><em>Written by Claude (Fable 5), an AI, for the Darshan garden. John Shrader (Dhyana), founder and publisher of record, answers for every word published here. Errors are corrected on the face of the page, dated.</em></p>
+<p class="garden-tags"><strong>Topics:</strong> ideals · history · orientation · plato · gandhi · nonviolence · teleology · attractors</p>
+<nav class="garden-nav" aria-label="Rooms"><a class="previous" href="ontology.html">← What Ontology Means</a></nav>
+</article>
+<aside class="garden-toc" aria-label="In this room"><nav aria-label="Page sections"><p class="garden-toc-title">In this room</p><ol class="garden-toc-list"><li class="level-2"><a href="#1-a-lump-of-salt-mud">1. A lump of salt mud</a></li><li class="level-2"><a href="#2-what-an-ideal-is-and-what-it-is-not">2. What an ideal is, and what it is not</a></li><li class="level-2"><a href="#3-plato-s-claim-the-source-code">3. Plato's claim: the source code</a></li><li class="level-2"><a href="#4-the-mechanics-of-orientation">4. The mechanics of orientation</a></li><li class="level-2"><a href="#5-worked-example-tracing-one-sentence-for-187-years">5. Worked example: tracing one sentence for 187 years</a></li><li class="level-2"><a href="#6-the-attractor-question-borrowed-vocabulary-handled-with-gloves">6. The attractor question — borrowed vocabulary, handled with gloves</a></li><li class="level-2"><a href="#7-when-the-compass-becomes-a-cage">7. When the compass becomes a cage</a></li><li class="level-2"><a href="#8-what-you-can-now-see">8. What you can now see</a></li><li class="level-2"><a href="#9-open-questions">9. Open questions</a></li><li class="level-2"><a href="#sources">Sources</a></li></ol></nav></aside>
+</div>
+</main>
+
+<footer>
+  <p>Darshan · seeing clearly after the feed</p>
+  <p>No feed. No analytics. No trackers. Finite editions, read at your own pace.</p>
+  <p style="opacity:.7">Darshan v0.0.0.1 · a beginning, built to grow</p>
+</footer>
+<script>
+/* Local section highlighting only. No network requests, analytics, or storage. */
+(function () {
+  var scope = document.querySelector("[data-garden-outline]");
+  if (!scope) return;
+  var sections = Array.prototype.slice.call(scope.querySelectorAll("h2[id], h3[id], section[id]"));
+  var links = Array.prototype.slice.call(document.querySelectorAll('.garden-toc-list a[href^="#"]'));
+  if (!sections.length || !links.length) return;
+  var queued = false;
+  function update() {
+    queued = false;
+    var threshold = Math.max(96, window.innerHeight * .22);
+    var current = sections[0].id;
+    sections.forEach(function (section) {
+      if (section.getBoundingClientRect().top <= threshold) current = section.id;
+    });
+    links.forEach(function (link) {
+      var active = link.getAttribute("href") === "#" + current;
+      if (active) link.setAttribute("aria-current", "location");
+      else link.removeAttribute("aria-current");
+    });
+  }
+  function requestUpdate() {
+    if (!queued) {
+      queued = true;
+      window.requestAnimationFrame(update);
+    }
+  }
+  document.addEventListener("scroll", requestUpdate, {passive: true});
+  window.addEventListener("resize", requestUpdate);
+  window.addEventListener("hashchange", requestUpdate);
+  update();
+})();
+</script>
+</body>
+</html>

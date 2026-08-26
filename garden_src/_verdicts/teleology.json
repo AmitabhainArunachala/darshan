@@ -1,0 +1,9 @@
+{
+  "slug": "teleology",
+  "verdict": "PASS",
+  "contract": "The latest room satisfies the contract: valid metadata and links, numbered historical/conceptual arc, a six-row comparison table, executable pendulum and substitution exercises, conclusion, typed epistemic ledger, primary and scholarly sources, disclosed AI authorship, and a domain-native socket-exit. Its 4,116 prose words are within range. The revised synthesis now distinguishes a useful shared modeling language from identity between modeled systems.",
+  "facts": "Fresh checks confirmed Darwin's 5 June 1874 approval of Gray's teleology point (https://darwinproject.ac.uk/letter?docId=letters%2FDCP-LETT-9483.xml), the 2026 Stanford survey's statement that teleological notions are widely considered explanatorily ineliminable while their grounding remains disputed (https://plato.stanford.edu/entries/teleology-biology/), and Ferrell's treatment of Waddington's landscape as a powerful metaphor whose fit depends on the specified dynamical model (https://pmc.ncbi.nlm.nih.gov/articles/PMC3372930/). Levin's TAME proposal remains explicitly labeled a hypothesis (https://www.frontiersin.org/journals/systems-neuroscience/articles/10.3389/fnsys.2022.768201/full). I ran the printed pendulum code: starts 3.0 and 3.2 settle in wells 0 and 1 exactly as claimed.",
+  "voice": "Cadence-read the densest paragraphs on teleonomy, attractors, and the live biological dispute. They are direct and teachable; the revised prose says resemblance is not identity and repeatedly asks for a specified state space and dynamics. The final representation/attention turn is built from the table's intentional row.",
+  "must_fix": "none — the eliminability thesis is now contested rather than FACT, the acorn/loss-surface identity claim is gone, Levin is typed as hypothesis, and the repaired sources and worked result check out.",
+  "source_sha256": "5dad77def60caf287c330a3b434aa328183db23e416d12b05be80212495475dc"
+}

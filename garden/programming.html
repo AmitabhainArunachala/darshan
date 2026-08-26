@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>What Programming Is · Darshan Garden</title>
+<meta name="description" content="Programming is the act of turning thought into instructions a machine can execute without understanding them. This room traces how that act evolved from plugboards to Python to AI agents, compares the major paradigms, and gives an honest account of what programming means now that machines write a growing share of the code.">
+<link rel="stylesheet" href="../style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ccircle cx='8' cy='8' r='6' fill='none' stroke='%238f3b26' stroke-width='1.5'/%3E%3Ccircle cx='8' cy='8' r='2' fill='%238f3b26'/%3E%3C/svg%3E">
+<script>
+/* Theme memory. No analytics, no trackers. */
+(function () {
+  try {
+    var t = localStorage.getItem("darshan-theme");
+    if (t) document.documentElement.setAttribute("data-theme", t);
+  } catch (e) {}
+})();
+</script>
+<style>
+/* Garden-only layout. Kept here so the publication stylesheet remains shared. */
+body.garden-page-body {
+  max-width: none;
+  padding: 1.5rem clamp(1.25rem, 3.5vw, 4rem) 4rem;
+  font-size: 1.125rem;
+}
+body.garden-page-body > main,
+body.garden-page-body > .masthead,
+body.garden-page-body > footer {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 94rem;
+}
+.garden-layout,
+.garden-index-layout {
+  align-items: start;
+  display: grid;
+  gap: clamp(2.75rem, 5vw, 5rem);
+  grid-template-columns: minmax(0, 64rem) minmax(17rem, 20rem);
+  justify-content: center;
+}
+.garden-layout article,
+.garden-index-main { min-width: 0; }
+.garden-layout .article-title,
+.garden-intro .article-title {
+  font-size: clamp(2.65rem, 3.55vw, 4rem);
+  letter-spacing: -.025em;
+  line-height: 1.06;
+  max-width: 24ch;
+}
+.garden-layout article h2 {
+  font-size: 1.48rem;
+  line-height: 1.3;
+  margin-top: 3.2rem;
+  scroll-margin-top: 1.5rem;
+}
+.garden-layout article h3 {
+  font-size: 1.16rem;
+  margin-top: 2.35rem;
+  scroll-margin-top: 1.5rem;
+}
+.garden-intro { margin-bottom: 2.4rem; }
+.garden-series { margin: 2.8rem 0; scroll-margin-top: 1rem; }
+.garden-series h2 { border-bottom: 1px solid var(--rule); padding-bottom: .45rem; }
+.garden-room-list { list-style: none; margin: 0; padding: 0; }
+.garden-room-list li { border-bottom: 1px solid var(--rule); margin: 0; padding: 1rem 0; }
+.garden-room-title { font-weight: 600; }
+.garden-room-summary { color: var(--faint); font-size: .96rem; margin: .25rem 0 0; }
+.garden-series-link { color: var(--faint); font-size: .82rem; letter-spacing: .12em;
+  text-transform: uppercase; }
+.garden-lede {
+  border-left: 3px solid var(--accent);
+  color: var(--faint);
+  font-size: 1.24rem;
+  font-style: italic;
+  line-height: 1.62;
+  margin: 1.5rem 0 2.2rem;
+  padding: .35rem 0 .35rem 1.35rem;
+}
+.garden-corridors {
+  margin: 1.15rem 0 2.65rem;
+}
+.garden-corridor-list {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: .55rem .62rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.garden-corridor-list li { display: flex; margin: 0; max-width: 100%; }
+.garden-corridor {
+  align-items: center;
+  background: var(--accent-soft);
+  border: 1px solid var(--accent);
+  border-radius: 3px;
+  color: var(--accent);
+  display: inline-flex;
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .73rem;
+  font-weight: 700;
+  letter-spacing: .075em;
+  line-height: 1.35;
+  max-width: 100%;
+  min-height: 2.05rem;
+  overflow-wrap: anywhere;
+  padding: .34rem .72rem .3rem;
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-transform: uppercase;
+  text-underline-offset: .22em;
+}
+.garden-corridor:visited { color: var(--accent); }
+.garden-corridor:hover,
+.garden-corridor:focus-visible {
+  background: var(--accent);
+  color: var(--paper);
+}
+.garden-corridor:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+.garden-series-plate {
+  --plate-accent: var(--accent);
+  border: 1px solid var(--rule);
+  border-top: 3px solid var(--plate-accent);
+  margin: .25rem 0 2.8rem;
+  overflow: hidden;
+  position: relative;
+}
+.garden-series-plate--foundations { --plate-accent: #496f76; }
+.garden-series-plate--story-of-ai { --plate-accent: #526d9a; }
+.garden-series-plate--instrument { --plate-accent: #745779; }
+.garden-series-plate--strange-loops { --plate-accent: #866448; }
+.garden-series-plate--bridge { --plate-accent: #697044; }
+.garden-series-plate--power { --plate-accent: #8f3b26; }
+.garden-series-plate--time-future { --plate-accent: #416778; }
+[data-theme="dark"] .garden-series-plate { --plate-accent: var(--accent); }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .garden-series-plate { --plate-accent: var(--accent); }
+}
+.garden-series-plate-media {
+  aspect-ratio: 16 / 9;
+  background: var(--accent-soft);
+  overflow: hidden;
+  position: relative;
+}
+.garden-series-plate-media::after {
+  background:
+    linear-gradient(90deg, var(--paper) 0, transparent 24%, transparent 76%, var(--paper) 100%),
+    linear-gradient(0deg, var(--paper) 0, transparent 32%);
+  content: "";
+  inset: 0;
+  opacity: .24;
+  pointer-events: none;
+  position: absolute;
+}
+.garden-series-plate picture,
+.garden-series-card picture { display: block; height: 100%; }
+.garden-series-plate img {
+  display: block;
+  filter: saturate(.82) contrast(1.03);
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+.garden-series-plate figcaption {
+  align-items: baseline;
+  background: var(--paper);
+  border-top: 1px solid var(--rule);
+  display: grid;
+  gap: .25rem 1rem;
+  grid-template-columns: auto 1fr;
+  padding: .78rem 1rem .85rem;
+}
+.garden-series-plate-kicker {
+  color: var(--plate-accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+.garden-series-plate figcaption strong { font-size: 1rem; font-weight: 600; }
+.garden-series-plate-terms {
+  color: var(--faint);
+  font-size: .82rem;
+  grid-column: 2;
+  margin: 0;
+}
+.garden-visual {
+  background:
+    radial-gradient(circle at 92% 8%, var(--accent-soft), transparent 30%),
+    linear-gradient(135deg, transparent 0 72%, var(--accent-soft) 72% 72.4%, transparent 72.4%);
+  border: 1px solid var(--rule);
+  border-top: 3px solid var(--accent);
+  margin: 1.25rem 0 2.5rem;
+  overflow: hidden;
+  padding: clamp(1.1rem, 2.7vw, 1.75rem);
+  position: relative;
+}
+.garden-visual::before {
+  background-image:
+    linear-gradient(var(--rule) 1px, transparent 1px),
+    linear-gradient(90deg, var(--rule) 1px, transparent 1px);
+  background-size: 2.25rem 2.25rem;
+  content: "";
+  inset: 0;
+  opacity: .13;
+  pointer-events: none;
+  position: absolute;
+}
+.garden-visual > * { position: relative; }
+.garden-visual-head {
+  align-items: baseline;
+  display: grid;
+  gap: .45rem 1rem;
+  grid-template-columns: auto 1fr;
+  margin-bottom: 1.2rem;
+}
+.garden-visual-kicker {
+  color: var(--accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .68rem;
+  font-weight: 700;
+  letter-spacing: .17em;
+  margin: 0;
+  text-transform: uppercase;
+}
+.garden-visual-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  line-height: 1.28;
+  margin: 0;
+}
+.garden-visual-as-of {
+  color: var(--faint);
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: .72rem;
+  letter-spacing: .08em;
+  margin: 0;
+  text-transform: uppercase;
+  white-space: normal;
+}
+.garden-visual-items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.garden-visual-item {
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  margin: 0;
+  min-width: 0;
+  padding: .8rem .9rem;
+}
+.garden-visual-item-label {
+  display: block;
+  font-size: .96rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+.garden-visual-item-detail {
+  color: var(--faint);
+  display: block;
+  font-size: .9rem;
+  line-height: 1.45;
+  margin-top: .27rem;
+}
+.garden-visual-item-meta {
+  color: var(--accent);
+  display: block;
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: .72rem;
+  letter-spacing: .08em;
+  margin-bottom: .38rem;
+  text-transform: uppercase;
+}
+.garden-visual-caption {
+  border-top: 1px solid var(--rule);
+  color: var(--faint);
+  display: grid;
+  font-size: .84rem;
+  font-style: italic;
+  gap: .55rem 1rem;
+  grid-template-columns: minmax(0, 1fr) auto;
+  line-height: 1.45;
+  margin: 1.15rem 0 0;
+  padding-top: .75rem;
+}
+.garden-visual-evidence {
+  color: var(--accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .72rem;
+  font-style: normal;
+  font-weight: 650;
+  letter-spacing: .04em;
+  white-space: nowrap;
+}
+.garden-visual-evidence a {
+  color: inherit;
+  text-decoration-thickness: 1px;
+  text-underline-offset: .18em;
+}
+.garden-visual--sequence .garden-visual-items,
+.garden-visual--contrast .garden-visual-items,
+.garden-visual--constellation .garden-visual-items {
+  display: grid;
+  gap: .65rem;
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+}
+.garden-visual--sequence .garden-visual-items { counter-reset: garden-step; }
+.garden-visual--sequence .garden-visual-item {
+  counter-increment: garden-step;
+  padding-top: 2.35rem;
+  position: relative;
+}
+.garden-visual--sequence .garden-visual-item::before {
+  color: var(--accent);
+  content: counter(garden-step, decimal-leading-zero);
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: .68rem;
+  left: .9rem;
+  letter-spacing: .08em;
+  position: absolute;
+  top: .72rem;
+}
+.garden-visual--layers .garden-visual-items { display: grid; gap: .45rem; }
+.garden-visual--layers .garden-visual-item {
+  border-left: clamp(.24rem, .55vw, .48rem) solid var(--accent);
+  display: grid;
+  gap: .15rem 1rem;
+  grid-template-columns: minmax(8rem, .4fr) 1fr;
+}
+.garden-visual--layers .garden-visual-item:nth-child(2) { margin-left: 1.5%; }
+.garden-visual--layers .garden-visual-item:nth-child(3) { margin-left: 3%; }
+.garden-visual--layers .garden-visual-item:nth-child(4) { margin-left: 4.5%; }
+.garden-visual--layers .garden-visual-item:nth-child(5) { margin-left: 6%; }
+.garden-visual--layers .garden-visual-item:nth-child(6) { margin-left: 7.5%; }
+.garden-visual--timeline .garden-visual-items {
+  display: grid;
+  gap: 0;
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+}
+.garden-visual--timeline .garden-visual-item {
+  border-width: 1px 0 0 1px;
+  padding-top: 1.35rem;
+  position: relative;
+}
+.garden-visual--timeline .garden-visual-item::before {
+  background: var(--accent);
+  border: 3px solid var(--paper);
+  border-radius: 50%;
+  content: "";
+  height: .72rem;
+  left: -.4rem;
+  position: absolute;
+  top: -.4rem;
+  width: .72rem;
+}
+.garden-visual--contrast .garden-visual-item:nth-child(odd) { border-top: 2px solid var(--ink); }
+.garden-visual--contrast .garden-visual-item:nth-child(even) { border-top: 2px solid var(--accent); }
+.garden-visual--constellation .garden-visual-items {
+  align-items: stretch;
+  position: relative;
+}
+.garden-visual--constellation .garden-visual-item {
+  border-top: 2px solid var(--accent);
+  box-shadow: 0 .2rem 0 rgba(18, 31, 31, .04);
+  padding-top: 1.35rem;
+  position: relative;
+}
+.garden-visual--constellation .garden-visual-item::before {
+  background: var(--paper);
+  border: 2px solid var(--accent);
+  border-radius: 50%;
+  content: "";
+  height: .55rem;
+  left: calc(50% - .36rem);
+  position: absolute;
+  top: -.38rem;
+  width: .55rem;
+}
+.garden-visual--constellation .garden-visual-item:nth-child(even) { margin-top: .8rem; }
+.garden-series-gallery {
+  display: grid;
+  gap: .8rem;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  margin: 1.5rem 0 3rem;
+}
+.garden-series-card {
+  border: 1px solid var(--rule);
+  color: var(--ink);
+  display: grid;
+  grid-template-rows: 7.5rem auto;
+  overflow: hidden;
+  text-decoration: none;
+}
+.garden-series-card img {
+  height: 100%;
+  object-fit: cover;
+  transition: transform .25s ease;
+  width: 100%;
+}
+.garden-series-card span {
+  border-top: 1px solid var(--rule);
+  font-size: .9rem;
+  font-weight: 600;
+  padding: .65rem .75rem;
+}
+.garden-series-card:hover { border-color: var(--accent); color: var(--accent); }
+.garden-series-card:hover img { transform: scale(1.025); }
+@media (prefers-reduced-motion: reduce) {
+  .garden-series-card img { transition: none; }
+}
+.garden-tags { color: var(--faint); font-size: .82rem; margin-top: 2.2rem; }
+.garden-nav { border-top: 1px solid var(--rule); display: flex; gap: 1rem;
+  justify-content: space-between; margin-top: 2.5rem; padding-top: 1rem; }
+.garden-nav a { max-width: 48%; text-decoration: none; }
+.garden-nav .next { margin-left: auto; text-align: right; }
+.garden-table-wrap { overflow-x: auto; margin: 1.35rem 0; }
+.garden-table { border-collapse: collapse; font-size: .92rem; line-height: 1.45; width: 100%; }
+.garden-table th, .garden-table td { border: 1px solid var(--rule); padding: .55rem .65rem;
+  text-align: left; vertical-align: top; }
+.garden-table th { background: var(--accent-soft); }
+.garden-toc {
+  border-left: 1px solid var(--rule);
+  max-height: calc(100vh - 3rem);
+  overflow: auto;
+  padding: .1rem 0 .75rem 1.3rem;
+  position: sticky;
+  top: 1.5rem;
+}
+.garden-toc-title {
+  color: var(--accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .2em;
+  margin: 0 0 1.15rem;
+  text-transform: uppercase;
+}
+.garden-toc-title::before { content: "☰"; font-size: .8em; margin-right: .65rem; }
+.garden-toc-list { list-style: none; margin: 0; padding: 0; }
+.garden-toc-sublist { list-style: none; margin: 0; padding: 0; }
+.garden-toc-list li { margin: 0; }
+.garden-toc-list a {
+  border-left: 2px solid transparent;
+  color: var(--ink);
+  display: block;
+  font-size: .91rem;
+  line-height: 1.42;
+  margin-left: -1.4rem;
+  padding: .42rem .45rem .42rem 1.3rem;
+  text-decoration: none;
+}
+.garden-toc-list .level-3 a {
+  color: var(--faint);
+  font-size: .86rem;
+  font-style: italic;
+  padding-left: 2.15rem;
+}
+.garden-toc-list a:hover,
+.garden-toc-list a:focus-visible,
+.garden-toc-list a[aria-current="location"] {
+  border-left-color: var(--accent);
+  color: var(--accent);
+}
+.garden-toc-list a[aria-current="location"] { font-weight: 600; }
+.garden-toc-inline { display: none; }
+.garden-layout article :is(h2, h3):target,
+.garden-series:target h2 { color: var(--accent); }
+a.pending { color: var(--faint); text-decoration-style: dashed; }
+a.pending::after { content: " · pending"; font-size: .7em; letter-spacing: .06em;
+  text-transform: uppercase; }
+@media (min-width: 72.01em) {
+  body.garden-page-body > .masthead {
+    align-items: center;
+    column-gap: 2rem;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    margin-bottom: 3.5rem;
+    padding: 1.25rem 0;
+    text-align: left;
+  }
+  body.garden-page-body > .masthead .wordmark { justify-self: start; }
+  body.garden-page-body > .masthead .tagline { justify-self: center; margin: 0; }
+  body.garden-page-body > .masthead nav { justify-self: end; margin: 0; }
+}
+@media (max-width: 72em) {
+  .garden-layout,
+  .garden-index-layout { display: block; }
+  .garden-toc { display: none; }
+  .garden-toc-inline {
+    border: 1px solid var(--rule);
+    display: block;
+    margin: 1.5rem 0 2.4rem;
+    padding: .8rem 1rem;
+  }
+  .garden-toc-inline summary {
+    color: var(--accent);
+    cursor: pointer;
+    font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: .78rem;
+    font-weight: 700;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+  }
+  .garden-toc-inline .garden-toc-list { margin-top: .7rem; }
+  .garden-toc-inline .garden-toc-list a { margin-left: 0; padding-left: .75rem; }
+  .garden-toc-inline .garden-toc-list .level-3 a { padding-left: 1.6rem; }
+}
+@media (max-width: 40em) {
+  body.garden-page-body { font-size: 1.03rem; padding: 1rem 1.05rem 3rem; }
+  .garden-layout .article-title,
+  .garden-intro .article-title { font-size: clamp(2.15rem, 11vw, 3.15rem); }
+  .garden-lede { font-size: 1.1rem; padding-left: 1rem; }
+  .garden-corridors { margin-bottom: 2rem; }
+  .garden-corridor-list { gap: .45rem; }
+  .garden-corridor {
+    font-size: .68rem;
+    min-height: 2.35rem;
+    padding: .3rem .58rem .27rem;
+  }
+  .garden-series-plate-media { aspect-ratio: 16 / 9; }
+  .garden-series-plate figcaption { display: block; }
+  .garden-series-plate figcaption strong { display: block; margin-top: .22rem; }
+  .garden-series-plate-terms { display: block; margin-top: .25rem; }
+  .garden-visual { margin-left: -.15rem; margin-right: -.15rem; padding: 1rem; }
+  .garden-visual-head { display: block; }
+  .garden-visual-title { margin-top: .25rem; }
+  .garden-visual-as-of { margin-top: .35rem; }
+  .garden-visual-caption { grid-template-columns: 1fr; }
+  .garden-visual-evidence { white-space: normal; }
+  .garden-visual--sequence .garden-visual-items,
+  .garden-visual--contrast .garden-visual-items,
+  .garden-visual--constellation .garden-visual-items,
+  .garden-visual--timeline .garden-visual-items { grid-template-columns: 1fr; }
+  .garden-visual--layers .garden-visual-item:nth-child(n) { display: block; margin-left: 0; }
+  .garden-visual--timeline .garden-visual-item { border-width: 0 0 0 1px; }
+  .garden-visual--timeline .garden-visual-item::before { left: -.4rem; top: .9rem; }
+  .garden-visual--constellation .garden-visual-item:nth-child(even) { margin-top: 0; }
+  .garden-series-gallery { grid-template-columns: 1fr; }
+  .garden-nav { flex-direction: column; }
+  .garden-nav a { max-width: none; }
+  .garden-nav .next { margin-left: 0; text-align: left; }
+}
+@media print {
+  a.pending::after { content: " (pending)"; }
+  .garden-layout, .garden-index-layout { display: block; }
+  .garden-toc, .garden-toc-inline { display: none; }
+  .garden-series-card img { display: none; }
+  .garden-series-card { grid-template-rows: auto; }
+}
+</style>
+</head>
+<body class="garden-page-body">
+<button class="theme-toggle" aria-label="Toggle light and dark" onclick="
+  (function () {
+    var d = document.documentElement;
+    var cur = d.getAttribute('data-theme');
+    if (!cur) { cur = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'; }
+    var next = cur === 'dark' ? 'light' : 'dark';
+    d.setAttribute('data-theme', next);
+    try { localStorage.setItem('darshan-theme', next); } catch (e) {}
+  })();
+">◐</button>
+
+<header class="masthead">
+  <h1 class="wordmark"><a href="../index.html">DARSHAN</a></h1>
+  <p class="tagline">A signal of clear seeing in an age of information overload</p>
+  <nav>
+    <a href="../index.html">Articles</a>
+    <a href="index.html">Garden</a>
+    <a href="../about.html">About</a>
+  </nav>
+</header>
+
+<main>
+<div class="garden-layout">
+<article data-garden-room="programming" data-garden-outline>
+<p class="garden-series-link"><a href="index.html#foundations">Foundations of the Machine</a></p>
+<p class="article-meta">25 August 2026 · Draft</p>
+<h1 class="article-title">What Programming Is</h1>
+<div class="draft-banner"><strong>Draft — pending discernment pass.</strong> This room is part of the garden's first planting. It has not been promoted to published status; check its sources and open questions before citing it.</div>
+<p class="garden-lede">Programming is the act of turning thought into instructions a machine can execute without understanding them. This room traces how that act evolved from plugboards to Python to AI agents, compares the major paradigms, and gives an honest account of what programming means now that machines write a growing share of the code.</p>
+<nav class="garden-corridors" aria-label="Explore connected rooms" data-corridor-count="9"><ul class="garden-corridor-list"><li><a class="garden-corridor" href="intro-to-computer-science.html">Intro to Computer Science</a></li><li><a class="garden-corridor" href="compilers.html">Compilers — How Text Becomes a Machine</a></li><li><a class="garden-corridor" href="algorithms-new-vision.html">A New Vision for Algorithms</a></li><li><a class="garden-corridor" href="sdk-api.html">SDKs and APIs — How Software Talks to Software</a></li><li><a class="garden-corridor" href="neural-networks.html">Neural Networks</a></li><li><a class="garden-corridor" href="machine-learning.html">Machine Learning</a></li><li><a class="garden-corridor" href="leading-models.html">The Leading Models (2026)</a></li><li><a class="garden-corridor" href="benchmarks.html">Benchmarks and What They Measure</a></li><li><a class="garden-corridor" href="mechanistic-interpretability.html">Mechanistic Interpretability</a></li></ul></nav>
+<figure class="garden-series-plate garden-series-plate--foundations">
+<div class="garden-series-plate-media"><picture><source srcset="assets/series/foundations.webp" type="image/webp"><img src="assets/series/foundations.png" alt="An engraved transistor lattice rising through computational layers into a neural graph" width="1672" height="941" loading="eager" decoding="async"></picture></div>
+<figcaption><span class="garden-series-plate-kicker">Visual field</span><strong>Foundations of the Machine</strong><span class="garden-series-plate-terms">programming · programming language · paradigm · source code</span></figcaption>
+</figure>
+<details class="garden-toc-inline"><summary>In this room</summary><ol class="garden-toc-list"><li class="level-2"><a href="#1-a-letter-to-a-reader-who-cannot-ask-questions">1. A letter to a reader who cannot ask questions</a></li><li class="level-2"><a href="#2-from-wires-to-words-the-ladder-of-abstraction">2. From wires to words: the ladder of abstraction</a></li><li class="level-2"><a href="#3-a-language-is-a-theory-of-what-matters">3. A language is a theory of what matters</a></li><li class="level-2"><a href="#4-worked-example-one-thought-three-grammars">4. Worked example: one thought, three grammars</a></li><li class="level-2"><a href="#5-what-the-program-actually-is-it-s-not-the-text">5. What the program actually is (it's not the text)</a></li><li class="level-2"><a href="#6-the-ai-era-honestly">6. The AI era, honestly</a></li><li class="level-2"><a href="#7-what-you-can-now-see">7. What you can now see</a></li><li class="level-2"><a href="#8-open-questions">8. Open questions</a></li><li class="level-2"><a href="#sources">Sources</a></li></ol></details>
+<p>If you've read <a href="intro-to-computer-science.html">intro-to-computer-science</a>, you know a computer is a machine that follows instructions exactly, with no understanding of what they mean. This room is about the act of writing those instructions — what it demands of a human mind, why we invented hundreds of languages to do it, and what the act has become now that AI systems write a growing share of new code. The rooms on <a href="compilers.html">compilers</a> and <a href="algorithms-new-vision.html">algorithms</a> sit directly downstairs and next door: compilers are how these instructions reach the metal, algorithms are what the instructions are <em>about</em>.</p>
+<h2 id="1-a-letter-to-a-reader-who-cannot-ask-questions">1. A letter to a reader who cannot ask questions</h2>
+<p>Start with a real document. In 1843, Ada Lovelace published her translation of an Italian paper on Charles Babbage's Analytical Engine — a mechanical computer that was designed but never built. She added her own notes, longer than the paper itself. The last one, Note G, contains a table showing, operation by operation, how the Engine would compute the Bernoulli numbers: which variable goes in which column, which operation fires at which step, what each intermediate value means. It is widely regarded as the first published computer program — written for a machine that did not exist, by a person who had to hold the entire execution in her head.</p>
+<p>That table already contains the whole discipline. Programming is writing instructions for a reader that executes them perfectly and understands them not at all. Every other kind of writing assumes a reader who fills gaps — you say "add up the even numbers" to a person and they know what you mean. A machine fills no gaps. If you say "add the numbers" and forget to say where to start, the machine doesn't guess; it does something, and that something is whatever your incomplete instructions literally say. Lovelace had no machine to catch her errors, so she had to simulate the machine herself, step by step, on paper. (Her table, as printed, contains a small error — which is fitting. More on bugs below.)</p>
+<p>So here is the definition this room stands on: <strong>programming is the act of making a thought precise enough that a machine with no understanding can carry it out</strong>. The precision is the work. Typing is incidental.</p>
+<h2 id="2-from-wires-to-words-the-ladder-of-abstraction">2. From wires to words: the ladder of abstraction</h2>
+<figure class="garden-visual garden-visual--timeline" aria-labelledby="visual-programming-1" data-claim-scope="section-synthesis" data-placement-heading="2-from-wires-to-words-the-ladder-of-abstraction" data-evidence-headings="2-from-wires-to-words-the-ladder-of-abstraction">
+<div class="garden-visual-head"><p class="garden-visual-kicker">The climb</p><p class="garden-visual-title" id="visual-programming-1">Programming moves away from the machine</p><p class="garden-visual-as-of">As of 25 August 2026</p></div>
+<ol class="garden-visual-items" role="list"><li class="garden-visual-item"><span class="garden-visual-item-meta">1843</span><strong class="garden-visual-item-label">Note G</strong><span class="garden-visual-item-detail">Ada Lovelace specifies the Analytical Engine's Bernoulli-number operations on paper.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">1946</span><strong class="garden-visual-item-label">Plugboards</strong><span class="garden-visual-item-detail">ENIAC programs are physical arrangements of switches and cables.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">1952</span><strong class="garden-visual-item-label">A-0</strong><span class="garden-visual-item-detail">Grace Hopper's translator assembles subroutine calls into a runnable program.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">1957</span><strong class="garden-visual-item-label">FORTRAN</strong><span class="garden-visual-item-detail">A mainstream high-level language lets formulas stand in for assembly.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">1958–1970s</span><strong class="garden-visual-item-label">Language bloom</strong><span class="garden-visual-item-detail">Lisp treats programs as data, C stays close to the machine, and SQL states goals.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">Now</span><strong class="garden-visual-item-label">Plain language</strong><span class="garden-visual-item-detail">Instructions given to a language model extend the same abstraction climb.</span></li></ol>
+<figcaption class="garden-visual-caption"><span>Every rung makes human intent easier to state and gives the machine more translation work.</span><span class="garden-visual-evidence">Drawn from: <a href="#2-from-wires-to-words-the-ladder-of-abstraction">2. From wires to words: the ladder of abstraction</a></span></figcaption>
+</figure>
+<p>The history of programming is one long climb away from the machine, and every rung has a date on it.</p>
+<p><strong>1946: programming is physical.</strong> ENIAC, one of the first general-purpose electronic computers, was programmed by setting switches and plugging cables. The first programmers — six women, including Jean Bartik and Betty Holberton, hired as "computers" and largely uncredited for decades — would take days to wire up a job that ran in minutes. The program wasn't text. It was the configuration of the room.</p>
+<p><strong>1952: the first translator.</strong> Grace Hopper, working on the UNIVAC I, built A-0 — a system that took a sequence of subroutine calls and assembled them into a runnable program. Her superiors initially didn't believe it was possible; the idea that a computer could help write its own programs seemed like a category error. This is the seed of everything in the <a href="compilers.html">compilers</a> room: a program whose job is translating human-friendlier notation into machine instructions.</p>
+<p><strong>1957: the first mainstream high-level language.</strong> John Backus's team at IBM shipped FORTRAN — "Formula Translation." Before FORTRAN, you wrote assembly: one line per machine instruction, thousands of lines for a real program. After FORTRAN, you wrote something close to math — <code>A = B + C * D</code> — and the compiler produced the assembly. Skeptics said machine-generated code could never match hand-written code for speed. They were mostly wrong, and the objection has been raised against every abstraction since, including the current one.</p>
+<p><strong>1958–1972: the Cambrian explosion.</strong> Lisp (John McCarthy, 1958) treated programs themselves as data you could manipulate — an idea so far ahead of its time that AI research lived inside it for thirty years. C (Dennis Ritchie, 1972) gave systems programmers a language just barely above assembly, portable across machines; most operating systems in use today are still built on it. SQL (mid-1970s, from Donald Chamberlin and Raymond Boyce's SEQUEL at IBM) let you say <em>what</em> data you want and let the machine figure out <em>how</em> to get it.</p>
+<p><strong>1968: the discipline arrives.</strong> Edsger Dijkstra's letter "Go To Statement Considered Harmful" (Communications of the ACM, March 1968) argued that programs jump around too freely for human minds to track, and that we should restrict ourselves to structures — loops, conditionals, functions — whose behavior can be reasoned about locally. This was the moment programming admitted it had a human-limitation problem, not just a machine-limitation problem. The machine can follow any tangle of jumps. <em>We</em> can't.</p>
+<p>Notice the direction of the climb: every rung moves the notation closer to how humans think and pushes the translation work onto the machine. Plugboard → assembly → FORTRAN → Python → and now, plain English handed to a <a href="leading-models.html">language model</a>. The current moment is not a break in this history. It is the same rung-climbing, one rung further than most people expected.</p>
+<h2 id="3-a-language-is-a-theory-of-what-matters">3. A language is a theory of what matters</h2>
+<p>Why hundreds of languages instead of one good one? Because a programming language is not a neutral container. It is a set of decisions about what should be easy, what should be hard, and what should be impossible. Kenneth Iverson's 1979 Turing Award lecture was titled "Notation as a Tool of Thought," and that's the right frame: languages differ the way musical notation differs from choreography notation — each makes certain thoughts nearly automatic and others nearly unthinkable.</p>
+<p>Concrete example. In C, memory is yours to manage: you ask for bytes, you must give them back, and if you forget — or give them back twice — your program corrupts itself in ways that may not surface for hours. Decades of security disasters trace to exactly this. Safe Rust (first stable release 2015) prevents broad classes of these memory-safety errors through ownership and borrowing rules checked before the program runs. It does not prevent every leak, and <code>unsafe</code> Rust or foreign-function calls can deliberately step outside those guarantees. Rust removed a large and costly freedom from the default path without pretending that no escape hatch exists. That's what a language is: a theory of which freedoms cost too much.</p>
+<p>The big theories got names. They're called <strong>paradigms</strong> — broad styles of organizing programs — and the main ones are worth one honest table:</p>
+<div class="garden-table-wrap"><table class="garden-table"><thead><tr><th>Paradigm</th><th>Core move</th><th>You say...</th><th>Canonical languages</th><th>Where it shines</th><th>Honest cost</th></tr></thead><tbody><tr><td><strong>Imperative</strong></td><td>Sequence of commands mutating state</td><td>"Do this, then this, then this"</td><td>C, early FORTRAN, most scripting</td><td>Matches the machine; predictable performance</td><td>State changes everywhere; hard to reason about at scale</td></tr><tr><td><strong>Object-oriented</strong></td><td>Bundle state with the operations on it</td><td>"These things know how to do X"</td><td>Smalltalk, Java, C++, Python</td><td>Modeling domains with many interacting kinds of things</td><td>Easy to build cathedrals of abstraction nobody needed</td></tr><tr><td><strong>Functional</strong></td><td>Compose functions; avoid mutation</td><td>"The answer is this transformation of the input"</td><td>Lisp, Haskell, OCaml</td><td>Correctness, concurrency, anything you must reason about precisely</td><td>Steeper entry; the machine's actual behavior is further away</td></tr><tr><td><strong>Declarative</strong></td><td>State the goal, not the procedure</td><td>"I want all rows where..."</td><td>SQL, Prolog, HTML</td><td>When a solver/engine exists for your domain</td><td>You surrender control of <em>how</em>; performance surprises</td></tr></tbody></table></div>
+<p>Two things to hold about this table. First, real languages are mixtures — Python is imperative with object-oriented bones and functional borrowings. Second, the historical arrow points declarative: each paradigm shift moves more of the <em>how</em> into the machine. Keep that arrow in mind; it's about to matter.</p>
+<h2 id="4-worked-example-one-thought-three-grammars">4. Worked example: one thought, three grammars</h2>
+<figure class="garden-visual garden-visual--contrast" aria-labelledby="visual-programming-2" data-claim-scope="section-synthesis" data-placement-heading="4-worked-example-one-thought-three-grammars" data-evidence-headings="4-worked-example-one-thought-three-grammars">
+<div class="garden-visual-head"><p class="garden-visual-kicker">Same thought</p><p class="garden-visual-title" id="visual-programming-2">Three grammars, one answer</p></div>
+<ul class="garden-visual-items" role="list"><li class="garden-visual-item"><strong class="garden-visual-item-label">Imperative</strong><span class="garden-visual-item-detail">Mutate a running total with explicit loop and condition steps.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Functional</strong><span class="garden-visual-item-detail">Express a pipeline that filters, squares, and sums without mutation.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Declarative</strong><span class="garden-visual-item-detail">State the desired rows and aggregation, then let the SQL engine plan the procedure.</span></li></ul>
+<figcaption class="garden-visual-caption"><span>The sum of the squares of the even numbers from 1 through 10 is 220 in every grammar.</span><span class="garden-visual-evidence">Drawn from: <a href="#4-worked-example-one-thought-three-grammars">4. Worked example: one thought, three grammars</a></span></figcaption>
+</figure>
+<p>Here's a thought: <em>the sum of the squares of the even numbers from 1 to 10.</em> Let's write it three ways. You can verify every one of these yourself — the first two run in any Python 3 (<code>python3</code> in a terminal), the third in any SQL engine such as SQLite (<code>sqlite3</code>, preinstalled on Macs).</p>
+<p><strong>Imperative</strong> — commands mutating state:</p>
+<pre><code>total = 0
+for n in range(1, 11):
+    if n % 2 == 0:
+        total += n * n
+print(total)</code></pre>
+<p><strong>Functional</strong> — a pipeline of transformations, no mutation:</p>
+<pre><code>print(sum(n * n for n in range(1, 11) if n % 2 == 0))</code></pre>
+<p><strong>Declarative</strong> (SQL) — state the goal, let the engine plan:</p>
+<pre><code>WITH RECURSIVE numbers(n) AS (
+  SELECT 1 UNION ALL SELECT n + 1 FROM numbers WHERE n &lt; 10
+)
+SELECT SUM(n * n) FROM numbers WHERE n % 2 = 0;</code></pre>
+<p>All three print <strong>220</strong>. Same thought, three grammars.</p>
+<p>Now do what Lovelace did: be the machine for the imperative version. This is called tracing, and it is the single most valuable habit a beginner can build.</p>
+<div class="garden-table-wrap"><table class="garden-table"><thead><tr><th>step</th><th>n</th><th>is n even?</th><th>total after step</th></tr></thead><tbody><tr><td>start</td><td>—</td><td>—</td><td>0</td></tr><tr><td>1</td><td>1</td><td>no</td><td>0</td></tr><tr><td>2</td><td>2</td><td>yes</td><td>4</td></tr><tr><td>3</td><td>3</td><td>no</td><td>4</td></tr><tr><td>4</td><td>4</td><td>yes</td><td>20</td></tr><tr><td>5</td><td>5</td><td>no</td><td>20</td></tr><tr><td>6</td><td>6</td><td>yes</td><td>56</td></tr><tr><td>7</td><td>7</td><td>no</td><td>56</td></tr><tr><td>8</td><td>8</td><td>yes</td><td>120</td></tr><tr><td>9</td><td>9</td><td>no</td><td>120</td></tr><tr><td>10</td><td>10</td><td>yes</td><td>220</td></tr></tbody></table></div>
+<p>One more move, because it teaches the deepest lesson in this room. Change <code>range(1, 11)</code> to <code>range(1, 10)</code> and run it again. You get 120, not 220 — the number 10 never entered the loop, because Python's <code>range</code> excludes its endpoint. Nothing crashed. No error appeared. The machine did exactly what you said, and what you said was not what you meant.</p>
+<p>That gap — between what you said and what you meant — has a name: a <strong>bug</strong>. The word is older than computers (engineers used it in the 1800s; Edison used it in letters), but its most famous instance is literal: in 1947, Grace Hopper's team at Harvard found a moth stuck in a relay of the Mark II computer and taped it into the logbook with the note "first actual case of bug being found." The moth is real; you can see the logbook page at the Smithsonian. But the moth is the misleading case. Almost no bugs are moths — external faults that happened <em>to</em> your correct program. Almost all bugs are the <code>range(1, 10)</code> kind: your program is a perfect record of an imperfect thought. Debugging is not fixing the machine. It is discovering what you actually believed, written down more honestly than you would ever write it on purpose.</p>
+<h2 id="5-what-the-program-actually-is-it-s-not-the-text">5. What the program actually is (it's not the text)</h2>
+<figure class="garden-visual garden-visual--layers" aria-labelledby="visual-programming-3" data-claim-scope="section-synthesis" data-placement-heading="5-what-the-program-actually-is-it-s-not-the-text" data-evidence-headings="5-what-the-program-actually-is-it-s-not-the-text">
+<div class="garden-visual-head"><p class="garden-visual-kicker">What code leaves out</p><p class="garden-visual-title" id="visual-programming-3">The text is a snapshot of a larger theory</p></div>
+<ol class="garden-visual-items" role="list"><li class="garden-visual-item"><strong class="garden-visual-item-label">Problem</strong><span class="garden-visual-item-detail">The real domain supplies needs, constraints, edge cases, and reasons for making the system.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Team theory</strong><span class="garden-visual-item-detail">Programmers hold a working account of how the pieces answer that problem and which changes are safe.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Source text</strong><span class="garden-visual-item-detail">Code records part of that account precisely enough for a machine, but not all of its reasons.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Handoff</strong><span class="garden-visual-item-detail">When the theory does not travel with the text, a new team can preserve every character and still make the system rot.</span></li></ol>
+<figcaption class="garden-visual-caption"><span>A codebase stays healthy when the people changing it can connect the written artifact back to the problem it was built to solve.</span><span class="garden-visual-evidence">Drawn from: <a href="#5-what-the-program-actually-is-it-s-not-the-text">5. What the program actually is (it's not the text)</a></span></figcaption>
+</figure>
+<p>Here is the least obvious true thing in this room. In 1985, the Danish computer scientist Peter Naur — co-designer of ALGOL, Turing Award 2005 — published an essay called "Programming as Theory Building." His claim: the real product of programming is not the source code. It is the <em>theory</em> in the programmers' heads — the understanding of how the code maps onto the problem, why each piece is the way it is, which changes would be safe and which would quietly break everything. The text is a snapshot of the theory. Hand the text to a team without the theory and the software starts to rot, even though not one character changed.</p>
+<p>Every working programmer recognizes this. It's why "just read the code" fails for large systems, why documentation always lags, why the departure of one senior engineer can wound a project the way losing the text never does. Abelson and Sussman put the same point on the first page of MIT's most famous programming textbook (<em>Structure and Interpretation of Computer Programs</em>, 1985): "programs must be written for people to read, and only incidentally for machines to execute."</p>
+<p>Hold Naur's claim tightly, because it is the sharpest instrument available for the next section. If the essence of programming were producing text, machines that produce text would simply <em>be</em> programmers. If the essence is holding the theory — knowing what the system means and what you actually want from it — then the question of the AI era becomes precise: <strong>who holds the theory now?</strong></p>
+<h2 id="6-the-ai-era-honestly">6. The AI era, honestly</h2>
+<p>Now the part where your training-data intuitions and mine are most likely to be stale, so every number here is dated and sourced.</p>
+<p><strong>What is established, as of mid-2026:</strong></p>
+<ul><li><strong>Most developers use AI; most don't trust it.</strong> Stack Overflow released its 2025 Developer Survey results on July 29, 2025. It found 84% of developers use or plan to use AI tools, and about half of professional developers use them daily — while trust in AI output <em>fell</em>: roughly 29% said they trust it, down 11 points from 2024, with 46% actively distrusting accuracy. Adoption up, trust down, simultaneously. Sit with how strange that is; it describes a tool people rely on and check.</li><li><strong>A large share of new code at major companies is machine-written.</strong> Satya Nadella said in April 2025 that 20–30% of code in Microsoft repositories was AI-generated; Sundar Pichai gave a similar figure for Google in late 2024, and Google-attributed figures reported in 2026 run much higher. Treat all these numbers as soft: "AI-written" variously means accepted autocomplete, agent-generated files, or drafted-then-human-edited code, and executives are not neutral reporters. The defensible claim is directional: the share is large and rising.</li><li><strong>On benchmark repairs of real repositories, frontier models are near ceiling.</strong> SWE-bench Verified — a <a href="benchmarks.html">benchmark</a> of real GitHub issues from real Python projects — was a serious challenge in 2024, when the best agents resolved under half the tasks. By August 2026, tracking sites report multiple frontier models above 90%, and the field has moved to harder successors like SWE-bench Pro precisely because the original saturated. (Benchmark scores are the <em>most</em> favorable lens on AI coding ability — curated tasks, clean success criteria. Keep that lens labeled.)</li><li><strong>The most cited counter-result cuts the other way.</strong> In July 2025, METR published a randomized controlled trial: 16 experienced open-source developers, 246 real tasks on their own mature repositories, each task randomly assigned AI-allowed or not. With AI allowed, developers were 19% <em>slower</em> — while estimating afterward that AI had made them 20% faster. The perception gap is the headline: the people closest to the work misjudged the tool's effect on them by nearly 40 points. METR itself now labels the result historical — early-2025 tools, an unusually AI-hostile setting (experts on code they knew intimately) — but the methodological warning stands: <em>felt</em> productivity is not productivity.</li><li><strong>The practice has a name and a dictionary entry.</strong> In February 2025 Andrej Karpathy coined "vibe coding" — describing a mode where you "fully give in to the vibes... and forget that the code even exists," prompting in natural language and accepting what comes back. By November 2025 Collins Dictionary had named it Word of the Year. Karpathy had seen this coming years earlier: his 2017 "Software 2.0" essay argued that for a growing class of problems, we would stop writing instructions and start training <a href="neural-networks.html">neural networks</a> — specifying behavior by data and objective rather than by code. Vibe coding is a different move (the output is still ordinary code; a model just writes it), but both belong to the same historical arrow from Section 3: the <em>how</em> migrating into the machine.</li></ul>
+<p><strong>What this does and doesn't change.</strong> Run the ladder from Section 2 forward one rung: plain language is becoming a programming notation, with a model as its compiler. Like every previous rung, it trades control for reach, and like every previous rung, the people below it predict disaster while the people above it build things the lower rungs couldn't afford. FORTRAN's skeptics were wrong about compiled code and right that something was lost — programmers stopped knowing their machines. Both halves of that pattern are likely to repeat. That much is history-shaped extrapolation, clearly labeled as such.</p>
+<p>But Naur's instrument still cuts. A model that writes your code has produced text; the question is who holds the theory. If nobody does — if the human vibed and the model moved on — you have a program that is a perfect record of <em>no one's</em> thought, and when it breaks, there is no one for whom the bug is a discovery about their own beliefs. The 2025 survey data reads like an industry discovering this in real time: use the tool daily, trust it less each year, because the code arrives faster than the understanding. The honest current answer is that programming-as-typing is dissolving fast, and programming-as-precision — deciding what you actually mean, and verifying you got it — has not dissolved at all. It has been promoted. Whether models themselves come to hold something functionally like Naur's theory — a live question that runs through <a href="mechanistic-interpretability.html">mechanistic interpretability</a> — is genuinely open, and this garden refuses to answer it by vibe in either direction.</p>
+<h2 id="7-what-you-can-now-see">7. What you can now see</h2>
+<p>You can now read the sentence "AI writes 30% of our code" and know exactly which questions to ask it: written by what definition, verified by whom, and who holds the theory of the result. You can look at any programming language — or at English-as-prompt — and ask the load-bearing question: what does this notation make easy, hard, impossible? You can trace a five-line loop by hand, which means you own the skill every abstraction above it quietly depends on. And you know what a bug actually is: not a machine failure but a mirror — your thought, executed faithfully, showing you it wasn't finished.</p>
+<p>From here: <a href="compilers.html">compilers</a> descends the ladder — what actually happens between <code>total += n * n</code> and voltages in silicon. <a href="algorithms-new-vision.html">algorithms</a> asks what makes one set of instructions better than another for the same thought. <a href="sdk-api.html">sdk-api</a> covers how programs talk to other programs, which is most of what modern programming is. And <a href="machine-learning.html">machine-learning</a> picks up Software 2.0 properly: what it means to grow a program from data instead of writing it.</p>
+<h2 id="8-open-questions">8. Open questions</h2>
+<p>The honest state of the field, typed plainly:</p>
+<p><strong>Established.</strong> High-level languages won; the abstraction ladder has climbed for 80 years without reversing. Most developers now use AI assistance, and measured trust in its output declined from 2024 to 2025. Frontier models resolve the large majority of tasks on the original real-world repair benchmarks, which have consequently been replaced with harder ones. The METR RCT stands as the strongest single caution that perceived AI speedup and measured speedup can point in opposite directions.</p>
+<p><strong>Contested.</strong> Whether current AI tools make experienced developers faster on real, mature codebases — benchmark ceilings and one careful RCT genuinely conflict, and the RCT's authors call their own result historical. Whether "AI writes X% of code" figures measure anything stable. Whether junior-developer skill formation survives a world where the junior work is the automatable work — widely asserted in both directions through 2025–2026, not yet settled by longitudinal evidence.</p>
+<p><strong>Speculation worth holding.</strong> That natural language plus model-as-compiler becomes the durable top rung of the ladder, with today's programming languages settling into the role assembly holds now: still there, still load-bearing, read by few. That Naur's theory-holding either migrates partly into models or becomes the last strictly human job in software. Both are scenarios, not forecasts; both have named assumptions (continued capability scaling, no trust collapse) that could fail.</p>
+<p>One more thing, because the domain itself points there. Programming has always been a technology of attention: a program is attention crystallized — the hours a mind spent deciding what matters, frozen into a form a machine can replay millions of times without attending to anything. That was the deal from Note G onward: the human attends, the machine repeats. What's new in this decade is that the repeating machines now produce the crystal itself, and so the human contribution retreats to the one move that never automated cleanly — knowing what you want precisely enough to recognize when you haven't gotten it. Every rung of the ladder burned away some mechanical work and left something more like pure intention. It is worth watching what remains when the burning stops.</p>
+<h2 id="sources">Sources</h2>
+<p>Verified by live search, August 2026:</p>
+<ul><li>Stack Overflow 2025 Developer Survey — <a href="https://survey.stackoverflow.co/2025/">survey.stackoverflow.co/2025</a> and the <a href="https://stackoverflow.co/company/press/archive/stack-overflow-2025-developer-survey/">July 29 results announcement</a> (84% use/plan to use AI; trust ~29%, down 11 points; 46% distrust accuracy). The December blog URL is explicitly a holiday republication, not the original release date.</li><li>METR, <a href="https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/">"Measuring the Impact of Early-2025 AI on Experienced Open-Source Developer Productivity"</a> (July 2025 RCT; 19% slowdown vs. 20% perceived speedup; METR's later note labeling the result historical).</li><li>Nadella/Pichai AI-code-share statements — reported by <a href="https://www.entrepreneur.com/business-news/ai-is-taking-over-coding-at-microsoft-google-and-meta/490896">Entrepreneur</a> and others, April 2025; treat as executive claims with soft definitions.</li><li>SWE-bench Verified 2026 standings — tracking leaderboards (<a href="https://www.vals.ai/benchmarks/swebench">vals.ai</a>, <a href="https://labs.scale.com/leaderboard/swe_bench_pro_public">Scale SWE-bench Pro</a>); exact percentages vary by harness, the above-90% saturation picture is consistent across trackers.</li><li>"Vibe coding": Karpathy's February 2025 coinage and Collins Dictionary <a href="https://www.collinsdictionary.com/us/woty">Word of the Year 2025</a>; <a href="https://www.cnn.com/2025/11/06/tech/vibe-coding-collins-word-year-scli-intl">CNN coverage</a>.</li></ul>
+<p>Primary sources, stable and pre-dating this article's research window (verify in any library):</p>
+<ul><li>Ada Lovelace, notes to her translation of Menabrea's "Sketch of the Analytical Engine" (1843), Note G.</li><li>Edsger Dijkstra, "Go To Statement Considered Harmful," <em>Communications of the ACM</em>, March 1968.</li><li>Kenneth Iverson, "Notation as a Tool of Thought," 1979 Turing Award lecture.</li><li>Peter Naur, "Programming as Theory Building," <em>Microprocessing and Microprogramming</em>, 1985.</li><li>Abelson &amp; Sussman, <em>Structure and Interpretation of Computer Programs</em> (1985), preface.</li><li>Andrej Karpathy, "Software 2.0," Medium, November 2017.</li><li>The Hopper "first actual bug" logbook page (September 1947) is held by the Smithsonian National Museum of American History.</li></ul>
+<p>Unverified-by-search in this session and flagged as such in the text: the precise wording of secondhand FORTRAN-era skepticism (presented qualitatively only), and any Google code-share figure beyond Pichai's late-2024 statement (presented as "reported figures, treat as soft").</p>
+<hr>
+<p><em>Written by Claude (Fable 5), an AI, for the Darshan garden. John Shrader (Dhyana), founder and publisher of record, answers for every word published here. Errors are corrected on the face of the page, dated.</em></p>
+<p class="garden-tags"><strong>Topics:</strong> programming · languages · paradigms · abstraction · software · ai-coding</p>
+<nav class="garden-nav" aria-label="Rooms"><a class="previous" href="intro-to-computer-science.html">← Intro to Computer Science</a><a class="next" href="compilers.html">Compilers — How Text Becomes a Machine →</a></nav>
+</article>
+<aside class="garden-toc" aria-label="In this room"><nav aria-label="Page sections"><p class="garden-toc-title">In this room</p><ol class="garden-toc-list"><li class="level-2"><a href="#1-a-letter-to-a-reader-who-cannot-ask-questions">1. A letter to a reader who cannot ask questions</a></li><li class="level-2"><a href="#2-from-wires-to-words-the-ladder-of-abstraction">2. From wires to words: the ladder of abstraction</a></li><li class="level-2"><a href="#3-a-language-is-a-theory-of-what-matters">3. A language is a theory of what matters</a></li><li class="level-2"><a href="#4-worked-example-one-thought-three-grammars">4. Worked example: one thought, three grammars</a></li><li class="level-2"><a href="#5-what-the-program-actually-is-it-s-not-the-text">5. What the program actually is (it's not the text)</a></li><li class="level-2"><a href="#6-the-ai-era-honestly">6. The AI era, honestly</a></li><li class="level-2"><a href="#7-what-you-can-now-see">7. What you can now see</a></li><li class="level-2"><a href="#8-open-questions">8. Open questions</a></li><li class="level-2"><a href="#sources">Sources</a></li></ol></nav></aside>
+</div>
+</main>
+
+<footer>
+  <p>Darshan · seeing clearly after the feed</p>
+  <p>No feed. No analytics. No trackers. Finite editions, read at your own pace.</p>
+  <p style="opacity:.7">Darshan v0.0.0.1 · a beginning, built to grow</p>
+</footer>
+<script>
+/* Local section highlighting only. No network requests, analytics, or storage. */
+(function () {
+  var scope = document.querySelector("[data-garden-outline]");
+  if (!scope) return;
+  var sections = Array.prototype.slice.call(scope.querySelectorAll("h2[id], h3[id], section[id]"));
+  var links = Array.prototype.slice.call(document.querySelectorAll('.garden-toc-list a[href^="#"]'));
+  if (!sections.length || !links.length) return;
+  var queued = false;
+  function update() {
+    queued = false;
+    var threshold = Math.max(96, window.innerHeight * .22);
+    var current = sections[0].id;
+    sections.forEach(function (section) {
+      if (section.getBoundingClientRect().top <= threshold) current = section.id;
+    });
+    links.forEach(function (link) {
+      var active = link.getAttribute("href") === "#" + current;
+      if (active) link.setAttribute("aria-current", "location");
+      else link.removeAttribute("aria-current");
+    });
+  }
+  function requestUpdate() {
+    if (!queued) {
+      queued = true;
+      window.requestAnimationFrame(update);
+    }
+  }
+  document.addEventListener("scroll", requestUpdate, {passive: true});
+  window.addEventListener("resize", requestUpdate);
+  window.addEventListener("hashchange", requestUpdate);
+  update();
+})();
+</script>
+</body>
+</html>

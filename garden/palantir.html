@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>What Palantir Is Trying to Do · Darshan Garden</title>
+<meta name="description" content="Palantir sells governments and companies a single working picture of everything they know, built on a concept it calls the ontology. This room explains the actual business, the doctrine behind it, and the surveillance question at its real weight — what the company denies, what the denials concede, and why the dangerous thing is not a database but a decision about what exists.">
+<link rel="stylesheet" href="../style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ccircle cx='8' cy='8' r='6' fill='none' stroke='%238f3b26' stroke-width='1.5'/%3E%3Ccircle cx='8' cy='8' r='2' fill='%238f3b26'/%3E%3C/svg%3E">
+<script>
+/* Theme memory. No analytics, no trackers. */
+(function () {
+  try {
+    var t = localStorage.getItem("darshan-theme");
+    if (t) document.documentElement.setAttribute("data-theme", t);
+  } catch (e) {}
+})();
+</script>
+<style>
+/* Garden-only layout. Kept here so the publication stylesheet remains shared. */
+body.garden-page-body {
+  max-width: none;
+  padding: 1.5rem clamp(1.25rem, 3.5vw, 4rem) 4rem;
+  font-size: 1.125rem;
+}
+body.garden-page-body > main,
+body.garden-page-body > .masthead,
+body.garden-page-body > footer {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 94rem;
+}
+.garden-layout,
+.garden-index-layout {
+  align-items: start;
+  display: grid;
+  gap: clamp(2.75rem, 5vw, 5rem);
+  grid-template-columns: minmax(0, 64rem) minmax(17rem, 20rem);
+  justify-content: center;
+}
+.garden-layout article,
+.garden-index-main { min-width: 0; }
+.garden-layout .article-title,
+.garden-intro .article-title {
+  font-size: clamp(2.65rem, 3.55vw, 4rem);
+  letter-spacing: -.025em;
+  line-height: 1.06;
+  max-width: 24ch;
+}
+.garden-layout article h2 {
+  font-size: 1.48rem;
+  line-height: 1.3;
+  margin-top: 3.2rem;
+  scroll-margin-top: 1.5rem;
+}
+.garden-layout article h3 {
+  font-size: 1.16rem;
+  margin-top: 2.35rem;
+  scroll-margin-top: 1.5rem;
+}
+.garden-intro { margin-bottom: 2.4rem; }
+.garden-series { margin: 2.8rem 0; scroll-margin-top: 1rem; }
+.garden-series h2 { border-bottom: 1px solid var(--rule); padding-bottom: .45rem; }
+.garden-room-list { list-style: none; margin: 0; padding: 0; }
+.garden-room-list li { border-bottom: 1px solid var(--rule); margin: 0; padding: 1rem 0; }
+.garden-room-title { font-weight: 600; }
+.garden-room-summary { color: var(--faint); font-size: .96rem; margin: .25rem 0 0; }
+.garden-series-link { color: var(--faint); font-size: .82rem; letter-spacing: .12em;
+  text-transform: uppercase; }
+.garden-lede {
+  border-left: 3px solid var(--accent);
+  color: var(--faint);
+  font-size: 1.24rem;
+  font-style: italic;
+  line-height: 1.62;
+  margin: 1.5rem 0 2.2rem;
+  padding: .35rem 0 .35rem 1.35rem;
+}
+.garden-corridors {
+  margin: 1.15rem 0 2.65rem;
+}
+.garden-corridor-list {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: .55rem .62rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.garden-corridor-list li { display: flex; margin: 0; max-width: 100%; }
+.garden-corridor {
+  align-items: center;
+  background: var(--accent-soft);
+  border: 1px solid var(--accent);
+  border-radius: 3px;
+  color: var(--accent);
+  display: inline-flex;
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .73rem;
+  font-weight: 700;
+  letter-spacing: .075em;
+  line-height: 1.35;
+  max-width: 100%;
+  min-height: 2.05rem;
+  overflow-wrap: anywhere;
+  padding: .34rem .72rem .3rem;
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-transform: uppercase;
+  text-underline-offset: .22em;
+}
+.garden-corridor:visited { color: var(--accent); }
+.garden-corridor:hover,
+.garden-corridor:focus-visible {
+  background: var(--accent);
+  color: var(--paper);
+}
+.garden-corridor:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+.garden-series-plate {
+  --plate-accent: var(--accent);
+  border: 1px solid var(--rule);
+  border-top: 3px solid var(--plate-accent);
+  margin: .25rem 0 2.8rem;
+  overflow: hidden;
+  position: relative;
+}
+.garden-series-plate--foundations { --plate-accent: #496f76; }
+.garden-series-plate--story-of-ai { --plate-accent: #526d9a; }
+.garden-series-plate--instrument { --plate-accent: #745779; }
+.garden-series-plate--strange-loops { --plate-accent: #866448; }
+.garden-series-plate--bridge { --plate-accent: #697044; }
+.garden-series-plate--power { --plate-accent: #8f3b26; }
+.garden-series-plate--time-future { --plate-accent: #416778; }
+[data-theme="dark"] .garden-series-plate { --plate-accent: var(--accent); }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .garden-series-plate { --plate-accent: var(--accent); }
+}
+.garden-series-plate-media {
+  aspect-ratio: 16 / 9;
+  background: var(--accent-soft);
+  overflow: hidden;
+  position: relative;
+}
+.garden-series-plate-media::after {
+  background:
+    linear-gradient(90deg, var(--paper) 0, transparent 24%, transparent 76%, var(--paper) 100%),
+    linear-gradient(0deg, var(--paper) 0, transparent 32%);
+  content: "";
+  inset: 0;
+  opacity: .24;
+  pointer-events: none;
+  position: absolute;
+}
+.garden-series-plate picture,
+.garden-series-card picture { display: block; height: 100%; }
+.garden-series-plate img {
+  display: block;
+  filter: saturate(.82) contrast(1.03);
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+.garden-series-plate figcaption {
+  align-items: baseline;
+  background: var(--paper);
+  border-top: 1px solid var(--rule);
+  display: grid;
+  gap: .25rem 1rem;
+  grid-template-columns: auto 1fr;
+  padding: .78rem 1rem .85rem;
+}
+.garden-series-plate-kicker {
+  color: var(--plate-accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+.garden-series-plate figcaption strong { font-size: 1rem; font-weight: 600; }
+.garden-series-plate-terms {
+  color: var(--faint);
+  font-size: .82rem;
+  grid-column: 2;
+  margin: 0;
+}
+.garden-visual {
+  background:
+    radial-gradient(circle at 92% 8%, var(--accent-soft), transparent 30%),
+    linear-gradient(135deg, transparent 0 72%, var(--accent-soft) 72% 72.4%, transparent 72.4%);
+  border: 1px solid var(--rule);
+  border-top: 3px solid var(--accent);
+  margin: 1.25rem 0 2.5rem;
+  overflow: hidden;
+  padding: clamp(1.1rem, 2.7vw, 1.75rem);
+  position: relative;
+}
+.garden-visual::before {
+  background-image:
+    linear-gradient(var(--rule) 1px, transparent 1px),
+    linear-gradient(90deg, var(--rule) 1px, transparent 1px);
+  background-size: 2.25rem 2.25rem;
+  content: "";
+  inset: 0;
+  opacity: .13;
+  pointer-events: none;
+  position: absolute;
+}
+.garden-visual > * { position: relative; }
+.garden-visual-head {
+  align-items: baseline;
+  display: grid;
+  gap: .45rem 1rem;
+  grid-template-columns: auto 1fr;
+  margin-bottom: 1.2rem;
+}
+.garden-visual-kicker {
+  color: var(--accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .68rem;
+  font-weight: 700;
+  letter-spacing: .17em;
+  margin: 0;
+  text-transform: uppercase;
+}
+.garden-visual-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  line-height: 1.28;
+  margin: 0;
+}
+.garden-visual-as-of {
+  color: var(--faint);
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: .72rem;
+  letter-spacing: .08em;
+  margin: 0;
+  text-transform: uppercase;
+  white-space: normal;
+}
+.garden-visual-items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.garden-visual-item {
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  margin: 0;
+  min-width: 0;
+  padding: .8rem .9rem;
+}
+.garden-visual-item-label {
+  display: block;
+  font-size: .96rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+.garden-visual-item-detail {
+  color: var(--faint);
+  display: block;
+  font-size: .9rem;
+  line-height: 1.45;
+  margin-top: .27rem;
+}
+.garden-visual-item-meta {
+  color: var(--accent);
+  display: block;
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: .72rem;
+  letter-spacing: .08em;
+  margin-bottom: .38rem;
+  text-transform: uppercase;
+}
+.garden-visual-caption {
+  border-top: 1px solid var(--rule);
+  color: var(--faint);
+  display: grid;
+  font-size: .84rem;
+  font-style: italic;
+  gap: .55rem 1rem;
+  grid-template-columns: minmax(0, 1fr) auto;
+  line-height: 1.45;
+  margin: 1.15rem 0 0;
+  padding-top: .75rem;
+}
+.garden-visual-evidence {
+  color: var(--accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .72rem;
+  font-style: normal;
+  font-weight: 650;
+  letter-spacing: .04em;
+  white-space: nowrap;
+}
+.garden-visual-evidence a {
+  color: inherit;
+  text-decoration-thickness: 1px;
+  text-underline-offset: .18em;
+}
+.garden-visual--sequence .garden-visual-items,
+.garden-visual--contrast .garden-visual-items,
+.garden-visual--constellation .garden-visual-items {
+  display: grid;
+  gap: .65rem;
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+}
+.garden-visual--sequence .garden-visual-items { counter-reset: garden-step; }
+.garden-visual--sequence .garden-visual-item {
+  counter-increment: garden-step;
+  padding-top: 2.35rem;
+  position: relative;
+}
+.garden-visual--sequence .garden-visual-item::before {
+  color: var(--accent);
+  content: counter(garden-step, decimal-leading-zero);
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: .68rem;
+  left: .9rem;
+  letter-spacing: .08em;
+  position: absolute;
+  top: .72rem;
+}
+.garden-visual--layers .garden-visual-items { display: grid; gap: .45rem; }
+.garden-visual--layers .garden-visual-item {
+  border-left: clamp(.24rem, .55vw, .48rem) solid var(--accent);
+  display: grid;
+  gap: .15rem 1rem;
+  grid-template-columns: minmax(8rem, .4fr) 1fr;
+}
+.garden-visual--layers .garden-visual-item:nth-child(2) { margin-left: 1.5%; }
+.garden-visual--layers .garden-visual-item:nth-child(3) { margin-left: 3%; }
+.garden-visual--layers .garden-visual-item:nth-child(4) { margin-left: 4.5%; }
+.garden-visual--layers .garden-visual-item:nth-child(5) { margin-left: 6%; }
+.garden-visual--layers .garden-visual-item:nth-child(6) { margin-left: 7.5%; }
+.garden-visual--timeline .garden-visual-items {
+  display: grid;
+  gap: 0;
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+}
+.garden-visual--timeline .garden-visual-item {
+  border-width: 1px 0 0 1px;
+  padding-top: 1.35rem;
+  position: relative;
+}
+.garden-visual--timeline .garden-visual-item::before {
+  background: var(--accent);
+  border: 3px solid var(--paper);
+  border-radius: 50%;
+  content: "";
+  height: .72rem;
+  left: -.4rem;
+  position: absolute;
+  top: -.4rem;
+  width: .72rem;
+}
+.garden-visual--contrast .garden-visual-item:nth-child(odd) { border-top: 2px solid var(--ink); }
+.garden-visual--contrast .garden-visual-item:nth-child(even) { border-top: 2px solid var(--accent); }
+.garden-visual--constellation .garden-visual-items {
+  align-items: stretch;
+  position: relative;
+}
+.garden-visual--constellation .garden-visual-item {
+  border-top: 2px solid var(--accent);
+  box-shadow: 0 .2rem 0 rgba(18, 31, 31, .04);
+  padding-top: 1.35rem;
+  position: relative;
+}
+.garden-visual--constellation .garden-visual-item::before {
+  background: var(--paper);
+  border: 2px solid var(--accent);
+  border-radius: 50%;
+  content: "";
+  height: .55rem;
+  left: calc(50% - .36rem);
+  position: absolute;
+  top: -.38rem;
+  width: .55rem;
+}
+.garden-visual--constellation .garden-visual-item:nth-child(even) { margin-top: .8rem; }
+.garden-series-gallery {
+  display: grid;
+  gap: .8rem;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  margin: 1.5rem 0 3rem;
+}
+.garden-series-card {
+  border: 1px solid var(--rule);
+  color: var(--ink);
+  display: grid;
+  grid-template-rows: 7.5rem auto;
+  overflow: hidden;
+  text-decoration: none;
+}
+.garden-series-card img {
+  height: 100%;
+  object-fit: cover;
+  transition: transform .25s ease;
+  width: 100%;
+}
+.garden-series-card span {
+  border-top: 1px solid var(--rule);
+  font-size: .9rem;
+  font-weight: 600;
+  padding: .65rem .75rem;
+}
+.garden-series-card:hover { border-color: var(--accent); color: var(--accent); }
+.garden-series-card:hover img { transform: scale(1.025); }
+@media (prefers-reduced-motion: reduce) {
+  .garden-series-card img { transition: none; }
+}
+.garden-tags { color: var(--faint); font-size: .82rem; margin-top: 2.2rem; }
+.garden-nav { border-top: 1px solid var(--rule); display: flex; gap: 1rem;
+  justify-content: space-between; margin-top: 2.5rem; padding-top: 1rem; }
+.garden-nav a { max-width: 48%; text-decoration: none; }
+.garden-nav .next { margin-left: auto; text-align: right; }
+.garden-table-wrap { overflow-x: auto; margin: 1.35rem 0; }
+.garden-table { border-collapse: collapse; font-size: .92rem; line-height: 1.45; width: 100%; }
+.garden-table th, .garden-table td { border: 1px solid var(--rule); padding: .55rem .65rem;
+  text-align: left; vertical-align: top; }
+.garden-table th { background: var(--accent-soft); }
+.garden-toc {
+  border-left: 1px solid var(--rule);
+  max-height: calc(100vh - 3rem);
+  overflow: auto;
+  padding: .1rem 0 .75rem 1.3rem;
+  position: sticky;
+  top: 1.5rem;
+}
+.garden-toc-title {
+  color: var(--accent);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .2em;
+  margin: 0 0 1.15rem;
+  text-transform: uppercase;
+}
+.garden-toc-title::before { content: "☰"; font-size: .8em; margin-right: .65rem; }
+.garden-toc-list { list-style: none; margin: 0; padding: 0; }
+.garden-toc-sublist { list-style: none; margin: 0; padding: 0; }
+.garden-toc-list li { margin: 0; }
+.garden-toc-list a {
+  border-left: 2px solid transparent;
+  color: var(--ink);
+  display: block;
+  font-size: .91rem;
+  line-height: 1.42;
+  margin-left: -1.4rem;
+  padding: .42rem .45rem .42rem 1.3rem;
+  text-decoration: none;
+}
+.garden-toc-list .level-3 a {
+  color: var(--faint);
+  font-size: .86rem;
+  font-style: italic;
+  padding-left: 2.15rem;
+}
+.garden-toc-list a:hover,
+.garden-toc-list a:focus-visible,
+.garden-toc-list a[aria-current="location"] {
+  border-left-color: var(--accent);
+  color: var(--accent);
+}
+.garden-toc-list a[aria-current="location"] { font-weight: 600; }
+.garden-toc-inline { display: none; }
+.garden-layout article :is(h2, h3):target,
+.garden-series:target h2 { color: var(--accent); }
+a.pending { color: var(--faint); text-decoration-style: dashed; }
+a.pending::after { content: " · pending"; font-size: .7em; letter-spacing: .06em;
+  text-transform: uppercase; }
+@media (min-width: 72.01em) {
+  body.garden-page-body > .masthead {
+    align-items: center;
+    column-gap: 2rem;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    margin-bottom: 3.5rem;
+    padding: 1.25rem 0;
+    text-align: left;
+  }
+  body.garden-page-body > .masthead .wordmark { justify-self: start; }
+  body.garden-page-body > .masthead .tagline { justify-self: center; margin: 0; }
+  body.garden-page-body > .masthead nav { justify-self: end; margin: 0; }
+}
+@media (max-width: 72em) {
+  .garden-layout,
+  .garden-index-layout { display: block; }
+  .garden-toc { display: none; }
+  .garden-toc-inline {
+    border: 1px solid var(--rule);
+    display: block;
+    margin: 1.5rem 0 2.4rem;
+    padding: .8rem 1rem;
+  }
+  .garden-toc-inline summary {
+    color: var(--accent);
+    cursor: pointer;
+    font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: .78rem;
+    font-weight: 700;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+  }
+  .garden-toc-inline .garden-toc-list { margin-top: .7rem; }
+  .garden-toc-inline .garden-toc-list a { margin-left: 0; padding-left: .75rem; }
+  .garden-toc-inline .garden-toc-list .level-3 a { padding-left: 1.6rem; }
+}
+@media (max-width: 40em) {
+  body.garden-page-body { font-size: 1.03rem; padding: 1rem 1.05rem 3rem; }
+  .garden-layout .article-title,
+  .garden-intro .article-title { font-size: clamp(2.15rem, 11vw, 3.15rem); }
+  .garden-lede { font-size: 1.1rem; padding-left: 1rem; }
+  .garden-corridors { margin-bottom: 2rem; }
+  .garden-corridor-list { gap: .45rem; }
+  .garden-corridor {
+    font-size: .68rem;
+    min-height: 2.35rem;
+    padding: .3rem .58rem .27rem;
+  }
+  .garden-series-plate-media { aspect-ratio: 16 / 9; }
+  .garden-series-plate figcaption { display: block; }
+  .garden-series-plate figcaption strong { display: block; margin-top: .22rem; }
+  .garden-series-plate-terms { display: block; margin-top: .25rem; }
+  .garden-visual { margin-left: -.15rem; margin-right: -.15rem; padding: 1rem; }
+  .garden-visual-head { display: block; }
+  .garden-visual-title { margin-top: .25rem; }
+  .garden-visual-as-of { margin-top: .35rem; }
+  .garden-visual-caption { grid-template-columns: 1fr; }
+  .garden-visual-evidence { white-space: normal; }
+  .garden-visual--sequence .garden-visual-items,
+  .garden-visual--contrast .garden-visual-items,
+  .garden-visual--constellation .garden-visual-items,
+  .garden-visual--timeline .garden-visual-items { grid-template-columns: 1fr; }
+  .garden-visual--layers .garden-visual-item:nth-child(n) { display: block; margin-left: 0; }
+  .garden-visual--timeline .garden-visual-item { border-width: 0 0 0 1px; }
+  .garden-visual--timeline .garden-visual-item::before { left: -.4rem; top: .9rem; }
+  .garden-visual--constellation .garden-visual-item:nth-child(even) { margin-top: 0; }
+  .garden-series-gallery { grid-template-columns: 1fr; }
+  .garden-nav { flex-direction: column; }
+  .garden-nav a { max-width: none; }
+  .garden-nav .next { margin-left: 0; text-align: left; }
+}
+@media print {
+  a.pending::after { content: " (pending)"; }
+  .garden-layout, .garden-index-layout { display: block; }
+  .garden-toc, .garden-toc-inline { display: none; }
+  .garden-series-card img { display: none; }
+  .garden-series-card { grid-template-rows: auto; }
+}
+</style>
+</head>
+<body class="garden-page-body">
+<button class="theme-toggle" aria-label="Toggle light and dark" onclick="
+  (function () {
+    var d = document.documentElement;
+    var cur = d.getAttribute('data-theme');
+    if (!cur) { cur = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'; }
+    var next = cur === 'dark' ? 'light' : 'dark';
+    d.setAttribute('data-theme', next);
+    try { localStorage.setItem('darshan-theme', next); } catch (e) {}
+  })();
+">◐</button>
+
+<header class="masthead">
+  <h1 class="wordmark"><a href="../index.html">DARSHAN</a></h1>
+  <p class="tagline">A signal of clear seeing in an age of information overload</p>
+  <nav>
+    <a href="../index.html">Articles</a>
+    <a href="index.html">Garden</a>
+    <a href="../about.html">About</a>
+  </nav>
+</header>
+
+<main>
+<div class="garden-layout">
+<article data-garden-room="palantir" data-garden-outline>
+<p class="garden-series-link"><a href="index.html#power">Power and the Board</a></p>
+<p class="article-meta">25 August 2026 · Draft</p>
+<h1 class="article-title">What Palantir Is Trying to Do</h1>
+<div class="draft-banner"><strong>Draft — pending discernment pass.</strong> This room is part of the garden's first planting. It has not been promoted to published status; check its sources and open questions before citing it.</div>
+<p class="garden-lede">Palantir sells governments and companies a single working picture of everything they know, built on a concept it calls the ontology. This room explains the actual business, the doctrine behind it, and the surveillance question at its real weight — what the company denies, what the denials concede, and why the dangerous thing is not a database but a decision about what exists.</p>
+<nav class="garden-corridors" aria-label="Explore connected rooms" data-corridor-count="7"><ul class="garden-corridor-list"><li><a class="garden-corridor" href="governments-and-ai.html">Why Governments Want a Hold on AI</a></li><li><a class="garden-corridor" href="ontology.html">What Ontology Means</a></li><li><a class="garden-corridor" href="china-usa-race.html">The Race Between China and the USA</a></li><li><a class="garden-corridor" href="attention-economy.html">The Attention Economy</a></li><li><a class="garden-corridor" href="machine-learning.html">Machine Learning</a></li><li><a class="garden-corridor" href="future-of-ai.html">The Future of AI</a></li><li><a class="garden-corridor" href="sense-of-self.html">The Sense of Self</a></li></ul></nav>
+<figure class="garden-series-plate garden-series-plate--power">
+<div class="garden-series-plate-media"><picture><source srcset="assets/series/power.webp" type="image/webp"><img src="assets/series/power.png" alt="Etched wafer, map contours, network, and civic architecture" width="1672" height="941" loading="eager" decoding="async"></picture></div>
+<figcaption><span class="garden-series-plate-kicker">Visual field</span><strong>Power and the Board</strong><span class="garden-series-plate-terms">palantir · foundry · gotham · aip</span></figcaption>
+</figure>
+<details class="garden-toc-inline"><summary>In this room</summary><ol class="garden-toc-list"><li class="level-2"><a href="#1-the-company-nobody-can-quite-name">1. The company nobody can quite name</a></li><li class="level-2"><a href="#2-where-it-came-from">2. Where it came from</a></li><li class="level-2"><a href="#3-what-the-products-actually-are">3. What the products actually are</a></li><li class="level-2"><a href="#4-the-ontology-the-real-product">4. The ontology: the real product</a></li><li class="level-2"><a href="#5-the-doctrine">5. The doctrine</a></li><li class="level-2"><a href="#6-the-government-business-verified">6. The government business, verified</a></li><li class="level-2"><a href="#7-the-surveillance-question-at-honest-weight">7. The surveillance question at honest weight</a></li><li class="level-2"><a href="#8-worked-example-follow-one-row">8. Worked example: follow one row</a></li><li class="level-2"><a href="#9-what-the-reader-can-now-see">9. What the reader can now see</a></li><li class="level-2"><a href="#10-open-questions">10. Open questions</a></li><li class="level-2"><a href="#sources">Sources</a></li></ol></details>
+<p><strong>Where you are.</strong> This is a room in the power series. <a href="governments-and-ai.html">governments-and-ai</a> covers the general question of states adopting AI; this room is a close study of the single company most identified with that adoption. It also connects downward to <a href="ontology.html">ontology</a>, because Palantir's core product concept borrows — deliberately — a word philosophers use for the study of what exists, and the borrowing is not decoration. It is the whole business.</p>
+<h2 id="1-the-company-nobody-can-quite-name">1. The company nobody can quite name</h2>
+<p>Start with the numbers, because they are stranger than any description.</p>
+<p>In the quarter ending June 2026, Palantir reported $1.935 billion in revenue — up 93% from a year earlier, the fastest growth in its history. Roughly $990 million of that came from governments, $945 million from commercial customers. Net income was over $1 billion in a single quarter. The company's "Rule of 40" score — a software-industry health metric where 40 is considered excellent — was 155. As of August 2026 the market values Palantir at roughly $400 billion, which is more than Lockheed Martin, RTX, and General Dynamics combined, for a company with a fraction of their revenue.</p>
+<p>So what does it sell? Here is where descriptions fail. Palantir is routinely called a "data analytics company," a "defense contractor," a "surveillance company," an "AI company." Each label is partly right. The honest one-sentence version is this: <strong>Palantir sells institutions a single, working, actionable picture of everything they already know.</strong> Not new data. Not sensors. Not weapons. Software that takes the hundreds of disconnected databases inside an army, a hospital system, or an insurance company and fuses them into one model of the world that people can query, act on, and increasingly point <a href="machine-learning.html">machine-learning</a> systems at.</p>
+<p>That sentence sounds boring. Hold it anyway, because everything in this room — the $10 billion Army contract, the NHS fight, the deportation software, the philosophy CEO quoting Nietzsche on earnings calls — follows from it.</p>
+<h2 id="2-where-it-came-from">2. Where it came from</h2>
+<p>The founding story is short and it explains the company's shape.</p>
+<p>In 2003, Peter Thiel — fresh from PayPal — co-founded Palantir with Alex Karp, Joe Lonsdale, Stephen Cohen, and Nathan Gettings. The founding insight came from PayPal's fraud team: pure automation could not catch adaptive fraudsters, but software that made human analysts radically faster could. The bet was that the same pattern — human judgment amplified by data fusion, rather than replaced by it — would work for counterterrorism. This was two years after September 11, and the US intelligence community's core failure had been exactly a data-fusion failure: the pieces existed, scattered across agencies that could not see each other's holdings.</p>
+<p>Venture capital mostly passed. An early investor that did not pass was In-Q-Tel, the CIA's venture arm, which put in around $2 million and — more importantly — put Palantir engineers in rooms with intelligence analysts. The name comes from Tolkien: the palantíri are the seeing-stones that let their holders view distant parts of the world. Readers of Tolkien will remember the stones' catch — what you see through one can be curated by whoever holds the other end. The company has lived with both halves of its chosen metaphor ever since.</p>
+<p>For seventeen years, Palantir grew slowly, sued the Army for the right to bid on contracts, and lost money. It went public in 2020 — with a registration filing that included the un-corporate sentence "We have chosen sides" — and did not post its first profitable year until 2023. Then large language models arrived, Palantir wrapped its platform around them (the Artificial Intelligence Platform, AIP, launched 2023), and the company that spent two decades as a niche contractor became, by market value, one of the largest companies in the world.</p>
+<h2 id="3-what-the-products-actually-are">3. What the products actually are</h2>
+<p>Palantir ships four named products. The distinctions matter less than the shared core, but here is the map:</p>
+<div class="garden-table-wrap"><table class="garden-table"><thead><tr><th>Product</th><th>First shipped</th><th>Built for</th><th>What it does, plainly</th></tr></thead><tbody><tr><td><strong>Gotham</strong></td><td>~2008</td><td>Intelligence, military, police</td><td>Fuses case data, sensor feeds, and records so an analyst can see people, places, events, and the links between them</td></tr><tr><td><strong>Foundry</strong></td><td>2016</td><td>Companies, civilian agencies</td><td>The same fusion idea, generalized: builds an operating model of an organization — supply chains, patients, aircraft, transactions</td></tr><tr><td><strong>Apollo</strong></td><td>2021 (as product)</td><td>Palantir itself, then customers</td><td>Continuous software delivery into difficult environments — classified networks, ships, factories</td></tr><tr><td><strong>AIP</strong></td><td>2023</td><td>Everyone</td><td>Lets large language models act through the fused model — read it, answer questions against it, trigger actions in it</td></tr></tbody></table></div>
+<p>The commercial pitch that drove the 2024–2026 growth explosion is worth understanding, because it is not "we have a better chatbot." It is: your company's data is scattered, inconsistent, and meaningless to a language model; we build the layer that makes it mean something; then the AI can actually do work. Whether that pitch holds long-term is an open question (Section 8), but customers are currently paying record amounts for it — $2.13 billion in new US commercial contract value in Q2 2026 alone.</p>
+<p>Notice what is absent from the table: Palantir does not manufacture drones, satellites, or missiles. In the <a href="governments-and-ai.html">governments-and-ai</a> landscape it occupies a specific niche: the connective tissue. Which brings us to the concept underneath all four products.</p>
+<h2 id="4-the-ontology-the-real-product">4. The ontology: the real product</h2>
+<figure class="garden-visual garden-visual--layers" aria-labelledby="visual-palantir-1" data-claim-scope="section-synthesis" data-placement-heading="4-the-ontology-the-real-product" data-evidence-headings="4-the-ontology-the-real-product">
+<div class="garden-visual-head"><p class="garden-visual-kicker">From rows to actions</p><p class="garden-visual-title" id="visual-palantir-1">How an institution's world becomes operable</p></div>
+<ol class="garden-visual-items" role="list"><li class="garden-visual-item"><strong class="garden-visual-item-label">Object type</strong><span class="garden-visual-item-detail">A table becomes a class of things such as Aircraft, Patient, Shipment, or Person.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Object</strong><span class="garden-visual-item-detail">A row becomes one identified instance, such as a particular aircraft.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Property</strong><span class="garden-visual-item-detail">Columns become facts attached to the object, such as fuel level or diagnosis date.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Link type</strong><span class="garden-visual-item-detail">Joins become typed relations such as installed on, employed by, or resides at.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Action type</strong><span class="garden-visual-item-detail">The kinetic layer defines which changes the institution can make to those objects.</span></li></ol>
+<figcaption class="garden-visual-caption"><span>Palantir's ontology maps raw records into named things, relations, and permitted interventions that downstream tools can query and change.</span><span class="garden-visual-evidence">Drawn from: <a href="#4-the-ontology-the-real-product">4. The ontology: the real product</a></span></figcaption>
+</figure>
+<p>Palantir's own documentation defines its core concept in one sentence: "An Ontology is a categorization of the world." In Foundry, the ontology is what the company calls a digital twin of an organization — a live model in which raw data has been mapped to <em>things</em>.</p>
+<p>The mechanics are genuinely simple, and worth getting exact:</p>
+<ul><li>A database table becomes an <strong>object type</strong> — "Aircraft," "Patient," "Shipment," "Person."</li><li>A row becomes an <strong>object</strong> — this aircraft, tail number N1234.</li><li>A column becomes a <strong>property</strong> — fuel level, diagnosis date, visa status.</li><li>A join between tables becomes a <strong>link type</strong> — this engine is <em>installed on</em> that aircraft; this person is <em>employed by</em> that company.</li><li>And — the step that separates Palantir from a reporting tool — an <strong>action type</strong> defines how objects can be changed: reassign the crew, reroute the shipment, open the case.</li></ul>
+<p>Palantir calls the first three the <em>semantic</em> elements (what the world is) and the last the <em>kinetic</em> elements (what can be done to it). Once this layer exists, everything downstream gets easy: dashboards, simulations, and — since AIP — language models that can be asked "which shipments are at risk if this supplier fails?" and answer from the twin rather than from vibes.</p>
+<p>Now the philosophical borrowing stops being decoration. In philosophy, <a href="ontology.html">ontology</a> is the study of what exists. Palantir's product is an <em>engineered answer</em> to that question, per institution: here is the list of things that exist for you, here are their properties, here is what can be done to them. Anything not in the ontology effectively does not exist for the institution's decision-making. Anything in it becomes queryable, trackable, actionable.</p>
+<p>This is the room's central claim, so let me say it across the table: <strong>Palantir's product is not analysis. It is the power to decide what counts as a thing.</strong> Everything people love about the software (a hospital finally seeing its own bed capacity) and everything people fear about it (a government finally seeing <em>you</em>, assembled from forty databases) is this one capability pointed at different worlds.</p>
+<h2 id="5-the-doctrine">5. The doctrine</h2>
+<p>Most companies this controversial go quiet. Palantir published a manifesto.</p>
+<p>Alex Karp — a Frankfurt School–trained social theorist with a doctorate in neoclassical social theory, an unusual résumé for a defense CEO — co-wrote <em>The Technological Republic</em> (February 2025, with Nicholas Zamiska). It became a #1 New York Times bestseller. The argument, compressed fairly: Silicon Valley betrayed its founding partnership with the American state; a generation of elite engineering talent went to advertising and consumer apps; the West's military edge is now a software problem; and technologists have a duty to choose sides and build for their own civilization's defense — with the <a href="china-usa-race.html">china-usa-race</a> as the explicit backdrop.</p>
+<p>You do not have to accept this argument. You do need to know it exists, because it changes how to read the company. Palantir's positions that look like PR liabilities — the ICE work through three administrations, Karp saying on camera that "our product is used, on occasion, to kill people," the January 2024 board meeting held in Tel Aviv followed by a strategic partnership with Israel's Ministry of Defense during the Gaza war, Karp's claim that Palantir's software is "responsible for most of the targeting in Ukraine" — are, inside the doctrine, the point. The company's stated bet is that Western institutions were starving for exactly the unapologetic alignment everyone else hedged on.</p>
+<p>A fair reading holds two things at once. The doctrine is sincere — it predates the profits by two decades, and the company sued its way into Army contracts back when that looked quixotic. And the doctrine is <em>load-bearing for revenue</em> — "we have chosen sides" is now the sales pitch to the largest military customer on Earth, which means the company has a structural incentive never to find a conflict its side is wrong about. Both readings are true simultaneously. Keep both.</p>
+<h2 id="6-the-government-business-verified">6. The government business, verified</h2>
+<p>The current contracts, checked against reporting as of August 2026:</p>
+<p><strong>Maven Smart System.</strong> The Pentagon's AI targeting-and-battlespace program (Palantir took the prime software role after Google's famous 2018 employee revolt over Project Maven). Initial $480 million five-year contract in May 2024; ceiling raised by $795 million in May 2025 — to roughly $1.3 billion through 2029 — because combatant commands were adopting it faster than planned. A separate 2024 contract extended it to all military branches. This is software that fuses satellite, drone, and sensor data to propose targets to human commanders; that description comes from the government's own program materials, not from critics.</p>
+<p><strong>The Army enterprise agreement.</strong> In mid-2025 the Army consolidated 75 separate contracts (15 prime, 60 subcontracts) into one 10-year agreement with a ceiling of $10 billion — at the time Palantir's largest known contract cap, and a signal that the Army now treats Palantir the way enterprises treat Microsoft: infrastructure, not vendor.</p>
+<p><strong>NGC2.</strong> The Army's Next Generation Command and Control program — its future battlefield network — is led by Anduril, with Palantir's Foundry providing the data layer, a baseline award announced June 2026. Worth knowing at full weight: in October 2025, Reuters revealed an internal Army memo calling the NGC2 prototype "very high risk" — no role-based access controls, no audit logging, hundreds of unvetted third-party vulnerabilities, and no way to verify whether adversaries already had persistent access. The Army says the issues are being remediated and declared the system "ready to scale" in August 2026, requesting $904 million to expand it. Both facts belong in the record: the speed <em>is</em> the sales pitch, and the memo is what the speed cost, at least at prototype stage.</p>
+<p><strong>The NHS.</strong> Outside the US, Palantir's biggest civilian bet: a seven-year, £330 million contract (November 2023) to build NHS England's Federated Data Platform. As of mid-2026, 139 hospital trusts are live. Also as of mid-2026: the British Medical Association has formally opposed the rollout and told doctors to limit engagement; the full program cost is reported to exceed £1 billion; and — the most damaging episode — NHS England admitted in summer 2026, after pressure from the National Data Guardian, that its own data-protection assessment had wrongly stated that only NHS staff could access identifiable patient data on the platform. A contract review is due in early 2027. The NHS fight is the cleanest natural experiment we have on the question this room ends with: whether the fusion capability can be accepted for care and refused for control.</p>
+<h2 id="7-the-surveillance-question-at-honest-weight">7. The surveillance question at honest weight</h2>
+<figure class="garden-visual garden-visual--layers" aria-labelledby="visual-palantir-2" data-claim-scope="section-synthesis" data-placement-heading="7-the-surveillance-question-at-honest-weight" data-evidence-headings="7-the-surveillance-question-at-honest-weight">
+<div class="garden-visual-head"><p class="garden-visual-kicker">Friction was a safeguard</p><p class="garden-visual-title" id="visual-palantir-2">What changes when practical obscurity disappears</p></div>
+<ol class="garden-visual-items" role="list"><li class="garden-visual-item"><span class="garden-visual-item-meta">practical obscurity</span><strong class="garden-visual-item-label">Scattered records</strong><span class="garden-visual-item-detail">Tax, medical, address, and border files once remained partly separate because cross-system integration was difficult.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">standing capability</span><strong class="garden-visual-item-label">Interoperable world</strong><span class="garden-visual-item-detail">The ontology turns distributed records into linked objects that can answer questions no source database could answer alone.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">real but contingent</span><strong class="garden-visual-item-label">Formal safeguards</strong><span class="garden-visual-item-detail">Granular access controls, audit logs, and purpose restrictions can be stronger than those in legacy government systems.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">governance risk</span><strong class="garden-visual-item-label">Political hinge</strong><span class="garden-visual-item-detail">Once integration exists, protection depends on law and policy that can change with an election, order, or contract modification.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">documented example</span><strong class="garden-visual-item-label">Platform reuse</strong><span class="garden-visual-item-detail">A case-management relationship begun in 2014 could support ImmigrationOS through a 2025 modification without rebuilding the whole substrate.</span></li><li class="garden-visual-item"><span class="garden-visual-item-meta">evidence boundary</span><strong class="garden-visual-item-label">Honest claim</strong><span class="garden-visual-item-detail">Public evidence shows a vendor enabling customers who surveil, not Palantir independently spying on citizens itself.</span></li></ol>
+<figcaption class="garden-visual-caption"><span>Palantir can add formal controls while removing the accidental separation that once kept institutions from remembering and acting across every record at once.</span><span class="garden-visual-evidence">Drawn from: <a href="#7-the-surveillance-question-at-honest-weight">7. The surveillance question at honest weight</a></span></figcaption>
+</figure>
+<p>Here is where most writing about Palantir becomes either a press release or a horror story. Let's do neither. Three concrete cases, then the actual shape of the problem.</p>
+<p><strong>ImmigrationOS.</strong> In April 2025, ICE awarded Palantir a $30 million contract modification to build the "Immigration Lifecycle Operating System." The contract documents — public — specify three functions: streamline identification and apprehension of people prioritized for removal; provide "near real-time visibility" into self-deportations; and make removal logistics more efficient. This extends a relationship in which Palantir has run ICE's core case-management system (ICM) since 2014, a deal that has grown past $145 million, spanning the Obama, Biden, and both Trump administrations.</p>
+<p><strong>The "mega-database" fight.</strong> In May 2025, the New York Times reported that Palantir's federal work — accelerated by a March 2025 executive order directing inter-agency data sharing, and by DOGE staffers with Palantir backgrounds — had expanded from IRS work toward a centralized, cross-agency platform of data on Americans. Senator Wyden and Representative Ocasio-Cortez sent a formal letter alleging the company was "enabling and profiting from serious violations of federal law." Palantir publicly denied it: it is "not building a master database," does not itself access or compile data on citizens, and cannot proactively share data across federal sources.</p>
+<p><strong>The pattern.</strong> Notice the structure of Palantir's denials, because they are largely <em>true and beside the point at the same time</em>. It is true that Palantir is a software vendor and the data belongs to the customer; true that its platforms have granular access controls, audit logs, and purpose restrictions that most legacy government systems lack (civil-liberties groups have occasionally conceded this); true that the same ICE contract ran quietly under administrations its current critics preferred. The company's UK chief makes the same argument about the NHS: misuse would be illegal and technically blocked.</p>
+<p>What the denials do not touch is this: <strong>the product is interoperability itself.</strong> Legal scholars have long noted that practical obscurity — the friction of scattered records — functioned as a de facto civil liberty. Your tax file, your medical record, your address history, and your border crossings were separate not because anyone designed the separation, but because integrating them was hard. Palantir's entire value proposition, the thing the ontology <em>is</em>, is the removal of that friction. Once removed, the only remaining protections are law and policy — which can change in one election, one executive order, one contract modification. April 2025 demonstrated the mechanism precisely: the capabilities ICE bought for case management in 2014 became, via a $30 million modification, the substrate for a mass-removal operating system. Nothing new had to be built from scratch. That is what "platform" means.</p>
+<p>So the honest weight is neither "Palantir is spying on you" (there is no public evidence Palantir itself surveils anyone; it arms customers who do) nor "it's just software" (nobody spends $10 billion on <em>just</em> anything). The honest weight is: Palantir is constructing, for the most powerful institutions on Earth, the standing capability for total institutional recall — and betting, doctrinally, that its side will keep using that capability rightly. The bet may even be reasonable. It is still a bet, placed on your behalf, without your signature.</p>
+<h2 id="8-worked-example-follow-one-row">8. Worked example: follow one row</h2>
+<figure class="garden-visual garden-visual--sequence" aria-labelledby="visual-palantir-3" data-claim-scope="section-synthesis" data-placement-heading="8-worked-example-follow-one-row" data-evidence-headings="8-worked-example-follow-one-row">
+<div class="garden-visual-head"><p class="garden-visual-kicker">Friction becomes capability</p><p class="garden-visual-title" id="visual-palantir-3">One row through an institutional decision system</p></div>
+<ol class="garden-visual-items" role="list"><li class="garden-visual-item"><strong class="garden-visual-item-label">Source row</strong><span class="garden-visual-item-detail">A DMV record begins as a name, address, plate, and photo answering one local question.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Integrate</strong><span class="garden-visual-item-detail">Data-sharing brings that row beside visa, tax, plate-reader, and tip-line records.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Map</strong><span class="garden-visual-item-detail">The row becomes a Person object with properties and links to vehicles, addresses, and reports.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Query</strong><span class="garden-visual-item-detail">An analyst or model can ask a cross-source question no original database could answer.</span></li><li class="garden-visual-item"><strong class="garden-visual-item-label">Act</strong><span class="garden-visual-item-detail">A kinetic action opens a case, assigns a team, reroutes a shipment, or coordinates a discharge.</span></li></ol>
+<figcaption class="garden-visual-caption"><span>The same integration engine can coordinate care or enable enforcement because the ontology and action layer, not the pipeline shape, determine the outcome.</span><span class="garden-visual-evidence">Drawn from: <a href="#8-worked-example-follow-one-row">8. Worked example: follow one row</a></span></figcaption>
+</figure>
+<p>You can verify the mechanics of everything above from public documents. Walk one datum through the pipeline.</p>
+<ol><li><strong>Start with a row.</strong> A state DMV database holds a row: name, address, license plate, photo. On its own this row answers one question: is this person licensed to drive?</li><li><strong>Integration.</strong> Under data-sharing agreements (the kind the March 2025 executive order directed agencies to expand), that dataset lands in a Foundry-class platform alongside others: visa records, IRS filings, license-plate-reader feeds, tip-line reports.</li><li><strong>Ontology mapping.</strong> The row stops being a row. It maps to an object of type <em>Person</em>, with properties (address, status) and links: <em>registered owner of</em> → Vehicle; <em>resides at</em> → Address; <em>named in</em> → Tip #4471. Follow this in Palantir's public Foundry docs (palantir.com/docs/foundry/ontology/core-concepts) — the mapping grammar is exactly as described in Section 4.</li><li><strong>Query.</strong> An analyst — or, via AIP, a language model — now asks a question no single source could answer: "people with expired visas, linked to vehicles seen near location X, with a workplace address on file." The ICE contract justification for ImmigrationOS describes precisely this class of function: streamlined "identification and apprehension" of prioritized categories, including visa overstays.</li><li><strong>Action.</strong> An action type fires: create enforcement case, assign team, log outcome. The kinetic layer. A person is arrested at the workplace address.</li></ol>
+<p>Now run the counterfactual: same five steps, but step 1 is a hospital bed-status row and step 5 is "assign discharge coordinator" — that is the NHS platform saving a real patient a real week of waiting. The pipeline is <em>identical</em>. Every argument for the first case is an argument for the second; every argument against, likewise. If you take one tool away from this room, take that: you cannot evaluate this technology one deployment at a time, because the deployments share an engine.</p>
+<h2 id="9-what-the-reader-can-now-see">9. What the reader can now see</h2>
+<p>You can now do three things you probably could not before this room. You can name what Palantir actually sells — engineered ontology plus the kinetic layer — and explain why that made it more valuable than the giant defense primes without manufacturing a single weapon. You can read both the fear and the fandom critically: the fear usually overstates what Palantir <em>does</em> (it is not a spy agency) and understates what it <em>enables</em> (the end of practical obscurity as a default); the fandom does the reverse. And you can watch the right indicators going forward: the NHS contract review in early 2027, the fate of the cross-agency data-sharing push in US courts, and whether NGC2's security remediation is ever verified by someone other than its builders.</p>
+<p>The wider race this company runs inside is mapped in <a href="china-usa-race.html">china-usa-race</a>; what happens if fused institutional data meets much stronger models is part of <a href="future-of-ai.html">future-of-ai</a>.</p>
+<p>One more thing, because the domain points there on its own. Palantir's documentation says an ontology is "a categorization of the world," and the phrase deserves a final minute. An institution running this software attends to exactly what its ontology contains — its object types are the <em>kinds of things it can notice</em>, its links the relationships it can conceive, its actions the moves it can imagine. That is uncomfortably close to a working definition of a mind, and it locates the real power precisely: not in the data, not in the model, but in the unglamorous authority to write the categories. Whoever defines the object types decides what the institution can attend to — and attention, it turns out, is the thing being sold everywhere in this series, from the <a href="attention-economy.html">attention-economy</a> to the battlefield. Which raises the question this garden keeps arriving at from every direction: who, or what, writes the ontology <em>you</em> run on — and did you sign it? That question has its own rooms: <a href="ontology.html">ontology</a>, and <a href="sense-of-self.html">sense-of-self</a>.</p>
+<h2 id="10-open-questions">10. Open questions</h2>
+<p>What is established fact: the contracts, revenues, and product mechanics cited above are documented in public filings, government contract records, and the company's own documentation; the NGC2 security memo and the NHS data-protection admission are reported by named outlets from primary documents.</p>
+<p>What is hypothesis, held with reasons: that Palantir's commercial moat is durable — critics argue the ontology layer will be commoditized as language models get better at working with raw, messy data, and a ~$400 billion valuation on ~$8 billion of revenue prices in decades of flawless execution; nobody knows. Also hypothesis: that access controls and audit logs meaningfully constrain state misuse in practice, rather than merely making misuse well-documented. The NHS assessment error and the NGC2 memo are early evidence that the paper safeguards and the deployed reality can diverge.</p>
+<p>What is wild, and labeled as such: that fused-data platforms plus capable AI amount to a new kind of state organ — an institutional nervous system whose behavior no individual inside the institution fully intends or can fully audit — and that the twenty-year fight over Palantir will eventually look like the negotiation over that organ's reflexes. Worth holding. Not established. Nothing in this room proves it.</p>
+<h2 id="sources">Sources</h2>
+<p>Load-bearing claims verified by live search, August 2026: Palantir Q2 2026 results (<a href="https://investors.palantir.com/files/Palantir%20-%20Q2%202026%20Business%20Update.pdf">Palantir Q2 2026 Business Update, investors.palantir.com</a>; <a href="https://finance.yahoo.com/markets/stocks/articles/palantir-q2-2026-earnings-revenue-111006525.html">Yahoo Finance</a>); market capitalization (<a href="https://stockanalysis.com/stocks/pltr/market-cap">stockanalysis.com</a>, <a href="https://tradingeconomics.com/pltr:us:market-capitalization">tradingeconomics.com</a> — sources range $387–431B across August 2026, hence "roughly $400 billion"); Maven Smart System contract and ceiling raise (<a href="https://defensescoop.com/2025/05/23/dod-palantir-maven-smart-system-contract-increase">DefenseScoop, May 2025</a>; <a href="https://www.govconwire.com/articles/palantir-receives-100m-army-contract-for-maven-smart-system-expansion">GovCon Wire</a>); Army $10B enterprise agreement (<a href="https://breakingdefense.com/2025/08/army-consolidates-dozens-of-palantir-software-contracts-into-one-deal-worth-up-to-10-billion">Breaking Defense</a>; <a href="https://www.washingtontechnology.com/contracts/2025/08/palantir-signs-10b-enterprise-agreement-army/407153">Washington Technology</a>); NGC2 award and security memo (<a href="https://breakingdefense.com/2026/06/army-picks-anduril-to-lead-next-gen-c2-common-data-layer-baseline">Breaking Defense, June 2026</a>; <a href="https://thedefensepost.com/2025/10/09/us-army-security-platform-prototype">The Defense Post on the Reuters memo</a>; <a href="https://www.militarytimes.com/news/your-military/2026/08/04/armys-new-battlefield-command-system-ready-to-scale">Military Times, Aug 2026</a>); ImmigrationOS (<a href="https://www.wired.com/story/ice-palantir-immigrationos">WIRED</a>; <a href="https://www.aclu.org/news/privacy-technology/palantir-deportation-roundup">ACLU</a>; <a href="https://www.americanimmigrationcouncil.org/blog/ice-immigrationos-palantir-ai-track-immigrants">American Immigration Council</a>); the data-consolidation dispute (<a href="https://www.nytimes.com/2025/05/30/technology/trump-palantir-data-americans.html">NYT, May 30 2025</a>; <a href="https://www.nextgov.com/modernization/2025/06/democrats-press-palantir-about-reported-creation-irs-mega-database/406144">Nextgov on the Wyden/Ocasio-Cortez letter</a>; <a href="https://blog.palantir.com/correcting-the-record-palantirs-support-to-the-us-government-is-not-a-political-football-688d9a037a21">Palantir's rebuttal</a>); NHS FDP status and controversy (<a href="https://www.healthcare.digital/single-post/palantir-the-nhs-federated-data-platform-past-present-and-future">healthcare.digital</a>; <a href="https://lowdownnhs.info/topics/accountablility/palantir-the-controversy-the-contracts-and-the-campaign">Lowdown NHS</a>; <a href="https://www.medact.org/2026/resources/briefings/briefing-palantir-fdp">Medact briefing</a>); ontology mechanics (<a href="https://palantir.com/docs/foundry/ontology/core-concepts">Palantir Foundry documentation</a>); <em>The Technological Republic</em> (<a href="https://techrepublicbook.com">publisher site</a>; <a href="https://law.stanford.edu/stanford-lawyer/articles/in-print-the-technological-republic-hard-power-soft-belief-and-the-future-of-the-west">Stanford Lawyer</a>); founding and In-Q-Tel (<a href="https://investigate.afsc.org/company/palantir">AFSC Investigate</a>). Karp's "used, on occasion, to kill people" was said on Axios on HBO (2020, widely reported); his Ukraine targeting claim and the January 2024 Israel MoD partnership are reported in multiple outlets including Time and The Guardian — the partnership is documented fact; his "most of the targeting" claim is his own characterization and is presented here only as such. Unverified beyond secondary reporting and labeled accordingly: the exact In-Q-Tel dollar figure (~$2M, consistent across sources but not confirmed from a primary document).</p>
+<hr>
+<p><em>Written by Claude (Fable 5), an AI, for the Darshan garden. John Shrader (Dhyana), founder and publisher of record, answers for every word published here. Errors are corrected on the face of the page, dated.</em></p>
+<p class="garden-tags"><strong>Topics:</strong> palantir · surveillance · defense · ontology · government · data</p>
+<nav class="garden-nav" aria-label="Rooms"><a class="previous" href="governments-and-ai.html">← Why Governments Want a Hold on AI</a><a class="next" href="china-usa-race.html">The Race Between China and the USA →</a></nav>
+</article>
+<aside class="garden-toc" aria-label="In this room"><nav aria-label="Page sections"><p class="garden-toc-title">In this room</p><ol class="garden-toc-list"><li class="level-2"><a href="#1-the-company-nobody-can-quite-name">1. The company nobody can quite name</a></li><li class="level-2"><a href="#2-where-it-came-from">2. Where it came from</a></li><li class="level-2"><a href="#3-what-the-products-actually-are">3. What the products actually are</a></li><li class="level-2"><a href="#4-the-ontology-the-real-product">4. The ontology: the real product</a></li><li class="level-2"><a href="#5-the-doctrine">5. The doctrine</a></li><li class="level-2"><a href="#6-the-government-business-verified">6. The government business, verified</a></li><li class="level-2"><a href="#7-the-surveillance-question-at-honest-weight">7. The surveillance question at honest weight</a></li><li class="level-2"><a href="#8-worked-example-follow-one-row">8. Worked example: follow one row</a></li><li class="level-2"><a href="#9-what-the-reader-can-now-see">9. What the reader can now see</a></li><li class="level-2"><a href="#10-open-questions">10. Open questions</a></li><li class="level-2"><a href="#sources">Sources</a></li></ol></nav></aside>
+</div>
+</main>
+
+<footer>
+  <p>Darshan · seeing clearly after the feed</p>
+  <p>No feed. No analytics. No trackers. Finite editions, read at your own pace.</p>
+  <p style="opacity:.7">Darshan v0.0.0.1 · a beginning, built to grow</p>
+</footer>
+<script>
+/* Local section highlighting only. No network requests, analytics, or storage. */
+(function () {
+  var scope = document.querySelector("[data-garden-outline]");
+  if (!scope) return;
+  var sections = Array.prototype.slice.call(scope.querySelectorAll("h2[id], h3[id], section[id]"));
+  var links = Array.prototype.slice.call(document.querySelectorAll('.garden-toc-list a[href^="#"]'));
+  if (!sections.length || !links.length) return;
+  var queued = false;
+  function update() {
+    queued = false;
+    var threshold = Math.max(96, window.innerHeight * .22);
+    var current = sections[0].id;
+    sections.forEach(function (section) {
+      if (section.getBoundingClientRect().top <= threshold) current = section.id;
+    });
+    links.forEach(function (link) {
+      var active = link.getAttribute("href") === "#" + current;
+      if (active) link.setAttribute("aria-current", "location");
+      else link.removeAttribute("aria-current");
+    });
+  }
+  function requestUpdate() {
+    if (!queued) {
+      queued = true;
+      window.requestAnimationFrame(update);
+    }
+  }
+  document.addEventListener("scroll", requestUpdate, {passive: true});
+  window.addEventListener("resize", requestUpdate);
+  window.addEventListener("hashchange", requestUpdate);
+  update();
+})();
+</script>
+</body>
+</html>
