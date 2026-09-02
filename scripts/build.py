@@ -325,11 +325,17 @@ def build():
             else '<a href="articles/%s.html">%s</a>'
             % (art["slug"], html.escape(art["title"], quote=False))
         )
-        items.append(
-            '<li>\n<span class="when">%s</span>\n'
-            '<span class="piece-title">%s%s</span>%s\n</li>'
-            % (display_date(art["date"]), title_html, badge, summary)
-        )
+        if art["title"].lower().startswith("claim trace"):
+            items.append(
+                '<li class="companion">\n<span class="piece-title">%s%s</span>\n</li>'
+                % (title_html, badge)
+            )
+        else:
+            items.append(
+                '<li>\n<span class="when">%s</span>\n'
+                '<span class="piece-title">%s%s</span>%s\n</li>'
+                % (display_date(art["date"]), title_html, badge, summary)
+            )
 
     index_page = render(
         base,
