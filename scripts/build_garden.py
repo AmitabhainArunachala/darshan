@@ -142,6 +142,22 @@ SERIES = [
             "the-future",
         ],
     ),
+    (
+        "silicon",
+        "Seeing the Silicon",
+        [
+            "necessity-and-capture",
+            "the-capital-cycle",
+            "reading-the-filings",
+            "the-memory-wall",
+            "what-are-those-rings",
+            "the-japanese-layer",
+            "advanced-packaging",
+            "power-and-cooling",
+            "bottleneck-migration",
+            "physical-accounting",
+        ],
+    ),
 ]
 
 SERIES_NAMES = {slug: name for slug, name, _ in SERIES}
