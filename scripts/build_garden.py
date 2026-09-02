@@ -142,10 +142,43 @@ SERIES = [
             "the-future",
         ],
     ),
+    (
+        "silicon",
+        "Seeing the Silicon",
+        [
+            "necessity-and-capture",
+            "the-capital-cycle",
+            "reading-the-filings",
+            "the-memory-wall",
+            "what-are-those-rings",
+            "the-japanese-layer",
+            "advanced-packaging",
+            "power-and-cooling",
+            "bottleneck-migration",
+            "physical-accounting",
+        ],
+    ),
 ]
 
 SERIES_NAMES = {slug: name for slug, name, _ in SERIES}
 SERIES_ORDER = {slug: rooms for slug, _, rooms in SERIES}
+SERIES_INTRODUCTIONS = {
+    "silicon": (
+        "This wing is for seeing where physical necessity turns into economic "
+        "capture, and where it does not. Its one law is research, never advice."
+    ),
+}
+WING_PAGES = {
+    "silicon": "seeing-the-silicon.html",
+}
+WING_REQUIRED_META = {
+    "title",
+    "slug",
+    "series",
+    "summary",
+    "status",
+    "date",
+}
 EXPECTED_SLUGS = {slug for _, _, rooms in SERIES for slug in rooms}
 REQUIRED_META = {
     "title",
@@ -223,6 +256,7 @@ body.garden-page-body > footer {
   margin: 1.5rem 0 2.2rem;
   padding: .35rem 0 .35rem 1.35rem;
 }
+.garden-corridors[data-corridor-count="0"] { display: none; margin: 0; }
 .garden-corridors {
   margin: 1.15rem 0 2.65rem;
 }
@@ -282,6 +316,7 @@ body.garden-page-body > footer {
 .garden-series-plate--bridge { --plate-accent: #697044; }
 .garden-series-plate--power { --plate-accent: #8f3b26; }
 .garden-series-plate--time-future { --plate-accent: #416778; }
+.garden-series-plate--silicon { --plate-accent: #7c5f46; }
 [data-theme="dark"] .garden-series-plate { --plate-accent: var(--accent); }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) .garden-series-plate { --plate-accent: var(--accent); }
@@ -1367,6 +1402,45 @@ def load_rooms() -> tuple[list[dict[str, str]], list[str]]:
     return rooms, skipped
 
 
+def load_wings() -> tuple[list[dict[str, str]], list[str]]:
+    wings: list[dict[str, str]] = []
+    skipped: list[str] = []
+    wing_dir = SOURCE_DIR / "_wings"
+    if not wing_dir.is_dir():
+        return wings, skipped
+    seen: set[str] = set()
+    for path in sorted(wing_dir.glob("*.md")):
+        try:
+            meta, body = parse_front_matter(path.read_text(encoding="utf-8"))
+            missing = sorted(WING_REQUIRED_META - set(meta))
+            if missing:
+                raise ValueError("missing keys: " + ", ".join(missing))
+            extra = sorted(set(meta) - WING_REQUIRED_META)
+            if extra:
+                raise ValueError("unexpected keys: " + ", ".join(extra))
+            slug = meta["slug"]
+            if not re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", slug):
+                raise ValueError("slug is not URL-safe: %s" % slug)
+            if slug in seen:
+                raise ValueError("duplicate slug: %s" % slug)
+            if meta["series"] not in SERIES_NAMES:
+                raise ValueError("unknown series: %s" % meta["series"])
+            expected_page = WING_PAGES.get(meta["series"])
+            if expected_page and slug + ".html" != expected_page:
+                raise ValueError(
+                    "slug %s does not match the wing page for series %s"
+                    % (slug, meta["series"])
+                )
+            date.fromisoformat(meta["date"])
+            if meta["status"].lower() not in {"draft", "published", "forthcoming"}:
+                raise ValueError("unknown status: %s" % meta["status"])
+            seen.add(slug)
+            wings.append({**meta, "body": strip_source_title(body), "path": str(path)})
+        except (OSError, UnicodeError, ValueError) as exc:
+            skipped.append("_wings/%s: %s" % (path.name, exc))
+    return wings, skipped
+
+
 def ordered_series_rooms(series_slug: str, rooms: dict[str, dict[str, str]]) -> list[str]:
     canonical = [slug for slug in SERIES_ORDER[series_slug] if slug in rooms]
     extras = sorted(
@@ -1575,7 +1649,7 @@ def load_visual_catalog(
             slug for slug in canonical_slugs if slug in rooms and slug in available_slugs
         }
         missing_rooms = sorted(expected_rooms - set(visual_rooms))
-        extra_rooms = sorted(set(visual_rooms) - expected_rooms)
+        extra_rooms = sorted(set(visual_rooms) - set(canonical_slugs))
         if missing_rooms:
             errors.append("%s: missing rooms: %s" % (spec_path.name, ", ".join(missing_rooms)))
         if extra_rooms:
@@ -1588,7 +1662,13 @@ def load_visual_catalog(
                 errors.append("%s: room entry must be an object" % location)
                 continue
             visuals = room_entry.get("visuals")
-            if not isinstance(visuals, list) or not 3 <= len(visuals) <= 5:
+            if not isinstance(visuals, list):
+                errors.append("%s: three to five visuals are required" % location)
+                continue
+            if len(visuals) == 0:
+                room_catalog[room_slug] = {"series": series_slug, "visuals": []}
+                continue
+            if not 3 <= len(visuals) <= 5:
                 errors.append("%s: three to five visuals are required" % location)
                 continue
             outline: list[tuple[int, str, str]] = []
@@ -1916,9 +1996,10 @@ def render_series_gallery(catalog: dict[str, object]) -> str:
         if art is None:
             continue
         width, height = art.get("dimensions", (0, 0))
+        href = WING_PAGES.get(series_slug, "#%s" % series_slug)
         cards.append(
-            """<a class="garden-series-card" href="#{series}"><picture><source srcset="{webp_src}" type="image/webp"><img src="{src}" alt="" width="{width}" height="{height}" loading="lazy" decoding="async"></picture><span>{name}</span></a>""".format(
-                series=html.escape(series_slug, quote=True),
+            """<a class="garden-series-card" href="{href}"><picture><source srcset="{webp_src}" type="image/webp"><img src="{src}" alt="" width="{width}" height="{height}" loading="lazy" decoding="async"></picture><span>{name}</span></a>""".format(
+                href=html.escape(href, quote=True),
                 src=html.escape(str(art["src"]), quote=True),
                 webp_src=html.escape(str(art["webp_src"]), quote=True),
                 width=int(width),
@@ -1927,7 +2008,7 @@ def render_series_gallery(catalog: dict[str, object]) -> str:
             )
         )
     return (
-        '<nav class="garden-series-gallery" aria-label="Explore the seven series">%s</nav>'
+        '<nav class="garden-series-gallery" aria-label="Explore the garden series">%s</nav>'
         % "".join(cards)
     )
 
@@ -2002,8 +2083,8 @@ def garden_base(*, title: str, description: str, content: str) -> str:
     page = page.replace("</head>", GARDEN_STYLES + "\n</head>", 1)
     page = page.replace("<body>", '<body class="garden-page-body">', 1)
     page = page.replace(
-        '<a href="../about.html">About</a>',
-        '<a href="index.html">Garden</a>\n    <a href="../about.html">About</a>',
+        '<a href="../garden/index.html">Garden</a>',
+        '<a href="index.html">Garden</a>',
         1,
     )
     page = page.replace("</body>", GARDEN_SCROLLSPY + "\n</body>", 1)
@@ -2066,6 +2147,56 @@ def build_room(
     )
 
 
+def build_wing(
+    wing: dict[str, str],
+    rooms: dict[str, dict[str, str]],
+    visual_catalog: dict[str, object],
+) -> str:
+    series_name = SERIES_NAMES[wing["series"]]
+    status = wing["status"].lower()
+    status_label = " · Draft" if status == "draft" else ""
+    available_slugs = rendered_room_slugs(rooms)
+    outline: list[tuple[int, str, str]] = []
+    body_html = md_to_html(wing["body"], available_slugs, outline)
+    plate_room = {
+        "series": wing["series"],
+        "terms_defined": "",
+    }
+    content = """<div class="garden-layout">
+<article data-garden-room="{slug}" data-garden-outline>
+<p class="garden-series-link"><a href="index.html#{series_slug}">{series_name}</a></p>
+<p class="article-meta">{date}{status}</p>
+<h1 class="article-title">{title}</h1>
+{banner}
+<p class="garden-lede">{summary}</p>
+<nav class="garden-corridors" aria-label="Explore connected rooms" data-corridor-count="0"><ul class="garden-corridor-list"></ul></nav>
+{series_plate}
+{inline_toc}
+{body}
+<nav class="garden-nav" aria-label="Rooms"><a class="previous" href="index.html">← The knowledge garden</a></nav>
+</article>
+{sidebar_toc}
+</div>""".format(
+        slug=html.escape(wing["slug"], quote=True),
+        series_slug=wing["series"],
+        series_name=html.escape(series_name, quote=False),
+        date=html.escape(display_date(wing["date"]), quote=False),
+        status=status_label,
+        title=html.escape(wing["title"], quote=False),
+        banner=DRAFT_BANNER if status == "draft" else "",
+        summary=_inline(wing["summary"], available_slugs),
+        series_plate=render_series_plate(plate_room, visual_catalog),
+        inline_toc=inline_toc(outline, "In this wing"),
+        body=body_html,
+        sidebar_toc=sidebar_toc(outline, "In this wing"),
+    )
+    return garden_base(
+        title="%s · %s Garden" % (wing["title"], SITE_NAME),
+        description=wing["summary"] or SITE_TAGLINE,
+        content=content,
+    )
+
+
 def build_index(
     rooms: dict[str, dict[str, str]], visual_catalog: dict[str, object]
 ) -> str:
@@ -2098,9 +2229,29 @@ def build_index(
                 )
             )
         empty = "<li><p class=\"garden-room-summary\">Rooms are still being planted.</p></li>"
+        introduction = SERIES_INTRODUCTIONS.get(series_slug, "")
+        introduction_html = (
+            '<p class="garden-room-summary">%s</p>'
+            % html.escape(introduction, quote=False)
+            if introduction
+            else ""
+        )
+        wing_page = WING_PAGES.get(series_slug)
+        if wing_page:
+            introduction_html += (
+                '<p class="garden-room-summary"><a href="%s">Enter the wing</a>'
+                " — the reading desk, the rooms, and how to keep seeing after you "
+                "leave the page.</p>"
+                % html.escape(wing_page, quote=True)
+            )
         sections.append(
-            '<section class="garden-series" id="%s"><h2>%s</h2><ul class="garden-room-list">%s</ul></section>'
-            % (series_slug, html.escape(series_name, quote=False), "\n".join(items) or empty)
+            '<section class="garden-series" id="%s"><h2>%s</h2>%s<ul class="garden-room-list">%s</ul></section>'
+            % (
+                series_slug,
+                html.escape(series_name, quote=False),
+                introduction_html,
+                "\n".join(items) or empty,
+            )
         )
 
     outline = [(2, series_slug, series_name) for series_slug, series_name, _ in SERIES]
@@ -2153,6 +2304,8 @@ def build(strict: bool = False) -> int:
     rooms_list, skipped = load_rooms()
     rooms = {room["slug"]: room for room in rooms_list}
     missing = sorted(EXPECTED_SLUGS - set(rooms))
+    wings_list, wing_skipped = load_wings()
+    skipped.extend(wing_skipped)
 
     for reason in skipped:
         print("SKIP  garden_src/%s" % reason)
@@ -2184,6 +2337,15 @@ def build(strict: bool = False) -> int:
             )
             written.append(out_path)
 
+    for wing in wings_list:
+        if wing["status"].lower() == "forthcoming":
+            continue
+        out_path = OUTPUT_DIR / (wing["slug"] + ".html")
+        out_path.write_text(
+            build_wing(wing, rooms, visual_catalog), encoding="utf-8"
+        )
+        written.append(out_path)
+
     index_path = OUTPUT_DIR / "index.html"
     index_path.write_text(build_index(rooms, visual_catalog), encoding="utf-8")
     written.append(index_path)
@@ -2206,7 +2368,7 @@ def build(strict: bool = False) -> int:
             room_visual_catalog: dict[str, dict[str, object]] = visual_catalog[
                 "rooms"
             ]  # type: ignore[assignment]
-            visuals = room_visual_catalog[path.stem]["visuals"]
+            visuals = room_visual_catalog.get(path.stem, {}).get("visuals")
             if isinstance(visuals, list):
                 expected_visual_count = len(visuals)
         errors = check_well_formed(

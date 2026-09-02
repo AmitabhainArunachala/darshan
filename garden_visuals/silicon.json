@@ -1,0 +1,43 @@
+{
+  "schema": "darshan.visual-series/v1",
+  "series": "silicon",
+  "art": {
+    "src": "assets/series/silicon.png",
+    "alt": "Silicon wafer, ledger tide-line, copper lattice, and a distant substation",
+    "png_sha256": "0b9d7d1bbdd241a66deec01b4c7be93147403338fa76715a01fa64570e75777a",
+    "webp_sha256": "621d68702123c225f6fa5382a193feaf5ca66d08cdbcb2fe0e008181988c1173",
+    "prompt": "Use case: stylized-concept\nAsset type: wide 16:9 editorial series plate for a long-form knowledge garden\nPrimary request: Create a sober visual tension between physical necessity and economic capture: a partially seen silicon wafer whose patterned surface splits white light into a faint diffraction band, an engraved ledger of ruled lines and a rising-and-falling tide-line like a capital cycle drawn as a single etched curve, a copper interposer lattice of fine wires, and the austere silhouette of a substation transformer and cooling towers on the horizon. The value seems to sit with the visible object; the plate quietly draws the eye upstream to the plainer machinery beneath it.\nScene/backdrop: cream handmade paper field; the wafer and its rainbow band across the lower-left, the ledger and tide-line curve crossing the center as translucent drafting overlays, the copper lattice mid-right, the transformer and towers small and far on the upper right.\nStyle/medium: tactile printmaking, woodcut and copperplate engraving, with translucent technical drafting layers; sophisticated financial-editorial illustration.\nComposition/framing: cinematic 16:9 horizontal plate, dense but legible layered depth, a strong diagonal from the bright wafer to the dim substation, breathing room for website banner use; the systems interlock rather than reading as a collage of icons.\nLighting/mood: serious, analytic, patient; the money is not the hero.\nColor palette: warm cream paper, charcoal-black linework, oxide red used sparingly on the tide-line, one restrained mineral-blue accent, the wafer's diffraction rendered as a muted ink spectrum rather than a glow.\nMaterials/textures: subtle paper grain, etched copper lines, wafer iridescence translated into muted ink, translucent vellum overlays.\nConstraints: no flags, national emblems, people, company marks, recognizable logos, currency symbols, text, letters, numbers, signature, border, or watermark.\nAvoid: stock-market bull or bear, coins or banknotes, glowing AI brain, neon cyberpunk, photorealism, stock-photo collage, trading-floor screens.\n\n---\nProvenance note (first mate, 2026-09-02 21:55 CST): the fal.ai image generator refused the request (account balance exhausted), so this plate is a hand-composed vector illustration following the prompt above, drawn as SVG (capital.svg beside this file) and rasterized with rsvg-convert to 1600x900 PNG, then encoded to WebP with cwebp -q 82. Store the prompt above as the manifest's generation prompt and this note as its provenance; regenerate from the same prompt when an image model is available and the captain prefers it."
+  },
+  "rooms": {
+    "necessity-and-capture": {
+      "visuals": []
+    },
+    "the-capital-cycle": {
+      "visuals": []
+    },
+    "reading-the-filings": {
+      "visuals": []
+    },
+    "the-memory-wall": {
+      "visuals": []
+    },
+    "what-are-those-rings": {
+      "visuals": []
+    },
+    "the-japanese-layer": {
+      "visuals": []
+    },
+    "advanced-packaging": {
+      "visuals": []
+    },
+    "power-and-cooling": {
+      "visuals": []
+    },
+    "bottleneck-migration": {
+      "visuals": []
+    },
+    "physical-accounting": {
+      "visuals": []
+    }
+  }
+}

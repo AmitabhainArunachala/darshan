@@ -11,4 +11,6 @@ live in `garden_src/`; generated pages live in `garden/`, with
 Verify the complete first planting and its independent verdicts:
 `python3 scripts/check_garden.py`.
 
+Seeing the Silicon was planted on 2026-09-02.
+
 v0.0.0.1.
