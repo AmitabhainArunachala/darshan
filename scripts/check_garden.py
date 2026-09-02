@@ -47,6 +47,15 @@ CODEX_AUTHORED_SLUGS = frozenset(
         "trends-gap",
     }
 )
+SILICON_AUTHORSHIP = (
+    "*Written by Codex, an AI, for Seeing the Silicon, a wing of the Darshan garden. "
+    "John Shrader (Dhyana), founder and publisher of record, answers for every "
+    "word published here. Errors are corrected on the face of the page, dated.*"
+)
+# Plantings after the first carry their own date and authorship, keyed by series slug.
+SERIES_PLANTINGS = {
+    "silicon": {"date": "2026-09-02", "authorship": SILICON_AUTHORSHIP},
+}
 # Closed evidence schema: the seventh field binds a review to exact source bytes.
 VERDICT_REQUIRED_KEYS = {
     "slug",
@@ -256,6 +265,12 @@ def has_markdown_table(body: str) -> bool:
 
 
 def expected_authorship_footer(slug: str) -> str:
+    series_slug = next(
+        (series for series, _, rooms in build_garden.SERIES if slug in rooms), None
+    )
+    planting = SERIES_PLANTINGS.get(series_slug or "")
+    if planting:
+        return planting["authorship"]
     return CODEX_AUTHORSHIP if slug in CODEX_AUTHORED_SLUGS else CLAUDE_AUTHORSHIP
 
 
@@ -374,8 +389,9 @@ def main() -> int:
             )
         if meta.get("status", "").lower() != "draft":
             errors.append(f"{slug}: first-planting status must remain draft")
-        if meta.get("date") != "2026-08-25":
-            errors.append(f"{slug}: date must be exactly 2026-08-25")
+        planting_date = SERIES_PLANTINGS.get(expected_series, {}).get("date", "2026-08-25")
+        if meta.get("date") != planting_date:
+            errors.append(f"{slug}: date must be exactly {planting_date}")
         for key in ("title", "summary", "tags", "terms_defined"):
             if not meta.get(key, "").strip():
                 errors.append(f"{slug}: {key} must be non-empty")

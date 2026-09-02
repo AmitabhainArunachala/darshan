@@ -306,7 +306,32 @@ def build():
 
     prune_stale({p.name for p in written})
 
-    items = []
+    extras = [
+        {
+            "date": "2026-09-02",
+            "html": (
+                "<li>\n<span class=\"when\">2 September 2026</span>\n"
+                "<span class=\"piece-title\"><a href=\"garden/seeing-the-silicon.html\">"
+                "Seeing the Silicon</a>"
+                "<span class=\"badge-draft\">Draft</span></span>\n"
+                "<p class=\"summary\">A wing of the garden on the physical stack under AI: "
+                "where necessity turns into economic capture, and where it does not. "
+                "Ten rooms and a reading desk. Research, never advice.</p>\n</li>"
+            ),
+        },
+        {
+            "date": "2026-08-25",
+            "html": (
+                "<li>\n<span class=\"when\">25 August 2026</span>\n"
+                "<span class=\"piece-title\"><a href=\"garden/index.html\">"
+                "The Knowledge Garden</a></span>\n"
+                "<p class=\"summary\">Rooms connected by ideas. Each room teaches one "
+                "subject from the ground up. Follow a corridor whenever a term needs "
+                "its own room.</p>\n</li>"
+            ),
+        },
+    ]
+    dated_items = [(item["date"], item["html"]) for item in extras]
     for art in articles:
         fc = art["status"] == "forthcoming"
         badge = (
@@ -325,11 +350,16 @@ def build():
             else '<a href="articles/%s.html">%s</a>'
             % (art["slug"], html.escape(art["title"], quote=False))
         )
-        items.append(
-            '<li>\n<span class="when">%s</span>\n'
-            '<span class="piece-title">%s%s</span>%s\n</li>'
-            % (display_date(art["date"]), title_html, badge, summary)
+        dated_items.append(
+            (
+                art["date"],
+                '<li>\n<span class="when">%s</span>\n'
+                '<span class="piece-title">%s%s</span>%s\n</li>'
+                % (display_date(art["date"]), title_html, badge, summary),
+            )
         )
+    dated_items.sort(key=lambda pair: pair[0], reverse=True)
+    items = [html for _, html in dated_items]
 
     index_page = render(
         base,
