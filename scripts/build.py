@@ -157,6 +157,17 @@ def md_to_html(md):
             )
             continue
 
+        # GFM pipe tables: header row, separator row, then body rows.
+        if stripped.startswith("|") and i + 1 < n and _is_table_separator(lines[i + 1]):
+            header = _split_table_row(stripped)
+            i += 2
+            body = []
+            while i < n and lines[i].strip().startswith("|"):
+                body.append(_split_table_row(lines[i].strip()))
+                i += 1
+            out.append(_render_table(header, body))
+            continue
+
         if re.match(r"\d+\.\s+", stripped):
             items = []
             while i < n and re.match(r"\d+\.\s+", lines[i].strip()):
@@ -184,12 +195,44 @@ def md_to_html(md):
     return "\n".join(out)
 
 
+def _is_table_separator(line):
+    """A GFM separator row: | --- | :---: | etc."""
+    s = line.strip()
+    if not s.startswith("|"):
+        return False
+    cells = _split_table_row(s)
+    return bool(cells) and all(re.fullmatch(r":?-{2,}:?", c) for c in cells)
+
+
+def _split_table_row(line):
+    return [c.strip() for c in line.strip().strip("|").split("|")]
+
+
+def _render_table(header, body):
+    def cells(row, tag):
+        return "".join(
+            "<%s>%s</%s>" % (tag, _inline(html.escape(c, quote=False)), tag)
+            for c in row
+        )
+
+    width = len(header)
+    rows = []
+    for row in body:
+        row = (row + [""] * width)[:width]
+        rows.append("<tr>%s</tr>" % cells(row, "td"))
+    return (
+        "<table><thead><tr>%s</tr></thead><tbody>%s</tbody></table>"
+        % (cells(header, "th"), "".join(rows))
+    )
+
+
 def _is_block_start(stripped):
     return bool(
         stripped.startswith(("#", ">", "```"))
         or re.fullmatch(r"(-{3,}|\*{3,}|_{3,})", stripped)
         or re.match(r"[-*]\s+", stripped)
         or re.match(r"\d+\.\s+", stripped)
+        or stripped.startswith("|")
     )
 
 
