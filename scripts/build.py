@@ -11,6 +11,7 @@ Usage:  python3 scripts/build.py
 import html
 import re
 import sys
+import unicodedata
 from datetime import date
 from html.parser import HTMLParser
 from pathlib import Path
@@ -218,16 +219,21 @@ def _strip_tags(fragment):
 
 
 def _slugify(text, fallback):
-    """URL-safe, ASCII-ish slug. Falls back when a heading has no word chars
-    (non-Latin scripts, pure punctuation) so every heading still gets an id."""
-    text = html.unescape(_strip_tags(text)).lower()
-    slug = re.sub(r"[^a-z0-9]+", "-", text).strip("-")
+    """Create a stable Unicode-safe heading ID.
+
+    Keep letters and numbers from every script rather than turning non-Latin
+    headings into order-dependent ``section-N`` fallbacks. Pure punctuation
+    still gets the fallback.
+    """
+    text = unicodedata.normalize("NFKC", html.unescape(_strip_tags(text))).lower()
+    slug = re.sub(r"[^\w]+", "-", text, flags=re.UNICODE).strip("-_")
+    slug = slug.replace("_", "-")
     slug = re.sub(r"-{2,}", "-", slug)
     return slug[:60].strip("-") or fallback
 
 
 def add_heading_ids_and_toc(body, min_headings=8, min_words=3000, max_median_label=60):
-    """Give every h2/h3 a unique id; return (body, toc_html).
+    """Give every h2/h3/h4 a unique id; return (body, toc_html).
 
     Ids are always added — they make every section linkable whether or not a
     TOC is drawn. A TOC is only emitted when it would actually help:
@@ -251,10 +257,14 @@ def add_heading_ids_and_toc(body, min_headings=8, min_words=3000, max_median_lab
         count = used.get(base, 0) + 1
         used[base] = count
         slug = base if count == 1 else "%s-%d" % (base, count)
-        headings.append((int(level), slug, _strip_tags(inner)))
+        level_num = int(level)
+        if level_num <= 3:
+            headings.append(
+                (level_num, slug, html.unescape(_strip_tags(inner)))
+            )
         return '<h%s id="%s">%s</h%s>' % (level, slug, inner, level)
 
-    body = re.sub(r"<h([23])>(.*?)</h\1>", tag, body, flags=re.S)
+    body = re.sub(r"<h([234])>(.*?)</h\1>", tag, body, flags=re.S)
 
     words = len(_strip_tags(body).split())
     if len(headings) < min_headings or words < min_words:
@@ -270,11 +280,39 @@ def add_heading_ids_and_toc(body, min_headings=8, min_words=3000, max_median_lab
         for lvl, slug, label in headings
     )
     toc = (
-        '<nav class="toc" aria-label="Contents">'
-        '<p class="toc-title">Contents</p>'
-        "<ol>%s</ol></nav>" % items
+        '<details class="toc">'
+        '<summary><span>Contents</span>'
+        '<span class="toc-count">%d sections</span></summary>'
+        '<nav aria-label="Contents"><ol>%s</ol></nav></details>'
+        % (len(headings), items)
     )
     return body, toc
+
+
+def insert_toc(body, toc):
+    """Place a compact contents disclosure after the author's opening note.
+
+    Darshan pieces commonly open with a disclosed-AI byline followed by a
+    short rule. Keeping that note before navigation preserves authorship at
+    the threshold. If no rule exists, the contents disclosure leads.
+    """
+    if not toc:
+        return body
+    marker = "<hr>"
+    if marker in body:
+        before, after = body.split(marker, 1)
+        return "%s%s\n%s\n%s" % (before, marker, toc, after)
+    return "%s\n%s" % (toc, body)
+
+
+def decorate_article_body(body):
+    """Mark the disclosed authorship note as secondary publication metadata."""
+    return re.sub(
+        r"^<p><em>((?:Written by|By )[^<].*?)</em></p>",
+        r'<p class="byline"><em>\1</em></p>',
+        body,
+        count=1,
+    )
 
 
 def _is_table_separator(line):
@@ -303,8 +341,11 @@ def _render_table(header, body):
         row = (row + [""] * width)[:width]
         rows.append("<tr>%s</tr>" % cells(row, "td"))
     return (
-        "<table><thead><tr>%s</tr></thead><tbody>%s</tbody></table>"
-        % (cells(header, "th"), "".join(rows))
+        '<div class="table-wrap" role="region" aria-label="Scrollable table" '
+        'tabindex="0"><table class="cols-%d"><thead><tr>%s</tr></thead>'
+        "<tbody>%s</tbody>"
+        "</table></div>"
+        % (width, cells(header, "th"), "".join(rows))
     )
 
 
@@ -370,15 +411,30 @@ def load_articles():
     articles = []
     for path in sorted(ARTICLES_DIR.glob("*.md")):
         meta, body = parse_front_matter(path.read_text(encoding="utf-8"))
-        if "title" not in meta or "date" not in meta:
-            print("SKIP %s: front matter needs at least title: and date:" % path.name)
-            continue
+        if "title" not in meta or "date" not in meta or "status" not in meta:
+            raise ValueError(
+                "%s: front matter requires title:, date:, and explicit status:"
+                % path.name
+            )
+        try:
+            date.fromisoformat(meta["date"])
+        except ValueError as exc:
+            raise ValueError(
+                "%s: date must be ISO YYYY-MM-DD, got %r"
+                % (path.name, meta["date"])
+            ) from exc
+        status = meta["status"].lower()
+        if status not in {"draft", "forthcoming", "published"}:
+            raise ValueError(
+                "%s: status must be draft, forthcoming, or published, got %r"
+                % (path.name, status)
+            )
         articles.append(
             {
                 "slug": path.stem,
                 "title": meta["title"],
                 "date": meta["date"],
-                "status": meta.get("status", "draft").lower(),
+                "status": status,
                 "issue": meta.get("issue", ""),
                 "summary": meta.get("summary", ""),
                 "body_html": md_to_html(body),
@@ -410,19 +466,22 @@ def build():
         issue_display = " · %s" % html.escape(art["issue"]) if art["issue"] else ""
         if art["status"] == "draft":
             issue_display += " · Draft"
-        body_html, toc_html = add_heading_ids_and_toc(art["body_html"])
+        body_html = decorate_article_body(art["body_html"])
+        body_html, toc_html = add_heading_ids_and_toc(body_html)
         page_content = render(
             template("article.html"),
             date_display=meta_bits,
             issue_display=issue_display,
             title=html.escape(art["title"], quote=False),
             draft_banner=DRAFT_BANNER if art["status"] == "draft" else "",
-            body=toc_html + body_html,
+            body=insert_toc(body_html, toc_html),
         )
         page = render(
             base,
             title="%s · %s" % (art["title"], SITE_NAME),
-            description=art["summary"] or SITE_TAGLINE,
+            description=html.escape(
+                art["summary"] or SITE_TAGLINE, quote=True
+            ),
             root="../",
             content=page_content,
         )

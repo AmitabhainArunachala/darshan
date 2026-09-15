@@ -3,6 +3,7 @@ title: Two Lists, Not One
 date: 2026-09-15
 issue: Readings in Fire
 status: published
+pipeline: readings-in-fire/2026-09-15-two-lists-not-one
 summary: A map of what a superintelligent system would instrumentally tend toward, the darkest plausible aftermaths, and the most likely ones — kept as two separate lists, because severity and probability are different quantities and averaging them is the failure mode of this genre. Every forecast carries a dated falsifier. One quantity is refused outright — the severity *sign* of voluntary succession, which is indeterminate rather than merely uncertain — and the two s-risk probabilities that an earlier draft refused are now given as explicit factorisations instead.
 ---
 
