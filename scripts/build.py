@@ -148,13 +148,30 @@ def md_to_html(md):
                     item += " " + lines[i].strip()
                     i += 1
                 items.append(item)
+            # A list whose every item opens with a bold lead-in term is a
+            # field list (label: value), not a bullet list. Render it as such.
+            cls = " class=\"fields\"" if _is_field_list(items) else ""
             out.append(
-                "<ul>%s</ul>"
-                % "".join(
-                    "<li>%s</li>" % _inline(html.escape(t, quote=False))
-                    for t in items
+                "<ul%s>%s</ul>"
+                % (
+                    cls,
+                    "".join(
+                        "<li>%s</li>" % _inline(html.escape(t, quote=False))
+                        for t in items
+                    ),
                 )
             )
+            continue
+
+        # GFM pipe tables: header row, separator row, then body rows.
+        if stripped.startswith("|") and i + 1 < n and _is_table_separator(lines[i + 1]):
+            header = _split_table_row(stripped)
+            i += 2
+            body = []
+            while i < n and lines[i].strip().startswith("|"):
+                body.append(_split_table_row(lines[i].strip()))
+                i += 1
+            out.append(_render_table(header, body))
             continue
 
         if re.match(r"\d+\.\s+", stripped):
@@ -184,12 +201,120 @@ def md_to_html(md):
     return "\n".join(out)
 
 
+FIELD_LEAD_RE = re.compile(r"^\*\*[^*]+\*\*")
+
+
+def _is_field_list(items):
+    """True when EVERY item opens with a bold lead-in term.
+
+    Mixed lists keep their bullets; only fully label-led lists become
+    definition-style field rows.
+    """
+    return bool(items) and all(FIELD_LEAD_RE.match(i.strip()) for i in items)
+
+
+def _strip_tags(fragment):
+    return re.sub(r"<[^>]+>", "", fragment)
+
+
+def _slugify(text, fallback):
+    """URL-safe, ASCII-ish slug. Falls back when a heading has no word chars
+    (non-Latin scripts, pure punctuation) so every heading still gets an id."""
+    text = html.unescape(_strip_tags(text)).lower()
+    slug = re.sub(r"[^a-z0-9]+", "-", text).strip("-")
+    slug = re.sub(r"-{2,}", "-", slug)
+    return slug[:60].strip("-") or fallback
+
+
+def add_heading_ids_and_toc(body, min_headings=8, min_words=3000, max_median_label=60):
+    """Give every h2/h3 a unique id; return (body, toc_html).
+
+    Ids are always added — they make every section linkable whether or not a
+    TOC is drawn. A TOC is only emitted when it would actually help:
+
+    * the piece is long (min_words) and many-sectioned (min_headings), and
+    * its headings read as *labels* rather than sentences.
+
+    That last test matters. A claim trace whose headings are whole findings
+    ("[CONFIRMED] 8-second attention span myth: trail dies at ...") produces a
+    contents block that is noisier than the article, so it does not get one.
+    Median length is the discriminator: label-style headings sit near 35
+    characters, sentence-style headings near 85.
+    """
+    headings = []
+    used = {}
+
+    def tag(match):
+        level, inner = match.group(1), match.group(2)
+        base = _slugify(inner, "section-%d" % (len(headings) + 1))
+        # De-duplicate: two sections may legitimately share a title.
+        count = used.get(base, 0) + 1
+        used[base] = count
+        slug = base if count == 1 else "%s-%d" % (base, count)
+        headings.append((int(level), slug, _strip_tags(inner)))
+        return '<h%s id="%s">%s</h%s>' % (level, slug, inner, level)
+
+    body = re.sub(r"<h([23])>(.*?)</h\1>", tag, body, flags=re.S)
+
+    words = len(_strip_tags(body).split())
+    if len(headings) < min_headings or words < min_words:
+        return body, ""
+
+    lengths = sorted(len(label) for _, _, label in headings)
+    median = lengths[len(lengths) // 2]
+    if median > max_median_label:
+        return body, ""
+
+    items = "".join(
+        '<li class="lvl%d"><a href="#%s">%s</a></li>' % (lvl, slug, html.escape(label, quote=False))
+        for lvl, slug, label in headings
+    )
+    toc = (
+        '<nav class="toc" aria-label="Contents">'
+        '<p class="toc-title">Contents</p>'
+        "<ol>%s</ol></nav>" % items
+    )
+    return body, toc
+
+
+def _is_table_separator(line):
+    """A GFM separator row: | --- | :---: | etc."""
+    s = line.strip()
+    if not s.startswith("|"):
+        return False
+    cells = _split_table_row(s)
+    return bool(cells) and all(re.fullmatch(r":?-{2,}:?", c) for c in cells)
+
+
+def _split_table_row(line):
+    return [c.strip() for c in line.strip().strip("|").split("|")]
+
+
+def _render_table(header, body):
+    def cells(row, tag):
+        return "".join(
+            "<%s>%s</%s>" % (tag, _inline(html.escape(c, quote=False)), tag)
+            for c in row
+        )
+
+    width = len(header)
+    rows = []
+    for row in body:
+        row = (row + [""] * width)[:width]
+        rows.append("<tr>%s</tr>" % cells(row, "td"))
+    return (
+        "<table><thead><tr>%s</tr></thead><tbody>%s</tbody></table>"
+        % (cells(header, "th"), "".join(rows))
+    )
+
+
 def _is_block_start(stripped):
     return bool(
         stripped.startswith(("#", ">", "```"))
         or re.fullmatch(r"(-{3,}|\*{3,}|_{3,})", stripped)
         or re.match(r"[-*]\s+", stripped)
         or re.match(r"\d+\.\s+", stripped)
+        or stripped.startswith("|")
     )
 
 
@@ -285,13 +410,14 @@ def build():
         issue_display = " · %s" % html.escape(art["issue"]) if art["issue"] else ""
         if art["status"] == "draft":
             issue_display += " · Draft"
+        body_html, toc_html = add_heading_ids_and_toc(art["body_html"])
         page_content = render(
             template("article.html"),
             date_display=meta_bits,
             issue_display=issue_display,
             title=html.escape(art["title"], quote=False),
             draft_banner=DRAFT_BANNER if art["status"] == "draft" else "",
-            body=art["body_html"],
+            body=toc_html + body_html,
         )
         page = render(
             base,
