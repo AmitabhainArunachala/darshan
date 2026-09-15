@@ -457,7 +457,19 @@ def build():
     base = template("base.html")
     written = []
 
-    articles = load_articles()
+    try:
+        articles = load_articles()
+    except ValueError as exc:
+        # Front matter is a fail-closed contract, but a routine authoring
+        # slip should read as an editorial correction, not a stack trace.
+        print("FAIL  %s" % exc, file=sys.stderr)
+        print(
+            "      Every article needs title:, an ISO date:, and an explicit\n"
+            "      status: of draft, forthcoming, or published.\n"
+            "      Nothing was written; the site is unchanged.",
+            file=sys.stderr,
+        )
+        return 1
 
     for art in articles:
         if art["status"] == "forthcoming":

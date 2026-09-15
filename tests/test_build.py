@@ -1,7 +1,9 @@
 from __future__ import annotations
 
 import importlib.util
+import subprocess
 import sys
+import tempfile
 import unittest
 from pathlib import Path
 
@@ -95,6 +97,64 @@ class MarkdownRenderingTests(unittest.TestCase):
         self.assertIn('role="region"', rendered)
         self.assertIn('tabindex="0"', rendered)
         self.assertIn("<strong>7.0</strong>", rendered)
+
+
+class FrontMatterContractTests(unittest.TestCase):
+    def test_missing_status_is_rejected_with_the_offending_filename(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "2026-09-15-no-status.md"
+            path.write_text(
+                "---\ntitle: No Status\ndate: 2026-09-15\n---\n\nBody.\n",
+                encoding="utf-8",
+            )
+            original = build.ARTICLES_DIR
+            build.ARTICLES_DIR = Path(tmp)
+            try:
+                with self.assertRaises(ValueError) as caught:
+                    build.load_articles()
+            finally:
+                build.ARTICLES_DIR = original
+
+            self.assertIn("2026-09-15-no-status.md", str(caught.exception))
+            self.assertIn("status", str(caught.exception))
+
+    def test_invalid_status_and_non_iso_date_are_rejected(self):
+        cases = {
+            "status": "---\ntitle: T\ndate: 2026-09-15\nstatus: live\n---\n\nB.\n",
+            "date": "---\ntitle: T\ndate: 15-09-2026\nstatus: published\n---\n\nB.\n",
+        }
+        for expected, text in cases.items():
+            with self.subTest(field=expected), tempfile.TemporaryDirectory() as tmp:
+                (Path(tmp) / "2026-09-15-bad.md").write_text(text, encoding="utf-8")
+                original = build.ARTICLES_DIR
+                build.ARTICLES_DIR = Path(tmp)
+                try:
+                    with self.assertRaises(ValueError) as caught:
+                        build.load_articles()
+                finally:
+                    build.ARTICLES_DIR = original
+                self.assertIn(expected, str(caught.exception))
+
+    def test_build_reports_bad_front_matter_without_a_traceback(self):
+        """The operator-facing failure must read as an editorial correction."""
+        article = ROOT / "articles" / "_tmp_contract_probe.md"
+        article.write_text(
+            "---\ntitle: Probe\ndate: 2026-09-15\n---\n\nBody.\n", encoding="utf-8"
+        )
+        try:
+            result = subprocess.run(
+                [sys.executable, "scripts/build.py"],
+                cwd=ROOT,
+                text=True,
+                capture_output=True,
+            )
+        finally:
+            article.unlink()
+
+        self.assertEqual(1, result.returncode)
+        self.assertNotIn("Traceback", result.stderr)
+        self.assertIn("_tmp_contract_probe.md", result.stderr)
+        self.assertIn("Nothing was written", result.stderr)
 
 
 if __name__ == "__main__":
