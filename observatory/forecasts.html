@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Forecasts · Quantum Observatory</title>
+<meta name="description" content="Registered predictions with pre-written resolution criteria, resolution deadlines, and required evidence.">
+<link rel="stylesheet" href="../style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ccircle cx='8' cy='8' r='6' fill='none' stroke='%238f3b26' stroke-width='1.5'/%3E%3Ccircle cx='8' cy='8' r='2' fill='%238f3b26'/%3E%3C/svg%3E">
+<script>
+/* Theme memory — the only JavaScript on this site. No analytics, no trackers. */
+(function () {
+  try {
+    var t = localStorage.getItem("darshan-theme");
+    if (t) document.documentElement.setAttribute("data-theme", t);
+  } catch (e) {}
+})();
+</script>
+<style>
+body.qo-page-body { font-size: 1.05rem; }
+.qo-nav { border-block: 1px solid var(--rule); display: flex; flex-wrap: wrap;
+  gap: .15rem .9rem; margin: 0 0 2.4rem; padding: .6rem 0; }
+.qo-nav a { color: var(--faint); font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .74rem; font-weight: 700; letter-spacing: .13em; text-decoration: none;
+  text-transform: uppercase; }
+.qo-nav a[aria-current="page"], .qo-nav a:hover { color: var(--accent); }
+.qo-kicker { color: var(--accent); font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: .72rem; letter-spacing: .14em; margin: 0 0 .5rem; text-transform: uppercase; }
+.qo-lede { border-left: 3px solid var(--accent); color: var(--faint); font-size: 1.18rem;
+  font-style: italic; line-height: 1.6; margin: 1.2rem 0 2rem; padding-left: 1.2rem; }
+.qo-grid { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+  margin: 1.4rem 0 2.4rem; }
+.qo-card { border: 1px solid var(--rule); border-top: 3px solid var(--accent); padding: 1rem 1.1rem; }
+.qo-card h3 { margin: .15rem 0 .4rem; font-size: 1.05rem; }
+.qo-card p { color: var(--faint); font-size: .92rem; margin: .35rem 0; }
+.qo-meta { color: var(--faint); font-size: .8rem; margin: 0 0 2rem; }
+.qo-meta code { font-size: .78rem; }
+.qo-table-wrap { overflow-x: auto; margin: 1.4rem 0 2.4rem; }
+.qo-table { border-collapse: collapse; font-size: .88rem; line-height: 1.45; width: 100%; }
+.qo-table th, .qo-table td { border: 1px solid var(--rule); padding: .5rem .6rem;
+  text-align: left; vertical-align: top; }
+.qo-table th { background: var(--accent-soft); white-space: nowrap; }
+.qo-badge { border: 1px solid var(--rule); border-radius: 3px; display: inline-block;
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: .68rem;
+  letter-spacing: .06em; padding: .12rem .45rem; text-transform: uppercase; white-space: nowrap; }
+.qo-badge--self { color: var(--faint); }
+.qo-badge--ind { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
+.qo-badge--warn { border-color: #a33; color: #a33; }
+.qo-src { font-size: .8rem; color: var(--faint); }
+.qo-src a { color: inherit; }
+.qo-figure { border: 1px solid var(--rule); margin: 1.6rem 0 2.4rem; padding: 1rem 1.2rem; }
+.qo-figure figcaption { color: var(--faint); font-size: .82rem; font-style: italic; margin-top: .6rem; }
+.qo-figure svg { display: block; height: auto; max-width: 100%; }
+.qo-axis-note { color: var(--faint); font-size: .84rem; }
+.qo-nye { color: #a33; font-weight: 700; }
+.qo-list-plain { list-style: none; margin: 0; padding: 0; }
+.qo-list-plain li { border-bottom: 1px solid var(--rule); padding: .8rem 0; }
+.qo-falsifier { background: var(--accent-soft); border-left: 3px solid var(--accent);
+  font-size: .9rem; margin: .8rem 0; padding: .6rem .9rem; }
+.qo-question { border: 1px solid var(--rule); border-left: 4px solid #a33; margin: 0 0 .9rem;
+  padding: .8rem 1rem; }
+.qo-question[data-status="bounded"] { border-left-color: var(--accent); }
+.qo-hindcast-belief { border: 1px solid var(--rule); margin: 0 0 1rem; padding: 1rem 1.1rem; }
+.qo-hindcast-verdict { font-weight: 650; }
+.qo-subtle { color: var(--faint); font-size: .9rem; }
+.qo-timeline { list-style: none; margin: 0; padding: 0; }
+.qo-timeline li { border-left: 2px solid var(--rule); margin: 0; padding: .4rem 0 .9rem 1.1rem;
+  position: relative; }
+.qo-timeline li::before { background: var(--paper); border: 2px solid var(--accent); border-radius: 50%;
+  content: ""; height: .5rem; left: -.38rem; position: absolute; top: .85rem; width: .5rem; }
+.qo-date { color: var(--faint); font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: .74rem; letter-spacing: .05em; }
+@media (max-width: 52em) { .qo-nav { gap: .1rem .7rem; } }
+</style>
+</head>
+<body class="qo-page-body">
+<button class="theme-toggle" aria-label="Toggle light and dark" onclick="
+  (function () {
+    var d = document.documentElement;
+    var cur = d.getAttribute('data-theme');
+    if (!cur) { cur = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'; }
+    var next = cur === 'dark' ? 'light' : 'dark';
+    d.setAttribute('data-theme', next);
+    try { localStorage.setItem('darshan-theme', next); } catch (e) {}
+  })();
+">◐</button>
+
+<header class="masthead">
+  <h1 class="wordmark"><a href="../index.html">DARSHAN</a></h1>
+  <p class="tagline">seeing clearly after the feed</p>
+  <nav>
+    <a href="../index.html">Articles</a>
+    <a href="../garden/index.html">Garden</a>
+    <a href="index.html">Observatory</a>
+    <a href="../about.html">About</a>
+  </nav>
+</header>
+
+<main>
+<nav class="qo-nav" aria-label="Observatory"><a href="index.html">Field</a><a href="companies.html">Companies</a><a href="architectures.html">Architectures</a><a href="institutions.html">Institutions</a><a href="evidence.html">Evidence</a><a href="forecasts.html" aria-current="page">Forecasts</a><a href="bottlenecks.html">Bottlenecks</a><a href="graph.html">Map</a><a href="hindcast.html">Hindcast</a><a href="questions.html">Questions</a><a href="sources.html">Sources</a><a href="methodology.html">Method</a></nav>
+<p class="qo-kicker">Ledger</p>
+<h1 class="article-title">Forecasts</h1>
+<p class="qo-lede">Recorded predictions with resolution criteria written <em>before</em> the
+answer is known. A forecast may not resolve without cited evidence; an unresolved forecast
+is itself information.</p>
+<div class="qo-table-wrap"><table class="qo-table">
+<tr><th>ID</th><th>Predictor</th><th>Statement</th><th>Made → resolves</th><th>Status</th><th>Criteria</th><th>Sources</th></tr>
+<tr><td><code>fc-qm-nqcc-readout-2026</code></td><td><code>ce-operator</code></td><td>By end of 2026, NQCC publishes an evaluation of the installed Quantum Motion testbed containing at least one independently measured qubit performance figure (fidelity, coherence, or readout).</td><td class='qo-date'>2026-09-19 → 2026-12-31</td><td>Open</td><td>An NQCC-authored publication or report with measured figures for the Quantum Motion system; a marketing update or non-technical blog post does not resolve it.</td><td><span class="qo-src"><a href="https://quantummotion.com/quantum-motion-delivers-the-industrys-first-full-stack-silicon-cmos-quantum-computer/" title="Quantum Motion Delivers the Industry&#x27;s First Full-Stack Silicon CMOS Quantum Computer">[src-qm-nqcc-delivery-2025-09-15]</a> <a href="https://www.nqcc.ac.uk/quantum-computing-testbeds-in-the-uk/" title="Quantum computing testbeds">[src-nqcc-testbeds]</a></span></td></tr><tr><td><code>fc-psq-utility-2029</code></td><td><code>co-psiquantum</code></td><td>PsiQuantum will operate a utility-scale, fault-tolerant photonic quantum computer at a Quantum Compute Center before 2030.</td><td class='qo-date'>2025-02-26 → 2029-12-31</td><td>Open</td><td>A utility-scale system operational and demonstrably running workloads at a QCC (Brisbane or Chicago), confirmed by sources outside PsiQuantum.</td><td><span class="qo-src"><a href="https://www.psiquantum.com/news-import/omega" title="PsiQuantum Announces Omega, a Manufacturable Chipset for Photonic Quantum Computing">[src-psq-omega-2025-02-26]</a> <a href="https://www.psiquantum.com/news-import/darpa-final-phase" title="DARPA Selects PsiQuantum to Advance to Final Phase of Quantum Computing Program">[src-psq-darpa-2025-02-06]</a></span></td></tr><tr><td><code>fc-qbi-utility-2033</code></td><td><code>inst-darpa</code></td><td>At least one evaluated quantum computing approach can achieve utility-scale operation — computational value exceeding cost — by 2033.</td><td class='qo-date'>2024-07 → 2033-12-31</td><td>Open</td><td>A QBI Stage C verification-and-validation determination that a utility-scale system was constructed as designed and operated as intended; program is explicit that multiple, one, or zero participants may succeed.</td><td><span class="qo-src"><a href="https://www.darpa.mil/research/programs/quantum-benchmarking-initiative/stage-b-selection" title="Stage B selection | Quantum Benchmarking Initiative">[src-darpa-qbi-stageb-2025-11-06]</a></span></td></tr></table></div>
+<p class="qo-subtle"><code>ce-operator</code> rows are this system's own registered
+predictions — the observatory grades itself on the same ledger it keeps for everyone else.</p>
+
+</main>
+
+<footer>
+  <p>Darshan · seeing clearly after the feed</p>
+  <p>No feed. No analytics. No trackers. Finite pieces, read at your own pace.</p>
+  <p style="opacity:.7">The door opened 2026&#8209;08&#8209;09 · every piece gated, traced, and answered for</p>
+</footer>
+</body>
+</html>
