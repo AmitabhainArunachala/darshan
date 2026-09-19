@@ -1,0 +1,116 @@
+{
+  "schema": "darshan.qo-claims/v1",
+  "as_of": "2026-09-19",
+  "entries": [
+    {
+      "id": "cl-qm-first-fullstack-cmos",
+      "subject_id": "co-quantum-motion",
+      "date": "2025-09-15",
+      "claim": "Delivered the industry's first full-stack quantum computer built with a standard silicon CMOS chip fabrication process — 300 mm wafer technology — installed at the UK NQCC under the Quantum Computing Testbed Programme.",
+      "claim_class": "company_claim",
+      "source_id": "src-qm-nqcc-delivery-2025-09-15",
+      "recorded_on": "2026-09-19",
+      "note": "Installation fact is corroborated by NQCC's director quote inside the same release and by independent trade press; the performance of the installed system is a separate, unanswered question."
+    },
+    {
+      "id": "cl-qm-qbi-stageb",
+      "subject_id": "co-quantum-motion",
+      "date": "2025-11-06",
+      "claim": "Selected by DARPA to advance to QBI Stage B — one of 11 of the original 18 Stage A companies.",
+      "claim_class": "selection",
+      "source_id": "src-darpa-qbi-stageb-2025-11-06",
+      "recorded_on": "2026-09-19",
+      "note": "Government selection = admitted to deeper evaluation. It is not a validation of the architecture."
+    },
+    {
+      "id": "cl-qm-42m",
+      "subject_id": "co-quantum-motion",
+      "date": "2023-02-21",
+      "claim": "Raised over £42M led by Bosch Ventures (with Porsche SE, British Patient Capital); total funding ~£62M.",
+      "claim_class": "funding",
+      "source_id": "src-qm-42m-2023-02-21",
+      "recorded_on": "2026-09-19",
+      "note": "Investor appetite; no bearing on device physics."
+    },
+    {
+      "id": "cl-qm-cryo-ics",
+      "subject_id": "co-quantum-motion",
+      "date": "2023-02-21",
+      "claim": "Designed and validated integrated circuits operating at deep cryogenic temperatures (tenths of a degree above absolute zero) for qubit control.",
+      "claim_class": "company_claim",
+      "source_id": "src-qm-42m-2023-02-21",
+      "recorded_on": "2026-09-19",
+      "note": "Cryo-CMOS control is central to the wiring-wall answer; 'validated' here is the company's own word from a funding release."
+    },
+    {
+      "id": "cl-qm-readout-exchange",
+      "subject_id": "co-quantum-motion",
+      "date": "2026-07-07",
+      "claim": "Demonstrated an 8 µs spin-qubit readout method and exchange control in a 300 mm-fabricated MOS double quantum dot — the basis for two-qubit gates.",
+      "claim_class": "technical_disclosure",
+      "source_id": "src-qm-research-2026",
+      "recorded_on": "2026-09-19",
+      "note": "Company-described results; venue and peer-review status of the underlying papers not confirmed in Genesis."
+    },
+    {
+      "id": "cl-psq-us2qc-2023",
+      "subject_id": "co-psiquantum",
+      "date": "2023-01-31",
+      "claim": "Selected for the initial phase of DARPA US2QC alongside Atom Computing and Microsoft.",
+      "claim_class": "selection",
+      "source_id": "src-darpa-us2qc-2023-01-31",
+      "recorded_on": "2026-09-19",
+      "note": "Program entry, not a result."
+    },
+    {
+      "id": "cl-psq-final-phase",
+      "subject_id": "co-psiquantum",
+      "date": "2025-02-06",
+      "claim": "Advanced to US2QC's final validation/co-design phase (= QBI Stage C goals) after a year-long evaluation by a ~50-expert team.",
+      "claim_class": "selection",
+      "source_id": "src-darpa-us2qc-final-2025",
+      "recorded_on": "2026-09-19",
+      "note": "The furthest rung any company has reached on the DARPA ladder — and still an evaluation-in-progress, not a passed exam."
+    },
+    {
+      "id": "cl-psq-omega",
+      "subject_id": "co-psiquantum",
+      "date": "2025-02-26",
+      "claim": "Announced Omega: a photonic chipset containing all components needed for million-qubit-scale systems, manufactured at GlobalFoundries.",
+      "claim_class": "technical_disclosure",
+      "source_id": "src-psq-omega-2025-02-26",
+      "recorded_on": "2026-09-19",
+      "note": "Company framing; the component-level measurements are in the peer-reviewed Nature paper — both are entered as evidence separately."
+    },
+    {
+      "id": "cl-psq-125m",
+      "subject_id": "co-psiquantum",
+      "date": "2026-07-22",
+      "claim": "Signed a $125M expanded QBI agreement with DARPA (following a $31.8M Stage C tasking in Sep 2025).",
+      "claim_class": "procurement",
+      "source_id": "src-psq-darpa-125m-2026-07-22",
+      "recorded_on": "2026-09-19",
+      "note": "Contract value measures government willingness to pay for evaluation depth — it is not a measurement of qubit performance."
+    },
+    {
+      "id": "cl-psq-qcc-construction",
+      "subject_id": "co-psiquantum",
+      "date": "2025-02-26",
+      "claim": "Will break ground in 2025 on datacenter-sized Quantum Compute Centers in Brisbane and Chicago.",
+      "claim_class": "roadmap",
+      "source_id": "src-psq-omega-2025-02-26",
+      "recorded_on": "2026-09-19",
+      "note": "Forward-looking construction claim; completion status unverified at Genesis close."
+    },
+    {
+      "id": "cl-qm-nqcc-award",
+      "subject_id": "co-quantum-motion",
+      "date": "2024-03-05",
+      "claim": "Awarded an NQCC/UKRI testbed contract (Silicon Cloverleaf) — one of seven testbeds funded under the £30M programme.",
+      "claim_class": "procurement",
+      "source_id": "src-ukri-testbeds-30m",
+      "recorded_on": "2026-09-19",
+      "note": "A delivery contract with milestones; award ≠ delivered system ≠ validated performance."
+    }
+  ]
+}

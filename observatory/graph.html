@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dependency &amp; Value-Accrual Map · Quantum Observatory</title>
+<meta name="description" content="Physical capabilities, their suppliers, the architectures that require them, and shared dependencies across competitors.">
+<link rel="stylesheet" href="../style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ccircle cx='8' cy='8' r='6' fill='none' stroke='%238f3b26' stroke-width='1.5'/%3E%3Ccircle cx='8' cy='8' r='2' fill='%238f3b26'/%3E%3C/svg%3E">
+<script>
+/* Theme memory — the only JavaScript on this site. No analytics, no trackers. */
+(function () {
+  try {
+    var t = localStorage.getItem("darshan-theme");
+    if (t) document.documentElement.setAttribute("data-theme", t);
+  } catch (e) {}
+})();
+</script>
+<style>
+body.qo-page-body { font-size: 1.05rem; }
+.qo-nav { border-block: 1px solid var(--rule); display: flex; flex-wrap: wrap;
+  gap: .15rem .9rem; margin: 0 0 2.4rem; padding: .6rem 0; }
+.qo-nav a { color: var(--faint); font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .74rem; font-weight: 700; letter-spacing: .13em; text-decoration: none;
+  text-transform: uppercase; }
+.qo-nav a[aria-current="page"], .qo-nav a:hover { color: var(--accent); }
+.qo-kicker { color: var(--accent); font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: .72rem; letter-spacing: .14em; margin: 0 0 .5rem; text-transform: uppercase; }
+.qo-lede { border-left: 3px solid var(--accent); color: var(--faint); font-size: 1.18rem;
+  font-style: italic; line-height: 1.6; margin: 1.2rem 0 2rem; padding-left: 1.2rem; }
+.qo-grid { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+  margin: 1.4rem 0 2.4rem; }
+.qo-card { border: 1px solid var(--rule); border-top: 3px solid var(--accent); padding: 1rem 1.1rem; }
+.qo-card h3 { margin: .15rem 0 .4rem; font-size: 1.05rem; }
+.qo-card p { color: var(--faint); font-size: .92rem; margin: .35rem 0; }
+.qo-meta { color: var(--faint); font-size: .8rem; margin: 0 0 2rem; }
+.qo-meta code { font-size: .78rem; }
+.qo-table-wrap { overflow-x: auto; margin: 1.4rem 0 2.4rem; }
+.qo-table { border-collapse: collapse; font-size: .88rem; line-height: 1.45; width: 100%; }
+.qo-table th, .qo-table td { border: 1px solid var(--rule); padding: .5rem .6rem;
+  text-align: left; vertical-align: top; }
+.qo-table th { background: var(--accent-soft); white-space: nowrap; }
+.qo-badge { border: 1px solid var(--rule); border-radius: 3px; display: inline-block;
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: .68rem;
+  letter-spacing: .06em; padding: .12rem .45rem; text-transform: uppercase; white-space: nowrap; }
+.qo-badge--self { color: var(--faint); }
+.qo-badge--ind { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
+.qo-badge--warn { border-color: #a33; color: #a33; }
+.qo-src { font-size: .8rem; color: var(--faint); }
+.qo-src a { color: inherit; }
+.qo-figure { border: 1px solid var(--rule); margin: 1.6rem 0 2.4rem; padding: 1rem 1.2rem; }
+.qo-figure figcaption { color: var(--faint); font-size: .82rem; font-style: italic; margin-top: .6rem; }
+.qo-figure svg { display: block; height: auto; max-width: 100%; }
+.qo-axis-note { color: var(--faint); font-size: .84rem; }
+.qo-nye { color: #a33; font-weight: 700; }
+.qo-list-plain { list-style: none; margin: 0; padding: 0; }
+.qo-list-plain li { border-bottom: 1px solid var(--rule); padding: .8rem 0; }
+.qo-falsifier { background: var(--accent-soft); border-left: 3px solid var(--accent);
+  font-size: .9rem; margin: .8rem 0; padding: .6rem .9rem; }
+.qo-question { border: 1px solid var(--rule); border-left: 4px solid #a33; margin: 0 0 .9rem;
+  padding: .8rem 1rem; }
+.qo-question[data-status="bounded"] { border-left-color: var(--accent); }
+.qo-hindcast-belief { border: 1px solid var(--rule); margin: 0 0 1rem; padding: 1rem 1.1rem; }
+.qo-hindcast-verdict { font-weight: 650; }
+.qo-subtle { color: var(--faint); font-size: .9rem; }
+.qo-timeline { list-style: none; margin: 0; padding: 0; }
+.qo-timeline li { border-left: 2px solid var(--rule); margin: 0; padding: .4rem 0 .9rem 1.1rem;
+  position: relative; }
+.qo-timeline li::before { background: var(--paper); border: 2px solid var(--accent); border-radius: 50%;
+  content: ""; height: .5rem; left: -.38rem; position: absolute; top: .85rem; width: .5rem; }
+.qo-date { color: var(--faint); font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: .74rem; letter-spacing: .05em; }
+@media (max-width: 52em) { .qo-nav { gap: .1rem .7rem; } }
+</style>
+</head>
+<body class="qo-page-body">
+<button class="theme-toggle" aria-label="Toggle light and dark" onclick="
+  (function () {
+    var d = document.documentElement;
+    var cur = d.getAttribute('data-theme');
+    if (!cur) { cur = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'; }
+    var next = cur === 'dark' ? 'light' : 'dark';
+    d.setAttribute('data-theme', next);
+    try { localStorage.setItem('darshan-theme', next); } catch (e) {}
+  })();
+">◐</button>
+
+<header class="masthead">
+  <h1 class="wordmark"><a href="../index.html">DARSHAN</a></h1>
+  <p class="tagline">seeing clearly after the feed</p>
+  <nav>
+    <a href="../index.html">Articles</a>
+    <a href="../garden/index.html">Garden</a>
+    <a href="index.html">Observatory</a>
+    <a href="../about.html">About</a>
+  </nav>
+</header>
+
+<main>
+<nav class="qo-nav" aria-label="Observatory"><a href="index.html">Field</a><a href="companies.html">Companies</a><a href="architectures.html">Architectures</a><a href="institutions.html">Institutions</a><a href="evidence.html">Evidence</a><a href="forecasts.html">Forecasts</a><a href="bottlenecks.html">Bottlenecks</a><a href="graph.html" aria-current="page">Map</a><a href="hindcast.html">Hindcast</a><a href="questions.html">Questions</a><a href="sources.html">Sources</a><a href="methodology.html">Method</a></nav>
+<p class="qo-kicker">Map</p>
+<h1 class="article-title">Where Value and Dependence Sit</h1>
+<p class="qo-lede">The dependency and value-accrual map: which physical capabilities each
+architecture cannot route around, who supplies them, and which dependencies are shared
+across competitors — the positions where leverage accumulates.</p>
+<h2>Supply nodes</h2>
+<div class="qo-grid"><div class="qo-card">
+<h3>300 mm CMOS foundry processing for quantum devices <span class="qo-badge">single-architecture</span></h3>
+<p class="qo-src">manufacturing · suppliers: Tier-1 foundry ecosystem (unnamed in sources); Quantum Motion's customized 300 mm line</p>
+<p>The decisive capability for the silicon-spin thesis: quantum-dot devices that survive full industrial design rules.</p>
+<p><strong>Required by:</strong> Silicon MOS spin qubits</p>
+<p><span class="qo-src"><a href="https://www.nature.com/articles/s41534-024-00864-3" title="Low charge noise quantum dots with industrial CMOS manufacturing">[src-qm-npjqi-2024-07-19]</a> <a href="https://www.nature.com/articles/s41928-022-00727-9" title="Qubits made by advanced semiconductor manufacturing">[src-intel-natelec-2022-03-29]</a></span></p></div><div class="qo-card">
+<h3>Barium-titanate fast optical switching <span class="qo-badge">single-architecture</span></h3>
+<p class="qo-src">materials · suppliers: PsiQuantum (BTO developed and produced in-house, San Jose)</p>
+<p>Low-loss, high-speed switching is where photonic routing becomes manufacturable or not.</p>
+<p><strong>Required by:</strong> Fusion-based photonic quantum computing</p>
+<p><span class="qo-src"><a href="https://www.psiquantum.com/news-import/omega" title="PsiQuantum Announces Omega, a Manufacturable Chipset for Photonic Quantum Computing">[src-psq-omega-2025-02-26]</a> <a href="https://doi.org/10.1038/s41586-025-08820-7" title="A manufacturable platform for photonic quantum computing">[src-psq-omega-nature-2025-02-26]</a></span></p></div><div class="qo-card">
+<h3>Room-temperature control electronics <span class="qo-badge qo-badge--warn">shared dependency</span></h3>
+<p class="qo-src">electronics · suppliers: Zurich Instruments class suppliers (generic)</p>
+<p>Channel count and synchronization scale with qubit count.</p>
+<p><strong>Required by:</strong> Modular superconducting processors, Neutral-atom arrays, Trapped-ion (QCCD) processors</p>
+<p><span class="qo-src"><a href="https://www.darpa.mil/research/programs/quantum-benchmarking-initiative/stage-b-selection" title="Stage B selection | Quantum Benchmarking Initiative">[src-darpa-qbi-stageb-2025-11-06]</a></span></p></div><div class="qo-card">
+<h3>Cryo-CMOS control electronics <span class="qo-badge">single-architecture</span></h3>
+<p class="qo-src">electronics · suppliers: Quantum Motion (validated cryogenic ICs, per company account)</p>
+<p>Co-integrated control at deep-cryogenic temperatures is the silicon-spin answer to the wiring wall.</p>
+<p><strong>Required by:</strong> Silicon MOS spin qubits</p>
+<p><span class="qo-src"><a href="https://quantummotion.com/quantum-motion-raises-42-million-investment-round/" title="Quantum Motion Raises £42 Million Investment Round Led By Bosch Ventures">[src-qm-42m-2023-02-21]</a></span></p></div><div class="qo-card">
+<h3>Dilution refrigeration (sub-100 mK, scaled) <span class="qo-badge qo-badge--warn">shared dependency</span></h3>
+<p class="qo-src">infrastructure · suppliers: Bluefors / Oxford Instruments class suppliers (generic; not source-bound in Genesis)</p>
+<p>Cross-architecture dependency: nearly every utility-scale design bottoms out in cooling capacity and wiring volume at mK temperatures. Whoever supplies large dilution capacity at acceptable cost sits under most plausible futures.</p>
+<p><strong>Required by:</strong> Bosonic superconducting qubits, Fusion-based photonic quantum computing, Modular superconducting processors, Neutral-atom arrays, Optically linked silicon spin qubits, Precision atom qubits in silicon, Silicon MOS spin qubits, Topological superconducting qubits, Trapped-ion (QCCD) processors</p>
+<p><span class="qo-src"><a href="https://quantummotion.com/quantum-motion-delivers-the-industrys-first-full-stack-silicon-cmos-quantum-computer/" title="Quantum Motion Delivers the Industry&#x27;s First Full-Stack Silicon CMOS Quantum Computer">[src-qm-nqcc-delivery-2025-09-15]</a> <a href="https://www.psiquantum.com/news-import/darpa-final-phase" title="DARPA Selects PsiQuantum to Advance to Final Phase of Quantum Computing Program">[src-psq-darpa-2025-02-06]</a></span></p></div><div class="qo-card">
+<h3>Topological / III-V hybrid material stacks <span class="qo-badge">single-architecture</span></h3>
+<p class="qo-src">materials · suppliers: Microsoft (in-house program)</p>
+<p>Materials science is the critical path for topological approaches.</p>
+<p><strong>Required by:</strong> Topological superconducting qubits</p>
+<p><span class="qo-src"><a href="https://www.darpa.mil/news/2023/accelerate-quantum-computing" title="DARPA Collaborates with Commercial Partners to Accelerate Quantum Computing">[src-darpa-us2qc-2023-01-31]</a></span></p></div><div class="qo-card">
+<h3>Low-loss chip-to-fibre coupling <span class="qo-badge">single-architecture</span></h3>
+<p class="qo-src">photonics · suppliers: PsiQuantum (Omega preview technologies)</p>
+<p>Chip-to-chip interconnect demonstrated at 99.72% conditional fidelity; unconditional performance is part of the loss-budget question.</p>
+<p><strong>Required by:</strong> Fusion-based photonic quantum computing</p>
+<p><span class="qo-src"><a href="https://doi.org/10.1038/s41586-025-08820-7" title="A manufacturable platform for photonic quantum computing">[src-psq-omega-nature-2025-02-26]</a></span></p></div><div class="qo-card">
+<h3>High-volume silicon-photonics foundry manufacture <span class="qo-badge qo-badge--warn">shared dependency</span></h3>
+<p class="qo-src">manufacturing · suppliers: GlobalFoundries (PsiQuantum Omega, New York)</p>
+<p>Photonic approaches' structural claim: the same industrial base that built telecom optics can build quantum components.</p>
+<p><strong>Required by:</strong> Fusion-based photonic quantum computing, Optically linked silicon spin qubits, Photonic testbed-class platforms</p>
+<p><span class="qo-src"><a href="https://www.psiquantum.com/news-import/omega" title="PsiQuantum Announces Omega, a Manufacturable Chipset for Photonic Quantum Computing">[src-psq-omega-2025-02-26]</a> <a href="https://doi.org/10.1038/s41586-025-08820-7" title="A manufacturable platform for photonic quantum computing">[src-psq-omega-nature-2025-02-26]</a></span></p></div><div class="qo-card">
+<h3>Precision ion traps and zone control <span class="qo-badge">single-architecture</span></h3>
+<p class="qo-src">manufacturing · suppliers: IonQ, Quantinuum, Oxford Ionics (in-house designs)</p>
+<p>Trap fabrication and shuttling control bound trapped-ion scaling.</p>
+<p><strong>Required by:</strong> Trapped-ion (QCCD) processors</p>
+<p><span class="qo-src"><a href="https://www.darpa.mil/research/programs/quantum-benchmarking-initiative/stage-b-selection" title="Stage B selection | Quantum Benchmarking Initiative">[src-darpa-qbi-stageb-2025-11-06]</a></span></p></div><div class="qo-card">
+<h3>Isotopically enriched silicon (²⁸Si) <span class="qo-badge qo-badge--warn">shared dependency</span></h3>
+<p class="qo-src">materials · suppliers: Specialty isotope-supply chain (not source-bound in Genesis)</p>
+<p>²⁸Si removes nuclear-spin decoherence; enrichment capacity is a shared upstream dependency.</p>
+<p><strong>Required by:</strong> Precision atom qubits in silicon, Silicon MOS spin qubits</p>
+<p><span class="qo-src"><a href="https://www.nature.com/articles/s41928-022-00727-9" title="Qubits made by advanced semiconductor manufacturing">[src-intel-natelec-2022-03-29]</a></span></p></div><div class="qo-card">
+<h3>Stable laser systems (trapping and gates) <span class="qo-badge qo-badge--warn">shared dependency</span></h3>
+<p class="qo-src">photonics · suppliers: Photonics suppliers (generic)</p>
+<p>Laser stability and count scale with trap/zone complexity — a shared optical-infrastructure dependency.</p>
+<p><strong>Required by:</strong> Neutral-atom arrays, Optically linked silicon spin qubits, Trapped-ion (QCCD) processors</p>
+<p><span class="qo-src"><a href="https://www.darpa.mil/research/programs/quantum-benchmarking-initiative/stage-b-selection" title="Stage B selection | Quantum Benchmarking Initiative">[src-darpa-qbi-stageb-2025-11-06]</a></span></p></div><div class="qo-card">
+<h3>Photon-number-resolving / superconducting single-photon detectors <span class="qo-badge qo-badge--warn">shared dependency</span></h3>
+<p class="qo-src">photonics · suppliers: PsiQuantum (superconducting thin-film detectors in the fab process)</p>
+<p>Detection efficiency and dark count set the loss budget directly.</p>
+<p><strong>Required by:</strong> Fusion-based photonic quantum computing, Optically linked silicon spin qubits, Photonic testbed-class platforms</p>
+<p><span class="qo-src"><a href="https://www.psiquantum.com/news-import/omega" title="PsiQuantum Announces Omega, a Manufacturable Chipset for Photonic Quantum Computing">[src-psq-omega-2025-02-26]</a> <a href="https://doi.org/10.1038/s41586-025-08820-7" title="A manufacturable platform for photonic quantum computing">[src-psq-omega-nature-2025-02-26]</a></span></p></div><div class="qo-card">
+<h3>Superconducting-circuit fabrication <span class="qo-badge qo-badge--warn">shared dependency</span></h3>
+<p class="qo-src">manufacturing · suppliers: IBM, academic/industrial fabs (generic)</p>
+<p>Mature relative to alternatives; uniformity and materials losses still bind fidelity.</p>
+<p><strong>Required by:</strong> Bosonic superconducting qubits, Modular superconducting processors, Topological superconducting qubits</p>
+<p><span class="qo-src"><a href="https://www.darpa.mil/research/programs/quantum-benchmarking-initiative/stage-b-selection" title="Stage B selection | Quantum Benchmarking Initiative">[src-darpa-qbi-stageb-2025-11-06]</a></span></p></div><div class="qo-card">
+<h3>Silicon spin-qubit device fabrication <span class="qo-badge qo-badge--warn">shared dependency</span></h3>
+<p class="qo-src">manufacturing · suppliers: Photonic Inc., Quantum Motion, Diraq (each in-house flows)</p>
+<p>Shared device substrate between monolithic and optically-linked spin architectures.</p>
+<p><strong>Required by:</strong> Optically linked silicon spin qubits, Silicon MOS spin qubits</p>
+<p><span class="qo-src"><a href="https://www.darpa.mil/research/programs/quantum-benchmarking-initiative/stage-b-selection" title="Stage B selection | Quantum Benchmarking Initiative">[src-darpa-qbi-stageb-2025-11-06]</a></span></p></div><div class="qo-card">
+<h3>Low-loss silicon-nitride waveguides <span class="qo-badge qo-badge--warn">shared dependency</span></h3>
+<p class="qo-src">photonics · suppliers: GlobalFoundries process integration (PsiQuantum Omega)</p>
+<p>Waveguide loss is the quiet budget line in every photonic architecture.</p>
+<p><strong>Required by:</strong> Fusion-based photonic quantum computing, Optically linked silicon spin qubits</p>
+<p><span class="qo-src"><a href="https://doi.org/10.1038/s41586-025-08820-7" title="A manufacturable platform for photonic quantum computing">[src-psq-omega-nature-2025-02-26]</a></span></p></div><div class="qo-card">
+<h3>Single-photon sources at component scale <span class="qo-badge qo-badge--warn">shared dependency</span></h3>
+<p class="qo-src">photonics · suppliers: PsiQuantum (Omega integrated sources)</p>
+<p>Fabrication-tolerant, high-quality sources are the photonic feedstock.</p>
+<p><strong>Required by:</strong> Fusion-based photonic quantum computing, Optically linked silicon spin qubits, Photonic testbed-class platforms</p>
+<p><span class="qo-src"><a href="https://doi.org/10.1038/s41586-025-08820-7" title="A manufacturable platform for photonic quantum computing">[src-psq-omega-nature-2025-02-26]</a></span></p></div><div class="qo-card">
+<h3>Scanning-tunnelling-lithography atomic placement <span class="qo-badge">single-architecture</span></h3>
+<p class="qo-src">manufacturing · suppliers: Silicon Quantum Computing (in-house)</p>
+<p>Precision at the cost of throughput.</p>
+<p><strong>Required by:</strong> Precision atom qubits in silicon</p>
+<p><span class="qo-src"><a href="https://www.darpa.mil/research/programs/quantum-benchmarking-initiative/stage-b-selection" title="Stage B selection | Quantum Benchmarking Initiative">[src-darpa-qbi-stageb-2025-11-06]</a></span></p></div><div class="qo-card">
+<h3>UHV vacuum packaging <span class="qo-badge qo-badge--warn">shared dependency</span></h3>
+<p class="qo-src">infrastructure · suppliers: Vacuum system suppliers (generic)</p>
+<p>Utility-scale atomic systems need industrial-quality vacuum enclosures, not lab rigs.</p>
+<p><strong>Required by:</strong> Neutral-atom arrays, Trapped-ion (QCCD) processors</p>
+<p><span class="qo-src"><a href="https://www.darpa.mil/research/programs/quantum-benchmarking-initiative/stage-b-selection" title="Stage B selection | Quantum Benchmarking Initiative">[src-darpa-qbi-stageb-2025-11-06]</a></span></p></div><div class="qo-card">
+<h3>Cryogenic wiring and interconnect density <span class="qo-badge qo-badge--warn">shared dependency</span></h3>
+<p class="qo-src">infrastructure · suppliers: Cryogenic interconnect suppliers (generic)</p>
+<p>The wiring wall: signal lines into mK space grow faster than qubits unless control moves down-temperature.</p>
+<p><strong>Required by:</strong> Modular superconducting processors, Silicon MOS spin qubits, Topological superconducting qubits</p>
+<p><span class="qo-src"><a href="https://quantummotion.com/research/" title="Research — Quantum Motion">[src-qm-research-2026]</a></span></p></div></div>
+<h2>Edges</h2>
+<div class="qo-table-wrap"><table class="qo-table">
+<tr><th>From</th><th>Relation</th><th>To</th><th>Note</th></tr>
+<tr><td>Silicon MOS spin qubits</td><td><code>requires</code></td><td>300 mm CMOS foundry flow</td><td>The core thesis: utility scale rides existing CMOS manufacturing.</td></tr><tr><td>High-volume Si-photonics fab</td><td><code>supplied_by</code></td><td>GlobalFoundries (NY fab)</td><td>GlobalFoundries NY manufactures Omega.</td></tr><tr><td>Silicon MOS spin qubits</td><td><code>draws_on</code></td><td>UCL + Oxford research base</td><td>Founding institutions; ongoing doctoral training ties.</td></tr><tr><td>Silicon MOS spin qubits</td><td><code>capital_from</code></td><td>Bosch Ventures / industrial capital</td><td>Industrial capital link — labeled capital, not validation.</td></tr><tr><td>DARPA QBI evaluation</td><td><code>evaluates</code></td><td>Silicon MOS spin qubits</td><td>QBI Stage B for Quantum Motion (Nov 2025).</td></tr><tr><td>DARPA QBI evaluation</td><td><code>evaluates</code></td><td>Fusion-based photonics</td><td>QBI Stage C / US2QC final phase for PsiQuantum (Feb 2025).</td></tr><tr><td>NQCC testbed evaluation</td><td><code>evaluates</code></td><td>Silicon MOS spin qubits</td><td>Hands-on test and validation of the installed QM testbed.</td></tr><tr><td>DOE/SLAC cryo test site</td><td><code>hosts_under_test</code></td><td>Fusion-based photonics</td><td>SLAC hosts PsiQuantum's largest cryogenic module.</td></tr><tr><td>Silicon MOS spin qubits</td><td><code>requires</code></td><td>Cryo-CMOS control</td><td>Control density at mK temperatures.</td></tr><tr><td>Silicon MOS spin qubits</td><td><code>requires</code></td><td>Isotopically enriched ²⁸Si</td><td>²⁸Si substrates for coherence.</td></tr><tr><td>Fusion-based photonics</td><td><code>requires</code></td><td>High-volume Si-photonics fab</td><td>Millions of identical photonic components.</td></tr><tr><td>Fusion-based photonics</td><td><code>requires</code></td><td>Superconducting photon detectors</td><td>Detection efficiency feeds the loss budget.</td></tr><tr><td>Fusion-based photonics</td><td><code>requires</code></td><td>BTO optical switching</td><td>Fast low-loss switching for fusion networking.</td></tr><tr><td>Silicon MOS spin qubits</td><td><code>requires</code></td><td>Dilution refrigeration</td><td>Spin qubits operate at mK.</td></tr><tr><td>Fusion-based photonics</td><td><code>requires</code></td><td>Dilution refrigeration</td><td>Superconducting detectors require cryogenics — the shared dependency.</td></tr><tr><td>Other evaluated architectures</td><td><code>requires</code></td><td>Dilution refrigeration</td><td>Nearly every modality converges on dilution refrigeration.</td></tr></table></div>
+
+</main>
+
+<footer>
+  <p>Darshan · seeing clearly after the feed</p>
+  <p>No feed. No analytics. No trackers. Finite pieces, read at your own pace.</p>
+  <p style="opacity:.7">The door opened 2026&#8209;08&#8209;09 · every piece gated, traced, and answered for</p>
+</footer>
+</body>
+</html>

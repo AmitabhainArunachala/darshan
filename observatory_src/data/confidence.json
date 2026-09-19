@@ -1,0 +1,78 @@
+{
+  "schema": "darshan.qo-confidence/v1",
+  "as_of": "2026-09-19",
+  "entries": [
+    {
+      "id": "conf-qm-2026-09-19",
+      "subject_id": "co-quantum-motion",
+      "as_of": "2026-09-19",
+      "axes": {
+        "technical_architecture": {"kind": "range", "low": 0.45, "high": 0.7, "reason": "Peer-reviewed 300 mm manufacturability evidence and an independently corroborated full-stack delivery, but no published two-qubit-gate fidelity on the foundry process and no independent performance measurement yet."},
+        "execution": {"kind": "range", "low": 0.5, "high": 0.75, "reason": "Delivered a contracted national-lab testbed (late vs the March 2025 target) and advanced to QBI Stage B; both are execution facts, neither is a utility-scale result."},
+        "market_utility": {"kind": "not_yet_estimable", "reason": "No independently measured application-level performance exists anywhere in the ledger for this company; utility is the quantity NQCC and DARPA are still evaluating."},
+        "value_capture": {"kind": "not_yet_estimable", "reason": "Value capture depends on competitive position across at least eleven Stage-B architectures and on unresolved supply-chain structure; too few resolved observations to bound it."}
+      },
+      "evidence_increasing": [
+        "Peer-reviewed record-low charge noise on a customized 300 mm CMOS line (npj QI 2024)",
+        "NQCC testbed delivery corroborated by the evaluator and independent press (Sep 2025)",
+        "Advanced to DARPA QBI Stage B (Nov 2025) — deeper government scrutiny accepted, not passed"
+      ],
+      "evidence_decreasing": [
+        "Testbed delivery ran late against the programme's March 2025 target",
+        "Every performance figure in the ledger is self-measured; none is independent of the company",
+        "Two-qubit gate fidelity on the foundry process remains unpublished at Genesis close"
+      ],
+      "unresolved": [
+        "Does the installed NQCC system demonstrate measured qubit performance, and what does NQCC report?",
+        "Can exchange-control demonstrations convert to >99% two-qubit gates under foundry tolerances?",
+        "Does co-integrated cryo-CMOS control survive hybrid quantum+classical power dissipation?"
+      ],
+      "next_decisive": [
+        {"milestone": "ms-qm-2q-foundry-gate", "deadline": null, "resolution": "Peer-reviewed or independently measured two-qubit gate fidelity on a 300 mm MOS process"},
+        {"milestone": "NQCC evaluation report for the installed testbed", "deadline": "2026-12-31", "resolution": "fc-qm-nqcc-readout-2026"}
+      ],
+      "falsifiers": [
+        "Charge noise or variability under foundry rules prevents >99% two-qubit gates at array scale",
+        "Cryo-CMOS control power destroys qubit performance before useful channel density",
+        "The NQCC evaluation fails to show usable qubit performance on the delivered system"
+      ],
+      "recorded_on": "2026-09-19"
+    },
+    {
+      "id": "conf-psq-2026-09-19",
+      "subject_id": "co-psiquantum",
+      "as_of": "2026-09-19",
+      "axes": {
+        "technical_architecture": {"kind": "range", "low": 0.4, "high": 0.65, "reason": "Peer-reviewed complete manufacturable component set at record fidelities — but every fidelity is conditional on detection, and system-level loss remains the unmeasured multiplier."},
+        "execution": {"kind": "range", "low": 0.55, "high": 0.8, "reason": "Deepest DARPA evaluation stage of any company; real fab partnership; real infrastructure commitments — offset by announced-not-verified QCC construction."},
+        "market_utility": {"kind": "not_yet_estimable", "reason": "No application-level result exists; the utility-scale question is precisely what Stage C is evaluating."},
+        "value_capture": {"kind": "not_yet_estimable", "reason": "Vertically integrated photonics supply chains have no public comparables to bound capture against."}
+      },
+      "evidence_increasing": [
+        "Nature paper: complete manufacturable photonic component set at GlobalFoundries (Feb 2025)",
+        "QBI Stage C entry after a year-long ~50-expert evaluation (Feb 2025)",
+        "$125M expanded DARPA agreement (Jul 2026) — sustained evaluator commitment"
+      ],
+      "evidence_decreasing": [
+        "All component fidelities are conditioned on photon detection — the loss budget is the unanswered question",
+        "Quantum Compute Centers were announced for 2025 groundbreaking; completion is unverified",
+        "No independently measured system-level performance is in the ledger"
+      ],
+      "unresolved": [
+        "What is the end-to-end loss budget at system scale, and does it fit inside the fusion-tolerance threshold?",
+        "Does Stage C verification produce a constructed system that operates as designed?",
+        "Can cryogenic loading of millions of detectors be engineered at datacenter scale?"
+      ],
+      "next_decisive": [
+        {"milestone": "ms-psq-qcc-groundbreak", "deadline": "2025-12-31", "resolution": "Independent confirmation of construction progress at Brisbane or Chicago"},
+        {"milestone": "QBI Stage C verification outcome", "deadline": null, "resolution": "fc-psq-utility-2029"}
+      ],
+      "falsifiers": [
+        "Integrated photon loss cannot reach the fusion-tolerance threshold at the required component counts",
+        "Detector cryogenics or switching speed make the lattice physically or economically infeasible",
+        "Stage C V&V determines the design cannot be constructed and operated as proposed"
+      ],
+      "recorded_on": "2026-09-19"
+    }
+  ]
+}

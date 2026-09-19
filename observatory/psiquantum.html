@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PsiQuantum · Quantum Observatory</title>
+<meta name="description" content="Fusion-based photonic quantum computing. US2QC performer since Jan 2023; QBI Stage C (final phase) since Feb 2025; Omega chipset at GlobalFoundries; Quantum Compute Centers announced for Brisbane and Chicago.">
+<link rel="stylesheet" href="../style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ccircle cx='8' cy='8' r='6' fill='none' stroke='%238f3b26' stroke-width='1.5'/%3E%3Ccircle cx='8' cy='8' r='2' fill='%238f3b26'/%3E%3C/svg%3E">
+<script>
+/* Theme memory — the only JavaScript on this site. No analytics, no trackers. */
+(function () {
+  try {
+    var t = localStorage.getItem("darshan-theme");
+    if (t) document.documentElement.setAttribute("data-theme", t);
+  } catch (e) {}
+})();
+</script>
+<style>
+body.qo-page-body { font-size: 1.05rem; }
+.qo-nav { border-block: 1px solid var(--rule); display: flex; flex-wrap: wrap;
+  gap: .15rem .9rem; margin: 0 0 2.4rem; padding: .6rem 0; }
+.qo-nav a { color: var(--faint); font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .74rem; font-weight: 700; letter-spacing: .13em; text-decoration: none;
+  text-transform: uppercase; }
+.qo-nav a[aria-current="page"], .qo-nav a:hover { color: var(--accent); }
+.qo-kicker { color: var(--accent); font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: .72rem; letter-spacing: .14em; margin: 0 0 .5rem; text-transform: uppercase; }
+.qo-lede { border-left: 3px solid var(--accent); color: var(--faint); font-size: 1.18rem;
+  font-style: italic; line-height: 1.6; margin: 1.2rem 0 2rem; padding-left: 1.2rem; }
+.qo-grid { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+  margin: 1.4rem 0 2.4rem; }
+.qo-card { border: 1px solid var(--rule); border-top: 3px solid var(--accent); padding: 1rem 1.1rem; }
+.qo-card h3 { margin: .15rem 0 .4rem; font-size: 1.05rem; }
+.qo-card p { color: var(--faint); font-size: .92rem; margin: .35rem 0; }
+.qo-meta { color: var(--faint); font-size: .8rem; margin: 0 0 2rem; }
+.qo-meta code { font-size: .78rem; }
+.qo-table-wrap { overflow-x: auto; margin: 1.4rem 0 2.4rem; }
+.qo-table { border-collapse: collapse; font-size: .88rem; line-height: 1.45; width: 100%; }
+.qo-table th, .qo-table td { border: 1px solid var(--rule); padding: .5rem .6rem;
+  text-align: left; vertical-align: top; }
+.qo-table th { background: var(--accent-soft); white-space: nowrap; }
+.qo-badge { border: 1px solid var(--rule); border-radius: 3px; display: inline-block;
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: .68rem;
+  letter-spacing: .06em; padding: .12rem .45rem; text-transform: uppercase; white-space: nowrap; }
+.qo-badge--self { color: var(--faint); }
+.qo-badge--ind { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
+.qo-badge--warn { border-color: #a33; color: #a33; }
+.qo-src { font-size: .8rem; color: var(--faint); }
+.qo-src a { color: inherit; }
+.qo-figure { border: 1px solid var(--rule); margin: 1.6rem 0 2.4rem; padding: 1rem 1.2rem; }
+.qo-figure figcaption { color: var(--faint); font-size: .82rem; font-style: italic; margin-top: .6rem; }
+.qo-figure svg { display: block; height: auto; max-width: 100%; }
+.qo-axis-note { color: var(--faint); font-size: .84rem; }
+.qo-nye { color: #a33; font-weight: 700; }
+.qo-list-plain { list-style: none; margin: 0; padding: 0; }
+.qo-list-plain li { border-bottom: 1px solid var(--rule); padding: .8rem 0; }
+.qo-falsifier { background: var(--accent-soft); border-left: 3px solid var(--accent);
+  font-size: .9rem; margin: .8rem 0; padding: .6rem .9rem; }
+.qo-question { border: 1px solid var(--rule); border-left: 4px solid #a33; margin: 0 0 .9rem;
+  padding: .8rem 1rem; }
+.qo-question[data-status="bounded"] { border-left-color: var(--accent); }
+.qo-hindcast-belief { border: 1px solid var(--rule); margin: 0 0 1rem; padding: 1rem 1.1rem; }
+.qo-hindcast-verdict { font-weight: 650; }
+.qo-subtle { color: var(--faint); font-size: .9rem; }
+.qo-timeline { list-style: none; margin: 0; padding: 0; }
+.qo-timeline li { border-left: 2px solid var(--rule); margin: 0; padding: .4rem 0 .9rem 1.1rem;
+  position: relative; }
+.qo-timeline li::before { background: var(--paper); border: 2px solid var(--accent); border-radius: 50%;
+  content: ""; height: .5rem; left: -.38rem; position: absolute; top: .85rem; width: .5rem; }
+.qo-date { color: var(--faint); font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: .74rem; letter-spacing: .05em; }
+@media (max-width: 52em) { .qo-nav { gap: .1rem .7rem; } }
+</style>
+</head>
+<body class="qo-page-body">
+<button class="theme-toggle" aria-label="Toggle light and dark" onclick="
+  (function () {
+    var d = document.documentElement;
+    var cur = d.getAttribute('data-theme');
+    if (!cur) { cur = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'; }
+    var next = cur === 'dark' ? 'light' : 'dark';
+    d.setAttribute('data-theme', next);
+    try { localStorage.setItem('darshan-theme', next); } catch (e) {}
+  })();
+">◐</button>
+
+<header class="masthead">
+  <h1 class="wordmark"><a href="../index.html">DARSHAN</a></h1>
+  <p class="tagline">seeing clearly after the feed</p>
+  <nav>
+    <a href="../index.html">Articles</a>
+    <a href="../garden/index.html">Garden</a>
+    <a href="index.html">Observatory</a>
+    <a href="../about.html">About</a>
+  </nav>
+</header>
+
+<main>
+<nav class="qo-nav" aria-label="Observatory"><a href="index.html">Field</a><a href="companies.html" aria-current="page">Companies</a><a href="architectures.html">Architectures</a><a href="institutions.html">Institutions</a><a href="evidence.html">Evidence</a><a href="forecasts.html">Forecasts</a><a href="bottlenecks.html">Bottlenecks</a><a href="graph.html">Map</a><a href="hindcast.html">Hindcast</a><a href="questions.html">Questions</a><a href="sources.html">Sources</a><a href="methodology.html">Method</a></nav>
+<p class="qo-kicker">Case study · Fusion-based photonic quantum computing</p>
+<h1 class="article-title">PsiQuantum</h1>
+<p class="qo-lede">Fusion-based photonic quantum computing. US2QC performer since Jan 2023; QBI Stage C (final phase) since Feb 2025; Omega chipset at GlobalFoundries; Quantum Compute Centers announced for Brisbane and Chicago.</p>
+<p class="qo-meta">Architecture: <a href="architectures.html">Fusion-based photonic quantum computing</a> · HQ Palo Alto, California, US · founded 2016 ·
+ledger as of <code>2026-09-19</code></p>
+<h2 id="what-it-is">What it is</h2>
+<p>PsiQuantum, Palo Alto, is the comparator for this Genesis slice: a fusion-based photonic architecture that has reached the deepest rung of the same DARPA ladder Quantum Motion is climbing. Where the silicon-spin thesis says <em>the existing fab industry scales qubits</em>, the photonic thesis says <em>the hard physics lives entirely in components a high-volume fab can stamp out</em> — sources, waveguides, switches, detectors — and networking photons replaces wiring spins.</p>
+<h2 id="what-it-has-actually-demonstrated">What it has actually demonstrated</h2>
+<ul><li><strong>Omega chipset (Nature, February 2025)</strong> — a complete, manufacturable photonic component set benchmarked at GlobalFoundries in New York: 99.98% dual-rail state preparation and measurement, 99.22% two-qubit fusion fidelity, 99.72% chip-to-chip interconnect. All figures are conditional on photon detection — the paper does not price in system loss, which is the architecture's governing unknown.</li><li><strong>Manufacturing integration</strong> — millions of devices, thousands of wafers, and a claimed ~500,000 device-level measurements per month, in a high-volume commercial fab.</li><li><strong>Evaluation depth</strong> — the only non-Microsoft company through to US2QC's final phase (≡ QBI Stage C), after a year-long review by a ~50-expert DARPA team; followed by a $31.8M Stage C tasking (Sep 2025) and a $125M expanded agreement (Jul 2026).</li></ul>
+<h2 id="what-has-not-been-demonstrated">What has not been demonstrated</h2>
+<p>No independently measured <em>system-level</em> quantum performance exists in the record. The DARPA progression measures design viability and evaluation access, not demonstrated utility-scale hardware. Groundbreaking of the Brisbane and Chicago Quantum Compute Centers was announced for 2025; completion and commissioning status is unverified in this ledger.</p>
+<h2 id="why-it-is-the-comparator">Why it is the comparator</h2>
+<p>PsiQuantum shares Quantum Motion's load-bearing dependency — industrial foundry manufacture — while differing on nearly everything else: photons versus spins, fusion networks versus gate arrays, a room-temperature optical plane plus cryogenic detectors versus an mK CMOS stack. If foundry manufacturability is the durable advantage both claim, the observatory can watch two different wagers on the same substrate race.</p>
+<h2 id="claims">Claims on record</h2>
+<p class="qo-subtle">Claims are provenance, not evidence. Funding, selection, procurement,
+partnership, and roadmap claims can never promote a result.</p>
+<div class="qo-table-wrap"><table class="qo-table">
+<tr><th>Date</th><th>Claim</th><th>Class</th><th>Sources</th></tr><tr><td class='qo-date'>2023-01-31</td><td>Selected for the initial phase of DARPA US2QC alongside Atom Computing and Microsoft.</td><td><span class="qo-badge qo-badge--warn">Program selection</span></td><td><span class="qo-src"><a href="https://www.darpa.mil/news/2023/accelerate-quantum-computing" title="DARPA Collaborates with Commercial Partners to Accelerate Quantum Computing">[src-darpa-us2qc-2023-01-31]</a></span></td></tr><tr><td class='qo-date'>2025-02-06</td><td>Advanced to US2QC's final validation/co-design phase (= QBI Stage C goals) after a year-long evaluation by a ~50-expert team.</td><td><span class="qo-badge qo-badge--warn">Program selection</span></td><td><span class="qo-src"><a href="https://www.darpa.mil/news/2025/quantum-computing-approaches" title="DARPA selects two discrete utility-scale quantum computing approaches for evaluation">[src-darpa-us2qc-final-2025]</a></span></td></tr><tr><td class='qo-date'>2025-02-26</td><td>Announced Omega: a photonic chipset containing all components needed for million-qubit-scale systems, manufactured at GlobalFoundries.</td><td><span class="qo-badge qo-badge--self">Technical disclosure</span></td><td><span class="qo-src"><a href="https://www.psiquantum.com/news-import/omega" title="PsiQuantum Announces Omega, a Manufacturable Chipset for Photonic Quantum Computing">[src-psq-omega-2025-02-26]</a></span></td></tr><tr><td class='qo-date'>2025-02-26</td><td>Will break ground in 2025 on datacenter-sized Quantum Compute Centers in Brisbane and Chicago.</td><td><span class="qo-badge qo-badge--warn">Roadmap</span></td><td><span class="qo-src"><a href="https://www.psiquantum.com/news-import/omega" title="PsiQuantum Announces Omega, a Manufacturable Chipset for Photonic Quantum Computing">[src-psq-omega-2025-02-26]</a></span></td></tr><tr><td class='qo-date'>2026-07-22</td><td>Signed a $125M expanded QBI agreement with DARPA (following a $31.8M Stage C tasking in Sep 2025).</td><td><span class="qo-badge qo-badge--warn">Procurement</span></td><td><span class="qo-src"><a href="https://www.psiquantum.com/news-import/psiquantum-signs-125-million-agreement-with-darpa" title="PsiQuantum Signs $125 Million Agreement with DARPA">[src-psq-darpa-125m-2026-07-22]</a></span></td></tr></table></div>
+<h2 id="evidence">Evidence ledger</h2>
+<div class="qo-table-wrap"><table class="qo-table">
+<tr><th>Date</th><th>Metric</th><th>Qualifier</th><th>Class</th><th>Measured by</th><th>Sources</th><th>Note</th></tr><tr><td class='qo-date'>2025-02-26</td><td><code>high_volume_fab_integration</code></td><td>Omega manufactured in GlobalFoundries' high-volume NY fab; ~500k device-level measurements per month claimed; millions of devices, thousands of wafers tested</td><td><span class="qo-badge qo-badge--self">Technical disclosure</span></td><td>self · self/contextual</td><td><span class="qo-src"><a href="https://www.psiquantum.com/news-import/omega" title="PsiQuantum Announces Omega, a Manufacturable Chipset for Photonic Quantum Computing">[src-psq-omega-2025-02-26]</a></span></td><td>Manufacturing-throughput claims are company disclosure; foundry partnership is corroborated by the Nature paper's industrial provenance.</td></tr><tr><td class='qo-date'>2025-02-06</td><td><code>cryogenic_module_installed_doe</code></td><td>largest quantum cryogenic module installed and under test at DOE's SLAC laboratory (per company account)</td><td><span class="qo-badge qo-badge--self">Technical disclosure</span></td><td>self · self/contextual</td><td><span class="qo-src"><a href="https://www.psiquantum.com/news-import/darpa-final-phase" title="PsiQuantum cryogenic module at SLAC">[src-doe-slac-psq]</a> <a href="https://www.psiquantum.com/news-import/darpa-final-phase" title="DARPA Selects PsiQuantum to Advance to Final Phase of Quantum Computing Program">[src-psq-darpa-2025-02-06]</a></span></td><td>Government-lab hosting of hardware under test — but the only captured source is PsiQuantum's own release, so this sits at technical_disclosure, not independent_testbed. A DOE/SLAC confirmation would promote it.</td></tr><tr><td class='qo-date'>2025-02-26</td><td><code>photonic_component_fidelities</code></td><td>dual-rail SPAM 99.98%±0.01; HOM visibility 99.50%±0.25; two-qubit fusion 99.22%±0.12; chip-to-chip interconnect 99.72%±0.04 — all conditional on photon detection, NOT accounting for loss</td><td><span class="qo-badge qo-badge--self">Peer review</span></td><td>self · self/contextual</td><td><span class="qo-src"><a href="https://doi.org/10.1038/s41586-025-08820-7" title="A manufacturable platform for photonic quantum computing">[src-psq-omega-nature-2025-02-26]</a></span></td><td>Peer-reviewed component benchmarks from a complete manufacturable platform. The 'conditional on detection' qualifier is load-bearing: the unresolved question is total system loss, not component fidelity.</td></tr></table></div>
+<figure class="qo-figure"><svg viewBox="0 0 560 170" role="img" aria-label="Evidence by rung"><text x="162" y="22" font-size="11" fill="var(--faint)" text-anchor="end">Company claim</text><text x="174" y="21" font-size="10" fill="var(--faint)" font-style="italic">none recorded</text><text x="162" y="44" font-size="11" fill="var(--faint)" text-anchor="end">Technical disclosure</text><rect x="170" y="34" width="34" height="12" fill="var(--faint)" opacity="0.90"/><rect x="208" y="34" width="34" height="12" fill="var(--faint)" opacity="0.78"/><text x="162" y="66" font-size="11" fill="var(--faint)" text-anchor="end">Peer review</text><rect x="170" y="56" width="34" height="12" fill="var(--faint)" opacity="0.90"/><text x="162" y="88" font-size="11" fill="var(--faint)" text-anchor="end">Independent benchmark</text><text x="174" y="87" font-size="10" fill="var(--faint)" font-style="italic">none recorded</text><text x="162" y="110" font-size="11" fill="var(--faint)" text-anchor="end">Independent testbed</text><text x="174" y="109" font-size="10" fill="var(--faint)" font-style="italic">none recorded</text><text x="162" y="132" font-size="11" fill="var(--faint)" text-anchor="end">Replication</text><text x="174" y="131" font-size="10" fill="var(--faint)" font-style="italic">none recorded</text><text x="162" y="154" font-size="11" fill="var(--faint)" text-anchor="end">System utility</text><text x="174" y="153" font-size="10" fill="var(--faint)" font-style="italic">none recorded</text></svg><figcaption>Evidence distribution by ladder rung for this
+subject — blocks above <em>peer review</em> required a non-self measuring family.</figcaption></figure>
+<h2 id="milestones">Milestones and promises</h2>
+<div class="qo-table-wrap"><table class="qo-table">
+<tr><th>Description</th><th>Promised</th><th>Achieved</th><th>Status</th><th>Evidence</th></tr><tr><td>Break ground on Brisbane and Chicago Quantum Compute Centers</td><td>2025-12-31</td><td>—</td><td>Open</td><td>—</td></tr><tr><td>Advance to US2QC final phase / QBI Stage C validation</td><td>—</td><td>2025-02-06</td><td>Achieved</td><td>—</td></tr></table></div>
+<h2 id="bottlenecks">Critical bottleneck</h2>
+<div class="qo-grid"><div class="qo-card"><h3>End-to-end photon loss below the fusion-tolerance threshold</h3><p>Every headline photonic metric is conditional on detection. The architecture lives or dies on total loss — source, waveguide, switching, coupling, detector — because fusion-based correction has a hard loss budget.</p><p><strong>Falsifier:</strong> Integrated system loss cannot be reduced to the fault-tolerant fusion threshold at the required component counts</p></div></div>
+
+<h2 id="confidence">Confidence decomposition <span class="qo-date">as of 2026-09-19</span></h2>
+<figure class="qo-figure"><svg viewBox="0 0 560 156" role="img" aria-label="Confidence decomposition"><text x="160" y="24" font-size="11" fill="var(--faint)" text-anchor="end">Technical architecture</text><rect x="170" y="14" width="340" height="10" fill="none" stroke="var(--rule)"/><rect x="306.0" y="14" width="85.0" height="10" fill="var(--accent)" opacity=".75"/><text x="518" y="23" font-size="10" fill="var(--faint)">0.40–0.65</text><text x="160" y="58" font-size="11" fill="var(--faint)" text-anchor="end">Execution</text><rect x="170" y="48" width="340" height="10" fill="none" stroke="var(--rule)"/><rect x="357.0" y="48" width="85.0" height="10" fill="var(--accent)" opacity=".75"/><text x="518" y="57" font-size="10" fill="var(--faint)">0.55–0.80</text><text x="160" y="92" font-size="11" fill="var(--faint)" text-anchor="end">Market utility</text><rect x="170" y="82" width="340" height="10" fill="none" stroke="var(--rule)"/><text x="518" y="91" font-size="10" fill="#a33" font-weight="700">NOT YET ESTIMABLE</text><text x="160" y="126" font-size="11" fill="var(--faint)" text-anchor="end">Value capture</text><rect x="170" y="116" width="340" height="10" fill="none" stroke="var(--rule)"/><text x="518" y="125" font-size="10" fill="#a33" font-weight="700">NOT YET ESTIMABLE</text></svg><figcaption>No headline score by design — each axis is a range
+with a stated reason, and NOT YET ESTIMABLE renders as an empty track.</figcaption></figure>
+<div class="qo-table-wrap"><table class="qo-table">
+<tr><th>Axis</th><th>Range</th><th>Reason</th></tr><tr><td>technical architecture</td><td>0.40–0.65</td><td>Peer-reviewed complete manufacturable component set at record fidelities — but every fidelity is conditional on detection, and system-level loss remains the unmeasured multiplier.</td></tr><tr><td>execution</td><td>0.55–0.80</td><td>Deepest DARPA evaluation stage of any company; real fab partnership; real infrastructure commitments — offset by announced-not-verified QCC construction.</td></tr><tr><td>market utility</td><td><span class="qo-nye">NOT YET ESTIMABLE</span></td><td>No application-level result exists; the utility-scale question is precisely what Stage C is evaluating.</td></tr><tr><td>value capture</td><td><span class="qo-nye">NOT YET ESTIMABLE</span></td><td>Vertically integrated photonics supply chains have no public comparables to bound capture against.</td></tr></table></div>
+<div class="qo-grid">
+<div class="qo-card"><h3>Would raise confidence</h3><ul><li>Nature paper: complete manufacturable photonic component set at GlobalFoundries (Feb 2025)</li><li>QBI Stage C entry after a year-long ~50-expert evaluation (Feb 2025)</li><li>$125M expanded DARPA agreement (Jul 2026) — sustained evaluator commitment</li></ul></div>
+<div class="qo-card"><h3>Would lower confidence</h3><ul><li>All component fidelities are conditioned on photon detection — the loss budget is the unanswered question</li><li>Quantum Compute Centers were announced for 2025 groundbreaking; completion is unverified</li><li>No independently measured system-level performance is in the ledger</li></ul></div>
+<div class="qo-card"><h3>Unresolved</h3><ul><li>What is the end-to-end loss budget at system scale, and does it fit inside the fusion-tolerance threshold?</li><li>Does Stage C verification produce a constructed system that operates as designed?</li><li>Can cryogenic loading of millions of detectors be engineered at datacenter scale?</li></ul></div>
+</div>
+<h3>Next decisive checkpoints</h3>
+<div class="qo-table-wrap"><table class="qo-table">
+<tr><th>Milestone</th><th>Deadline</th><th>Resolution</th></tr><tr><td>ms-psq-qcc-groundbreak</td><td>2025-12-31</td><td>Independent confirmation of construction progress at Brisbane or Chicago</td></tr><tr><td>QBI Stage C verification outcome</td><td>None</td><td>fc-psq-utility-2029</td></tr></table></div>
+<h3>Falsifiers</h3><div class="qo-falsifier">Integrated photon loss cannot reach the fusion-tolerance threshold at the required component counts</div><div class="qo-falsifier">Detector cryogenics or switching speed make the lattice physically or economically infeasible</div><div class="qo-falsifier">Stage C V&amp;V determines the design cannot be constructed and operated as proposed</div>
+
+<h2 id="forecasts">Forecasts touching this subject</h2>
+<div class="qo-table-wrap"><table class="qo-table">
+<tr><th>ID</th><th>Statement</th><th>Resolves by</th><th>Status</th><th>Resolution criteria</th></tr><tr><td><code>fc-psq-utility-2029</code></td><td>PsiQuantum will operate a utility-scale, fault-tolerant photonic quantum computer at a Quantum Compute Center before 2030.</td><td>2029-12-31</td><td>Open</td><td>A utility-scale system operational and demonstrably running workloads at a QCC (Brisbane or Chicago), confirmed by sources outside PsiQuantum.</td></tr></table></div>
+
+</main>
+
+<footer>
+  <p>Darshan · seeing clearly after the feed</p>
+  <p>No feed. No analytics. No trackers. Finite pieces, read at your own pace.</p>
+  <p style="opacity:.7">The door opened 2026&#8209;08&#8209;09 · every piece gated, traced, and answered for</p>
+</footer>
+</body>
+</html>

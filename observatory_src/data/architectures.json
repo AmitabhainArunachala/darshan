@@ -1,0 +1,124 @@
+{
+  "schema": "darshan.qo-architectures/v1",
+  "as_of": "2026-09-19",
+  "entries": [
+    {
+      "id": "arch-silicon-spin-mos",
+      "name": "Silicon MOS spin qubits",
+      "modality": "silicon_spin",
+      "summary": "Electron spins in gate-defined quantum dots at a Si/SiO2 interface, fabricated with industrial 300 mm CMOS processes. The thesis: if qubit structures survive full foundry rules, the semiconductor industry's uniformity, yield and scale become available to quantum processors.",
+      "key_dependencies": ["cap-300mm-cmos-foundry", "cap-iso-silicon", "cap-dilution-fridge", "cap-cryo-cmos-control", "cap-wiring-density"],
+      "scaling_hypothesis": "Foundry-fabricated 2D-scalable qubit arrays plus co-integrated cryo-CMOS control reach utility scale without bespoke quantum fabs.",
+      "falsifiers": [
+        "Si/SiO2 interface charge noise or valley-splitting variability cannot sustain >99% two-qubit gates at array scale under foundry tolerances",
+        "Per-qubit wiring/measurement overhead defeats co-integration before the error-corrected regime is reached",
+        "Yield of quantum-dot devices across a full 300 mm wafer stays too low for tiled processors"
+      ],
+      "source_ids": ["src-qm-npjqi-2024-07-19", "src-intel-natelec-2022-03-29"],
+      "recorded_on": "2026-09-19"
+    },
+    {
+      "id": "arch-photonic-fbqc",
+      "name": "Fusion-based photonic quantum computing",
+      "modality": "photonic",
+      "summary": "Photonic qubits in silicon-photonics chips, entangled into a lattice through two-qubit fusion measurements; utility scale requires millions of near-identical photonic components manufactured in a high-volume fab.",
+      "key_dependencies": ["cap-foundry-photonics", "cap-single-photon-source", "cap-pnr-detectors", "cap-bto-switching", "cap-sin-waveguides", "cap-fiber-coupling", "cap-dilution-fridge"],
+      "scaling_hypothesis": "All hard physics lives in components that a telecom-grade fab can mass-produce; scale becomes a manufacturing and integration problem rather than a coherence problem.",
+      "falsifiers": [
+        "End-to-end photon loss (source → switching → detection) cannot be pushed below the fusion-tolerance threshold at system scale",
+        "Optical switching speed or detector efficiency does not reach the fusion network's simultaneous requirements",
+        "Cryogenic loading of millions of detectors makes the refrigeration plant impractical"
+      ],
+      "source_ids": ["src-psq-omega-nature-2025-02-26"],
+      "recorded_on": "2026-09-19"
+    },
+    {
+      "id": "arch-trapped-ion",
+      "name": "Trapped-ion (QCCD) processors",
+      "modality": "trapped_ion",
+      "summary": "Ions held and shuttled in RF traps; state-of-the-art fidelities with slow gates and wiring/packaging pressure as zones multiply.",
+      "key_dependencies": ["cap-ion-traps", "cap-laser-systems", "cap-vacuum-packaging", "cap-control-electronics"],
+      "scaling_hypothesis": "QCCD shuttling and modular photonic networking scale a high-fidelity core into a larger system.",
+      "falsifiers": ["Gate throughput and shuttling overhead keep useful circuit depth below utility requirements at achievable clock rates"],
+      "source_ids": ["src-darpa-qbi-stageb-2025-11-06"],
+      "recorded_on": "2026-09-19"
+    },
+    {
+      "id": "arch-superconducting-modular",
+      "name": "Modular superconducting processors",
+      "modality": "superconducting",
+      "summary": "Transmon-class superconducting qubits tiled into modular processors; mature fab and control ecosystem with coherence and crosstalk limits.",
+      "key_dependencies": ["cap-sc-fab", "cap-dilution-fridge", "cap-control-electronics"],
+      "scaling_hypothesis": "Modular interconnection of proven processor units plus steady fidelity gains reaches fault tolerance incrementally.",
+      "falsifiers": ["Interconnect loss between modules prevents the modular step from counting as scaling"],
+      "source_ids": ["src-darpa-qbi-stageb-2025-11-06"],
+      "recorded_on": "2026-09-19"
+    },
+    {
+      "id": "arch-neutral-atom",
+      "name": "Neutral-atom arrays",
+      "modality": "neutral_atom",
+      "summary": "Optically trapped atom arrays with Rydberg-mediated gates; naturally large qubit counts with mid-circuit reload and fidelity questions.",
+      "key_dependencies": ["cap-laser-systems", "cap-vacuum-packaging", "cap-control-electronics"],
+      "scaling_hypothesis": "Optical addressing scales atom counts faster than electrode wiring scales other modalities.",
+      "falsifiers": ["Atom loss and reload overhead dominate as array size grows toward error-corrected operation"],
+      "source_ids": ["src-darpa-qbi-stageb-2025-11-06"],
+      "recorded_on": "2026-09-19"
+    },
+    {
+      "id": "arch-bosonic-sc",
+      "name": "Bosonic superconducting qubits",
+      "modality": "bosonic",
+      "summary": "Error-resilient bosonic encodings in superconducting resonators, trading qubit count for per-qubit protection.",
+      "key_dependencies": ["cap-sc-fab", "cap-dilution-fridge"],
+      "scaling_hypothesis": "Hardware-level error suppression reduces the QEC overhead enough that fewer physical modes reach utility.",
+      "falsifiers": ["Residual error channels do not suppress far enough to offset the added hardware complexity"],
+      "source_ids": ["src-darpa-qbi-stageb-2025-11-06"],
+      "recorded_on": "2026-09-19"
+    },
+    {
+      "id": "arch-atom-in-silicon",
+      "name": "Precision atom qubits in silicon",
+      "modality": "atom_in_silicon",
+      "summary": "Single dopant atoms placed with atomic precision in isotopically pure silicon; STM-defined fabrication.",
+      "key_dependencies": ["cap-iso-silicon", "cap-stm-fab", "cap-dilution-fridge"],
+      "scaling_hypothesis": "Atomic-precision placement produces perfectly identical qubits, trading throughput for uniformity.",
+      "falsifiers": ["STM-based fabrication throughput cannot populate utility-scale arrays"],
+      "source_ids": ["src-darpa-qbi-stageb-2025-11-06"],
+      "recorded_on": "2026-09-19"
+    },
+    {
+      "id": "arch-optically-linked-spin",
+      "name": "Optically linked silicon spin qubits",
+      "modality": "optically_linked_spin",
+      "summary": "Silicon spin qubits entangled through photonic links, combining spin-qubit density with optical networking.",
+      "key_dependencies": ["cap-silicon-spin-devices", "cap-foundry-photonics", "cap-single-photon-source"],
+      "scaling_hypothesis": "Optical interconnect removes the wiring wall that limits monolithic spin arrays.",
+      "falsifiers": ["Spin-photon interface efficiency never reaches the entanglement rate the architecture assumes"],
+      "source_ids": ["src-darpa-qbi-stageb-2025-11-06"],
+      "recorded_on": "2026-09-19"
+    },
+    {
+      "id": "arch-topological",
+      "name": "Topological superconducting qubits",
+      "modality": "topological",
+      "summary": "Majorana-based topological qubits aiming for hardware-level error protection; the qubit's existence and controllability remain the open question.",
+      "key_dependencies": ["cap-sc-fab", "cap-dilution-fridge", "cap-exotic-materials"],
+      "scaling_hypothesis": "Topological protection collapses QEC overhead by orders of magnitude if the base qubit works.",
+      "falsifiers": ["The underlying topological excitation cannot be demonstrated with the braiding fidelity the architecture requires"],
+      "source_ids": ["src-darpa-us2qc-2023-01-31"],
+      "recorded_on": "2026-09-19"
+    },
+    {
+      "id": "arch-photonic-testbed",
+      "name": "Photonic testbed-class platforms",
+      "modality": "photonic",
+      "summary": "Photonic systems built for algorithm demonstration rather than the fusion-lattice utility-scale path — e.g. NQCC's Aegiq and ORCA testbeds.",
+      "key_dependencies": ["cap-foundry-photonics", "cap-single-photon-source"],
+      "scaling_hypothesis": "Near-term photonic systems test application mapping while utility-scale photonics is built elsewhere.",
+      "falsifiers": ["Photon losses cap problem size below anything application-relevant"],
+      "source_ids": ["src-ukri-testbeds-30m"],
+      "recorded_on": "2026-09-19"
+    }
+  ]
+}

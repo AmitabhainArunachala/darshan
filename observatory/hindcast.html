@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hindcast · Quantum Observatory</title>
+<meta name="description" content="Belief snapshots by date with their evidential basis, and the evidence that arrived afterward — calibration as a first-class view.">
+<link rel="stylesheet" href="../style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ccircle cx='8' cy='8' r='6' fill='none' stroke='%238f3b26' stroke-width='1.5'/%3E%3Ccircle cx='8' cy='8' r='2' fill='%238f3b26'/%3E%3C/svg%3E">
+<script>
+/* Theme memory — the only JavaScript on this site. No analytics, no trackers. */
+(function () {
+  try {
+    var t = localStorage.getItem("darshan-theme");
+    if (t) document.documentElement.setAttribute("data-theme", t);
+  } catch (e) {}
+})();
+</script>
+<style>
+body.qo-page-body { font-size: 1.05rem; }
+.qo-nav { border-block: 1px solid var(--rule); display: flex; flex-wrap: wrap;
+  gap: .15rem .9rem; margin: 0 0 2.4rem; padding: .6rem 0; }
+.qo-nav a { color: var(--faint); font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .74rem; font-weight: 700; letter-spacing: .13em; text-decoration: none;
+  text-transform: uppercase; }
+.qo-nav a[aria-current="page"], .qo-nav a:hover { color: var(--accent); }
+.qo-kicker { color: var(--accent); font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: .72rem; letter-spacing: .14em; margin: 0 0 .5rem; text-transform: uppercase; }
+.qo-lede { border-left: 3px solid var(--accent); color: var(--faint); font-size: 1.18rem;
+  font-style: italic; line-height: 1.6; margin: 1.2rem 0 2rem; padding-left: 1.2rem; }
+.qo-grid { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+  margin: 1.4rem 0 2.4rem; }
+.qo-card { border: 1px solid var(--rule); border-top: 3px solid var(--accent); padding: 1rem 1.1rem; }
+.qo-card h3 { margin: .15rem 0 .4rem; font-size: 1.05rem; }
+.qo-card p { color: var(--faint); font-size: .92rem; margin: .35rem 0; }
+.qo-meta { color: var(--faint); font-size: .8rem; margin: 0 0 2rem; }
+.qo-meta code { font-size: .78rem; }
+.qo-table-wrap { overflow-x: auto; margin: 1.4rem 0 2.4rem; }
+.qo-table { border-collapse: collapse; font-size: .88rem; line-height: 1.45; width: 100%; }
+.qo-table th, .qo-table td { border: 1px solid var(--rule); padding: .5rem .6rem;
+  text-align: left; vertical-align: top; }
+.qo-table th { background: var(--accent-soft); white-space: nowrap; }
+.qo-badge { border: 1px solid var(--rule); border-radius: 3px; display: inline-block;
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: .68rem;
+  letter-spacing: .06em; padding: .12rem .45rem; text-transform: uppercase; white-space: nowrap; }
+.qo-badge--self { color: var(--faint); }
+.qo-badge--ind { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
+.qo-badge--warn { border-color: #a33; color: #a33; }
+.qo-src { font-size: .8rem; color: var(--faint); }
+.qo-src a { color: inherit; }
+.qo-figure { border: 1px solid var(--rule); margin: 1.6rem 0 2.4rem; padding: 1rem 1.2rem; }
+.qo-figure figcaption { color: var(--faint); font-size: .82rem; font-style: italic; margin-top: .6rem; }
+.qo-figure svg { display: block; height: auto; max-width: 100%; }
+.qo-axis-note { color: var(--faint); font-size: .84rem; }
+.qo-nye { color: #a33; font-weight: 700; }
+.qo-list-plain { list-style: none; margin: 0; padding: 0; }
+.qo-list-plain li { border-bottom: 1px solid var(--rule); padding: .8rem 0; }
+.qo-falsifier { background: var(--accent-soft); border-left: 3px solid var(--accent);
+  font-size: .9rem; margin: .8rem 0; padding: .6rem .9rem; }
+.qo-question { border: 1px solid var(--rule); border-left: 4px solid #a33; margin: 0 0 .9rem;
+  padding: .8rem 1rem; }
+.qo-question[data-status="bounded"] { border-left-color: var(--accent); }
+.qo-hindcast-belief { border: 1px solid var(--rule); margin: 0 0 1rem; padding: 1rem 1.1rem; }
+.qo-hindcast-verdict { font-weight: 650; }
+.qo-subtle { color: var(--faint); font-size: .9rem; }
+.qo-timeline { list-style: none; margin: 0; padding: 0; }
+.qo-timeline li { border-left: 2px solid var(--rule); margin: 0; padding: .4rem 0 .9rem 1.1rem;
+  position: relative; }
+.qo-timeline li::before { background: var(--paper); border: 2px solid var(--accent); border-radius: 50%;
+  content: ""; height: .5rem; left: -.38rem; position: absolute; top: .85rem; width: .5rem; }
+.qo-date { color: var(--faint); font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: .74rem; letter-spacing: .05em; }
+@media (max-width: 52em) { .qo-nav { gap: .1rem .7rem; } }
+</style>
+</head>
+<body class="qo-page-body">
+<button class="theme-toggle" aria-label="Toggle light and dark" onclick="
+  (function () {
+    var d = document.documentElement;
+    var cur = d.getAttribute('data-theme');
+    if (!cur) { cur = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'; }
+    var next = cur === 'dark' ? 'light' : 'dark';
+    d.setAttribute('data-theme', next);
+    try { localStorage.setItem('darshan-theme', next); } catch (e) {}
+  })();
+">◐</button>
+
+<header class="masthead">
+  <h1 class="wordmark"><a href="../index.html">DARSHAN</a></h1>
+  <p class="tagline">seeing clearly after the feed</p>
+  <nav>
+    <a href="../index.html">Articles</a>
+    <a href="../garden/index.html">Garden</a>
+    <a href="index.html">Observatory</a>
+    <a href="../about.html">About</a>
+  </nav>
+</header>
+
+<main>
+<nav class="qo-nav" aria-label="Observatory"><a href="index.html">Field</a><a href="companies.html">Companies</a><a href="architectures.html">Architectures</a><a href="institutions.html">Institutions</a><a href="evidence.html">Evidence</a><a href="forecasts.html">Forecasts</a><a href="bottlenecks.html">Bottlenecks</a><a href="graph.html">Map</a><a href="hindcast.html" aria-current="page">Hindcast</a><a href="questions.html">Questions</a><a href="sources.html">Sources</a><a href="methodology.html">Method</a></nav>
+<p class="qo-kicker">Hindcast</p>
+<h1 class="article-title">What the System Believed, and When</h1>
+<p class="qo-lede">Belief snapshots pinned to a date, with the evidence and claims that
+justified them — and everything that arrived afterward. A belief is only honest if you can
+reconstruct why it was held.</p>
+<p class="qo-meta">Ledger now: <code>2026-09-19</code>. Leakage check: a snapshot may only cite
+facts whose domain date and publication precede its as_of; the validator enforces it.</p>
+
+<h2>Snapshot: 2024-12-31 <span class="qo-date">End of 2024 — before the NQCC delivery and the QBI Stage-B cut</span></h2>
+<div class="qo-hindcast-belief">
+<p class="qo-hindcast-verdict">Silicon-CMOS spin qubits had credible peer-reviewed manufacturability evidence (record-low charge noise on a customized 300 mm line), but no full-stack system had yet been delivered to an independent evaluator.</p>
+<p class="qo-src">held as <code>bounded_hypothesis</code></p>
+<ul><li><code>ev-qm-charge-noise-2024</code> charge_noise_1hz — average across multiple devices; below 0.1 µeV·Hz^-1/2 under some operating conditions (Peer review)</li><li><code>ev-arch-sispin-300mm-2022</code> spin_qubit_coherence_300mm — T1 &gt; 1 s at 1 T; T2* &gt; 3 ms; quantum dots from all-optical-lithography 300 mm industrial processing (Si/SiGe) (Peer review)</li></ul>
+<p class="qo-subtle">What the record showed then: manufacturability of qubit devices, yes; an installed system under independent test, no.</p></div><div class="qo-hindcast-belief">
+<p class="qo-hindcast-verdict">PsiQuantum had passed US2QC's R&amp;D-viability stage; final hardware verification was still ahead.</p>
+<p class="qo-src">held as <code>bounded_hypothesis</code></p>
+<ul><li><code>cl-psq-us2qc-2023</code> Selected for the initial phase of DARPA US2QC alongside Atom Computing and Microsoft. — <em>claim, not evidence</em> (Program selection)</li></ul>
+<p class="qo-subtle">Phase-2 standing was a selection fact — design viability assessed on paper, not demonstrated hardware.</p></div><div class="qo-hindcast-belief">
+<p class="qo-hindcast-verdict">Quantum Motion's £62M total funding represented investor confidence; the ledger held zero independent measurements of a delivered Quantum Motion system.</p>
+<p class="qo-src">held as <code>fact_of_record</code></p>
+<ul><li><code>cl-qm-42m</code> Raised over £42M led by Bosch Ventures (with Porsche SE, British Patient Capital); total funding ~£62M. — <em>claim, not evidence</em> (Funding)</li><li><code>cl-qm-nqcc-award</code> Awarded an NQCC/UKRI testbed contract (Silicon Cloverleaf) — one of seven testbeds funded under the £30M programme. — <em>claim, not evidence</em> (Procurement)</li></ul>
+<p class="qo-subtle">The 2024 view already separated capital events from technical evidence — the anti-hype rule pre-existed the findings it now protects.</p></div>
+<h3>What the ledger gained after 2024-12-31</h3>
+<p class="qo-subtle">Computed deterministically: every evidence entry and claim whose
+domain date postdates the snapshot. This is the calibration check — did the field deliver
+what the beliefs implied it might?</p>
+<h4>Evidence</h4><ul class="qo-list-plain"><li>PsiQuantum — <code>ev-psq-slac-module-2025</code> cryogenic_module_installed_doe <span class="qo-date">2025-02-06</span></li><li>PsiQuantum — <code>ev-psq-omega-components-2025</code> photonic_component_fidelities <span class="qo-date">2025-02-26</span></li><li>PsiQuantum — <code>ev-psq-gf-manufacture-2025</code> high_volume_fab_integration <span class="qo-date">2025-02-26</span></li><li>Quantum Motion — <code>ev-qm-nqcc-installed-2025</code> system_installed_independent_testbed <span class="qo-date">2025-09-15</span></li><li>Quantum Motion — <code>ev-qm-systems-delivered-2025</code> full_stack_system_delivered <span class="qo-date">2025-09-15</span></li></ul>
+<h4>Claims (not evidence)</h4><ul class="qo-list-plain"><li>PsiQuantum — Advanced to US2QC's final validation/co-design phase (= QBI Stage C goals) after a year-long evaluation by a ~50-expert team. <span class="qo-date">2025-02-06</span></li><li>PsiQuantum — Announced Omega: a photonic chipset containing all components needed for million-qubit-scale systems, manufactured at GlobalFoundries. <span class="qo-date">2025-02-26</span></li><li>PsiQuantum — Will break ground in 2025 on datacenter-sized Quantum Compute Centers in Brisbane and Chicago. <span class="qo-date">2025-02-26</span></li><li>Quantum Motion — Delivered the industry's first full-stack quantum computer built with a standard silicon CMOS chip fabrication process — 300 mm wafer technology — installed at the UK NQCC under the Quantum Computing Testbed Programme. <span class="qo-date">2025-09-15</span></li><li>Quantum Motion — Selected by DARPA to advance to QBI Stage B — one of 11 of the original 18 Stage A companies. <span class="qo-date">2025-11-06</span></li><li>Quantum Motion — Demonstrated an 8 µs spin-qubit readout method and exchange control in a 300 mm-fabricated MOS double quantum dot — the basis for two-qubit gates. <span class="qo-date">2026-07-07</span></li><li>PsiQuantum — Signed a $125M expanded QBI agreement with DARPA (following a $31.8M Stage C tasking in Sep 2025). <span class="qo-date">2026-07-22</span></li></ul>
+
+
+</main>
+
+<footer>
+  <p>Darshan · seeing clearly after the feed</p>
+  <p>No feed. No analytics. No trackers. Finite pieces, read at your own pace.</p>
+  <p style="opacity:.7">The door opened 2026&#8209;08&#8209;09 · every piece gated, traced, and answered for</p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,71 @@
+{
+  "schema": "darshan.qo-milestones/v1",
+  "as_of": "2026-09-19",
+  "entries": [
+    {
+      "id": "ms-qm-nqcc-deploy",
+      "subject_id": "co-quantum-motion",
+      "kind": "program_deliverable",
+      "description": "Deliver and commission a silicon-spin-qubit testbed system at NQCC under the UKRI £30M competition",
+      "promised": "2025-03-31",
+      "achieved_on": "2025-09-15",
+      "status": "achieved_late",
+      "evidence_ids": ["ev-qm-nqcc-installed-2025"],
+      "source_ids": ["src-ukri-testbeds-30m", "src-qm-nqcc-delivery-2025-09-15"],
+      "recorded_on": "2026-09-19",
+      "note": "Programme target was deployment by March 2025; installation announced September 2025. 'Commissioned/operational' confirmation pending — achieved_late records delivery, not operational validation."
+    },
+    {
+      "id": "ms-qm-qbi-stageb",
+      "subject_id": "co-quantum-motion",
+      "kind": "program_stage",
+      "description": "Advance from QBI Stage A to Stage B",
+      "promised": null,
+      "achieved_on": "2025-11-06",
+      "status": "achieved",
+      "evidence_ids": [],
+      "source_ids": ["src-darpa-qbi-stageb-2025-11-06", "src-qm-qbi-stageb-2025-11-06"],
+      "recorded_on": "2026-09-19",
+      "note": "A selection event (claim class selection), recorded as a program milestone, not technical evidence."
+    },
+    {
+      "id": "ms-psq-us2qc-stagec",
+      "subject_id": "co-psiquantum",
+      "kind": "program_stage",
+      "description": "Advance to US2QC final phase / QBI Stage C validation",
+      "promised": null,
+      "achieved_on": "2025-02-06",
+      "status": "achieved",
+      "evidence_ids": [],
+      "source_ids": ["src-darpa-us2qc-final-2025", "src-psq-darpa-2025-02-06"],
+      "recorded_on": "2026-09-19",
+      "note": "Deepest stage reached by any company; still an evaluation in progress."
+    },
+    {
+      "id": "ms-psq-qcc-groundbreak",
+      "subject_id": "co-psiquantum",
+      "kind": "roadmap_promise",
+      "description": "Break ground on Brisbane and Chicago Quantum Compute Centers",
+      "promised": "2025-12-31",
+      "achieved_on": null,
+      "status": "open",
+      "evidence_ids": [],
+      "source_ids": ["src-psq-omega-2025-02-26"],
+      "recorded_on": "2026-09-19",
+      "note": "Announced intent; construction status not independently verified in Genesis — open past its promised date marks it for review."
+    },
+    {
+      "id": "ms-qm-2q-foundry-gate",
+      "subject_id": "co-quantum-motion",
+      "kind": "roadmap_promise",
+      "description": "Demonstrate two-qubit gates on foundry-fabricated MOS arrays — the step that converts 'manufacturable qubits' into a manufacturable computer",
+      "promised": null,
+      "achieved_on": null,
+      "status": "open",
+      "evidence_ids": [],
+      "source_ids": ["src-qm-research-2026"],
+      "recorded_on": "2026-09-19",
+      "note": "Exchange control (the gate basis) was demonstrated per company research feed; a measured two-qubit gate fidelity on the foundry process is the next decisive observation."
+    }
+  ]
+}

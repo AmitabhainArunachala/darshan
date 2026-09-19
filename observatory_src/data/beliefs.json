@@ -1,0 +1,35 @@
+{
+  "schema": "darshan.qo-beliefs/v1",
+  "as_of": "2026-09-19",
+  "snapshots": [
+    {
+      "as_of": "2024-12-31",
+      "label": "End of 2024 — before the NQCC delivery and the QBI Stage-B cut",
+      "entries": [
+        {
+          "id": "bl-2024-sispin-manufacturability",
+          "statement": "Silicon-CMOS spin qubits had credible peer-reviewed manufacturability evidence (record-low charge noise on a customized 300 mm line), but no full-stack system had yet been delivered to an independent evaluator.",
+          "confidence": "bounded_hypothesis",
+          "basis_evidence_ids": ["ev-qm-charge-noise-2024", "ev-arch-sispin-300mm-2022"],
+          "note": "What the record showed then: manufacturability of qubit devices, yes; an installed system under independent test, no."
+        },
+        {
+          "id": "bl-2024-psq-design-viability",
+          "statement": "PsiQuantum had passed US2QC's R&D-viability stage; final hardware verification was still ahead.",
+          "confidence": "bounded_hypothesis",
+          "basis_evidence_ids": [],
+          "basis_claim_ids": ["cl-psq-us2qc-2023"],
+          "note": "Phase-2 standing was a selection fact — design viability assessed on paper, not demonstrated hardware."
+        },
+        {
+          "id": "bl-2024-capital-vs-evidence",
+          "statement": "Quantum Motion's £62M total funding represented investor confidence; the ledger held zero independent measurements of a delivered Quantum Motion system.",
+          "confidence": "fact_of_record",
+          "basis_evidence_ids": [],
+          "basis_claim_ids": ["cl-qm-42m", "cl-qm-nqcc-award"],
+          "note": "The 2024 view already separated capital events from technical evidence — the anti-hype rule pre-existed the findings it now protects."
+        }
+      ]
+    }
+  ]
+}

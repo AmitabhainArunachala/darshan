@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Architectures · Quantum Observatory</title>
+<meta name="description" content="Competing quantum-computing architectures with dependencies, scaling hypotheses, and falsifiers.">
+<link rel="stylesheet" href="../style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ccircle cx='8' cy='8' r='6' fill='none' stroke='%238f3b26' stroke-width='1.5'/%3E%3Ccircle cx='8' cy='8' r='2' fill='%238f3b26'/%3E%3C/svg%3E">
+<script>
+/* Theme memory — the only JavaScript on this site. No analytics, no trackers. */
+(function () {
+  try {
+    var t = localStorage.getItem("darshan-theme");
+    if (t) document.documentElement.setAttribute("data-theme", t);
+  } catch (e) {}
+})();
+</script>
+<style>
+body.qo-page-body { font-size: 1.05rem; }
+.qo-nav { border-block: 1px solid var(--rule); display: flex; flex-wrap: wrap;
+  gap: .15rem .9rem; margin: 0 0 2.4rem; padding: .6rem 0; }
+.qo-nav a { color: var(--faint); font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .74rem; font-weight: 700; letter-spacing: .13em; text-decoration: none;
+  text-transform: uppercase; }
+.qo-nav a[aria-current="page"], .qo-nav a:hover { color: var(--accent); }
+.qo-kicker { color: var(--accent); font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: .72rem; letter-spacing: .14em; margin: 0 0 .5rem; text-transform: uppercase; }
+.qo-lede { border-left: 3px solid var(--accent); color: var(--faint); font-size: 1.18rem;
+  font-style: italic; line-height: 1.6; margin: 1.2rem 0 2rem; padding-left: 1.2rem; }
+.qo-grid { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+  margin: 1.4rem 0 2.4rem; }
+.qo-card { border: 1px solid var(--rule); border-top: 3px solid var(--accent); padding: 1rem 1.1rem; }
+.qo-card h3 { margin: .15rem 0 .4rem; font-size: 1.05rem; }
+.qo-card p { color: var(--faint); font-size: .92rem; margin: .35rem 0; }
+.qo-meta { color: var(--faint); font-size: .8rem; margin: 0 0 2rem; }
+.qo-meta code { font-size: .78rem; }
+.qo-table-wrap { overflow-x: auto; margin: 1.4rem 0 2.4rem; }
+.qo-table { border-collapse: collapse; font-size: .88rem; line-height: 1.45; width: 100%; }
+.qo-table th, .qo-table td { border: 1px solid var(--rule); padding: .5rem .6rem;
+  text-align: left; vertical-align: top; }
+.qo-table th { background: var(--accent-soft); white-space: nowrap; }
+.qo-badge { border: 1px solid var(--rule); border-radius: 3px; display: inline-block;
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: .68rem;
+  letter-spacing: .06em; padding: .12rem .45rem; text-transform: uppercase; white-space: nowrap; }
+.qo-badge--self { color: var(--faint); }
+.qo-badge--ind { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
+.qo-badge--warn { border-color: #a33; color: #a33; }
+.qo-src { font-size: .8rem; color: var(--faint); }
+.qo-src a { color: inherit; }
+.qo-figure { border: 1px solid var(--rule); margin: 1.6rem 0 2.4rem; padding: 1rem 1.2rem; }
+.qo-figure figcaption { color: var(--faint); font-size: .82rem; font-style: italic; margin-top: .6rem; }
+.qo-figure svg { display: block; height: auto; max-width: 100%; }
+.qo-axis-note { color: var(--faint); font-size: .84rem; }
+.qo-nye { color: #a33; font-weight: 700; }
+.qo-list-plain { list-style: none; margin: 0; padding: 0; }
+.qo-list-plain li { border-bottom: 1px solid var(--rule); padding: .8rem 0; }
+.qo-falsifier { background: var(--accent-soft); border-left: 3px solid var(--accent);
+  font-size: .9rem; margin: .8rem 0; padding: .6rem .9rem; }
+.qo-question { border: 1px solid var(--rule); border-left: 4px solid #a33; margin: 0 0 .9rem;
+  padding: .8rem 1rem; }
+.qo-question[data-status="bounded"] { border-left-color: var(--accent); }
+.qo-hindcast-belief { border: 1px solid var(--rule); margin: 0 0 1rem; padding: 1rem 1.1rem; }
+.qo-hindcast-verdict { font-weight: 650; }
+.qo-subtle { color: var(--faint); font-size: .9rem; }
+.qo-timeline { list-style: none; margin: 0; padding: 0; }
+.qo-timeline li { border-left: 2px solid var(--rule); margin: 0; padding: .4rem 0 .9rem 1.1rem;
+  position: relative; }
+.qo-timeline li::before { background: var(--paper); border: 2px solid var(--accent); border-radius: 50%;
+  content: ""; height: .5rem; left: -.38rem; position: absolute; top: .85rem; width: .5rem; }
+.qo-date { color: var(--faint); font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: .74rem; letter-spacing: .05em; }
+@media (max-width: 52em) { .qo-nav { gap: .1rem .7rem; } }
+</style>
+</head>
+<body class="qo-page-body">
+<button class="theme-toggle" aria-label="Toggle light and dark" onclick="
+  (function () {
+    var d = document.documentElement;
+    var cur = d.getAttribute('data-theme');
+    if (!cur) { cur = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'; }
+    var next = cur === 'dark' ? 'light' : 'dark';
+    d.setAttribute('data-theme', next);
+    try { localStorage.setItem('darshan-theme', next); } catch (e) {}
+  })();
+">◐</button>
+
+<header class="masthead">
+  <h1 class="wordmark"><a href="../index.html">DARSHAN</a></h1>
+  <p class="tagline">seeing clearly after the feed</p>
+  <nav>
+    <a href="../index.html">Articles</a>
+    <a href="../garden/index.html">Garden</a>
+    <a href="index.html">Observatory</a>
+    <a href="../about.html">About</a>
+  </nav>
+</header>
+
+<main>
+<nav class="qo-nav" aria-label="Observatory"><a href="index.html">Field</a><a href="companies.html">Companies</a><a href="architectures.html" aria-current="page">Architectures</a><a href="institutions.html">Institutions</a><a href="evidence.html">Evidence</a><a href="forecasts.html">Forecasts</a><a href="bottlenecks.html">Bottlenecks</a><a href="graph.html">Map</a><a href="hindcast.html">Hindcast</a><a href="questions.html">Questions</a><a href="sources.html">Sources</a><a href="methodology.html">Method</a></nav>
+<p class="qo-kicker">Registry</p>
+<h1 class="article-title">Architectures</h1>
+<p class="qo-lede">Ten competing ways to build a utility-scale quantum computer. Each entry
+carries its scaling hypothesis, its physical dependencies, and the falsifiers that would
+kill the thesis.</p>
+<div class="qo-grid"><div class="qo-card" style="grid-column: 1 / -1">
+<h3>Precision atom qubits in silicon <span class="qo-src">arch-atom-in-silicon</span></h3>
+<p>Single dopant atoms placed with atomic precision in isotopically pure silicon; STM-defined fabrication.</p>
+<p><strong>Companies:</strong> Silicon Quantum Computing</p>
+<p><strong>Scaling hypothesis:</strong> Atomic-precision placement produces perfectly identical qubits, trading throughput for uniformity.</p>
+<details><summary class="qo-src">Dependencies &amp; falsifiers</summary>
+<ul><li><strong>Isotopically enriched silicon (²⁸Si)</strong> — ²⁸Si removes nuclear-spin decoherence; enrichment capacity is a shared upstream dependency.</li><li><strong>Scanning-tunnelling-lithography atomic placement</strong> — Precision at the cost of throughput.</li><li><strong>Dilution refrigeration (sub-100 mK, scaled)</strong> — Cross-architecture dependency: nearly every utility-scale design bottoms out in cooling capacity and wiring volume at mK temperatures. Whoever supplies large dilution capacity at acceptable cost sits under most plausible futures.</li></ul><div class="qo-falsifier">STM-based fabrication throughput cannot populate utility-scale arrays</div></details>
+<p><span class="qo-src"><a href="https://www.darpa.mil/research/programs/quantum-benchmarking-initiative/stage-b-selection" title="Stage B selection | Quantum Benchmarking Initiative">[src-darpa-qbi-stageb-2025-11-06]</a></span></p></div><div class="qo-card" style="grid-column: 1 / -1">
+<h3>Bosonic superconducting qubits <span class="qo-src">arch-bosonic-sc</span></h3>
+<p>Error-resilient bosonic encodings in superconducting resonators, trading qubit count for per-qubit protection.</p>
+<p><strong>Companies:</strong> Nord Quantique</p>
+<p><strong>Scaling hypothesis:</strong> Hardware-level error suppression reduces the QEC overhead enough that fewer physical modes reach utility.</p>
+<details><summary class="qo-src">Dependencies &amp; falsifiers</summary>
+<ul><li><strong>Superconducting-circuit fabrication</strong> — Mature relative to alternatives; uniformity and materials losses still bind fidelity.</li><li><strong>Dilution refrigeration (sub-100 mK, scaled)</strong> — Cross-architecture dependency: nearly every utility-scale design bottoms out in cooling capacity and wiring volume at mK temperatures. Whoever supplies large dilution capacity at acceptable cost sits under most plausible futures.</li></ul><div class="qo-falsifier">Residual error channels do not suppress far enough to offset the added hardware complexity</div></details>
+<p><span class="qo-src"><a href="https://www.darpa.mil/research/programs/quantum-benchmarking-initiative/stage-b-selection" title="Stage B selection | Quantum Benchmarking Initiative">[src-darpa-qbi-stageb-2025-11-06]</a></span></p></div><div class="qo-card" style="grid-column: 1 / -1">
+<h3>Neutral-atom arrays <span class="qo-src">arch-neutral-atom</span></h3>
+<p>Optically trapped atom arrays with Rydberg-mediated gates; naturally large qubit counts with mid-circuit reload and fidelity questions.</p>
+<p><strong>Companies:</strong> Atom Computing, Infleqtion (Cold Quanta UK), QuEra Computing</p>
+<p><strong>Scaling hypothesis:</strong> Optical addressing scales atom counts faster than electrode wiring scales other modalities.</p>
+<details><summary class="qo-src">Dependencies &amp; falsifiers</summary>
+<ul><li><strong>Stable laser systems (trapping and gates)</strong> — Laser stability and count scale with trap/zone complexity — a shared optical-infrastructure dependency.</li><li><strong>UHV vacuum packaging</strong> — Utility-scale atomic systems need industrial-quality vacuum enclosures, not lab rigs.</li><li><strong>Room-temperature control electronics</strong> — Channel count and synchronization scale with qubit count.</li></ul><div class="qo-falsifier">Atom loss and reload overhead dominate as array size grows toward error-corrected operation</div></details>
+<p><span class="qo-src"><a href="https://www.darpa.mil/research/programs/quantum-benchmarking-initiative/stage-b-selection" title="Stage B selection | Quantum Benchmarking Initiative">[src-darpa-qbi-stageb-2025-11-06]</a></span></p></div><div class="qo-card" style="grid-column: 1 / -1">
+<h3>Optically linked silicon spin qubits <span class="qo-src">arch-optically-linked-spin</span></h3>
+<p>Silicon spin qubits entangled through photonic links, combining spin-qubit density with optical networking.</p>
+<p><strong>Companies:</strong> Photonic Inc.</p>
+<p><strong>Scaling hypothesis:</strong> Optical interconnect removes the wiring wall that limits monolithic spin arrays.</p>
+<details><summary class="qo-src">Dependencies &amp; falsifiers</summary>
+<ul><li><strong>Silicon spin-qubit device fabrication</strong> — Shared device substrate between monolithic and optically-linked spin architectures.</li><li><strong>High-volume silicon-photonics foundry manufacture</strong> — Photonic approaches' structural claim: the same industrial base that built telecom optics can build quantum components.</li><li><strong>Single-photon sources at component scale</strong> — Fabrication-tolerant, high-quality sources are the photonic feedstock.</li></ul><div class="qo-falsifier">Spin-photon interface efficiency never reaches the entanglement rate the architecture assumes</div></details>
+<p><span class="qo-src"><a href="https://www.darpa.mil/research/programs/quantum-benchmarking-initiative/stage-b-selection" title="Stage B selection | Quantum Benchmarking Initiative">[src-darpa-qbi-stageb-2025-11-06]</a></span></p></div><div class="qo-card" style="grid-column: 1 / -1">
+<h3>Fusion-based photonic quantum computing <span class="qo-src">arch-photonic-fbqc</span></h3>
+<p>Photonic qubits in silicon-photonics chips, entangled into a lattice through two-qubit fusion measurements; utility scale requires millions of near-identical photonic components manufactured in a high-volume fab.</p>
+<p><strong>Companies:</strong> PsiQuantum, Xanadu</p>
+<p><strong>Scaling hypothesis:</strong> All hard physics lives in components that a telecom-grade fab can mass-produce; scale becomes a manufacturing and integration problem rather than a coherence problem.</p>
+<details><summary class="qo-src">Dependencies &amp; falsifiers</summary>
+<ul><li><strong>High-volume silicon-photonics foundry manufacture</strong> — Photonic approaches' structural claim: the same industrial base that built telecom optics can build quantum components.</li><li><strong>Single-photon sources at component scale</strong> — Fabrication-tolerant, high-quality sources are the photonic feedstock.</li><li><strong>Photon-number-resolving / superconducting single-photon detectors</strong> — Detection efficiency and dark count set the loss budget directly.</li><li><strong>Barium-titanate fast optical switching</strong> — Low-loss, high-speed switching is where photonic routing becomes manufacturable or not.</li><li><strong>Low-loss silicon-nitride waveguides</strong> — Waveguide loss is the quiet budget line in every photonic architecture.</li><li><strong>Low-loss chip-to-fibre coupling</strong> — Chip-to-chip interconnect demonstrated at 99.72% conditional fidelity; unconditional performance is part of the loss-budget question.</li><li><strong>Dilution refrigeration (sub-100 mK, scaled)</strong> — Cross-architecture dependency: nearly every utility-scale design bottoms out in cooling capacity and wiring volume at mK temperatures. Whoever supplies large dilution capacity at acceptable cost sits under most plausible futures.</li></ul><div class="qo-falsifier">End-to-end photon loss (source → switching → detection) cannot be pushed below the fusion-tolerance threshold at system scale</div><div class="qo-falsifier">Optical switching speed or detector efficiency does not reach the fusion network's simultaneous requirements</div><div class="qo-falsifier">Cryogenic loading of millions of detectors makes the refrigeration plant impractical</div></details>
+<p><span class="qo-src"><a href="https://doi.org/10.1038/s41586-025-08820-7" title="A manufacturable platform for photonic quantum computing">[src-psq-omega-nature-2025-02-26]</a></span></p></div><div class="qo-card" style="grid-column: 1 / -1">
+<h3>Photonic testbed-class platforms <span class="qo-src">arch-photonic-testbed</span></h3>
+<p>Photonic systems built for algorithm demonstration rather than the fusion-lattice utility-scale path — e.g. NQCC's Aegiq and ORCA testbeds.</p>
+<p><strong>Companies:</strong> Aegiq, ORCA Computing</p>
+<p><strong>Scaling hypothesis:</strong> Near-term photonic systems test application mapping while utility-scale photonics is built elsewhere.</p>
+<details><summary class="qo-src">Dependencies &amp; falsifiers</summary>
+<ul><li><strong>High-volume silicon-photonics foundry manufacture</strong> — Photonic approaches' structural claim: the same industrial base that built telecom optics can build quantum components.</li><li><strong>Single-photon sources at component scale</strong> — Fabrication-tolerant, high-quality sources are the photonic feedstock.</li></ul><div class="qo-falsifier">Photon losses cap problem size below anything application-relevant</div></details>
+<p><span class="qo-src"><a href="https://www.ukri.org/news/ukri-and-nqcc-invest-30-million-in-uk-quantum-innovators/" title="UKRI and NQCC invest £30 million in UK quantum innovators">[src-ukri-testbeds-30m]</a></span></p></div><div class="qo-card" style="grid-column: 1 / -1">
+<h3>Silicon MOS spin qubits <span class="qo-src">arch-silicon-spin-mos</span></h3>
+<p>Electron spins in gate-defined quantum dots at a Si/SiO2 interface, fabricated with industrial 300 mm CMOS processes. The thesis: if qubit structures survive full foundry rules, the semiconductor industry's uniformity, yield and scale become available to quantum processors.</p>
+<p><strong>Companies:</strong> Diraq, Quantum Motion</p>
+<p><strong>Scaling hypothesis:</strong> Foundry-fabricated 2D-scalable qubit arrays plus co-integrated cryo-CMOS control reach utility scale without bespoke quantum fabs.</p>
+<details><summary class="qo-src">Dependencies &amp; falsifiers</summary>
+<ul><li><strong>300 mm CMOS foundry processing for quantum devices</strong> — The decisive capability for the silicon-spin thesis: quantum-dot devices that survive full industrial design rules.</li><li><strong>Isotopically enriched silicon (²⁸Si)</strong> — ²⁸Si removes nuclear-spin decoherence; enrichment capacity is a shared upstream dependency.</li><li><strong>Dilution refrigeration (sub-100 mK, scaled)</strong> — Cross-architecture dependency: nearly every utility-scale design bottoms out in cooling capacity and wiring volume at mK temperatures. Whoever supplies large dilution capacity at acceptable cost sits under most plausible futures.</li><li><strong>Cryo-CMOS control electronics</strong> — Co-integrated control at deep-cryogenic temperatures is the silicon-spin answer to the wiring wall.</li><li><strong>Cryogenic wiring and interconnect density</strong> — The wiring wall: signal lines into mK space grow faster than qubits unless control moves down-temperature.</li></ul><div class="qo-falsifier">Si/SiO2 interface charge noise or valley-splitting variability cannot sustain &gt;99% two-qubit gates at array scale under foundry tolerances</div><div class="qo-falsifier">Per-qubit wiring/measurement overhead defeats co-integration before the error-corrected regime is reached</div><div class="qo-falsifier">Yield of quantum-dot devices across a full 300 mm wafer stays too low for tiled processors</div></details>
+<p><span class="qo-src"><a href="https://www.nature.com/articles/s41534-024-00864-3" title="Low charge noise quantum dots with industrial CMOS manufacturing">[src-qm-npjqi-2024-07-19]</a> <a href="https://www.nature.com/articles/s41928-022-00727-9" title="Qubits made by advanced semiconductor manufacturing">[src-intel-natelec-2022-03-29]</a></span></p></div><div class="qo-card" style="grid-column: 1 / -1">
+<h3>Modular superconducting processors <span class="qo-src">arch-superconducting-modular</span></h3>
+<p>Transmon-class superconducting qubits tiled into modular processors; mature fab and control ecosystem with coherence and crosstalk limits.</p>
+<p><strong>Companies:</strong> Google Quantum AI, IBM, Rigetti UK</p>
+<p><strong>Scaling hypothesis:</strong> Modular interconnection of proven processor units plus steady fidelity gains reaches fault tolerance incrementally.</p>
+<details><summary class="qo-src">Dependencies &amp; falsifiers</summary>
+<ul><li><strong>Superconducting-circuit fabrication</strong> — Mature relative to alternatives; uniformity and materials losses still bind fidelity.</li><li><strong>Dilution refrigeration (sub-100 mK, scaled)</strong> — Cross-architecture dependency: nearly every utility-scale design bottoms out in cooling capacity and wiring volume at mK temperatures. Whoever supplies large dilution capacity at acceptable cost sits under most plausible futures.</li><li><strong>Room-temperature control electronics</strong> — Channel count and synchronization scale with qubit count.</li></ul><div class="qo-falsifier">Interconnect loss between modules prevents the modular step from counting as scaling</div></details>
+<p><span class="qo-src"><a href="https://www.darpa.mil/research/programs/quantum-benchmarking-initiative/stage-b-selection" title="Stage B selection | Quantum Benchmarking Initiative">[src-darpa-qbi-stageb-2025-11-06]</a></span></p></div><div class="qo-card" style="grid-column: 1 / -1">
+<h3>Topological superconducting qubits <span class="qo-src">arch-topological</span></h3>
+<p>Majorana-based topological qubits aiming for hardware-level error protection; the qubit's existence and controllability remain the open question.</p>
+<p><strong>Companies:</strong> Microsoft</p>
+<p><strong>Scaling hypothesis:</strong> Topological protection collapses QEC overhead by orders of magnitude if the base qubit works.</p>
+<details><summary class="qo-src">Dependencies &amp; falsifiers</summary>
+<ul><li><strong>Superconducting-circuit fabrication</strong> — Mature relative to alternatives; uniformity and materials losses still bind fidelity.</li><li><strong>Dilution refrigeration (sub-100 mK, scaled)</strong> — Cross-architecture dependency: nearly every utility-scale design bottoms out in cooling capacity and wiring volume at mK temperatures. Whoever supplies large dilution capacity at acceptable cost sits under most plausible futures.</li><li><strong>Topological / III-V hybrid material stacks</strong> — Materials science is the critical path for topological approaches.</li></ul><div class="qo-falsifier">The underlying topological excitation cannot be demonstrated with the braiding fidelity the architecture requires</div></details>
+<p><span class="qo-src"><a href="https://www.darpa.mil/news/2023/accelerate-quantum-computing" title="DARPA Collaborates with Commercial Partners to Accelerate Quantum Computing">[src-darpa-us2qc-2023-01-31]</a></span></p></div><div class="qo-card" style="grid-column: 1 / -1">
+<h3>Trapped-ion (QCCD) processors <span class="qo-src">arch-trapped-ion</span></h3>
+<p>Ions held and shuttled in RF traps; state-of-the-art fidelities with slow gates and wiring/packaging pressure as zones multiply.</p>
+<p><strong>Companies:</strong> IonQ, Oxford Ionics, Quantinuum</p>
+<p><strong>Scaling hypothesis:</strong> QCCD shuttling and modular photonic networking scale a high-fidelity core into a larger system.</p>
+<details><summary class="qo-src">Dependencies &amp; falsifiers</summary>
+<ul><li><strong>Precision ion traps and zone control</strong> — Trap fabrication and shuttling control bound trapped-ion scaling.</li><li><strong>Stable laser systems (trapping and gates)</strong> — Laser stability and count scale with trap/zone complexity — a shared optical-infrastructure dependency.</li><li><strong>UHV vacuum packaging</strong> — Utility-scale atomic systems need industrial-quality vacuum enclosures, not lab rigs.</li><li><strong>Room-temperature control electronics</strong> — Channel count and synchronization scale with qubit count.</li></ul><div class="qo-falsifier">Gate throughput and shuttling overhead keep useful circuit depth below utility requirements at achievable clock rates</div></details>
+<p><span class="qo-src"><a href="https://www.darpa.mil/research/programs/quantum-benchmarking-initiative/stage-b-selection" title="Stage B selection | Quantum Benchmarking Initiative">[src-darpa-qbi-stageb-2025-11-06]</a></span></p></div></div>
+
+</main>
+
+<footer>
+  <p>Darshan · seeing clearly after the feed</p>
+  <p>No feed. No analytics. No trackers. Finite pieces, read at your own pace.</p>
+  <p style="opacity:.7">The door opened 2026&#8209;08&#8209;09 · every piece gated, traced, and answered for</p>
+</footer>
+</body>
+</html>

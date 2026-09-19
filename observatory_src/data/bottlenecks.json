@@ -1,0 +1,55 @@
+{
+  "schema": "darshan.qo-bottlenecks/v1",
+  "as_of": "2026-09-19",
+  "entries": [
+    {
+      "id": "bn-sispin-2q-foundry",
+      "architecture_id": "arch-silicon-spin-mos",
+      "name": "Two-qubit gate fidelity on foundry-fabricated arrays",
+      "description": "Single-qubit and charge-noise results on 300 mm lines are established; the limiting step is demonstrating >99% two-qubit gates at array scale on industrial processes, then holding that under tiling.",
+      "required_milestone": "ms-qm-2q-foundry-gate",
+      "current_best_evidence_id": "ev-qm-charge-noise-2024",
+      "trend": "improving",
+      "falsifier": "Charge noise, valley splitting, or device-to-device variability under foundry design rules prevents >99% two-qubit operation at the densities the architecture assumes",
+      "source_ids": ["src-qm-npjqi-2024-07-19", "src-qm-research-2026"],
+      "recorded_on": "2026-09-19"
+    },
+    {
+      "id": "bn-photonic-loss-budget",
+      "architecture_id": "arch-photonic-fbqc",
+      "name": "End-to-end photon loss below the fusion-tolerance threshold",
+      "description": "Every headline photonic metric is conditional on detection. The architecture lives or dies on total loss — source, waveguide, switching, coupling, detector — because fusion-based correction has a hard loss budget.",
+      "required_milestone": "UNKNOWN",
+      "current_best_evidence_id": "ev-psq-omega-components-2025",
+      "trend": "unknown",
+      "falsifier": "Integrated system loss cannot be reduced to the fault-tolerant fusion threshold at the required component counts",
+      "source_ids": ["src-psq-omega-nature-2025-02-26"],
+      "recorded_on": "2026-09-19"
+    },
+    {
+      "id": "bn-cryo-wiring",
+      "architecture_id": "arch-silicon-spin-mos",
+      "name": "Cryogenic wiring and control density",
+      "description": "Every qubit needs addressability at mK temperatures. The silicon-spin answer is co-integrated cryo-CMOS control; its open question is whether hybrid quantum+classical chips tolerate the dissipated power.",
+      "required_milestone": "UNKNOWN",
+      "current_best_evidence_id": "ev-qm-systems-delivered-2025",
+      "trend": "unknown",
+      "falsifier": "Control-electronics power dissipation destroys qubit performance before the required channel density is reached",
+      "source_ids": ["src-qm-research-2026", "src-qm-42m-2023-02-21"],
+      "recorded_on": "2026-09-19"
+    },
+    {
+      "id": "bn-qec-decode-classical",
+      "architecture_id": "arch-multiple",
+      "name": "Real-time QEC decoding classical compute",
+      "description": "Fault tolerance converts qubit-count races into a decoding-rate problem: the classical stack must decode syndromes faster than errors accumulate, at scale, without becoming the bottleneck nobody budgeted.",
+      "required_milestone": "UNKNOWN",
+      "current_best_evidence_id": "UNKNOWN",
+      "trend": "unknown",
+      "falsifier": "Decoding latency or power scales worse than the error-suppression gain it enables",
+      "source_ids": [],
+      "recorded_on": "2026-09-19",
+      "note": "Cross-architecture bottleneck registered with no best-measurement bound yet — the registry holds the question open rather than inventing a leader."
+    }
+  ]
+}

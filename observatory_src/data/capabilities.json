@@ -1,0 +1,196 @@
+{
+  "schema": "darshan.qo-capabilities/v1",
+  "as_of": "2026-09-19",
+  "entries": [
+    {
+      "id": "cap-300mm-cmos-foundry",
+      "name": "300 mm CMOS foundry processing for quantum devices",
+      "kind": "manufacturing",
+      "suppliers": ["Tier-1 foundry ecosystem (unnamed in sources); Quantum Motion's customized 300 mm line"],
+      "shared_with_architectures": ["arch-silicon-spin-mos"],
+      "note": "The decisive capability for the silicon-spin thesis: quantum-dot devices that survive full industrial design rules.",
+      "source_ids": ["src-qm-npjqi-2024-07-19", "src-intel-natelec-2022-03-29"],
+      "recorded_on": "2026-09-19"
+    },
+    {
+      "id": "cap-foundry-photonics",
+      "name": "High-volume silicon-photonics foundry manufacture",
+      "kind": "manufacturing",
+      "suppliers": ["GlobalFoundries (PsiQuantum Omega, New York)"],
+      "shared_with_architectures": ["arch-photonic-fbqc", "arch-photonic-testbed", "arch-optically-linked-spin"],
+      "note": "Photonic approaches' structural claim: the same industrial base that built telecom optics can build quantum components.",
+      "source_ids": ["src-psq-omega-2025-02-26", "src-psq-omega-nature-2025-02-26"],
+      "recorded_on": "2026-09-19"
+    },
+    {
+      "id": "cap-dilution-fridge",
+      "name": "Dilution refrigeration (sub-100 mK, scaled)",
+      "kind": "infrastructure",
+      "suppliers": ["Bluefors / Oxford Instruments class suppliers (generic; not source-bound in Genesis)"],
+      "shared_with_architectures": ["arch-silicon-spin-mos", "arch-photonic-fbqc", "arch-trapped-ion", "arch-superconducting-modular", "arch-neutral-atom", "arch-bosonic-sc", "arch-atom-in-silicon", "arch-optically-linked-spin", "arch-topological"],
+      "note": "Cross-architecture dependency: nearly every utility-scale design bottoms out in cooling capacity and wiring volume at mK temperatures. Whoever supplies large dilution capacity at acceptable cost sits under most plausible futures.",
+      "source_ids": ["src-qm-nqcc-delivery-2025-09-15", "src-psq-darpa-2025-02-06"],
+      "recorded_on": "2026-09-19"
+    },
+    {
+      "id": "cap-cryo-cmos-control",
+      "name": "Cryo-CMOS control electronics",
+      "kind": "electronics",
+      "suppliers": ["Quantum Motion (validated cryogenic ICs, per company account)"],
+      "shared_with_architectures": ["arch-silicon-spin-mos"],
+      "note": "Co-integrated control at deep-cryogenic temperatures is the silicon-spin answer to the wiring wall.",
+      "source_ids": ["src-qm-42m-2023-02-21"],
+      "recorded_on": "2026-09-19"
+    },
+    {
+      "id": "cap-iso-silicon",
+      "name": "Isotopically enriched silicon (²⁸Si)",
+      "kind": "materials",
+      "suppliers": ["Specialty isotope-supply chain (not source-bound in Genesis)"],
+      "shared_with_architectures": ["arch-silicon-spin-mos", "arch-atom-in-silicon"],
+      "note": "²⁸Si removes nuclear-spin decoherence; enrichment capacity is a shared upstream dependency.",
+      "source_ids": ["src-intel-natelec-2022-03-29"],
+      "recorded_on": "2026-09-19"
+    },
+    {
+      "id": "cap-single-photon-source",
+      "name": "Single-photon sources at component scale",
+      "kind": "photonics",
+      "suppliers": ["PsiQuantum (Omega integrated sources)"],
+      "shared_with_architectures": ["arch-photonic-fbqc", "arch-photonic-testbed", "arch-optically-linked-spin"],
+      "note": "Fabrication-tolerant, high-quality sources are the photonic feedstock.",
+      "source_ids": ["src-psq-omega-nature-2025-02-26"],
+      "recorded_on": "2026-09-19"
+    },
+    {
+      "id": "cap-pnr-detectors",
+      "name": "Photon-number-resolving / superconducting single-photon detectors",
+      "kind": "photonics",
+      "suppliers": ["PsiQuantum (superconducting thin-film detectors in the fab process)"],
+      "shared_with_architectures": ["arch-photonic-fbqc", "arch-photonic-testbed", "arch-optically-linked-spin"],
+      "note": "Detection efficiency and dark count set the loss budget directly.",
+      "source_ids": ["src-psq-omega-2025-02-26", "src-psq-omega-nature-2025-02-26"],
+      "recorded_on": "2026-09-19"
+    },
+    {
+      "id": "cap-bto-switching",
+      "name": "Barium-titanate fast optical switching",
+      "kind": "materials",
+      "suppliers": ["PsiQuantum (BTO developed and produced in-house, San Jose)"],
+      "shared_with_architectures": ["arch-photonic-fbqc"],
+      "note": "Low-loss, high-speed switching is where photonic routing becomes manufacturable or not.",
+      "source_ids": ["src-psq-omega-2025-02-26", "src-psq-omega-nature-2025-02-26"],
+      "recorded_on": "2026-09-19"
+    },
+    {
+      "id": "cap-sin-waveguides",
+      "name": "Low-loss silicon-nitride waveguides",
+      "kind": "photonics",
+      "suppliers": ["GlobalFoundries process integration (PsiQuantum Omega)"],
+      "shared_with_architectures": ["arch-photonic-fbqc", "arch-optically-linked-spin"],
+      "note": "Waveguide loss is the quiet budget line in every photonic architecture.",
+      "source_ids": ["src-psq-omega-nature-2025-02-26"],
+      "recorded_on": "2026-09-19"
+    },
+    {
+      "id": "cap-fiber-coupling",
+      "name": "Low-loss chip-to-fibre coupling",
+      "kind": "photonics",
+      "suppliers": ["PsiQuantum (Omega preview technologies)"],
+      "shared_with_architectures": ["arch-photonic-fbqc"],
+      "note": "Chip-to-chip interconnect demonstrated at 99.72% conditional fidelity; unconditional performance is part of the loss-budget question.",
+      "source_ids": ["src-psq-omega-nature-2025-02-26"],
+      "recorded_on": "2026-09-19"
+    },
+    {
+      "id": "cap-ion-traps",
+      "name": "Precision ion traps and zone control",
+      "kind": "manufacturing",
+      "suppliers": ["IonQ, Quantinuum, Oxford Ionics (in-house designs)"],
+      "shared_with_architectures": ["arch-trapped-ion"],
+      "note": "Trap fabrication and shuttling control bound trapped-ion scaling.",
+      "source_ids": ["src-darpa-qbi-stageb-2025-11-06"],
+      "recorded_on": "2026-09-19"
+    },
+    {
+      "id": "cap-laser-systems",
+      "name": "Stable laser systems (trapping and gates)",
+      "kind": "photonics",
+      "suppliers": ["Photonics suppliers (generic)"],
+      "shared_with_architectures": ["arch-trapped-ion", "arch-neutral-atom", "arch-optically-linked-spin"],
+      "note": "Laser stability and count scale with trap/zone complexity — a shared optical-infrastructure dependency.",
+      "source_ids": ["src-darpa-qbi-stageb-2025-11-06"],
+      "recorded_on": "2026-09-19"
+    },
+    {
+      "id": "cap-vacuum-packaging",
+      "name": "UHV vacuum packaging",
+      "kind": "infrastructure",
+      "suppliers": ["Vacuum system suppliers (generic)"],
+      "shared_with_architectures": ["arch-trapped-ion", "arch-neutral-atom"],
+      "note": "Utility-scale atomic systems need industrial-quality vacuum enclosures, not lab rigs.",
+      "source_ids": ["src-darpa-qbi-stageb-2025-11-06"],
+      "recorded_on": "2026-09-19"
+    },
+    {
+      "id": "cap-sc-fab",
+      "name": "Superconducting-circuit fabrication",
+      "kind": "manufacturing",
+      "suppliers": ["IBM, academic/industrial fabs (generic)"],
+      "shared_with_architectures": ["arch-superconducting-modular", "arch-bosonic-sc", "arch-topological"],
+      "note": "Mature relative to alternatives; uniformity and materials losses still bind fidelity.",
+      "source_ids": ["src-darpa-qbi-stageb-2025-11-06"],
+      "recorded_on": "2026-09-19"
+    },
+    {
+      "id": "cap-control-electronics",
+      "name": "Room-temperature control electronics",
+      "kind": "electronics",
+      "suppliers": ["Zurich Instruments class suppliers (generic)"],
+      "shared_with_architectures": ["arch-trapped-ion", "arch-superconducting-modular", "arch-neutral-atom"],
+      "note": "Channel count and synchronization scale with qubit count.",
+      "source_ids": ["src-darpa-qbi-stageb-2025-11-06"],
+      "recorded_on": "2026-09-19"
+    },
+    {
+      "id": "cap-wiring-density",
+      "name": "Cryogenic wiring and interconnect density",
+      "kind": "infrastructure",
+      "suppliers": ["Cryogenic interconnect suppliers (generic)"],
+      "shared_with_architectures": ["arch-silicon-spin-mos", "arch-superconducting-modular", "arch-topological"],
+      "note": "The wiring wall: signal lines into mK space grow faster than qubits unless control moves down-temperature.",
+      "source_ids": ["src-qm-research-2026"],
+      "recorded_on": "2026-09-19"
+    },
+    {
+      "id": "cap-stm-fab",
+      "name": "Scanning-tunnelling-lithography atomic placement",
+      "kind": "manufacturing",
+      "suppliers": ["Silicon Quantum Computing (in-house)"],
+      "shared_with_architectures": ["arch-atom-in-silicon"],
+      "note": "Precision at the cost of throughput.",
+      "source_ids": ["src-darpa-qbi-stageb-2025-11-06"],
+      "recorded_on": "2026-09-19"
+    },
+    {
+      "id": "cap-exotic-materials",
+      "name": "Topological / III-V hybrid material stacks",
+      "kind": "materials",
+      "suppliers": ["Microsoft (in-house program)"],
+      "shared_with_architectures": ["arch-topological"],
+      "note": "Materials science is the critical path for topological approaches.",
+      "source_ids": ["src-darpa-us2qc-2023-01-31"],
+      "recorded_on": "2026-09-19"
+    },
+    {
+      "id": "cap-silicon-spin-devices",
+      "name": "Silicon spin-qubit device fabrication",
+      "kind": "manufacturing",
+      "suppliers": ["Photonic Inc., Quantum Motion, Diraq (each in-house flows)"],
+      "shared_with_architectures": ["arch-optically-linked-spin", "arch-silicon-spin-mos"],
+      "note": "Shared device substrate between monolithic and optically-linked spin architectures.",
+      "source_ids": ["src-darpa-qbi-stageb-2025-11-06"],
+      "recorded_on": "2026-09-19"
+    }
+  ]
+}
