@@ -1,0 +1,112 @@
+{
+  "schema": "darshan.qo-institutions/v1",
+  "as_of": "2026-09-19",
+  "entries": [
+    {
+      "id": "inst-darpa",
+      "name": "DARPA — Defense Advanced Research Projects Agency",
+      "kind": "evaluator",
+      "jurisdiction": "United States",
+      "observes": "Whether any quantum computing approach can achieve utility-scale operation — computational value exceeding cost — by 2033, via the QBI three-stage evaluation (Stage A concept characterization; Stage B yearlong R&D-plan and risk-mitigation scrutiny; Stage C government verification-and-validation of a constructed-and-operated system). US2QC was the pilot effort folded into QBI.",
+      "programs": [
+        {"name": "US2QC", "started": "2023-01-31", "status": "folded into QBI", "detail": "Pilot: Atom Computing, Microsoft, PsiQuantum; final phase ≡ QBI Stage C goals."},
+        {"name": "QBI", "started": "2024-07", "status": "active", "detail": "18 companies entered Stage A; 11 advanced to Stage B on 2025-11-06; Google Quantum AI joined Stage A Sep 2025."}
+      ],
+      "source_ids": ["src-darpa-us2qc-2023-01-31", "src-darpa-us2qc-final-2025", "src-darpa-qbi-stagea-2025", "src-darpa-qbi-stageb-2025-11-06"],
+      "recorded_on": "2026-09-19",
+      "note": "Selection to a stage is an evaluation event, not a passed test. QBI is explicitly not a winner-picking competition."
+    },
+    {
+      "id": "inst-nqcc",
+      "name": "NQCC — UK National Quantum Computing Centre",
+      "kind": "testbed_operator",
+      "jurisdiction": "United Kingdom",
+      "observes": "Hands-on test and validation of vendor systems installed under the Quantum Computing Testbed Programme, and mapping of real-world applications onto each architecture.",
+      "programs": [
+        {"name": "Quantum Computing Testbed Programme", "started": "2024", "status": "active", "detail": "£30M with UKRI/Innovate UK; seven testbeds contracted for deployment at Harwell Campus by March 2025."}
+      ],
+      "source_ids": ["src-nqcc-testbeds", "src-ukri-testbeds-30m"],
+      "recorded_on": "2026-09-19",
+      "note": "Accepting an installation begins the evaluation; it does not conclude it."
+    },
+    {
+      "id": "inst-ukri",
+      "name": "UKRI / Innovate UK — Technology Missions Fund",
+      "kind": "funding_agency",
+      "jurisdiction": "United Kingdom",
+      "observes": "Competition awards and milestone-based SBRI funding for the seven NQCC testbeds.",
+      "programs": [
+        {"name": "SBRI Quantum Testbed Competition", "started": "2024-03", "status": "awarded", "detail": "Aegiq, Infleqtion (Cold Quanta UK), ORCA Computing, Oxford Ionics, Rigetti UK, Quantum Motion, QuEra."}
+      ],
+      "source_ids": ["src-ukri-testbeds-30m"],
+      "recorded_on": "2026-09-19",
+      "note": "An award is funding plus a delivery contract — not evidence the delivered system performs."
+    },
+    {
+      "id": "inst-doe-slac",
+      "name": "US DOE / SLAC National Accelerator Laboratory",
+      "kind": "lab",
+      "jurisdiction": "United States",
+      "observes": "Hosts and exercises PsiQuantum's largest cryogenic module for on-site testing.",
+      "programs": [],
+      "source_ids": ["src-doe-slac-psq"],
+      "recorded_on": "2026-09-19",
+      "note": "Hosting a module under test is infrastructure participation, not endorsement of results."
+    },
+    {
+      "id": "inst-iqmp",
+      "name": "Illinois Quantum & Microelectronics Park / Quantum Proving Ground",
+      "kind": "infrastructure",
+      "jurisdiction": "United States (Illinois)",
+      "observes": "Physical site for utility-scale deployment: PsiQuantum's Chicago Quantum Compute Center and DARPA's proving-ground presence.",
+      "programs": [],
+      "source_ids": ["src-psq-darpa-2025-02-06"],
+      "recorded_on": "2026-09-19",
+      "note": "State-backed capacity commitment; a site under construction is not a working machine."
+    },
+    {
+      "id": "inst-qedc",
+      "name": "QED-C — Quantum Economic Development Consortium",
+      "kind": "consortium",
+      "jurisdiction": "United States",
+      "observes": "Supply-chain maturity, benchmarking taxonomy, standards and workforce metrics across member companies.",
+      "programs": [],
+      "source_ids": ["src-qedc"],
+      "recorded_on": "2026-09-19",
+      "note": "Industry consortium; its metrics describe the field, membership describes a mailing list."
+    },
+    {
+      "id": "inst-npl",
+      "name": "NPL — UK National Physical Laboratory",
+      "kind": "metrology",
+      "jurisdiction": "United Kingdom",
+      "observes": "Measurement standards and independent characterisation capability underpinning quantum device claims.",
+      "programs": [],
+      "source_ids": ["src-npl"],
+      "recorded_on": "2026-09-19",
+      "note": "Metrology capacity exists; no Genesis evidence entry is yet measured by NPL."
+    },
+    {
+      "id": "inst-metriq",
+      "name": "Metriq (Unitary Foundation)",
+      "kind": "evaluator",
+      "jurisdiction": "International / open",
+      "observes": "Published benchmark submissions and cross-platform comparability of reported quantum-computing metrics.",
+      "programs": [],
+      "source_ids": ["src-metriq"],
+      "recorded_on": "2026-09-19",
+      "note": "Aggregation of published results; comparability is limited by heterogeneous methods."
+    },
+    {
+      "id": "inst-eurohpc",
+      "name": "EuroHPC Joint Undertaking",
+      "kind": "procurement",
+      "jurisdiction": "European Union",
+      "observes": "Procurement and hosting of European quantum systems; demand-side signal across architectures.",
+      "programs": [],
+      "source_ids": ["src-eurohpc"],
+      "recorded_on": "2026-09-19",
+      "note": "A purchase order proves a buyer decided; it does not prove the machine works at utility scale."
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "schema": "darshan.qo-companies/v1",
+  "as_of": "2026-09-19",
+  "entries": [
+    {
+      "id": "co-quantum-motion",
+      "name": "Quantum Motion",
+      "hq": "London, UK",
+      "founded": "2017",
+      "architecture_id": "arch-silicon-spin-mos",
+      "status": "active",
+      "depth": "case_study",
+      "registry_note": "MOS-based silicon spin qubits in standard CMOS foundry processes. NQCC Silicon Cloverleaf testbed delivered Sep 2025; DARPA QBI Stage B participant since Nov 2025.",
+      "source_ids": ["src-ucl-qm-42m-2023-02-21", "src-qm-nqcc-delivery-2025-09-15", "src-qm-qbi-stageb-2025-11-06"],
+      "recorded_on": "2026-09-19"
+    },
+    {
+      "id": "co-psiquantum",
+      "name": "PsiQuantum",
+      "hq": "Palo Alto, California, US",
+      "founded": "2016",
+      "architecture_id": "arch-photonic-fbqc",
+      "status": "active",
+      "depth": "case_study",
+      "registry_note": "Fusion-based photonic quantum computing. US2QC performer since Jan 2023; QBI Stage C (final phase) since Feb 2025; Omega chipset at GlobalFoundries; Quantum Compute Centers announced for Brisbane and Chicago.",
+      "source_ids": ["src-darpa-us2qc-2023-01-31", "src-psq-omega-2025-02-26", "src-psq-darpa-125m-2026-07-22"],
+      "recorded_on": "2026-09-19"
+    },
+    {"id": "co-atom-computing", "name": "Atom Computing", "hq": "Boulder, Colorado, US", "founded": "UNKNOWN", "architecture_id": "arch-neutral-atom", "status": "active", "depth": "registry", "registry_note": "QBI Stage B; original US2QC performer.", "source_ids": ["src-darpa-us2qc-2023-01-31", "src-darpa-qbi-stageb-2025-11-06"], "recorded_on": "2026-09-19"},
+    {"id": "co-diraq", "name": "Diraq", "hq": "Sydney, Australia", "founded": "UNKNOWN", "architecture_id": "arch-silicon-spin-mos", "status": "active", "depth": "registry", "registry_note": "QBI Stage B; silicon CMOS spin qubits — direct architecture comparator to Quantum Motion.", "source_ids": ["src-darpa-qbi-stageb-2025-11-06"], "recorded_on": "2026-09-19"},
+    {"id": "co-ibm", "name": "IBM", "hq": "Yorktown Heights, New York, US", "founded": "UNKNOWN", "architecture_id": "arch-superconducting-modular", "status": "active", "depth": "registry", "registry_note": "QBI Stage B; modular superconducting processors.", "source_ids": ["src-darpa-qbi-stageb-2025-11-06"], "recorded_on": "2026-09-19"},
+    {"id": "co-ionq", "name": "IonQ", "hq": "College Park, Maryland, US", "founded": "UNKNOWN", "architecture_id": "arch-trapped-ion", "status": "active", "depth": "registry", "registry_note": "QBI Stage B; trapped-ion systems.", "source_ids": ["src-darpa-qbi-stageb-2025-11-06"], "recorded_on": "2026-09-19"},
+    {"id": "co-nord-quantique", "name": "Nord Quantique", "hq": "Sherbrooke, Quebec, Canada", "founded": "UNKNOWN", "architecture_id": "arch-bosonic-sc", "status": "active", "depth": "registry", "registry_note": "QBI Stage B; bosonic superconducting error correction.", "source_ids": ["src-darpa-qbi-stageb-2025-11-06"], "recorded_on": "2026-09-19"},
+    {"id": "co-photonic-inc", "name": "Photonic Inc.", "hq": "Vancouver, British Columbia, Canada", "founded": "UNKNOWN", "architecture_id": "arch-optically-linked-spin", "status": "active", "depth": "registry", "registry_note": "QBI Stage B; optically linked silicon spin qubits.", "source_ids": ["src-darpa-qbi-stageb-2025-11-06"], "recorded_on": "2026-09-19"},
+    {"id": "co-quantinuum", "name": "Quantinuum", "hq": "Broomfield, Colorado, US", "founded": "UNKNOWN", "architecture_id": "arch-trapped-ion", "status": "active", "depth": "registry", "registry_note": "QBI Stage B; trapped-ion QCCD architecture.", "source_ids": ["src-darpa-qbi-stageb-2025-11-06"], "recorded_on": "2026-09-19"},
+    {"id": "co-quera", "name": "QuEra Computing", "hq": "Boston, Massachusetts, US", "founded": "UNKNOWN", "architecture_id": "arch-neutral-atom", "status": "active", "depth": "registry", "registry_note": "QBI Stage B; neutral atoms; also an NQCC testbed provider.", "source_ids": ["src-darpa-qbi-stageb-2025-11-06", "src-ukri-testbeds-30m"], "recorded_on": "2026-09-19"},
+    {"id": "co-sqc", "name": "Silicon Quantum Computing", "hq": "Sydney, Australia", "founded": "UNKNOWN", "architecture_id": "arch-atom-in-silicon", "status": "active", "depth": "registry", "registry_note": "QBI Stage B; precision atom qubits in silicon.", "source_ids": ["src-darpa-qbi-stageb-2025-11-06"], "recorded_on": "2026-09-19"},
+    {"id": "co-xanadu", "name": "Xanadu", "hq": "Toronto, Canada", "founded": "UNKNOWN", "architecture_id": "arch-photonic-fbqc", "status": "active", "depth": "registry", "registry_note": "QBI Stage B; photonic quantum computing.", "source_ids": ["src-darpa-qbi-stageb-2025-11-06"], "recorded_on": "2026-09-19"},
+    {"id": "co-microsoft", "name": "Microsoft", "hq": "Redmond, Washington, US", "founded": "UNKNOWN", "architecture_id": "arch-topological", "status": "active", "depth": "registry", "registry_note": "US2QC performer; in final phase (= QBI Stage C goals) alongside PsiQuantum.", "source_ids": ["src-darpa-us2qc-2023-01-31", "src-darpa-us2qc-final-2025"], "recorded_on": "2026-09-19"},
+    {"id": "co-google-quantum-ai", "name": "Google Quantum AI", "hq": "Santa Barbara, California, US", "founded": "UNKNOWN", "architecture_id": "arch-superconducting-modular", "status": "active", "depth": "registry", "registry_note": "Joined QBI Stage A in Sep 2025.", "source_ids": ["src-darpa-qbi-stageb-2025-11-06"], "recorded_on": "2026-09-19"},
+    {"id": "co-aegiq", "name": "Aegiq", "hq": "Sheffield, UK", "founded": "UNKNOWN", "architecture_id": "arch-photonic-testbed", "status": "active", "depth": "registry", "registry_note": "NQCC photonic testbed provider.", "source_ids": ["src-ukri-testbeds-30m", "src-nqcc-testbeds"], "recorded_on": "2026-09-19"},
+    {"id": "co-infleqtion", "name": "Infleqtion (Cold Quanta UK)", "hq": "Warwick, UK", "founded": "UNKNOWN", "architecture_id": "arch-neutral-atom", "status": "active", "depth": "registry", "registry_note": "NQCC neutral-atom testbed (SQALE).", "source_ids": ["src-ukri-testbeds-30m", "src-nqcc-testbeds"], "recorded_on": "2026-09-19"},
+    {"id": "co-orca", "name": "ORCA Computing", "hq": "London, UK", "founded": "UNKNOWN", "architecture_id": "arch-photonic-testbed", "status": "active", "depth": "registry", "registry_note": "NQCC photonic testbed (Asteroidea).", "source_ids": ["src-ukri-testbeds-30m", "src-nqcc-testbeds"], "recorded_on": "2026-09-19"},
+    {"id": "co-oxford-ionics", "name": "Oxford Ionics", "hq": "Oxford, UK", "founded": "UNKNOWN", "architecture_id": "arch-trapped-ion", "status": "active", "depth": "registry", "registry_note": "NQCC trapped-ion testbed (QUARTET).", "source_ids": ["src-ukri-testbeds-30m", "src-nqcc-testbeds"], "recorded_on": "2026-09-19"},
+    {"id": "co-rigetti-uk", "name": "Rigetti UK", "hq": "London, UK", "founded": "UNKNOWN", "architecture_id": "arch-superconducting-modular", "status": "active", "depth": "registry", "registry_note": "NQCC superconducting testbed (24-qubit).", "source_ids": ["src-ukri-testbeds-30m", "src-nqcc-testbeds"], "recorded_on": "2026-09-19"}
+  ]
+}

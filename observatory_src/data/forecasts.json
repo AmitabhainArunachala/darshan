@@ -1,0 +1,51 @@
+{
+  "schema": "darshan.qo-forecasts/v1",
+  "as_of": "2026-09-19",
+  "entries": [
+    {
+      "id": "fc-qbi-utility-2033",
+      "predictor_id": "inst-darpa",
+      "subject_id": "arch-multiple",
+      "statement": "At least one evaluated quantum computing approach can achieve utility-scale operation — computational value exceeding cost — by 2033.",
+      "made_on": "2024-07",
+      "resolves_by": "2033-12-31",
+      "resolution_criteria": "A QBI Stage C verification-and-validation determination that a utility-scale system was constructed as designed and operated as intended; program is explicit that multiple, one, or zero participants may succeed.",
+      "status": "open",
+      "resolved_on": null,
+      "resolution_evidence_ids": [],
+      "source_ids": ["src-darpa-qbi-stageb-2025-11-06"],
+      "recorded_on": "2026-09-19",
+      "note": "Program goal recorded as a testable institutional forecast — the observatory will score whether government technical selection was predictive."
+    },
+    {
+      "id": "fc-psq-utility-2029",
+      "predictor_id": "co-psiquantum",
+      "subject_id": "co-psiquantum",
+      "statement": "PsiQuantum will operate a utility-scale, fault-tolerant photonic quantum computer at a Quantum Compute Center before 2030.",
+      "made_on": "2025-02-26",
+      "resolves_by": "2029-12-31",
+      "resolution_criteria": "A utility-scale system operational and demonstrably running workloads at a QCC (Brisbane or Chicago), confirmed by sources outside PsiQuantum.",
+      "status": "open",
+      "resolved_on": null,
+      "resolution_evidence_ids": [],
+      "source_ids": ["src-psq-omega-2025-02-26", "src-psq-darpa-2025-02-06"],
+      "recorded_on": "2026-09-19",
+      "note": "Company roadmap ambition translated into a resolvable forecast; company phrasing varies ('end of decade'), so the resolving date is set conservatively."
+    },
+    {
+      "id": "fc-qm-nqcc-readout-2026",
+      "predictor_id": "ce-operator",
+      "subject_id": "co-quantum-motion",
+      "statement": "By end of 2026, NQCC publishes an evaluation of the installed Quantum Motion testbed containing at least one independently measured qubit performance figure (fidelity, coherence, or readout).",
+      "made_on": "2026-09-19",
+      "resolves_by": "2026-12-31",
+      "resolution_criteria": "An NQCC-authored publication or report with measured figures for the Quantum Motion system; a marketing update or non-technical blog post does not resolve it.",
+      "status": "open",
+      "resolved_on": null,
+      "resolution_evidence_ids": [],
+      "source_ids": ["src-qm-nqcc-delivery-2025-09-15", "src-nqcc-testbeds"],
+      "recorded_on": "2026-09-19",
+      "note": "The observatory's own first logged forecast — the system's calibration record starts with a prediction it can lose."
+    }
+  ]
+}

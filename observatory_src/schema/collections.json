@@ -1,0 +1,229 @@
+{
+  "schema": "darshan.qo-collections/v1",
+  "description": "Declarative field contracts enforced by check_observatory.py. Types: str, id, date (YYYY-MM-DD), month (YYYY-MM), number, bool, list_str, list_id, obj, enum(list). 'id' is a non-empty string matching ^[a-z][a-z0-9-]*$.",
+  "collections": {
+    "sources": {
+      "file": "sources.json",
+      "schema_field": "darshan.qo-sources/v1",
+      "fields": {
+        "id": {"type": "id", "required": true},
+        "title": {"type": "str", "required": true},
+        "publisher": {"type": "str", "required": true},
+        "url": {"type": "str", "required": true},
+        "kind": {"type": "enum", "values": ["press_release", "journal_paper", "preprint", "government_page", "regulatory_filing", "standards_doc", "conference", "dataset", "news", "institution_page"], "required": true},
+        "publisher_family": {"type": "enum", "values": ["self", "government", "academic_journal", "consortium", "independent_press", "research_lab"], "required": true},
+        "published": {"type": "str", "required": true, "note": "ISO date or the literal UNKNOWN"},
+        "retrieved": {"type": "date", "required": true},
+        "access": {"type": "enum", "values": ["open", "paywalled", "registration"], "required": true},
+        "note": {"type": "str", "required": false}
+      }
+    },
+    "institutions": {
+      "file": "institutions.json",
+      "schema_field": "darshan.qo-institutions/v1",
+      "fields": {
+        "id": {"type": "id", "required": true},
+        "name": {"type": "str", "required": true},
+        "kind": {"type": "enum", "values": ["funding_agency", "testbed_operator", "metrology", "consortium", "evaluator", "lab", "infrastructure", "procurement"], "required": true},
+        "jurisdiction": {"type": "str", "required": true},
+        "observes": {"type": "str", "required": true},
+        "programs": {"type": "list_obj", "required": true},
+        "source_ids": {"type": "list_id", "required": true},
+        "recorded_on": {"type": "date", "required": true},
+        "note": {"type": "str", "required": false}
+      }
+    },
+    "capabilities": {
+      "file": "capabilities.json",
+      "schema_field": "darshan.qo-capabilities/v1",
+      "fields": {
+        "id": {"type": "id", "required": true},
+        "name": {"type": "str", "required": true},
+        "kind": {"type": "enum", "values": ["manufacturing", "materials", "photonics", "electronics", "infrastructure"], "required": true},
+        "suppliers": {"type": "list_str", "required": true},
+        "shared_with_architectures": {"type": "list_id", "required": true},
+        "note": {"type": "str", "required": true},
+        "source_ids": {"type": "list_id", "required": true},
+        "recorded_on": {"type": "date", "required": true}
+      }
+    },
+    "architectures": {
+      "file": "architectures.json",
+      "schema_field": "darshan.qo-architectures/v1",
+      "fields": {
+        "id": {"type": "id", "required": true},
+        "name": {"type": "str", "required": true},
+        "modality": {"type": "str", "required": true},
+        "summary": {"type": "str", "required": true},
+        "key_dependencies": {"type": "list_id", "required": true},
+        "scaling_hypothesis": {"type": "str", "required": true},
+        "falsifiers": {"type": "list_str", "required": true},
+        "source_ids": {"type": "list_id", "required": true},
+        "recorded_on": {"type": "date", "required": true}
+      }
+    },
+    "companies": {
+      "file": "companies.json",
+      "schema_field": "darshan.qo-companies/v1",
+      "fields": {
+        "id": {"type": "id", "required": true},
+        "name": {"type": "str", "required": true},
+        "hq": {"type": "str", "required": true},
+        "founded": {"type": "str", "required": true, "note": "year or UNKNOWN"},
+        "architecture_id": {"type": "id", "required": true},
+        "status": {"type": "enum", "values": ["active", "acquired", "closed"], "required": true},
+        "depth": {"type": "enum", "values": ["case_study", "registry"], "required": true},
+        "registry_note": {"type": "str", "required": true},
+        "source_ids": {"type": "list_id", "required": true},
+        "recorded_on": {"type": "date", "required": true}
+      }
+    },
+    "claims": {
+      "file": "claims.json",
+      "schema_field": "darshan.qo-claims/v1",
+      "fields": {
+        "id": {"type": "id", "required": true},
+        "subject_id": {"type": "id", "required": true},
+        "date": {"type": "str", "required": true, "note": "ISO date or month"},
+        "claim": {"type": "str", "required": true},
+        "claim_class": {"type": "enum", "values": ["company_claim", "technical_disclosure", "peer_review", "independent_benchmark", "independent_testbed", "replication", "system_utility", "funding", "selection", "procurement", "partnership", "roadmap"], "required": true},
+        "source_id": {"type": "id", "required": true},
+        "recorded_on": {"type": "date", "required": true},
+        "note": {"type": "str", "required": true}
+      }
+    },
+    "evidence": {
+      "file": "evidence.json",
+      "schema_field": "darshan.qo-evidence/v1",
+      "fields": {
+        "id": {"type": "id", "required": true},
+        "subject_id": {"type": "id", "required": true},
+        "subject_kind": {"type": "enum", "values": ["company", "architecture", "institution"], "required": true},
+        "date": {"type": "str", "required": true},
+        "metric": {"type": "str", "required": true},
+        "value": {"type": "any", "required": true, "note": "number or null"},
+        "unit": {"type": "str", "required": true},
+        "qualifier": {"type": "str", "required": true},
+        "evidence_class": {"type": "enum", "values": ["company_claim", "technical_disclosure", "peer_review", "independent_benchmark", "independent_testbed", "replication", "system_utility"], "required": true},
+        "measured_by": {"type": "str", "required": true},
+        "measured_by_family": {"type": "enum", "values": ["self", "customer", "government", "academic", "consortium", "independent_press", "research_lab"], "required": true},
+        "independent_of_subject": {"type": "bool", "required": true},
+        "source_ids": {"type": "list_id", "required": true},
+        "recorded_on": {"type": "date", "required": true},
+        "note": {"type": "str", "required": true}
+      }
+    },
+    "milestones": {
+      "file": "milestones.json",
+      "schema_field": "darshan.qo-milestones/v1",
+      "fields": {
+        "id": {"type": "id", "required": true},
+        "subject_id": {"type": "id", "required": true},
+        "kind": {"type": "enum", "values": ["roadmap_promise", "program_stage", "program_deliverable"], "required": true},
+        "description": {"type": "str", "required": true},
+        "promised": {"type": "nullable_date", "required": true},
+        "achieved_on": {"type": "nullable_date", "required": true},
+        "status": {"type": "enum", "values": ["open", "achieved", "achieved_late", "slipped", "superseded"], "required": true},
+        "evidence_ids": {"type": "list_id", "required": true},
+        "source_ids": {"type": "list_id", "required": true},
+        "recorded_on": {"type": "date", "required": true},
+        "note": {"type": "str", "required": true}
+      }
+    },
+    "forecasts": {
+      "file": "forecasts.json",
+      "schema_field": "darshan.qo-forecasts/v1",
+      "fields": {
+        "id": {"type": "id", "required": true},
+        "predictor_id": {"type": "id", "required": true, "note": "entity id or ce-operator"},
+        "subject_id": {"type": "id", "required": true},
+        "statement": {"type": "str", "required": true},
+        "made_on": {"type": "str", "required": true},
+        "resolves_by": {"type": "date", "required": true},
+        "resolution_criteria": {"type": "str", "required": true},
+        "status": {"type": "enum", "values": ["open", "resolved_true", "resolved_false", "void"], "required": true},
+        "resolved_on": {"type": "nullable_date", "required": true},
+        "resolution_evidence_ids": {"type": "list_id", "required": true},
+        "source_ids": {"type": "list_id", "required": true},
+        "recorded_on": {"type": "date", "required": true},
+        "note": {"type": "str", "required": true}
+      }
+    },
+    "bottlenecks": {
+      "file": "bottlenecks.json",
+      "schema_field": "darshan.qo-bottlenecks/v1",
+      "fields": {
+        "id": {"type": "id", "required": true},
+        "architecture_id": {"type": "id", "required": true},
+        "name": {"type": "str", "required": true},
+        "description": {"type": "str", "required": true},
+        "required_milestone": {"type": "str", "required": true, "note": "milestone id or UNKNOWN"},
+        "current_best_evidence_id": {"type": "str", "required": true, "note": "evidence id or UNKNOWN"},
+        "trend": {"type": "enum", "values": ["improving", "flat", "worsening", "unknown"], "required": true},
+        "falsifier": {"type": "str", "required": true},
+        "source_ids": {"type": "list_id", "required": true},
+        "recorded_on": {"type": "date", "required": true},
+        "note": {"type": "str", "required": false}
+      }
+    },
+    "confidence": {
+      "file": "confidence.json",
+      "schema_field": "darshan.qo-confidence/v1",
+      "fields": {
+        "id": {"type": "id", "required": true},
+        "subject_id": {"type": "id", "required": true},
+        "as_of": {"type": "date", "required": true},
+        "axes": {"type": "obj", "required": true},
+        "evidence_increasing": {"type": "list_str", "required": true},
+        "evidence_decreasing": {"type": "list_str", "required": true},
+        "unresolved": {"type": "list_str", "required": true},
+        "next_decisive": {"type": "list_obj", "required": true},
+        "falsifiers": {"type": "list_str", "required": true},
+        "recorded_on": {"type": "date", "required": true}
+      }
+    },
+    "questions": {
+      "file": "questions.json",
+      "schema_field": "darshan.qo-questions/v1",
+      "fields": {
+        "id": {"type": "id", "required": true},
+        "question": {"type": "str", "required": true},
+        "status": {"type": "enum", "values": ["open", "bounded", "resolved_unknown", "resolved"], "required": true},
+        "linked_ids": {"type": "list_id", "required": true},
+        "note": {"type": "str", "required": true},
+        "recorded_on": {"type": "date", "required": true}
+      }
+    }
+  },
+  "graph": {
+    "file": "graph.json",
+    "schema_field": "darshan.qo-graph/v1",
+    "node_fields": {
+      "id": {"type": "id", "required": true},
+      "kind": {"type": "enum", "values": ["architecture", "capability", "supplier", "institution"], "required": true},
+      "label": {"type": "str", "required": true},
+      "ref_id": {"type": "id", "required": false},
+      "note": {"type": "str", "required": false}
+    },
+    "edge_fields": {
+      "id": {"type": "id", "required": true},
+      "from": {"type": "id", "required": true},
+      "to": {"type": "id", "required": true},
+      "relation": {"type": "enum", "values": ["requires", "supplied_by", "draws_on", "capital_from", "evaluates", "hosts_under_test", "enables"], "required": true},
+      "note": {"type": "str", "required": true},
+      "source_ids": {"type": "list_id", "required": true}
+    }
+  },
+  "beliefs": {
+    "file": "beliefs.json",
+    "schema_field": "darshan.qo-beliefs/v1",
+    "entry_fields": {
+      "id": {"type": "id", "required": true},
+      "statement": {"type": "str", "required": true},
+      "confidence": {"type": "enum", "values": ["bounded_hypothesis", "fact_of_record", "unknown"], "required": true},
+      "basis_evidence_ids": {"type": "list_id", "required": false},
+      "basis_claim_ids": {"type": "list_id", "required": false},
+      "note": {"type": "str", "required": true}
+    }
+  }
+}

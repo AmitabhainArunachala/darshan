@@ -1,0 +1,40 @@
+{
+  "schema": "darshan.qo-graph/v1",
+  "as_of": "2026-09-19",
+  "nodes": [
+    {"id": "gn-arch-sispin", "kind": "architecture", "ref_id": "arch-silicon-spin-mos", "label": "Silicon MOS spin qubits"},
+    {"id": "gn-arch-fbqc", "kind": "architecture", "ref_id": "arch-photonic-fbqc", "label": "Fusion-based photonics"},
+    {"id": "gn-arch-other", "kind": "architecture", "ref_id": "arch-multiple", "label": "Other evaluated architectures"},
+    {"id": "gn-cap-foundry", "kind": "capability", "ref_id": "cap-300mm-cmos-foundry", "label": "300 mm CMOS foundry flow"},
+    {"id": "gn-cap-photonics-fab", "kind": "capability", "ref_id": "cap-foundry-photonics", "label": "High-volume Si-photonics fab"},
+    {"id": "gn-cap-cryo", "kind": "capability", "ref_id": "cap-dilution-fridge", "label": "Dilution refrigeration"},
+    {"id": "gn-cap-cryocmos", "kind": "capability", "ref_id": "cap-cryo-cmos-control", "label": "Cryo-CMOS control"},
+    {"id": "gn-cap-iso-si", "kind": "capability", "ref_id": "cap-iso-silicon", "label": "Isotopically enriched ²⁸Si"},
+    {"id": "gn-cap-detectors", "kind": "capability", "ref_id": "cap-pnr-detectors", "label": "Superconducting photon detectors"},
+    {"id": "gn-cap-bto", "kind": "capability", "ref_id": "cap-bto-switching", "label": "BTO optical switching"},
+    {"id": "gn-supplier-gf", "kind": "supplier", "label": "GlobalFoundries (NY fab)", "note": "Manufactures PsiQuantum's Omega chipset; candidate foundry partner class for Si-MOS quantum devices."},
+    {"id": "gn-supplier-ucl-oxford", "kind": "supplier", "label": "UCL + Oxford research base", "note": "Quantum Motion's founding institutions and talent source."},
+    {"id": "gn-supplier-bosch", "kind": "supplier", "label": "Bosch Ventures / industrial capital", "note": "Lead investor in QM's 2023 round — strategic industrial capital, not technical evidence."},
+    {"id": "gn-inst-darpa", "kind": "institution", "ref_id": "inst-darpa", "label": "DARPA QBI evaluation"},
+    {"id": "gn-inst-nqcc", "kind": "institution", "ref_id": "inst-nqcc", "label": "NQCC testbed evaluation"},
+    {"id": "gn-inst-doe", "kind": "institution", "ref_id": "inst-doe-slac", "label": "DOE/SLAC cryo test site"}
+  ],
+  "edges": [
+    {"id": "ge-1", "from": "gn-arch-sispin", "to": "gn-cap-foundry", "relation": "requires", "note": "The core thesis: utility scale rides existing CMOS manufacturing.", "source_ids": ["src-qm-npjqi-2024-07-19"]},
+    {"id": "ge-2", "from": "gn-arch-sispin", "to": "gn-cap-cryocmos", "relation": "requires", "note": "Control density at mK temperatures.", "source_ids": ["src-qm-42m-2023-02-21"]},
+    {"id": "ge-3", "from": "gn-arch-sispin", "to": "gn-cap-iso-si", "relation": "requires", "note": "²⁸Si substrates for coherence.", "source_ids": ["src-intel-natelec-2022-03-29"]},
+    {"id": "ge-4", "from": "gn-arch-fbqc", "to": "gn-cap-photonics-fab", "relation": "requires", "note": "Millions of identical photonic components.", "source_ids": ["src-psq-omega-nature-2025-02-26"]},
+    {"id": "ge-5", "from": "gn-arch-fbqc", "to": "gn-cap-detectors", "relation": "requires", "note": "Detection efficiency feeds the loss budget.", "source_ids": ["src-psq-omega-nature-2025-02-26"]},
+    {"id": "ge-6", "from": "gn-arch-fbqc", "to": "gn-cap-bto", "relation": "requires", "note": "Fast low-loss switching for fusion networking.", "source_ids": ["src-psq-omega-2025-02-26"]},
+    {"id": "ge-7", "from": "gn-arch-sispin", "to": "gn-cap-cryo", "relation": "requires", "note": "Spin qubits operate at mK.", "source_ids": ["src-qm-nqcc-delivery-2025-09-15"]},
+    {"id": "ge-8", "from": "gn-arch-fbqc", "to": "gn-cap-cryo", "relation": "requires", "note": "Superconducting detectors require cryogenics — the shared dependency.", "source_ids": ["src-psq-darpa-2025-02-06"]},
+    {"id": "ge-9", "from": "gn-arch-other", "to": "gn-cap-cryo", "relation": "requires", "note": "Nearly every modality converges on dilution refrigeration.", "source_ids": ["src-darpa-qbi-stageb-2025-11-06"]},
+    {"id": "ge-10", "from": "gn-cap-photonics-fab", "to": "gn-supplier-gf", "relation": "supplied_by", "note": "GlobalFoundries NY manufactures Omega.", "source_ids": ["src-psq-omega-2025-02-26"]},
+    {"id": "ge-11", "from": "gn-arch-sispin", "to": "gn-supplier-ucl-oxford", "relation": "draws_on", "note": "Founding institutions; ongoing doctoral training ties.", "source_ids": ["src-ucl-qm-42m-2023-02-21"]},
+    {"id": "ge-12", "from": "gn-arch-sispin", "to": "gn-supplier-bosch", "relation": "capital_from", "note": "Industrial capital link — labeled capital, not validation.", "source_ids": ["src-qm-42m-2023-02-21"]},
+    {"id": "ge-13", "from": "gn-inst-darpa", "to": "gn-arch-sispin", "relation": "evaluates", "note": "QBI Stage B for Quantum Motion (Nov 2025).", "source_ids": ["src-darpa-qbi-stageb-2025-11-06"]},
+    {"id": "ge-14", "from": "gn-inst-darpa", "to": "gn-arch-fbqc", "relation": "evaluates", "note": "QBI Stage C / US2QC final phase for PsiQuantum (Feb 2025).", "source_ids": ["src-darpa-us2qc-final-2025"]},
+    {"id": "ge-15", "from": "gn-inst-nqcc", "to": "gn-arch-sispin", "relation": "evaluates", "note": "Hands-on test and validation of the installed QM testbed.", "source_ids": ["src-qm-nqcc-delivery-2025-09-15"]},
+    {"id": "ge-16", "from": "gn-inst-doe", "to": "gn-arch-fbqc", "relation": "hosts_under_test", "note": "SLAC hosts PsiQuantum's largest cryogenic module.", "source_ids": ["src-psq-darpa-2025-02-06"]}
+  ]
+}
